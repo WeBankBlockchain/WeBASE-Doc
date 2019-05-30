@@ -1,0 +1,6 @@
+{% extends "!layout.html" %}
+{%- if pagename == '404' %}{% set metatags = '<base href="/zh_CN/latest/">\n  ' + metatags %}{% endif %}
+{% block sidebartitle %}
+{{ super() }}
+<br>
+{% endblock %}
