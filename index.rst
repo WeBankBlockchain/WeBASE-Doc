@@ -22,10 +22,10 @@ WEBASE 技术文档
    
    docs/webase/introduction.md
    docs/webase/install.md
-   docs/webase_front/README.md
-   docs/webase_node_mgr/README.md
-   docs/webase_web/README.md
-   docs/webase_monkey/README.md
-   docs/webase_bee/README.md
-   docs/webase_transaction/README.md
-   docs/webase_sign/README.md
+   docs/webase-front/README.md
+   docs/webase-mgr/README.md
+   docs/webase-web/README.md
+   docs/webase-monkey/README.md
+   docs/webase-bee/README.md
+   docs/webase-transaction/README.md
+   docs/webase-sign/README.md
