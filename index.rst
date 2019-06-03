@@ -18,7 +18,7 @@ WEBASE 技术文档
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    
    docs/webase/introduction.md
    docs/webase/install.md
