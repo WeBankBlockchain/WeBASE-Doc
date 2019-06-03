@@ -2,7 +2,7 @@
 WEBASE 技术文档
 ##############################################################
 
-.. image:: images/logo/logo.png
+.. image:: ./images/logo/logo.png
 
 .. admonition:: Overview
 
