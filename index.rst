@@ -2,32 +2,29 @@
 WEBASE 技术文档
 ##############################################################
 
-.. image:: _static/images/FISCO_BCOS_Logo.svg
+.. image:: images/logo/logo.svg
 
 .. admonition:: Overview
 
-    - 了解FISCO BCOS版本、兼容性信息，请参考 `版本及兼容性 <./docs/change_log/index.html>`_
-    - 基于FISCO BCOS 2.0快速构建区块链系统，请参考 `安装 <./docs/installation.html>`_
-    - 基于FISCO BCOS 2.0部署多群组区块链、构建第一个区块链应用，请参考 `教程 <./docs/tutorial/index.html>`_
-    - 使用企业级部署工具Generator，请参考 `教程 <./docs/tutorial/enterprise_quick_start.html>`_ 和 `企业级部署工具 <./docs/enterprise_tools/index.html>`_
-    - 深入了解FISCO BCOS 2.0的 `源码编译 <./docs/manual/get_executable.html#id2>`_、`建链脚本 <./docs/manual/build_chain.html>`_、`配置文件和配置项 <./docs/manual/configuration.html>`_、`控制台 <./docs/manual/console.html>`_、`节点准入 <./docs/manual/node_management.html>`_、`并行交易 <./docs/manual/transaction_parallel.html>`_、`分布式存储 <./docs/manual/amdbconfig.html>`_、`国密 <./docs/manual/guomi_crypto.html>`_ 等请参考 `使用手册 <./docs/manual/index.html>`_
-    - SDK的详细介绍请参考 `Web3SDK <./docs/sdk/sdk.html>`_
-    - 浏览器详细介绍请参考 `浏览器 <./docs/browser/browser.html>`_
-    - RPC接口可参考 `JSON-RPC API <./docs/api.html>`_
-    - 系统设计文档请参考 `系统设计 <./docs/design/index.html>`_
+    - WEBASE整体架构，请参考 `安装 <./docs/webase/introduction.html>`_
+    - WEBASE搭建，请参考 `教程 <./docs/webase/install.html>`_
+    - webase_front详细介绍请参考 `Web3SDK <./docs/webase-front/README.html>`_
+    - webase_node_mgr详细介绍请参考 `浏览器 <./docs/webase_node_mgr/README.html>`_
+    - webase_web详细介绍请参考 `Web3SDK <./docs/webase_web/README.html>`_
+    - webase_sign详细介绍请参考 `Web3SDK <./docs/webase_sign/README.html>`_
+    - webase_transaction详细介绍请参考 `浏览器 <./docs/webase_transaction/README.html>`_
+    - webase_monkey详细介绍请参考 `Web3SDK <./docs/webase_monkey/README.html>`_
+    - webase_bee详细介绍请参考 `Web3SDK <./docs/webase_bee/README.html>`_
 
 .. toctree::
    :maxdepth: 2
    
-   docs/introduction.md
-   docs/what_is_new.md
-   docs/change_log/index.md
-   docs/webase_front/index.md
-   docs/webase_node_mgr/index.md
-   docs/webase_web/index.md
-   docs/webase_transaction/index.md
-   docs/webase_monkey/index.md
-   docs/webase_bee/index.md
-   docs/webase_sign/index.md
-   docs/faq.md
-   docs/community.md
+   docs/webase/introduction.md
+   docs/webase/install.md
+   docs/webase_front/README.md
+   docs/webase_node_mgr/README.md
+   docs/webase_web/README.md
+   docs/webase_transaction/README.md
+   docs/webase_monkey/README.md
+   docs/webase_bee/README.md
+   docs/webase_sign/README.md
