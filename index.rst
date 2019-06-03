@@ -24,8 +24,8 @@ WEBASE 技术文档
    docs/webase/install.md
    docs/webase-front/README.md
    docs/webase-mgr/README.md
-..
- docs/webase-web/README.md
+   docs/webase-web/README.md
+.. 
  docs/webase-monkey/README.md
  docs/webase-bee/README.md
  docs/webase-transaction/README.md
