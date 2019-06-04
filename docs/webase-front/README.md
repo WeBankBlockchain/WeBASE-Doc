@@ -134,3 +134,10 @@ export GRADLE_HOME=/software/gradle-2.1
 export PATH=$GRADLE_HOME/bin:$PATH
 ```
 
+```eval_rst
+.. toctree::
+   :maxdepth: 1
+
+   interface.md
+   install_FAQ.md
+```
