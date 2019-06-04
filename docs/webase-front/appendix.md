@@ -1,6 +1,6 @@
-## 5. 附录
+## 附录
 
-### 5.1 Java部署
+### 1.1 Java部署
 
 此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
@@ -19,7 +19,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ```
 
-### 5.2 gradle部署
+### 1.2 gradle部署
 
 此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.gradle.org/downloads)。
 
@@ -35,12 +35,4 @@ unzip -d /software/ gradleXXX.zip
 ```shell
 export GRADLE_HOME=/software/gradle-2.1
 export PATH=$GRADLE_HOME/bin:$PATH
-```
-
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-
-   interface.md
-   install_FAQ.md
 ```

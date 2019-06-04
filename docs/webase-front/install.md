@@ -1,4 +1,4 @@
-## 1. 部署说明
+## 部署说明
 
 ### 1.1 拉取代码
 
@@ -71,50 +71,3 @@ web3连接日志：tail -f log/web3sdk.log
 http://{nodeIP}:8081/webase-front
 
 基于可视化控制台，可以查看节点数据概览，查看链上节点的运行情况，开发智能合约，管理私钥等。
-
-## 5. 附录
-
-### 5.1 Java部署
-
-此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
-
-（1）从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到相应目录
-
-```shell
-mkdir /software
-tar -zxvf jdkXXX.tar.gz /software/
-```
-
-（2）配置环境变量
-
-```shell
-export JAVA_HOME=/software/jdk1.8.0_121
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-```
-
-### 5.2 gradle部署
-
-此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.gradle.org/downloads)。
-
-（1）从[官网](http://www.gradle.org/downloads)下载对应版本的gradle安装包，并解压到相应目录
-
-```shell
-mkdir /software/
-unzip -d /software/ gradleXXX.zip
-```
-
-（2）配置环境变量
-
-```shell
-export GRADLE_HOME=/software/gradle-2.1
-export PATH=$GRADLE_HOME/bin:$PATH
-```
-
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-
-   interface.md
-   install_FAQ.md
-```
