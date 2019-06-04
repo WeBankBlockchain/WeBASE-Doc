@@ -22,6 +22,7 @@ WEBASE 技术文档
    
    docs/webase/introduction.md
    docs/webase/install.md
+   docs/webase/subsystem.md
 .. 
  docs/webase-monkey/README.md
  docs/webase-bee/README.md
