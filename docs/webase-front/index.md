@@ -1,4 +1,4 @@
-# 节点前置服务(webase-front)
+# 节点前置服务
 
 ```eval_rst
 .. toctree::
