@@ -1,4 +1,4 @@
-# 节点管理服务前端服务(webase-web)
+# 节点管理前端服务(webase-web)
 
 本项目是fisco-bcos应用平台项目，使用框架`vue-cli`。
 
