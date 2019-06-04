@@ -1,17 +1,10 @@
-# 签名服务子系统说明
+# 签名服务
 
-# 目录
-> * [功能说明](#chapter-1)
-> * [前提条件](#chapter-2)
-> * [部署说明](#chapter-3)
-> * [接口说明](#chapter-4)
-> * [附录](#chapter-5)
-
-# 1. <a id="chapter-1"></a>功能说明
+## 1. 功能说明
 
 本工程为签名服务子系统。功能：管理公私钥、对数据进行签名。
 
-# 2. <a id="chapter-2"></a>前提条件
+## 2. 前提条件
 
 | 环境     | 版本              |
 | ------ | --------------- |
@@ -19,9 +12,9 @@
 | 数据库    | mysql-5.6或以上版本  |
 备注：安装说明请参看附录。
 
-# 3. <a id="chapter-3"></a>部署说明
+## 3. 部署说明
 
-## 3.1 拉取代码
+### 3.1 拉取代码
 执行命令：
 ```
 git clone https://github.com/WeBankFinTech/webase-sign.git
@@ -33,7 +26,7 @@ git clone https://github.com/WeBankFinTech/webase-sign.git
 cd webase-sign
 ```
 
-## 3.2 编译代码
+### 3.2 编译代码
 
 方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
 
@@ -46,7 +39,7 @@ gradle build -x test
 ```
 构建完成后，会在根目录webase-sign下生成已编译的代码目录dist。
 
-## 3.3 修改配置
+### 3.3 修改配置
 
 （1）进入编译的代码目录：
 ```shell
@@ -79,7 +72,7 @@ constant:
   aesKey: EfdsW23D23d3df43
 ```
 
-## 3.4 服务启停
+### 3.4 服务启停
 ```shell
 启动：sh start.sh
 停止：sh stop.sh
@@ -91,19 +84,19 @@ constant:
 转格式：dos2unix *.sh
 ```
 
-## 3.5 查看日志
+### 3.5 查看日志
 
 ```shell
 tail -f log/webase-sign.log
 ```
-# 4. <a id="chapter-4"></a>接口说明
+## 4. 接口说明
 
 - [接口说明请点击](interface.md)
 
 
-# 5. <a id="chapter-5"></a>附录
+## 5. 附录
 
-## 5.1 Java环境部署
+### 5.1 Java环境部署
 
 此处给出简单步骤，供快速查阅。详情请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
@@ -122,7 +115,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ```
 
-## 5.2 数据库部署
+### 5.2 数据库部署
 
 此处以Centos/Fedora为例。
 
