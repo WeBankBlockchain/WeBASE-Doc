@@ -1,6 +1,5 @@
-# 常见问题解答
+# 部署常见问题解答
 
-### 一般问题
 * 1：执行shell脚本报下面错误permission denied： 
 
    答：chmod +x 给文件增加权限
