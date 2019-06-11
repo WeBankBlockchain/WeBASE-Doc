@@ -255,6 +255,8 @@ htmlhelp_basename = 'WeBASE_doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
+latex_engine = 'pdflatex'
+latex_use_xindy = False
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
 'papersize': 'a4paper',
