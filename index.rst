@@ -22,7 +22,9 @@ WEBASE 技术文档
    
    docs/webase/introduction.md
    docs/webase/install.md
+   docs/webase-console-suit/index.md
    docs/webase/subsystem.md
+   
 
  
  
