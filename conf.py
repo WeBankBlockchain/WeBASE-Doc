@@ -268,7 +268,7 @@ latex_elements = {
 #'preamble': '',
 'preamble': r'''
 \hypersetup{unicode=true}
-\usepackage{CJKutf8}
+\usepackage{xeCJK}
 \DeclareUnicodeCharacter{00A0}{\nobreakspace}
 \DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
 \DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
