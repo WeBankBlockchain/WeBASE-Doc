@@ -11,8 +11,8 @@ WEBASE 技术文档
     - webase_front详细介绍请参考 `webase_front <./docs/webase-front/README.html>`_
     - webase_node_mgr详细介绍请参考 `webase_node_mgr <./docs/webase_node_mgr/README.html>`_
     - webase_web详细介绍请参考 `webase_web <./docs/webase_web/README.html>`_
-    - webase_monkey详细介绍请参考 `webase_monkey <./docs/webase_monkey/README.html>`_
-    - webase_bee详细介绍请参考 `webase_bee <./docs/webase_bee/README.html>`_
+    - webase_monkey详细介绍请参考 `webase_codegen_monkey <./docs/webase_codegen_monkey/README.html>`_
+    - webase_bee详细介绍请参考 `webase_collect_bee <./docs/webase_collect_bee/README.html>`_
     - webase_sign详细介绍请参考 `webase_sign <./docs/webase_sign/README.html>`_
     - webase_transaction详细介绍请参考 `webase_transaction <./docs/webase_transaction/README.html>`_
 
