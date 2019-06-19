@@ -16,15 +16,16 @@ WEBASE 技术文档
     - webase_sign详细介绍请参考 `webase_sign <./docs/webase_sign/README.html>`_
     - webase_transaction详细介绍请参考 `webase_transaction <./docs/webase_transaction/README.html>`_
 
-
 .. toctree::
    :maxdepth: 3
    
    docs/webase/introduction.md
    docs/webase/install.md
+   docs/webase-console-suit/index.md
    docs/webase/subsystem.md
 .. 
  docs/WeBASE-Codegen-Monkey/README.md
  docs/WeBASE-Collect-Bee/README.md
+
  
  
