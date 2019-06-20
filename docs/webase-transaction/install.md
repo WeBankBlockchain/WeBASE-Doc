@@ -10,7 +10,7 @@ git clone https://github.com/WeBankFinTech/webase-transaction.git
 
 ## 2. 编译代码
 
-在代码的根目录webase-transcation编译，如果出现问题可以查看[常见问题解答](./install_FAQ.md)</br>
+在代码的根目录webase-transcation编译，如果出现问题可以查看[常见问题](./install_FAQ.html)</br>
 方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
 
 ```shell
@@ -129,5 +129,3 @@ cd dist
 ```shell
 tail -f log/webase-transcation.log
 ```
-
-# 
