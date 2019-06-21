@@ -24,6 +24,7 @@ WEBASE 技术文档
    docs/webase-console-suit/index.md
    docs/webase/subsystem.md
 .. 
+ docs/webase-codegen-monkey/README.md
  docs/webase-collect-bee/README.md
 
  
