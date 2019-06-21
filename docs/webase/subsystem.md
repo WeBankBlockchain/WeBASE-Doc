@@ -9,4 +9,5 @@
    ../webase-web/README.md
    ../webase-transaction/README.md
    ../webase-sign/README.md
+   ../webase-codegen-monkey/README.md
 ```
