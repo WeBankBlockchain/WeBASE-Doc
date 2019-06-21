@@ -61,3 +61,20 @@
 
 该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
 
+### 1.4 特性介绍
+
+#### 自动生成数据导出组件
+
+只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-Codegen-Monkey就能帮助你自动生成一个区块链数据导出的组件。现阶段，支持将数据导出到Mysql数据库中。
+
+#### 支持自定义导出数据内容
+
+可以支持导出区块链的基本信息、智能合约的函数、Event等信息。可以对导出的数据库表、字段进行定制。也可以修改导出数据字段的长度。
+
+#### 内置Restful API，提供常用的查询功能
+
+自带常用的Restful API，支持查询块高、块信息、Event信息和函数信息等。
+
+#### 支持多数据源，支持读写分离和分库分表
+
+
