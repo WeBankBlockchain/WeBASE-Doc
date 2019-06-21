@@ -93,6 +93,5 @@
 
 #### 提供可视化的互动API控制台
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)集成了swagger插件，提供可视化互动API控制台。
-
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)集成了swagger插件，提供可视化互动API控制台。![效果图](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/blob/dev_v0.7.0.2019.06/photos/grafana_demo.png)
 
