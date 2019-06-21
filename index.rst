@@ -19,10 +19,10 @@ WEBASE 技术文档
 .. toctree::
    :maxdepth: 3
    
-   docs/WEBASE/introduction.md
-   docs/WEBASE/install.md
-   docs/WEBASE-Console-Suit/index.md
-   docs/WEBASE/subsystem.md
+   docs/WeBASE/introduction.md
+   docs/WeBASE/install.md
+   docs/WeBASE-Console-Suit/index.md
+   docs/WeBASE/subsystem.md
 .. 
  docs/WeBASE-Codegen-Monkey/README.md
  docs/WeBASE-Collect-Bee/README.md
