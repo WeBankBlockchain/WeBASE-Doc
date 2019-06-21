@@ -7,6 +7,6 @@
    ../webase-front/index.md
    ../webase-mgr/README.md
    ../webase-web/README.md
-   ../webase-transaction/README.md
+   ../webase-transaction/index.md
    ../webase-sign/README.md
 ```
