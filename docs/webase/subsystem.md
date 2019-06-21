@@ -10,4 +10,5 @@
    ../webase-transaction/README.md
    ../webase-sign/README.md
    ../webase-codegen-monkey/README.md
+   ../webase-collect-bee/README.md
 ```
