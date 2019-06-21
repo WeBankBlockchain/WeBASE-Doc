@@ -4,9 +4,9 @@
 .. toctree::
    :maxdepth: 1
 
-   ../webase-front/index.md
-   ../webase-mgr/README.md
-   ../webase-web/README.md
-   ../webase-transaction/index.md
-   ../webase-sign/README.md
+   ../WeBASE-Front/index.md
+   ../WeBASE-Node-Manager/README.md
+   ../WeBASE-Web/README.md
+   ../WeBASE-Transaction/index.md
+   ../WeBASE-Sign/README.md
 ```
