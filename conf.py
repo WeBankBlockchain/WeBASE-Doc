@@ -263,16 +263,14 @@ latex_elements = {
 'papersize': 'a4paper',
 
 # The font size ('10pt', '11pt' or '12pt').
-'pointsize': '10pt','classoptions':',oneside','babel':'',
-'inputenc':'',
-'utf8extra':'',
+'pointsize': '10pt',
 
 # Additional stuff for the LaTeX preamble.
 #'preamble': '',
 'preamble': r'''
 \hypersetup{unicode=true}
 \usepackage{CJKutf8}
-\DeclareUnicodeCharacter{00A0}{\nobreakspace}
+\DeclareUnicodeCharacter{00A0}{~}
 \DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
 \DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
 \DeclareUnicodeCharacter{2286}{\ensuremath{\subseteq}}
