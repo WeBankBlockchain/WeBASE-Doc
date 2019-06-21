@@ -5,12 +5,12 @@
 执行命令：
 
 ```
-git clone https://github.com/WeBankFinTech/webase-transaction.git
+git clone https://github.com/WeBankFinTech/WeBASE-Transaction.git
 ```
 
 ## 2. 编译代码
 
-在代码的根目录webase-transcation编译，如果出现问题可以查看[常见问题](./install_FAQ.html)</br>
+在代码的根目录WeBASE-Transaction编译，如果出现问题可以查看[常见问题](./install_FAQ.html)</br>
 方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
 
 ```shell
@@ -23,7 +23,7 @@ gradle build -x test
 ./gradlew build -x test
 ```
 
-构建完成后，会在根目录webase-transcation下生成已编译的代码目录dist。
+构建完成后，会在根目录WeBASE-Transaction下生成已编译的代码目录dist。
 
 ## 3. 修改配置
 
