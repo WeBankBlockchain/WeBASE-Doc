@@ -8,9 +8,15 @@
 git clone https://github.com/WeBankFinTech/WeBASE-Transaction.git
 ```
 
+进入目录：
+
+```
+cd WeBASE-Transaction
+```
+
 ## 2. 编译代码
 
-在代码的根目录WeBASE-Transaction编译，如果出现问题可以查看[常见问题](./install_FAQ.html)</br>
+使用以下方式编译构建，如果出现问题可以查看[常见问题](./install_FAQ.html)</br>
 方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
 
 ```shell
@@ -51,7 +57,7 @@ server:
 spring: 
   datasource: 
     # 数据库连接信息
-    url: jdbc:mysql://127.0.0.1:3306/webase_transaction?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/db_transaction?useUnicode=true&characterEncoding=utf8
     # 数据库用户名
     username: dbUsername
     # 数据库密码
@@ -118,14 +124,9 @@ cd dist
 
 ## 5. 查看日志
 
-进入到已编译的代码根目录：
+在已编译的代码根目录dist查看：
 
 ```shell
-cd dist
-```
-
-查看
-
-```shell
-tail -f log/webase-transcation.log
+交易服务日志：tail -f log/transcation.log
+web3连接日志：tail -f log/web3sdk.log
 ```
