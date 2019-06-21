@@ -97,7 +97,7 @@ mysql -utest -ptest1234 -h 127.0.0.1 -P 3306
 创建数据库
 
 ```sql
-mysql > create database webase_transaction;
+mysql > create database db_transaction;
 ```
 
 ## 3. Zookeeper部署
@@ -117,3 +117,4 @@ ZooKeeper的安装包括单机模式安装，以及集群模式安装。具体�
 
 - [集群部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_zkMulitServerSetup) 
 - [单机部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_singleAndDevSetup)
+
