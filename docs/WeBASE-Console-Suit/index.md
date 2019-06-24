@@ -58,7 +58,7 @@ WeBASE管理平台分为三个部分：节点前置，节点管理，WEB管理�
 
 ##### 2.2.2.3、WEB管理台搭建
 
-WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安装说明》](../WeBASE-Web/install.md)。
+WEB管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/README.md#id2)。
 
 ## 3、系统初始化配置
 
