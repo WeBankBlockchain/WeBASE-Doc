@@ -169,7 +169,7 @@ nginx下载地址：https://nginx.org/download/（下载最新稳定版本即可
 ps -ef | grep nginx                              # 查看nginx进程
 ```
 
-# 3.2 常见问题
+## 3.2 常见问题
 ### 3.2.1 出现“登录错误”怎么排查问题
     登录时出现“登录错误”，请一一排查：
     1. WeBASE-node-mgr服务是否启动成功，
