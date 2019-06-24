@@ -9,4 +9,6 @@
    ../WeBASE-Web/README.md
    ../WeBASE-Transaction/index.md
    ../WeBASE-Sign/README.md
+   ../WeBASE-Codegen-Monkey/README.md
+   ../WeBASE-Collect-Bee/README.md
 ```
