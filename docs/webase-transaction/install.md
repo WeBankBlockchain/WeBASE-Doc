@@ -8,7 +8,7 @@
 | 数据库    | mysql-5.6或以上版本        |
 | zookeeper | zookeeper-3.4.10或以上版本 |
 
-备注：安装说明请参看 [附录1](./appendix.html)，不使用分布式任务可以不部署zookeeper。
+备注：安装说明请参看 [附录-1](./appendix.html)，不使用分布式任务可以不部署zookeeper。
 
 ## 2. 拉取代码
 
@@ -26,7 +26,7 @@ cd WeBASE-Transaction
 
 ## 3. 编译代码
 
-使用以下方式编译构建，如果出现问题可以查看[常见问题](./install_FAQ.html)</br>
+使用以下方式编译构建，如果出现问题可以查看[附录-2](./appendix.html)</br>
 方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
 
 ```shell
