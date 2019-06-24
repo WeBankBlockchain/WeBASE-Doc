@@ -1,4 +1,4 @@
-# WEB管理台
+# WeBASE管理平台
 
 本项目是fisco-bcos应用平台项目，使用框架`vue-cli`。
 
