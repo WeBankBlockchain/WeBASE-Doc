@@ -7,4 +7,4 @@ webase-front是和fisco-bcos节点配合使用的一个子系统，此分支支�
 
  注意：webase-front需要跟节点同机部署。一台机器部署多个节点，建议只部署一个front服务即可。
   
- <div align=center> ![架构图](../../images/webase/front/2.png)
+ <div align=center> ![](../../images/webase/front/2.png)
