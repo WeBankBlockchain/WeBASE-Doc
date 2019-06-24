@@ -1,4 +1,4 @@
-# 交易服务
+# 节点管理服务
 
 ```eval_rst
 .. toctree::
@@ -6,8 +6,6 @@
 
    README.md
    install.md
-   install_FAQ.md
-   interface.md
+   interfaces.md
    appendix.md
 ```
-
