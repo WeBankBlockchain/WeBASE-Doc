@@ -1,21 +1,21 @@
-# 1. 合约接口
+# API接口
 
-## 1.1. 发送abi接口
- [top](#目录)
+## 1、合约接口
+### 1.1. 发送abi接口
 
-### 接口描述
+#### 接口描述
 
 根据abi内容判断合约是否已部署，未部署则生成对应abi文件
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/contract/abiInfo**
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -45,29 +45,27 @@ HTTP POST
 ]
 }
 ```
-### 响应参数
+#### 响应参数
 
-**1）数据格式**
+**2）数据格式**
 无
 
+### 1.2. 合约部署接口
 
 
-## 1.2. 合约部署接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 将合约部署到当前节点
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/contract/deploy**
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -79,7 +77,10 @@ HTTP POST
 | 4        | 合约abi      | abiInfo      | List |              | 是       |          |
 | 5        | 合约bin      | bytecodeBin  | String         |              | 是       |          |
 | 6        | 构造函数参数 | funcParam    | List|              | 否       |          |
+
+
 **2）数据格式**
+
 ```
 {
 "user":700001,
@@ -89,34 +90,32 @@ HTTP POST
 "funcParam":[]
 }
 ```
-### 响应参数
+#### 响应参数
+
 **1）数据格式**
 ```
 {
-
 "0x60aac015d5d41adc74217419ea77815ecb9a2192"
 }
 ```
+### 1.3. cns接口 
 
 
-## 1.3. cns接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 根据合约名及版本号查询合约地址
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/contract/cns?groupId={groupId}&name={name}&version={version}**
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
-**1）参数表**
+1. **参数表**
 
 | **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
@@ -124,35 +123,34 @@ HTTP POST
 | 2        | 合约名称     | name       | String         |              | 是       |          |
 | 3        | 合约版本     | version      | String |              | 是       |          |
 
+
 **2）数据格式**
 http://localhost:8081/webase-front/contract/cns?groupId=1&name=HelloWorld&version=2
 
 ### 响应参数
+
 **1）数据格式**
 ```
 {
-
 "0x31b26e43651e9371c88af3d36c14cfd938baf4fd"
 }
 ```
+### 1.4. java转译接口
 
 
-## 1.4. java转译接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 将合约abi转成java文件
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/contract/compile-java**
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -165,14 +163,12 @@ HTTP POST
 
 1. **数据格式**
 
-```
 {
     "contractName": "HeHe",
     "abiInfo": [],
     "contractBin": "60806040526004361061004c576000357c0100000000000000000000029",
     "packageName": "com.webank"
 }
-```
 
 ### 响应参数
 
@@ -182,23 +178,21 @@ java文件
 **2）数据格式**
 无
 
+### 1.5. 保存合约接口
 
-## 1.5. 保存合约接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 支持前置的控制台保存合约信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/contract/save**
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -227,7 +221,7 @@ HTTP POST
 }
 ```
 
-### 响应参数
+#### 响应参数
 **1）参数表**
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
@@ -270,23 +264,21 @@ HTTP POST
 }
 ```
 
+### 1.6. 删除合约接口
 
-## 1.5. 删除合约接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 支持前置的控制台通过群组编号和合约编号删除未部署的合约信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/contract/{groupId}/{contractId}**
 
-### 调用方法
+#### 调用方法
 
 HTTP DELETE
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -298,7 +290,7 @@ HTTP DELETE
 **2）数据格式**
 http://localhost:8081/webase-front/contract/1/1
 
-### 响应参数
+#### 响应参数
 **1）参数表**
 
 | **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
@@ -317,22 +309,21 @@ http://localhost:8081/webase-front/contract/1/1
 ```
 
 
-## 1.6. 分页查询合约列表
-[top](#目录)
+## 1.7. 分页查询合约列表
 
-### 接口描述
+#### 接口描述
 
 支持前置的控制台分页查询合约列表
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/contract/contractList**
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -358,7 +349,7 @@ HTTP POST
 }
 ```
 
-### 响应参数
+#### 响应参数
 **1）参数表**
 
 | **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
@@ -409,26 +400,23 @@ HTTP POST
 }
 ```
 
+## 2. 私钥接口
 
+### 2.1. 获取公私钥接口
 
-# 2. 私钥接口
-
-## 2.1. 获取公私钥接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 通过调用此接口获取公私钥对和对应账户信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/privateKey?useAes={useAes}&userName={userName}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -444,31 +432,27 @@ HTTP GET
 **1）数据格式**
 ```
 {
-
 "publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
 "privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
 "address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
 }
 ```
 
+### 2.2. 导入私钥接口
 
-
-## 2.2. 导入私钥接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 导入私钥信息，并返回对应的公钥及用户地址
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/privateKey/import?privateKey={privateKey}&useAes={useAes}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -485,34 +469,30 @@ HTTP GET
 **1）数据格式**
 ```
 {
-
 "publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
 "privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
 "address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
 }
 ```
 
+## 3. web3接口
+
+### 3.1. 获取块高接口 
 
 
-
-# 3. web3接口
-
-## 3.1. 获取块高接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 获取节点最新块高
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/blockNumber**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -520,47 +500,49 @@ HTTP GET
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 
+
 **2）数据格式**
 http://localhost:8081/webase-front/1/web3/blockNumber
-
 
 ### 响应参数
 **1）数据格式**
 ```
+{
 8346
+}
 ```
 
 
-## 3.2. 根据块高获取块信息接口
-[top](#目录)
+### 3.2. 根据块高获取块信息接口 
 
-### 接口描述
+
+#### 接口描述
 
 通过块高获取块信息
 
-### 接口URL
+#### 接口URL
 
-**http://localhost:8081/webase-front/{groupId}/web3/blockByNumber/{blockNumber}**
+**http://localhost:8081/webase-front/1/web3/blockByNumber/{blockNumber}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
-**1）参数表**
+1. **参数表**
 
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
-| 2        | 块高     | blockNumber | BigInteger |       | 是       |          |
+| 1        | 块高     | blockNumber | BigInteger |              | 是       |          |
+
+
 
 **2）数据格式**
 
 http://localhost:8081/webase-front/1/web3/blockByNumber/100
 
-
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -627,17 +609,14 @@ http://localhost:8081/webase-front/1/web3/blockByNumber/100
     }
 }
 ```
+### 3.3. 根据块hash获取块信息接口 
 
 
-
-## 3.3. 根据块hash获取块信息接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 通过块hash获取块信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/blockByHash/{blockHash}**
 
@@ -645,8 +624,7 @@ http://localhost:8081/webase-front/1/web3/blockByNumber/100
 
 HTTP GET
 
-
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -659,9 +637,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/blockByHash/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade
 
-
-
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -729,97 +705,96 @@ http://localhost:8081/webase-front/1/web3/blockByHash/0xf27ff42d4be65329a1e7b113
 }
 ```
 
+### 3.4. 获取块中交易个数接口  
 
 
-
-## 3.4. 获取块中交易个数接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 根据块高获取该块中的交易个数
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/blockTransCnt/{blockNumber}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
-**1）参数表**
+1. **参数表**
 
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
-| 2        | 块高     | blockNumber | BigInteger |              | 是       |          |
+| 1        | 块高     | blockNumber | BigInteger |              | 是       |          |
+
+
 
 **2）数据格式**
 
 http://localhost:8081/webase-front/1/web3/blockTransCnt/100
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
+{
  1
+}
 ```
+}
+
+### 3.5. 获取PbftView接口  
 
 
-## 3.5. 获取PbftView接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 通过调用此接口获取PbftView
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/pbftView**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
-**1）参数表**
+1. **参数表**
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 
 
 **2）数据格式**
+
 `http://localhost:8081/webase-front/1/web3/pbftView`
-
-
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
- 438328
+{
+ 160565
+}
 ```
 
+### 3.6. 获取交易回执接口 
 
 
-## 3.6. 获取交易回执接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 根据交易hash获取交易回执
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/transactionReceipt/{transHash}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -828,11 +803,12 @@ HTTP GET
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 | 2        | 交易hash | transHash  | String   |              | 是       |          |
 
+
 **2）数据格式**
 
 http://localhost:8081/webase-front/1/web3/transactionReceipt/0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b
 
-### 响应参数
+#### 响应参数
 
 **2）数据格式**
 ```
@@ -874,25 +850,22 @@ http://localhost:8081/webase-front/1/web3/transactionReceipt/0xb2c733b742045e61c
 }
 ```
 
+### 3.7. 根据交易hash获取交易信息接口  
 
 
-
-## 3.7. 根据交易hash获取交易信息接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 根据交易hash获取交易信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/transaction/{transHash}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -905,7 +878,8 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/transaction/0xa6750b812b1a7e36313879b09f0c41fc583b463c15e57608416f3a32688b432b
 
-### 响应参数
+#### 响应参数
+
 
 **1）数据格式**
 ```
@@ -936,37 +910,37 @@ http://localhost:8081/webase-front/1/web3/transaction/0xa6750b812b1a7e36313879b0
 }
 ```
 
-## 3.8. 获取web3j版本接口
-[top](#目录)
+### 3.8. 获取web3j版本接口  
 
-### 接口描述
+
+#### 接口描述
 
 > 获取web3j版本
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/clientVersion**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
 无入参
 
-**2）数据格式**
+1. **数据格式**
 http://localhost:8081/webase-front/1/web3/clientVersion
 
-### 响应参数
+#### 响应参数
 
 **1）参数表**
 无
 
 **2）数据格式**
-···
+```
 {
     "Build Time": "20190318 10:56:37",
     "Build Type": "Linux/g++/RelWithDebInfo",
@@ -974,24 +948,25 @@ http://localhost:8081/webase-front/1/web3/clientVersion
     "Git Branch": "master",
     "Git Commit Hash": "2467ddf73b091bc8e0ee611ccee85db7989ad389"
 }
-···
+```
 
-## 3.9. 获取合约二进制代码接口
-[top](#目录)
 
-### 接口描述
+### 3.9. 获取合约二进制代码接口  
+
+
+#### 接口描述
 
 > 获取指定块高区块指定合约地址的二进制代码
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/code/{address}/{blockNumber}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1004,38 +979,41 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/code/0x0000000000000000000000000000000000000000/1
 
-### 响应参数
+#### 响应参数
+
+
 
 **2）数据格式**
+
 ```
+{
 0x
+}
 ```
+### 3.10. 获取总交易数  
 
 
-## 3.10. 获取总交易数
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 获取总交易数量
 
-### 接口URL
+#### 接口URL
 
-**http://localhost:8081/webase-front/1/transaction-total**
+**http://localhost:8081/webase-front/{groupId}/transaction-total**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
 **2）数据格式**
 
-http://localhost:8081/webase-front/1/web3/transaction-total
+http://localhost:8081/webase-front/1/web3/transCnt/0x0000000000000000000000000000000000000000/1
 
-### 响应参数
+#### 响应参数
 
 **1）参数表**
 
@@ -1046,33 +1024,32 @@ http://localhost:8081/webase-front/1/web3/transaction-total
 | 3        |  | blockNumberRaw  | String   |              | 是       |          |
 | 4        |  | txSumRaw  | String   |              | 是       |          |
 
-
 **2）数据格式**
 ```
 {
-  "txSum": 125,
+ "txSum": 125,
   "blockNumber": 125,
   "blockNumberRaw": "0x7d",
   "txSumRaw": "0x7d"
 }
 ```
 
-## 3.11. 根据块hash和交易index获取交易接口
-[top](#目录)
+### 3.11. 根据块hash和交易index获取交易接口  
 
-### 接口描述
+
+#### 接口描述
 
 > 获取指定区块指定位置的交易信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/transByBlockHashAndIndex/{blockHash}/{transactionIndex}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1081,11 +1058,14 @@ HTTP GET
 | 1        | 块hash   | blockHash        | String     |              | 是       |          |
 | 2        | 交易位置 | transactionIndex | BigInteger |              | 是       |          |
 
+
+
 **2）数据格式**
 
-http://localhost:8081/webase-front/1/web3/transByBlockHashAndIndex/0x0d9ed7b20645d5b8200347a72e7fb15347b83d74c6e1b6c3995cdb7a849f95d9/0
+http://localhost:8081/webase-front/1/web3/transByBlockHashAndIndex/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade/0
 
-### 响应参数
+#### 响应参数
+
 
 **2）数据格式**
 ```
@@ -1116,23 +1096,22 @@ http://localhost:8081/webase-front/1/web3/transByBlockHashAndIndex/0x0d9ed7b2064
 }
 ```
 
+### 3.12. 根据块高和交易index获取交易接口  
 
-## 3.12. 根据块高和交易index获取交易接口
-[top](#目录)
 
-### 接口描述
+#### 接口描述
 
 > 获取指定区块指定位置的交易信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/transByBlockNumberAndIndex/{blockNumber}/{transactionIndex}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1146,7 +1125,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/transByBlockNumberAndIndex/100/0
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1177,24 +1156,22 @@ http://localhost:8081/webase-front/1/web3/transByBlockNumberAndIndex/100/0
 }
 ```
 
+### 3.13. 获取群组内的共识状态信息接口  
 
 
-## 3.13. 获取群组内的共识状态信息接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 返回指定群组内的共识状态信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/consensusStatus**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1202,13 +1179,14 @@ HTTP GET
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 
+
 **2）数据格式**
 
 http://localhost:8081/webase-front/1/web3/consensusStatus
 
-### 响应参数
-
+#### 响应参数
 **1）数据格式**
+
 ```
 [
     {
@@ -1282,36 +1260,22 @@ http://localhost:8081/webase-front/1/web3/consensusStatus
 ]
 ```
 
+### 3.14. 获取节点状态列表接口  
 
-## 3.14. 获取节点状态列表接口
-[top](#目录)
 
-### 接口描述
+#### 接口描述
 
 > 返回节点的快高、pbftview及状态
 
-### 接口URL
+#### 接口URL
 
-**http://localhost:8081/webase-front/{groupId}/web3/getNodeStatusList**
+**http://localhost:8081/webase-front/{groupId}/web3/nodeHeartBeat**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
-
-
-**2）数据格式**
-
-http://localhost:8081/webase-front/1/web3/getNodeStatusList
-
-### 响应参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1324,22 +1288,38 @@ http://localhost:8081/webase-front/1/web3/getNodeStatusList
 | 5        | 上次状态修改时间 | latestStatusUpdateTime | String   |   | 是   | 跟上次状态变更时间间隔至少大于三秒才会重新检测节点状态 |
 
 
-## 3.15. 获取群组列表接口
-[top](#目录)
+**2）数据格式**
 
-### 接口描述
+http://localhost:8081/webase-front/1/web3/getNodeStatusList
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+
+"blockNumber": 1,
+
+"pbftView": 1232
+
+}
+```
+
+### 3.15. 获取群组列表接口  
+
+#### 接口描述
 
 > 返回群组列表
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/groupList**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1351,7 +1331,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/groupList
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1361,24 +1341,21 @@ http://localhost:8081/webase-front/1/web3/groupList
 ]
 ```
 
+### 3.16. 获取观察及共识节点列表
 
-
-## 3.16. 获取观察及共识节点列表
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 返回指定群组内的共识节点和观察节点列表
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/groupPeers**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1391,7 +1368,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/groupPeers
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1405,22 +1382,21 @@ http://localhost:8081/webase-front/1/web3/groupPeers
 
 
 
-## 3.17. 获取群组内观察节点列表
-[top](#目录)
+### 3.17. 获取群组内观察节点列表
 
-### 接口描述
+#### 接口描述
 
 > 返回指定群组内的观察节点列表
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/observerList**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1433,7 +1409,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/observerList
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1444,22 +1420,22 @@ http://localhost:8081/webase-front/1/web3/observerList
 
 
 
-## 3.18. 获取群组最新的pbftview视图
+### 3.18. 获取群组最新的pbftview视图
 [top](#目录)
 
-### 接口描述
+#### 接口描述
 
 > 返回指定群组内的pbftview
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/pbftView**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1472,7 +1448,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/pbftView
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1480,22 +1456,21 @@ http://localhost:8081/webase-front/1/web3/pbftView
 ```
 
 
-## 3.19. 获取已连接的P2P节点信息
-[top](#目录)
+### 3.19. 获取已连接的P2P节点信息
 
-### 接口描述
+#### 接口描述
 
 > 返回指定群组内已连接的P2P节点信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/peers**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1508,7 +1483,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/peers
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1548,22 +1523,21 @@ http://localhost:8081/webase-front/1/web3/peers
 
 
 
-## 3.20. 获取群组内正在处理的交易数
-[top](#目录)
+### 3.20. 获取群组内正在处理的交易数
 
-### 接口描述
+#### 接口描述
 
 > 获取群组内正在处理的交易数
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/pending-transactions-count**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1576,7 +1550,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/pending-transactions-count
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1584,22 +1558,21 @@ http://localhost:8081/webase-front/1/web3/pending-transactions-count
 ```
 
 
-## 3.21. 获取共识节点接口
-[top](#目录)
+### 3.21. 获取共识节点接口
 
-### 接口描述
+#### 接口描述
 
 > 返回群组内共识节点列表
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/sealerList**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1612,7 +1585,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/sealerList
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1625,22 +1598,21 @@ http://localhost:8081/webase-front/1/web3/sealerList
 ```
 
 
-## 3.22. 区块/交易
-[top](#目录)
+### 3.22. 区块/交易
 
-### 接口描述
+#### 接口描述
 
 > 如果输入块高就返回区块信息，如果输入交易hash就返回交易信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/search?input={inputValue}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1656,7 +1628,7 @@ http://localhost:8081/webase-front/1/web3/search?input=1
 
 
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1720,24 +1692,21 @@ http://localhost:8081/webase-front/1/web3/search?input=1
 }
 ```
 
+### 3.23. 获取群组内同步状态信息
 
-
-## 3.23. 获取群组内同步状态信息
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 获取群组内同步状态信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/syncStatus**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1750,7 +1719,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/syncStatus
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1785,26 +1754,21 @@ http://localhost:8081/webase-front/1/web3/syncStatus
 }
 ```
 
+### 3.24. 获取交易信息接口
 
-
-
-
-## 3.24. 获取交易信息接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 > 根据交易hash查询交易信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/transaction/{transHash}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1819,7 +1783,7 @@ HTTP GET
 
 http://localhost:8081/webase-front/1/web3/transaction/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1851,22 +1815,21 @@ http://localhost:8081/webase-front/1/web3/transaction/0x4145b921309fcaa92b05b782
 ```
 
 
-## 3.25. 获取交易回执接口
-[top](#目录)
+### 3.25. 获取交易回执接口
 
-### 接口描述
+#### 接口描述
 
 > 根据交易hash查询交易回执
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/{groupId}/web3/transactionReceipt/{transHash}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1875,13 +1838,11 @@ HTTP GET
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 | 2        | 交易hash | transHash | String      |             | 是        |                      |
 
-
-
 **2）数据格式**
 
 http://localhost:8081/webase-front/1/web3/transactionReceipt/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
 
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
 ```
@@ -1910,48 +1871,46 @@ http://localhost:8081/webase-front/1/web3/transactionReceipt/0x4145b921309fcaa92
 
 
 
+## 4. 性能检测接口
 
-# 4. 性能检测接口
+### 4.1. 获取机器配置信息  
 
-## 4.1. 获取机器配置信息
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 获取机器配置信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/performance/config**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
 无入参
 
-### 响应参数
+#### 响应参数
 
-## 4.2. 获取机器历史性能信息
-[top](#目录)
+### 4.2. 获取机器历史性能信息  
 
-### 接口描述
+
+#### 接口描述
 
 获取机器历史性能信息
 
-### 接口URL
+#### 接口URL
 
 **http://localhost:8081/webase-front/performance**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -1963,7 +1922,7 @@ HTTP GET
 | 4 | 对比结束日期 | contrastEndDate | LocalDateTime |   |   |   |
 | 5 | 间隔 | gap | int |   |   |   |
 
-### 响应参数
+#### 响应参数
 **1）参数表**
 ``` 
 {
@@ -1971,25 +1930,24 @@ HTTP GET
 }
 ```
 
+## 5. 交易接口
 
-# 5. 交易接口
+### 5.1. 交易处理接口
 
-## 5.1. 交易处理接口
-[top](#目录)
-
-### 接口描述
+#### 接口描述
 
 通过合约信息进行调用，前置根据调用的合约方法是否是“constant”方法区分返回信息，“constant”方法为查询，返回要查询的信息。非“constant”方法为发送数据上链，返回块hash、块高、交易hash等信息。
 
-### 接口URL
+#### 接口URL
+
 
 **http://localhost:8081/webase-front/trans/handle**
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
@@ -2018,8 +1976,7 @@ HTTP POST
 示例：curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
 "HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:8081/webase-front/trans/handle
 
-### 响应参数
-
+#### 响应参数
 
 1. **数据格式**
 
@@ -2050,12 +2007,9 @@ b、正确发送数据上链返回值信息(交易收据)
 }
 ```
 
+## 附录
 
-
-# 附录
-
-## 1. 返回码信息列表 
- [top](#目录)
+### 1. 返回码信息列表 
 
 ------
 
