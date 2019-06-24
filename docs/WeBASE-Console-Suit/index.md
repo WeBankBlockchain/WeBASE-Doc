@@ -40,25 +40,25 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 WeBASE管理平台分为三个部分：节点前置，节点管理，WEB管理台。
 
-当前版本我们提供了两种搭建方式：[**一键搭建**](./deploy/README.md)和手动搭建。
+当前版本我们提供了两种搭建方式：[**一键搭建**](../WeBASE/install.md)和手动搭建。
 
 #### 2.2.1、一键搭建
 
-适合同机部署，快速体验的情况使用。具体搭建流程参见[**安装文档**](./deploy/README.md)。
+适合同机部署，快速体验的情况使用。具体搭建流程参见[**安装文档**](../WeBASE/install.md)。
 
 #### 2.2.2、手动搭建
 
 ##### 2.2.2.1、节点前置搭建
 
-节点前置使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点前置安装说明》](../webase-front/install.md)。
+节点前置使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点前置安装说明》](../WeBASE-Front/install.md)。
 
 ##### 2.2.2.2、节点管理搭建
 
-节点管理使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点管理安装说明》](../webase-mgr/install.md)。
+节点管理使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点管理安装说明》](../WeBASE-Node-Manager/install.md)。
 
 ##### 2.2.2.3、WEB管理台搭建
 
-WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安装说明》](../webase-web/install.md)。
+WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安装说明》](../WeBASE-Web/install.md)。
 
 ## 3、系统初始化配置
 
