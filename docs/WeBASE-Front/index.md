@@ -6,7 +6,7 @@
 
    README.md
    install.md
-   install_FAQ.md
    interface.md
+   install_FAQ.md
    appendix.md
 ```
