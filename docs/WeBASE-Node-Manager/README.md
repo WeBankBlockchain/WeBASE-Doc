@@ -1,11 +1,11 @@
-# 节点管理
+# 节点管理服务
 
-## 1. 功能说明</a>
+## 1. 功能说明
 节点管理服务是fisco-bcos配套的一个子系统，含有如下功能模块：
 
 | 序号  | 模块                       |   描述   |
 |-------|---------------------------|----------------------|
-| 1     | 前置管理模块               |  维护关联webase-front服务信息   |
+| 1     | 前置管理模块               |  维护关联WeBASE-Front服务信息   |
 | 2     | 交易信息模块               |  查看交易信息   |
 | 3     | 帐号管理模块               |  维护系统登录账号信息  |
 | 4     | 区块管理模块               |  查看区块信息 |
@@ -22,38 +22,38 @@
 
 
 
-## 2. 前提条件</a>
+## 2. 前提条件
 | 序号  | 软件                                          |
 |-------|---------------------------------------------------|
 | 1     | fisco-bcos 2.0                                    |
-| 2     | webase-front 0.7版本                  |
+| 2     | WeBASE-Front 0.7版本                  |
 | 3     | mysql5.5或5.6版本【更高版本需要更改mysql配置，可参考《install_FAQ.md》】    |
 | 4     | java1.8.0_181或更高版本                           |
 | 5     | gradle-4.10或以上版本                            |
 
 
-## 3. 部署说明</a>
+## 3. 部署说明
 
 ### 3.1 注意事项
-* 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.md)
+* 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](https://github.com/WeBankFinTech/WeBASE-Node-Manager/blob/dev-0.7/install_FAQ.md)
 * 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略。
 
 ### 3.2 拉取代码
 执行命令：
 ```shell
-git clone -b dev-0.7 https://github.com/WeBankFinTech/webase-node-mgr.git
+git clone -b dev-0.7 https://github.com/WeBankFinTech/WeBASE-Node-Manager.git
 ```
 ### 3.3 编译代码
 进入代码根目录：
 ```shell
-cd webase-node-mgr
+cd WeBASE-Node-Manager
 ```
-在代码的根目录webase-node-mgr执行构建命令：
+在代码的根目录WeBASE-Node-Manager执行构建命令：
 ```shell
 gradle build -x test
 （没有安装gradle  则使用 ./gradlew build -x test）
 ```
-构建完成后，会在根目录webase-node-mgr下生成已编译的代码目录dist。
+构建完成后，会在根目录WeBASE-Node-Manager下生成已编译的代码目录dist。
 
 
 ### 3.4 数据库初始化
@@ -96,7 +96,7 @@ cd dist/conf
 ```
 修改服务配置：
 ```shell
-修改当前服务（webase-node-mgr）端口：sed -i "s/8080/${your_server_port}/g" application.yml
+修改当前服务（WeBASE-Node-Manager）端口：sed -i "s/8080/${your_server_port}/g" application.yml
 修改数据库IP：sed -i "s/127.0.0.1/${your_db_ip}/g" application.yml
 修改数据库端口：sed -i "s/3306/${your_db_port}/g" application.yml
 修改数据库名称：sed -i "s/fisco-bcos-data/${your_db_name}/g" application.yml
