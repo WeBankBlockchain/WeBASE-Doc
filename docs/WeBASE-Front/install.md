@@ -4,7 +4,7 @@
 
 执行命令：
 ```
-git clone -b dev-0.7 https://github.com/WeBankFinTech/webase-front.git
+git clone https://github.com/WeBankFinTech/webase-front.git
 ```
 
 ### 1.2 拷贝证书
@@ -16,11 +16,13 @@ git clone -b dev-0.7 https://github.com/WeBankFinTech/webase-front.git
 
 ### 1.3 修改配置文件
  然后修改application.yml配置文件。
-```
+spring:
+  datasource:
+    url: jdbc:h2:file:~/.h2/front_db;DB_CLOSE_ON_EXIT=FALSE   //默认H2库为~/.h2/front_db,可按需更改
 constant:  
   transMaxWait: 30            //交易等待时间
   monitorDisk: /home          //要监控的硬盘目录 
-  keyServer: 10.0.0.1:8080   // 配置密钥服务(可以是node-mgr服务)的IP和端口（front独立使用可不配） 
+  keyServer: 127.0.0.1:8082   // 配置密钥服务(可以是node-mgr服务)的IP和端口（front独立使用可不配） 
 ```
  application.yml配置文件中sdk的配置采用默认配置，无需修改。如果想修改连接的节点和端口，设置如下：
 ``` 
