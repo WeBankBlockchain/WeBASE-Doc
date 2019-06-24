@@ -1,6 +1,16 @@
 # 部署说明
 
-## 1. 拉取代码
+## 1. 前提条件
+
+| 环境      | 版本                       |
+| --------- | -------------------------- |
+| Java      | jdk1.8.0_121或以上版本     |
+| 数据库    | mysql-5.6或以上版本        |
+| zookeeper | zookeeper-3.4.10或以上版本 |
+
+备注：安装说明请参看 [附录-1](./appendix.html#id2)，不使用分布式任务可以不部署zookeeper。
+
+## 2. 拉取代码
 
 执行命令：
 
@@ -14,9 +24,9 @@ git clone https://github.com/WeBankFinTech/WeBASE-Transaction.git
 cd WeBASE-Transaction
 ```
 
-## 2. 编译代码
+## 3. 编译代码
 
-使用以下方式编译构建，如果出现问题可以查看[常见问题](./install_FAQ.html)</br>
+使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id4)</br>
 方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
 
 ```shell
@@ -31,7 +41,7 @@ gradle build -x test
 
 构建完成后，会在根目录WeBASE-Transaction下生成已编译的代码目录dist。
 
-## 3. 修改配置
+## 4. 修改配置
 
 （1）进入目录：
 
@@ -101,7 +111,7 @@ job:
     shardingTotalCount: 3
 ```
 
-## 4. 服务启停
+## 5. 服务启停
 
 进入到已编译的代码根目录：
 
@@ -122,7 +132,7 @@ cd dist
 转格式：dos2unix *.sh
 ```
 
-## 5. 查看日志
+## 6. 查看日志
 
 在已编译的代码根目录dist查看：
 

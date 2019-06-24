@@ -2,11 +2,11 @@
 
 ```eval_rst
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
    README.md
    install.md
-   install_FAQ.md
    interface.md
    appendix.md
 ```
