@@ -5,7 +5,7 @@
    :maxdepth: 1
 
    ../WeBASE-Front/index.md
-   ../WeBASE-Node-Manager/README.md
+   ../WeBASE-Node-Manager/index.md
    ../WeBASE-Web/README.md
    ../WeBASE-Transaction/index.md
    ../WeBASE-Sign/README.md
