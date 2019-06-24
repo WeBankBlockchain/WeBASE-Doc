@@ -4,7 +4,7 @@
 
 执行命令：
 ```
-git clone -b dev https://github.com/WeBankFinTech/webase-front.git
+git clone https://github.com/WeBankFinTech/webase-front.git
 ```
 
 ### 1.2 拷贝证书
