@@ -57,7 +57,7 @@ nginx安装请参考附录
 
 2、 修改服务ip
 ```
-    sed -i "s/ 10.0.0.1 /${your_server_ip}/g" nginx.conf
+    sed -i "s/10.0.0.1/${your_server_ip}/g" nginx.conf
 ```
 例如： 
 ```
@@ -72,7 +72,7 @@ nginx安装请参考附录
 
 4、 修改mgr服务ip和端口
 ```
-sed -i "s/10.0.0.1:8083/${your_mgrServer_ipPort}/g" nginx.conf
+    sed -i "s/10.0.0.1:8083/${your_mgrServer_ipPort}/g" nginx.conf
 ````
 
 按照上面的步骤执行后，可以直接跳过这一步骤，直接启动nginx。若服务器已有nginx可按照以下修改，增加一条server
