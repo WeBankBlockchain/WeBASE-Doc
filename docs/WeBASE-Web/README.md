@@ -172,8 +172,8 @@ ps -ef | grep nginx                              # 查看nginx进程
 # 3.2 常见问题
 ### 3.2.1 出现“登录错误”怎么排查问题
 登录时出现“登录错误”，请一一排查：
- 1. WeBASE-node-mgr服务是否启动成功，
- 2. WeBASE-node-mgr的数据库是否正常，
+ 1. WeBASE-Node-Manager服务是否启动成功，
+ 2. WeBASE-Node-Manager的数据库是否正常，
  3. nginx代理是否存在错误。
     
 ### 3.2.2 为什么输入正确的验证码显示验证码错误
