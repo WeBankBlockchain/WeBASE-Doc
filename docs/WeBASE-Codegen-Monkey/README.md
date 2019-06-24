@@ -95,7 +95,7 @@
 
 [WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)集成了swagger插件，提供可视化互动API控制台。
 
-![[效果图]](../../images/webase-codegen-monkey/grafana_demo.png)
+![[效果图]](../../images/WeBASE-Codegen-Monkey/grafana_demo.png)
 
 ## 2. 快速开始
 
@@ -327,13 +327,13 @@ grafana将自动绑定3000端口并自动安装时钟和Json的插件。
 
 在正常登录成功后，如图所示，选择左边栏设置按钮，点击『Data Sources』，选择『MySQL』数据源，随后按照提示的页面，配置 Host， Database， User 和 Password等。
 
-![[添加步骤]](../../images/webase-codegen-monkey/add_datasource.png)
+![[添加步骤]](../../images/WeBASE-Codegen-Monkey/add_datasource.png)
 
 #### 2.3.5 导入Dashboard模板
 
 WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径位于：WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json，请点击左边栏『+』，选择『import』，点击绿色按钮『Upload.json File』,选择刚才的WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json文件，最后，点击『import』按钮。
 
-![[导入步骤]](../../images/webase-codegen-monkey/import_json.png)
+![[导入步骤]](../../images/WeBASE-Codegen-Monkey/import_json.png)
 
 如果导入成功，dashboards下面会出现『FISCO-BCOS区块链监控视图』，您可以选择右上方的时间按钮来选择和设置时间范围及刷新时间等。您也可以选中具体的页面组件进行编辑，自由地移除或挪动组件的位置，达到更好的使用体验。
 
@@ -343,7 +343,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 [WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
-![[swagger控制台]](../../images/webase-codegen-monkey/swagger.png)
+![[swagger控制台]](../../images/WeBASE-Codegen-Monkey/swagger.png)
 
 **请注意，swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件**
 
@@ -365,9 +365,9 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 我们以查询区块信息为例，如下列图所示：
 
-![[选择请求]](../../images/webase-codegen-monkey/swag_test1.png)
-![[编辑报文]](../../images/webase-codegen-monkey/swag_test2.png)
-![[查收结果]](../../images/webase-codegen-monkey/swag_test3.png)
+![[选择请求]](../../images/WeBASE-Codegen-Monkey/swag_test1.png)
+![[编辑报文]](../../images/WeBASE-Codegen-Monkey/swag_test2.png)
+![[查收结果]](../../images/WeBASE-Codegen-Monkey/swag_test3.png)
 
 ## 3. 存储模型
 
