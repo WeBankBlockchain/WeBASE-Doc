@@ -16,6 +16,7 @@ git clone https://github.com/WeBankFinTech/webase-front.git
 
 ### 1.3 修改配置文件
  然后修改application.yml配置文件。
+``` 
 spring:
   datasource:
     url: jdbc:h2:file:~/.h2/front_db;DB_CLOSE_ON_EXIT=FALSE   //默认H2库为~/.h2/front_db,可按需更改
