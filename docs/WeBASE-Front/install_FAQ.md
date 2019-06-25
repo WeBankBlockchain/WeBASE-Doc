@@ -2,7 +2,8 @@
 
 * 1：执行shell脚本报下面错误permission denied： 
 
-   答：chmod +x 给文件增加权限
+   答：chmod +x 给文件增加权限 
+   
    
 * 2: eclipse环境编译源码失败，错误提示如下；
 ```
