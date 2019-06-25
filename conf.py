@@ -255,7 +255,8 @@ htmlhelp_basename = 'WeBASE_doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
-latex_engine = 'pdflatex'
+#latex_engine = 'pdflatex'
+latex_engine = 'xelatex'
 latex_use_xindy = False
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
@@ -269,7 +270,7 @@ latex_elements = {
 'preamble': r'''
 \hypersetup{unicode=true}
 \usepackage{CJKutf8}
-\DeclareUnicodeCharacter{00A0}{\nobreakspace}
+\DeclareUnicodeCharacter{00A0}{~}
 \DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
 \DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
 \DeclareUnicodeCharacter{2286}{\ensuremath{\subseteq}}
