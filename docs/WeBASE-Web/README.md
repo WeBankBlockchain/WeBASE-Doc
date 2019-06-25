@@ -1,10 +1,10 @@
-# WEB管理台
+# WeBASE管理平台
 
 本项目是fisco-bcos应用平台项目，使用框架`vue-cli`。
 
 兼容浏览器IE9及以上，360浏览器兼容版（IE9内核），360浏览器极速版，chrome浏览器。
 
-## 1、功能
+## 1、概要介绍
 
 本代码仅支持fisco-bcos 2.0以上版本，支持群组和群组切换
 
@@ -21,7 +21,7 @@
 7. 帐号管理，只有admin帐号才能查看此功能，可以新增帐号（登录此系统帐号），修改密码等等。
 
 
-## 2、部署
+## 2、部署说明
 
 ### 2.1 依赖环境
 
@@ -57,7 +57,7 @@ nginx安装请参考附录
 
 2、 修改服务ip
 ```
-    sed -i "s/ 10.0.0.1 /${your_server_ip}/g" nginx.conf
+    sed -i "s/10.0.0.1/${your_server_ip}/g" nginx.conf
 ```
 例如： 
 ```
@@ -72,7 +72,7 @@ nginx安装请参考附录
 
 4、 修改mgr服务ip和端口
 ```
-sed -i "s/10.0.0.1:8083/${your_mgrServer_ipPort}/g" nginx.conf
+    sed -i "s/10.0.0.1:8083/${your_mgrServer_ipPort}/g" nginx.conf
 ````
 
 按照上面的步骤执行后，可以直接跳过这一步骤，直接启动nginx。若服务器已有nginx可按照以下修改，增加一条server
@@ -125,7 +125,7 @@ sed -i "s/10.0.0.1:8083/${your_mgrServer_ipPort}/g" nginx.conf
 
 
 ## 3、附录
-### 3.1 安装nginx（可参考[网络教程](http://www.runoob.com/linux/nginx-install-setup.html)）
+### 3.1 安装nginx
 #### 3.1.1 下载nginx依赖
 在安装nginx前首先要确认系统中安装了gcc、pcre-devel、zlib-devel、openssl-devel。如果没有，请执行命令
 
@@ -168,3 +168,21 @@ nginx下载地址：https://nginx.org/download/（下载最新稳定版本即可
 /usr/local/nginx/sbin/nginx -s stop              # 停止 Nginx
 ps -ef | grep nginx                              # 查看nginx进程
 ```
+
+
+### 3.2 常见问题
+#### 3.2.1 出现“登录错误”怎么排查问题
+登录时出现“登录错误”，请一一排查：
+ 1. WeBASE-Node-Manager服务是否启动成功，
+ 2. WeBASE-Node-Manager的数据库是否正常，
+ 3. nginx代理是否存在错误。
+    
+#### 3.2.2 为什么输入正确的验证码显示验证码错误
+登录验证码有效时间为一分钟，一分钟后验证码失效，登录会出现“验证码错误” 。
+
+#### 3.2.3 交易解码解不出来
+将发送该交易的合约上传到合约管理，并编译。
+
+#### 3.2.4 交易审计异常交易和异常合约怎么消除
+将发送交易的账户在私钥管理中添加成公钥用户，那么该用户所发的交易将审计成正常交易；
+将部署该合约的账户在私钥管理中添加成公钥用户，那么该用户所部署的合约将审计成正常合约。
