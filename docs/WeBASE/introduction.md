@@ -47,9 +47,3 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
 - **数据导出服务** 
 [WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee) 导出区块链上的基础数据，如当前块高、交易总量等，通过智能合约的配置，导出区块链上合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
-
-
-
-
-
-
