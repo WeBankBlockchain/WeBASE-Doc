@@ -43,9 +43,10 @@ export PATH=$GRADLE_HOME/bin:$PATH
 
 * 1：执行shell脚本报下面错误permission denied： 
 
-   答：chmod +x 给文件增加权限
+   答：chmod +x 给文件增加权限  
    
-* 2: eclipse环境编译源码失败，错误提示如下；
+   
+ * 2: eclipse环境编译源码失败，错误提示如下；
 ```
 ...
 /data/temp/WeBASE-Front/src/main/java/com/webank/webase/front/performance/PerformanceService.java:167: error: cannot find symbol
