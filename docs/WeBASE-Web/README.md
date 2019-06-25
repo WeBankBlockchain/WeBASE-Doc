@@ -1,4 +1,4 @@
-# WEB管理台
+# WeBASE管理平台
 
 本项目是fisco-bcos应用平台项目，使用框架`vue-cli`。
 
@@ -168,6 +168,7 @@ nginx下载地址：https://nginx.org/download/（下载最新稳定版本即可
 /usr/local/nginx/sbin/nginx -s stop              # 停止 Nginx
 ps -ef | grep nginx                              # 查看nginx进程
 ```
+
 
 ### 3.2 常见问题
 #### 3.2.1 出现“登录错误”怎么排查问题
