@@ -31,21 +31,34 @@ print('PROJECT_ROOT_DIR', PROJECT_ROOT_DIR)
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'	
 
 # Hack for lacking git-lfs support ReadTheDocs	# Hack for lacking git-lfs support ReadTheDocs
-try:
-  # use python provided git_lfs
-  if on_rtd:	
-      print('Fetching files with git_lfs')
-      fetch(DOC_SOURCES_DIR)
+# Hack for lacking git-lfs support ReadTheDocs
+if on_rtd:
+    print('Fetching files with git_lfs')
 
-except Exception, e:
-  # use wgetted git-lfs if python git_lfs excepted
-  if not os.path.exists('./git-lfs'):
-      os.system('wget https://github.com/git-lfs/git-lfs/releases/download/v2.7.1/git-lfs-linux-amd64-v2.7.1.tar.gz')
-      os.system('tar xvfz git-lfs-linux-amd64-v2.7.1.tar.gz')
-      os.system('./git-lfs install')
-      os.system('./git-lfs fetch')  # download content from remote
-      os.system('./git-lfs checkout')  # make local files to have the real content on them
+    import git_lfs
+    try:
+        from urllib.error import HTTPError
+    except ImportError:
+        from urllib2 import HTTPError
 
+    _fetch_urls = git_lfs.fetch_urls
+    def _patched_fetch_urls(lfs_url, oid_list):
+        """Hack git_lfs library that sometimes makes too big requests"""
+        objects = []
+
+        try:
+            objects.extend(_fetch_urls(lfs_url, oid_list))
+        except HTTPError as err:
+            if err.code != 413:
+                raise
+            print("LFS: request entity too large, splitting in half")
+            objects.extend(_patched_fetch_urls(lfs_url, oid_list[:len(oid_list) // 2]))
+            objects.extend(_patched_fetch_urls(lfs_url, oid_list[len(oid_list) // 2:]))
+
+        return objects
+
+    git_lfs.fetch_urls = _patched_fetch_urls
+    git_lfs.fetch(DOC_SOURCES_DIR)
 
 # The suffix of source filenames.
 source_parsers = {
