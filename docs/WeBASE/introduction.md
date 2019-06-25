@@ -19,7 +19,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
 ## 整体架构
 
-![[架构图]](../../images/webase/architecture.png)
+![[架构图]](../../images/WeBASE/architecture.png)
 
 
 ## 各子系统简介
@@ -36,7 +36,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
        <tr>
             <td>WeBASE-Front</td>
             <td>节点前置</td>
-            <td>集成web3jsdk，提供restful风格的接口，客户端可以使用http的形式和节点进行交互，如获取节点快高，部署合约，发送交易等。内置内存数据库，采集节点健康度数据。内置web控制台，实现节点的可视化操作。</td>
+            <td>集成web3jsdk，提供restful风格的接口，客户端可以使用http的形式和节点进行交互，如获取节点块高，部署合约，发送交易等。内置内存数据库，采集节点健康度数据。内置web控制台，实现节点的可视化操作。</td>
         </tr>
        <tr>
             <td>webase-transcation</td>
