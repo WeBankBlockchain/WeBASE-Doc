@@ -1,4 +1,4 @@
-# WeBASE-Collect-Bee
+# 数据导出子系�?
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/WeBASE-Collect-Bee/WeBASE-Collect-Bee.svg)](https://gitter.im/WeBASE-Collect-Bee/community)
 
@@ -481,7 +481,7 @@ grafana将自动绑�?3000端口并自动安装时钟和Json的插件�??
 #### 2.3.4 添加MySQL数据�?
 在正常登录成功后，如图所示，选择左边栏设置按钮，点击『Data Sources』， 选择『MySQL』数据源
 
-![[添加步骤]](../../images/webase-collect-bee/add_datasource.png)
+![[添加步骤]](../../images/WeBASE-Collect-Bee/add_datasource.png)
 
 随后按照提示的页面，配置 Host�? Database�? User �? Password等�??
 
@@ -491,7 +491,7 @@ grafana将自动绑�?3000端口并自动安装时钟和Json的插件�??
 
 请点击左边栏�?+』，选择『import』，点击绿色按钮『Upload .json File�?,选择刚才的WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json文件
 
-![[导入步骤]](../../images/webase-collect-bee/import_json.png)
+![[导入步骤]](../../images/WeBASE-Collect-Bee/import_json.png)
 
 �?后，点击『import』按钮�??
 
@@ -508,7 +508,7 @@ grafana将自动绑�?3000端口并自动安装时钟和Json的插件�??
 
 WeBASE-Collect-Bee默认集成了swagger的插件，支持通过可视化的控制台来发�?�交易�?�生成报文�?�查看结果�?�调试交易等�?
 
-![[swagger控制台]](../../images/webase-collect-bee/swagger.png)
+![[swagger控制台]](../../images/WeBASE-Collect-Bee/swagger.png)
 
 **请注意， swagger插件仅推荐在�?发或测试环境调试使用，在正式上生产环境时，请关闭此插�?**
 
@@ -530,9 +530,9 @@ WeBASE-Collect-Bee默认集成了swagger的插件，支持通过可视化的控�
 
 我们以查询区块信息为例，如下列图�?示：
 
-![[选择请求]](../../images/webase-collect-bee/swag_test1.png)
-![[编辑报文]](../../images/webase-collect-bee/swag_test2.png)
-![[查收结果]](../../images/webase-collect-bee/swag_test3.png)
+![[选择请求]](../../images/WeBASE-Collect-Bee/swag_test1.png)
+![[编辑报文]](../../images/WeBASE-Collect-Bee/swag_test2.png)
+![[查收结果]](../../images/WeBASE-Collect-Bee/swag_test3.png)
 
 ## 3. 存储模型
 
