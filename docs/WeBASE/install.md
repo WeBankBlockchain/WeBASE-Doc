@@ -1,4 +1,4 @@
-# 一键部署说明
+# 快速搭建
 
 ​	一键部署可以快速搭建WeBASE环境。包括节点（fisco-bcos）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。
 
