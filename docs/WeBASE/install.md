@@ -2,7 +2,7 @@
 
 [TOC]
 
-​	一键部署可以快速搭建WeBASE环境。包括节点（fisco-bcos）、节点前置（webase-front）、节点管理（webase-node-mgr）、管理平台（webase-web）。
+​	一键部署可以快速搭建WeBASE环境。包括节点（fisco-bcos）、节点前置（WeBASE-Front）、节点管理（webase-node-mgr）、管理平台（webase-web）。
 
 ​	部署脚本会拉取相关安装包进行部署（需保持网络畅通），重复部署可根据提示进行相关操作。
 
@@ -89,7 +89,7 @@ http://{deployIP}:{webPort}
 节点前置控制台：
 
 ```
-http://{deployIP}:{frontPort}/webase-front
+http://{deployIP}:{frontPort}/WeBASE-Front
 ```
 
 **备注：**部署服务器IP和相关服务端口需对应修改
@@ -101,7 +101,7 @@ http://{deployIP}:{frontPort}/webase-front
 节点日志：nodes/127.0.0.1/node*/log/
 web服务日志：webase-web/log/
 mgr服务日志：webase-node-mgr/logs/
-front服务日志：webase-front/log/
+front服务日志：WeBASE-Front/log/
 ```
 
 ## 7、附录
@@ -268,12 +268,12 @@ ImportError: No module named MySQLdb
 Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.112.19|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 22793550 (22M) [application/octet-stream]
-Saving to: ‘webase-front.zip’
+Saving to: ‘WeBASE-Front.zip’
 
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
 
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [webase-web](https://github.com/mingzhenliu/sss/releases/download/111/webase-web.zip) 、[webase-node-mgr](https://github.com/mingzhenliu/sss/releases/download/111/webase-node-mgr.zip) 、[webase-front](https://github.com/mingzhenliu/sss/releases/download/111/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [webase-web](https://github.com/mingzhenliu/sss/releases/download/111/webase-web.zip) 、[webase-node-mgr](https://github.com/mingzhenliu/sss/releases/download/111/webase-node-mgr.zip) 、[WeBASE-Front](https://github.com/mingzhenliu/sss/releases/download/111/WeBASE-Front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
 
 ### 8.4 部署时数据库访问报错
 
