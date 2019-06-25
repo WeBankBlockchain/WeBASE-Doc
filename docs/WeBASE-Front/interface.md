@@ -427,7 +427,7 @@ HTTP GET
 
 **2）数据格式** 
  
- `http://localhost:8081/webase-privateKey=008cf98bd0f37fb09privateKey=008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af84ab43ed6fc2dcdf58811522affront/privateKey?useAes=false&userName=test`
+ `http://localhost:8081/WeBASE-Front/privateKey?useAes=false&userName=test`
 ### 响应参数
 
 **1）数据格式**
@@ -640,7 +640,7 @@ HTTP GET
 **2）数据格式**
 
 `http://localhost:8081/WeBASE-Front/1/web3/blockByHash/
-  0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade`
+ 0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade`
 
 #### 响应参数
 
@@ -731,7 +731,7 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
-| 1        | 块高     | blockNumber | BigInteger |              | 是       |          |
+| 1         | 块高      | blockNumber  | BigInteger   |                 | 是       |          |
 
 
 
@@ -767,9 +767,10 @@ HTTP GET
 #### 请求参数
 
 1. **参数表**
+
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+| -------- | -------- | ----------- | ---------- | ------------ | -------- | --------       |
+| 1        | 群组编号 | groupId       | int      |             | 是        |                |
 
 
 **2）数据格式**
@@ -811,7 +812,8 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/transactionReceipt/0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b
+`http://localhost:8081/WeBASE-Front/1/web3/transactionReceipt/
+0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b`
 
 #### 响应参数
 
@@ -881,7 +883,8 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/transaction/0xa6750b812b1a7e36313879b09f0c41fc583b463c15e57608416f3a32688b432b
+`http://localhost:8081/WeBASE-Front/1/web3/transaction/
+0xa6750b812b1a7e36313879b09f0c41fc583b463c15e57608416f3a32688b432b`
 
 #### 响应参数
 
@@ -1067,7 +1070,8 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/transByBlockHashAndIndex/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade/0
+`http://localhost:8081/WeBASE-Front/1/web3/transByBlockHashAndIndex/
+ 0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade/0`
 
 #### 响应参数
 
