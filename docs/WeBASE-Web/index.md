@@ -1,4 +1,4 @@
-# 节点前置服务
+# WeBASE管理平台
 
 ```eval_rst
 .. toctree::
@@ -6,6 +6,5 @@
 
    README.md
    install.md
-   interface.md
    appendix.md
 ```
