@@ -125,7 +125,7 @@ nginx安装请参考附录
 
 
 ## 3、附录
-### 3.1 安装nginx（可参考[网络教程](http://www.runoob.com/linux/nginx-install-setup.html)）
+### 3.1 安装nginx
 #### 3.1.1 下载nginx依赖
 在安装nginx前首先要确认系统中安装了gcc、pcre-devel、zlib-devel、openssl-devel。如果没有，请执行命令
 
