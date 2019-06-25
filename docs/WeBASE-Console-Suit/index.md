@@ -50,7 +50,7 @@ WeBASE管理平台分为三个部分：节点前置，节点管理，WEB管理�
 
 ##### 2.2.2.1、节点前置搭建
 
-节点前置使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点前置安装说明》](../webase-front/install.md)。
+节点前置使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点前置安装说明》](../WeBASE-Front/install.md)。
 
 ##### 2.2.2.2、节点管理搭建
 
