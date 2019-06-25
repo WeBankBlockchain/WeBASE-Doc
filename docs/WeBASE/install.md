@@ -15,7 +15,7 @@
 | MySQL-python | 1.2.5 |
 | mysql | mysql-5.6或以上版本 |
 
-**备注：** 安装说明请参看 [附录7](#7附录)
+**备注：** 安装说明请参看 [附录7](#id8)
 
 ## 2、拉取部署脚本
 
@@ -36,7 +36,7 @@ cd webase-deploy
 
 ① 可以使用以下命令修改，也可以直接修改文件（vi common.properties），没有变化的可以不修改
 
-② 数据库需要提前安装（数据库安装请参看 [附录7.4](#74-数据库部署)）
+② 数据库需要提前安装（数据库安装请参看 [附录7.4](#id9)）
 
 ③ 服务端口不能小于1024
 
@@ -76,7 +76,7 @@ python deploy.py stopAll
 python deploy.py help
 ```
 
-**备注：** 部署过程出现问题可以查看 [常见问题8](#8常见问题)
+**备注：** 部署过程出现问题可以查看 [常见问题8](#id10)
 
 ## 5、访问
 
@@ -259,7 +259,7 @@ Traceback (most recent call last):
 ImportError: No module named MySQLdb
 ```
 
-答：MySQL-python安装请参看部署 [附录7.3](#73-MySQL-python部署)
+答：MySQL-python安装请参看部署 [附录7.3](#mysql-python)
 
 ### 8.3 部署时编译包下载慢
 
