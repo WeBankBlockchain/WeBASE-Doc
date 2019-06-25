@@ -427,7 +427,7 @@ HTTP GET
 
 **2）数据格式** 
  
- `http://localhost:8081/webase-privateKey=008cf98bd0f37fb09privateKey=008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af84ab43ed6fc2dcdf58811522affront/privateKey?useAes=false&userName=test`
+ `http://localhost:8081/WeBASE-Front/privateKey?useAes=false&userName=test`
 ### 响应参数
 
 **1）数据格式**
