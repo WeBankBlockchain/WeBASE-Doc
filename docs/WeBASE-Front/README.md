@@ -8,7 +8,7 @@ WeBASE-Front是和fisco-bcos节点配合使用的一个子系统，此分支支�
    部署方式有两种: 
    1. 可以front组件单独部署作为独立控制台使用,打开
    `http://{nodeIP}:8081/WeBASE-Front` 即可访问控制台界面； 
-   2. 也可以结合[webase-node-mgr](https://github.com/WeBankFinTech/webase-node-mgr) 和 [webase-web](https://github.com/WeBankFinTech/webase-web)服务一起部署。
+   2. 也可以结合[WeBASE-Node-Manager](https://github.com/WeBankFinTech/webase-node-mgr) 和 [WeBASE-Web](https://github.com/WeBankFinTech/webase-web)服务一起部署。
 
  注意：WeBASE-Front需要跟节点同机部署。一台机器部署多个节点，建议只部署一个front服务即可。
   
