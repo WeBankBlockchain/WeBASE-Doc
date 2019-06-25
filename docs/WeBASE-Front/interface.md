@@ -47,7 +47,8 @@ HTTP POST
 ```
 #### 响应参数
 
-**2）数据格式**
+**1）数据格式** 
+
 无
 
 ### 1.2. 合约部署接口
@@ -172,7 +173,8 @@ HTTP POST
 
 ### 响应参数
 
-**1）参数表**
+**1）参数表** 
+
 java文件
 
 **2）数据格式**
@@ -241,8 +243,6 @@ HTTP POST
 | 13        | 修改时间 | modifyTime | String         |      | 是       |           |
 | 14        | 创建时间 | createTime | String         |      | 是       |           |
 | 15        | 备注 | description | String         |      | 否       |           |
-
-
 
 **2）数据格式**
 ```
@@ -425,8 +425,9 @@ HTTP GET
 | 1        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
 | 2        | 用户名 | userName | String        |             | 是        |   |
 
-**2）数据格式**
-`http://localhost:8081/webase-front/privateKey?useAes=false&userName=test`
+**2）数据格式** 
+ 
+ `http://localhost:8081/webase-privateKey=008cf98bd0f37fb09privateKey=008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af84ab43ed6fc2dcdf58811522affront/privateKey?useAes=false&userName=test`
 ### 响应参数
 
 **1）数据格式**
@@ -461,8 +462,11 @@ HTTP GET
 | 1        | 私钥信息 | privateKey | String      |             | 是        |                      |
 | 2        | 是否是加密私钥 | useAes | boolean      |             | 否        |      默认true       |
 
-**2）数据格式**
-`http://localhost:8081/webase-front/privateKey/import?privateKey=008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=false`
+**2）数据格式** 
+
+`http://localhost:8081/webase-front/privateKey/import?privateKey=`
+
+`008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=false`
 
 ### 响应参数
 
@@ -635,7 +639,8 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/webase-front/1/web3/blockByHash/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade
+`http://localhost:8081/webase-front/1/web3/blockByHash/
+  0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade`
 
 #### 响应参数
 
