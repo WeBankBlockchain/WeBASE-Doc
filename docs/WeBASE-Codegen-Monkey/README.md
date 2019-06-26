@@ -13,19 +13,19 @@
 
 ### 1.1 数据导出组件：WeBASE-Collect-Bee
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
 
-数据导出组件[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
+数据导出组件[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)可以导出区块链上的基础数据，如当前块高、交易总量等。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)可以导出区块链上的基础数据，如当前块高、交易总量等。
 
-如果正确配置了FISCO-BCOS上运行的所有合约，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
+如果正确配置了FISCO-BCOS上运行的所有合约，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)提供了基于Restful的API，支持通过http的方式调用这些接口。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)提供了基于Restful的API，支持通过http的方式调用这些接口。
 
 ### 1.2 代码自动生成组件：WeBASE-Codegen-Monkey
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WeBASE-Codegen-Monkey。只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WeBASE-Codegen-Monkey。只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)。
 
 ### 1.3 使用场景和解决方案
 
@@ -39,7 +39,7 @@
 
 - 解决方案
 
-该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。导出到db的数据接入到了该公司的统一监控平台，该公司PM可以在业务后台系统上获得该业务的实时进展，该公司运维人员可以在公司运维监控室的大屏幕实时监控业务系统的状态。
+该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。导出到db的数据接入到了该公司的统一监控平台，该公司PM可以在业务后台系统上获得该业务的实时进展，该公司运维人员可以在公司运维监控室的大屏幕实时监控业务系统的状态。
 
 #### 案例 区块链业务数据对账系统
 
@@ -49,7 +49,7 @@
 
 - 解决方案
 
-该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
+该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
 
 #### 案例 区块链业务数据查询系统
 
@@ -59,7 +59,7 @@
 
 - 解决方案
 
-该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
+该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
 
 ### 1.4 特性介绍
 
@@ -77,23 +77,23 @@
 
 #### 支持多数据源，支持读写分离和分库分表
 
-为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
 
 #### 支持多活部署，多节点自动导出
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件支持多活部署，可自动进行分布式任务调度。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件支持多活部署，可自动进行分布式任务调度。
 
 
 #### 支持区块重置导出
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
 
 ### 支持可视化的监控页面
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
 
 #### 提供可视化的互动API控制台
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)集成了swagger插件，提供可视化互动API控制台。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)集成了swagger插件，提供可视化互动API控制台。
 
 ![[效果图]](../../images/WeBASE-Codegen-Monkey/grafana_demo.png)
 
@@ -121,7 +121,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/dev_v0.7.0.2019.06/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/master/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
@@ -145,13 +145,11 @@ cd install_scripts
 
 ##### 2.2.2.1 配置合约文件
 
-请注意，请确保你使用的Web3SDK的版本大于等于**V1.2.0**。同时请注意，上链程序所安装的[fisco-solc](https://github.com/FISCO-BCOS/fisco-solc)必须与编译的版本一致。
+找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例HelloWorld.java文件）。
 
-找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例Evidence.java文件）。
+如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [利用控制台将合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)
 
-如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考：[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/release-1.3/docs/web3sdk/advanced/gen_java_code.html)
-
-请注意:**请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。
+请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考附录1.3 数据库配置。
 
 ##### 2.2.2.2 配置密钥文件
 
@@ -189,7 +187,7 @@ chmod +x generate_bee.sh
 sh generate_bee.sh
 ```
 
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
 
 请注意:请务必按照以上命令操作，**切莫使用sudo命令来操作**，否则会导致Gradlew没有权限，导致depot数据失败。
 
@@ -200,7 +198,7 @@ chmod +x generate_bee.sh
 sh generate_bee.sh build
 ```
 
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
 
 ```
 chmod +x *.jar
@@ -341,7 +339,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 ### 2.4 开启可视化的功能性测试
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
 ![[swagger控制台]](../../images/WeBASE-Codegen-Monkey/swagger.png)
 
@@ -353,7 +351,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 > http://your_ip:port/swagger-ui.html
 
-例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)，且未修改默认的8080端口，则可以访问此地址：
+例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)，且未修改默认的8080端口，则可以访问此地址：
 
 > http://localhost:8080/swagger-ui.html
 
@@ -541,7 +539,7 @@ A：可以。只需要手动将编译生成的合约代码的包名改为同一�
 
 > **3. 如果我的链上所执行的合约是低于V1.2.0版本的怎么办？还可以导出来吗？**
 
-A:可以，但需要进行特殊的操作。首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/v1.0.1/docs/web3sdk/advanced/gen_java_code.html?highlight=compile.sh)，复制每个Java文件里的ABI字段。
+A: 可以，但需要进行特殊的操作。 首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)，复制每个Java文件里的ABI字段。
 
 然后找到你用之前版本的web3sdk曾经编译的Java代码，注意请保证你安装的fisco-solc与之前的版本一致，将刚才V1.2.0版本Java文件中的ABI字段手工拷贝到之前Java代码中。
 
@@ -570,7 +568,7 @@ Elastic-Job-Lite - 分布式调度解决方案 | 轻量级无中心化解决方�
 
 ### 1. 配置参数说明
 
-WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)组件实例，在WeBASE-Codegen-Monkey组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
+WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)组件实例，在WeBASE-Codegen-Monkey组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
 
 #### 1.1 Springboot服务配置
 
@@ -580,7 +578,7 @@ WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankF
 
 #### 1.2 FISCO-BCOS节点配置
 
-FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/feature_error_handler_2019.04)服务连接的区块链节点，使得WeBASE-Collect-Bee服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
+FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)服务连接的区块链节点，使得WeBASE-Collect-Bee服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |

@@ -24,7 +24,7 @@ WeBASE-Collect-Bee提供了基于Restful的API，支持通过http的方式调用
 
 WeBASE-Collect-Bee还集成了Swagger组件，提供了可视化的文档和测试控制台。
 
-你可以通过[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)来自动生成本工程，只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；我们推荐这种方式。
+你可以通过[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)来自动生成本工程，只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；我们推荐这种方式。
 
 ### 1.2 使用场景和解决方案
 
@@ -38,7 +38,7 @@ WeBASE-Collect-Bee还集成了Swagger组件，提供了可视化的文档和测�
 
 - 解决方案
 
-该公司使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)迅速生成了WeBASE-Collect-Bee的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。
+该公司使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)迅速生成了WeBASE-Collect-Bee的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。
 
 导出到db的数据接入到了该公司的统一监控平台，该公司PM可以在业务后台系统上获得该业务的实时进展，该公司运维人员可以在公司运维监控室的大屏幕实时监控业务系统的状态。
 
@@ -50,7 +50,7 @@ WeBASE-Collect-Bee还集成了Swagger组件，提供了可视化的文档和测�
 
 - 解决方案
 
-该公司使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)迅速生成了WeBASE-Collect-Bee的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
+该公司使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)迅速生成了WeBASE-Collect-Bee的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
 
 #### 案例 区块链业务数据查询系统
 
@@ -60,13 +60,13 @@ WeBASE-Collect-Bee还集成了Swagger组件，提供了可视化的文档和测�
 
 - 解决方案
 
-该公司使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)迅速生成了WeBASE-Collect-Bee的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用WeBASE-Collect-Bee自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
+该公司使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)迅速生成了WeBASE-Collect-Bee的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用WeBASE-Collect-Bee自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
 
 ### 1.3 特性介绍
 
 #### 可自动生成代码
 
-可使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)生成的代码和配置文件，自动组装成数据导出工程实例
+可使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)生成的代码和配置文件，自动组装成数据导出工程实例
 
 #### 支持灵活的数据库策略
 
@@ -112,9 +112,9 @@ WeBASE-Collect-Bee可与grafana深度集成，支持自动生成dashboard实例�
 
 #### 2.2.1 获取工程代码
 
-请按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)的操作手册进行操作。
+请按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作。
 
-如果你已经按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)的操作手册进行操作，那么恭喜，你将获得一个完整WeBASE-Collect-Bee工程目录。
+如果你已经按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作，那么恭喜，你将获得一个完整WeBASE-Collect-Bee工程目录。
 
 WeBASE-Collect-Bee的工程使用gradle进行构建，是一个SpringBoot工程。
 
@@ -138,7 +138,7 @@ WeBASE-Collect-Bee的工程使用gradle进行构建，是一个SpringBoot工程�
 
 #### 2.2.2 配置工程(更多高级配置)
 
-当完整地按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)的操作手册进行操作获得WeBASE-Collect-Bee工程后，会得到WeBASE-Collect-Bee工程，主要的基础配置都将会在配置中自动生成，无需额外配置。但是，基于已生成的配置文件，你可以继续按照需求进行深入的个性化高级配置，例如配置集群部署、分库分表、读写分离等等。
+当完整地按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作获得WeBASE-Collect-Bee工程后，会得到WeBASE-Collect-Bee工程，主要的基础配置都将会在配置中自动生成，无需额外配置。但是，基于已生成的配置文件，你可以继续按照需求进行深入的个性化高级配置，例如配置集群部署、分库分表、读写分离等等。
 
 
 在得到WeBASE-Collect-Bee工程后，进入WeBASE-Collect-Bee的目录：
@@ -323,7 +323,7 @@ sharding.jdbc.config.props.sql.show=true
 
 #### 2.2.3 编译代码并运行程序
 
-如果你已经按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)的操作手册进行操作，那么可跳过此章节。
+如果你已经按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作，那么可跳过此章节。
 
 但是如果你对配置或代码进行了深度定制，可参考以下步骤：
 
@@ -344,7 +344,7 @@ tail -f *.log
 
 supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程。
 
-supervisor的安装与部署可以参考 [WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06) 附录6的说明文档。
+supervisor的安装与部署可以参考 [WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master) 附录6的说明文档。
 
 
 #### 2.2.4 检查运行状态及退出
@@ -487,7 +487,7 @@ grafana将自动绑定3000端口并自动安装时钟和Json的插件。
 
 #### 2.3.5 导入Dashboard模板
 
-[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/dev_v0.7.0.2019.06)会自动生成数据的dashboard模板，数据的路径位于：WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json
+[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)会自动生成数据的dashboard模板，数据的路径位于：WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json
 
 请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json文件
 
