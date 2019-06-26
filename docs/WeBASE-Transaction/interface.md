@@ -8,7 +8,7 @@
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/contract/compile
+http://localhost:8082/webase-transaction/contract/compile
 
 #### 调用方法
 
@@ -68,7 +68,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/contract/deploy
+http://localhost:8082/webase-transaction/contract/deploy
 
 #### 调用方法
 
@@ -95,7 +95,6 @@ HTTP POST
   "signType":0,
   "contractBin":"0xXXXXX",
   "contractAbi":[],
-  "funcName":"set",
   "funcParam":["hello"]
 }
 ```
@@ -137,7 +136,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/contract/address/{groupId}/{uuidDeploy}
+http://localhost:8082/webase-transaction/contract/address/{groupId}/{uuidDeploy}
 
 #### 调用方法
 
@@ -192,7 +191,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/contract/event/{groupId}/{uuidDeploy}
+http://localhost:8082/webase-transaction/contract/event/{groupId}/{uuidDeploy}
 
 #### 调用方法
 
@@ -257,7 +256,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/key/address
+http://localhost:8082/webase-transaction/key/address
 
 #### 调用方法
 
@@ -312,7 +311,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/trans/send
+http://localhost:8082/webase-transaction/trans/send
 
 #### 调用方法
 
@@ -383,7 +382,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/trans/call
+http://localhost:8082/webase-transaction/trans/call
 
 #### 调用方法
 
@@ -450,7 +449,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/trans/event/{groupId}/{uuidStateless}
+http://localhost:8082/webase-transaction/trans/event/{groupId}/{uuidStateless}
 
 #### 调用方法
 
@@ -512,7 +511,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:8082/webase-transcation/trans/output/{groupId}/{uuidStateless}
+http://localhost:8082/webase-transaction/trans/output/{groupId}/{uuidStateless}
 
 #### 调用方法
 
@@ -596,4 +595,4 @@ b.异常返回结果示例（信息详情请参看附录1）
 | 303016  | if deploy uuid is empty, contract address and contract abi cannot be empty | 部署业务流水号为空时，合约地址和abi不能为空 |
 | 303017  | trans output is empty                 | 交易返回值为空             |
 | 303018  | trans is not exist                    | 交易不存在                 |
-| 303019  | request group id has not been configured | 请求的 群组编号未配置   |
+| 303019  | request group id has not been configured | 请求的群组编号未配置   |
