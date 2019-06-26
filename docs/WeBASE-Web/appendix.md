@@ -60,3 +60,6 @@ ps -ef | grep nginx                              # 查看nginx进程
 #### 2.4 交易审计异常交易和异常合约怎么消除
 将发送交易的账户在私钥管理中添加成公钥用户，那么该用户所发的交易将审计成正常交易；
 将部署该合约的账户在私钥管理中添加成公钥用户，那么该用户所部署的合约将审计成正常合约。
+
+### 3. 二次开发
+[开发文档]((https://webase-web.readthedocs.io/en/latest/docs/WeBASE-Web/development.html))
