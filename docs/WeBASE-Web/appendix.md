@@ -62,4 +62,4 @@ ps -ef | grep nginx                              # 查看nginx进程
 将部署该合约的账户在私钥管理中添加成公钥用户，那么该用户所部署的合约将审计成正常合约。
 
 ### 3. 二次开发
-[开发文档]((https://webase-web.readthedocs.io/en/latest/docs/WeBASE-Web/development.html)
+[开发文档](https://webase-web.readthedocs.io/en/latest/docs/WeBASE-Web/development.html)
