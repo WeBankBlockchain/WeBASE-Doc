@@ -1,4 +1,4 @@
-# web管理平台
+# WeBASE管理平台
 
 ```eval_rst
 .. toctree::
