@@ -885,8 +885,9 @@ HTTP GET
 
 **2）数据格式**
 
-`http://localhost:8081/WeBASE-Front/1/web3/transaction/
-0xa6750b812b1a7e36313879b09f0c41fc583b463c15e57608416f3a32688b432b`
+```
+http://localhost:8081/WeBASE-Front/1/web3/transaction/0xa6750b812b1a7e36313879b09f0c41fc583b463c15e57608416f3a32688b432b
+```
 
 #### 响应参数
 
@@ -1793,7 +1794,9 @@ HTTP GET
 
 **2）数据格式**
 
+```
 http://localhost:8081/WeBASE-Front/1/web3/transaction/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
+```
 
 #### 响应参数
 
