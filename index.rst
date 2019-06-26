@@ -1,5 +1,5 @@
 ##############################################################
-WEBASE 技术文档
+WeBASE 技术文档
 ##############################################################
 
 .. image:: ./images/logo/logo.jpg
@@ -23,6 +23,7 @@ WEBASE 技术文档
    docs/WeBASE/install.md
    docs/WeBASE-Console-Suit/index.md
    docs/WeBASE/subsystem.md
+   docs/WeBASE/quick-start.md
 .. 
  docs/WeBASE-Codegen-Monkey/README.md
  docs/WeBASE-Collect-Bee/README.md
