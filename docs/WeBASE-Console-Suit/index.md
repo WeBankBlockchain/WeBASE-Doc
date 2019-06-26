@@ -16,13 +16,13 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 6. 交易审计
 7. 登陆账号管理
 
-![](../../images/webase-console-suit/overview.png)
+![](../../images/WeBASE-Console-Suit/overview.png)
 
 ### 1.3部署架构
 
 这套管理工具主要由：节点前置，节点管理，WEB管理台三个WeBASE子系统构成。WeBASE三个服务的部署架构如下图：节点前置需要和区块链节点部署在同一台机器；节点管理和WEB管理台可以同机部署，也可以分开部署。
 
-![](../../images/webase-console-suit/Framework.png)
+![](../../images/WeBASE-Console-Suit/Framework.png)
 
 
 ## 2、使用前提
@@ -58,7 +58,7 @@ WeBASE管理平台分为三个部分：节点前置，节点管理，WEB管理�
 
 ##### 2.2.2.3、WEB管理台搭建
 
-WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安装说明》](../WeBASE-Web/install.md)。
+WEB管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
 
 ## 3、系统初始化配置
 
@@ -68,7 +68,7 @@ WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安�
 
  未初始化节点前置的管理平台，会引导去节点管理页面添加节点前置。
 
-![](../../images/webase-console-suit/add_node_front.png)
+![](../../images/WeBASE-Console-Suit/add_node_front.png)
 
 前置添加完成后，管理平台就会开始拉取群组信息和群组的区块信息。此时数据概览页面应该就有数据了。为了解析和审计区块数据，需要把相关的合约和用户导入到管理平台。具体看下面两个小节。
 
@@ -78,23 +78,23 @@ WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安�
 
 管理平台提供两种添加合约的方式，一个是新建一个合约，一个是导入已有合约。同时合约编辑器还提供新建目录。用目录的形式管理合约，主要是为了解决同名合约引用的问题。合约添加完成后，需要编译保存。
 
-![](../../images/webase-console-suit/add_contract.png)
+![](../../images/WeBASE-Console-Suit/add_contract.png)
 
 #### 3.2.2部署合约
 
 编译后的合约可以部署。
 
-![](../../images/webase-console-suit/deploy.png)
+![](../../images/WeBASE-Console-Suit/deploy.png)
 
 #### 3.2.3合约调用
 
-![](../../images/webase-console-suit/transaction.png)
+![](../../images/WeBASE-Console-Suit/transaction.png)
 
 ### 3.3、私钥管理
 
 私钥管理提供了新建私钥用户和导入公钥用户两种用户导入方式。第一种方式主要用于新建用户在管理平台的合约管理中部署和调用合约。第二种方式主要用于把交易和用户关联起来。
 
-![](../../images/webase-console-suit/user_transaction.png)
+![](../../images/WeBASE-Console-Suit/user_transaction.png)
 
 ## 4、各模块的详细介绍
 
@@ -104,31 +104,31 @@ WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安�
 
 数据概览页面，展示了区块链的核心数据指标：节点个数，区块数量，交易数量，通过管理台部署的合约数量。关键监控指标：历史15天的交易量。节点信息列表：展示了节点的ID，节点块高，节点view和运行状态。区块信息展示了最近5个块的概览信息，点击更多可以查看更多历史区块。交易信息展示了最近5个交易的概览信息，点击更多可以查看更多历史交易。
 
-![](../../images/webase-console-suit/overview.png)
+![](../../images/WeBASE-Console-Suit/overview.png)
 
 ### 4.2节点管理
 
 节点管理主要提供了前置列表和节点列表的功能。用户可以通过新增节点前置，把新的节点前置添加到前置列表。系统会默认拉取这些前置所在的群组和各个群组的节点信息。
 
-![](../../images/webase-console-suit/node.png)
+![](../../images/WeBASE-Console-Suit/node.png)
 
 ### 4.3合约管理
 
 合约管理提供了一个图形化的合约IDE环境。这个IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口。
 
-![](../../images/webase-console-suit/contract.png)
+![](../../images/WeBASE-Console-Suit/contract.png)
 
 ### 4.4私钥管理
 
 在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，然后拿新建用户的私钥来做合约部署和合约交易的签名。
 
-![](../../images/webase-console-suit/key_manager.png)
+![](../../images/WeBASE-Console-Suit/key_manager.png)
 
 ### 4.5系统监控
 
 系统监控主要包括节点监控和主机监控。节点监控主要有区块高度，pbftview，待打包交易。主机监控主要有主机的CPU，内存，网络和硬盘IO。
 
-![](../../images/webase-console-suit/node_monitor.png)
+![](../../images/WeBASE-Console-Suit/node_monitor.png)
 
 ### 4.6交易审计
 
@@ -143,10 +143,10 @@ WEB管理台使用框架`vue-cli`，具体搭建流程参见[《web管理台安�
 | 异常交易用户监控     | 监控链上出现的异常交易用户（没在区块链中间件平台登记的交易用户） |
 | 异常合约部署监控     | 监控链上合约部署情况，非白名单合约（没在区块链中间件平台登记的合约）记录 |
 
-![](../../images/webase-console-suit/user_audit.png)
+![](../../images/WeBASE-Console-Suit/user_audit.png)
 
 ### 4.7登陆账号管理
 
 提供管理台登陆账号的管理功能。管理台用户分为两种角色：普通用户和管理员用户。这两者的区别是，管理员拥有管理平台的读写权限，而普通用户只有查看权限。
 
-![](../../images/webase-console-suit/login_user_manager.png)
+![](../../images/WeBASE-Console-Suit/login_user_manager.png)

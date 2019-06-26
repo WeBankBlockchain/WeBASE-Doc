@@ -15,14 +15,14 @@
 
 执行命令：
 ```
-git clone https://github.com/WeBankFinTech/webase-front.git
+git clone https://github.com/WeBankFinTech/WeBASE-Front.git
 ```
 
 ### 2.2 拷贝证书
 
  拷贝节点sdk目录下的ca.crt、node.crt、node.key证书到项目的src/main/resources目录。
  ```
- cp ~/nodes/127.0.0.1/sdk/*  ~/webase-front/src/main/resources
+ cp ~/nodes/127.0.0.1/sdk/*  ~/WeBASE-Front/src/main/resources
  ```
 
 ### 2.3 修改配置文件
@@ -45,12 +45,12 @@ constant:
 ```
 
 ### 2.4 编译
-在代码的根目录webase-front执行构建命令：
+在代码的根目录WeBASE-Front执行构建命令：
 ```
   chmod +x ./gradlew
  ./gradlew build -x test
 ```
-构建完成后，会在根目录webase-front下生成已编译的代码目录dist。 安装碰到问题，请参考 [安装问题帮助](install_FAQ.md)
+构建完成后，会在根目录WeBASE-Front下生成已编译的代码目录dist。 安装碰到问题，请参考 [安装问题帮助](install_FAQ.md)
 
 
 ### 2.5 服务启停
@@ -77,12 +77,12 @@ cd dist
 cd dist
 ```
 ```
-前置服务日志：tail -f log/webase-front.log
+前置服务日志：tail -f log/WeBASE-Front.log
 web3连接日志：tail -f log/web3sdk.log
 ```
 
 ### 2.7 打开控制台
 
-http://{nodeIP}:8081/webase-front
+http://{nodeIP}:8081/WeBASE-Front
 
 基于可视化控制台，可以查看节点数据概览，查看链上节点的运行情况，开发智能合约，管理私钥等。
