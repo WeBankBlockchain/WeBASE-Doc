@@ -1,4 +1,4 @@
-# webase开发文档
+# 开发文档
 
 本代码仅支持fisco-bcos 2.0以上版本，支持群组和群组切换。
 
@@ -132,4 +132,4 @@ nodejs下载地址：https://nodejs.org/en/download/
 
 ### 2.2 部署
 
-请参考部署文档
+请参考[部署说明](https://webase-web.readthedocs.io/en/latest/docs/WeBASE-Web/install.html)
