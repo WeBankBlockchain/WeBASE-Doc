@@ -122,7 +122,7 @@ sudo yum -y install git
 sudo apt install git
 ```
 
-#### 4. Mysql安装
+### 4. Mysql安装
 
 此处以Centos/Fedora为例。
 
@@ -167,20 +167,20 @@ show databases;
 use test;
 select * from tb_txnByDay;
 ```
-#### 5. zookeeper安装
+### 5. zookeeper安装
 
 zookeeper 支持单机和集群部署，推荐使用集群部署的方式，请参考zookeeper官网的说明：
 [集群部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_zkMulitServerSetup)
 [单机部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_singleAndDevSetup)
 
-#### 6. supervisor安装与部署
+### 6. supervisor安装与部署
 
-##### 安装脚本
+#### 安装脚本
 
 > sudo yum -y install supervisor
 会生成默认配置/etc/supervisord.conf和目录/etc/supervisord.d，如果没有则自行创建。
 
-##### 配置脚本
+#### 配置脚本
 
 cd /etc/supervisord.d
 修改/etc/supervisord.conf的[include]部分：
@@ -207,7 +207,7 @@ stdout_logfile = 【你的日志路径】/WeBASE-Collect-Bee/dist/log/webase_bee
 [supervisord]
 ```
 
-##### 启动任务
+#### 启动任务
 
 supervisor支持supervisorctl和supervisord启动，可通过systemctl实现开机自启动。
 我们建议采用supervisord的方式启动：
@@ -215,7 +215,7 @@ supervisor支持supervisorctl和supervisord启动，可通过systemctl实现开�
 ```shell
 supervisord -c /etc/supervisord.d/webasebee_config1.ini
 ```
-##### 关闭任务
+#### 关闭任务
 
 ```shell
 ps -ef|grep supervisord|grep webasebee| awk '{print $2}'|xargs kill -9
@@ -225,7 +225,7 @@ ps -ef|grep WeBASE-Collect-Bee|grep -v grep| awk '{print $2}'|xargs kill -9
 
 
 
-#### 7. 常见问题
+### 7. 常见问题
 
 > **1. 为啥我的数据里自动生成的表里，只有block_task_pool和block_detail_info表有数据？**
 
