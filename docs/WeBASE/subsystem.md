@@ -6,9 +6,9 @@
 
    ../WeBASE-Front/index.md
    ../WeBASE-Node-Manager/index.md
-   ../WeBASE-Web/README.md
+   ../WeBASE-Web/index.md
    ../WeBASE-Transaction/index.md
-   ../WeBASE-Sign/README.md
-   ../WeBASE-Codegen-Monkey/README.md
-   ../WeBASE-Collect-Bee/README.md
+   ../WeBASE-Sign/index.md
+   ../WeBASE-Codegen-Monkey/index.md
+   ../WeBASE-Collect-Bee/index.md
 ```

@@ -1,4 +1,4 @@
-# 数据导出子系统
+# 概要介绍
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/WeBASE-Collect-Bee/WeBASE-Collect-Bee.svg)](https://gitter.im/WeBASE-Collect-Bee/community)
 
@@ -92,8 +92,8 @@ WeBASE-Collect-Bee还集成了Swagger组件，提供了可视化的文档和测�
 
 WeBASE-Collect-Bee可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
 
-## 2. 快速开始
 
+<<<<<<< HEAD
 ### 2.1 前置依赖
 
 在使用本组件前，请确认系统环境已安装相关依赖软件，清单如下：
@@ -690,4 +690,6 @@ contract UserInfo {
 | --- | --- | --- | --- | --- |
 | user_name | varchar(255) |  |  | 用户名 |
 | sex | int |  |  | 性别 |
+=======
+>>>>>>> upstream/master
 
