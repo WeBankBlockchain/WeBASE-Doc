@@ -74,19 +74,19 @@ WEB管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平�
 
 ### 合约管理
 
-#### 1添加合约
+#### 1、添加合约
 
 管理平台提供两种添加合约的方式，一个是新建一个合约，一个是导入已有合约。同时合约编辑器还提供新建目录。用目录的形式管理合约，主要是为了解决同名合约引用的问题。合约添加完成后，需要编译保存。
 
 ![](../../images/WeBASE-Console-Suit/add_contract.png)
 
-#### 2部署合约
+#### 2、部署合约
 
 编译后的合约可以部署。
 
 ![](../../images/WeBASE-Console-Suit/deploy.png)
 
-#### 3合约调用
+#### 3、合约调用
 
 ![](../../images/WeBASE-Console-Suit/transaction.png)
 
