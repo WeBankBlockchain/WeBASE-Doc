@@ -97,6 +97,9 @@
 
 ![[效果图]](../../images/WeBASE-Codegen-Monkey/grafana_demo.png)
 
+## 2. 快速开始
+
+### 2.1 前置依赖
 
 在使用本组件前，请确认系统环境已安装相关依赖软件，清单如下：
 
