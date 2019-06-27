@@ -1,7 +1,5 @@
 # 一键部署说明
 
-[TOC]
-
 ​	一键部署可以快速搭建WeBASE环境。包括节点（fisco-bcos）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。
 
 ​	部署脚本会拉取相关安装包进行部署（需保持网络畅通），重复部署可根据提示进行相关操作。
@@ -101,7 +99,7 @@ http://{deployIP}:{frontPort}/WeBASE-Front
 节点日志：nodes/127.0.0.1/node*/log/
 web服务日志：webase-web/log/
 mgr服务日志：webase-node-mgr/logs/
-front服务日志：webase-front/log/
+front服务日志：WeBASE-Front/log/
 ```
 
 ## 7、附录
@@ -268,7 +266,7 @@ ImportError: No module named MySQLdb
 Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.112.19|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 22793550 (22M) [application/octet-stream]
-Saving to: ‘webase-front.zip’
+Saving to: ‘WeBASE-Front.zip’
 
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
