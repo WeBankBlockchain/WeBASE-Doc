@@ -92,8 +92,8 @@ WeBASE-Collect-Bee还集成了Swagger组件，提供了可视化的文档和测�
 
 WeBASE-Collect-Bee可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
 
+## 2. 快速开始
 
-<<<<<<< HEAD
 ### 2.1 前置依赖
 
 在使用本组件前，请确认系统环境已安装相关依赖软件，清单如下：
@@ -425,7 +425,7 @@ OK! done blocks from 48 to 48, and height is from 48 to 48
 
 ##### 2.2.5.2 提示
 
- ```OK! to do blocks is lesss than $threshold```  区块导出总体进度正常.
+```OK! to do blocks is lesss than $threshold```  区块导出总体进度正常.
  ```OK! done blocks from $prev_done to $b, and height is from $prev_height to $a```  上个时间周期区块导出进度正常.
  ```ERROR! $todo_blocks:the block height is far behind.```    区块总体下载进度异常.
  ```ERROR! Depot task stuck in trouble, done block is $prev_done to $b , but block height is from $prev_height to $a ```  上个时间周期数据导出进度异常.
@@ -690,6 +690,4 @@ contract UserInfo {
 | --- | --- | --- | --- | --- |
 | user_name | varchar(255) |  |  | 用户名 |
 | sex | int |  |  | 性别 |
-=======
->>>>>>> upstream/master
 
