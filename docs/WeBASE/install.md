@@ -92,7 +92,7 @@ http://{deployIP}:{webPort}
 http://{deployIP}:{frontPort}/WeBASE-Front
 ```
 
-**备注：**部署服务器IP和相关服务端口需对应修改
+**备注：** 部署服务器IP和相关服务端口需对应修改
 
 ## 6、日志路径
 
