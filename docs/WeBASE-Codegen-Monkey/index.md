@@ -6,5 +6,8 @@
 
    outline.md
    install.md
+   model.md
+   question.md
+   tech.md
    appendix.md
 ```
