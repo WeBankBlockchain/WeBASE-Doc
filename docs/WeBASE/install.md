@@ -4,7 +4,7 @@
 
 ​	部署脚本会拉取相关安装包进行部署（需保持网络畅通），重复部署可根据提示进行相关操作。
 
-## 1、前提条件
+## 前提条件
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
@@ -13,9 +13,9 @@
 | MySQL-python | 1.2.5 |
 | mysql | mysql-5.6或以上版本 |
 
-**备注：** 安装说明请参看 [附录7](#id8)
+**备注：** 安装说明请参看 [附录](#id8)
 
-## 2、拉取部署脚本
+## 拉取部署脚本
 
 获取部署安装包：
 ```shell
@@ -30,7 +30,7 @@ unzip webase-deploy.zip
 cd webase-deploy
 ```
 
-## 3、修改配置
+## 修改配置
 
 ① 可以使用以下命令修改，也可以直接修改文件（vi common.properties），没有变化的可以不修改
 
@@ -60,7 +60,7 @@ cd webase-deploy
 例子（将磁盘路径由/data改为/home）：sed -i "s%/data%/home%g" common.properties
 ```
 
-## 4、部署
+## 部署
 部署所有服务：
 ```shell
 python deploy.py startAll
@@ -76,7 +76,7 @@ python deploy.py help
 
 **备注：** 部署过程出现问题可以查看 [常见问题8](#id10)
 
-## 5、访问
+## 访问
 
 管理平台：
 
@@ -92,7 +92,7 @@ http://{deployIP}:{frontPort}/WeBASE-Front
 
 **备注：**部署服务器IP和相关服务端口需对应修改
 
-## 6、日志路径
+## 日志路径
 
 ```
 部署日志：log/
@@ -102,9 +102,9 @@ mgr服务日志：webase-node-mgr/logs/
 front服务日志：WeBASE-Front/log/
 ```
 
-## 7、附录
+## 附录
 
-### 7.1 Java环境部署
+### Java环境部署
 
 此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
@@ -123,13 +123,13 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ```
 
-### 7.2 Python部署
+### Python部署
 
 ```shell
 pip install requests 或 sudo yum install -y requests
 ```
 
-### 7.3 MySQL-python部署
+### MySQL-python部署
 
 - CentOS
 
@@ -144,7 +144,7 @@ pip install requests 或 sudo yum install -y requests
   sudo pip install MySQL-python
   ```
 
-### 7.4 数据库部署
+### 数据库部署
 
 此处以Centos/Fedora为例。
 
@@ -225,9 +225,9 @@ mysql -utest -p123456 -h 127.0.0.1 -P 3306
 mysql > create database db_mgr;
 ```
 
-## 8、常见问题
+## 常见问题
 
-### 8.1 数据库安装后登录报错
+### 数据库安装后登录报错
 
 腾讯云centos mysql安装完成后，登录报错：Access denied for user 'root'@'localhost'
 
@@ -249,7 +249,7 @@ service mysqld restart
 mysql -uroot -p mysql
 ```
 
-### 8.2 找不到MySQLdb
+### 找不到MySQLdb
 
 ```
 Traceback (most recent call last):
@@ -259,7 +259,7 @@ ImportError: No module named MySQLdb
 
 答：MySQL-python安装请参看部署 [附录7.3](#mysql-python)
 
-### 8.3 部署时编译包下载慢
+### 部署时编译包下载慢
 
 ```
 ...
@@ -273,7 +273,7 @@ Saving to: ‘WeBASE-Front.zip’
 
 答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [webase-web](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-web.zip) 、[webase-node-mgr](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-node-mgr.zip) 、[webase-front](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
 
-### 8.4 部署时数据库访问报错
+### 部署时数据库访问报错
 
 ```
 ...
