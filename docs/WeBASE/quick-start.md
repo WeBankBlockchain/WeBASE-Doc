@@ -1,9 +1,9 @@
 # 使用WeBASE开发区块链应用
 
-## 1 部署WeBASE
+## 部署WeBASE
 搭建WeBASE, 请参考[快速部署](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/install.html)
 
-## 2 登录WeBASE管理平台进行配置
+## 登录WeBASE管理平台进行配置
 安装WeBASE完成后，需要将节点信息添加到WeBASE平台中，这样WeBASE才可和节点进行通信。需要添加的信息包含节点信息，生成用户的私钥等。如下图所示：
 
 * 节点信息：
@@ -12,7 +12,7 @@
 * 私钥用户：
 ![[私钥用户]](../../images/WeBASE/keyUser.png)
 
-## 3 开发智能合约
+## 开发智能合约
 以HelloWorld.sol为例
 ```
 pragma solidity ^0.4.2;
@@ -39,16 +39,20 @@ contract HelloWorld{
 
 
 
-## 4 应用层开发
+## 应用层开发
 
-### 4.1 根据所写合约和交易api的格式，发送交易。
+* 调用交易接口
+```
 请参考[交易接口](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html#id211)
 
 从IDE中的输出信息，拷贝合约地址，合约名，方法名等信息，同时获取用户的公钥信息，调用交易接口。
 具体代码请参考 [HelloWorld范例](https://github.com/WeBankFinTech/WeBASE/tree/master/quick-start)
-### 4.2 接口调用的主要代码：
-* application.yml
 ```
+* 主要代码
+
+```
+application.yml
+
 transactionUrl: http://127.0.0.1:8082/webase-front/trans/handle
 groupId: 1
 userAddress: "0x4f08eac5af5e77b7006d11bee94adba2f721def8"
@@ -110,7 +114,7 @@ public class TransactionService {
 }
 ```
 
-## 5 运维管理
+## 运维管理
 应用层发布后，持续发送交易，可在WeBASE管理平台查看数据概览，节点监控，查看交易解析，交易审计等管理功能。
 * 查看交易解析
 ![[交易解析]](../../images/WeBASE/transHash.png)
