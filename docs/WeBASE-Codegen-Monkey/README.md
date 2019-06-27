@@ -1,6 +1,6 @@
 # 概要介绍
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/WeBASE-Codegen-Monkey/community)
+[![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/webase-monkey/community)
 
 > 道生一，一生二，二生三，三生万物。
 > 万物负阴而抱阳，冲气以为和。
@@ -97,6 +97,9 @@
 
 ![[效果图]](../../images/WeBASE-Codegen-Monkey/grafana_demo.png)
 
+## 2. 快速开始
+
+### 2.1 前置依赖
 
 在使用本组件前，请确认系统环境已安装相关依赖软件，清单如下：
 
