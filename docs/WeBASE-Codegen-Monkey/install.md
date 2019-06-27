@@ -1,6 +1,6 @@
 ## 部署说明
 
-### 1 前置依赖
+### 1. 前置依赖
 
 在使用本组件前，请确认系统环境已安装相关依赖软件，清单如下：
 
@@ -14,7 +14,7 @@
 | zookeeper | >= zookeeper[3.4] | 只有在进行集群部署的时候需要安装，zookeeper安装可参考附录5|
 | docker    | >= docker[18.0.0] | 只有需要可视化监控页面的时候才需要安装，docker的安装可参考[docker安装手册](https://docker_practice.gitee.io/install/centos.html) |
 
-### 2 部署步骤
+### 2. 部署步骤
 
 #### 2.1 获取安装包
 
@@ -193,7 +193,7 @@ ps -ef |grep WeBASE-Collect-Bee |grep -v grep|awk '{print $2}' |xargs kill -9
 
 恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考2.3
 
-### 3 可视化监控程序安装和部署
+### 3. 可视化监控程序安装和部署
 
 #### 3.1 安装软件
 
@@ -238,7 +238,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 更多关于Grafana的自定义配置和开发文档，可参考[Grafana官方文档](http://docs.grafana.org/guides/getting_started/)
 
-### 4 开启可视化的功能性测试
+### 4. 开启可视化的功能性测试
 
 [WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
