@@ -99,7 +99,7 @@ http://{deployIP}:{frontPort}/WeBASE-Front
 节点日志：nodes/127.0.0.1/node*/log/
 web服务日志：webase-web/log/
 mgr服务日志：webase-node-mgr/logs/
-front服务日志：WeBASE-Front/log/
+front服务日志：webase-front/log/
 ```
 
 ## 7、附录
