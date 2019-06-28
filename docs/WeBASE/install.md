@@ -9,9 +9,9 @@
 | 环境   | 版本                   |
 | ------ | ---------------------- |
 | Java   | jdk1.8.0_121或以上版本 |
+| mysql | mysql-5.6或以上版本 |
 | python | 2.7                 |
 | MySQL-python | 1.2.5 |
-| mysql | mysql-5.6或以上版本 |
 
 **备注：** 安装说明请参看 [附录](#id8)
 
@@ -123,27 +123,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ```
 
-### Python部署
-
-```shell
-pip install requests 或 sudo yum install -y requests
-```
-
-### MySQL-python部署
-
-- CentOS
-
-  ```
-  sudo yum install -y MySQL-python
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt-get install -y python-pip
-  sudo pip install MySQL-python
-  ```
-
 ### 数据库部署
 
 此处以Centos/Fedora为例。
@@ -224,6 +203,36 @@ mysql -utest -p123456 -h 127.0.0.1 -P 3306
 ```sql
 mysql > create database db_mgr;
 ```
+
+### Python部署
+
+- CentOS
+
+  ```
+  sudo yum install -y python-requests
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python-pip
+  sudo pip install -y python-requests
+  ```
+
+### MySQL-python部署
+
+- CentOS
+
+  ```
+  sudo yum install -y MySQL-python
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python-pip
+  sudo pip install -y MySQL-python
+  ```
 
 ## 常见问题
 
