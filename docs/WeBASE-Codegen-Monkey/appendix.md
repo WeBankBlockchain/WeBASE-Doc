@@ -52,7 +52,6 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
 | system.multiLiving | Y | 关闭多活开关 | false | false |
-| system.maxBlockHeightThreshold | N | 多线程开关阈值：当前区块落后区块高度的阈值，如果超过，系统将启动多线程执行任务 | 10 | 10 |
 | system.crawlBatchUnit | N | 线程处理单元：多线程任务模式下单个线程一次任务执行完成的区块数 | 100 | 100 |
 
 #### 1.6 集群多活配置
