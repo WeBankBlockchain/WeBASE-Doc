@@ -1,7 +1,7 @@
 # 接口文档
 
 
-## 1 前置管理模块  
+## 1 前置管理模块
 
 ### 1.1 新增节点前置信息
 
@@ -13,25 +13,20 @@
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.1.2 参数信息详情
+#### 1.1.2 请求参数
+
+***1）入参表***
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|--------------------------------------------|
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | frontIp     | string        | 否     | 前置ip                                     |
 | 2    | frontPort   | int           | 否     | 前置服务端口                               |
-| 2    | agency      | int           | 否     | 所属机构                               |
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述                                       |
-| 3    |             | Object        |        | 节点信息对象                               |
-| 3.1  | frontId     | int           | 否     | 前置编号                        |
-| 3.2  | frontIp     | string        | 否     | 前置ip                                    |
-| 3.3  | frontPort   | int           | 否     | 前置端口                                   |
-| 3.4  | agency      | string        | 否     | 所属机构                                   |
-| 3.5  | createTime  | LocalDateTime | 否     | 落库时间                                   |
-| 3.6  | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
+| 3    | agency      | int           | 否     | 所属机构                               |
 
-#### 1.1.3 入参示例
+
+***2）入参示例***
+
+
 `http://127.0.0.1:8080/WeBASE-Node-Manager/front/new`
 ```
 {
@@ -42,7 +37,23 @@
 ```
 
 
-#### 1.1.4 出参示例
+#### 1.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                                       |
+| 3    |             | Object        |        | 节点信息对象                               |
+| 3.1  | frontId     | int           | 否     | 前置编号                        |
+| 3.2  | frontIp     | string        | 否     | 前置ip                                    |
+| 3.3  | frontPort   | int           | 否     | 前置端口                                   |
+| 3.4  | agency      | string        | 否     | 所属机构                                   |
+| 3.5  | createTime  | LocalDateTime | 否     | 落库时间                                   |
+| 3.6  | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -78,13 +89,27 @@
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 1.2.2 参数信息详情
+#### 1.2.2 请求参数
 
-| 序号  | 输入参数      | 类型          | 可为空 | 备注                       |
-|-------|---------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                 |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | frontId       | Int           | 是     | 前置编号                  |
 | 2     | groupId       | Int           | 是     | 所属群组编号                |
-| 序号  | 输出参数      | 类型           |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/front/find`
+
+
+#### 1.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
 | 3     | totalCount    | Int           | 否     | 总记录数                   |
@@ -97,11 +122,7 @@
 | 4.1.5 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
 | 4.1.6 | agency        | string        | 否     | 所属机构                   |
 
-
-#### 1.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/front/find`
-
-#### 1.2.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -124,16 +145,16 @@
 * 失败：
 ```
 {
-    "code": 102000,
-    "message": "system exception",
-    "data": {}
+   "code": 102000,
+   "message": "system exception",
+   "data": {}
 }
 ```
 
 
 
-### 1.3 删除前置信息
 
+### 1.3 删除前置信息
 
 #### 1.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -142,21 +163,32 @@
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.3.2 参数信息详情
+#### 1.3.2 请求参数
 
-| 序号 | 输入参数   | 类型   | 可为空 | 备注                       |
-|------|------------|--------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | frontId    | int    | 否     | 前置编号                   |
-| 序号 | 输出参数   | 类型   |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/front/{frontId}`
+
+
+#### 1.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code       | Int    | 否     | 返回码，0：成功 其它：失败 |
 | 2    | message    | String | 否     | 描述                       |
 | 3    | data       | object | 是     | 返回信息实体（空）         |
 
-#### 1.3.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/front/{frontId}`
 
-#### 1.3.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -165,7 +197,6 @@
     "message": "Success"
 }
 ```
-
 
 * 失败：
 ```
@@ -192,16 +223,32 @@
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 2.1.2 参数信息详情
+#### 2.1.2 请求参数
 
-| 序号  | 输入参数        | 类型          | 可为空 | 备注                       |
-|-------|-----------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId         | int           | 否     | 所属群组编号               |
 | 2     | transactionHash | String        | 是     | 交易hash                   |
 | 3     | blockNumber     | BigInteger    | 是     | 块高                       |
 | 4     | pageSize        | int           | 否     | 每页记录数                 |
 | 5     | pageNumber      | int           | 否     | 当前页码                   |
-| 序号  | 输出参数        | 类型          |        | 备注                       |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?transactionHash=0x303daa78ebe9e6f5a6d9761a8eab4bf5a0ed0b06c28764488e4716de42e1df01
+```
+
+
+#### 2.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code            | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message         | String        | 否     | 描述                       |
 | 3     | totalCount      | Int           | 否     | 总记录数                   |
@@ -214,12 +261,8 @@
 | 4.1.5 | createTime      | LocalDateTime | 否     | 落库时间                   |
 | 4.1.6 | modifyTime      | LocalDateTime | 否     | 修改时间                   |
 
-#### 2.1.3 入参示例
-```
-http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?transactionHash=0x303daa78ebe9e6f5a6d9761a8eab4bf5a0ed0b06c28764488e4716de42e1df01
-```
 
-#### 2.1.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -239,7 +282,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -248,6 +290,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
     "data": {}
 }
 ```
+
 
 
 ### 2.2 查询交易回执 
@@ -261,13 +304,29 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 2.2.2 参数信息详情
+#### 2.2.2 请求参数
 
-| 序号  | 输入参数        | 类型          | 可为空 | 备注                       |
-|-------|-----------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId         | int           | 否     | 所属群组编号               |
 | 2     | transHash | String        | 是     | 交易hash                   |
-| 序号  | 输出参数        | 类型          |        | 备注                       |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
+```
+
+
+#### 2.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code            | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message         | String        | 否     | 描述                       |
 | 3     |                 | Object        |        | 交易信息对象               |
@@ -285,12 +344,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 | 3.11 | logs      | String | 否     | 日志                   |
 | 3.12 | logsBloom      | String | 否     | log的布隆过滤值                   |
 
-#### 2.2.3 入参示例
-```
-http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
-```
 
-#### 2.2.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -318,7 +373,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda8
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -327,6 +381,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda8
     "data": {}
 }
 ```
+
+
+
 
 
 ### 2.3 根据交易hash查询交易信息 
@@ -342,11 +399,29 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda8
 
 #### 2.3.2 参数信息详情
 
-| 序号  | 输入参数        | 类型          | 可为空 | 备注                       |
-|-------|-----------------|---------------|--------|----------------------------|
+请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId         | int           | 否     | 所属群组编号               |
 | 2     | transHash       | String        | 是     | 交易hash                   |
-| 序号  | 输出参数        | 类型          |        | 备注                       |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
+```
+
+
+#### 2.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code            | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message         | String        | 否     | 描述                       |
 | 3     |                 | Object        |        | 交易信息对象               |
@@ -375,15 +450,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda8
 | 3.22  | gasRaw          | String | 否     |                    |
 
 
-
-
-
-#### 2.3.3 入参示例
-```
-http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
-```
-
-#### 2.3.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -411,7 +478,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -438,14 +504,35 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 3.1.2 参数信息详情
+#### 3.1.2 请求参数
 
-| 序号 | 输入参数      | 类型          | 可为空 | 备注                       |
-|------|---------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | account       | String        | 否     | 帐号名称                   |
 | 2    | accountPwd    | String        | 否     | 登录密码（sha256）         |
 | 3    | roleId        | int           | 否     | 所属角色                   |
-| 序号 | 输出参数      | 类型          |        | 备注                        |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountInfo`
+```
+{
+    "account": "testAccount",
+    "accountPwd": "3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e",
+    "roleId": 100001
+}
+```
+
+
+#### 3.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code          | Int           | 否     | 返回码，0：成功 其它：失败   |
 | 2    | message       | String        | 否     | 描述                      |
 | 3    | data          | object        | 否     | 返回信息实体               |
@@ -459,20 +546,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.8  | createTime    | LocalDateTime | 否     | 创建时间                   |
 | 3.9  | modifyTime    | LocalDateTime | 否     | 修改时间                   |
 
-### 3.1.3 入参示例
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountInfo`
-```
-{
-    "account": "testAccount",
-    "accountPwd": "3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e",
-    "roleId": 100001
-}
-```
-
-
-#### 3.1.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -492,7 +567,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -501,6 +575,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
 
 
 ### 3.2 修改帐号
@@ -513,14 +590,35 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 3.2.2 参数信息详情
+#### 3.2.2 请求参数
 
-| 序号 | 输入参数      | 类型          | 可为空 | 备注                       |
-|------|---------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | account       | String        | 否     | 帐号名称                   |
 | 2    | accountPwd    | String        | 否     | 登录密码（sha256）         |
 | 3    | roleId        | int           | 否     | 所属角色                   |
-| 序号 | 输出参数      | 类型          |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountInfo`
+```
+{
+    "account": "testAccount",
+    "accountPwd": "82ca84cf0d2ae423c09a214cee2bd5a7ac65c230c07d1859b9c43b30c3a9fc80",
+    "roleId": 100001
+}
+```
+
+
+#### 3.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2    | message       | String        | 否     | 描述                       |
 | 3    | data          | object        | 否     | 返回信息实体               |
@@ -534,20 +632,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.8  | createTime    | LocalDateTime | 否     | 创建时间                   |
 | 3.9  | modifyTime    | LocalDateTime | 否     | 修改时间                   |
 
-#### 3.2.3 入参示例
-
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountInfo`
-```
-{
-    "account": "testAccount",
-    "accountPwd": "82ca84cf0d2ae423c09a214cee2bd5a7ac65c230c07d1859b9c43b30c3a9fc80",
-    "roleId": 100001
-}
-```
-
-
-#### 3.2.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -576,6 +661,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
+
 ### 3.3 删除帐号
 
 
@@ -585,20 +673,32 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：DELETE
 * 返回格式：JSON
 
-#### 3.3.2 参数信息详情
+#### 3.3.2 请求参数
 
-| 序号 | 输入参数 | 类型   | 可为空 | 备注                       |
-|------|----------|--------|--------|------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | account  | String | 否     | 帐号名称                   |
-| 序号 | 输出参数 | 类型   |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/account/testAccount`
+
+
+#### 3.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code     | Int    | 否     | 返回码，0：成功 其它：失败 |
 | 2    | message  | String | 否     | 描述                       |
 | 3    | data     | object | 是     | 返回信息实体（空）         |
 
-#### 3.3.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/testAccount`
 
-#### 3.3.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -617,6 +717,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
 ###  3.4 查询帐号列表
 
 
@@ -626,14 +728,28 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 3.4.2 参数信息详情
+#### 3.4.2 请求参数
 
-| 序号  | 输入参数      | 类型          | 可为空 | 备注                       |
-|-------|---------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | pageSize      | Int           | 否     | 每页记录数                 |
 | 2     | pageNumber    | Int           | 否     | 当前页码                   |
 | 3     | account       | String        | 是     | 帐号                       |
-|       | 输出参数      | 类型          |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountList/1/10?account=`
+
+
+#### 3.4.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
 | 3     | totalCount    | Int           | 否     | 总记录数                   |
@@ -649,10 +765,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.8 | createTime    | LocalDateTime | 否     | 创建时间                   |
 | 4.1.9 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
 
-#### 3.4.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountList/1/10?account=`
 
-#### 3.4.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -695,6 +809,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
+
 ### 3.5 更新当前密码 
 
 
@@ -705,17 +822,19 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 3.5.2 参数信息详情
+#### 3.5.2 请求参数
 
-| 序号 | 输入参数      | 类型   | 可为空 | 备注                       |
-|------|---------------|--------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | oldAccountPwd | String | 否     | 旧密码（sha256）           |
 | 2    | newAccountPwd | String | 否     | 新密码（sha256）           |
-| 序号 | 输出参数      | 类型   |        | 备注                       |
-| 1    | code          | Int    | 否     | 返回码，0：成功 其它：失败 |
-| 2    | message       | String | 否     | 描述                       |
 
-### 3.5.3 入参示例
+
+
+***2）入参示例***
+
 `http://127.0.0.1:8080/WeBASE-Node-Manager/account/passwordUpdate`
 ```
 {
@@ -725,7 +844,17 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-#### 3.5.4 出参示例
+#### 3.5.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code          | Int    | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message       | String | 否     | 描述                       |
+
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -744,7 +873,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
 ### 3.6 获取登录验证码 
 
 
@@ -755,12 +883,24 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 3.6.2 参数信息详情
+#### 3.6.2 请求参数
 
-| 序号 | 输入参数      | 类型   | 可为空 | 备注                       |
-|------|---------------|--------|--------|----------------------------|
-| 无 |  |  |    |         |
-| 序号 | 输出参数      | 类型   |        | 备注                        |
+***1）入参表***
+无
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/account/pictureCheckCode`
+
+
+
+#### 3.6.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code          | Int    | 否     | 返回码，0：成功 其它：失败   |
 | 2    | message       | String | 否     | 描述                      |
 | 3    | data       | Object | 否     | 图片信息实体                  |
@@ -768,13 +908,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.2  | token   | String | 否     | token（登录接口需要用到此值）     |
 
 
-
-### 3.6.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/pictureCheckCode`
-
-
-
-#### 3.6.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -797,6 +931,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
+
+
+
 ### 3.7 登录接口
 
 
@@ -807,25 +944,21 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json;token:{token}
 * 返回格式：JSON
 
-#### 3.7.2 参数信息详情
+#### 3.7.2 请求参数
 
-| 序号 | 输入参数      | 类型   | 可为空 | 备注                       |
-|------|---------------|--------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | checkCode          | String    | 否     | 登录验证码   |
 | 2    | account          | String    | 否     | 帐号   |
 | 3    | accountPwd          | String    | 否     | 密码   |
 | 4    | token          | String    | 否     | 随验证码返回的token   |
-| 序号 | 输出参数      | 类型   |        | 备注                        |
-| 1    | code          | Int    | 否     | 返回码，0：成功 其它：失败   |
-| 2    | message       | String | 否     | 描述                      |
-| 3    | data       | Object | 否     | 信息实体                  |
-| 3.1  | accountStatus   | int | 否     | 1未修改密码，2正常   |
-| 3.2  | roleName   | String | 否     | 所属角色名称     |
-| 3.3  | account   | String | 否     | 帐号名称     |
 
 
 
-### 3.7.3 入参示例
+***2）入参示例***
+
 `http://127.0.0.1:8080/WeBASE-Node-Manager/account/login?checkCode=aege`
 ```
 {
@@ -835,7 +968,15 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-#### 3.7.4 出参示例
+#### 1.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -874,16 +1015,32 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 4.1.2 参数信息详情
+#### 4.1.2 请求参数
 
-| 序号  | 输入参数       | 类型          | 可为空 | 备注                       |
-|-------|----------------|---------------|--------|----------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId        | Int           | 否     | 当前所属链                 |
 | 2     | pageSize       | Int           | 否     | 每页记录数                 |
 | 3     | pageNumber     | Int           | 否     | 当前页码                   |
 | 4     | pkHash         | String        | 是     | 区块hash                   |
 | 5     | blockNumber    | BigInteger    | 是     | 块高                       |
-|       | 输出参数       | 类型          |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/block/blockList/300001/1/10?pkHash=`
+
+
+
+#### 4.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code           | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message        | String        | 否     | 描述                       |
 | 3     | totalCount     | Int           | 否     | 总记录数                   |
@@ -898,10 +1055,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.7 | createTime     | LocalDateTime | 否     | 创建时间                   |
 | 4.1.8 | modifyTime     | LocalDateTime | 否     | 修改时间                   |
 
-#### 4.1.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/block/blockList/300001/1/10?pkHash=`
 
-#### 4.1.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -933,6 +1088,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
+
+
 ### 4.2 根据块高或hash查询区块信息
 
 
@@ -942,16 +1099,31 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 4.2.2 参数信息详情
+#### 4.2.2 请求参数
 
-| 序号  | 输入参数       | 类型          | 可为空 | 备注                       |
-|-------|----------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId        | Int           | 否     | 当前所属链                 |
 | 2     | pageSize       | Int           | 否     | 每页记录数                 |
 | 3     | pageNumber     | Int           | 否     | 当前页码                   |
 | 4     | pkHash         | String        | 是     | 区块hash                   |
 | 5     | blockNumber    | BigInteger    | 是     | 块高                       |
-|       | 输出参数       | 类型          |        | 备注                       |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/block/blockByNumber/1/11`
+
+
+#### 4.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code           | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message        | String        | 否     | 描述                       |
 | 3     |                | Object        |        | 区块信息对象               |
@@ -1001,11 +1173,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.20.1.23  | transactionIndex         | Int           | 否     | 在区块中的索引               |
 
 
-
-#### 4.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/block/blockByNumber/1/11`
-
-#### 4.2.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1079,18 +1247,32 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：POST
 * 返回格式：JSON
 
-#### 5.1.2 参数信息详情
+#### 5.1.2 请求参数
 
-| 序号   | 输入参数        | 类型          | 可为空 | 备注                                            |
-|--------|-----------------|---------------|--------|-------------------------------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | groupId       | int           | 否     | 群组id                                          |
 | 2      | contractName       | String           | 否     | 合约名                             |
 | 3      | contractAddress    | String           | 否     | 合约地址                               |
 | 4      | pageSize        | int           | 否     | 每页记录数                                      |
 | 5      | pageNumber      | int           | 否     | 当前页码                                        |
 | 6      | contractStatus      | int           | 否     | 1未部署，2已部署                        |
-|        |                 |               |        |                                                 |
-| 序号   | 输出参数        | 类型          | 可为空 | 备注                                            |
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/contractList`
+
+
+
+#### 5.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2      | message         | String        | 否     | 描述                                            |
 | 3      | totalCount      | Int           | 否     | 总记录数                                        |
@@ -1111,18 +1293,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 5.1.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
 | 5.1.14 | description     | String        | 是     | 备注                                            |
 | 5.1.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 5.1.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 5.1.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        
 
 
-
-#### 5.1.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/contractList`
-```
-
-```
-
-#### 5.1.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1160,6 +1334,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
+
+
+
 ### 5.2 查询合约信息
 
 
@@ -1169,13 +1348,28 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 5.2.2 参数信息详情
+#### 5.2.2 请求参数
 
-| 序号 | 输入参数        | 类型          | 可为空 | 备注                                            |
-|------|-----------------|---------------|--------|-------------------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId       | int           | 否     | 群组id                                          |
 | 2    | contractId      | int           | 否     | 合约编号                                        |
-| 序号 | 输出参数        | 类型          | 可为空 | 备注                                            |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/200001`
+
+
+
+#### 5.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
 | 3    |                 | Oject         |        | 返回信息实体                                    |
@@ -1196,11 +1390,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
 | 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
 
-#### 5.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/200001`
 
-#### 5.2.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1226,7 +1417,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -1235,6 +1425,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
+
 
 ### 5.3 部署合约
 
@@ -1246,10 +1440,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.3.2 参数信息详情
+#### 5.3.2 请求参数
 
-| 序号 | 输入参数          | 类型           | 可为空 | 备注                       |
-|------|-------------------|----------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId           | Int            | 否     | 所属群组编号               |
 | 2    | contractName      | String         | 否     | 合约名称               |
 | 3    | contractSource    | String         | 否     | 合约源码                   |
@@ -1260,7 +1456,34 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 8    | contractPath      | String         | 否     | 合约所在目录               |
 | 9    | user              | String         | 否     | 私钥用户               |
 | 10    | constructorParams | List | 是     | 构造函数入参               |
-| 序号 | 输出参数          | 类型           |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/deploy`
+```
+{
+    "groupId": "1",
+    "contractBin": "60806040526004361061004c576000357c010000002269b80029",
+    "bytecodeBin": "60806040523480156100105761146031c79ef057dd274c87bff322ea2269b80029",
+    "contractAbi": "[]",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLICAJbmFtZSA9IG47CiAgICB9Cn0=",
+    "user": 700006,
+    "contractName": "HeHe",
+    "contractId": 200008,
+    "contractPath": "Hi",
+    "constructorParams": ["a"]
+}
+```
+
+
+
+#### 5.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
 | 3    |                 | Oject         |        | 返回信息实体                                    |
@@ -1282,28 +1505,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
 
 
-
-
-#### 5.3.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/deploy`
-```
-{
-    "groupId": "1",
-    "contractBin": "60806040526004361061004c576000357c010000002269b80029",
-    "bytecodeBin": "60806040523480156100105761146031c79ef057dd274c87bff322ea2269b80029",
-    "contractAbi": "[]",
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLICAJbmFtZSA9IG47CiAgICB9Cn0=",
-    "user": 700006,
-    "contractName": "HeHe",
-    "contractId": 200008,
-    "contractPath": "Hi",
-    "constructorParams": ["a"]
-}
-```
-
-
-#### 5.3.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1330,7 +1532,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -1339,6 +1540,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
 
 ### 5.4 发送交易
 
@@ -1350,10 +1554,13 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.4.2 参数信息详情
+#### 5.4.2 请求参数
 
-| 序号 | 输入参数     | 类型           | 可为空 | 备注                       |
-|------|--------------|----------------|--------|----------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId      | Int            | 否     | 所属群组编号               |
 | 2    | user       | Integer        | 否     | 私钥用户               |
 | 3    | contractName | String         | 否     | 合约名称                   |
@@ -1361,12 +1568,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 5    | funcName     | String         | 否     | 合约方法名                 |
 | 6    | contractAddress     | String         | 是     | 合约地址（传合约名和版本时可为空）   |
 | 7   | funcParam    | List | 是     | 合约方法入参               |
-| 序号 | 输出参数     | 类型           |        | 备注                       |
-| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
-| 2    | message      | String         | 否     | 描述                       |
-| 3    | data         | object         | 是     | 返回信息实体（空）         |
 
-#### 5.4.3 入参示例
+
+
+***2）入参示例***
+
 `http://127.0.0.1:8080/WeBASE-Node-Manager/contract/transaction`
 ```
 {
@@ -1381,7 +1587,18 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-#### 5.4.4 出参示例
+#### .3 5.4返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message      | String         | 否     | 描述                       |
+| 3    | data         | object         | 是     | 返回信息实体（空）         |
+
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1390,7 +1607,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
-
 
 * 失败：
 ```
@@ -1402,6 +1618,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
+
+
+
+
 ### 5.5 根据包含bytecodeBin的字符串查询合约  
 
 
@@ -1411,13 +1631,34 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 5.2.2 参数信息详情
+#### 5.2.2 请求参数
 
-| 序号 | 输入参数        | 类型          | 可为空 | 备注                                            |
-|------|-----------------|---------------|--------|-------------------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId         | int           | 否     | 所属群组编号                                        |
 | 2    | partOfBytecodeBin      | String           | 否     | 包含合约bytecodeBin的的字符串         |
-| 序号 | 输出参数        | 类型          | 可为空 | 备注                                            |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin`
+```
+{
+    "groupId": "300001",
+    "partOfBytecodeBin": "abc123455dev"
+}
+```
+
+
+#### 5.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
 | 3    |                 | Oject         |        | 返回信息实体                                    |
@@ -1436,17 +1677,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.13 | createTime      | LocalDateTime | 否     | 创建时间                                        |
 | 3.14 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
 
-#### 5.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin`
-```
-{
-    "groupId": "300001",
-    "partOfBytecodeBin": "abc123455dev"
-}
-```
 
-#### 5.2.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1471,7 +1703,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     }
 }
 ```
-
 
 * 失败：
 ```
@@ -1498,17 +1729,32 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 6.1.2 参数信息详情
+#### 6.1.2 请求参数
 
-| 序号      | 输入参数          | 类型            | 可为空 | 备注                                                           |
-|-----------|-------------------|-----------------|--------|----------------------------------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1         | nodeId            | int             | 否     | 群组id                                                         |
 | 2         | beginDate         | LocalDateTime   | 是     | 显示时间（开始） yyyy-MM-dd'T'HH:mm:ss.SSS 2019-03-13T00:00:00 |
 | 3         | endDate           | LocalDateTime   | 是     | 显示时间（结束）                                               |
 | 4         | contrastBeginDate | LocalDateTime   | 是     | 对比时间（开始）                                               |
 | 5         | contrastEndDate   | LocalDateTime   | 是     | 对比时间（结束）                                               |
 | 6         | gap               | Int             | 是     | 数据粒度                                                       |
-| 序号      | 输出参数          | 类型            |        | 备注                                                           |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22`
+
+
+
+#### 6.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1         | code              | int             | 否     | 返回码                                                         |
 | 2         | message           | String          | 否     | 描述信息                                                       |
 | 3         | data              | Array           | 否     | 返回信息列表                                                   |
@@ -1522,11 +1768,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
 
-#### 6.1.3 入参示例
-`http://127.0.0.1:8080/webcaf-node-mgr/chain/mointorInfo/500001?gap=60&beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22`
 
-#### 6.1.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1581,7 +1824,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -1590,6 +1832,14 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
+
+
+
+
+
 
 ### 6.2 获取服务器监控信息 
 
@@ -1600,17 +1850,33 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 6.2.2 参数信息详情
+#### 6.2.2 请求参数
 
-| 序号      | 输入参数          | 类型            | 可为空 | 备注                                                           |
-|-----------|-------------------|-----------------|--------|----------------------------------------------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1         | nodeId            | int             | 否     | 群组id                                                         |
 | 2         | beginDate         | LocalDateTime   | 是     | 显示时间（开始） yyyy-MM-dd'T'HH:mm:ss.SSS 2019-03-13T00:00:00 |
 | 3         | endDate           | LocalDateTime   | 是     | 显示时间（结束）                                               |
 | 4         | contrastBeginDate | LocalDateTime   | 是     | 对比时间（开始）                                               |
 | 5         | contrastEndDate   | LocalDateTime   | 是     | 对比时间（结束）                                               |
 | 6         | gap               | Int             | 是     | 数据粒度                                                       |
-| 序号      | 输出参数          | 类型            |        | 备注                                                           |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55`
+
+
+
+#### 6.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1         | code              | int             | 否     | 返回码                                                         |
 | 2         | message           | String          | 否     | 描述信息                                                       |
 | 3         | data              | Array           | 否     | 返回信息列表                                                   |
@@ -1624,10 +1890,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
 
-#### 6.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55`
 
-#### 6.2.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1682,7 +1946,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -1691,6 +1954,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
 
 
 ## 7 审计相关模块
@@ -1705,12 +1971,28 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 10.1.2 参数信息详情
+#### 7.1.2 请求参数
 
-| 序号   | 输入参数         | 类型          | 可为空 | 备注                                          |
-|--------|------------------|---------------|--------|-----------------------------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | groupId        | int           | 否     | 所属群组编号                                  |
-| 序号   | 输出参数         | 类型          |        | 备注                                          |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/userList/300001`
+
+
+
+#### 7.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | code             | Int           | 否     | 返回码，0：成功 其它：失败                    |
 | 2      | message          | String        | 否     | 描述                                          |
 | 3      | data             | List          | 是     | 信息列表                                      |
@@ -1729,10 +2011,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.1.12 | createTime       | LocalDateTime | 是     | 落库时间                                      |
 | 3.1.13 | modifyTime       | LocalDateTime | 是     | 修改时间                                      |
 
-#### 7.1.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/userList/300001`
 
-#### 7.1.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1781,6 +2061,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
+
 
 ### 7.2 获取合约方法监管信息列表
 
@@ -1791,13 +2075,28 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 7.2.2 参数信息详情
+#### 7.2.2 请求参数
 
-| 序号   | 输入参数         | 类型          | 可为空 | 备注                                          |
-|--------|------------------|---------------|--------|-----------------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | groupId        | int           | 否     | 所属群组编号                                  |
 | 2      | userName         | String        | 是     | 用户名                                        |
-| 序号   | 输出参数         | 类型          |        | 备注                                          |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/interfaceList/300001`
+
+
+#### 7.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | code             | Int           | 否     | 返回码，0：成功 其它：失败                    |
 | 2      | message          | String        | 否     | 描述                                          |
 | 3      | data             | List          | 是     | 信息列表                                      |
@@ -1816,10 +2115,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.1.12 | createTime       | LocalDateTime | 是     | 落库时间                                      |
 | 3.1.13 | modifyTime       | LocalDateTime | 是     | 修改时间                                      |
 
-#### 7.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/interfaceList/300001`
 
-#### 7.2.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1860,7 +2157,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -1869,6 +2165,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
 
 ### 7.3 获取交易hash监管信息列表
 
@@ -1879,16 +2178,32 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 7.3.2 参数信息详情
+#### 7.3.2 请求参数
 
-| 序号    | 输入参数      | 类型           | 可为空 | 备注                       |
-|---------|---------------|----------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1       | groupId     | int            | 否     | 所属群组编号               |
 | 2       | userName      | String         | 是     | 用户名                     |
 | 3       | startDate     | String         |        | 开始时间                   |
 | 4       | endDate       | String         |        | 结束时间                   |
 | 5       | interfaceName | String         |        | 接口名称                   |
-| 序号    | 输出参数      | 类型           |        | 备注                       |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d97f8d41638a7b1b669b70b307bab6d49df8e2c&interfaceName=0x4ed3885e`
+
+
+
+#### 7.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1       | code          | Int            | 否     | 返回码，0：成功 其它：失败 |
 | 2       | message       | String         | 否     | 描述                       |
 | 3       | data          | Object         | 否     | 返回结果实体               |
@@ -1901,10 +2216,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.5.1.1 | transCount    | Int            | 是     | 交易记录数                 |
 | 3.5.1.2 | time          | LcalDateTime   | 是     | 时间                       |
 
-#### 7.3.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d97f8d41638a7b1b669b70b307bab6d49df8e2c&interfaceName=0x4ed3885e`
 
-#### 7.3.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1925,7 +2238,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -1934,6 +2246,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
+
 
 ### 7.4 获取异常用户信息列表
 
@@ -1945,14 +2261,31 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 返回格式：JSON
 
 #### 7.4.2 参数信息详情
+请求参数
 
-| 序号  | 输入参数   | 类型          | 可为空 | 备注                       |
-|-------|------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId  | int           | 否     | 所属群组编号               |
 | 2     | userName   | String        | 是     | 用户名                     |
 | 3     | pageNumber | int           | 否     | 当前页码                   |
 | 4     | pageSize   | int           | 否     | 页面大小                   |
-| 序号  | 输出参数   | 类型          |        | 备注                       |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/unusualUserList/300001/1/10?userName=`
+
+
+
+#### 7.4.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code       | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message    | String        | 否     | 描述                       |
 | 3     | totalCount | Int           | 否     | 总记录数                   |
@@ -1963,10 +2296,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.3 | hashs      | String        | 是     | 交易hash                   |
 | 4.1.4 | time       | LocalDateTime | 是     | 时间                       |
 
-#### 7.4.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/unusualUserList/300001/1/10?userName=`
 
-#### 7.4.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -1993,8 +2324,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-### 7.5 获取异常合约信息列表
 
+
+
+### 7.5 获取异常合约信息列表
 
 #### 7.5.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -2002,15 +2335,31 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 7.5.2 参数信息详情
+#### 7.5.2 请求参数
 
-| 序号  | 输入参数        | 类型          | 可为空 | 备注                       |
-|-------|-----------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId       | int           | 否     | 所属群组编号               |
 | 2     | contractAddress | String        | 是     | 合约地址                   |
 | 3     | pageNumber      | int           | 否     | 当前页码                   |
 | 4     | pageSize        | int           | 否     | 页面大小                   |
-| 序号  | 输出参数        | 类型          |        | 备注                       |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/10?contractAddress=`
+
+
+
+#### 7.5.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code            | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message         | String        | 否     | 描述                       |
 | 3     | totalCount      | Int           | 否     | 总记录数                   |
@@ -2022,13 +2371,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.4 | hashs           | String        | 是     | 交易hash                   |
 | 4.1.5 | time            | LocalDateTime | 是     | 时间                       |
 
-#### 7.5.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/10?contractAddress=`
 
-#### 7.5.4 出参示例
-```
 
-```
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2056,6 +2401,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
+
+
+
 ## 8 群组信息模块
 
 
@@ -2068,12 +2418,26 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.1.2 参数信息详情
+#### 8.1.2 请求参数
 
-| 序号 | 输入参数         | 类型   | 可为空 | 备注                       |
-|------|------------------|--------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId          | int    | 否     | 群组id                     |
-| 序号 | 输出参数         | 类型   |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/group/300001`
+
+
+#### 8.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code             | Int    | 否     | 返回码，0：成功 其它：失败 |
 | 2    | message          | String | 否     | 描述                       |
 | 3    | data             | object | 否     | 返回信息实体               |
@@ -2083,10 +2447,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.4  | transactionCount | int    | 否     | 交易数量                   |
 | 3.5  | latestBlock      | int    | 否     | 当前块高                   |
 
-#### 8.1.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/group/300001`
 
-#### 8.1.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2102,7 +2464,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2111,6 +2472,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
+
+
 
 ### 8.2 获取所有群组列表
 
@@ -2121,12 +2487,24 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.2.2 参数信息详情
+#### 8.2.2 请求参数
 
-| 序号  | 输入参数      | 类型          | 可为空 | 备注                       |
-|-------|---------------|---------------|--------|----------------------------|
-|       |               |               |        |                            |
-| 序号  | 输出参数      | 类型          |        | 备注                       |
+***1）入参表***
+无
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/group/all`
+
+
+#### 8.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
 | 3     | totalCount    | Int           | 否     | 总记录数                   |
@@ -2139,10 +2517,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
 | 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
 
-#### 8.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/group/all`
 
-#### 8.2.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2171,6 +2547,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
+
+
+
 ### 8.3 查询每日交易数据
 
 
@@ -2180,12 +2561,27 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.3.2 参数信息详情
+#### 8.3.2 请求参数
 
-| 序号 | 输入参数   | 类型   | 可为空 | 备注                       |
-|------|------------|--------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId    | int    | 否     | 群组id                     |
-| 序号 | 输出参数   | 类型   |        | 备注                       |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/group/transDaily/300001`
+
+
+#### 8.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code       | Int    | 否     | 返回码，0：成功 其它：失败 |
 | 2    | message    | String | 否     | 描述                       |
 | 3    | data       | list   | 否     | 返回信息列表               |
@@ -2194,11 +2590,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.2  | groupId    | int    | 否     | 群组编号                   |
 | 4.3  | transCount | int    | 否     | 交易数量                   |
 
-#### 8.3.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/group/transDaily/300001`
 
-#### 8.3.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2219,7 +2612,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2228,6 +2620,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
 
 
 
@@ -2245,15 +2638,31 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 9.1.2 参数信息详情
+#### 9.1.2 请求参数
 
-| 序号   | 输入参数    | 类型          | 可为空 | 备注                                       |
-|--------|-------------|---------------|--------|--------------------------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | groupId   | int           | 否     | 群组id                                     |
 | 2      | pageSize    | Int           | 否     | 每页记录数                                 |
 | 3      | pageNumber  | Int           | 否     | 当前页码                                   |
 | 4      | nodeName    | String        | 是     | 节点名称                                   |
-|        | 输出参数    | 类型          |        | 备注                                       |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=`
+
+
+#### 9.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2      | message     | String        | 否     | 描述                                       |
 | 3      | totalCount  | Int           | 否     | 总记录数                                   |
@@ -2271,10 +2680,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 4.1.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
 
-#### 9.1.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=`
 
-#### 9.1.4 出参示例
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2308,6 +2716,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
+
+
+
 ### 9.2 查询节点信息
 
 
@@ -2317,12 +2730,28 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 9.2.2 参数信息详情
+#### 9.2.2 请求参数
+
+***1）入参表***
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|--------------------------------------------|
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | int           | 否     | 群组id                                     |
-|      | 输出参数    | 类型          |        | 备注                                       |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/node/nodeInfo/1
+
+
+
+#### 9.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述                                       |
 | 3    |             | Object        |        | 节点信息对象                               |
@@ -2338,10 +2767,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 3.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
 
-#### 9.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/node/nodeInfo/{groupId}
 
-#### 9.2.4 出参示例
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2350,7 +2778,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {
         "nodeId": 500001,
         "nodeName": "127.0.0.1_10303",
-        "groupId": 300001,
+        "groupId": 1,
         "nodeIp": "127.0.0.1",
         "p2pPort": 10303,
         "description": null,
@@ -2372,6 +2800,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
+
+
+
 ## 10 角色管理模块
 
 
@@ -2384,15 +2815,32 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-### 10.1.2 参数信息详情
+### 10.1.2 请求参数
 
-| 序号  | 输入参数    | 类型          | 可为空 | 备注                       |
-|-------|-------------|---------------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | roleId      | int           | 否     | 角色id                     |
 | 2     | roleName    | String        | 是     | 角色名称                   |
 | 3     | pageSize    | int           | 否     | 每页记录数                 |
 | 4     | pageNumber  | int           | 否     | 当前页码                   |
-| 序号  | 输出参数    | 类型          |        | 备注                       |
+
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=`
+
+
+
+#### 10.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1     | code        | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message     | String        | 否     | 描述                       |
 | 3     | totalCount  | Int           | 否     | 总记录数                   |
@@ -2406,11 +2854,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.6 | createTime  | LocalDateTime | 否     | 创建时间                   |
 | 4.1.7 | modifyTime  | LocalDateTime | 否     | 修改时间                   |
 
-### 10.1.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=`
 
-### 10.1.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2440,7 +2885,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2449,6 +2893,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
 
 ## 11 用户管理模块 
 
@@ -2463,14 +2910,37 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 11.1.2 参数信息详情
+#### 11.1.2 请求参数
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                               |
-|------|-------------|---------------|--------|------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | userName    | string        | 否     | 用户名称                           |
 | 2    | description | string        | 是     | 备注                               |
 | 3    | groupId     | Int           | 否     | 所属群组                           |
-| 序号 | 输出参数    | 类型          |        | 备注                               |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080//WeBASE-Node-Manager/user/userInfo`
+
+```
+{
+    "groupId": "300001",
+    "description": "密钥拥有者",
+    "userName": "user1"
+}
+```
+
+
+#### 11.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
 | 2    | message     | String        | 否     | 描述                               |
 | 3    | data        | object        | 是     | 返回信息实体（成功时不为空）       |
@@ -2485,19 +2955,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
 | 3.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
 
-#### 11.1.3 入参示例
-`v/WeBASE-Node-Manager/user/userInfo`
 
-```
-{
-    "groupId": "300001",
-    "description": "密钥拥有者",
-    "userName": "user1"
-}
-```
-
-
-#### 11.1.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2519,7 +2978,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2528,6 +2986,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
 
 ### 11.2 绑定公钥用户
 
@@ -2539,15 +3000,37 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 11.2.2 参数信息详情
+#### 11.2.2 请求参数
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                               |
-|------|-------------|---------------|--------|------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | userName    | string        | 否     | 用户名称                           |
 | 2    | description | string        | 是     | 备注                               |
 | 3    | groupId   | Int           | 否     | 所属群组                           |
-| 4    |             |               |        |                                    |
-| 序号 | 输出参数    | 类型          |        | 备注                               |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userInfo`
+
+```
+{
+    "userName": "sdfasd",
+    "publicKey": "0x4189fdacff55fb99172e015e1adb96dc77b0cae1619b1a41cc360777bee6682fcc9752d8aabf144fbf610a3057fd4b5",
+    "groupId": "300001",
+    "description": "sdfa"
+}
+```
+
+
+#### 1.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
 | 2    | message     | String        | 否     | 描述                               |
 | 3    | data        | object        | 是     | 返回信息实体（成功时不为空）       |
@@ -2562,19 +3045,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
 | 3.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
 
-#### 11.2.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userInfo`
 
-```
-{
-    "userName": "sdfasd",
-    "publicKey": "0x4189fdacff55fb99172e015e1adb96dc77b0cae1619b1a41cc360777bee6682fcc9752d8aabf144fbf610a3057fd4b5",
-    "groupId": "300001",
-    "description": "sdfa"
-}
-```
-
-#### 11.2.4 出参示例
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2596,7 +3068,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2605,6 +3076,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
 
 ### 11.3 修改用户备注
 
@@ -2616,13 +3088,36 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 11.3.2 参数信息详情
+#### 11.3.2 请求参数
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                               |
-|------|-------------|---------------|--------|------------------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | userId      | int           | 否     | 用户编号                           |
 | 2    | description | String        | 是     | 备注                               |
-| 序号 | 输出参数    | 类型          |        | 备注                               |
+
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userInfo`
+
+```
+{
+    "userId": "400001",
+    "description": "newDescription"
+}
+```
+
+
+#### 11.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
 | 2    | message     | String        | 否     | 描述                               |
 | 3    | data        | object        | 是     | 返回信息实体（成功时不为空）       |
@@ -2637,18 +3132,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
 | 3.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
 
-#### 11.3.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userInfo`
 
-```
-{
-    "userId": "400001",
-    "description": "newDescription"
-}
-```
-
-#### 11.3.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2670,7 +3155,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2679,6 +3163,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
 
 ### 11.4 查询私钥
 
@@ -2689,23 +3175,34 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：json
 
-#### 11.4.2 参数信息详情
+#### 11.4.2 请求参数
 
-| 序号 | 输入参数   | 类型   | 可为空 | 备注                       |
-|------|------------|--------|--------|----------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | userId     | int    | 否     | 用户编号                   |
-| 序号 | 输出参数   | 类型   |        | 备注                       |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/user/privateKey/4585`
+
+
+#### 1.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | code       | Int    | 否     | 返回码，0：成功 其它：失败 |
 | 2    | message    | String | 否     | 描述                       |
 | 3    | data       | Object | 否     | 返回私钥信息实体           |
 | 3.1  | privateKey | String | 否     | 私钥                       |
 | 3.2  | address    | String | 否     | 用户链上地址               |
 
-#### 11.4.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/privateKey/4585`
 
-#### 11.4.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2718,7 +3215,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2727,6 +3223,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
+
+
+
 
 ### 11.5 查询用户列表
 
@@ -2737,15 +3237,29 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 11.5.2 参数信息详情
+#### 11.5.2 请求参数
 
-| 序号   | 输入参数    | 类型          | 可为空 | 备注                               |
-|--------|-------------|---------------|--------|------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | groupId   | int           | 否     | 所属群组id                           |
 | 2      | pageSize    | Int           | 否     | 每页记录数                         |
 | 3      | pageNumber  | Int           | 否     | 当前页码                           |
 | 4      | userParam   | String        | 是     | 查询参数（用户名或公钥地址）       |
-|        | 输出参数    | 类型          |        | 备注                               |
+
+
+***2）入参示例***
+
+`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=asdfvw`
+
+
+#### 1.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
 | 2      | message     | String        | 否     | 描述                               |
 | 3      | totalCount  | Int           | 否     | 总记录数                           |
@@ -2762,11 +3276,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
 | 4.1.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
 
-#### 11.5.3 入参示例
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=asdfvw`
 
-#### 11.5.4 出参示例
-
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2790,7 +3301,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     ]
 }
 ```
-
 
 * 失败：
 ```
@@ -2818,23 +3328,23 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 12.1.2 参数信息详情
+#### 12.1.2 请求参数
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                               |
-|------|-------------|---------------|--------|------------------------------------|
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | Int           | 否     | 所属群组                           |
 | 2    | methodList  | List           | 否     | 方法列表                           |
 | 2.1  |             | Object           | 否     | 方法实体                           |
 | 2.1.1 | abiInfo    | String        | 否     | 合约abi信息                           |
 | 2.1.2 | methodId   | String        | 否     | 方法编号                           |
 | 2.1.3 | methodType | String        | 否     | 方法类型                           |
-| 序号 | 输出参数    | 类型          |        | 备注                               |
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2    | message     | String        | 否     | 描述                               |
-| 3    | data        | object        | 是     | 返回信息实体（空）       |
 
 
-#### 12.1.3 入参示例
+***2）入参示例***
+
 `http://127.0.0.1:8080/WeBASE-Node-Manager/method/add`
 
 ```
@@ -2851,7 +3361,18 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-#### 12.1.4 出参示例
+#### 1.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否     | 描述                               |
+| 3    | data        | object        | 是     | 返回信息实体（空）       |
+
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2861,7 +3382,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
 * 失败：
 ```
 {
@@ -2870,6 +3390,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
+
 
 
 
@@ -2884,23 +3405,40 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 12.1.2 参数信息详情
+#### 12.1.2 请求参数
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                               |
-|------|-------------|---------------|--------|------------------------------------|
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | Int           | 否     | 所属群组                           |
 | 2    | methodId    | String        | 否     | 方法编号                           |
-| 序号  | 输出参数     | 类型           |       | 备注                               |
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败            |
-| 2    | message     | String        | 否     | 描述                               |
-| 3    | data        | List          | 是     | 返回信息实体                        |
 
 
-#### 12.1.3 入参示例
+***2）入参示例***
+
+
 `http://127.0.0.1:8080/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt`
 
 
-#### 12.1.4 出参示例
+#### 1.1.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败            |
+| 2    | message     | String        | 否     | 描述                               |
+| 3  |             | Object           | 否     | 方法实体                           |
+| 3.1 | abiInfo    | String        | 否     | 合约abi信息                           |
+| 3.2 | methodId   | String        | 否     | 方法编号                           |
+| 3.3 | methodType | String        | 否     | 方法类型                           |
+| 3.4  | createTime  | LocalDateTime | 否     | 创建时间                           |
+| 3.5 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
+
+
+
+***2）出参示例***
 * 成功：
 ```
 {
@@ -2916,7 +3454,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     }
 }
 ```
-
 
 * 失败：
 ```
