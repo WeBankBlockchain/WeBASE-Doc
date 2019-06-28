@@ -81,8 +81,6 @@ sh gradlew clean bootJar
 #### 当此参数为false时，进入单节点任务模式
 system.multiLiving=false
 
-#### 开启多线程下载的区块阈值，如果当前已完成导出的区块高度小于当前区块总高度减去该阈值，则启动多线程下载
-system.maxBlockHeightThreshold=50
 #### 多线程下载的分片数量，当完成该分片所有的下载任务后，才会统一更新下载进度。
 system.crawlBatchUnit=100
 ```
