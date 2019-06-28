@@ -137,6 +137,6 @@ cd dist
 在已编译的代码根目录dist查看：
 
 ```shell
-交易服务日志：tail -f log/transcation.log
+交易服务日志：tail -f log/transaction.log
 web3连接日志：tail -f log/web3sdk.log
 ```
