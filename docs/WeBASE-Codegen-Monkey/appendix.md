@@ -43,7 +43,7 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | --- | --- | --- | --- | --- |
 | system.group | Y | 同spring项目的group | com.example | - |
 | system.contractPackName | Y | 编译智能合约所输入的包名 | com.webank.blockchain.wecredit.contracts | - |
-| monitor.default.frequency | N | 所有method和event的抓取频率 | 10 | 5 |
+| monitor.default.frequency | N | 所有method和event的抓取频率，默认几秒轮询一次 | 10 | 5 |
 
 #### 1.5 线程池配置
 
