@@ -4,7 +4,10 @@
 .. toctree::
    :maxdepth: 1
 
-   README.md
+   outline.md
    install.md
+   model.md
+   question.md
+   tech.md
    appendix.md
 ```
