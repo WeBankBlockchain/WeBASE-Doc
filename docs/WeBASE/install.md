@@ -215,8 +215,7 @@ mysql > create database db_mgr;
 - Ubuntu
 
   ```
-  sudo apt-get install -y python-pip
-  sudo pip install -y python-requests
+  sudo apt-get install -y python-requests
   ```
 
 ### MySQL-python部署
@@ -231,7 +230,7 @@ mysql > create database db_mgr;
 
   ```
   sudo apt-get install -y python-pip
-  sudo pip install -y MySQL-python
+  sudo pip install MySQL-python
   ```
 
 ## 常见问题
