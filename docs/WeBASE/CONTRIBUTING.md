@@ -6,13 +6,13 @@
 
 如果你的电脑上尚未安装 git, 请按照这个[ 安装指引 ](https://help.github.com/articles/set-up-git/)进行安装。
 
-## Fork（复制）本代码仓库
+## Fork本代码仓库
 ![](../../images/contribution/fork.png)
 
 点击图示中的按钮去 Fork 这个代码仓库。
 这个操作会将代码仓库复制到你的账户名下。
 
-## Clone（克隆）代码仓库
+## Clone代码仓库
 
 ![](../../images/contribution/clone.png)
 
@@ -31,20 +31,20 @@ git clone https://github.com/"你的 Github 用户名"/WeBASE-Node-Manager.git
 
 '你的 Github 用户名' 指的就是你的 Github 用户名。这一步，你将复制你账户名下的 WeBASE-Node-Manager 这个代码仓库克隆到你的本地电脑上。
 
-## 进入本地电脑的代码仓库克隆目录进行修改
+## 代码修改
 ```
 cd WeBASE-Node-Manager
 
 vim XXX
 ```
 
-## 对代码进行修改，而後 Commit (提交) 修改
+## Commit修改
 
 ```
 git commit -m "一个伟大改进"
 ```
 
-## 将改动 Push（发布）到 GitHub
+## 将改动 Push 到 GitHub
 
 使用 `git push` 命令发布代码
 ```
