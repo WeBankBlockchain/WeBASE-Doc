@@ -50,7 +50,6 @@ git commit -m "一个伟大改进"
 ```
 git push origin <分支的名称>
 ```
-将 `<分支的名称>` 替换为之前新建的分支名称。
 
 ## 提出 Pull Request 将你的修改供他人审阅
 
