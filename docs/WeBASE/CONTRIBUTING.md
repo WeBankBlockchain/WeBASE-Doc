@@ -1,6 +1,3 @@
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-
 # WeBASE贡献指南
 
 欢迎，提前感谢你的帮助和支持！
@@ -9,15 +6,15 @@
 
 如果你的电脑上尚未安装 git, 请按照这个[ 安装指引 ](https://help.github.com/articles/set-up-git/)进行安装。
 
-## Fork（复制）本代码仓库
-<img align="right" width="300" src="../../images/contribution/fork.png" alt="fork this repository" />
+## Fork本代码仓库
+![](../../images/contribution/fork.png)
 
 点击图示中的按钮去 Fork 这个代码仓库。
 这个操作会将代码仓库复制到你的账户名下。
 
-## Clone（克隆）代码仓库
+## Clone代码仓库
 
-<img align="right" width="300" src="../../images/contribution/clone.png" alt="clone this repository" />
+![](../../images/contribution/clone.png)
 
 接下来，将复制后的代码仓库克隆到你的电脑上。点击图示中的绿色按钮，接着点击复制到剪切板按钮（将代码仓库地址复制下来）
 
@@ -34,20 +31,20 @@ git clone https://github.com/"你的 Github 用户名"/WeBASE-Node-Manager.git
 
 '你的 Github 用户名' 指的就是你的 Github 用户名。这一步，你将复制你账户名下的 WeBASE-Node-Manager 这个代码仓库克隆到你的本地电脑上。
 
-## 进入本地电脑的代码仓库克隆目录进行修改
+## 代码修改
 ```
 cd WeBASE-Node-Manager
 
 vim XXX
 ```
 
-## 对代码进行修改，而後 Commit (提交) 修改
+## Commit修改
 
 ```
 git commit -m "一个伟大改进"
 ```
 
-## 将改动 Push（发布）到 GitHub
+## 将改动 Push 到 GitHub
 
 使用 `git push` 命令发布代码
 ```
@@ -59,11 +56,10 @@ git push origin <分支的名称>
 
 前往 Github 你的代码仓库，你会看到一个 `Compare & pull request` 的按钮。点击该按钮。
 
-<img style="float: right;" src="../../images/contribution/pr.png" alt="create a pull request" />
+![](../../images/contribution/pull-request.png)
 
 接着再点击 `Create pull request` 按钮，正式提交 pull request。
 
-<img style="float: right;" src="../../images/contribution/create-pull-request.png" alt="submit pull request" />
+![](../../images/contribution/create-pull-request.png)
 
 提交的改动经过审核，会合入到仓库。合并后，你会收到电子邮件通知。
-
