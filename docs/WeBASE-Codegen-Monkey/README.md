@@ -1,6 +1,6 @@
-# 数据导出代码生成子系统
+# 概要介绍
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/WeBASE-Codegen-Monkey/community)
+[![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/webase-monkey/community)
 
 > 道生一，一生二，二生三，三生万物。
 > 万物负阴而抱阳，冲气以为和。
@@ -13,19 +13,19 @@
 
 ### 1.1 数据导出组件：WeBASE-Collect-Bee
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
 
-数据导出组件[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
+数据导出组件[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)可以导出区块链上的基础数据，如当前块高、交易总量等。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)可以导出区块链上的基础数据，如当前块高、交易总量等。
 
-如果正确配置了FISCO-BCOS上运行的所有合约，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
+如果正确配置了FISCO-BCOS上运行的所有合约，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)提供了基于Restful的API，支持通过http的方式调用这些接口。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)提供了基于Restful的API，支持通过http的方式调用这些接口。
 
 ### 1.2 代码自动生成组件：WeBASE-Codegen-Monkey
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WeBASE-Codegen-Monkey。只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WeBASE-Codegen-Monkey。只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)。
 
 ### 1.3 使用场景和解决方案
 
@@ -39,7 +39,7 @@
 
 - 解决方案
 
-该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。导出到db的数据接入到了该公司的统一监控平台，该公司PM可以在业务后台系统上获得该业务的实时进展，该公司运维人员可以在公司运维监控室的大屏幕实时监控业务系统的状态。
+该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。导出到db的数据接入到了该公司的统一监控平台，该公司PM可以在业务后台系统上获得该业务的实时进展，该公司运维人员可以在公司运维监控室的大屏幕实时监控业务系统的状态。
 
 #### 案例 区块链业务数据对账系统
 
@@ -49,7 +49,7 @@
 
 - 解决方案
 
-该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
+该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
 
 #### 案例 区块链业务数据查询系统
 
@@ -59,7 +59,7 @@
 
 - 解决方案
 
-该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
+该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
 
 ### 1.4 特性介绍
 
@@ -77,23 +77,23 @@
 
 #### 支持多数据源，支持读写分离和分库分表
 
-为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
 
 #### 支持多活部署，多节点自动导出
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件支持多活部署，可自动进行分布式任务调度。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件支持多活部署，可自动进行分布式任务调度。
 
 
 #### 支持区块重置导出
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
 
 ### 支持可视化的监控页面
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
 
 #### 提供可视化的互动API控制台
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)集成了swagger插件，提供可视化互动API控制台。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)集成了swagger插件，提供可视化互动API控制台。
 
 ![[效果图]](../../images/WeBASE-Codegen-Monkey/grafana_demo.png)
 
@@ -121,7 +121,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/dev_v0.7.0.2019.06/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/master/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
@@ -145,13 +145,11 @@ cd install_scripts
 
 ##### 2.2.2.1 配置合约文件
 
-请注意，请确保你使用的Web3SDK的版本大于等于**V1.2.0**。同时请注意，上链程序所安装的[fisco-solc](https://github.com/FISCO-BCOS/fisco-solc)必须与编译的版本一致。
+找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例HelloWorld.java文件）。
 
-找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例Evidence.java文件）。
+如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [利用控制台将合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)
 
-如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考：[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/release-1.3/docs/web3sdk/advanced/gen_java_code.html)
-
-请注意:**请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。
+请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考附录1.3 数据库配置。
 
 ##### 2.2.2.2 配置密钥文件
 
@@ -189,7 +187,7 @@ chmod +x generate_bee.sh
 sh generate_bee.sh
 ```
 
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
 
 请注意:请务必按照以上命令操作，**切莫使用sudo命令来操作**，否则会导致Gradlew没有权限，导致depot数据失败。
 
@@ -200,7 +198,7 @@ chmod +x generate_bee.sh
 sh generate_bee.sh build
 ```
 
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
 
 ```
 chmod +x *.jar
@@ -341,7 +339,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 ### 2.4 开启可视化的功能性测试
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
+[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
 ![[swagger控制台]](../../images/WeBASE-Codegen-Monkey/swagger.png)
 
@@ -353,7 +351,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 > http://your_ip:port/swagger-ui.html
 
-例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)，且未修改默认的8080端口，则可以访问此地址：
+例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)，且未修改默认的8080端口，则可以访问此地址：
 
 > http://localhost:8080/swagger-ui.html
 
@@ -541,7 +539,7 @@ A：可以。只需要手动将编译生成的合约代码的包名改为同一�
 
 > **3. 如果我的链上所执行的合约是低于V1.2.0版本的怎么办？还可以导出来吗？**
 
-A:可以，但需要进行特殊的操作。首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/v1.0.1/docs/web3sdk/advanced/gen_java_code.html?highlight=compile.sh)，复制每个Java文件里的ABI字段。
+A: 可以，但需要进行特殊的操作。 首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)，复制每个Java文件里的ABI字段。
 
 然后找到你用之前版本的web3sdk曾经编译的Java代码，注意请保证你安装的fisco-solc与之前的版本一致，将刚才V1.2.0版本Java文件中的ABI字段手工拷贝到之前Java代码中。
 
@@ -570,7 +568,7 @@ Elastic-Job-Lite - 分布式调度解决方案 | 轻量级无中心化解决方�
 
 ### 1. 配置参数说明
 
-WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)组件实例，在WeBASE-Codegen-Monkey组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
+WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)组件实例，在WeBASE-Codegen-Monkey组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
 
 #### 1.1 Springboot服务配置
 
@@ -580,7 +578,7 @@ WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankF
 
 #### 1.2 FISCO-BCOS节点配置
 
-FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/feature_error_handler_2019.04)服务连接的区块链节点，使得WeBASE-Collect-Bee服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
+FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)服务连接的区块链节点，使得WeBASE-Collect-Bee服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
@@ -604,188 +602,3 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 
 其中**sysTableName**对应区块数据表和账户数据表，详情见 **数据存储模型** 章节。
 
-#### 1.4 FISCO-WeBASE-Collect-Bee工程配置
-
-| 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
-| --- | --- | --- | --- | --- |
-| system.group | Y | 同spring项目的group | com.example | - |
-| system.contractPackName | Y | 编译智能合约所输入的包名 | com.webank.blockchain.wecredit.contracts | - |
-| monitor.default.frequency | N | 所有method和event的抓取频率 | 10 | 5 |
-
-#### 1.5 线程池配置
-
-在单机部署下，必须配置线程池参数。数据导出配置用于配置数据导出的频率、线程数及启动多线程条件等。当system.multiLiving=true时，配置文件不会生成线程池相关配置。
-
-| 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
-| --- | --- | --- | --- | --- |
-| system.multiLiving | Y | 关闭多活开关 | false | false |
-| system.maxBlockHeightThreshold | N | 多线程开关阈值：当前区块落后区块高度的阈值，如果超过，系统将启动多线程执行任务 | 10 | 10 |
-| system.crawlBatchUnit | N | 线程处理单元：多线程任务模式下单个线程一次任务执行完成的区块数 | 100 | 100 |
-
-#### 1.6 集群多活配置
-
-在集群多活部署的方案中，必须设置集群多活的配置。集群必须通过zookeeper进行服务注册和任务分发。当system.multiLiving=false时，配置文件不会生成zookeeper相关配置。
-
-| 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
-| --- | --- | --- | --- | --- |
-| system.multiLiving | Y | 启动多活开关 | true | false |
-| regcenter.serverList | N | 注册中心服务器列表 | [12.00.10.1:2181;12.00.10.2:2181] | - |
-| regcenter.namespace | N | 注册中心命名空间 | wecredit_bee | - |
-
-#### 1.7 其他高级配置
-
-| 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
-| --- | --- | --- | --- | --- |
-| monitor.[contractName].[methodName/eventName].generated=false | N | 是否抓取特定合约中特定method或event的数据 | on/off | on |
-| monitor.[contractName].[eventName].ignoreParam=XXX,XXX | N | 忽略特定合约特定event的特定字段不进行抓取 | xxx,xxx |  |
-| length.[contractName].[methodName or eventName].paraName | N | 指定特定字段在数据库表中的长度 |  | 512 |
-
-### 2. Java安装
-
-#### Ubuntu环境安装Java
-
-```
-# 安装默认Java版本(Java 8或以上)
-sudo apt install -y default-jdk
-# 查询Java版本
-java -version 
-```
-
-#### CentOS环境安装Java
-
-```
-# 查询centos原有的Java版本
-$ rpm -qa|grep java
-# 删除查询到的Java版本
-$ rpm -e --nodeps java版本
-# 查询Java版本，没有出现版本号则删除完毕
-$ java -version
-# 创建新的文件夹，安装Java 8或以上的版本，将下载的jdk放在software目录
-# 从openJDK官网(https://jdk.java.net/java-se-ri/8)或Oracle官网(https://www.oracle.com/technetwork/java/javase/downloads/index.html)选择Java 8或以上的版本下载，例如下载jdk-8u201-linux-x64.tar.gz
-$ mkdir /software
-# 解压jdk 
-$ tar -zxvf jdk-8u201-linux-x64.tar.gz
-# 配置Java环境，编辑/etc/profile文件 
-$ vim /etc/profile 
-# 打开以后将下面三句输入到文件里面并退出
-export JAVA_HOME=/software/jdk-8u201-linux-x64.tar.gz
-export PATH=$JAVA_HOME/bin:$PATH 
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-# 生效profile
-$ source /etc/profile 
-# 查询Java版本，出现的版本是自己下载的版本，则安装成功。
-java -version 
-```
-
-### 3. Git安装
-
-git：用于拉取最新代码
-
-**centos**:
-```
-sudo yum -y install git
-```
-**ubuntu**:
-```
-sudo apt install git
-```
-
-#### 4. Mysql安装
-
-此处以Centos/Fedora为例。
-
-（1）切换到root
-```shell
-sudo -s
-```
-（2）安装mysql
-```shell
-yum install mysql*
-#某些版本的linux，需要安装mariadb，mariadb是mysql的一个分支
-yum install mariadb*
-```
-（3）启动mysql
-```shell
-service mysqld start
-#若安装了mariadb，则使用下面的命令启动
-service mariadb start
-```
-（4）初始化root用户
-```shell
-mysql -u root
-```
-**注意，以下语句仅适用于开发环境，不能直接在实际生产中使用！！！ 以下操作仅供参考，请勿直接拷贝，请自定义设置复杂密码。**
-```sql
-/*授权test用户本地访问数据库*/
-create user 'test'@'localhost' identified by 'test1234';
-```
-（5）用SQL语句给root分配密码
-``` sql
-GRANT ALL PRIVILEGES ON *.* TO 'test'@'%' IDENTIFIED BY 'test1234' WITH GRANT OPTION;
-```
-**注意，以上语句仅适用于开发环境，不能直接在实际生产中使用！！！以上设置会使数据库在所有网络上都可以访问，请按具体的网络拓扑和权限控制情况，设置网络和权限帐号 **
-（6）测试是否成功
-> 另开一个ssh测试用户是否可以登陆，并成功授权，登陆数据库
-```shell
-mysql -utest -ptest@2107 -h 127.0.0.1 -P 3306
-```
-> 登陆成功后，执行sql语句，若出现错误，则用户授权不成功
-```sql
-show databases;
-use test;
-select * from tb_txnByDay;
-```
-#### 5. zookeeper安装
-
-zookeeper 支持单机和集群部署，推荐使用集群部署的方式，请参考zookeeper官网的说明：
-[集群部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_zkMulitServerSetup)
-[单机部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_singleAndDevSetup)
-
-#### 6. supervisor安装与部署
-
-##### 安装脚本
-
-> sudo yum -y install supervisor
-会生成默认配置/etc/supervisord.conf和目录/etc/supervisord.d，如果没有则自行创建。
-
-##### 配置脚本
-
-cd /etc/supervisord.d
-修改/etc/supervisord.conf的[include]部分：
-```shell
-[include]
-files = supervisord.d/*.ini
-[supervisord]
-```
-在/etc/supervisord.d目录下配置以下启动配置文件webasebee_config1.ini（请注意配置文件里需要包含webasebee，否则会导致关闭任务命令失效），注意修改相关的路径。
-```shell
-[program:supervisor_webasebee]
-directory =【你的程序路径】/WeBASE-Collect-Bee/dist ; 程序的启动目录
-command = nohup java -jar 【你的安装包名，如WeBASE-Collect-Bee0.3.0-SNAPSHOT.jar】 & ; 启动命令，与命令行启动的命令是一样的
-autostart = true     ; 在 supervisord 启动的时候也自动启动
-startsecs = 15        ; 启动 15 秒后没有异常退出，就当作已经正常启动了
-autorestart = true   ; 程序异常退出后自动重启
-startretries = 3     ; 启动失败自动重试次数，默认是 3
-user = app          ; 用哪个用户启动
-redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false
-stdout_logfile_maxbytes = 150MB  ; stdout 日志文件大小，默认 50MB
-stdout_logfile_backups = 20     ; stdout 日志文件备份数
-stderr_logfile=【你的日志路径】/WeBASE-Collect-Bee/dist/log/webase_bee_error.log
-stdout_logfile = 【你的日志路径】/WeBASE-Collect-Bee/dist/log/webase_bee_out.log  ;日志统一放在log目录下
-[supervisord]
-```
-
-##### 启动任务
-
-supervisor支持supervisorctl和supervisord启动，可通过systemctl实现开机自启动。
-我们建议采用supervisord的方式启动：
-
-```shell
-supervisord -c /etc/supervisord.d/webasebee_config1.ini
-```
-##### 关闭任务
-
-```shell
-ps -ef|grep supervisord|grep webasebee| awk '{print $2}'|xargs kill -9
-ps -ef|grep WeBASE-Collect-Bee|grep -v grep| awk '{print $2}'|xargs kill -9
-```
