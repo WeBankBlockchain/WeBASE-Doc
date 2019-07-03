@@ -11,8 +11,8 @@ WeBASE 技术文档
     - WeBASE-Front详细介绍请参考 `WeBASE-Front <./docs/WeBASE-Front/README.html>`_
     - WeBASE-Node-Manager详细介绍请参考 `WeBASE-Node-Manager <./docs/WeBASE-Node-Manager/README.html>`_
     - WeBASE-Web详细介绍请参考 `WeBASE-Web <./docs/WeBASE-Web/README.html>`_
-    - WeBASE-Codegen-Monkey详细介绍请参考 `WeBASE-Codegen-Monkey <./docs/WeBASE-Codegen-Monkey/README.html>`_
-    - WeBASE-Collect-Bee详细介绍请参考 `WeBASE-Collect-Bee <./docs/WeBASE-Collect-Bee/README.html>`_
+    - WeBASE-Codegen-Monkey详细介绍请参考 `WeBASE-Codegen-Monkey <./docs/WeBASE-Codegen-Monkey/index.html>`_
+    - WeBASE-Collect-Bee详细介绍请参考 `WeBASE-Collect-Bee <./docs/WeBASE-Collect-Bee/index.html>`_
     - WeBASE-Sign详细介绍请参考 `WeBASE-Sign <./docs/WeBASE-Sign/README.html>`_
     - WeBASE-Transaction详细介绍请参考 `WeBASE-Transaction <./docs/WeBASE-Transaction/index.html>`_
 
