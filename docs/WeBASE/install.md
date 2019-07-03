@@ -9,9 +9,9 @@
 | 环境   | 版本                   |
 | ------ | ---------------------- |
 | Java   | jdk1.8.0_121或以上版本 |
+| mysql | mysql-5.6或以上版本 |
 | python | 2.7                 |
 | MySQL-python | 1.2.5 |
-| mysql | mysql-5.6或以上版本 |
 
 **备注：** 安装说明请参看 [附录](#id8)
 
@@ -34,7 +34,7 @@ cd webase-deploy
 
 ① 可以使用以下命令修改，也可以直接修改文件（vi common.properties），没有变化的可以不修改
 
-② 数据库需要提前安装（数据库安装请参看 [附录7.4](#id9)）
+② 数据库需要提前安装（数据库安装请参看 [数据库部署](#id9)）
 
 ③ 服务端口不能小于1024
 
@@ -74,7 +74,7 @@ python deploy.py stopAll
 python deploy.py help
 ```
 
-**备注：** 部署过程出现问题可以查看 [常见问题8](#id10)
+**备注：** 部署过程出现问题可以查看 [常见问题](#id10)
 
 ## 访问
 
@@ -122,27 +122,6 @@ export JAVA_HOME=/software/jdk1.8.0_121
 export PATH=$JAVA_HOME/bin:$PATH 
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ```
-
-### Python部署
-
-```shell
-pip install requests 或 sudo yum install -y requests
-```
-
-### MySQL-python部署
-
-- CentOS
-
-  ```
-  sudo yum install -y MySQL-python
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt-get install -y python-pip
-  sudo pip install MySQL-python
-  ```
 
 ### 数据库部署
 
@@ -225,6 +204,35 @@ mysql -utest -p123456 -h 127.0.0.1 -P 3306
 mysql > create database db_mgr;
 ```
 
+### Python部署
+
+- CentOS
+
+  ```
+  sudo yum install -y python-requests
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python-requests
+  ```
+
+### MySQL-python部署
+
+- CentOS
+
+  ```
+  sudo yum install -y MySQL-python
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python-pip
+  sudo pip install MySQL-python
+  ```
+
 ## 常见问题
 
 ### 数据库安装后登录报错
@@ -257,7 +265,7 @@ Traceback (most recent call last):
 ImportError: No module named MySQLdb
 ```
 
-答：MySQL-python安装请参看部署 [附录7.3](#mysql-python)
+答：MySQL-python安装请参看 [附录](#mysql-python)
 
 ### 部署时编译包下载慢
 
