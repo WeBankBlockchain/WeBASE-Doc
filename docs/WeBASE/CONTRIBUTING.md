@@ -7,14 +7,14 @@
 如果你的电脑上尚未安装 git, 请按照这个[ 安装指引 ](https://help.github.com/articles/set-up-git/)进行安装。
 
 ## Fork（复制）本代码仓库
-<img align="right" width="300" src="../../images/contribution/fork.png" alt="fork this repository" />
+![](../../images/contribution/fork.png)
 
 点击图示中的按钮去 Fork 这个代码仓库。
 这个操作会将代码仓库复制到你的账户名下。
 
 ## Clone（克隆）代码仓库
 
-<img align="right" width="300" src="../../images/contribution/clone.png" alt="clone this repository" />
+![](../../images/contribution/clone.png)
 
 接下来，将复制后的代码仓库克隆到你的电脑上。点击图示中的绿色按钮，接着点击复制到剪切板按钮（将代码仓库地址复制下来）
 
@@ -56,10 +56,10 @@ git push origin <分支的名称>
 
 前往 Github 你的代码仓库，你会看到一个 `Compare & pull request` 的按钮。点击该按钮。
 
-<img style="float: right;" src="../../images/contribution/pr.png" alt="create a pull request" />
+![](../../images/contribution/pr.png)
 
 接着再点击 `Create pull request` 按钮，正式提交 pull request。
 
-<img style="float: right;" src="../../images/contribution/create-pull-request.png" alt="submit pull request" />
+![](../../images/contribution/create-pull-request.png)
 
 提交的改动经过审核，会合入到仓库。合并后，你会收到电子邮件通知。
