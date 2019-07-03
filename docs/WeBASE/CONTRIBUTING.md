@@ -56,7 +56,7 @@ git push origin <分支的名称>
 
 前往 Github 你的代码仓库，你会看到一个 `Compare & pull request` 的按钮。点击该按钮。
 
-![](../../images/contribution/pr.png)
+![](../../images/contribution/pull-request.png)
 
 接着再点击 `Create pull request` 按钮，正式提交 pull request。
 
