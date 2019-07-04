@@ -1,6 +1,6 @@
 # 快速搭建
 
-​	一键部署可以快速搭建WeBASE环境。包括节点（fisco-bcos）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。用于快速体验WeBASE管理平台。
+​	一键部署可以快速搭建WeBASE环境。包括节点（FISCO-BCOS）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。用于快速体验WeBASE管理平台。
 
 ​	部署脚本会拉取相关安装包进行部署（需保持网络畅通），重复部署可根据提示进行相关操作。
 
@@ -9,8 +9,8 @@
 | 环境   | 版本                   |
 | ------ | ---------------------- |
 | Java   | jdk1.8.0_121或以上版本 |
-| mysql | mysql-5.6或以上版本 |
-| python | 2.7                 |
+| MySQL | MySQL-5.6或以上版本 |
+| Python | 2.7                 |
 | MySQL-python | 1.2.5 |
 
 **备注：** 安装说明请参看 [附录](#id8)
@@ -215,8 +215,7 @@ mysql > create database db_mgr;
 - Ubuntu
 
   ```
-  sudo apt-get install -y python-pip
-  sudo pip install -y python-requests
+  sudo apt-get install -y python-requests
   ```
 
 ### MySQL-python部署
@@ -231,7 +230,7 @@ mysql > create database db_mgr;
 
   ```
   sudo apt-get install -y python-pip
-  sudo pip install -y MySQL-python
+  sudo pip install MySQL-python
   ```
 
 ## 常见问题
@@ -280,7 +279,7 @@ Saving to: ‘WeBASE-Front.zip’
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
 
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [webase-web](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-web.zip) 、[webase-node-mgr](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-node-mgr.zip) 、[webase-front](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-web.zip) 、[WeBASE-Node-Manager](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-node-mgr.zip) 、[WeBASE-Front](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
 
 ### 部署时数据库访问报错
 
