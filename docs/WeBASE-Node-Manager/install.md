@@ -17,7 +17,7 @@ cd WeBASE-Node-Manager
 在代码的根目录WeBASE-Node-Manager执行构建命令：
 ```shell
 gradle build -x test
-（没有安装gradle  则使用 ./gradlew build -x test）
+（没有安装Gradle  则使用 ./gradlew build -x test）
 ```
 构建完成后，会在根目录WeBASE-Node-Manager下生成已编译的代码目录dist。
 
@@ -25,7 +25,7 @@ gradle build -x test
 ### 1.4 数据库初始化
 #### 1.4.1 新建数据库
 ```
-#登录mysql:
+#登录MySQL:
 mysql  -u ${your_db_account}  -p${your_db_password}  例如：mysql  -u root  -p123456
 #新建数据库：
 CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_general_ci;

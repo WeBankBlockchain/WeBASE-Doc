@@ -32,19 +32,19 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 ```
 ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (110)
 ```
-答：mysql没有开通该帐号的远程访问权限，登录mysql，执行如下命令，其中TestUser改为你的帐号
+答：MySQL没有开通该帐号的远程访问权限，登录MySQL，执行如下命令，其中TestUser改为你的帐号
 ```
 GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
 ```
 
 
 
-### mgr服务搭建问题
+### WeBASE-Node-Manager服务搭建问题
 * 问：执行构建命令`gradle build -x test`抛出异常：
 ```
 A problem occurred evaluating root project 'WeBASE-Node-Manager'.
 Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.18.2]] on root project 'WeBASE-Node-Manager'.
 ```
 答：
-方法1、已安装的gradle版本过低，升级gradle版本到4.10以上即可。
+方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`
