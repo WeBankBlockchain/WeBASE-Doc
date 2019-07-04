@@ -1,5 +1,5 @@
 # 什么是WeBASE
-WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应用和fisco bcos节点之间搭建的一套通用组件。围绕交易、合约、密钥管理，数据，可视化管理来设计各个模块，开发者可以根据业务所需，选择子系统进行部署。WeBASE屏蔽了区块链底层的复杂度，降低开发者的门槛，大幅提高区块链应用的开发效率，包含节点前置、节点管理、交易链路，数据导出，Web管理平台等子系统。
+WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应用和FISCO-BCOS节点之间搭建的一套通用组件。围绕交易、合约、密钥管理，数据，可视化管理来设计各个模块，开发者可以根据业务所需，选择子系统进行部署。WeBASE屏蔽了区块链底层的复杂度，降低开发者的门槛，大幅提高区块链应用的开发效率，包含节点前置、节点管理、交易链路，数据导出，Web管理平台等子系统。
 
 ## 建立区块链应用开发标准
 WeBASE将区块链应用开发标准化，按照部署、配置、开发智能合约、开发应用层、在线运维管理五个步骤即可完成一个区块链应用的开发，详细开发流程请参阅 [使用WeBASE开发区块链应用](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/quick-start.html)
@@ -18,7 +18,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 前端页面往往带有自身的业务属性，因此WeBASE采用前后端分离的技术，便于开发者基于后端接口定制自己的前端页面。
 
 ## 整体架构
-完整的部署架构如下，其中webase-front需要和区块链节点同机部署。
+完整的部署架构如下，其中WeBASE-Front需要和区块链节点同机部署。
 ![[]](../../images/WeBASE/architecture.png)
 
 ## 功能介绍
@@ -26,7 +26,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 ![[]](../../images/WeBASE/function.png)
 
 ## 各子系统简介
-- **节点前置服务** [WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front) 集成web3jsdk，提供restful风格的接口，客户端可以使用http的形式和节点进行交互，内置内存数据库，采集节点健康度数据。内置web控制台，实现节点的可视化操作。
+- **节点前置服务** [WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front) 集成web3sdk，提供restful风格的接口，客户端可以使用http的形式和节点进行交互，内置内存数据库，采集节点健康度数据。内置web控制台，实现节点的可视化操作。
 
 - **节点管理服务** 
 [WeBASE-Node-Manager](https://github.com/WeBankFinTech/WeBASE-Node-Manager) 
