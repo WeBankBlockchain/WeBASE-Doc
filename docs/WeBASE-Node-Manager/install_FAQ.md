@@ -20,7 +20,7 @@ dos2unix *.sh
 ```
 [Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'information_schema.PROFILING.SEQ' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
-答：mysql5.7版本默认开启（only_full_group_by），修改文件/etc/my.cnf,在[mysqlId]这行的后面加上下面的内容：
+答：MySQL5.7版本默认开启（only_full_group_by），修改文件/etc/my.cnf,在[mysqlId]这行的后面加上下面的内容：
 ```
 sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
 ```
@@ -29,21 +29,21 @@ sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_
 ```
 ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (110)
 ```
-答：mysql没有开通该帐号的远程访问权限，登录mysql，执行如下命令，其中TestUser改为你的帐号
+答：MySQL没有开通该帐号的远程访问权限，登录MySQL，执行如下命令，其中TestUser改为你的帐号
 ```
 GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
 ```
 
 
 
-### mgr服务搭建问题
+### WeBASE-Node-Manager服务搭建问题
 * 问：执行构建命令`gradle build -x test`抛出异常：
 ```
 A problem occurred evaluating root project 'WeBASE-Node-Manager'.
 Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.18.2]] on root project 'WeBASE-Node-Manager'.
 ```
 答：
-方法1、已安装的gradle版本过低，升级gradle版本到4.10以上即可。
+方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`
 
 
