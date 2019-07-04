@@ -42,5 +42,5 @@ FAILURE: Build failed with an exception.
     ```
     server:
         port: 8081
-        context-path: /WeBASE-Front   //修改此处即可如 webase-front;
+        context-path: /WeBASE-Front   //修改此处即可如 WeBASE-Front;
     ```    
