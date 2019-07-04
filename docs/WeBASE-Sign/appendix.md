@@ -29,15 +29,15 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 sudo -s
 ```
 
-（2）安装mysql
+（2）安装MySQL
 
 ```shell
 yum install mysql*
-#某些版本的linux，需要安装mariadb，mariadb是mysql的一个分支
+#某些版本的linux，需要安装mariadb，mariadb是MySQL的一个分支
 yum install mariadb*
 ```
 
-（3）启动mysql
+（3）启动MySQL
 
 ```shell
 service mysqld start
