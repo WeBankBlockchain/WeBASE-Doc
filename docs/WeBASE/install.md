@@ -9,8 +9,8 @@
 | 环境   | 版本                   |
 | ------ | ---------------------- |
 | Java   | jdk1.8.0_121或以上版本 |
-| mysql | mysql-5.6或以上版本 |
-| python | 2.7                 |
+| MySQL | MySQL-5.6或以上版本 |
+| Python | 2.7                 |
 | MySQL-python | 1.2.5 |
 
 **备注：** 安装说明请参看 [附录](#id8)
@@ -279,7 +279,7 @@ Saving to: ‘WeBASE-Front.zip’
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
 
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [webase-web](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-web.zip) 、[webase-node-mgr](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-node-mgr.zip) 、[webase-front](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-web.zip) 、[WeBASE-Node-Manager](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-node-mgr.zip) 、[WeBASE-Front](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/WeBASEV1.0.0/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
 
 ### 部署时数据库访问报错
 
