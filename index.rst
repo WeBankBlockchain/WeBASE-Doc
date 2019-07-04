@@ -25,6 +25,7 @@ WeBASE 技术文档
    docs/WeBASE/subsystem.md
    docs/WeBASE/quick-start.md
    docs/WeBASE/CONTRIBUTING.md
+   docs/WeBASE/ChangeLOG.md
 .. 
 
 
