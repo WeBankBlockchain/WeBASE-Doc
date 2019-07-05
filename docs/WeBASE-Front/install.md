@@ -4,9 +4,9 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| gradle | gradle4.9或更高版本（构建工具） |
-| java | 1.8.0_181或更高版本|
-| fisco-bcos | v2.0.x版本 |
+| Gradle | Gradle4.9或更高版本（构建工具） |
+| Java | 1.8.0_181或更高版本|
+| FISCO-BOCE | v2.0.x版本 |
 
 备注：安装说明请参看附录。
 
@@ -35,7 +35,7 @@ spring:
 constant:  
   transMaxWait: 30            //交易等待时间
   monitorDisk: /home          //要监控的硬盘目录 
-  keyServer: 127.0.0.1:8082   // 配置密钥服务(可以是node-mgr服务)的IP和端口（front独立使用可不配） 
+  keyServer: 127.0.0.1:8082   // 配置密钥服务(可以是WeBASE-Bode-Manager服务)的IP和端口（front独立使用可不配） 
 ```
  application.yml配置文件中sdk的配置采用默认配置，无需修改。如果想修改连接的节点和端口，设置如下：
 ``` 
