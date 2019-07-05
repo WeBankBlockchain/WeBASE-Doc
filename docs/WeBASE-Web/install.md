@@ -73,15 +73,15 @@ nginx安装请参考附录
         location /mgr {
                     proxy_pass    http://node_mgr_server/;    		
                     proxy_set_header		Host				$host;
-                        proxy_set_header		X-Real-IP			$remote_addr;
-                        proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+                    proxy_set_header		X-Real-IP			$remote_addr;
+                    proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
                 }
         }
 ```
 
 ### 3. 启动nginx
 
-(1)、启动nginx。
+1、启动nginx。
 启动命令：
 
 	/usr/local/nginx/sbin/nginx    (nginx下载在/usr/local目录下)
@@ -95,7 +95,7 @@ nginx安装请参考附录
 
 启动报错重点排查：日志路径是否正确（error.log和access.log）,nginx有没有添加用户权限。
 
-(2)、打开页面，页面url是nginx配置的前端ip和端口。
+2、打开页面，页面url是nginx配置的前端ip和端口。
 例如:上面配置文件的url为   http://10.0.0.1:3002
 
-(3)、打开页面后，请找运维提供帐号和密码登录(默认账号密码：admin/Abcd1234)。
+3、打开页面后，请找运维提供帐号和密码登录(默认账号密码：admin/Abcd1234)。
