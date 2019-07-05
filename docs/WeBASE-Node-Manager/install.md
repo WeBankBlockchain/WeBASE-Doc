@@ -1,15 +1,26 @@
 ## 部署说明
 
-### 1.1 注意事项
+## 1. 前提条件
+
+| 序号  | 软件                                          |
+|-------|---------------------------------------------------|
+| 1     | FISCO-BCOS 2.0                                    |
+| 2     | WeBASE-Front 版本                  |
+| 3     | MySQL5.5或5.6版本【更高版本需要更改MySQL配置，可参考install_FAQ.md 】    |
+| 4     | Java1.8.0_181                       |
+| 5     | Gradle-4.10或以上版本                            |
+
+
+### 2 注意事项
 * 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.md)
 * 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略。
 
-### 1.2 拉取代码
+### 3 拉取代码
 执行命令：
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Node-Manager.git
 ```
-### 1.3 编译代码
+### 4 编译代码
 进入代码根目录：
 ```shell
 cd WeBASE-Node-Manager
@@ -22,8 +33,8 @@ gradle build -x test
 构建完成后，会在根目录WeBASE-Node-Manager下生成已编译的代码目录dist。
 
 
-### 1.4 数据库初始化
-#### 1.4.1 新建数据库
+### 5 数据库初始化
+#### 5.1 新建数据库
 ```
 #登录MySQL:
 mysql  -u ${your_db_account}  -p${your_db_password}  例如：mysql  -u root  -p123456
@@ -31,7 +42,7 @@ mysql  -u ${your_db_account}  -p${your_db_password}  例如：mysql  -u root  -p
 CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
-#### 1.4.2 修改脚本配置
+#### 5.2 修改脚本配置
 进入数据库脚本目录
 ```shell
 cd  dist/script
@@ -47,15 +58,15 @@ cd  dist/script
 sed -i "s/defaultAccount/root/g" webase.sh
 ```
 
-#### 1.4.3 运行数据库脚本
+#### 5.3 运行数据库脚本
 执行命令：bash  webase.sh  ${dbIP}  ${dbPort}
 如：
 ```shell
 bash  webase.sh  127.0.0.1 3306
 ```
 
-### 1.5 节点服务的配置及启动
-#### 1.5.1 服务配置修改
+### 6 节点服务的配置及启动
+#### 6.1 服务配置修改
 进入到已编译的代码配置文件目录：
 ```shell
 cd dist/conf
@@ -70,7 +81,7 @@ cd dist/conf
 修改数据库密码：sed -i "s/defaultPassword/${your_db_password}/g" application.yml
 ```
 
-#### 1.5.2 服务启停
+#### 6.2 服务启停
 进入到已编译的代码根目录：
 ```
 cd dist
@@ -87,7 +98,7 @@ bash stop.sh
 ```shell
 bash serverStatus.sh
 ```
-### 1.5.3 查看日志
+### 6.3 查看日志
 进入到日志目录：
 ```shell
 cd dist/logs
