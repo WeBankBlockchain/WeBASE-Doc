@@ -3,27 +3,27 @@
 ### 1.1 拉取代码
 执行命令：
 ```
-git clone https://github.com/WeBankFinTech/webase-sign.git
+git clone https://github.com/WeBankFinTech/WeBASE-Sign.git
 ```
 
 进入目录：
 
 ```
-cd webase-sign
+cd WeBASE-Sign
 ```
 
 ### 1.2 编译代码
 
-方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
+方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
 
 ```shell
 gradle build -x test
 ```
-方式二：如果服务器未安装gradle，或者版本不是gradle-4.10或以上，使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
 ```shell
 ./gradlew build -x test
 ```
-构建完成后，会在根目录webase-sign下生成已编译的代码目录dist。
+构建完成后，会在根目录WeBASE-Sign下生成已编译的代码目录dist。
 
 ### 1.3 修改配置
 
@@ -41,7 +41,7 @@ vi conf/application.yml
 server: 
   # 本工程服务端口，端口被占用则修改
   port: 8085
-  context-path: /webase-sign
+  context-path: /WeBASE-Sign
 
 spring: 
   datasource: 
@@ -73,5 +73,5 @@ constant:
 ### 1.5 查看日志
 
 ```shell
-tail -f log/webase-sign.log
+tail -f log/WeBASE-Sign.log
 ```

@@ -21,11 +21,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ```
 
-### 1.2 gradle部署
+### 1.2 Gradle部署
 
 此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.gradle.org/downloads)。
 
-（1）从[官网](http://www.gradle.org/downloads)下载对应版本的gradle安装包，并解压到相应目录
+（1）从[官网](http://www.gradle.org/downloads)下载对应版本的Gradle安装包，并解压到相应目录
 
 ```shell
 mkdir /software/
