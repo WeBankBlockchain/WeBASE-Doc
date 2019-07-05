@@ -9,7 +9,7 @@ WeBASE将区块链应用开发标准化，按照部署、配置、开发智能�
 WeBASE抽象应用开发的诸多共性模块，形成各类服务组件，开发者根据需要部署所需组件。
 
 **微服务**
-WeBASE采用微服务架构，基于Spring Boot框架，提供Restful风格接口。
+WeBASE采用微服务架构，基于Spring Boot框架，提供RESTful风格接口。
 
 **零耦合**
 WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
@@ -26,7 +26,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 ![[]](../../images/WeBASE/function.png)
 
 ## 各子系统简介
-- **节点前置服务** [WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front) 集成web3sdk，提供restful风格的接口，客户端可以使用http的形式和节点进行交互，内置内存数据库，采集节点健康度数据。内置web控制台，实现节点的可视化操作。
+- **节点前置服务** [WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front) 集成web3sdk，提供RESTful风格的接口，客户端可以使用http的形式和节点进行交互，内置内存数据库，采集节点健康度数据。内置web控制台，实现节点的可视化操作。
 
 - **节点管理服务** 
 [WeBASE-Node-Manager](https://github.com/WeBankFinTech/WeBASE-Node-Manager) 
