@@ -38,7 +38,7 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 ### WeBASE管理平台搭建
 
-WeBASE管理平台分为三个部分：节点前置，节点管理，WEB管理台。
+WeBASE管理平台分为三个部分：节点前置，节点管理，WeBASE管理台。
 
 当前版本我们提供了两种搭建方式：[**一键搭建**](../WeBASE/install.md)和手动搭建。
 
@@ -56,13 +56,13 @@ WeBASE管理平台分为三个部分：节点前置，节点管理，WEB管理�
 
 节点管理使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点管理安装说明》](../WeBASE-Node-Manager/install.md)。
 
-##### 2.3、WEB管理台搭建
+##### 2.3、WeBASE管理台
 
-WEB管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
+WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
 
 ## 系统初始化配置
 
-服务搭建成功后，可使用网页浏览器访问nginx配置的WEB管理台IP和端口(例如XXX.XXX.XXX.XXX:XXXX)，进入到管理平台页面。管理平台默认用户为admin，默认密码为Abcd1234（第一次登陆成功后会要求重置密码，请按照密码标准设置一个更加安全的密码）。
+服务搭建成功后，可使用网页浏览器访问nginx配置的WeBASE管理台IP和端口(例如XXX.XXX.XXX.XXX:XXXX)，进入到管理平台页面。管理平台默认用户为admin，默认密码为Abcd1234（第一次登陆成功后会要求重置密码，请按照密码标准设置一个更加安全的密码）。
 
 ### 添加节点前置
 
