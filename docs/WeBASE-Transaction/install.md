@@ -5,10 +5,10 @@
 | 环境      | 版本                       |
 | --------- | -------------------------- |
 | Java      | jdk1.8.0_121或以上版本     |
-| 数据库    | mysql-5.6或以上版本        |
-| zookeeper | zookeeper-3.4.10或以上版本 |
+| 数据库    | MySQL-5.6或以上版本        |
+| ZooKeeper | ZooKeeper-3.4.10或以上版本 |
 
-备注：安装说明请参看 [附录-1](./appendix.html#id2)，不使用分布式任务可以不部署zookeeper。
+备注：安装说明请参看 [附录-1](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
 
 ## 2. 拉取代码
 
@@ -27,13 +27,13 @@ cd WeBASE-Transaction
 ## 3. 编译代码
 
 使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id4)</br>
-方式一：如果服务器已安装gradle，且版本为gradle-4.10或以上
+方式一：如果服务器已安装Gradle，且版本为gradle-4.10或以上
 
 ```shell
 gradle build -x test
 ```
 
-方式二：如果服务器未安装gradle，或者版本不是gradle-4.10或以上，使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10或以上，使用gradlew编译
 
 ```shell
 ./gradlew build -x test
