@@ -60,7 +60,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | mybatis.typeAliasesPackage  | com.webank.webase.node.mgr | mapper类扫描路径   |
 | mybatis.mapperLocations  | classpath:mapper/*.xml | mybatis的xml路径   |
 | spring.datasource.driver-class-name | com.mysql.cj.jdbc.Driver | mysql驱动   |
-| spring.datasource.url | jdbc:mysql://127.0.0.1:3306/fisco-bcos-data?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull | mysql连接地址   |
+| spring.datasource.url | jdbc:mysql://127.0.0.1:3306/fisco-bcos-data | mysql连接地址   |
 | spring.datasource.username | defaultAccount |  mysql账号  |
 | spring.datasource.password | defaultPassword |  mysql密码  |
 | logging.config | classpath:log/log4j2.xml | 日志配置文件目录   |
@@ -79,7 +79,6 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | constant.cookieMaxAge | 1800 |  登录cookie有效时长（妙）  |
 | constant.isUseSecurity | true | 是否启用登录鉴权   |
 | constant.jwtSecret | S3g4HtJyg7G6Hg0Ln3g4H5Jyg7H6f9dL |  jwt生成时用到的key，建议更改  |
-| constant.ignoreCheckFront | /account/login,/account/pictureCheckCode,/login,/user/privateKey,/front/new,/front/find |  鉴权时忽略的路径  |
 | constant.frontUrl | http://%1s:%2d/WeBASE-Front/%3s | 前置服务的请求路径  |
 | constant.httpTimeOut | 5000 | http请求超时时间（毫秒）  |
 | constant.contractDeployTimeOut | 30000 | 合约部署超时时间（毫秒）  |
@@ -92,7 +91,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | constant.isMonitorIgnoreUser | false | 审计逻辑是否忽略私钥用户  |
 | constant.isMonitorIgnoreContract | false |  审计逻辑是否忽略合约 |
 | constant.monitorUnusualMaxCount | 20 | 审计异常数据被允许最大值，到达后会停止审计  |
-| constant.cnsAddress | 0x0000000000000000000000000000000000001004,0x0000000000000000000000000000000000000000 | 审计中，如果交易目标用户地址（transTo）在这配置，就被当做是合约部署 |
+
 
 
 
