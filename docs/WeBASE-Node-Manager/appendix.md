@@ -1,6 +1,7 @@
 ## 附录
 
-### 一般问题
+### 1.问题及方案
+#### 一般问题
 * 问：执行shell脚本报下面错误：
 ```
 [app@VM_96_107_centos deployInputParam]$ bash start.sh
@@ -15,7 +16,7 @@ dos2unix *.sh
 ```
 
 
-### 数据库问题
+#### 数据库问题
 * 问：服务访问数据库抛出异常：
 ```
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
@@ -39,7 +40,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser�
 
 
 
-### WeBASE-Node-Manager服务搭建问题
+#### WeBASE-Node-Manager服务搭建问题
 * 问：执行构建命令`gradle build -x test`抛出异常：
 ```
 A problem occurred evaluating root project 'WeBASE-Node-Manager'.
@@ -48,3 +49,58 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 答：
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`
+
+
+### 2.配置文件解析
+
+| 参数 | 默认值    | 描述          |
+|------|-------------|-----------|
+| server.port  | 8080 | 当前服务端口   |
+| server.servlet.context-path  | /WeBASE-Node-Manager | 当前服务访问目录   |
+| mybatis.typeAliasesPackage  | com.webank.webase.node.mgr | mapper类扫描路径   |
+| mybatis.mapperLocations  | classpath:mapper/*.xml | mybatis的xml路径   |
+| spring.datasource.driver-class-name | com.mysql.cj.jdbc.Driver | mysql驱动   |
+| spring.datasource.url | jdbc:mysql://127.0.0.1:3306/fisco-bcos-data?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull | mysql连接地址   |
+| spring.datasource.username | defaultAccount |  mysql账号  |
+| spring.datasource.password | defaultPassword |  mysql密码  |
+| logging.config | classpath:log/log4j2.xml | 日志配置文件目录   |
+| logging.level | com.webank.webase.node.mgr: info |  日志扫描目录和级别  |
+| constant.isDeleteInfo | true | 是否定时删除数据（区块、交易hash、审计数据）；true-是，false-否   |
+| constant.transRetainMax | 10000 |表中交易hash保留的条数（开启constant.isDeleteInfo时有效） |
+| constant.deleteInfoCron | "0 0/1 * * * ?" | 定时删除数据的频率，默认一分钟   |
+| constant.statisticsTransDailyCron | "0 0/1 * * * ?" | 统计交易记录的执行频率，默认一分钟|
+| constant.resetGroupListCycle | 600000 | 刷新群组列表任务执行完后，下一个开始间隔（毫秒）   |
+| constant.groupInvalidGrayscaleValue | 1M |  群组失效灰度期长度，灰度期过后，如果还没查到失效状态的群组，就删除（y:年, M:月, d:天, h:小时, m:分钟, n:永远有效）  |
+| constant.notSupportFrontIp | localhost,127.0.0.1,0.0.0.0 | 不支持的前置ip   |
+| constant.isBlockPullFromZero | false |  是否从0开始同步区块信息  |
+| constant.pullBlockSleepTime | 200 |  拉完一个区块，睡眠时间（毫秒）  |
+| constant.pullBlockTaskFixedDelay | 30000 |  拉区块任务执行完后，间隔多久开始下一次（毫秒）|
+| constant.blockRetainMax | 10000 |  表中区块保留的条数（开启constant.isDeleteInfo时有效）  |
+| constant.cookieMaxAge | 1800 |  登录cookie有效时长（妙）  |
+| constant.isUseSecurity | true | 是否启用登录鉴权   |
+| constant.jwtSecret | S3g4HtJyg7G6Hg0Ln3g4H5Jyg7H6f9dL |  jwt生成时用到的key，建议更改  |
+| constant.ignoreCheckFront | /account/login,/account/pictureCheckCode,/login,/user/privateKey,/front/new,/front/find |  鉴权时忽略的路径  |
+| constant.frontUrl | http://%1s:%2d/WeBASE-Front/%3s | 前置服务的请求路径  |
+| constant.httpTimeOut | 5000 | http请求超时时间（毫秒）  |
+| constant.contractDeployTimeOut | 30000 | 合约部署超时时间（毫秒）  |
+| constant.isPrivateKeyEncrypt | true | 前置私钥接口返回的私钥是否需要加密，true-加密，false-不加密  |
+| constant.maxRequestFail | 3 |  请求前置（frot）被允许失败次数，达到配置值后，将会停止往该路径发送请求  |
+| constant.sleepWhenHttpMaxFail | 60000 | 请求失败次数过多，熔断时间长度（毫秒） |
+| constant.transMonitorTaskFixedRate | 60000  | 交易审计开始执行后，下一个任务开始时间（毫秒）  |
+| constant.analysisSleepTime | 200 | 审计完一条交易hash后，睡眠时间（毫秒）  |
+| constant.monitorInfoRetainMax | 10000 | 表中审计数据保留的条数（开启constant.isDeleteInfo时有效） |
+| constant.isMonitorIgnoreUser | false | 审计逻辑是否忽略私钥用户  |
+| constant.isMonitorIgnoreContract | false |  审计逻辑是否忽略合约 |
+| constant.monitorUnusualMaxCount | 20 | 审计异常数据被允许最大值，到达后会停止审计  |
+| constant.cnsAddress | 0x0000000000000000000000000000000000001004,0x0000000000000000000000000000000000000000 | 审计中，如果交易目标用户地址（transTo）在这配置，就被当做是合约部署 |
+
+
+
+
+
+
+
+
+
+
+
