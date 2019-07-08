@@ -98,7 +98,7 @@ bash stop.sh
 ```shell
 bash serverStatus.sh
 ```
-### 6.3 查看日志
+#### 6.3 查看日志
 进入到日志目录：
 ```shell
 cd dist/logs
