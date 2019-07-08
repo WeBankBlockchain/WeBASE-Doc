@@ -103,5 +103,5 @@ bash serverStatus.sh
 ```shell
 cd dist/logs
 ```
-全量日志：tail -f node-mgr.log
-错误日志：tail -f node-mgr-error.log
+全量日志：tail -f WeBASE-Node-Manager.log
+错误日志：tail -f WeBASE-Node-Manager-error.log
