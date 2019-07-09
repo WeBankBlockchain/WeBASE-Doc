@@ -1,19 +1,21 @@
-# 快速部署
+# 快速搭建
 
-​	一键部署可以快速搭建WeBASE环境。包括节点（FISCO-BCOS）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。用于快速体验WeBASE管理平台。
+​	一键部署可以在同机快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
-​	部署脚本会拉取相关安装包进行部署（需保持网络畅通），重复部署可根据提示进行相关操作。
+​	一键部署会搭建：节点（FISCO-BCOS 2.0）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
+
+![[]](../../images/WeBASE/deploy.png)
 
 ## 前提条件
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | **jdk1.8.0_121** |
-| MySQL | **MySQL-5.6** |
+| Java   | jdk1.8 |
+| MySQL | MySQL-5.6 |
 | Python | 2.7                 |
 | MySQL-python | 1.2.5 |
 
-**备注：** 安装说明请参看 [附录](#id8)
+**备注：** 安装说明请参看[附录](#id8)。
 
 ## 拉取部署脚本
 
@@ -32,75 +34,109 @@ cd webase-deploy
 
 ## 修改配置
 
-① 可以使用以下命令修改，也可以直接修改文件（vi common.properties），没有变化的可以不修改
+① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id9)；
 
-② 数据库需要提前安装（数据库安装请参看 [数据库部署](#id9)）
+② 可以使用以下命令修改，也可以直接修改文件（vi common.properties），没有变化的可以不修改；
 
-③ 服务端口不能小于1024
+③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
+
+- 当配置"yes"时，需配置已有链的路径
+- 当配置"no"时，需配置节点fisco版本和节点安装个数，搭建的新链默认两个群组
+
+​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
+
+④ 服务端口不能小于1024。
 
 ```shell
-数据库ip：sed -i "s%127.0.0.1%${your_db_ip}%g" common.properties
-数据库端口：sed -i "s%3306%${your_db_port}%g" common.properties
-数据库用户名：sed -i "s%dbUsername%${your_db_account}%g" common.properties
-数据库密码：sed -i "s%dbPassword%${your_db_password}%g" common.properties
-数据库名称：sed -i "s%db_mgr%${your_db_name}%g" common.properties
+# 数据库信息
+mysql.ip（数据库ip）：sed -i "s%127.0.0.1%${your_db_ip}%g" common.properties
+mysql.port（数据库端口）：sed -i "s%3306%${your_db_port}%g" common.properties
+mysql.user（数据库用户名）：sed -i "s%dbUsername%${your_db_account}%g" common.properties
+mysql.password（数据库密码）：sed -i "s%dbPassword%${your_db_password}%g" common.properties
+mysql.database（数据库名称）：sed -i "s%db_mgr%${your_db_name}%g" common.properties
 
-管理平台服务端口：sed -i "s%8080%${your_web_port}%g" common.properties
-节点管理子系统服务端口：sed -i "s%8081%${your_mgr_port}%g" common.properties
-节点前置子系统服务端口：sed -i "s%8082%${your_front_port}%g" common.properties
+# 各个服务的端口
+web.port（管理平台服务端口）：sed -i "s%8080%${your_web_port}%g" common.properties
+mgr.port（节点管理子系统服务端口）：sed -i "s%8081%${your_mgr_port}%g" common.properties
+front.port（节点前置子系统服务端口）：sed -i "s%8082%${your_front_port}%g" common.properties
 
-节点fisco版本：sed -i "s%2.0.0-rc2%${your_fisco_version}%g" common.properties
-节点安装个数：sed -i "s%nodeCounts%${your_node_counts}%g" common.properties
-节点p2p端口：sed -i "s%30300%${your_p2p_port}%g" common.properties
-节点channel端口：sed -i "s%20200%${your_channel_port}%g" common.properties
-节点rpc端口：sed -i "s%8545%${your_rpc_port}%g" common.properties
-前置h2数据库名：sed -i "s%/db_front%${your_dist_dir}%g" common.properties
-前置要监控的磁盘路径：sed -i "s%/data%${your_dist_dir}%g" common.properties
+# 节点端口信息
+node.p2pPort（节点p2p端口）：sed -i "s%30300%${your_p2p_port}%g" common.properties
+node.channelPort（节点channel端口）：sed -i "s%20200%${your_channel_port}%g" common.properties
+node.rpcPort（节点rpc端口）：sed -i "s%8545%${your_rpc_port}%g" common.properties
 
-例子（将磁盘路径由/data改为/home）：sed -i "s%/data%/home%g" common.properties
+# 是否使用已有的链（yes/no）
+if.exist.fisco（是否使用已有链）：sed -i "s%yes%${your_existed_fisco}%g" common.properties
+
+# 使用已有链时需配置
+fisco.dir（已有链的路径，start_all.sh脚本所在路径）：sed -i "s%fiscoDir%${your_fisco_dir}%g" common.properties
+
+# 搭建新链时需配置
+fisco.version（节点fisco版本）：sed -i "s%2.0.0-rc3%${your_fisco_version}%g" common.properties
+node.counts（节点安装个数，不修改的话默认两个）：sed -i "s%nodeCounts%${your_node_counts}%g" common.properties
+
+示例（将端口由8080改为8088）：sed -i "s%8080%8088%g" common.properties
 ```
 
 ## 部署
 部署所有服务：
 ```shell
-python deploy.py startAll
+python deploy.py installAll
 ```
 停止所有服务：
 ```shell
 python deploy.py stopAll
 ```
-单独启停命令和说明可查看帮助：
+服务部署后，如果需要单独启停，可以使用以下命令：
 ```shell
-python deploy.py help
+启动节点：python deploy.py startNode
+停止节点：python deploy.py stopNode
+启动web：python deploy.py startWeb
+停止web：python deploy.py stopWeb
+启动mgr：python deploy.py startMgr
+停止mgr：python deploy.py stopMgr
+启动front：python deploy.py startFront
+停止front：python deploy.py stopFront
 ```
 
-**备注：** 部署过程出现问题可以查看 [常见问题](#id10)
+**备注：** 
+
+- 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
+- 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
+- 部署过程出现问题可以查看[常见问题](#id10)
 
 ## 访问
 
-管理平台：
+WeBASE管理平台：
 
 ```
 http://{deployIP}:{webPort}
+示例：http://localhost:8080
 ```
 
-节点前置控制台：
+**备注：** 
 
-```
-http://{deployIP}:{frontPort}/WeBASE-Front
-```
-
-**备注：** 部署服务器IP和相关服务端口需对应修改
+- 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
+- WeBASE管理平台使用说明请查看[使用手册](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
 
 ## 日志路径
 
 ```
-部署日志：log/
-节点日志：nodes/127.0.0.1/node*/log/
-web服务日志：webase-web/log/
-mgr服务日志：webase-node-mgr/logs/
-front服务日志：webase-front/log/
+|-- webase-deploy # 一键部署目录
+|--|-- log # 部署日志目录
+|--|-- webase-web # 管理平台目录
+|--|--|-- log # 管理平台日志目录
+|--|-- webase-node-mgr # 节点管理服务目录
+|--|--|-- log # 节点管理服务日志目录
+|--|-- webase-front # 节点前置服务目录
+|--|--|-- log # 节点前置服务日志目录
+|--|-- nodes # 一件部署搭链节点目录
+|--|--|-- 127.0.0.1
+|--|--|--|-- node0 # 具体节点目录
+|--|--|--|--|-- log # 节点日志目录
 ```
+
+**备注：** 当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志。
 
 ## 附录
 
@@ -108,97 +144,121 @@ front服务日志：webase-front/log/
 
 此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
-（1）从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到相应目录
+#### ① 安装包下载
+
+从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到服务器相关目录
 
 ```shell
 mkdir /software
 tar -zxvf jdkXXX.tar.gz /software/
 ```
 
-（2）配置环境变量
+#### ② 配置环境变量
+
+- 修改/etc/profile
+
+```
+sudo vi /etc/profile
+```
+
+- 在/etc/profile末尾添加以下信息
 
 ```shell
-export JAVA_HOME=/software/jdk1.8.0_121
-export PATH=$JAVA_HOME/bin:$PATH 
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+JAVA_HOME=/nemo/jdk1.8.0_181
+PATH=$PATH:$JAVA_HOME/bin
+CLASSPATH==.:$JAVA_HOME/lib
+export JAVA_HOME CLASSPATH PATH
+```
+
+- 重载/etc/profile
+
+```
+source /etc/profile
+```
+
+#### ③ 查看版本
+
+```
+java -version
 ```
 
 ### 数据库部署
 
-此处以Centos/Fedora为例。
+此处以Centos安装*MariaDB*为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
 
-（1）切换到root
+#### ① 安装MariaDB
 
-```shell
-sudo -s
-```
-
-（2）安装mysql
+- 安装命令
 
 ```shell
-yum install mysql*
-#某些版本的linux，需要安装mariadb，mariadb是mysql的一个分支
-yum install mariadb*
+sudo yum install -y mariadb*
 ```
 
-（3）启动mysql
+- 启停
 
 ```shell
-service mysqld start
-#若安装了mariadb，则使用下面的命令启动
-systemctl start mariadb.service
+启动：sudo systemctl start mariadb.service
+停止：sudo systemctl stop  mariadb.service
 ```
 
-（4）初始化数据库用户
+- 设置开机启动
 
-初次登录
+```
+sudo systemctl enable mariadb.service
+```
+
+- 初始化
 
 ```shell
-mysql -u root
+执行以下命令：
+sudo mysql_secure_installation
+以下根据提示输入：
+Enter current password for root (enter for none):<–初次运行直接回车
+Set root password? [Y/n] <– 是否设置root用户密码，输入y并回车或直接回车
+New password: <– 设置root用户的密码
+Re-enter new password: <– 再输入一次你设置的密码
+Remove anonymous users? [Y/n] <– 是否删除匿名用户，回车
+Disallow root login remotely? [Y/n] <–是否禁止root远程登录，回车
+Remove test database and access to it? [Y/n] <– 是否删除test数据库，回车
+Reload privilege tables now? [Y/n] <– 是否重新加载权限表，回车
 ```
 
-给root设置密码和授权远程访问
+#### ② 授权访问和添加用户
+
+- 使用root用户登录，密码为初始化设置的密码
+
+```
+mysql -uroot -p -h localhost -P 3306
+```
+
+- 授权root用户远程访问
 
 ```sql
-mysql > SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123456');
 mysql > GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+mysql > flush PRIVILEGES;
+```
+
+- 创建test用户并授权本地访问
+
+```sql
+mysql > GRANT ALL PRIVILEGES ON *.* TO 'test'@localhost IDENTIFIED BY '123456' WITH GRANT OPTION;
+mysql > flush PRIVILEGES;
 ```
 
 **安全温馨提示：**
 
-1. 例子中给出的数据库密码（123456）仅为样例，强烈建议设置成复杂密码
-2. 例子中的远程授权设置会使数据库在所有网络上都可以访问，请按具体的网络拓扑和权限控制情况，设置网络和权限帐号
+- 例子中给出的数据库密码（123456）仅为样例，强烈建议设置成复杂密码
+- 例子中root用户的远程授权设置会使数据库在所有网络上都可以访问，请按具体的网络拓扑和权限控制情况，设置网络和权限帐号
 
-授权test用户本地访问数据库
+#### ③ 测试连接和创建数据库
 
-```sql
-mysql > create user 'test'@'localhost' identified by '123456';
-```
-
-（5）测试连接
-
-另开一个ssh测试本地用户test是否可以登录数据库
+- 登录数据库
 
 ```shell
-mysql -utest -p123456 -h 127.0.0.1 -P 3306
+mysql -utest -p123456 -h localhost -P 3306
 ```
 
-登陆成功后，执行以下sql语句，若出现错误，则用户授权不成功
-
-```sql
-mysql > show databases;
-mysql > use test;
-```
-
-（6）创建数据库
-
-登录数据库
-
-```shell
-mysql -utest -p123456 -h 127.0.0.1 -P 3306
-```
-
-创建数据库
+- 创建数据库
 
 ```sql
 mysql > create database db_mgr;
@@ -235,27 +295,16 @@ mysql > create database db_mgr;
 
 ## 常见问题
 
-### 数据库安装后登录报错
-
-腾讯云centos mysql安装完成后，登录报错：Access denied for user 'root'@'localhost'
-
-① 编辑 /etc/my.cnf ，在[mysqld] 部分最后添加一行
+### Python命令出错
 
 ```
-skip-grant-tables
+  File "deploy.py", line 62
+    print helpMsg
+                ^
+SyntaxError: Missing parentheses in call to "print". Did you mean print(helpMsg)?
 ```
 
-② 保存后重启mysql
-
-```shell
-service mysqld restart
-```
-
-③ 输入以下命令，回车后输入密码再回车登录mysql
-
-```
-mysql -uroot -p mysql
-```
+答：检查Python版本
 
 ### 找不到MySQLdb
 
@@ -274,7 +323,7 @@ ImportError: No module named MySQLdb
 Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.112.19|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 22793550 (22M) [application/octet-stream]
-Saving to: ‘WeBASE-Front.zip’
+Saving to: ‘webase-front.zip’
 
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
