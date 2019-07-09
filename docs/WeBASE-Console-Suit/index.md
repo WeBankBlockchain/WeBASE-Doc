@@ -20,7 +20,7 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 ### 部署架构
 
-这套管理工具主要由：节点前置，节点管理，WEB管理台三个WeBASE子系统构成。WeBASE三个服务的部署架构如下图：节点前置需要和区块链节点部署在同一台机器；节点管理和WEB管理台可以同机部署，也可以分开部署。
+这套管理工具主要由：节点前置，节点管理，WeBASE管理平台三个WeBASE子系统构成。WeBASE三个服务的部署架构如下图：节点前置需要和区块链节点部署在同一台机器；节点管理和WeBASE管理平台可以同机部署，也可以分开部署。
 
 ![](../../images/WeBASE-Console-Suit/Framework.png)
 
@@ -56,7 +56,7 @@ WeBASE管理平台分为三个部分：节点前置，节点管理，WeBASE管�
 
 节点管理使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点管理安装说明》](../WeBASE-Node-Manager/install.md)。
 
-##### 2.3、WeBASE管理台
+##### 2.3、WeBASE管理平台
 
 WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
 
