@@ -328,7 +328,7 @@ Saving to: ‘webase-front.zip’
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
 
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://www.fisco.com.cn/cdn/fisco-bcos/releases/download/WeBASE/V1.0.1/webase-web.zip) 、[WeBASE-Node-Manager](https://www.fisco.com.cn/cdn/fisco-bcos/releases/download/WeBASE/V1.0.1/webase-node-mgr.zip) 、[WeBASE-Front](https://www.fisco.com.cn/cdn/fisco-bcos/releases/download/WeBASE/V1.0.1/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://www.fisco.com.cn/cdn/WeBASE/release/download/V1.0.0/webase-web.zip) 、[WeBASE-Node-Manager](https://www.fisco.com.cn/cdn/WeBASE/release/download/V1.0.0/webase-node-mgr.zip) 、[WeBASE-Front](https://www.fisco.com.cn/cdn/WeBASE/release/download/V1.0.0/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
 
 ### 管理平台启动时Nginx报错
 
