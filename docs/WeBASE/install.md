@@ -1,6 +1,6 @@
 # 快速搭建
 
-​	一键部署可以在同机快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
+​	一键部署可以在***同机***快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
@@ -358,3 +358,12 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 ```
 
 答：确认数据库用户名和密码
+
+### 节点sdk目录不存在
+
+```
+...
+======= FISCO-BCOS sdk dir:/data/app/nodes/127.0.0.1/sdk is not exist. please check! =======
+```
+
+答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
