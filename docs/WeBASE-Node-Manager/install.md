@@ -1,6 +1,6 @@
 ## 部署说明
 
-## 1. 前提条件
+### 1.前提条件
 
 | 序号  | 软件                                          |
 |-------|---------------------------------------------------|
@@ -11,16 +11,16 @@
 | 5     | Gradle-4.10或以上版本                            |
 
 
-### 2 注意事项
+### 2.注意事项
 * 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.md)
 * 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略。
 
-### 3 拉取代码
+### 3.拉取代码
 执行命令：
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Node-Manager.git
 ```
-### 4 编译代码
+### 4.编译代码
 进入代码根目录：
 ```shell
 cd WeBASE-Node-Manager
@@ -33,7 +33,7 @@ gradle build -x test
 构建完成后，会在根目录WeBASE-Node-Manager下生成已编译的代码目录dist。
 
 
-### 5 数据库初始化
+### 5.数据库初始化
 #### 5.1 新建数据库
 ```
 #登录MySQL:
@@ -65,7 +65,7 @@ sed -i "s/defaultAccount/root/g" webase.sh
 bash  webase.sh  127.0.0.1 3306
 ```
 
-### 6 节点服务的配置及启动
+### 6.节点服务的配置及启动
 #### 6.1 服务配置修改
 进入到已编译的代码配置文件目录：
 ```shell
@@ -98,10 +98,10 @@ bash stop.sh
 ```shell
 bash serverStatus.sh
 ```
-### 6.3 查看日志
+#### 6.3 查看日志
 进入到日志目录：
 ```shell
 cd dist/logs
 ```
-全量日志：tail -f node-mgr.log
-错误日志：tail -f node-mgr-error.log
+全量日志：tail -f WeBASE-Node-Manager.log
+错误日志：tail -f WeBASE-Node-Manager-error.log
