@@ -72,7 +72,7 @@ if.exist.fisco（是否使用已有链）：sed -i "s%yes%${your_existed_fisco}%
 fisco.dir（已有链的路径，start_all.sh脚本所在路径）：sed -i "s%fiscoDir%${your_fisco_dir}%g" common.properties
 
 # 搭建新链时需配置
-fisco.version（节点fisco版本）：sed -i "s%2.0.0-rc3%${your_fisco_version}%g" common.properties
+fisco.version（节点FISCO-BCOS版本）：sed -i "s%2.0.0%${your_fisco_version}%g" common.properties
 node.counts（节点安装个数，不修改的话默认两个）：sed -i "s%nodeCounts%${your_node_counts}%g" common.properties
 
 示例（将端口由8080改为8088）：sed -i "s%8080%8088%g" common.properties
@@ -89,14 +89,14 @@ python deploy.py stopAll
 ```
 服务部署后，如果需要单独启停，可以使用以下命令：
 ```shell
-启动节点：python deploy.py startNode
-停止节点：python deploy.py stopNode
-启动web：python deploy.py startWeb
-停止web：python deploy.py stopWeb
-启动mgr：python deploy.py startMgr
-停止mgr：python deploy.py stopMgr
-启动front：python deploy.py startFront
-停止front：python deploy.py stopFront
+启动FISCO-BCOS节点:      python deploy.py startNode
+停止FISCO-BCOS节点:      python deploy.py stopNode
+启动WeBASE-Web:          python deploy.py startWeb
+停止WeBASE-Web:          python deploy.py stopWeb
+启动WeBASE-Node-Manager: python deploy.py startManager
+停止WeBASE-Node-Manager: python deploy.py stopManager
+启动WeBASE-Front:        python deploy.py startFront
+停止WeBASE-Front:        python deploy.py stopFront
 ```
 
 **备注：** 
@@ -314,7 +314,7 @@ Traceback (most recent call last):
 ImportError: No module named MySQLdb
 ```
 
-答：MySQL-python安装请参看 [附录](#mysql-python)
+答：需要安装MySQL-python，安装请参看 [附录](#mysql-python)
 
 ### 部署时编译包下载慢
 
@@ -328,7 +328,19 @@ Saving to: ‘webase-front.zip’
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
 
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/V1.0.1/webase-web.zip) 、[WeBASE-Node-Manager](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/V1.0.1/webase-node-mgr.zip) 、[WeBASE-Front](https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/V1.0.1/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://www.fisco.com.cn/cdn/fisco-bcos/releases/download/WeBASE/V1.0.1/webase-web.zip) 、[WeBASE-Node-Manager](https://www.fisco.com.cn/cdn/fisco-bcos/releases/download/WeBASE/V1.0.1/webase-node-mgr.zip) 、[WeBASE-Front](https://www.fisco.com.cn/cdn/fisco-bcos/releases/download/WeBASE/V1.0.1/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+
+### 管理平台启动时Nginx报错
+
+```
+...
+==============      WeBASE-Web      start...  ==============
+Traceback (most recent call last):
+...
+Exception: execute cmd  error ,cmd : sudo /usr/local/nginx/sbin/nginx -c /data/app/webase-deploy/comm/nginx.conf, status is 256 ,output is nginx: [emerg] open() "/etc/nginx/mime.types" failed (2: No such file or directory) in /data/app/webase-deploy/comm/nginx.conf:13
+```
+
+答：检查服务器是否安装了nginx，如果未安装，则通过"which nginx"查询nginx文件路径并删除。
 
 ### 部署时数据库访问报错
 
