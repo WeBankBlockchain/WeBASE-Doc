@@ -1022,7 +1022,7 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/transCnt/0x0000000000000000000000000000000000000000/1
+http://localhost:8081/WeBASE-Front/1/transaction-total
 
 #### 响应参数
 
