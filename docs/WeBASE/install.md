@@ -316,6 +316,18 @@ ImportError: No module named MySQLdb
 
 答：需要安装MySQL-python，安装请参看 [附录](#mysql-python)
 
+### 安装MySQL-python遇到问题
+
+```
+Command "python setup.py egg_info" failed with error code 1
+```
+
+答：运行下面两个命令
+```
+pip install --upgrade setuptools
+python -m pip install --upgrade pip
+```
+
 ### 部署时编译包下载慢
 
 ```
