@@ -1010,7 +1010,7 @@ http://localhost:8081/WeBASE-Front/1/web3/code/0x0000000000000000000000000000000
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/transaction-total**
+**http://localhost:8081/WeBASE-Front/{groupId}/web3/transaction-total**
 
 #### 调用方法
 
@@ -1022,7 +1022,7 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/transaction-total
+http://localhost:8081/WeBASE-Front/1/web3/transaction-total
 
 #### 响应参数
 
