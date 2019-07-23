@@ -1970,7 +1970,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------- |
-| 1        | 用户编号 | user       | Integer        |            | 是       |   用户编号或者用户名    |
+| 1        | 用户地址 | user       | String        |            | 是       |   用户地址    |
 | 2        | 合约名称 | contractName | String         |              | 是       |          |
 | 3        | 合约地址 | contractAddress | String         |              | 是       |          |
 | 4        | 方法名   | funcName     | String         |              | 是       |          |
@@ -1982,7 +1982,7 @@ HTTP POST
 ```
 {
 "useAes ":false,
-"user ":700001,
+"user ":0x3615c3819708b9c113d93a6720a11bfd6be9d39a,
 "contractName":"HelloWorld",
 "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
 "funcName":"set",
@@ -1991,7 +1991,7 @@ HTTP POST
 }
 ```
 示例：curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:8081/WeBASE-Front/trans/handle
+"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x3615c3819708b9c113d93a6720a11bfd6be9d39a", "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:8081/WeBASE-Front/trans/handle
 
 #### 响应参数
 
