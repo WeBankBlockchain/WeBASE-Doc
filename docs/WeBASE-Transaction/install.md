@@ -2,11 +2,11 @@
 
 ## 1. 前提条件
 
-| 环境      | 版本             |
-| --------- | ---------------- |
-| Java      | jdk1.8+          |
-| 数据库    | MySQL-5.6        |
-| ZooKeeper | ZooKeeper-3.4.10 |
+| 环境      | 版本                |
+| --------- | ------------------- |
+| Java      | jdk1.8或以上版本    |
+| 数据库    | MySQL-5.6或以上版本 |
+| ZooKeeper | ZooKeeper-3.4.10    |
 
 备注：安装说明请参看 [附录-1](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
 
@@ -26,7 +26,7 @@ cd WeBASE-Transaction
 
 ## 3. 编译代码
 
-使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id4)</br>
+使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id9)</br>
 方式一：如果服务器已安装Gradle，且版本为gradle-4.10或以上
 
 ```shell
@@ -36,6 +36,7 @@ gradle build -x test
 方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10或以上，使用gradlew编译
 
 ```shell
+chmod +x ./gradlew
 ./gradlew build -x test
 ```
 
@@ -43,16 +44,29 @@ gradle build -x test
 
 ## 4. 修改配置
 
-（1）进入目录：
+（1）进入dist目录
+
+```
+cd dist
+```
+
+dist目录提供了一份配置模板conf_template：
+
+```
+根据配置模板生成一份实际配置conf。初次部署可直接拷贝。
+例如：cp conf_template conf -r
+```
+
+（2）进入conf目录：
 
 ```shell
-cd dist/conf
+cd conf
 ```
 
 **将节点sdk目录下的以下文件复制到当前目录：**
 ca.crt、node.crt、node.key
 
-（2）以下有注释的地方根据实际情况修改：
+（3）修改配置（有注释的地方根据实际情况修改）：
 
 ```shell
 vi application.yml
@@ -117,16 +131,12 @@ job:
 
 ## 5. 服务启停
 
-进入到已编译的代码根目录：
+返回到dist目录执行：
 
 ```shell
-cd dist
-```
-
-```shell
-启动：sh start.sh
-停止：sh stop.sh
-检查：sh status.sh
+启动：bash start.sh
+停止：bash stop.sh
+检查：bash status.sh
 ```
 
 **备注**：如果脚本执行错误，尝试以下命令:
@@ -138,7 +148,7 @@ cd dist
 
 ## 6. 查看日志
 
-在已编译的代码根目录dist查看：
+在dist目录查看：
 
 ```shell
 交易服务日志：tail -f log/transaction.log

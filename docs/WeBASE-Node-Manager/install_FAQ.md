@@ -16,15 +16,6 @@ dos2unix *.sh
 
 
 ### 数据库问题
-* 问：服务访问数据库抛出异常：
-```
-[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'information_schema.PROFILING.SEQ' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
-```
-答：MySQL5.7版本默认开启（only_full_group_by），修改文件/etc/my.cnf,在[mysqlId]这行的后面加上下面的内容：
-```
-sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-```
-
 * 问：执行数据库初始化脚本抛出异常：
 ```
 ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (110)
@@ -34,19 +25,8 @@ ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (110)
 GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
 ```
 
-* 问：服务访问数据库抛出异常：
-```
-[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'information_schema.PROFILING.SEQ' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
-```
-答：mysql5.7版本默认开启（only_full_group_by），修改文件/etc/my.cnf,在[mysqlId]这行的后面加上下面的内容：
-```
-sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-```
 
-
-
-
-### WeBASE-Node-Manager服务搭建问题
+### 服务搭建问题
 * 问：执行构建命令`gradle build -x test`抛出异常：
 ```
 A problem occurred evaluating root project 'WeBASE-Node-Manager'.

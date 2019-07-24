@@ -2,10 +2,10 @@
 
 ## 1. 前提条件
 
-| 环境   | 版本      |
-| ------ | --------- |
-| Java   | jdk1.8+   |
-| 数据库 | MySQL-5.6 |
+| 环境   | 版本                |
+| ------ | ------------------- |
+| Java   | jdk1.8或以上版本    |
+| 数据库 | MySQL-5.6或以上版本 |
 
 备注：安装说明请参看 [附录-1](./appendix.html#id2)。
 
@@ -37,11 +37,20 @@ gradle build -x test
 
 ## 4. 修改配置
 
-（1）进入编译的代码目录：
-```shell
+（1）进入dist目录
+
+```
 cd dist
 ```
-（2）以下有注释的地方根据实际情况修改：
+
+dist目录提供了一份配置模板conf_template：
+
+```
+根据配置模板生成一份实际配置conf。初次部署可直接拷贝。
+例如：cp conf_template conf -r
+```
+
+（2）修改配置（根据实际情况修改）：
 
 ```shell
 vi conf/application.yml
@@ -69,10 +78,13 @@ constant:
 ```
 
 ## 5. 服务启停
+
+在dist目录下执行：
+
 ```shell
-启动：sh start.sh
-停止：sh stop.sh
-检查：sh status.sh
+启动：bash start.sh
+停止：bash stop.sh
+检查：bash status.sh
 ```
 **备注**：如果脚本执行错误，尝试以下命令:
 ```
@@ -81,6 +93,8 @@ constant:
 ```
 
 ## 6. 查看日志
+
+在dist目录下查看：
 
 ```shell
 tail -f log/WeBASE-Sign.log
