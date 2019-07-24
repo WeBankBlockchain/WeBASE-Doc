@@ -82,7 +82,7 @@ HTTP POST
 |----------|--------------|-------------|----------------|--------------|----------|----------------------------------------------------|
 | 1        | 群组编号     | groupId     | int            | 16           | 是       |                                                    |
 | 2        | 部署业务流水号   | uuidDeploy        | String         | 64           | 是       |                                                    |
-| 3        | 签名类型     | signType    | int            | 2            | 是       | 0-本地配置私钥签名，1-本地随机私钥签名，2-云端签名 |
+| 3        | 签名类型     | signType    | int            | 2            | 是       | 0-本地配置私钥签名，1-本地随机私钥签名，2-调用WeBASE-Sign签名 |
 | 4        | 合约Bin      | contractBin | String         |              | 是       |                                                    |
 | 5        | 合约Abi      | contractAbi | List\<Object\> |              | 是       | JSON数组                                           |
 | 6        | 构造方法参数 | funcParam   | List\<Object\> |              | 否       | JSON数组                                           |
@@ -326,7 +326,7 @@ HTTP POST
 | 1        | 群组编号   | groupId         | int            | 16           | 是       |                                                    |
 | 2        | 交易业务流水号 | uuidStateless            | String         | 64           | 是       |                                                    |
 | 3        | 部署业务流水号   | uuidDeploy        | String         | 64           | 否       |                                                    |
-| 4        | 签名类型   | signType        | int            | 2            | 是       | 0-本地配置私钥签名，1-本地随机私钥签名，2-云端签名 |
+| 4        | 签名类型   | signType        | int            | 2            | 是       | 0-本地配置私钥签名，1-本地随机私钥签名，2-调用WeBASE-Sign签名 |
 | 5        | 合约地址   | contractAddress | String         |              | 否       |                                                    |
 | 6        | 合约Abi    | contractAbi     | List\<Object\> |              | 否       | JSON数组                                           |
 | 7        | 调用方法名 | funcName        | String         |              | 是       |                                                    |
