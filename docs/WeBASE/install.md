@@ -10,7 +10,7 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | jdk1.8 |
+| Java   | jdk1.8+ |
 | MySQL | MySQL-5.6 |
 | Python | 2.7                 |
 | MySQL-python | 1.2.5 |
@@ -49,20 +49,26 @@ cd webase-deploy
 
 ```shell
 # 数据库信息
-mysql.ip（数据库ip）：sed -i "s%127.0.0.1%${your_db_ip}%g" common.properties
+mysql.ip（数据库ip）：sed -i "s%localhost%${your_db_ip}%g" common.properties
 mysql.port（数据库端口）：sed -i "s%3306%${your_db_port}%g" common.properties
 mysql.user（数据库用户名）：sed -i "s%dbUsername%${your_db_account}%g" common.properties
 mysql.password（数据库密码）：sed -i "s%dbPassword%${your_db_password}%g" common.properties
-mysql.database（数据库名称）：sed -i "s%db_mgr%${your_db_name}%g" common.properties
+mysql.database（数据库名称）：sed -i "s%webasenodemanager%${your_db_name}%g" common.properties
 
-# 各个服务的端口
-web.port（管理平台服务端口）：sed -i "s%8080%${your_web_port}%g" common.properties
-mgr.port（节点管理子系统服务端口）：sed -i "s%8081%${your_mgr_port}%g" common.properties
-front.port（节点前置子系统服务端口）：sed -i "s%8082%${your_front_port}%g" common.properties
+# WeBASE管理平台服务端口
+web.port（管理平台服务端口）：sed -i "s%5000%${your_web_port}%g" common.properties
+# 节点管理子系统服务端口
+mgr.port（节点管理子系统服务端口）：sed -i "s%5001%${your_mgr_port}%g" common.properties
+# 节点前置子系统端口
+front.port（节点前置子系统服务端口）：sed -i "s%5002%${your_front_port}%g" common.properties
 
-# 节点端口信息
+# 节点监听Ip
+node.listenIp（节点监听Ip）：sed -i "s%127.0.0.1%${your_listen_ip}%g" common.properties
+# 节点p2p端口
 node.p2pPort（节点p2p端口）：sed -i "s%30300%${your_p2p_port}%g" common.properties
+# 节点链上链下端口
 node.channelPort（节点channel端口）：sed -i "s%20200%${your_channel_port}%g" common.properties
+# 节点rpc端口
 node.rpcPort（节点rpc端口）：sed -i "s%8545%${your_rpc_port}%g" common.properties
 
 # 是否使用已有的链（yes/no）
@@ -75,7 +81,7 @@ fisco.dir（已有链的路径，start_all.sh脚本所在路径）：sed -i "s%f
 fisco.version（节点FISCO-BCOS版本）：sed -i "s%2.0.0%${your_fisco_version}%g" common.properties
 node.counts（节点安装个数，不修改的话默认两个）：sed -i "s%nodeCounts%${your_node_counts}%g" common.properties
 
-示例（将端口由8080改为8088）：sed -i "s%8080%8088%g" common.properties
+示例（将端口由5000改为5008）：sed -i "s%5000%5008%g" common.properties
 ```
 
 ## 部署
@@ -111,7 +117,7 @@ WeBASE管理平台：
 
 ```
 http://{deployIP}:{webPort}
-示例：http://localhost:8080
+示例：http://localhost:5000
 ```
 
 **备注：** 
@@ -261,7 +267,7 @@ mysql -utest -p123456 -h localhost -P 3306
 - 创建数据库
 
 ```sql
-mysql > create database db_mgr;
+mysql > create database webasenodemanager;
 ```
 
 ### Python部署

@@ -2,13 +2,13 @@
 
 ### 1.前提条件
 
-| 序号  | 软件                                          |
-|-------|---------------------------------------------------|
-| 1     | FISCO-BCOS 2.0                                    |
-| 2     | WeBASE-Front 版本                  |
-| 3     | MySQL5.5或5.6版本【更高版本需要更改MySQL配置，可参考install_FAQ.md 】    |
-| 4     | Java1.8.0_181                       |
-| 5     | Gradle-4.10或以上版本                            |
+| 序号 | 软件                                                         |
+| ---- | ------------------------------------------------------------ |
+| 1    | FISCO-BCOS 2.0                                               |
+| 2    | WeBASE-Front 版本                                            |
+| 3    | MySQL5.5或5.6版本【更高版本需要更改MySQL配置，可参考install_FAQ.md 】 |
+| 4    | Java1.8或以上版本                                            |
+| 5    | Gradle-4.10或以上版本                                        |
 
 
 ### 2.注意事项
@@ -73,10 +73,10 @@ cd dist/conf
 ```
 修改服务配置：
 ```shell
-修改当前服务（WeBASE-Node-Manager）端口：sed -i "s/8080/${your_server_port}/g" application.yml
+修改当前服务（WeBASE-Node-Manager）端口：sed -i "s/5001/${your_server_port}/g" application.yml
 修改数据库IP：sed -i "s/127.0.0.1/${your_db_ip}/g" application.yml
 修改数据库端口：sed -i "s/3306/${your_db_port}/g" application.yml
-修改数据库名称：sed -i "s/fisco-bcos-data/${your_db_name}/g" application.yml
+修改数据库名称：sed -i "s/webasenodemanager/${your_db_name}/g" application.yml
 修改数据库用户名：sed -i "s/defaultAccount/${your_db_account}/g" application.yml
 修改数据库密码：sed -i "s/defaultPassword/${your_db_password}/g" application.yml
 ```
@@ -101,7 +101,7 @@ bash serverStatus.sh
 #### 6.3 查看日志
 进入到日志目录：
 ```shell
-cd dist/logs
+cd dist/log
 ```
 全量日志：tail -f WeBASE-Node-Manager.log
 错误日志：tail -f WeBASE-Node-Manager-error.log

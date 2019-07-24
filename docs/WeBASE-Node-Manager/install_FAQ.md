@@ -1,4 +1,4 @@
-#常见问题解答
+## 常见问题解答
 
 ### 一般问题
 * 问：执行shell脚本报下面错误：
@@ -62,9 +62,10 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 symbol lookup error: /lib64/libfontconfig.so.1: undefined symbol: FT_Get_Advances
 ```
 答：
-1、尽量选择【[sunJDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)】,而不是openJDK(有些服务器受有影响)
+1、尽量选择【[sunJDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)】，而不是openJDK（有些服务器受有影响）
 2、检查jdk的位数是否跟当前系统支持的一致。
 3、安装gcc和gcc-c++
+
 ```
 yum -y install gcc
 yum -y install gcc-c++
@@ -80,8 +81,9 @@ yum install libgcc.i686 --setopt=protected_multilib=false
 ```
 
 * 问：集群环境下，成功的登录，但登录状态无效：
-答：
-更改nginx服务配置文件，加上ip_hash,如：
+
+答：更改nginx服务配置文件，加上ip_hash,如：
+
 ```
  upstream /mgr { 
                 server localhost:80; 
