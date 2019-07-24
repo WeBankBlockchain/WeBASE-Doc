@@ -10,8 +10,8 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | jdk1.8+ |
-| MySQL | MySQL-5.6 |
+| Java   | jdk1.8或以上版本 |
+| MySQL | MySQL-5.6或以上版本 |
 | Python | 2.7                 |
 | MySQL-python | 1.2.5 |
 
