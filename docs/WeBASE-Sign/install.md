@@ -1,6 +1,16 @@
-## 部署说明
+# 部署说明
 
-### 1.1 拉取代码
+## 1. 前提条件
+
+| 环境   | 版本      |
+| ------ | --------- |
+| Java   | jdk1.8+   |
+| 数据库 | MySQL-5.6 |
+
+备注：安装说明请参看 [附录-1](./appendix.html#id2)。
+
+## 2. 拉取代码
+
 执行命令：
 ```
 git clone https://github.com/WeBankFinTech/WeBASE-Sign.git
@@ -12,7 +22,7 @@ git clone https://github.com/WeBankFinTech/WeBASE-Sign.git
 cd WeBASE-Sign
 ```
 
-### 1.2 编译代码
+## 3. 编译代码
 
 方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
 
@@ -25,7 +35,7 @@ gradle build -x test
 ```
 构建完成后，会在根目录WeBASE-Sign下生成已编译的代码目录dist。
 
-### 1.3 修改配置
+## 4. 修改配置
 
 （1）进入编译的代码目录：
 ```shell
@@ -40,13 +50,13 @@ vi conf/application.yml
 ```
 server: 
   # 本工程服务端口，端口被占用则修改
-  port: 8085
+  port: 5004
   context-path: /WeBASE-Sign
 
 spring: 
   datasource: 
     # 数据库连接信息
-    url: jdbc:mysql://127.0.0.1:3306/testdb?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/webasesign?useUnicode=true&characterEncoding=utf8
     # 数据库用户名
     username: dbUsername
     # 数据库密码
@@ -58,7 +68,7 @@ constant:
   aesKey: EfdsW23D23d3df43
 ```
 
-### 1.4 服务启停
+## 5. 服务启停
 ```shell
 启动：sh start.sh
 停止：sh stop.sh
@@ -70,7 +80,7 @@ constant:
 转格式：dos2unix *.sh
 ```
 
-### 1.5 查看日志
+## 6. 查看日志
 
 ```shell
 tail -f log/WeBASE-Sign.log

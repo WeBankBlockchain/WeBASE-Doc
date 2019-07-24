@@ -123,7 +123,7 @@ mysql -utest -p123456 -h localhost -P 3306
 - 创建数据库
 
 ```sql
-mysql > create database db_transaction;
+mysql > create database webasetransaction;
 ```
 
 ### 1.3. Zookeeper部署
@@ -148,7 +148,7 @@ ZooKeeper的安装包括单机模式安装，以及集群模式安装。具体�
 
 ### 2.1 脚本没权限
 
-执行shell脚本报错误permission denied。
+执行shell脚本报错误"permission denied"
 
 答：使用 “chmod +x 文件” 给文件增加权限
 
