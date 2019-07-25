@@ -153,7 +153,9 @@ HTTP GET
 
 **2）数据格式**
 
+```
 http://127.0.0.1:5003/WeBASE-Transaction/contract/address/1/10001
+```
 
 #### 响应参数
 
@@ -208,7 +210,9 @@ HTTP GET
 
 **2）数据格式**
 
+```
 http://127.0.0.1:5003/WeBASE-Transaction/contract/event/1/10001
+```
 
 #### 响应参数
 
@@ -466,7 +470,9 @@ HTTP GET
 
 **2）数据格式**
 
+```
 http://127.0.0.1:5003/WeBASE-Transaction/trans/event/1/20001
+```
 
 #### 响应参数
 
@@ -528,7 +534,9 @@ HTTP GET
 
 **2）数据格式**
 
+```
 http://127.0.0.1:5003/WeBASE-Transaction/trans/output/1/20001
+```
 
 #### 响应参数
 
