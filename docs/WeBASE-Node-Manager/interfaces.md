@@ -1846,7 +1846,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 6.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}`
+* 请求地址：
+```
+performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}
+```
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1867,7 +1870,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55`
+```
+http://127.0.0.1:8080/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55
+```
 
 
 
@@ -2194,7 +2199,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d97f8d41638a7b1b669b70b307bab6d49df8e2c&interfaceName=0x4ed3885e`
+```
+http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d97f8d41638a7b1b669b70b307bab6d49df8e2c&interfaceName=0x4ed3885e
+```
 
 
 
