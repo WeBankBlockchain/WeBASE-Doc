@@ -22,7 +22,9 @@ HTTP GET
 
 **2）数据格式**
 
+```
 http://localhost:5004/WeBASE-Sign/user/newUser
+```
 
 ### 响应参数
 
@@ -88,7 +90,9 @@ HTTP GET
 
 **2）数据格式**
 
+```
 http://localhost:5004/WeBASE-Sign/user/100001/userInfo
+```
 
 ### 响应参数
 
