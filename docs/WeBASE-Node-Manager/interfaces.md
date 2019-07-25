@@ -8,7 +8,7 @@
 
 #### 1.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/front/new`
+* 请求地址： **/front/new**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -26,7 +26,7 @@
 
 ***2）入参示例***
 
-`http://127.0.0.1:5001/WeBASE-Node-Manager/front/new`
+**http://127.0.0.1:5001/WeBASE-Node-Manager/front/new**
 
 ```
 {
@@ -85,7 +85,7 @@
 
 #### 1.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/front/find?frontId={frontId}&groupId={groupId}`
+* 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -101,7 +101,7 @@
 
 ***2）入参示例***
 
-`http://127.0.0.1:5001/WeBASE-Node-Manager/front/find`
+**http://127.0.0.1:5001/WeBASE-Node-Manager/front/find**
 
 
 #### 1.2.3 返回参数 
@@ -156,7 +156,7 @@
 
 #### 1.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/front/{frontId}`
+* 请求地址：**/front/{frontId}**
 * 请求方式：DELETE
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -172,7 +172,7 @@
 
 ***2）入参示例***
 
-`http://127.0.0.1:5001/WeBASE-Node-Manager/front/{frontId}`
+**http://127.0.0.1:5001/WeBASE-Node-Manager/front/{frontId}**
 
 
 #### 1.3.3 返回参数 
@@ -213,7 +213,7 @@
 #### 2.1.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/transaction/transList/{groupId}/{pageNumber}/{pageSize}?transactionHash={transactionHash}&blockNumber={blockNumber}`
+* 请求地址：**/transaction/transList/{groupId}/{pageNumber}/{pageSize}?transactionHash={transactionHash}&blockNumber={blockNumber}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -232,9 +232,7 @@
 
 ***2）入参示例***
 
-```
-http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?transactionHash=0x303daa78ebe9e6f5a6d9761a8eab4bf5a0ed0b06c28764488e4716de42e1df01
-```
+**http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?transactionHash=0x303daa78ebe9e6f5a6d9761a8eab4bf5a0ed0b06c28764488e4716de42e1df01**
 
 
 #### 2.1.3 返回参数 
@@ -290,7 +288,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 #### 2.2.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/transaction/transactionReceipt/{groupId}/{transHash}`
+* 请求地址：**/transaction/transactionReceipt/{groupId}/{transHash}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1495,25 +1493,26 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId      | Int            | 否     | 所属群组编号               |
-| 2    | user       | Integer        | 否     | 私钥用户               |
+| 2    | user       | String  | 否     | 用户地址             |
 | 3    | contractName | String         | 否     | 合约名称                   |
-| 4    | contractId      | String         | 否     | 合约名称               |
+| 4    | contractId      | Int      | 否     | 合约编号               |
 | 5    | funcName     | String         | 否     | 合约方法名                 |
-| 6    | contractAddress     | String         | 是     | 合约地址（传合约名和版本时可为空）   |
+| 6    | contractAddress     | String         | 是     | 合约地址   |
 | 7   | funcParam    | List | 是     | 合约方法入参               |
 
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction`
+
 ```
 {
-    "groupId": "300001",
-    "contractBin": "6060604052600f8dee08980029",
-    "bytecodeBin": null,
-    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"trans\",\"outputs\":[],\"payable\":false,\"type\":\"function\"}]",
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjfQ==",
-    "userId": 700001,
-    "contractId": 200033
+    "groupId":"1",
+    "user":"0x6accbdb86107b70decceee618ce40e20e15c8ad4",
+    "contractName":"HelloWorld",
+    "funcName":"set",
+    "funcParam":["gwes"],
+    "contractId":200002,
+    "contractAddress":"0x7bd586b045e3684dbcd5506cb175c5d771f38d13"
 }
 ```
 
