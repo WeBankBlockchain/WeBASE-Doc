@@ -152,8 +152,6 @@
 ```
 
 
-
-
 ### 1.3 删除前置信息
 
 #### 1.3.1 传输协议规范
@@ -207,14 +205,10 @@
 }
 ```
 
-
-
 ## 2 交易信息模块
 
 
 ### 2.1 查询交易信息列表
-
-
 
 #### 2.1.1 传输协议规范
 
@@ -291,11 +285,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 }
 ```
 
-
-
 ### 2.2 查询交易回执 
-
-
 
 #### 2.2.1 传输协议规范
 
@@ -382,13 +372,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda8
 }
 ```
 
-
-
-
-
 ### 2.3 根据交易hash查询交易信息 
-
-
 
 #### 2.3.1 传输协议规范
 
@@ -488,8 +472,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 3 帐号管理模块
 
 
@@ -576,10 +558,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 3.2 修改帐号
 
 
@@ -662,8 +640,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 3.3 删除帐号
 
 
@@ -716,8 +692,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
-
-
 
 ###  3.4 查询帐号列表
 
@@ -810,8 +784,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 3.5 更新当前密码 
 
 
@@ -830,8 +802,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | oldAccountPwd | String | 否     | 旧密码（sha256）           |
 | 2    | newAccountPwd | String | 否     | 新密码（sha256）           |
-
-
 
 ***2）入参示例***
 
@@ -893,8 +863,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/account/pictureCheckCode`
 
-
-
 #### 3.6.3 返回参数 
 
 ***1）出参表***
@@ -930,10 +898,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 3.7 登录接口
 
 
@@ -954,8 +918,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 2    | account          | String    | 否     | 帐号   |
 | 3    | accountPwd          | String    | 否     | 密码   |
 | 4    | token          | String    | 否     | 随验证码返回的token   |
-
-
 
 ***2）入参示例***
 
@@ -999,10 +961,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 4 区块管理模块
 
 
@@ -1032,8 +990,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockList/300001/1/10?pkHash=`
-
-
 
 #### 4.1.3 返回参数 
 
@@ -1088,8 +1044,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 4.2 根据块高或hash查询区块信息
 
 
@@ -1110,8 +1064,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3     | pageNumber     | Int           | 否     | 当前页码                   |
 | 4     | pkHash         | String        | 是     | 区块hash                   |
 | 5     | blockNumber    | BigInteger    | 是     | 块高                       |
-
-
 
 ***2）入参示例***
 
@@ -1233,8 +1185,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 5 合约管理模块  
 
 
@@ -1265,8 +1215,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList`
 
-
-
 #### 5.1.3 返回参数 
 
 ***1）出参表***
@@ -1293,10 +1241,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 5.1.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
 | 5.1.14 | description     | String        | 是     | 备注                                            |
 | 5.1.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 5.1.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        
-
-
+| 5.1.16 | modifyTime | LocalDateTime | 是 | 修改时间 |
 ***2）出参示例***
+
 * 成功：
 ```
 {
@@ -1335,10 +1282,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 5.2 查询合约信息
 
 
@@ -1361,8 +1304,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001`
-
-
 
 #### 5.2.3 返回参数 
 
@@ -1426,10 +1367,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 5.3 部署合约
 
 
@@ -1475,8 +1412,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "constructorParams": ["a"]
 }
 ```
-
-
 
 #### 5.3.3 返回参数 
 
@@ -1542,8 +1477,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 5.4 发送交易
 
 
@@ -1568,8 +1501,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 5    | funcName     | String         | 否     | 合约方法名                 |
 | 6    | contractAddress     | String         | 是     | 合约地址（传合约名和版本时可为空）   |
 | 7   | funcParam    | List | 是     | 合约方法入参               |
-
-
 
 ***2）入参示例***
 
@@ -1618,10 +1549,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 5.5 根据包含bytecodeBin的字符串查询合约  
 
 
@@ -1639,8 +1566,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId         | int           | 否     | 所属群组编号                                        |
 | 2    | partOfBytecodeBin      | String           | 否     | 包含合约bytecodeBin的的字符串         |
-
-
 
 ***2）入参示例***
 
@@ -1713,10 +1638,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 6 服务器监控相关
 
 
@@ -1746,8 +1667,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22`
-
-
 
 #### 6.1.3 返回参数 
 
@@ -1833,14 +1752,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
-
-
-
-
 ### 6.2 获取服务器监控信息 
 
 
@@ -1868,8 +1779,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55`
-
-
 
 #### 6.2.3 返回参数 
 
@@ -1955,10 +1864,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 7 审计相关模块
 
 
@@ -1984,8 +1889,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/userList/300001`
-
-
 
 #### 7.1.3 返回参数 
 
@@ -2062,10 +1965,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 7.2 获取合约方法监管信息列表
 
 
@@ -2083,8 +1982,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 |------|-------------|---------------|--------|-------------------------------|
 | 1      | groupId        | int           | 否     | 所属群组编号                                  |
 | 2      | userName         | String        | 是     | 用户名                                        |
-
-
 
 ***2）入参示例***
 
@@ -2167,8 +2064,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 7.3 获取交易hash监管信息列表
 
 
@@ -2190,13 +2085,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4       | endDate       | String         |        | 结束时间                   |
 | 5       | interfaceName | String         |        | 接口名称                   |
 
-
-
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d97f8d41638a7b1b669b70b307bab6d49df8e2c&interfaceName=0x4ed3885e`
-
-
 
 #### 7.3.3 返回参数 
 
@@ -2247,10 +2138,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 7.4 获取异常用户信息列表
 
 
@@ -2272,13 +2159,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3     | pageNumber | int           | 否     | 当前页码                   |
 | 4     | pageSize   | int           | 否     | 页面大小                   |
 
-
-
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualUserList/300001/1/10?userName=`
-
-
 
 #### 7.4.3 返回参数 
 
@@ -2325,8 +2208,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 7.5 获取异常合约信息列表
 
 #### 7.5.1 传输协议规范
@@ -2346,13 +2227,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3     | pageNumber      | int           | 否     | 当前页码                   |
 | 4     | pageSize        | int           | 否     | 页面大小                   |
 
-
-
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/10?contractAddress=`
-
-
 
 #### 7.5.3 返回参数 
 
@@ -2370,8 +2247,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.3 | transCount      | int           | 是     | 交易数                     |
 | 4.1.4 | hashs           | String        | 是     | 交易hash                   |
 | 4.1.5 | time            | LocalDateTime | 是     | 时间                       |
-
-
 
 ***2）出参示例***
 * 成功：
@@ -2400,10 +2275,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
-
-
-
-
 
 
 ## 8 群组信息模块
@@ -2472,10 +2343,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
-
-
-
-
 
 
 ### 8.2 获取所有群组列表
@@ -2548,10 +2415,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 8.3 查询每日交易数据
 
 
@@ -2568,8 +2431,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId    | int    | 否     | 群组id                     |
-
-
 
 ***2）入参示例***
 
@@ -2622,10 +2483,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ## 9 节点管理模块
 
 
@@ -2649,8 +2506,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 2      | pageSize    | Int           | 否     | 每页记录数                                 |
 | 3      | pageNumber  | Int           | 否     | 当前页码                                   |
 | 4      | nodeName    | String        | 是     | 节点名称                                   |
-
-
 
 ***2）入参示例***
 
@@ -2680,9 +2535,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 4.1.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
 
-
-
 ***2）出参示例***
+
 * 成功：
 ```
 {
@@ -2717,10 +2571,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 9.2 查询节点信息
 
 
@@ -2738,13 +2588,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | int           | 否     | 群组id                                     |
 
-
-
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
-
-
 
 #### 9.2.3 返回参数 
 
@@ -2767,9 +2613,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 3.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
 
-
-
 ***2）出参示例***
+
 * 成功：
 ```
 {
@@ -2801,8 +2646,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 10 角色管理模块
 
 
@@ -2826,14 +2669,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3     | pageSize    | int           | 否     | 每页记录数                 |
 | 4     | pageNumber  | int           | 否     | 当前页码                   |
 
-
-
-
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=`
-
-
 
 #### 10.1.3 返回参数 
 
@@ -2895,8 +2733,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 11 用户管理模块 
 
 
@@ -2919,8 +2755,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 1    | userName    | string        | 否     | 用户名称                           |
 | 2    | description | string        | 是     | 备注                               |
 | 3    | groupId     | Int           | 否     | 所属群组                           |
-
-
 
 ***2）入参示例***
 
@@ -2986,8 +2820,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
-
-
 
 
 ### 11.2 绑定公钥用户
@@ -3098,8 +2930,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 1    | userId      | int           | 否     | 用户编号                           |
 | 2    | description | String        | 是     | 备注                               |
 
-
-
 ***2）入参示例***
 
 `http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo`
@@ -3164,8 +2994,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
 ### 11.4 查询私钥
 
 
@@ -3223,10 +3051,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
-
-
-
-
 
 ### 11.5 查询用户列表
 
@@ -3311,10 +3135,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 12 合约方法管理模块 
 
 
@@ -3391,10 +3211,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 12.2 根据方法编号查询
 
 
@@ -3436,9 +3252,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.4  | createTime  | LocalDateTime | 否     | 创建时间                           |
 | 3.5 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
 
-
-
 ***2）出参示例***
+
 * 成功：
 ```
 {
@@ -3463,4 +3278,3 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "data": {}
 }
 ```
-
