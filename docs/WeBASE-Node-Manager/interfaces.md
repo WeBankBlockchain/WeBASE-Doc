@@ -219,7 +219,10 @@
 #### 2.1.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/transaction/transList/{groupId}/{pageNumber}/{pageSize}?transactionHash={transactionHash}&blockNumber={blockNumber}`
+* 请求地址：
+```
+/transaction/transList/{groupId}/{pageNumber}/{pageSize}?transactionHash={transactionHash}&blockNumber={blockNumber}
+```
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1725,7 +1728,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 6.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/chain/mointorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}`
+* 请求地址：
+```
+/chain/mointorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}
+```
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1745,7 +1751,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22`
+```
+http://127.0.0.1:8080/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22
+```
 
 
 
@@ -2838,7 +2846,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=`
+```
+http://127.0.0.1:8080/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=
+```
 
 
 
