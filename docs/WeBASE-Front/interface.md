@@ -1,15 +1,15 @@
-# 接口文档
+# 接口说明
 
 ## 1. 合约接口
 ### 1.1. 发送abi接口
 
 #### 接口描述
 
-根据abi内容判断合约是否已部署，未部署则生成对应abi文件
+> 根据abi内容判断合约是否已部署，未部署则生成对应abi文件
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/contract/abiInfo**
+**http://localhost:5002/WeBASE-Front/contract/abiInfo**
 
 #### 调用方法
 
@@ -31,18 +31,18 @@ HTTP POST
 **2）数据格式**
 ```
 {
-"groupId": 1,
-"contractName": "HelloWorld",
-"address": "0x31b26e43651e9371c88af3d36c14cfd938baf4fd",
-"contractBin": "608060405234801561001057600080fd5b5060405161031d38038061031d8339810180",
-"abiInfo": [
-{"inputs": [{"type": "string", "name": "n"}], "constant": false, "name": "set",
-"outputs": [], "payable": false, "type": "function"},
-{"inputs": [], "constant": true, "name": "get", "outputs": [{"type": "string",
-"name": ""}], "payable": false, "type": "function"},
-{"inputs": [], "constant": false, "name": "HelloWorld", "outputs": [],
-"payable": false, "type": "function"}
-]
+    "groupId": 1,
+    "contractName": "HelloWorld",
+    "address": "0x31b26e43651e9371c88af3d36c14cfd938baf4fd",
+    "contractBin": "608060405234801561001057600080fd5b5060405161031d38038061031d8339810180",
+    "abiInfo": [
+        {"inputs": [{"type": "string", "name": "n"}], "constant": false, "name": "set",
+        "outputs": [], "payable": false, "type": "function"},
+        {"inputs": [], "constant": true, "name": "get", "outputs": [{"type": "string",
+        "name": ""}], "payable": false, "type": "function"},
+        {"inputs": [], "constant": false, "name": "HelloWorld", "outputs": [],
+        "payable": false, "type": "function"}
+    ]
 }
 ```
 #### 响应参数
@@ -53,14 +53,13 @@ HTTP POST
 
 ### 1.2. 合约部署接口
 
-
 #### 接口描述
 
-将合约部署到当前节点
+> 将合约部署到当前节点
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/contract/deploy**
+**http://localhost:5002/WeBASE-Front/contract/deploy**
 
 #### 调用方法
 
@@ -70,45 +69,101 @@ HTTP POST
 
 **1）参数表**
 
-| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
-| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
-| 1        | 所属群组     | groupId       | int            |            | 是       |          |
-| 2        | 用户编号     | user         | String          |            | 是       | 用户编号或者用户地址 |
-| 3        | 合约名称     | contractName | String         |              | 是       |          |
-| 4        | 合约abi      | abiInfo      | List |              | 是       |          |
-| 5        | 合约bin      | bytecodeBin  | String         |              | 是       |          |
-| 6        | 构造函数参数 | funcParam    | List|              | 否       |          |
-
+| **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
+| -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
+| 1        | 所属群组     | groupId      | int      |              | 是       |                      |
+| 2        | 用户编号     | user         | String   |              | 是       | 用户编号或者用户地址 |
+| 3        | 合约名称     | contractName | String   |              | 是       |                      |
+| 4        | 合约abi      | abiInfo      | List     |              | 是       |                      |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |                      |
+| 6        | 构造函数参数 | funcParam    | List     |              | 否       |                      |
 
 **2）数据格式**
 
 ```
 {
-"user":700001,
-"contractName":"HelloWorld",
-"abiInfo": [],
-"bytecodeBin":"",
-"funcParam":[]
+    "user":"700001",
+    "contractName":"HelloWorld",
+    "abiInfo": [],
+    "bytecodeBin":"",
+    "funcParam":[]
 }
 ```
+
 #### 响应参数
 
 **1）数据格式**
+
 ```
 {
-"0x60aac015d5d41adc74217419ea77815ecb9a2192"
+    "0x60aac015d5d41adc74217419ea77815ecb9a2192"
 }
 ```
-### 1.3. cns接口 
+
+### 1.3. 合约部署接口（结合WeBASE-Sign）
+
+#### 接口描述
+
+> 将合约部署到当前节点。此接口需结合WeBASE-Sign使用，通过调用WeBASE-Sign服务的签名接口让相关用户对数据进行签名，拿回签名数据再发送上链。需要调用此接口时，工程配置文件application.yml中的配置"keyServer"需配置WeBASE-Sign服务的ip和端口，并保证WeBASE-Sign服务正常和存在相关用户。
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/deployWithSign**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**  | **类型** | **最大长度** | **必填** | **说明**                  |
+| -------- | ------------ | ----------- | -------- | ------------ | -------- | ------------------------- |
+| 1        | 所属群组     | groupId     | int      |              | 是       |                           |
+| 2        | 签名用户编号 | signUserId  | String   |              | 是       | WeBASE-Sign服务的用户编号 |
+| 3        | 合约bin      | contractBin | String   |              | 是       |                           |
+| 4        | 合约abi      | contractAbi | List     |              | 是       |                           |
+| 5        | 构造函数参数 | funcParam   | List     |              | 否       |                           |
+
+**2）数据格式**
+
+```
+{
+    "groupId":1,
+    "signUserId":100001,
+    "contractBin":"xxx",
+    "contractAbi": [],
+    "funcParam":[]
+}
+```
+
+示例：
+
+```
+curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractBin\": \"608060405234801561001057600080fd5b506040805190810160405280600681526020017f68656c6c6f2100000000000000000000000000000000000000000000000000008152506000908051906020019061005c92919061011c565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d899600060405180806020018281038252838181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101095780601f106100de57610100808354040283529160200191610109565b820191906000526020600020905b8154815290600101906020018083116100ec57829003601f168201915b50509250505060405180910390a16101c1565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061015d57805160ff191683800117855561018b565b8280016001018555821561018b579182015b8281111561018a57825182559160200191906001019061016f565b5b509050610198919061019c565b5090565b6101be91905b808211156101ba5760008160009055506001016101a2565b5090565b90565b610391806101d06000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634ed3885e146100515780636d4ce63c146100ba575b600080fd5b34801561005d57600080fd5b506100b8600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061014a565b005b3480156100c657600080fd5b506100cf61021e565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561010f5780820151818401526020810190506100f4565b50505050905090810190601f16801561013c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b80600090805190602001906101609291906102c0565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d8996000604051808060200182810382528381815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561020d5780601f106101e25761010080835404028352916020019161020d565b820191906000526020600020905b8154815290600101906020018083116101f057829003601f168201915b50509250505060405180910390a150565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102b65780601f1061028b576101008083540402835291602001916102b6565b820191906000526020600020905b81548152906001019060200180831161029957829003601f168201915b5050505050905090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061030157805160ff191683800117855561032f565b8280016001018555821561032f579182015b8281111561032e578251825591602001919060010190610313565b5b50905061033c9190610340565b5090565b61036291905b8082111561035e576000816000905550600101610346565b5090565b905600a165627a7a723058201be6d6e6936e66c64b93771f9bd7ee708553fb6faf82e0273336fac2b1c6d83d0029\", \"funcParam\": [ ], \"groupId\": 1, \"signUserId\": 100001}"
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+    "0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266"
+}
+```
+
+### 1.4. cns接口 
 
 
 #### 接口描述
 
-根据合约名及版本号查询合约地址
+> 根据合约名及版本号查询合约地址
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/contract/cns?groupId={groupId}&name={name}&version={version}**
+**http://localhost:5002/WeBASE-Front/contract/cns?groupId={groupId}&name={name}&version={version}**
 
 #### 调用方法
 
@@ -124,28 +179,30 @@ HTTP POST
 | 2        | 合约名称     | name       | String         |              | 是       |          |
 | 3        | 合约版本     | version      | String |              | 是       |          |
 
-
 **2）数据格式**
-http://localhost:8081/WeBASE-Front/contract/cns?groupId=1&name=HelloWorld&version=2
 
-### 响应参数
+```
+http://localhost:5002/WeBASE-Front/contract/cns?groupId=1&name=HelloWorld&version=2
+```
+
+#### 响应参
 
 **1）数据格式**
 ```
 {
-"0x31b26e43651e9371c88af3d36c14cfd938baf4fd"
+    "0x31b26e43651e9371c88af3d36c14cfd938baf4fd"
 }
 ```
-### 1.4. java转译接口
+### 1.5. java转译接口
 
 
 #### 接口描述
 
-将合约abi转成java文件
+> 将合约abi转成java文件
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/contract/compile-java**
+**http://localhost:5002/WeBASE-Front/contract/compile-java**
 
 #### 调用方法
 
@@ -162,33 +219,31 @@ HTTP POST
 | 3        | 合约bin      | bytecodeBin  | String         |              | 是       |          |
 | 4        | 所在目录      | packageName  | String         |              | 是       | 生成java所在的包名 |
 
-1. **数据格式**
+**2）数据格式**
 
+```
 {
     "contractName": "HeHe",
     "abiInfo": [],
     "contractBin": "60806040526004361061004c576000357c0100000000000000000000029",
     "packageName": "com.webank"
 }
+```
 
-### 响应参数
+#### 响应参数
 
-**1）参数表** 
-
+**1）数据格式**
 java文件
 
-**2）数据格式**
-无
-
-### 1.5. 保存合约接口
+### 1.6. 保存合约接口
 
 #### 接口描述
 
-支持前置的控制台保存合约信息
+> 支持前置的控制台保存合约信息
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/contract/save**
+**http://localhost:5002/WeBASE-Front/contract/save**
 
 #### 调用方法
 
@@ -264,15 +319,15 @@ HTTP POST
 }
 ```
 
-### 1.6. 删除合约接口
+### 1.7. 删除合约接口
 
 #### 接口描述
 
-支持前置的控制台通过群组编号和合约编号删除未部署的合约信息
+> 支持前置的控制台通过群组编号和合约编号删除未部署的合约信息
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/contract/{groupId}/{contractId}**
+**http://localhost:5002/WeBASE-Front/contract/{groupId}/{contractId}**
 
 #### 调用方法
 
@@ -288,7 +343,10 @@ HTTP DELETE
 | 2        | 合约编号     | contractId    | int          |            | 是       |  |
 
 **2）数据格式**
-http://localhost:8081/WeBASE-Front/contract/1/1
+
+```
+http://localhost:5002/WeBASE-Front/contract/1/1
+```
 
 #### 响应参数
 **1）参数表**
@@ -302,22 +360,22 @@ http://localhost:8081/WeBASE-Front/contract/1/1
 **2）数据格式**
 ```
 {
-"code": 0,
-"message": "success",
-"data": null
+    "code": 0,
+    "message": "success",
+    "data": null
 }
 ```
 
 
-### 1.7. 分页查询合约列表
+### 1.8. 分页查询合约列表
 
 #### 接口描述
 
-支持前置的控制台分页查询合约列表
+> 支持前置的控制台分页查询合约列表
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/contract/contractList**
+**http://localhost:5002/WeBASE-Front/contract/contractList**
 
 #### 调用方法
 
@@ -406,11 +464,11 @@ HTTP POST
 
 #### 接口描述
 
-通过调用此接口获取公私钥对和对应账户信息
+> 通过调用此接口获取公私钥对和对应账户信息
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/privateKey?useAes={useAes}&userName={userName}**
+**http://localhost:5002/WeBASE-Front/privateKey?useAes={useAes}&userName={userName}**
 
 #### 调用方法
 
@@ -426,16 +484,19 @@ HTTP GET
 | 2        | 用户名 | userName | String        |             | 是        |   |
 
 **2）数据格式** 
- 
- `http://localhost:8081/WeBASE-Front/privateKey?useAes=false&userName=test`
-### 响应参数
+
+```
+http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=test
+```
+
+#### 响应参数
 
 **1）数据格式**
 ```
 {
-"publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
-"privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
-"address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
+    "publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
+    "privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
+    "address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
 }
 ```
 
@@ -443,11 +504,11 @@ HTTP GET
 
 #### 接口描述
 
-导入私钥信息，并返回对应的公钥及用户地址
+> 导入私钥信息，并返回对应的公钥及用户地址
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/privateKey/import?privateKey={privateKey}&useAes={useAes}**
+**http://localhost:5002/WeBASE-Front/privateKey/import?privateKey={privateKey}&useAes={useAes}**
 
 #### 调用方法
 
@@ -460,22 +521,23 @@ HTTP GET
 | **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
 | 1        | 私钥信息 | privateKey | String      |             | 是        |                      |
-| 2        | 是否是加密私钥 | useAes | boolean      |             | 否        |      默认true       |
+| 2        | 是否为加密私钥 | useAes | boolean      |             | 否        |      默认true       |
 
 **2）数据格式** 
 
-`http://localhost:8081/WeBASE-Front/privateKey/import?privateKey=`
+```
+http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=false
+```
 
-`008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=false`
-
-### 响应参数
+#### 响应参数
 
 **1）数据格式**
+
 ```
 {
-"publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
-"privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
-"address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
+    "publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
+    "privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
+    "address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
 }
 ```
 
@@ -486,11 +548,11 @@ HTTP GET
 
 #### 接口描述
 
-获取节点最新块高
+> 获取节点最新块高
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/blockNumber**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/blockNumber**
 
 #### 调用方法
 
@@ -504,15 +566,17 @@ HTTP GET
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 
-
 **2）数据格式**
-http://localhost:8081/WeBASE-Front/1/web3/blockNumber
 
-### 响应参数
+```
+http://localhost:5002/WeBASE-Front/1/web3/blockNumbe
+```
+
+#### 响应参数
 **1）数据格式**
 ```
 {
-8346
+	8346
 }
 ```
 
@@ -522,11 +586,11 @@ http://localhost:8081/WeBASE-Front/1/web3/blockNumber
 
 #### 接口描述
 
-通过块高获取块信息
+> 通过块高获取块信息
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/1/web3/blockByNumber/{blockNumber}**
+**http://localhost:5002/WeBASE-Front/1/web3/blockByNumber/{blockNumber}**
 
 #### 调用方法
 
@@ -538,13 +602,14 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
-| 1        | 块高     | blockNumber | BigInteger |              | 是       |          |
-
-
+| 1        | 群组编号 | groupId     | int        |              | 是       |          |
+| 2        | 块高     | blockNumber | BigInteger |              | 是       |          |
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/blockByNumber/100
+```
+http://localhost:5002/WeBASE-Front/1/web3/blockByNumber/100
+```
 
 #### 响应参数
 
@@ -618,13 +683,13 @@ http://localhost:8081/WeBASE-Front/1/web3/blockByNumber/100
 
 #### 接口描述
 
-通过块hash获取块信息
+> 通过块hash获取块信息
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/blockByHash/{blockHash}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/blockByHash/{blockHash}**
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
@@ -640,7 +705,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:8081/WeBASE-Front/1/web3/blockByHash/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade
+http://localhost:5002/WeBASE-Front/1/web3/blockByHash/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade
 ```
 
 #### 响应参数
@@ -720,7 +785,7 @@ http://localhost:8081/WeBASE-Front/1/web3/blockByHash/0xf27ff42d4be65329a1e7b113
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/blockTransCnt/{blockNumber}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/blockTransCnt/{blockNumber}**
 
 #### 调用方法
 
@@ -732,34 +797,33 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
-| 1         | 块高      | blockNumber  | BigInteger   |                 | 是       |          |
-
-
+| 1 | 群组编号 | groupId | int | | 是 | |
+| 2 | 块高 | blockNumber | BigInteger | | 是 | |
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/blockTransCnt/100
+```
+http://localhost:5002/WeBASE-Front/1/web3/blockTransCnt/100
+```
 
 #### 响应参数
 
 **1）数据格式**
 ```
 {
- 1
+    1
 }
 ```
-}
-
 ### 3.5. 获取PbftView接口  
 
 
 #### 接口描述
 
-通过调用此接口获取PbftView
+> 通过调用此接口获取PbftView
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/pbftView**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/pbftView**
 
 #### 调用方法
 
@@ -776,13 +840,16 @@ HTTP GET
 
 **2）数据格式**
 
-`http://localhost:8081/WeBASE-Front/1/web3/pbftView`
+```
+http://localhost:5002/WeBASE-Front/1/web3/pbftView
+```
+
 #### 响应参数
 
 **1）数据格式**
 ```
 {
- 160565
+    160565
 }
 ```
 
@@ -795,7 +862,7 @@ HTTP GET
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/transactionReceipt/{transHash}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transactionReceipt/{transHash}**
 
 #### 调用方法
 
@@ -814,12 +881,13 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:8081/WeBASE-Front/1/web3/transactionReceipt/0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b
+http://localhost:5002/WeBASE-Front/1/web3/transactionReceipt/0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b
 ```
 
 #### 响应参数
 
 **2）数据格式**
+
 ```
 {
     "transactionHash": "0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b",
@@ -868,7 +936,7 @@ http://localhost:8081/WeBASE-Front/1/web3/transactionReceipt/0xb2c733b742045e61c
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/transaction/{transHash}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transaction/{transHash}**
 
 #### 调用方法
 
@@ -886,7 +954,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:8081/WeBASE-Front/1/web3/transaction/0xa6750b812b1a7e36313879b09f0c41fc583b463c15e57608416f3a32688b432b
+http://localhost:5002/WeBASE-Front/1/web3/transaction/0xa6750b812b1a7e36313879b09f0c41fc583b463c15e57608416f3a32688b432b
 ```
 
 #### 响应参数
@@ -930,7 +998,7 @@ http://localhost:8081/WeBASE-Front/1/web3/transaction/0xa6750b812b1a7e36313879b0
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/clientVersion**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/clientVersion**
 
 #### 调用方法
 
@@ -942,13 +1010,19 @@ HTTP GET
 
 无入参
 
-1. **数据格式**
-http://localhost:8081/WeBASE-Front/1/web3/clientVersion
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/1/web3/clientVersion
+```
 
 #### 响应参数
 
 **1）参数表**
-无
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组编号 | groupId    | int      |              | 是       |          |
 
 **2）数据格式**
 ```
@@ -971,7 +1045,7 @@ http://localhost:8081/WeBASE-Front/1/web3/clientVersion
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/code/{address}/{blockNumber}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/code/{address}/{blockNumber}**
 
 #### 调用方法
 
@@ -983,22 +1057,23 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**  | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ----------- | ---------- | ------------ | -------- | -------- |
-| 1        | 合约地址 | address     | String     |              | 是       |          |
-| 2        | 块高     | blockNumber | BigInteger |              | 是       |          |
-
-1. **数据格式**
-
-http://localhost:8081/WeBASE-Front/1/web3/code/0x0000000000000000000000000000000000000000/1
-
-#### 响应参数
-
-
+| 1        | 群组编号 | groupId     | int        |              | 是       |          |
+| 2        | 合约地址 | address     | String     |              | 是       |          |
+| 3        | 块高     | blockNumber | BigInteger |              | 是       |          |
 
 **2）数据格式**
 
 ```
+http://localhost:5002/WeBASE-Front/1/web3/code/0x0000000000000000000000000000000000000000/1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
 {
-0x
+    0xxxx
 }
 ```
 ### 3.10. 获取总交易数  
@@ -1010,7 +1085,7 @@ http://localhost:8081/WeBASE-Front/1/web3/code/0x0000000000000000000000000000000
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/transaction-total**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transaction-total**
 
 #### 调用方法
 
@@ -1020,9 +1095,15 @@ HTTP GET
 
 **1）参数表**
 
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组编号 | groupId    | int      |              | 是       |          |
+
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/transaction-total
+```
+http://localhost:5002/WeBASE-Front/1/web3/transaction-total
+```
 
 #### 响应参数
 
@@ -1038,10 +1119,10 @@ http://localhost:8081/WeBASE-Front/1/web3/transaction-total
 **2）数据格式**
 ```
 {
- "txSum": 125,
-  "blockNumber": 125,
-  "blockNumberRaw": "0x7d",
-  "txSumRaw": "0x7d"
+	"txSum": 125,
+	"blockNumber": 125,
+	"blockNumberRaw": "0x7d",
+	"txSumRaw": "0x7d"
 }
 ```
 
@@ -1054,7 +1135,7 @@ http://localhost:8081/WeBASE-Front/1/web3/transaction-total
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/transByBlockHashAndIndex/{blockHash}/{transactionIndex}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transByBlockHashAndIndex/{blockHash}/{transactionIndex}**
 
 #### 调用方法
 
@@ -1066,21 +1147,20 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 块hash   | blockHash        | String     |              | 是       |          |
-| 2        | 交易位置 | transactionIndex | BigInteger |              | 是       |          |
-
-
+| 1        | 群组编号 | groupId          | int        |              | 是       |          |
+| 2        | 块hash   | blockHash        | String     |              | 是       |          |
+| 3        | 交易位置 | transactionIndex | BigInteger |              | 是       |          |
 
 **2）数据格式**
 
 ```
-http://localhost:8081/WeBASE-Front/1/web3/transByBlockHashAndIndex/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade/0
+http://localhost:5002/WeBASE-Front/1/web3/transByBlockHashAndIndex/0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade/0
 ```
 
 #### 响应参数
 
+**1）数据格式**
 
-**2）数据格式**
 ```
 {
     "hash": "0x7c503f202a5e275d8792dd2419ac48418dbec602038fb2a85c899403471f065d",
@@ -1118,7 +1198,7 @@ http://localhost:8081/WeBASE-Front/1/web3/transByBlockHashAndIndex/0xf27ff42d4be
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/transByBlockNumberAndIndex/{blockNumber}/{transactionIndex}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transByBlockNumberAndIndex/{blockNumber}/{transactionIndex}**
 
 #### 调用方法
 
@@ -1136,7 +1216,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/transByBlockNumberAndIndex/100/0
+```
+http://localhost:5002/WeBASE-Front/1/web3/transByBlockNumberAndIndex/100/0
+```
 
 #### 响应参数
 
@@ -1178,7 +1260,7 @@ http://localhost:8081/WeBASE-Front/1/web3/transByBlockNumberAndIndex/100/0
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/consensusStatus**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/consensusStatus**
 
 #### 调用方法
 
@@ -1192,10 +1274,11 @@ HTTP GET
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 
-
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/consensusStatus
+```
+http://localhost:5002/WeBASE-Front/1/web3/consensusStatus
+```
 
 #### 响应参数
 **1）数据格式**
@@ -1282,7 +1365,7 @@ http://localhost:8081/WeBASE-Front/1/web3/consensusStatus
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/nodeHeartBeat**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/nodeHeartBeat**
 
 #### 调用方法
 
@@ -1292,30 +1375,47 @@ HTTP GET
 
 **1）参数表**
 
-| **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 节点Id | nodeId | String      |             | 是        |                      |
-| 2        | 节点块高 | blockNumber | bigInteger      |             | 是        |                      |
-| 3        | 节点pbftView | pbftView | bigInteger      |             | 是        |                      |
-| 4        | 节点状态 | status | int     |     | 是    |   1正常，2异常     |
-| 5        | 上次状态修改时间 | latestStatusUpdateTime | String   |   | 是   | 跟上次状态变更时间间隔至少大于三秒才会重新检测节点状态 |
-
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组编号 | groupId    | int      |              | 是       |          |
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/getNodeStatusList
+```
+http://localhost:5002/WeBASE-Front/1/web3/getNodeStatusList
+```
 
 #### 响应参数
 
-**1）数据格式**
+**1）参数表**
+
+| **序号** | **中文**         | **参数名**             | **类型**   | **最大长度** | **必填** | **说明**                                               |
+| -------- | ---------------- | ---------------------- | ---------- | ------------ | -------- | ------------------------------------------------------ |
+| 1        | 节点Id           | nodeId                 | String     |              | 是       |                                                        |
+| 2        | 节点块高         | blockNumber            | bigInteger |              | 是       |                                                        |
+| 3        | 节点pbftView     | pbftView               | bigInteger |              | 是       |                                                        |
+| 4        | 节点状态         | status                 | int        |              | 是       | 1正常，2异常                                           |
+| 5        | 上次状态修改时间 | latestStatusUpdateTime | String     |              | 是       | 跟上次状态变更时间间隔至少大于三秒才会重新检测节点状态 |
+
+**2）数据格式**
+
 ```
-{
-
-"blockNumber": 1,
-
-"pbftView": 1232
-
-}
+[
+  {
+    "nodeId": "2917803543bcb58ad91cdf67e7b576a5b0440b4f76e6f5440edb8b09dadee297174d25133e841a17e4f89aa59bbaf4c80896af9d6a978aae04b3d0b9cd9d5b84",
+    "blockNumber": 3,
+    "pbftView": 146093,
+    "status": 1,
+    "latestStatusUpdateTime": "2019-07-25 10:07:07"
+  },
+  {
+    "nodeId": "8722cc018a79bc48b7408649fac4a45bd336a88959570ebba15eefb48fdc23b8a96f328d46852f3d12c4dde7346c573585386fadb5568ce1820144c106af1f72",
+    "blockNumber": 3,
+    "pbftView": 146095,
+    "status": 1,
+    "latestStatusUpdateTime": "2019-07-25 10:07:07"
+  }
+]
 ```
 
 ### 3.15. 获取群组列表接口  
@@ -1326,7 +1426,7 @@ http://localhost:8081/WeBASE-Front/1/web3/getNodeStatusList
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/groupList**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/groupList**
 
 #### 调用方法
 
@@ -1336,13 +1436,15 @@ HTTP GET
 
 **1）参数表**
 
-| **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组编号 | groupId    | int      |              | 是       |          |
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/groupList
+```
+http://localhost:5002/WeBASE-Front/1/web3/groupList
+```
 
 #### 响应参数
 
@@ -1362,7 +1464,7 @@ http://localhost:8081/WeBASE-Front/1/web3/groupList
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/groupPeers**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/groupPeers**
 
 #### 调用方法
 
@@ -1379,7 +1481,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/groupPeers
+```
+http://localhost:5002/WeBASE-Front/1/web3/groupPeers
+```
 
 #### 响应参数
 
@@ -1403,7 +1507,7 @@ http://localhost:8081/WeBASE-Front/1/web3/groupPeers
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/observerList**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/observerList**
 
 #### 调用方法
 
@@ -1420,29 +1524,26 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/observerList
+```
+http://localhost:5002/WeBASE-Front/1/web3/observerList
+```
 
 #### 响应参数
 
 **1）数据格式**
 ```
-[
-    "d822165959a0ed217df6541f1a7dd38b79336ff571dd5f8f85ad76f3e7ec097e1eabd8b03e4a757fd5a9fb0eea905aded56aaf44df83c34b73acb9ab7a165010"
+[  "d822165959a0ed217df6541f1a7dd38b79336ff571dd5f8f85ad76f3e7ec097e1eabd8b03e4a757fd5a9fb0eea905aded56aaf44df83c34b73acb9ab7a165010"
 ]
 ```
 
-
-
 ### 3.18. 获取群组最新的pbftview视图
-[top](#目录)
-
 #### 接口描述
 
 > 返回指定群组内的pbftview
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/pbftView**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/pbftView**
 
 #### 调用方法
 
@@ -1459,7 +1560,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/pbftView
+```
+http://localhost:5002/WeBASE-Front/1/web3/pbftView
+```
 
 #### 响应参数
 
@@ -1477,7 +1580,7 @@ http://localhost:8081/WeBASE-Front/1/web3/pbftView
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/peers**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/peers**
 
 #### 调用方法
 
@@ -1494,7 +1597,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/peers
+```
+http://localhost:5002/WeBASE-Front/1/web3/peers
+```
 
 #### 响应参数
 
@@ -1534,8 +1639,6 @@ http://localhost:8081/WeBASE-Front/1/web3/peers
 ]
 ```
 
-
-
 ### 3.20. 获取群组内正在处理的交易数
 
 #### 接口描述
@@ -1544,7 +1647,7 @@ http://localhost:8081/WeBASE-Front/1/web3/peers
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/pending-transactions-count**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/pending-transactions-count**
 
 #### 调用方法
 
@@ -1561,7 +1664,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/pending-transactions-count
+```
+http://localhost:5002/WeBASE-Front/1/web3/pending-transactions-count
+```
 
 #### 响应参数
 
@@ -1579,7 +1684,7 @@ http://localhost:8081/WeBASE-Front/1/web3/pending-transactions-count
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/sealerList**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/sealerList**
 
 #### 调用方法
 
@@ -1596,7 +1701,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/sealerList
+```
+http://localhost:5002/WeBASE-Front/1/web3/sealerList
+```
 
 #### 响应参数
 
@@ -1619,7 +1726,7 @@ http://localhost:8081/WeBASE-Front/1/web3/sealerList
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/search?input={inputValue}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/search?input={inputValue}**
 
 #### 调用方法
 
@@ -1637,9 +1744,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/search?input=1
-
-
+```
+http://localhost:5002/WeBASE-Front/1/web3/search?input=1
+```
 
 #### 响应参数
 
@@ -1713,7 +1820,7 @@ http://localhost:8081/WeBASE-Front/1/web3/search?input=1
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/syncStatus**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/syncStatus**
 
 #### 调用方法
 
@@ -1730,7 +1837,9 @@ HTTP GET
 
 **2）数据格式**
 
-http://localhost:8081/WeBASE-Front/1/web3/syncStatus
+```
+http://localhost:5002/WeBASE-Front/1/web3/syncStatus
+```
 
 #### 响应参数
 
@@ -1775,7 +1884,7 @@ http://localhost:8081/WeBASE-Front/1/web3/syncStatus
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/transaction/{transHash}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transaction/{transHash}**
 
 #### 调用方法
 
@@ -1790,12 +1899,10 @@ HTTP GET
 | 1        | 群组编号 | groupId | int      |             | 是        |                      |
 | 2        | 交易hash | transHash | String      |             | 是        |                      |
 
-
-
 **2）数据格式**
 
 ```
-http://localhost:8081/WeBASE-Front/1/web3/transaction/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
+http://localhost:5002/WeBASE-Front/1/web3/transaction/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
 ```
 
 #### 响应参数
@@ -1838,7 +1945,7 @@ http://localhost:8081/WeBASE-Front/1/web3/transaction/0x4145b921309fcaa92b05b782
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/{groupId}/web3/transactionReceipt/{transHash}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transactionReceipt/{transHash}**
 
 #### 调用方法
 
@@ -1856,7 +1963,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:8081/WeBASE-Front/1/web3/transactionReceipt/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
+http://localhost:5002/WeBASE-Front/1/web3/transactionReceipt/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
 ```
 
 #### 响应参数
@@ -1886,8 +1993,6 @@ http://localhost:8081/WeBASE-Front/1/web3/transactionReceipt/0x4145b921309fcaa92
 }
 ```
 
-
-
 ## 4. 性能检测接口
 
 ### 4.1. 获取机器配置信息  
@@ -1898,7 +2003,7 @@ http://localhost:8081/WeBASE-Front/1/web3/transactionReceipt/0x4145b921309fcaa92
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/performance/config**
+**http://localhost:5002/WeBASE-Front/performance/config**
 
 #### 调用方法
 
@@ -1921,7 +2026,7 @@ HTTP GET
 
 #### 接口URL
 
-**http://localhost:8081/WeBASE-Front/performance**
+**http://localhost:5002/WeBASE-Front/performance**
 
 #### 调用方法
 
@@ -1943,7 +2048,7 @@ HTTP GET
 **1）参数表**
 ``` 
 {
-  [{"metricType":"cpu","data":{"lineDataList":{"timestampList":[],"valueList":[]},"contrastDataList":{"timestampList":[],"valueList":[]}}},{"metricType":"memory","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"disk","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"txbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"rxbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}}]}
+[{"metricType":"cpu","data":{"lineDataList":{"timestampList":[],"valueList":[]},"contrastDataList":{"timestampList":[],"valueList":[]}}},{"metricType":"memory","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"disk","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"txbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"rxbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}}]}
 }
 ```
 
@@ -1957,8 +2062,7 @@ HTTP GET
 
 #### 接口URL
 
-
-**http://localhost:8081/WeBASE-Front/trans/handle**
+**http://localhost:5002/WeBASE-Front/trans/handle**
 
 #### 调用方法
 
@@ -1968,59 +2072,165 @@ HTTP POST
 
 **1）参数表**
 
-| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------- |
-| 1        | 用户地址 | user       | String        |            | 是       |   用户地址    |
-| 2        | 合约名称 | contractName | String         |              | 是       |          |
-| 3        | 合约地址 | contractAddress | String         |              | 是       |          |
-| 4        | 方法名   | funcName     | String         |              | 是       |          |
-| 5        | 方法参数 | funcParam    | List|   |        |JSONArray，对应合约方法参数，多个参数以“,”分隔|
-| 6        | 群组ID | groupId    | int |              |          |    |
-| 7        | 是否是加密私钥 | useAes | boolean      |             | 否        |             |
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 用户编号       | user            | String   |              | 是       | 用户编号或者用户地址                           |
+| 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
+| 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
+| 4        | 方法名         | funcName        | String   |              | 是       |                                                |
+| 5        | 方法参数       | funcParam       | List     |              |          | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
+| 6        | 群组ID         | groupId         | int      |              |          |                                                |
+| 7        | 是否是加密私钥 | useAes          | boolean  |              | 否       |                                                |
 
 **2）数据格式**
+
 ```
 {
-"useAes ":false,
-"user ":0x3615c3819708b9c113d93a6720a11bfd6be9d39a,
-"contractName":"HelloWorld",
-"contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
-"funcName":"set",
-"funcParam":["Hi,Welcome!"],
-"groupId" :"1"
+    "useAes ":false,
+    "user":"700001",
+    "contractName":"HelloWorld",
+    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
+    "funcName":"set",
+    "funcParam":["Hi,Welcome!"],
+    "groupId" :"1"
 }
 ```
-示例：curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x3615c3819708b9c113d93a6720a11bfd6be9d39a", "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:8081/WeBASE-Front/trans/handle
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
+"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+```
 
 #### 响应参数
 
-1. **数据格式**
-
 a、正确查询交易返回值信息
+
 ```
 {"Hi,Welcome!"}
 ```
-b、正确发送数据上链返回值信息(交易收据)
+
+b、正确发送数据上链返回值信息（交易收据）
+
 ```
 {
-"code": 0,
-"message": "success",
-"data": {
-"blockHash":
-"0x1d8d8275aa116d65893291c140849be272dac1d4ca0a0a722f44404b2f2356c3",
-"gasUsed": 32798,
-"transactionIndexRaw": "0",
-"blockNumberRaw": "33",
-"blockNumber": 33,
-"contractAddress": "0x0000000000000000000000000000000000000000",
-"cumulativeGasUsed": 32798,
-"transactionIndex": 0,
-"gasUsedRaw": "0x801e",
-"logs": [],
-"cumulativeGasUsedRaw": "0x801e",
-"transactionHash":"0x0653a8e959771955330461456dd094a96d9071bfa31e6f43b68b30f10a85689c"
+    "code": 0,
+    "message": "success",
+    "data": {
+        "blockHash":
+        "0x1d8d8275aa116d65893291c140849be272dac1d4ca0a0a722f44404b2f2356c3",
+        "gasUsed": 32798,
+        "transactionIndexRaw": "0",
+        "blockNumberRaw": "33",
+        "blockNumber": 33,
+        "contractAddress": "0x0000000000000000000000000000000000000000",
+        "cumulativeGasUsed": 32798,
+        "transactionIndex": 0,
+        "gasUsedRaw": "0x801e",
+        "logs": [],
+        "cumulativeGasUsedRaw": "0x801e",
+        "transactionHash":"0x0653a8e959771955330461456dd094a96d9071bfa31e6f43b68b30f10a85689c"
+    }
 }
+```
+
+### 5.2. 交易处理接口（结合WeBASE-Sign）
+
+#### 接口描述
+
+​	通过此接口对合约进行调用，前置根据调用的合约方法是否是“constant”方法区分返回信息，“constant”方法为查询，返回要查询的信息。非“constant”方法为发送数据上链，返回块hash、块高、交易hash等信息。
+
+​	当合约方法为非“constant”方法，要发送数据上链时，此接口需结合WeBASE-Sign使用。通过调用WeBASE-Sign服务的签名接口让相关用户对数据进行签名，拿回签名数据再发送上链。需要调用此接口时，工程配置文件application.yml中的配置"keyServer"需配置WeBASE-Sign服务的ip和端口，并保证WeBASE-Sign服务正常和存在相关用户。
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/trans/handleWithSign**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号                                       |
+| 2        | 用户编号 | signUserId      | int      |              | 否       | 签名用户编号（查询方法可不传）                 |
+| 3        | 合约abi  | contractAbi     | List     |              | 是       |                                                |
+| 4        | 合约地址 | contractAddress | String   |              | 是       |                                                |
+| 5        | 方法名   | funcName        | String   |              | 是       |                                                |
+| 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
+
+**2）数据格式**
+
+```
+{
+    "groupId" :1,
+    "signUserId":100001,
+    "contractAbi":[],
+    "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
+    "funcName":"set",
+    "funcParam":["test"]
+}
+```
+
+示例：
+
+```
+curl -X POST "http://localhost:5002/WeBASE-Front/trans/handleWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractAddress\": \"0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266\", \"funcName\": \"set\", \"funcParam\": [ \"test\" ], \"groupId\": 1, \"signUserId\": 100001}"
+```
+
+#### 响应参数
+
+a、正确查询交易返回值信息
+
+```
+{"Hi,Welcome!"}
+```
+
+b、正确发送数据上链返回值信息（交易收据）
+
+```
+{
+  "transactionHash": "0x0b426a58af8ba449742b937f1e9b2b225335638707b93d6b296dfd8107edddd7",
+  "transactionIndex": 0,
+  "blockHash": "0xc8eb7a983ecb8c2a0a64450a059d2cf3de8c8d786211dcec48ab9c47219ee8f7",
+  "blockNumber": 36985,
+  "gasUsed": 35400,
+  "contractAddress": "0x0000000000000000000000000000000000000000",
+  "root": null,
+  "status": "0x0",
+  "from": "0xb173ca9a2e07efe6007aee751a013849d53e7c29",
+  "to": "0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266",
+  "input": "0x4ed3885e000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000047465737400000000000000000000000000000000000000000000000000000000",
+  "output": "0x",
+  "logs": [
+    {
+      "removed": false,
+      "logIndex": null,
+      "transactionIndex": null,
+      "transactionHash": null,
+      "blockHash": null,
+      "blockNumber": null,
+      "address": "0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266",
+      "data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000047465737400000000000000000000000000000000000000000000000000000000",
+      "type": null,
+      "topics": [
+        "0x9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d899"
+      ],
+      "logIndexRaw": null,
+      "blockNumberRaw": null,
+      "transactionIndexRaw": null
+    }
+  ],
+  "logsBloom": "0x00000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000800000000020000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000",
+  "gasUsedRaw": "0x8a48",
+  "statusOK": true,
+  "blockNumberRaw": "0x9079",
+  "transactionIndexRaw": "0x0"
 }
 ```
 
@@ -2030,30 +2240,43 @@ b、正确发送数据上链返回值信息(交易收据)
 
 ------
 
-| code   | message                                      | 描述                 |
-| ------ | -------------------------------------------- | -------------------- |
-| 0      | success                                      | 成功                 |
-| 101001 | system error                                 | 系统异常             |
-| 101002 | param valid fail                             | 参数校验异常         |
-| 201001 | uuid cannot be empty                         | 业务流水号不能为空   |
-| 201002 | userId cannot be empty                       | 用户编号不能为空     |
-| 201003 | contractName cannot be empty                 | 合约名不能为空       |
-| 201004 | version cannot be empty                      | 合约版本不能为空     |
-| 201005 | funcName cannot be empty                     | 方法名不能为空       |
-| 201006 | abiInfo cannot be empty                      | abi内容不能为空      |
-| 201007 | contractBin cannot be empty                  | 合约bin不能为空      |
-| 201008 | contract's current version has been deployed | 该合约版本已部署     |
-| 201009 | contract is not deployed                     | 合约未部署           |
-| 201010 | save abi error                               | abi保存错误          |
-| 201011 | request funcParam is error                   | 请求的方法参数错误   |
-| 201012 | requst blockNumber is greater than latest    | 请求块高大于最新块高 |
-| 201013 | get abi from chain error                     | 获取合约abi错误      |
-| 201014 | contract deploy error                        | 合约部署错误         |
-| 201015 | user's privateKey is null                    | 用户私钥为空         |
-| 201016 | file is not exist                            | 文件不存在           |
-| 201017 | failed to get node config                    | 获取节点配置失败     |
-| 201018 | blockNumber and pbftView unchanged           | 块高和view没有变化   |
-| 201019 | request function is error                    | 请求的方法错误       |
-| 201020 | transaction query from chain failed          | 交易查询失败         |
-| 201021 | transaction send to chain failed             | 交易上链失败         |
-| 201022 | node request failed                          | 节点请求失败         |
+| code   | message                                      | 描述                       |
+| ------ | -------------------------------------------- | -------------------------- |
+| 0      | success                                      | 成功                       |
+| 101001 | system error                                 | 系统异常                   |
+| 101002 | param valid fail                             | 参数校验异常               |
+| 201001 | groupId cannot be empty                      | 群组编号不能为空           |
+| 201002 | user cannot be empty                         | 用户不能为空               |
+| 201003 | useAes cannot be empty                       | 是否为加密私钥不能为空     |
+| 201004 | version cannot be empty                      | 合约版本不能为空           |
+| 201005 | funcName cannot be empty                     | 方法名不能为空             |
+| 201006 | abiInfo cannot be empty                      | abi内容不能为空            |
+| 201007 | contractBin cannot be empty                  | 合约bin不能为空            |
+| 201008 | contract's current version has been deployed | 该合约版本已部署           |
+| 201009 | contract is not deployed                     | 合约未部署                 |
+| 201010 | save abi error                               | abi保存错误                |
+| 201011 | contract funcParam is error                  | 请求的方法参数错误         |
+| 201012 | requst blockNumber is greater than latest    | 请求块高大于最新块高       |
+| 201013 | get abi from chain error                     | 获取合约abi错误            |
+| 201014 | contract deploy error                        | 合约部署错误               |
+| 201015 | user's privateKey is null                    | 用户私钥为空               |
+| 201016 | file is not exist                            | 文件不存在                 |
+| 201017 | failed to get node config                    | 获取节点配置失败           |
+| 201018 | blockNumber and pbftView unchanged           | 块高和view没有变化         |
+| 201019 | request function is error                    | 请求的方法错误             |
+| 201020 | transaction query from chain failed          | 交易查询失败               |
+| 201021 | transaction send to chain failed             | 交易上链失败               |
+| 201022 | node request failed                          | 节点请求失败               |
+| 201023 | contract already exists                      | 合约已经存在               |
+| 201024 | contract name cannot be repeated             | 合约名不能重复             |
+| 201025 | invalid contract id                          | 无效的合约编号             |
+| 201026 | contract has been deployed                   | 合约已部署                 |
+| 201027 | send abiInfo fail                            | 发送abi失败                |
+| 201028 | contractbin is null                          | 合约bin为空                |
+| 201029 | contractAddress is null                      | 合约地址为空               |
+| 201030 | contractAddress invalid                      | 合约地址无效               |
+| 201031 | privateKey decode fail                       | 私钥编码失败               |
+| 201032 | not found config of keyServer                | 密钥服务未配置             |
+| 201033 | data request sign error                      | 数据请求签名异常           |
+| 201034 | groupId not exist                            | 群组编号不存在             |
+| 201035 | version and address cannot all be  null      | 合约版本和地址不能同时为空 |
