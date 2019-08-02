@@ -296,7 +296,7 @@ mysql > create database webasenodemanager;
 
   ```
   sudo apt-get install -y python-pip
-  sudo pip install MySQL-python
+  sudo -H pip install MySQL-python
   ```
 
 ## 常见问题
