@@ -21,7 +21,7 @@
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/V1.0.1/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.0.2/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -346,7 +346,7 @@ Saving to: ‘webase-front.zip’
  0% [                                                                                                                                ] 77,974      37.8KB/s    
 ```
 
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://www.fisco.com.cn/cdn/WeBASE/release/download/V1.0.1/webase-web.zip) 、[WeBASE-Node-Manager](https://www.fisco.com.cn/cdn/WeBASE/release/download/V1.0.1/webase-node-mgr.zip) 、[WeBASE-Front](https://www.fisco.com.cn/cdn/WeBASE/release/download/V1.0.1/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-web.zip) 、[WeBASE-Node-Manager](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-node-mgr.zip) 、[WeBASE-Front](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
 
 ### 管理平台启动时Nginx报错
 
