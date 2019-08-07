@@ -85,7 +85,7 @@ monitor.contractPackName=[编译Solidity合约时指定的包名]
 
 ```
 chmod +x generate_bee.sh
-sh generate_bee.sh
+bash generate_bee.sh
 ```
 
 当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
@@ -96,7 +96,7 @@ sh generate_bee.sh
 
 ```
 chmod +x generate_bee.sh
-sh generate_bee.sh build
+bash generate_bee.sh build
 ```
 
 当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
