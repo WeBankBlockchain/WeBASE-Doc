@@ -75,14 +75,40 @@ FAILURE: Build failed with an exception.
 
    答：调用 http://{ip}:{port}/WeBASE-Front/5002/1/web3/refresh 方法，即可手动更新。
 
-- 4：觉得URL中WeBASE-Front输入比较麻烦，怎么修改？
-
-  答：修改 application.yml 文件中的context-path即可：
+- 4：升级1.0.2版本时，数据库报错：
 
   ```
-  server:
-    port: 5002
-    context-path: /WeBASE-Front  // 修改此处即可，如：webase-front
+  Caused by: org.h2.jdbc.JdbcSQLException: NULL not allowed for column "TYPE"; SQL statement:
+  alter table key_store_info add column type integer not null [23502-197]
+          at org.h2.message.DbException.getJdbcSQLException(DbException.java:357) ~[h2-1.4.197.jar:1.4.197]
+          at org.h2.message.DbException.get(DbException.java:179) ~[h2-1.4.197.jar:1.4.197]
+          at org.h2.message.DbException.get(DbException.java:155) ~[h2-1.4.197.jar:1.4.197]
   ```
 
-  
+  答：将H2数据库删除（在h2目录下），或者配置新数据库名，在 application.yml 文件中的配置如下：
+
+  ```
+  spring:
+    datasource:
+      url: jdbc:h2:file:./h2/webasefront;DB_CLOSE_ON_EXIT=FALSE // 默认H2库为webasefront
+  ...
+  ```
+
+- 5：日志报以下错误信息：
+
+  ```
+  2019-08-08 17:29:05.505 [pool-11-thread-1] ERROR TaskUtils$LoggingErrorHandler() - Unexpected error occurred in scheduled task.
+  org.hyperic.sigar.SigarFileNotFoundException: 没有那个文件或目录
+          at org.hyperic.sigar.FileSystemUsage.gather(Native Method) ~[sigar-1.6.4.jar:?]
+          at org.hyperic.sigar.FileSystemUsage.fetch(FileSystemUsage.java:30) ~[sigar-1.6.4.jar:?]
+          at org.hyperic.sigar.Sigar.getFileSystemUsage(Sigar.java:667) ~[sigar-1.6.4.jar:?]
+  ```
+
+  答：监控目录不存在，需配置节点所在磁盘目录，在 application.yml 文件中的配置如下：
+
+  ```
+  ...
+  constant:  
+    monitorDisk: /            // 要监控的磁盘目录，配置节点所在目录（如：/home）
+  ...
+  ```
