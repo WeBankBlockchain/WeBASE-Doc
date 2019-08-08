@@ -65,7 +65,7 @@ vi application.yml
 ``` 
 spring:
   datasource:
-    url: jdbc:h2:file:~/.h2/webasefront;DB_CLOSE_ON_EXIT=FALSE // 默认H2库为webasefront
+    url: jdbc:h2:file:./h2/webasefront;DB_CLOSE_ON_EXIT=FALSE // 默认H2库为webasefront
 ...
 server: 
   port: 5003                    // 服务端口
@@ -76,7 +76,7 @@ sdk:
   channelPort: 20200            // 连接节点的链上链下端口
 constant:  
   transMaxWait: 30              // 交易等待时间
-  monitorDisk: /data            // 要监控的硬盘目录 
+  monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
   keyServer: 127.0.0.1:5001     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
 ...
 ```
