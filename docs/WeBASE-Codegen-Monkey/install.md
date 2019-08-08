@@ -12,7 +12,7 @@
 | Git | 下载的安装包使用Git | Git安装可参考附录3|
 | MySQL | >= mysql-community-server[5.7] | MySQL安装可参考附录4|
 | zookeeper | >= zookeeper[3.4] | 只有在进行集群部署的时候需要安装，zookeeper安装可参考附录5|
-| docker    | >= docker[18.0.0] | 只有需要可视化监控页面的时候才需要安装，docker的安装可参考[docker安装手册](https://docker_practice.gitee.io/install/centos.html) |
+| docker    | >= docker[18.0.0] | 只有需要可视化监控页面的时候才需要安装，docker的安装可参考[gitee docker安装手册](https://docker_practice.gitee.io/install/centos.html) |
 
 ### 2. 部署步骤
 
@@ -22,7 +22,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/master/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/dev_multi_proj_2019.06/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
@@ -33,13 +33,13 @@ cd install_scripts
 进入解压后的install_scripts文件夹目录，获得如下的目录结构，其中Evidence.java为合约示例。
 
 ```
-├──install_scripts
-    └── config
-        └── contract
-            └── Evidence.java
-        └── resources
-            └── application.properties
-    └── generate_bee.sh
+├── install_scripts
+│   ├── config
+│   │   ├── contract
+│   │   │   └── HelloWorld.java
+│   │   └── resources
+│   │       └── application.properties
+│   └── generate_bee.sh
 ```
 
 #### 2.2 配置安装包
@@ -51,6 +51,7 @@ cd install_scripts
 如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [利用控制台将合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)
 
 请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考附录1.3 数据库配置。
+
 
 ##### 2.2.2 配置密钥文件
 
@@ -65,14 +66,16 @@ cd install_scripts
 修改application.properties文件：该文件包含了所有的配置信息。以下配置信息是必须要修改的，否则跑不起来：
 
 ```
-# 节点的IP及通讯端口、组号。NODE_NAME可以是任意字符和数字的组合
+# 节点的IP及通讯端口、组号。 NODE_NAME可以是任意字符和数字的组合
 system.nodeStr=[NODE_NAME]@[IP]:[PORT]
 system.groupId=[GROUP_ID]
 # 最新版本的FISCO-BCOS平台中的NODE_NAME可以为任意值。
-# 数据库的信息，暂时只支持mysql；serverTimezone用来设置时区
+
+# 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
 system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
 system.dbUser=[user_name]
 system.dbPassword=[password]
+
 # 合约Java文件的包名
 monitor.contractPackName=[编译Solidity合约时指定的包名]
 ```
@@ -99,11 +102,11 @@ chmod +x generate_bee.sh
 bash generate_bee.sh build
 ```
 
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/WeBASE-Collect-Bee-core/dist文件夹复制到其他服务器上，并执行：
 
 ```
-chmod +x *.jar
-nohup java -jar *.jar >/dev/null 2>&1 &
+chmod +x *.sh
+bash start.sh
 tail -f *.log
 ```
 
@@ -143,13 +146,13 @@ Hibernate: select blockheigh0_.pk_id as pk_id1_2_, blockheigh0_.block_height as 
 还可以通过以下命令来查看区块的同步状态：
 
 ```
-tail -f webasebee.log| grep "sync block"
+tail -f webasebee-core.log| grep "sync block"
 ```
 
 当看到以下滚动的日志时，则代表区块同步状态正常，开始执行下载任务。
 
 ```
-$ tail -f webasebee.log| grep "sync block"
+ $ tail -f webasebee-core.log| grep "sync block"
 2019-05-05 14:41:07.348  INFO 60538 --- [main] c.w.w.c.service.CommonCrawlerService     : Try to sync block number 0 to 90 of 90
 2019-05-05 14:41:07.358  INFO 60538 --- [main] c.w.w.c.service.BlockTaskPoolService     : Begin to prepare sync blocks from 0 to 90
 2019-05-05 14:41:17.142  INFO 60538 --- [main] c.w.w.crawler.service.BlockSyncService   : Block 0 of 90 sync block succeed.
@@ -188,10 +191,22 @@ mysql -u[用户名] -p[密码] -e "use [数据库名]; select count(*) from bloc
 ##### 2.4.4 停止导入程序
 
 ```
-ps -ef |grep WeBASE-Collect-Bee |grep -v grep|awk '{print $2}' |xargs kill -9
+bash stop.sh
 ```
 
 恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考2.3
+
+#### 2.4.5 注意事项
+
+在生成的工程中，我们使用了Hibernate auto-ddl 的特性来自动创建数据库表，该特性仅供提供快速的演示，但请勿使用该特性上线；否则可能会造成生产系统的安全隐患。
+
+你可以修改WeBASE-Collect-Bee/WeBASE-Collect/src/main/resources/appliction.properties:
+
+```
+
+spring.jpa.properties.hibernate.hbm2ddl.auto=none
+
+```
 
 ### 3. 可视化监控程序安装和部署
 
@@ -238,7 +253,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 更多关于Grafana的自定义配置和开发文档，可参考[Grafana官方文档](http://docs.grafana.org/guides/getting_started/)
 
-### 4. 开启可视化的功能性测试
+### 4. 开启可视化的API文档和功能性测试
 
 [WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
@@ -246,15 +261,15 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 **请注意，swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件**
 
-#### 4.1 打开swagger页面
+#### 4.1 查看API文档：
 
 请在你的浏览器打开此地址：
 
 > http://your_ip:port/swagger-ui.html
 
-例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)，且未修改默认的8080端口，则可以访问此地址：
+例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)，且未修改默认的5200端口，则可以访问此地址：
 
-> http://localhost:8080/swagger-ui.html
+> http://localhost:5200/swagger-ui.html
 
 此时，你可以看到上述页面，可以看到页面主要包括了http请求页面和数据模型两部分。
 
