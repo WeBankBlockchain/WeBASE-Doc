@@ -495,7 +495,7 @@ http://localhost:5002/WeBASE-Front/contract/ifChanged/1/10
 true
 ```
 
-## 2. 私钥接口
+## 2. 密钥接口
 
 ### 2.1. 获取公私钥接口
 
@@ -505,7 +505,7 @@ true
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/privateKey?useAes={useAes}&userName={userName}**
+**http://localhost:5002/WeBASE-Front/privateKey?useAes={useAes}&type={type}&userName={userName}**
 
 #### 调用方法
 
@@ -518,12 +518,13 @@ HTTP GET
 | **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
 | 1        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
-| 2        | 用户名 | userName | String        |             | 是        |   |
+| 2 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户 |
+| 2        | 用户名 | userName | String        |             | 否   | 类型为本地用户时必填 |
 
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=test
+http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=0&userName=test
 ```
 
 #### 响应参数
@@ -531,9 +532,11 @@ http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=test
 **1）数据格式**
 ```
 {
-    "publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
-    "privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
-    "address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
+  "address": "0x2007e1430f41f75c850464307c0994472bd92ee0",
+  "publicKey": "0x9bd35211855f9f8de22d8a8da7f30d35d62ab2c3d36ea5162008fcbb9faff4d83809f7033deb20049bf51e081105076ec7a09a847f852530f81e978b1eda0392",
+  "privateKey": "42caa160cadcb635381b980ddd981171c862d3105981fe92d6db330f30615f21",
+  "userName": "test",
+  "type": 0
 }
 ```
 
@@ -545,7 +548,7 @@ http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=test
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/privateKey/import?privateKey={privateKey}&useAes={useAes}**
+**http://localhost:5002/WeBASE-Front/privateKey/import?privateKey={privateKey}&userName={userName}**
 
 #### 调用方法
 
@@ -555,15 +558,15 @@ HTTP GET
 
 **1）参数表**
 
-| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
-| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
-| 1        | 私钥信息 | privateKey | String      |             | 是        |                      |
-| 2        | 是否为加密私钥 | useAes | boolean      |             | 否        |      默认true       |
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 私钥信息 | privateKey | String   |              | 是       |          |
+| 2        | 用户名   | userName   | String   |              | 是       |          |
 
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=false
+http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=8cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=lili
 ```
 
 #### 响应参数
@@ -572,9 +575,108 @@ http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=008cf98bd0f37fb0
 
 ```
 {
-    "publicKey":"1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
-    "privateKey":"008cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
-    "address":"0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee"
+  "address": "0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee",
+  "publicKey": "0x1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
+  "privateKey": "8cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
+  "userName": "lili",
+  "type": 0
+}
+```
+
+### 2.3. 获取本地公私钥列表接口
+
+#### 接口描述
+
+> 返回本地公私钥信息列表
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/localKeyStores**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+无
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/localKeyStores
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+[
+  {
+    "address": "0x2007e1430f41f75c850464307c0994472bd92ee0",
+    "publicKey": "0x9bd35211855f9f8de22d8a8da7f30d35d62ab2c3d36ea5162008fcbb9faff4d83809f7033deb20049bf51e081105076ec7a09a847f852530f81e978b1eda0392",
+    "privateKey": "42caa160cadcb635381b980ddd981171c862d3105981fe92d6db330f30615f21",
+    "userName": "test",
+    "type": 0
+  },
+  {
+    "address": "0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee",
+    "publicKey": "0x1c7073dc185af0644464b178da932846666a858bc492450e9e94c77203428ed54e2ce45679dbb36bfed714dbe055a215dc1aaf4a75faeddce6a62b39c0158e1e",
+    "privateKey": "8cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c",
+    "userName": "lili",
+    "type": 0
+  }
+]
+```
+
+### 2.4. 删除公私钥接口
+
+#### 接口描述
+
+> 支持前置的控制台通过用户地址删除公私钥信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/{address}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 用户地址 | address    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/0x2e8ff65fb1b2ce5b0c9476b8f8beb221445f42ee
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
 }
 ```
 
@@ -2317,3 +2419,7 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201033 | data request sign error                      | 数据请求签名异常           |
 | 201034 | groupId not exist                            | 群组编号不存在             |
 | 201035 | version and address cannot all be  null      | 合约版本和地址不能同时为空 |
+| 201036 | compile fail                                 | 合约编译失败               |
+| 201037 | user name is null                            | 用户名为空                 |
+| 201038 | user name already exists                     | 用户名已存在               |
+| 201039 | private key already exists                   | 私钥已存在                 |
