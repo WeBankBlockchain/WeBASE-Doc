@@ -65,7 +65,7 @@
 
 #### 4.1 自动生成数据导出组件
 
-只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-Codegen-Monkey就能帮助你自动生成一个区块链数据导出的组件。现阶段，支持将数据导出到Mysql数据库中。
+只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-Codegen-Monkey就能帮助你自动生成一个区块链数据导出的组件。理论上可支持主流的数据库；现阶段，实测支持将数据导出到Mysql数据库中。
 
 #### 4.2 支持自定义导出数据内容
 
@@ -77,7 +77,7 @@
 
 #### 4.4 支持多数据源，支持读写分离和分库分表
 
-为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件集成了sharding-jdbc,支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
 
 #### 4.5 支持多活部署，多节点自动导出
 
