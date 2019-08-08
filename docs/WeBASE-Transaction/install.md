@@ -63,8 +63,7 @@ dist目录提供了一份配置模板conf_template：
 cd conf
 ```
 
-**将节点sdk目录下的以下文件复制到当前目录：**
-ca.crt、node.crt、node.key
+**注意：**需要将节点所在目录'nodes/${ip}/sdk'下的'ca.crt'、'node.crt'和'node.key'文件拷贝到当前conf目录，供SDK与节点建立连接时使用。
 
 （3）修改配置（有注释的地方根据实际情况修改）：
 
