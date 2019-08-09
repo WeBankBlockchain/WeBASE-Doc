@@ -12,7 +12,7 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Java | jdk1.8或以上版本 |
+| Java | jdk1.8 |
 
 备注：安装说明请参看 [附录-1](../WeBASE-Front/appendix.html#id2)。
 
@@ -42,6 +42,7 @@
 
 5. 访问
     http://{deployIP}:{frontPort}/WeBASE-Front 
+    
     示例：http://localhost:5002/WeBASE-Front 
 
     
