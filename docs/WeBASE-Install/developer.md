@@ -37,7 +37,9 @@
     bash start.sh 
     ```
     其他命令：
+    
     停止: bash stop.sh 
+    
     检查服务状态: bash status.sh 
 
 5. 访问
