@@ -22,7 +22,7 @@
 .. toctree::
    :maxdepth: 1
 
+   ../WeBASE-Install/developer.md
    ../WeBASE/install.md
    ../WeBASE-Install/enterprise.md
-   ../WeBASE-Install/developer.md
 ```
