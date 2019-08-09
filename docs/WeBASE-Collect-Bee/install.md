@@ -273,13 +273,13 @@ sharding.jdbc.datasource.names=master,slave0
         
 sharding.jdbc.datasource.master.type=com.zaxxer.hikari.HikariDataSource
 sharding.jdbc.datasource.master.driver-class-name=com.mysql.cj.jdbc.Driver
-sharding.jdbc.datasource.master.jdbc-url=jdbc:mysql://106.12.31.94:3306/test0?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+sharding.jdbc.datasource.master.jdbc-url=jdbc:mysql://[ip]:3306/test0?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
 sharding.jdbc.datasource.master.username=
 sharding.jdbc.datasource.master.password=
 
 sharding.jdbc.datasource.slave0.type=com.zaxxer.hikari.HikariDataSource
 sharding.jdbc.datasource.slave0.driver-class-name=com.mysql.cj.jdbc.Driver
-sharding.jdbc.datasource.slave0.jdbc-url=jdbc:mysql://106.12.31.94:3306/test1?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+sharding.jdbc.datasource.slave0.jdbc-url=jdbc:mysql://[ip]:3306/test1?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
 sharding.jdbc.datasource.slave0.username=
 sharding.jdbc.datasource.slave0.password=
 
