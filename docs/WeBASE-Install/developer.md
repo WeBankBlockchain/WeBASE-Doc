@@ -21,6 +21,7 @@
     wget https://www.fisco.com.cn/cdn/WeBASE/releases/download/v1.0.2/webase-front.zip
     ```
 
+
 2. 解压
     ```shell
     unzip webase-front.zip
