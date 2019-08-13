@@ -85,11 +85,11 @@ node.counts（节点安装个数，不修改的话默认两个）：sed -i "s%no
 ```
 
 ## 部署
-部署所有服务：
+部署所有服务（使用已有链本命令不会搭建节点）：
 ```shell
 python deploy.py installAll
 ```
-停止所有服务：
+停止所有服务（使用已有链本命令不会停止节点）：
 ```shell
 python deploy.py stopAll
 ```
@@ -334,19 +334,9 @@ pip install --upgrade setuptools
 python -m pip install --upgrade pip
 ```
 
-### 部署时编译包下载慢
+### 部署时某个组件失败，重新部署提示端口被占用问题
 
-```
-...
-Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.112.19|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 22793550 (22M) [application/octet-stream]
-Saving to: ‘webase-front.zip’
-
- 0% [                                                                                                                                ] 77,974      37.8KB/s    
-```
-
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-web.zip) 、[WeBASE-Node-Manager](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-node-mgr.zip) 、[WeBASE-Front](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
+答：因为有个别组件是启动成功的，需先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py installAll”部署全部。
 
 ### 管理平台启动时Nginx报错
 
