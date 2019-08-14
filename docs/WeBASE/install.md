@@ -83,6 +83,23 @@ node.counts（节点安装个数，不修改的话默认两个）：sed -i "s%no
 
 示例（将端口由5000改为5008）：sed -i "s%5000%5008%g" common.properties
 ```
+## 常规问题
+
+1、遇到问题，试试：解决 Command "python setup.py egg_info" failed with error code 1 问题
+
+在执行 pip install -r requirements.txt 时遇到错误：
+
+Command "python setup.py egg_info" failed with error code 1
+
+解决方法是更新 setuptools 和 pip：
+
+pip install --upgrade setuptools
+python -m pip install --upgrade pip
+
+2、目前支持127.0.0.1 等内网一键部署，不支持外网
+
+需要将/generator/nodeA 中config.ini 节点配置修改
+把rpc的listen_ip改成127.0.0.1重启一下,只改一个节点
 
 ## 部署
 部署所有服务：
