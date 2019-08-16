@@ -1,4 +1,4 @@
-# 接口文档
+# 接口说明
 
 
 ## 1 前置管理模块
@@ -8,7 +8,7 @@
 
 #### 1.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/front/new`
+* 请求地址： **/front/new**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -23,15 +23,16 @@
 | 2    | frontPort   | int           | 否     | 前置服务端口                               |
 | 3    | agency      | int           | 否     | 所属机构                               |
 
-
 ***2）入参示例***
 
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
+```
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/front/new`
 ```
 {
     "frontIp": "127.0.0.1",
-    "frontPort": "8081",
+    "frontPort": "5002",
     "agency": "abc"
 }
 ```
@@ -85,7 +86,7 @@
 
 #### 1.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/front/find?frontId={frontId}&groupId={groupId}`
+* 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -101,7 +102,9 @@
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/front/find`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
+```
 
 
 #### 1.2.3 返回参数 
@@ -131,8 +134,8 @@
     "data": [
         {
             "frontId": 500001,
-            "frontIp": "10.107.105.18",
-            "frontPort": 8081,
+            "frontIp": "127.0.0.1",
+            "frontPort": 5002,
             "agency": "aa",
             "createTime": "2019-06-04 20:49:42",
             "modifyTime": "2019-06-04 20:49:42"
@@ -152,13 +155,11 @@
 ```
 
 
-
-
 ### 1.3 删除前置信息
 
 #### 1.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/front/{frontId}`
+* 请求地址：**/front/{frontId}**
 * 请求方式：DELETE
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -174,7 +175,9 @@
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/front/{frontId}`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
+```
 
 
 #### 1.3.3 返回参数 
@@ -207,19 +210,18 @@
 }
 ```
 
-
-
 ## 2 交易信息模块
 
 
 ### 2.1 查询交易信息列表
 
-
-
 #### 2.1.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/transaction/transList/{groupId}/{pageNumber}/{pageSize}?transactionHash={transactionHash}&blockNumber={blockNumber}`
+* 请求地址：
+```
+/transaction/transList/{groupId}/{pageNumber}/{pageSize}?transactionHash={transactionHash}&blockNumber={blockNumber}
+```
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -239,7 +241,7 @@
 ***2）入参示例***
 
 ```
-http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?transactionHash=0x303daa78ebe9e6f5a6d9761a8eab4bf5a0ed0b06c28764488e4716de42e1df01
+http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?transactionHash=0x303daa78ebe9e6f5a6d9761a8eab4bf5a0ed0b06c28764488e4716de42e1df01
 ```
 
 
@@ -291,16 +293,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 }
 ```
 
-
-
 ### 2.2 查询交易回执 
-
-
 
 #### 2.2.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/transaction/transactionReceipt/{groupId}/{transHash}`
+* 请求地址：**/transaction/transactionReceipt/{groupId}/{transHash}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -317,7 +315,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 ***2）入参示例***
 
 ```
-http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
+http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
 ```
 
 
@@ -382,18 +380,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda8
 }
 ```
 
-
-
-
-
 ### 2.3 根据交易hash查询交易信息 
-
-
 
 #### 2.3.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/transaction/transInfo/{groupId}/{transHash}`
+* 请求地址：**/transaction/transInfo/{groupId}/{transHash}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -412,7 +404,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transactionReceipt/1/0xda8
 ***2）入参示例***
 
 ```
-http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
+http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b5d75d2d807f036b461e0cebcc1abaccac119c9a282d3941a4818
 ```
 
 
@@ -488,8 +480,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 3 帐号管理模块
 
 
@@ -499,7 +489,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 #### 3.1.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/account/accountInfo`
+* 请求地址：**/account/accountInfo**
 * 请求方式：post
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -517,7 +507,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountInfo`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/account/accountInfo
+```
+
 ```
 {
     "account": "testAccount",
@@ -576,16 +569,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 3.2 修改帐号
 
 
 #### 3.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/account/accountInfo`
+* 请求地址：**/account/accountInfo**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -603,7 +592,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountInfo`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/account/accountInfo
+```
+
 ```
 {
     "account": "testAccount",
@@ -662,14 +654,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 3.3 删除帐号
 
 
 #### 3.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/account/{account}`
+* 请求地址：**/account/{account}**
 * 请求方式：DELETE
 * 返回格式：JSON
 
@@ -684,7 +674,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/testAccount`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/account/testAccount
+```
 
 
 #### 3.3.3 返回参数 
@@ -717,14 +709,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
 ###  3.4 查询帐号列表
 
 
 #### 3.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址: `/account/accountList/{pageNumber}/{pageSize}?account={account}`
+* 请求地址：**/account/accountList/{pageNumber}/{pageSize}?account={account}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -741,7 +731,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/accountList/1/10?account=`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/account/accountList/1/10?account=
+```
 
 
 #### 3.4.3 返回参数 
@@ -810,14 +802,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 3.5 更新当前密码 
 
 
 #### 3.5.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/account/passwordUpdate`
+* 请求地址：**/account/passwordUpdate**
 * 请求方式：put
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -831,11 +821,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 1    | oldAccountPwd | String | 否     | 旧密码（sha256）           |
 | 2    | newAccountPwd | String | 否     | 新密码（sha256）           |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/passwordUpdate`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/account/passwordUpdate
+```
+
 ```
 {
     "oldAccountPwd": "dfdfgdg490cef2bfb60a9702erd2ddb7a805c9bd1arrrewefd51a7d0etttfa93e ",
@@ -878,7 +869,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 3.6.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/account/pictureCheckCode`
+* 请求地址：**/account/pictureCheckCode**
 * 请求方式：get
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -891,9 +882,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/pictureCheckCode`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/account/pictureCheckCode
+```
 
 #### 3.6.3 返回参数 
 
@@ -930,16 +921,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 3.7 登录接口
 
 
 #### 3.7.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/account/login?checkCode={checkCode}`
+* 请求地址：**/account/login?checkCode={checkCode}**
 * 请求方式：get
 * 请求头：Content-type: application/json;token:{token}
 * 返回格式：JSON
@@ -955,11 +942,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3    | accountPwd          | String    | 否     | 密码   |
 | 4    | token          | String    | 否     | 随验证码返回的token   |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/account/login?checkCode=aege`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/account/login?checkCode=aege
+```
+
 ```
 {
     "account": "admin",
@@ -972,8 +960,14 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
+| 序号 | 输出参数      | 类型   |      | 备注                       |
+| ---- | ------------- | ------ | ---- | -------------------------- |
+| 1    | code          | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message       | String | 否   | 描述                       |
+| 3    | data          | Object | 否   | 图片信息实体               |
+| 3.1  | account       | String | 否   | 账户                       |
+| 3.2  | roleName      | String | 否   | 角色                       |
+| 3.3  | accountStatus | Int    | 否   | 状态                       |
 
 
 ***2）出参示例***
@@ -999,10 +993,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 4 区块管理模块
 
 
@@ -1011,7 +1001,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 4.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址:`/block/blockList/{groupId}/{pageNumber}/{pageSize}}?pkHash={pkHash}&blockNumber={blockNumber}`
+* 请求地址：**/block/blockList/{groupId}/{pageNumber}/{pageSize}}?pkHash={pkHash}&blockNumber={blockNumber}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1031,9 +1021,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/block/blockList/300001/1/10?pkHash=`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockList/300001/1/10?pkHash=
+```
 
 #### 4.1.3 返回参数 
 
@@ -1088,14 +1078,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 4.2 根据块高或hash查询区块信息
 
 
 #### 4.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址:`/block/blockList/{groupId}/{pageNumber}/{pageSize}}?pkHash={pkHash}&blockNumber={blockNumber}`
+* 请求地址：**/block/blockList/{groupId}/{pageNumber}/{pageSize}}?pkHash={pkHash}&blockNumber={blockNumber}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1111,11 +1099,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4     | pkHash         | String        | 是     | 区块hash                   |
 | 5     | blockNumber    | BigInteger    | 是     | 块高                       |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/block/blockByNumber/1/11`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockByNumber/1/11
+```
 
 
 #### 4.2.3 返回参数 
@@ -1233,8 +1221,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 5 合约管理模块  
 
 
@@ -1243,7 +1229,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 5.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/contract/contractList/{groupId}/{pageNumber}/{pageSize}`
+* 请求地址：**/contract/contractList/{groupId}/{pageNumber}/{pageSize}**
 * 请求方式：POST
 * 返回格式：JSON
 
@@ -1263,9 +1249,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/contractList`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
+```
 
 #### 5.1.3 返回参数 
 
@@ -1293,10 +1279,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 5.1.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
 | 5.1.14 | description     | String        | 是     | 备注                                            |
 | 5.1.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 5.1.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        
-
-
+| 5.1.16 | modifyTime | LocalDateTime | 是 | 修改时间 |
 ***2）出参示例***
+
 * 成功：
 ```
 {
@@ -1335,16 +1320,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 5.2 查询合约信息
 
 
 #### 5.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/contract/{contractId}`
+* 请求地址：**/contract/{contractId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1360,9 +1341,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/200001`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
+```
 
 #### 5.2.3 返回参数 
 
@@ -1426,16 +1407,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 5.3 部署合约
 
 
 #### 5.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/contract/deploy`
+* 请求地址：**/contract/deploy**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -1460,7 +1437,10 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/deploy`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
+```
+
 ```
 {
     "groupId": "1",
@@ -1475,8 +1455,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
     "constructorParams": ["a"]
 }
 ```
-
-
 
 #### 5.3.3 返回参数 
 
@@ -1542,14 +1520,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 5.4 发送交易
 
 
 #### 5.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/contract/transaction`
+* 请求地址：**/contract/transaction**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -1562,27 +1538,28 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId      | Int            | 否     | 所属群组编号               |
-| 2    | user       | Integer        | 否     | 私钥用户               |
+| 2    | user       | String  | 否     | 用户地址             |
 | 3    | contractName | String         | 否     | 合约名称                   |
-| 4    | contractId      | String         | 否     | 合约名称               |
+| 4    | contractId      | Int      | 否     | 合约编号               |
 | 5    | funcName     | String         | 否     | 合约方法名                 |
-| 6    | contractAddress     | String         | 是     | 合约地址（传合约名和版本时可为空）   |
+| 6    | contractAddress     | String         | 是     | 合约地址   |
 | 7   | funcParam    | List | 是     | 合约方法入参               |
-
-
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/transaction`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
+```
+
 ```
 {
-    "groupId": "300001",
-    "contractBin": "6060604052600f8dee08980029",
-    "bytecodeBin": null,
-    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"trans\",\"outputs\":[],\"payable\":false,\"type\":\"function\"}]",
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjfQ==",
-    "userId": 700001,
-    "contractId": 200033
+    "groupId":"1",
+    "user":"0x6accbdb86107b70decceee618ce40e20e15c8ad4",
+    "contractName":"HelloWorld",
+    "funcName":"set",
+    "funcParam":["gwes"],
+    "contractId":200002,
+    "contractAddress":"0x7bd586b045e3684dbcd5506cb175c5d771f38d13"
 }
 ```
 
@@ -1618,16 +1595,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 5.5 根据包含bytecodeBin的字符串查询合约  
 
 
 #### 5.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/contract/findByPartOfBytecodeBin`
+* 请求地址： **/contract/findByPartOfBytecodeBin**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1640,11 +1613,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 1    | groupId         | int           | 否     | 所属群组编号                                        |
 | 2    | partOfBytecodeBin      | String           | 否     | 包含合约bytecodeBin的的字符串         |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
+```
+
 ```
 {
     "groupId": "300001",
@@ -1713,10 +1687,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 6 服务器监控相关
 
 
@@ -1725,7 +1695,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 6.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/chain/mointorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}`
+* 请求地址：
+```
+/chain/mointorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}
+```
+
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1745,8 +1719,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22`
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22
+```
 
 
 #### 6.1.3 返回参数 
@@ -1833,20 +1808,16 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
-
-
-
-
 ### 6.2 获取服务器监控信息 
 
 
 #### 6.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}`
+* 请求地址：
+```
+performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}
+```
+
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1867,9 +1838,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55
+```
 
 #### 6.2.3 返回参数 
 
@@ -1955,10 +1926,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 7 审计相关模块
 
 
@@ -1967,7 +1934,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 7.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/monitor/userList/{groupId}`
+* 请求地址：**/monitor/userList/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1983,9 +1950,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/userList/300001`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/userList/300001
+```
 
 #### 7.1.3 返回参数 
 
@@ -2062,16 +2029,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 7.2 获取合约方法监管信息列表
 
 
 #### 7.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/monitor/interfaceList/{groupId}?userName={userName}`
+* 请求地址：**/monitor/interfaceList/{groupId}?userName={userName}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2084,11 +2047,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 1      | groupId        | int           | 否     | 所属群组编号                                  |
 | 2      | userName         | String        | 是     | 用户名                                        |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/interfaceList/300001`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/interfaceList/300001
+```
 
 
 #### 7.2.3 返回参数 
@@ -2167,14 +2130,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 7.3 获取交易hash监管信息列表
 
 
 #### 7.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/monitor/interfaceList/{groupId}`
+* 请求地址： **/monitor/interfaceList/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2190,12 +2151,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4       | endDate       | String         |        | 结束时间                   |
 | 5       | interfaceName | String         |        | 接口名称                   |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d97f8d41638a7b1b669b70b307bab6d49df8e2c&interfaceName=0x4ed3885e`
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d97f8d41638a7b1b669b70b307bab6d49df8e2c&interfaceName=0x4ed3885e
+```
 
 
 #### 7.3.3 返回参数 
@@ -2247,16 +2207,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 7.4 获取异常用户信息列表
 
 
 #### 7.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/unusualUserList/{groupId}/{pageNumber}/{pageSize}?userName={userName}`
+* 请求地址：**/unusualUserList/{groupId}/{pageNumber}/{pageSize}?userName={userName}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2272,13 +2228,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3     | pageNumber | int           | 否     | 当前页码                   |
 | 4     | pageSize   | int           | 否     | 页面大小                   |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/unusualUserList/300001/1/10?userName=`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualUserList/300001/1/10?userName=
+```
 
 #### 7.4.3 返回参数 
 
@@ -2325,13 +2279,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 7.5 获取异常合约信息列表
 
 #### 7.5.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/unusualContractList/{groupId}/{pageNumber}/{pageSize}?contractAddress={contractAddress}`
+* 请求地址：**/unusualContractList/{groupId}/{pageNumber}/{pageSize}?contractAddress={contractAddress}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2346,13 +2298,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3     | pageNumber      | int           | 否     | 当前页码                   |
 | 4     | pageSize        | int           | 否     | 页面大小                   |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/10?contractAddress=`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/10?contractAddress=
+```
 
 #### 7.5.3 返回参数 
 
@@ -2370,8 +2320,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.3 | transCount      | int           | 是     | 交易数                     |
 | 4.1.4 | hashs           | String        | 是     | 交易hash                   |
 | 4.1.5 | time            | LocalDateTime | 是     | 时间                       |
-
-
 
 ***2）出参示例***
 * 成功：
@@ -2402,10 +2350,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ## 8 群组信息模块
 
 
@@ -2414,7 +2358,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 8.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/group/general/{groupId}`
+* 请求地址：**/group/general/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2429,7 +2373,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/group/300001`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
+```
 
 
 #### 8.1.3 返回参数 
@@ -2474,16 +2420,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 8.2 获取所有群组列表
 
 
 #### 8.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/group/all`
+* 请求地址：**/group/all**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2492,11 +2434,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ***1）入参表***
 无
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/group/all`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/all
+```
 
 
 #### 8.2.3 返回参数 
@@ -2548,16 +2490,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 8.3 查询每日交易数据
 
 
 #### 8.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/group/transDaily/{groupId}`
+* 请求地址：**/group/transDaily/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2569,11 +2507,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId    | int    | 否     | 群组id                     |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/group/transDaily/300001`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
+```
 
 
 #### 8.3.3 返回参数 
@@ -2622,10 +2560,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ## 9 节点管理模块
 
 
@@ -2634,7 +2568,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 9.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址:`/node/nodeList/{groupId}/{pageNumber}/{pageSize}?nodeName={nodeName}`
+* 请求地址：**/node/nodeList/{groupId}/{pageNumber}/{pageSize}?nodeName={nodeName}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2650,11 +2584,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3      | pageNumber  | Int           | 否     | 当前页码                                   |
 | 4      | nodeName    | String        | 是     | 节点名称                                   |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
+```
 
 
 #### 9.1.3 返回参数 
@@ -2680,9 +2614,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 4.1.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 4.1.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
 
-
-
 ***2）出参示例***
+
 * 成功：
 ```
 {
@@ -2717,16 +2650,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
-
-
 ### 9.2 查询节点信息
 
 
 #### 9.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址: `/node/nodeInfo/{groupId}?nodeType={nodeType}`
+* 请求地址：**/node/nodeInfo/{groupId}?nodeType={nodeType}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2738,13 +2667,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | int           | 否     | 群组id                                     |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/node/nodeInfo/1
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
+```
 
 #### 9.2.3 返回参数 
 
@@ -2767,9 +2694,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 3.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
 
-
-
 ***2）出参示例***
+
 * 成功：
 ```
 {
@@ -2801,8 +2727,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 10 角色管理模块
 
 
@@ -2811,7 +2735,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ### 10.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`role/roleList`
+* 请求地址：**role/roleList**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -2826,14 +2750,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3     | pageSize    | int           | 否     | 每页记录数                 |
 | 4     | pageNumber  | int           | 否     | 当前页码                   |
 
-
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=`
-
-
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=
+```
 
 #### 10.1.3 返回参数 
 
@@ -2895,8 +2816,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ## 11 用户管理模块 
 
 
@@ -2905,7 +2824,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 11.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/user/userInfo`
+* 请求地址：**/user/userInfo**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -2920,11 +2839,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 2    | description | string        | 是     | 备注                               |
 | 3    | groupId     | Int           | 否     | 所属群组                           |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080//WeBASE-Node-Manager/user/userInfo`
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
+```
 
 ```
 {
@@ -2988,14 +2907,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 ```
 
 
-
-
 ### 11.2 绑定公钥用户
 
 
 #### 11.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/user/bind`
+* 请求地址：**/user/bind**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -3013,7 +2930,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userInfo`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
+```
 
 ```
 {
@@ -3083,7 +3002,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 11.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/user/userInfo`
+* 请求地址：**/user/userInfo**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -3098,11 +3017,11 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 1    | userId      | int           | 否     | 用户编号                           |
 | 2    | description | String        | 是     | 备注                               |
 
-
-
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userInfo`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
+```
 
 ```
 {
@@ -3164,14 +3083,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
 ### 11.4 查询私钥
 
 
 #### 11.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：`/user/privateKey/{userId}`
+* 请求地址：**/user/privateKey/{userId}**
 * 请求方式：GET
 * 返回格式：json
 
@@ -3186,7 +3103,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/privateKey/4585`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
+```
 
 
 #### 1.1.3 返回参数 
@@ -3224,16 +3143,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 11.5 查询用户列表
 
 
 #### 11.5.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址:`/user/userList/{groupId}/{pageNumber}/{pageSize}?userParam={userName}`
+* 请求地址：**/user/userList/{groupId}/{pageNumber}/{pageSize}?userParam={userName}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -3251,7 +3166,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=asdfvw`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=asdfvw
+```
 
 
 #### 1.1.3 返回参数 
@@ -3311,10 +3228,6 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ## 12 合约方法管理模块 
 
 
@@ -3323,7 +3236,7 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 #### 12.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/method/add`
+* 请求地址：**/method/add**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -3345,7 +3258,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-`http://127.0.0.1:8080/WeBASE-Node-Manager/method/add`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/method/add
+```
 
 ```
 {
@@ -3391,16 +3306,12 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 }
 ```
 
-
-
-
-
 ### 12.2 根据方法编号查询
 
 
 #### 12.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： `/method/findById/{groupId}/{methodId}`
+* 请求地址：**/method/findById/{groupId}/{methodId}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -3417,8 +3328,9 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 
 ***2）入参示例***
 
-
-`http://127.0.0.1:8080/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt`
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
+```
 
 
 #### 1.1.3 返回参数 
@@ -3436,9 +3348,8 @@ http://127.0.0.1:8080/WeBASE-Node-Manager/transaction/transInfo/1/0xda879949df6b
 | 3.4  | createTime  | LocalDateTime | 否     | 创建时间                           |
 | 3.5 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
 
-
-
 ***2）出参示例***
+
 * 成功：
 ```
 {

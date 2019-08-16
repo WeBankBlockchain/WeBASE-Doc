@@ -41,12 +41,11 @@ export PATH=$GRADLE_HOME/bin:$PATH
 
 ## 2. 常见问题
 
-* 1：执行shell脚本报下面错误permission denied： 
+* 1：执行shell脚本报错"permission denied"
 
-   答：chmod +x 给文件增加权限  
-   
-   
- * 2: eclipse环境编译源码失败，错误提示如下；
+   答：chmod +x filename 给文件增加权限 
+
+ * 2：eclipse环境编译源码失败，错误提示如下：
 ```
 ...
 /data/temp/WeBASE-Front/src/main/java/com/webank/webase/front/performance/PerformanceService.java:167: error: cannot find symbol
@@ -66,12 +65,50 @@ FAILURE: Build failed with an exception.
 ...
 ```
 
-  答：问题是不能编译Lombok注解 ，修改 build.gradle文件，将以下代码的注释加上
+  答：问题是不能编译Lombok注解 ，修改build.gradle文件，将以下代码的注释加上
 ```
  //annotationProcessor 'org.projectlombok:lombok:1.18.6'
 ```
 
-   
-* 3: 节点运行一段时间后新增了一个群组，front查不到新群组信息。 
- 
-   答： 调用 http://{ip}:{port}/WeBASE-Front/8081/1/web3/refresh 方法，即可手动更新。
+
+* 3：节点运行一段时间后新增了一个群组，前置查不到新群组的信息。 
+
+   答：调用 http://{ip}:{port}/WeBASE-Front/5002/1/web3/refresh 方法，即可手动更新。
+
+- 4：升级1.0.2版本时，数据库报错：
+
+  ```
+  Caused by: org.h2.jdbc.JdbcSQLException: NULL not allowed for column "TYPE"; SQL statement:
+  alter table key_store_info add column type integer not null [23502-197]
+          at org.h2.message.DbException.getJdbcSQLException(DbException.java:357) ~[h2-1.4.197.jar:1.4.197]
+          at org.h2.message.DbException.get(DbException.java:179) ~[h2-1.4.197.jar:1.4.197]
+          at org.h2.message.DbException.get(DbException.java:155) ~[h2-1.4.197.jar:1.4.197]
+  ```
+
+  答：将H2数据库删除（在h2目录下），或者配置新数据库名，在 application.yml 文件中的配置如下：
+
+  ```
+  spring:
+    datasource:
+      url: jdbc:h2:file:./h2/webasefront;DB_CLOSE_ON_EXIT=FALSE // 默认H2库为webasefront
+  ...
+  ```
+
+- 5：日志报以下错误信息：
+
+  ```
+  2019-08-08 17:29:05.505 [pool-11-thread-1] ERROR TaskUtils$LoggingErrorHandler() - Unexpected error occurred in scheduled task.
+  org.hyperic.sigar.SigarFileNotFoundException: 没有那个文件或目录
+          at org.hyperic.sigar.FileSystemUsage.gather(Native Method) ~[sigar-1.6.4.jar:?]
+          at org.hyperic.sigar.FileSystemUsage.fetch(FileSystemUsage.java:30) ~[sigar-1.6.4.jar:?]
+          at org.hyperic.sigar.Sigar.getFileSystemUsage(Sigar.java:667) ~[sigar-1.6.4.jar:?]
+  ```
+
+  答：监控目录不存在，需配置节点所在磁盘目录，在 application.yml 文件中的配置如下：
+
+  ```
+  ...
+  constant:  
+    monitorDisk: /            // 要监控的磁盘目录，配置节点所在目录（如：/home）
+  ...
+  ```
