@@ -1,14 +1,3 @@
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/webase-monkey/community)
-
-> 道生一，一生二，二生三，三生万物。
-> 万物负阴而抱阳，冲气以为和。
-> 人之所恶，唯孤、寡、不谷，而王公以为称。
-> 故物或损之而益，或益之而损。
-> 人之所教，亦我而教人。
-> 强梁者不得其死——吾将以为教父。
-> -- 老子
-
 ## 组件介绍
 
 ### 1. 数据导出组件
@@ -65,7 +54,7 @@
 
 #### 4.1 自动生成数据导出组件
 
-只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-Codegen-Monkey就能帮助你自动生成一个区块链数据导出的组件。现阶段，支持将数据导出到Mysql数据库中。
+只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-Codegen-Monkey就能帮助你自动生成一个区块链数据导出的组件。理论上可支持主流的数据库；现阶段，实测支持将数据导出到Mysql数据库中。
 
 #### 4.2 支持自定义导出数据内容
 
@@ -77,7 +66,7 @@
 
 #### 4.4 支持多数据源，支持读写分离和分库分表
 
-为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件集成了sharding-jdbc,支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
 
 #### 4.5 支持多活部署，多节点自动导出
 
