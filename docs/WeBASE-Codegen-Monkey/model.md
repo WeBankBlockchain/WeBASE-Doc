@@ -26,11 +26,12 @@
 | 字段 | 类型 | 字段设置 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
-| block_hash | varchar(225) | Unique key & Index |  | 区块哈希 |
+| block_hash | varchar(255) | Unique key & Index |  | 区块哈希 |
 | block_height | bigint(20) |  |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
 | tx_count | int(11) |  |  | 当前区块交易量 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
+| status | int(11) |  |  | 区块状态 0-初始化 1-成功 2-失败 |
 
 #### 1.3 区块交易数据存储模型
 
@@ -39,14 +40,14 @@
 | 字段 | 类型 | 字段设置 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
-| block_hash | varchar(225) | Unique key & Index |  | 区块哈希 |
+| block_hash | varchar(255) | Unique key & Index |  | 区块哈希 |
 | block_height | bigint(20) |  |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
-| contract_name | varchar(225) |  |  | 该笔交易的合约名称 |
-| method_name | varchar(225) |  |  | 该笔交易调用的function名称 |
-| tx_hash | varchar(225) |  |  | 交易哈希 |
-| tx_from | varchar(225) |  |  | 交易发起方地址 |
-| tx_to | varchar(225) |  |  | 交易接收方地址 |
+| contract_name | varchar(255) |  |  | 该笔交易的合约名称 |
+| method_name | varchar(255) |  |  | 该笔交易调用的function名称 |
+| tx_hash | varchar(255) |  |  | 交易哈希 |
+| tx_from | varchar(255) |  |  | 交易发起方地址 |
+| tx_to | varchar(255) |  |  | 交易接收方地址 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 
 ### 2. 账户数据存储模型
@@ -58,8 +59,8 @@
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
 | block_height | bigint(20) | index |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
-| contract_address | varchar(225) | index |  | 合约/账户地址 |
-| contract_name | varchar(225) |  |  | 合约名称 |
+| contract_address | varchar(255) | index |  | 合约/账户地址 |
+| contract_name | varchar(255) |  |  | 合约名称 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 
 ### 3. 事件数据存储模型
@@ -108,8 +109,10 @@ contract UserInfo {
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
 | block_height | bigint(20) | index |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
+| contract_address | varchar(255) |  |  | 合约地址 |
+
 | **event-paralist** |  |  |  | 事件字段列表 |
-| tx_hash | varchar(225) | index |  | 交易哈希 |
+| tx_hash | varchar(255) | index |  | 交易哈希 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 
 以上述智能合约为例，对应的 **<event-paralist>** 如下：
@@ -125,11 +128,11 @@ contract UserInfo {
 
 #### 4.1 交易数据存储命名规则
 
-交易数据存储表名、表结构及字段命名规则同事件数据存储模型类似，以3.3.1中的合约为例进行说明。
+交易数据存储表名、表结构及字段命名规则同事件数据存储模型类似.
 
 ##### 4.1.1 交易表命名规则
 
-交易表命名规则为：合约名称_方法名称，并将合约名称和方法名称中的驼峰命名转化为小写加下划线方式。比如上述合约中合约名称为UserInfo，方法名称为modifyUserName，则表名称为user_info_modify_user_name；构造方法名称为UserInfo，那么对应的表名为user_info_user_info。
+交易表命名规则为：合约名称_方法名称，并将合约名称和方法名称中的驼峰命名转化为小写加下划线方式。比如上述合约中合约名称为UserInfo，方法名称为modifyUserName，则表名称为user_info_modify_user_name_method；构造方法名称为UserInfo，那么对应的表名为user_info_user_info_method。
 
 ##### 4.1.2 交易字段命名规则
 
@@ -145,7 +148,7 @@ contract UserInfo {
 | block_height | bigint(20) | index |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
 | **function-paralist** |  |  |  | 方法字段列表 |
-| tx_hash | varchar(225) | index |  | 交易哈希 |
+| tx_hash | varchar(255) | index |  | 交易哈希 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 
 以**3.1**中的合约为例，对应的 **<function-paralist>** 如下：
