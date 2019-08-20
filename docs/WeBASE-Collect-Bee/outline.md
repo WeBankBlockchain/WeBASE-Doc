@@ -1,12 +1,3 @@
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Gitter](https://badges.gitter.im/WeBASE-Collect-Bee/WeBASE-Collect-Bee.svg)](https://gitter.im/WeBASE-Collect-Bee/community)
-
-> 穿花度柳飞如箭，
-> 粘絮寻香似落星。
-> 小小微躯能负重，
-> 器器薄翅会乘风。
-> -- 吴承恩
-
 ## 组件介绍
 
 ### 1. 组件介绍
@@ -59,32 +50,32 @@ WeBASE-Collect-Bee还集成了Swagger组件，提供了可视化的文档和测�
 
 该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
 
-### 4. 特性介绍
+### 3. 特性介绍
 
-#### 4.1 可自动生成代码
+#### 3.1 可自动生成代码
 
 可使用[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)生成的代码和配置文件，自动组装成数据导出工程实例
 
-#### 4.2 支持灵活的数据库策略
+#### 3.2 支持灵活的数据库策略
 
 集成sharding-jdbc组件，支持多数据源、分库分表、读写分离
 
-#### 4.3 支持集群部署和分布式任务调度
+#### 3.3 支持集群部署和分布式任务调度
 
 集成elstic-job开源组件，支持灵活的分布式部署和任务调度
 
-#### 4.4 可定制化的数据导出策略
+#### 3.4 可定制化的数据导出策略
 
 提供灵活的可配置的区块、交易、事件、账户等数据导出功能，过滤不需要的数据
 
-#### 4.5 提供丰富的Restful API查询接口
+#### 3.5 提供丰富的Restful API查询接口
 
 支持丰富的Restful API数据查询接口
 
-#### 4.6提供可视化的互动API控制台
+#### 3.6提供可视化的互动API控制台
 
 集成swagger插件，提供可视化互动API控制台
 
-#### 4.7 支持可视化的监控页面
+#### 3.7 支持可视化的监控页面
 
 WeBASE-Collect-Bee可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
