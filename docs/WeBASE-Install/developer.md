@@ -35,9 +35,11 @@
 
 4. 修改conf/application.yml中节点的端口（build_chain使用默认配置时无需修改）
 
-    `sdk:
+    ```yml
+    sdk:
       ......
-      channelPort: 21200`
+      channelPort: 21200
+    ```
 
     端口可以在节点所在目录nodes/${ip}/node${number}/config.ini中看到。
 
@@ -89,7 +91,7 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ### 1.4 使用说明
 以合约Asset为例：
 
-```
+```solidity
 pragma solidity ^0.4.21;
 
 contract Asset {
