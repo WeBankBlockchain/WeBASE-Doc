@@ -31,6 +31,7 @@ gradle build -x test
 ```
 方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
 ```shell
+chmod +x ./gradlew
 ./gradlew build -x test
 ```
 构建完成后，会在根目录WeBASE-Sign下生成已编译的代码目录dist。

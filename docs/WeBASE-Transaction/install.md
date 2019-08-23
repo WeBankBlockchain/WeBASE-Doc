@@ -104,11 +104,9 @@ sdk:
       - 127.0.0.1:20201
 
 constant: 
-  # 签名服务url，需要调用签名服务进行签名的话则对应修改，使用本地签名的话可以不修改
-  signServiceUrl: http://127.0.0.1:5004/WeBASE-Sign/sign
-  # 签名服务用户编号，需要调用签名服务进行签名的话则对应修改，使用本地签名的话可以不修改
-  signUserId: 100001
-  # 本地配置私钥进行签名，使用这种模式则对应修改
+  # WeBASE-Sign签名服务ip端口，使用本签名方式则对应修改，使用本地签名的话可以不修改
+  signServer: 127.0.0.1:5004
+  # 本地配置私钥进行签名，使用本签名方式则对应修改
   privateKey: edf02a4a69b14ee6b1650a95de71d5f50496ef62ae4213026bd8d6651d030995
   cronTrans: 0/1 * * * * ?
   requestCountMax: 6
