@@ -31,6 +31,7 @@ gradle build -x test
 ```
 方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
 ```shell
+chmod +x ./gradlew
 ./gradlew build -x test
 ```
 构建完成后，会在根目录WeBASE-Sign下生成已编译的代码目录dist。
@@ -65,7 +66,7 @@ server:
 spring: 
   datasource: 
     # 数据库连接信息
-    url: jdbc:mysql://127.0.0.1:3306/webasesign?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/webasesign?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     # 数据库用户名
     username: dbUsername
     # 数据库密码
