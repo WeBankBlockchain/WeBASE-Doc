@@ -8,7 +8,6 @@
 | 2    | WeBASE-Front 对应版本 |
 | 3    | MySQL5.6或以上版本    |
 | 4    | Java1.8或以上版本     |
-| 5    | Gradle-4.10或以上版本 |
 
 
 ## 2. 注意事项
@@ -28,11 +27,19 @@ cd WeBASE-Node-Manager
 
 ## 4. 编译代码
 
-执行构建命令：
+方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+
 ```shell
 gradle build -x test
-（没有安装Gradle，则使用 ./gradlew build -x test）
 ```
+
+方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+
+```shell
+chmod +x ./gradlew
+./gradlew build -x test
+```
+
 构建完成后，会在根目录WeBASE-Node-Manager下生成已编译的代码目录dist。
 
 
