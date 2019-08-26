@@ -4,7 +4,6 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Gradle | Gradle4.10或以上版本 |
 | Java | jdk1.8或以上版本 |
 | FISCO-BCOS | V2.0.x版本 |
 
@@ -24,9 +23,17 @@ cd WeBASE-Front
 
 ## 3. 编译代码
 
-执行构建命令，如果出现问题可以查看 [附录-2](./appendix.html#id3) ：
+使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id3) ：
 
+方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+
+```shell
+gradle build -x test
 ```
+
+方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+
+```shell
 chmod +x ./gradlew
 ./gradlew build -x test
 ```
