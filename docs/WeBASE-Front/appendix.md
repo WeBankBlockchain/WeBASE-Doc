@@ -73,7 +73,7 @@ FAILURE: Build failed with an exception.
 
 * 3：节点运行一段时间后新增了一个群组，前置查不到新群组的信息。 
 
-   答：调用 http://{ip}:{port}/WeBASE-Front/5002/1/web3/refresh 方法，即可手动更新。
+   答：调用 http://{ip}:{port}/WeBASE-Front/1/web3/refresh 方法，即可手动更新。
 
 - 4：升级1.0.2版本时，数据库报错：
 
