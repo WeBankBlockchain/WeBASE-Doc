@@ -1,3 +1,4 @@
+
 # 接口说明
 
 
@@ -3375,3 +3376,728 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 }
 ```
 
+
+## 13 预编译接口
+
+
+### 13.1 查看权限管理
+
+根据PermissionType权限类型，查询该类权限记录列表。共支持查看六种权限的管理员列表：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
+
+#### 13.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/permission**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2    | permissionType      | String           | 否     | 查看拥有某个权限的address list|
+| 3    | tableName   | String           | 是     |
+| 4   | pageSize   | int           | 否     |
+| 5    | pageNumber   | int           | 否     |
+type=UserTable的时候不能为空。查看某个表的管理员list                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/permission?groupId=1&permissionType=cns&pageSize=5&pageNumber=1
+```
+
+
+
+#### 13.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | List数组        |      | 直接返回数组                     
+| 4   | totalCount     | int        |      | 总数目                          
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "table_name": "_sys_table_access_",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+* 失败：
+```
+{
+    "code": 400,
+    "message": "Required String parameter 'tableName' is not present"
+}
+```
+
+### 13.2 查看权限管理列表（全量不分页）
+
+根据PermissionType权限类型，查询该类权限记录列表。共支持查看六种权限的管理员列表：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
+
+
+#### 13.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/permission/full**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2    | permissionType      | String           | 否     | 查看拥有某个权限的address list|
+| 3    | tableName   | String           | 是     |
+                     
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/permission/full?groupId=1&permissionType=cns&pageSize=5&pageNumber=1
+```
+
+
+#### 13.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | List数组        |      | 直接返回数组                     
+| 4   | totalCount     | int        |      | 总数目                          
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "table_name": "_sys_table_access_",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+* 失败：
+```
+{
+    "code": 400,
+    "message": "Required String parameter 'tableName' is not present"
+}
+```
+
+
+### 13.3 增加管理权限接口
+
+由管理员赋予外部账户地址不同类型的权限，包含六种：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
+
+其中userTable权限还需传入相应的表明tableName
+
+
+
+#### 13.3.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/permission**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.3.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | permissionType     | String        | 否     | 分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)  
+| 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
+| 4    | address   | String           | 否     | 分配链管理员的用户地址         
+| 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
+                           
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/permission
+```
+
+```
+{
+    "groupId": 1,
+    "permissionType": "permission",
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.3.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -51000,
+    "message": "table name and address already exist"
+}
+```
+
+
+### 13.4 去除管理权限接口
+
+由管理员去除外部账户地址不同类型的权限，包含六种：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
+
+其中userTable权限还需传入相应的表明tableName
+
+#### 13.4.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/permission**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.4.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | permissionType     | String        | 否     | 分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)  
+| 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
+| 4    | address   | String           | 否     | 分配链管理员的用户地址         
+| 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
+                           
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/permission
+```
+
+```
+{
+    "groupId": 1,
+    "permissionType": "permission",
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.4.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -51001,
+    "message": "table name and address does not exist"
+}
+```
+
+
+
+
+
+### 14.1 查询CNS接口
+
+根据群组id和合约名（或合约名加版本）获取CNS的list列表。
+
+#### 14.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/precompiled/cns/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 14.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     |
+| 2    | contractNameAndVersion   | String           | 否     | 只需要合约名,version缺乏时返回所有版本，version与contractName用英文冒号":"连接                             |
+| 4   | pageSize   | int           | 否     |
+| 5    | pageNumber   | int           | 否     |
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/cns/list?groupId=1&contractNameAndVersion=HelloWorld&pageSize=10&pageNumber=1
+```
+
+
+
+#### 14.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述       
+| 3    | data     | List数组        | 否     | 描述                           
+| 4   | totalCount     | int        |      | 总数目                          
+
+
+
+***2）出参示例***
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "name": "HelloWorld",
+            "version": "2d36b8ed7ed12da01ed51cc0c85c3002085b17b6",
+            "address": "0x2d36b8ed7ed12da01ed51cc0c85c3002085b17b6",
+            "abi": "[{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"nameEvent\",\"payable\":false,\"type\":\"event\"}]"
+        }
+    ],
+    "totalCount": 1
+}
+
+```
+
+
+### 15.1 获取系统配置
+
+根据群组id获取系统配置SystemConfig的list列表，目前只支持tx_count_limit, tx_gas_limit两个参数。
+
+
+#### 15.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/sys/config/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 15.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2   | pageSize   | int           | 否     |
+| 3    | pageNumber   | int           | 否     |
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/sys/config/list?groupId=1&pageSize=10&pageNumber=1
+```
+
+
+#### 15.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data    | 数组        | 否     | list包含数据库存储的配置key与对应value                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 6,
+            "groupId": 1,
+            "fromAddress": "0x",
+            "configKey": "tx_gas_limit",
+            "configValue": "300000000"
+        },
+        {
+            "id": 5,
+            "groupId": 1,
+            "fromAddress": "0xd0b56b4ce0e8ce5e064f896d9ad1c16b2603f285",
+            "configKey": "tx_count_limit",
+            "configValue": "10002"
+        }
+    ],
+    "totalCount": 2
+}
+```
+
+
+### 15.2 设置系统配置
+
+系统配置管理员设置系统配置，目前只支持tx_count_limit, tx_gas_limit两个参数。
+
+
+#### 15.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/sys/config**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 15.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 管理员自己的地址
+| 3    | configKey     | String        | 否     | 目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price
+ | 4    | configValue     | String        | 否     |  
+
+                          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/sys/config
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "configKey": "tx_count_limit",
+    "configValue": "1001"
+}
+```
+
+
+#### 15.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success"
+ }
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+
+
+### 16.1 获取节点list(节点管理)
+
+获取节点的list列表，包含节点id，节点共识状态。
+
+
+#### 16.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/precompiled/consensus/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id    
+| 2   | pageSize   | int           | 否     |
+| 3    | pageNumber   | int           | 否     |
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus/list?groupId=1&pageSize=10&pageNumber=1
+```
+
+
+#### 16.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "nodeId": "13e0f2b94cbce924cc3737385a38587939e809fb786c4fc34a6ba3ea97693bccfa173b352ac41f1dbb97e9e4910ccbec1df38ad4020cef3b2044e833188adad9",
+            "nodeType": "sealer"
+        },
+        {
+            "nodeId": "bce4b2269c25c2cdba30155396bfe90af08c3c08cff205213477683117e4243ebe26588479519e636a5d5d93545cab778435cacacc41993f28f58f60fa5ceb72",
+            "nodeType": "sealer"
+        },
+        {
+            "nodeId": "e815cc5637cb8c3274c83215c680822e4a0110d0a8315fcf03e43e8e3944edd758c8b173c4e0076f599aa1f853fa207d47cc95d201ae8d0206b71ad5aa8c3f59",
+            "nodeType": "sealer"
+        }
+    ],
+    "totalCount": 3
+}
+
+```
+
+
+### 16.2 设置节点共识状态接口（节点管理）
+
+节点管理相关接口，可用于节点三种共识状态的切换。分别是共识节点sealer, 观察节点observer, 游离节点remove
+
+
+#### 16.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/precompiled/consensus**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id    
+| 2    | fromAddress     | String        | 否     | 管理员的地址    
+| 3    | nodeType     | String        | 否     | 节点类型：observer,sealer,remove  
+| 4    | nodeId     | String        | 否     | 节点id    
+                          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "nodeType": "remove",
+    "nodeId": "224e6ee23e8a02d371298b9aec828f77cc2711da3a981684896715a3711885a3177b3cf7906bf9d1b84e597fad1e0049511139332c04edfe3daddba5ed60cffa"
+}
+```
+
+
+#### 16.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+
+
+
+***2）出参示例***
+* 成功：
+```
+[
+    {
+      "code": 0,
+      "message": "success"
+     }
+
+]
+
+```
+
+* 失败：
+```
+{
+    "code": -51000,
+    "message": "nodeId already exist"
+}
+```
+
+
+
+### 17.1 CRUD表格操作接口
+
+用于操作用户表的CRUD操作，包含create, desc, insert, update, select, remove。
+
+具体sql要求语法参考Fisco-bcos技术文档的  [Precompiled Crud API](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
+
+
+#### 5.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/precompiled/crud**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 5.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | UserTable管理员的地址  
+| 3    | sql     | String        | 否     | 需要调用的sql语句  
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "sql": "desc t_demo"
+}
+```
+
+
+#### 5.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | String        | 否     | 调用结果                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "tableName": "t_demo",
+        "key": "name",
+        "valueFields": "item_id,item_name",
+        "optional": "",
+        "entry": {
+            "fields": {}
+        },
+        "condition": {
+            "conditions": {}
+        }
+    }
+}
+
+或者
+
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "Insert OK, 1 row effected"
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 201228,
+    "message": "table not exists",
+    "data": "Table not exists "
+}
+```
