@@ -1,3 +1,4 @@
+
 # 接口说明
 
 ## 1. 合约接口
@@ -715,7 +716,7 @@ http://localhost:5002/WeBASE-Front/1/web3/blockNumbe
 **1）数据格式**
 ```
 {
-	8346
+    8346
 }
 ```
 
@@ -1258,10 +1259,10 @@ http://localhost:5002/WeBASE-Front/1/web3/transaction-total
 **2）数据格式**
 ```
 {
-	"txSum": 125,
-	"blockNumber": 125,
-	"blockNumberRaw": "0x7d",
-	"txSumRaw": "0x7d"
+    "txSum": 125,
+    "blockNumber": 125,
+    "blockNumberRaw": "0x7d",
+    "txSumRaw": "0x7d"
 }
 ```
 
@@ -2278,9 +2279,9 @@ b、正确发送数据上链返回值信息（交易收据）
 
 #### 接口描述
 
-​	通过此接口对合约进行调用，前置根据调用的合约方法是否是“constant”方法区分返回信息，“constant”方法为查询，返回要查询的信息。非“constant”方法为发送数据上链，返回块hash、块高、交易hash等信息。
+​   通过此接口对合约进行调用，前置根据调用的合约方法是否是“constant”方法区分返回信息，“constant”方法为查询，返回要查询的信息。非“constant”方法为发送数据上链，返回块hash、块高、交易hash等信息。
 
-​	当合约方法为非“constant”方法，要发送数据上链时，此接口需结合WeBASE-Sign使用。通过调用WeBASE-Sign服务的签名接口让相关用户对数据进行签名，拿回签名数据再发送上链。需要调用此接口时，工程配置文件application.yml中的配置"keyServer"需配置WeBASE-Sign服务的ip和端口，并保证WeBASE-Sign服务正常和存在相关用户。
+​   当合约方法为非“constant”方法，要发送数据上链时，此接口需结合WeBASE-Sign使用。通过调用WeBASE-Sign服务的签名接口让相关用户对数据进行签名，拿回签名数据再发送上链。需要调用此接口时，工程配置文件application.yml中的配置"keyServer"需配置WeBASE-Sign服务的ip和端口，并保证WeBASE-Sign服务正常和存在相关用户。
 
 #### 接口URL
 
@@ -2373,11 +2374,622 @@ b、正确发送数据上链返回值信息（交易收据）
 }
 ```
 
-## 6. 附录
+## 6. 预编译接口（系统管理）
+
+### 6.1. 查询权限接口
+
+#### 6.1.1 查询权限接口
+
+#### 接口描述
+
+
+根据PermissionType权限类型，查询该类权限记录列表。共支持查看六种权限的管理员列表：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig  
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/permission?groupId={groupId}&permissionType={permissionType}&pageSize={pageSize}&pageNumber={pageNumber}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 权限类型       | permissionType    | String   |              | 是       |  分配权限的类型                                     |
+| 3        | 分页大小         | pageSize        | int   |           | 是       | 默认为10
+| 4        | 分页页码         | pageNumber        | int   |           | 是       |  默认为1             
+5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+
+**2）数据格式**
+
+
+```
+http://localhost:5002/WeBASE-Front/permission?groupId=1&permissionType=cns&pageSize=5&pageNumber=1
+```
+
+
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "table_name": "_sys_table_access_",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+#### 6.1.2 查询权限接口（不分页）
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/permission/full?groupId={groupId}&permissionType={permissionType}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 权限类型       | permissionType    | String   |              | 是       |  分配权限的类型                                     
+| 3       | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+
+**2）数据格式**
+
+
+```
+http://localhost:5002/WeBASE-Front/permission/full?groupId=1&permissionType=cns&pageSize=5&pageNumber=1
+```
+
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "table_name": "_sys_table_access_",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+### 6.2. 增加管理权限接口
+
+#### 接口描述
+
+由管理员赋予外部账户地址不同类型的权限，包含六种：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
+
+其中userTable权限还需传入相应的表明tableName
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/permission**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 权限类型       | permissionType    | String   |              | 是       |  分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)                                                |
+| 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
+| 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
+| 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+
+**2）数据格式**
+
+```
+{
+    "groupId": 1,
+    "permissionType": "permission",
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"groupId": 1, "permissionType": "permission", "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1", "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"}' http://10.0.0.1:5002/WeBASE-Front/permission
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+b、失败：
+```
+{
+    "code": -51000,
+    "message": "table name and address already exist"
+}
+```
+
+
+### 6.3. 去除管理权限接口
+
+#### 接口描述
+
+由管理员去除外部账户地址不同类型的权限，包含六种：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
+
+其中userTable权限还需传入相应的表明tableName
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/permission**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 权限类型       | permissionType    | String   |              | 是       |  分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)                                                |
+| 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
+| 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
+| 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+
+**2）数据格式**
+
+```
+{
+    "groupId": 1,
+    "permissionType": "permission",
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X DELETE -d '{"groupId": 1, "permissionType": "permission", "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1", "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"}' http://10.0.0.1:5002/WeBASE-Front/permission
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+b、失败：
+```
+{
+    "code": -51001,
+    "message": "table name and address does not exist"
+}
+```
+
+
+### 6.4. 查询CNS接口
+
+#### 接口描述
+
+
+根据群组id和合约名（或合约名加版本）获取CNS的list列表。
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/precompiled/cns/list?groupId={groupId}&contractNameAndVersion={contractNameAndVersion}&pageSize={pageSize}&pageNumber={pageNumber}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 合约名与版本       | contractNameAndVersion    | String   |              | 是       |  版本非必填，合约名与版本中间用英文冒号":"连接，版本号最长为40，由字母数字与"."组成。无版本参数时返回全部版本                                     |
+| 3        | 分页大小         | pageSize        | int   |           | 是       | 默认为10
+| 4        | 分页页码         | pageNumber        | int   |           | 是       |  默认为1            
+      
+**2）数据格式**
+
+
+```
+http://localhost:5002/WeBASE-Front/precompiled/cns/list?groupId=1&contractNameAndVersion=HelloWorld&pageSize=5&pageNumber=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "name": "HelloWorld",
+            "version": "2d36b8ed7ed12da01ed51cc0c85c3002085b17b6",
+            "address": "0x2d36b8ed7ed12da01ed51cc0c85c3002085b17b6",
+            "abi": "[{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"nameEvent\",\"payable\":false,\"type\":\"event\"}]"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+### 6.5. 查询系统配置接口
+
+#### 接口描述
+
+根据群组id获取系统配置SystemConfig的list列表，目前只支持tx_count_limit, tx_gas_limit两个参数。
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/sys/config/list?groupId={groupId}&pageSize={pageSize}&pageNumber={pageNumber}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 分页大小         | pageSize        | int   |           | 是       | 默认为10
+| 3        | 分页页码         | pageNumber        | int   |           | 是       |  默认为1            
+      
+**2）数据格式**
+
+
+```
+http://localhost:5002/WeBASE-Front/sys/config/list?groupId=1&pageSize=5&pageNumber=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 6,
+            "groupId": 1,
+            "fromAddress": "0x",
+            "configKey": "tx_gas_limit",
+            "configValue": "300000000"
+        },
+        {
+            "id": 5,
+            "groupId": 1,
+            "fromAddress": "0xd0b56b4ce0e8ce5e064f896d9ad1c16b2603f285",
+            "configKey": "tx_count_limit",
+            "configValue": "10002"
+        }
+    ],
+    "totalCount": 2
+}
+```
+
+### 6.6. 设置系统配置接口
+
+#### 接口描述
+
+系统配置管理员设置系统配置，目前只支持tx_count_limit, tx_gas_limit两个参数。
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/sys/config**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |                                             |
+| 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
+| 3        | 配置的键         | configKey        | String   |           | 是       |   目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price                                             |
+| 4        | 配置的值       | configValue       | String     |              |     是    | tx_gas_limit范围为 [100000, 2147483647]
+
+**2）数据格式**
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "configKey": "tx_count_limit",
+    "configValue": "1001"
+}
+```
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"groupId": 1, "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1", "configKey": "tx_count_limit", "configValue": "1001"}' http://10.0.0.1:5002/WeBASE-Front/sys/config
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+b、失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+### 6.7. 查询节点接口（节点管理）
+
+#### 接口描述
+
+获取节点的list列表，列表包含节点id，节点共识状态。
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/precompiled/consensus/list?groupId={groupId}&pageSize={pageSize}&pageNumber={pageNumber}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 分页大小         | pageSize        | int   |           | 是       | 默认为10
+| 3        | 分页页码         | pageNumber        | int   |           | 是       |  默认为1            
+      
+**2）数据格式**
+
+
+```
+http://localhost:5002/WeBASE-Front/precompiled/consensus/list?groupId=1&pageSize=5&pageNumber=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "nodeId": "13e0f2b94cbce924cc3737385a38587939e809fb786c4fc34a6ba3ea97693bccfa173b352ac41f1dbb97e9e4910ccbec1df38ad4020cef3b2044e833188adad9",
+            "nodeType": "sealer"
+        },
+        {
+            "nodeId": "bce4b2269c25c2cdba30155396bfe90af08c3c08cff205213477683117e4243ebe26588479519e636a5d5d93545cab778435cacacc41993f28f58f60fa5ceb72",
+            "nodeType": "sealer"
+        },
+        {
+            "nodeId": "e815cc5637cb8c3274c83215c680822e4a0110d0a8315fcf03e43e8e3944edd758c8b173c4e0076f599aa1f853fa207d47cc95d201ae8d0206b71ad5aa8c3f59",
+            "nodeType": "sealer"
+        }
+    ],
+    "totalCount": 3
+}
+```
+
+### 6.8. 设置节点共识状态接口（节点管理）
+
+#### 接口描述
+
+节点管理相关接口，可用于节点三种共识状态的切换。分别是共识节点sealer, 观察节点observer, 游离节点remove
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precompiled/consensus**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |                                             |
+| 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
+| 3        | 节点类型       | nodeType       | String     |              |     是    | 节点类型：observer,sealer,remove 
+| 4      | 节点ID         | nodeId        | String   |           | 是       |   节点id，从节点根目录/conf/node.id获取                                             |
+
+**2）数据格式**
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "nodeType": "remove",
+    "nodeId": "224e6ee23e8a02d371298b9aec828f77cc2711da3a981684896715a3711885a3177b3cf7906bf9d1b84e597fad1e0049511139332c04edfe3daddba5ed60cffa"
+}
+```
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"groupId": 1, "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1", "configKey": "tx_count_limit", "configValue": "1001"}' http://10.0.0.1:5002/WeBASE-Front/sys/config
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+b、失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+
+### 6.9. CRUD表格操作接口
+
+#### 接口描述
+
+用于操作用户表的CRUD操作，包含create, desc, insert, update, select, remove。
+
+具体sql要求语法参考Fisco-bcos技术文档的  [Precompiled Crud API](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precompiled/crud**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |                                             |
+| 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
+| 3        | SQL语句       | sql       | String     |              |     是    | 包含create, desc, insert, update, select, remove，小写
+
+
+**2）数据格式**
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "sql": "desc t_demo"
+}
+```
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"groupId": 1, "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1", "sql": "desc t_demo"}' http://10.0.0.1:5002/WeBASE-Front/precompiled/crud
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "tableName": "t_demo",
+        "key": "name",
+        "valueFields": "item_id,item_name",
+        "optional": "",
+        "entry": {
+            "fields": {}
+        },
+        "condition": {
+            "conditions": {}
+        }
+    }
+}
+```
+
+b、失败：
+```
+{
+    "code": 2012228,
+    "message": "table not exists",
+    "data": "Table not exists "
+}
+```
+
+
+
+## 7. 附录
 
 ### 1. 返回码信息列表 
 
-------
 
 | code   | message                                      | 描述                       |
 | ------ | -------------------------------------------- | -------------------------- |
@@ -2423,3 +3035,53 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201037 | user name is null                            | 用户名为空                 |
 | 201038 | user name already exists                     | 用户名已存在               |
 | 201039 | private key already exists                   | 私钥已存在                 |
+| 201101  | groupId cannot be empty                   |    群组编号不能为空      | 
+| 201102  | tableName cannot be empty         |    表名不能为空      |
+| 201103  | permissionType cannot be empty             |    权限类型不能为空      |
+| 201104  | permissionType not exists             |    权限类型不存在      |
+| 201105  | from address cannot be empty             |    管理员地址不能为空      |
+| 201106  | contract name cannot be empty             |    合约名不能为空      |
+| 201107  | system config key cannot be empty    |  系统配置key值不能为空    |
+| 201108  | system config value cannot be empty      |    系统配置value值不能为空 |
+| 201109  | node id cannot be empty                 |    节点id不能为空      |
+| 201110  | node type cannot be empty           |   节点类型（共识状态不能为空） |
+| 201200  | params not fit             |    参数不符合要求      |
+| 201201  | address is invalid           |    账户地址不正确      |
+| 201208  | unsupported for this system config key     |    不支持设置该系统配置      |
+| 201209  | provide value by positive integer mode, from 100000 to 2147483647              |    请输入正值或[100000, 2147483647]范围的值      |
+| 201210  | set system config value fail for params error or permission denied               |    设置系统配置失败，请检查权限      |
+| 201211  | query system config value list fail    |    获取系统配置列表失败      |
+| 201216  | node id is invalid     |    节点id错误      |
+| 201217  | invalid node type: sealer, observer, remove  |  节点类型（共识状态）错误：sealer, observer, remove    |
+| 201221  | Contract version should only contains 'A-Z' or 'a-z' or '0-9' or dot mark  |    CNS合约版本号应只包含大小写字母、数字和"."      |
+| 201222  | version of contract is out of length |    合约版本号过长      |
+| 201226  | sql syntax error              |    sql语句错误      |
+| 201227  | crud sql fail              |    执行sql语句失败      |
+| 201228  | table not exists              |    操作的表格不存在      |
+| -51503  | crud sql execute error                |     执行sql失败     |
+
+
+### 2. Precompiled Service API 错误码
+
+| 错误码 | 消息内容                                          | 备注      |
+| :----- | :----------------------------------------------  | :-----   |
+| 0      | success                                          |          |
+| -50000  | permission denied                               |          |
+| -50001  | table name already exist                        |          |
+| -50100  | unknow function call                            |          |
+| -50101  | table does not exist                            |          |
+| -51000  | table name and address already exist            |          |
+| -51001  | table name and address does not exist           |          |
+| -51100  | invalid node ID                                 | SDK错误码 |
+| -51101  | the last sealer cannot be removed               |           |
+| -51102  | the node is not reachable                       | SDK错误码 |
+| -51103  | the node is not a group peer                    | SDK错误码 |
+| -51104  | the node is already in the sealer list          | SDK错误码 |
+| -51105  | the node is already in the observer list        | SDK错误码 |
+| -51200  | contract name and version already exist         | SDK错误码 |
+| -51201  | version string length exceeds the maximum limit | SDK错误码 |
+| -51300  | invalid configuration entry                     |          |
+| -51500  | contract name and version already exist         |          |
+| -51501  | condition parse error                           |          |
+| -51502  | condition operation undefined                   |          |
+
