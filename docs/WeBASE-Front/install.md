@@ -7,7 +7,7 @@
 | Java | jdk1.8或以上版本 |
 | FISCO-BCOS | V2.0.x版本 |
 
-备注：安装说明请参看 [附录-1](./appendix.html#id2)。
+**备注：** Java推荐[Oracle JDK](./appendix.html#java)。如果使用OpenJDK，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
 ## 2. 拉取代码
 执行命令：

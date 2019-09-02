@@ -148,9 +148,17 @@ ZooKeeper的安装包括单机模式安装，以及集群模式安装。具体�
 
 ### 2.1 脚本没权限
 
-执行shell脚本报错误"permission denied"
+- 执行shell脚本报错误"permission denied"
 
 答：使用 “chmod +x 文件” 给文件增加权限
+
+- netstat权限问题
+
+```
+（all processes could be identified, non-owned process info will not be shown, you would have to be root to see it all.）
+```
+
+答：加上权限即可（sudo chmod +s /bin/netstat）
 
 ### 2.2 构建失败
 

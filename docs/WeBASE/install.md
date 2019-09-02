@@ -16,7 +16,11 @@
 | MySQL-python | 使用python2时需安装 |
 | PyMySQL | 使用python3时需安装 |
 
-**备注：** 安装说明可以参看[附录](#id8)示例，也可以自行安装。
+**备注：** 
+
+- Java推荐[Oracle JDK](#java )。如果使用OpenJDK，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+
+- 安装说明可以参看[附录](#id8)示例，也可以自行安装
 
 ## 拉取部署脚本
 
@@ -157,7 +161,7 @@ http://{deployIP}:{webPort}
 
 ### 1. Java环境部署
 
-此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
 #### ① 安装包下载
 
@@ -417,3 +421,12 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 ```
 
 答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
+
+### 9. 前置启动报“nested exception is javax.net.ssl.SSLException”
+
+```
+...
+nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
+```
+
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。

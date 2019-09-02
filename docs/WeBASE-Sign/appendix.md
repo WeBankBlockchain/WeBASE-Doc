@@ -125,3 +125,19 @@ mysql -utest -p123456 -h localhost -P 3306
 ```sql
 mysql > create database webasesign;
 ```
+
+## 2. 常见问题
+
+### 2.1 脚本没权限
+
+- 执行shell脚本报错误"permission denied"
+
+答：使用 “chmod +x 文件” 给文件增加权限
+
+- netstat权限问题
+
+```
+（all processes could be identified, non-owned process info will not be shown, you would have to be root to see it all.）
+```
+
+答：加上权限即可（sudo chmod +s /bin/netstat）
