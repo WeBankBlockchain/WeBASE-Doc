@@ -4,7 +4,7 @@
 
 ### 1.1 Java部署
 
-此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
 （1）从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到相应目录
 
@@ -112,3 +112,11 @@ FAILURE: Build failed with an exception.
     monitorDisk: /            // 要监控的磁盘目录，配置节点所在目录（如：/home）
   ...
   ```
+
+- 6：执行起停脚本时提示以下信息：
+
+```
+（all processes could be identified, non-owned process info will not be shown, you would have to be root to see it all.）
+```
+
+答：netstat权限问题，加上权限即可（sudo chmod +s /bin/netstat）
