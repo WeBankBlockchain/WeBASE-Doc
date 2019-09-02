@@ -81,10 +81,11 @@ sdk:
   ...
   ip: 127.0.0.1                 // 连接节点的监听ip
   channelPort: 20200            // 连接节点的链上链下端口
-constant:  
-  transMaxWait: 30              // 交易等待时间
-  monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
+constant: 
   keyServer: 127.0.0.1:5001     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
+  transMaxWait: 30              // 交易最大等待时间
+  monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
+  monitorEnabled: true          // 是否监控数据，默认true
 ...
 ```
 
