@@ -26,7 +26,7 @@
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.0.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.1.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
