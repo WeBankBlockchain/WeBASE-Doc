@@ -143,9 +143,11 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns)
 
+CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
+
 ![](../../images/WeBASE-Console-Suit/contract_cns.png)
 
-CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。具体CRUD操作教程查看FISCO-BCOS的[控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
+CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。CRUD可以在FISCO-BCOS链上创建数据表，并对表进行增删改查操作，具体CRUD操作教程查看FISCO-BCOS的[控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
 
 ![](../../images/WeBASE-Console-Suit/contract_crud.png)
 
@@ -160,6 +162,20 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 添加私钥用户：
 
 ![](../../images/WeBASE-Console-Suit/key_manager_add_user_2.png)
+
+### 系统管理
+
+系统管理目前支持配置系统属性值的功能。系统属性包含FISCO-BCOS链的tx_count_limit和tx_gas_limit两种属性值的配置。注：一般不建议随意修改tx_count_limit和tx_gas_limit，如下情况可修改这些参数：
+- 机器网络或CPU等硬件性能有限：调小tx_count_limit，降低业务压力； 
+- 业务逻辑太复杂，执行区块时gas不足：调大tx_gas_limit。
+
+配置管理：
+
+![](../../images/WeBASE-Console-Suit/system_config.png)
+
+配置系统属性值：
+
+![](../../images/WeBASE-Console-Suit/system_config_edit.png)
 
 ### 系统监控
 
