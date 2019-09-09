@@ -16,7 +16,7 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 6. 交易审计
 7. 登陆账号管理
 
-![](../../images/WeBASE-Console-Suit/overview.png)
+![](../../images/WeBASE-Console-Suit/overview_2.png)
 
 ### 部署架构
 
@@ -68,7 +68,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
  未初始化节点前置的管理平台，会引导去节点管理页面添加节点前置。
 
-![](../../images/WeBASE-Console-Suit/add_node_front.png)
+![](../../images/WeBASE-Console-Suit/node_manager_add_front_2.png)
 
 前置添加完成后，管理平台就会开始拉取群组信息和群组的区块信息。此时数据概览页面应该就有数据了。为了解析和审计区块数据，需要把相关的合约和用户导入到管理平台。具体看下面两个小节。
 
@@ -78,23 +78,23 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 管理平台提供两种添加合约的方式，一个是新建一个合约，一个是导入已有合约。同时合约编辑器还提供新建目录。用目录的形式管理合约，主要是为了解决同名合约引用的问题。合约添加完成后，需要编译保存。
 
-![](../../images/WeBASE-Console-Suit/add_contract.png)
+![](../../images/WeBASE-Console-Suit/contract_add_2.png)
 
 #### 2、部署合约
 
 编译后的合约可以部署。
 
-![](../../images/WeBASE-Console-Suit/deploy.png)
+![](../../images/WeBASE-Console-Suit/contract_compile_deploy_2.png)
 
 #### 3、合约调用
 
-![](../../images/WeBASE-Console-Suit/transaction.png)
+![](../../images/WeBASE-Console-Suit/contract_send_transaction.png)
 
 ### 私钥管理
 
 私钥管理提供了新建私钥用户和导入公钥用户两种用户导入方式。第一种方式主要用于新建用户在管理平台的合约管理中部署和调用合约。第二种方式主要用于把交易和用户关联起来。
 
-![](../../images/WeBASE-Console-Suit/user_transaction.png)
+![](../../images/WeBASE-Console-Suit/key_manager_tx_audit.png)
 
 ## 各模块的详细介绍
 
@@ -102,33 +102,67 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ### 区块链数据概览
 
-数据概览页面，展示了区块链的核心数据指标：节点个数，区块数量，交易数量，通过管理台部署的合约数量。关键监控指标：历史15天的交易量。节点信息列表：展示了节点的ID，节点块高，节点view和运行状态。区块信息展示了最近5个块的概览信息，点击更多可以查看更多历史区块。交易信息展示了最近5个交易的概览信息，点击更多可以查看更多历史交易。
+数据概览页面，展示了区块链的核心数据指标：节点个数，区块数量，交易数量，通过管理台部署的合约数量。关键监控指标：历史15天的交易量。
+- 节点信息列表：展示了节点的ID，节点块高，节点view和运行状态；
+- 区块信息列表：展示了最近5个块的概览信息，点击更多可以查看更多历史区块；
+- 交易信息列表：展示了最近5个交易的概览信息，点击更多可以查看更多历史交易；
 
-![](../../images/WeBASE-Console-Suit/overview.png)
+![](../../images/WeBASE-Console-Suit/overview_2.png)
 
 ### 节点管理
 
-节点管理主要提供了前置列表和节点列表的功能。用户可以通过新增节点前置，把新的节点前置添加到前置列表。系统会默认拉取这些前置所在的群组和各个群组的节点信息。
+节点管理主要提供了前置列表、节点列表、修改节点共识状态的功能。
 
-![](../../images/WeBASE-Console-Suit/node.png)
+用户可以通过新增节点前置，把新的节点前置添加到前置列表。系统会默认拉取这些前置所在的群组和各个群组的节点信息。在节点列表中，用户可以修改节点的共识状态：共识节点、观察节点、游离节点。其中修改为游离节点相当于将节点移出群组。
+
+节点管理：
+![](../../images/WeBASE-Console-Suit/node_manager_2.png)
+
+添加前置节点：
+![](../../images/WeBASE-Console-Suit/node_manager_add_front_2.png)
+
+修改节点共识状态：
+![](../../images/WeBASE-Console-Suit/node_manager_edit.png)
 
 ### 合约管理
 
-合约管理提供了一个图形化的合约IDE环境。这个IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口。
+合约管理提供了一个图形化的合约IDE环境、已部署的合约列表、合约CNS查询以及预编译合约的CRUD功能。
 
-![](../../images/WeBASE-Console-Suit/contract.png)
+图形化合约IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口。其中，新建合约可以通过编辑键入合约内容，也可以上传合约文件；编译合约后才可以部署合约；部署合约成功后，可以通过发送交易调用合约接口。具体操作步骤可以参考上一章节中系统初始化配置介绍。
+
+合约IDE：
+![](../../images/WeBASE-Console-Suit/contract_2.png)
+
+合约列表：
+![](../../images/WeBASE-Console-Suit/contract_list_2.png)
+
+CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案]https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns
+![](../../images/WeBASE-Console-Suit/contract_cns.png)
+
+CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。具体CRUD操作教程查看FISCO-BCOS的[控制台CRUD命令]https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql
+![](../../images/WeBASE-Console-Suit/contract_crud.png)
 
 ### 私钥管理
 
-在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，然后拿新建用户的私钥来做合约部署和合约交易的签名。
+私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，然后拿新建用户的私钥来做合约部署和合约交易的签名。注：外部账户可通过新建公钥账户导入。
 
-![](../../images/WeBASE-Console-Suit/key_manager.png)
+私钥管理：
+![](../../images/WeBASE-Console-Suit/key_manger_2.png)
+
+添加私钥用户：
+![](../../images/WeBASE-Console-Suit/key_manager_add_user_2.png)
 
 ### 系统监控
 
-系统监控主要包括节点监控和主机监控。节点监控主要有区块高度，pbftview，待打包交易。主机监控主要有主机的CPU，内存，网络和硬盘IO。
+系统监控主要包括节点监控和主机监控,可以选择节点、时间范围等条件进行筛选查看:
+- 节点监控主要有区块高度，pbftview，待打包交易;
+- 主机监控主要有主机的CPU，内存，网络和硬盘IO;
 
-![](../../images/WeBASE-Console-Suit/node_monitor.png)
+节点监控：
+![](../../images/WeBASE-Console-Suit/node_monitor_2.png)
+
+主机监控：
+![](../../images/WeBASE-Console-Suit/host_mornitor_2.png)
 
 ### 交易审计
 
@@ -143,10 +177,25 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 | 异常交易用户监控     | 监控链上出现的异常交易用户（没在区块链中间件平台登记的交易用户） |
 | 异常合约部署监控     | 监控链上合约部署情况，非白名单合约（没在区块链中间件平台登记的合约）记录 |
 
-![](../../images/WeBASE-Console-Suit/user_audit.png)
+用户交易审计：可以指定用户、时间范围、交易接口进行筛选查看交易
+![](../../images/WeBASE-Console-Suit/tx_audit_user_tx_2.png)
 
-### 登陆账号管理
+异常用户审计：
+![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_user_2.png)
 
-提供管理台登陆账号的管理功能。管理台用户分为两种角色：普通用户和管理员用户。这两者的区别是，管理员拥有管理平台的读写权限，而普通用户只有查看权限。
+异常合约审计：
+![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_contract_2.png)
 
-![](../../images/WeBASE-Console-Suit/login_user_manager.png)
+### 账号管理
+
+账号管理提供管理台登陆账号的管理功能。管理台用户分为两种角色：
+- 普通用户，只有查看权限；
+- 管理员用户，拥有管理平台的读写权限；
+
+注：此处账号与私钥管理的私钥用户为两种不同的概念，账号用于管理台权限控制，私钥用户为区块链账户。
+
+账号管理：
+![](../../images/WeBASE-Console-Suit/login_user_manager_2.png)
+
+添加登陆账号并指定账号类型：
+![](../../images/WeBASE-Console-Suit/login_user_add_2.png)
