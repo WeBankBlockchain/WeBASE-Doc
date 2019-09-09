@@ -116,12 +116,15 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 用户可以通过新增节点前置，把新的节点前置添加到前置列表。系统会默认拉取这些前置所在的群组和各个群组的节点信息。在节点列表中，用户可以修改节点的共识状态：共识节点、观察节点、游离节点。其中修改为游离节点相当于将节点移出群组。
 
 节点管理：
+
 ![](../../images/WeBASE-Console-Suit/node_manager_2.png)
 
 添加前置节点：
+
 ![](../../images/WeBASE-Console-Suit/node_manager_add_front_2.png)
 
 修改节点共识状态：
+
 ![](../../images/WeBASE-Console-Suit/node_manager_edit.png)
 
 ### 合约管理
@@ -131,25 +134,31 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 图形化合约IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口。其中，新建合约可以通过编辑键入合约内容，也可以上传合约文件；编译合约后才可以部署合约；部署合约成功后，可以通过发送交易调用合约接口。具体操作步骤可以参考上一章节中系统初始化配置介绍。
 
 合约IDE：
+
 ![](../../images/WeBASE-Console-Suit/contract_2.png)
 
 合约列表：
+
 ![](../../images/WeBASE-Console-Suit/contract_list_2.png)
 
-CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案]https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns
+CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns)
+
 ![](../../images/WeBASE-Console-Suit/contract_cns.png)
 
-CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。具体CRUD操作教程查看FISCO-BCOS的[控制台CRUD命令]https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql
+CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。具体CRUD操作教程查看FISCO-BCOS的[控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
+
 ![](../../images/WeBASE-Console-Suit/contract_crud.png)
 
 ### 私钥管理
 
-私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，然后拿新建用户的私钥来做合约部署和合约交易的签名。注：外部账户可通过新建公钥账户导入。
+私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，然后拿新建用户的私钥来做合约部署和合约调用的签名。注：外部账户可通过新建公钥账户导入，主要用于把交易和用户关联起来。
 
 私钥管理：
+
 ![](../../images/WeBASE-Console-Suit/key_manger_2.png)
 
 添加私钥用户：
+
 ![](../../images/WeBASE-Console-Suit/key_manager_add_user_2.png)
 
 ### 系统监控
@@ -159,9 +168,11 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 - 主机监控主要有主机的CPU，内存，网络和硬盘IO;
 
 节点监控：
+
 ![](../../images/WeBASE-Console-Suit/node_monitor_2.png)
 
 主机监控：
+
 ![](../../images/WeBASE-Console-Suit/host_mornitor_2.png)
 
 ### 交易审计
@@ -178,12 +189,15 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 | 异常合约部署监控     | 监控链上合约部署情况，非白名单合约（没在区块链中间件平台登记的合约）记录 |
 
 用户交易审计：可以指定用户、时间范围、交易接口进行筛选查看交易
+
 ![](../../images/WeBASE-Console-Suit/tx_audit_user_tx_2.png)
 
 异常用户审计：
+
 ![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_user_2.png)
 
 异常合约审计：
+
 ![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_contract_2.png)
 
 ### 账号管理
@@ -195,7 +209,9 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 注：此处账号与私钥管理的私钥用户为两种不同的概念，账号用于管理台权限控制，私钥用户为区块链账户。
 
 账号管理：
+
 ![](../../images/WeBASE-Console-Suit/login_user_manager_2.png)
 
 添加登陆账号并指定账号类型：
+
 ![](../../images/WeBASE-Console-Suit/login_user_add_2.png)
