@@ -148,17 +148,9 @@ ZooKeeper的安装包括单机模式安装，以及集群模式安装。具体�
 
 ### 2.1 脚本没权限
 
-- 执行shell脚本报错误"permission denied"
+执行shell脚本报错误"permission denied"
 
 答：使用 “chmod +x 文件” 给文件增加权限
-
-- netstat权限问题
-
-```
-（all processes could be identified, non-owned process info will not be shown, you would have to be root to see it all.）
-```
-
-答：加上权限即可（sudo chmod +s /bin/netstat）
 
 ### 2.2 构建失败
 
@@ -189,3 +181,12 @@ FAILURE: Build failed with an exception.
 ```
  //annotationProcessor 'org.projectlombok:lombok:1.18.2'
 ```
+
+### 2.3 启动报“nested exception is javax.net.ssl.SSLException”
+
+```
+...
+nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
+```
+
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。
