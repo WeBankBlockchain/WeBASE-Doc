@@ -48,14 +48,6 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`
 
-- 问：执行起停脚本时提示以下信息：
-
-```
-（all processes could be identified, non-owned process info will not be shown, you would have to be root to see it all.）
-```
-
-答：netstat权限问题，加上权限即可（sudo chmod +s /bin/netstat）
-
 
 ### 2. 配置文件解析
 
