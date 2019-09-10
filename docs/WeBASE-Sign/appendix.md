@@ -125,3 +125,11 @@ mysql -utest -p123456 -h localhost -P 3306
 ```sql
 mysql > create database webasesign;
 ```
+
+## 2. 常见问题
+
+### 2.1 脚本没权限
+
+- 执行shell脚本报错误"permission denied"
+
+答：使用 “chmod +x 文件” 给文件增加权限
