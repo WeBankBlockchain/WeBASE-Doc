@@ -119,9 +119,6 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ![](../../images/WeBASE-Console-Suit/node_manager_2.png)
 
-添加前置节点：
-
-![](../../images/WeBASE-Console-Suit/node_manager_add_front_2.png)
 
 修改节点共识状态：
 
