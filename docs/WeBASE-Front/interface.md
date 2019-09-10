@@ -3053,6 +3053,7 @@ b、失败：
 | 201211  | query system config value list fail    |    获取系统配置列表失败      |
 | 201216  | node id is invalid     |    节点id错误      |
 | 201217  | invalid node type: sealer, observer, remove  |  节点类型（共识状态）错误：sealer, observer, remove    |
+| 201218  | set node consensus type fail, check permission or node's group config file  |  节点类型（共识状态）修改失败，请检查权限或节点群组配置文件  |
 | 201221  | Contract version should only contains 'A-Z' or 'a-z' or '0-9' or dot mark  |    CNS合约版本号应只包含大小写字母、数字和"."      |
 | 201222  | version of contract is out of length |    合约版本号过长      |
 | 201226  | sql syntax error              |    sql语句错误      |
