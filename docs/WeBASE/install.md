@@ -2,7 +2,7 @@
 
 ​	一键部署可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
-​	一键部署会搭建：节点（FISCO-BCOS 2.0）、节点前置子系统（WeBASE-Front）、节点管理子系统（WeBASE-Node-Manager）、管理平台（WeBASE-Web）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
+​	一键部署会搭建：节点（FISCO-BCOS 2.0）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
 ![[]](../../images/WeBASE/deploy.png)
 
@@ -12,16 +12,21 @@
 | ------ | ---------------------- |
 | Java   | jdk1.8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | 2.7                 |
-| MySQL-python | 1.2.5 |
+| Python | Python2或Python3 |
+| MySQL-python | 使用python2时需安装 |
+| PyMySQL | 使用python3时需安装 |
 
-**备注：** 安装说明请参看[附录](#id8)。
+**备注：** 
+
+- Java推荐[Oracle JDK](#java )。如果使用OpenJDK，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+
+- 安装说明可以参看[附录](#id8)示例，也可以自行安装
 
 ## 拉取部署脚本
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.0.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.1.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -36,7 +41,7 @@ cd webase-deploy
 
 ① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id9)；
 
-② 可以使用以下命令修改，也可以直接修改文件（vi common.properties），没有变化的可以不修改；
+② 修改配置文件（vi common.properties），没有变化的可以不修改；
 
 ③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
 
@@ -48,40 +53,48 @@ cd webase-deploy
 ④ 服务端口不能小于1024。
 
 ```shell
-# 数据库信息
-mysql.ip（数据库ip）：sed -i "s%localhost%${your_db_ip}%g" common.properties
-mysql.port（数据库端口）：sed -i "s%3306%${your_db_port}%g" common.properties
-mysql.user（数据库用户名）：sed -i "s%dbUsername%${your_db_account}%g" common.properties
-mysql.password（数据库密码）：sed -i "s%dbPassword%${your_db_password}%g" common.properties
-mysql.database（数据库名称）：sed -i "s%webasenodemanager%${your_db_name}%g" common.properties
+# WeBASE版本(v1.1.0或以上版本)
+webase.version=v1.1.0
+
+# 节点管理子系统mysql数据库配置
+mysql.ip=127.0.0.1
+mysql.port=3306
+mysql.user=dbUsername
+mysql.password=dbPassword
+mysql.database=webasenodemanager
+
+# 节点前置子系统h2数据库名
+front.h2.name=webasefront
 
 # WeBASE管理平台服务端口
-web.port（管理平台服务端口）：sed -i "s%5000%${your_web_port}%g" common.properties
+web.port=5000
 # 节点管理子系统服务端口
-mgr.port（节点管理子系统服务端口）：sed -i "s%5001%${your_mgr_port}%g" common.properties
+mgr.port=5001
 # 节点前置子系统端口
-front.port（节点前置子系统服务端口）：sed -i "s%5002%${your_front_port}%g" common.properties
+front.port=5002
 
 # 节点监听Ip
-node.listenIp（节点监听Ip）：sed -i "s%127.0.0.1%${your_listen_ip}%g" common.properties
+node.listenIp=127.0.0.1
 # 节点p2p端口
-node.p2pPort（节点p2p端口）：sed -i "s%30300%${your_p2p_port}%g" common.properties
+node.p2pPort=30300
 # 节点链上链下端口
-node.channelPort（节点channel端口）：sed -i "s%20200%${your_channel_port}%g" common.properties
+node.channelPort=20200
 # 节点rpc端口
-node.rpcPort（节点rpc端口）：sed -i "s%8545%${your_rpc_port}%g" common.properties
+node.rpcPort=8545
 
 # 是否使用已有的链（yes/no）
-if.exist.fisco（是否使用已有链）：sed -i "s%yes%${your_existed_fisco}%g" common.properties
+if.exist.fisco=no
 
 # 使用已有链时需配置
-fisco.dir（已有链的路径，start_all.sh脚本所在路径）：sed -i "s%fiscoDir%${your_fisco_dir}%g" common.properties
+# 已有链的路径，start_all.sh脚本所在路径
+# 路径下要存在sdk目录，里面存放节点证书（ca.crt、node.crt和node.key）
+fisco.dir=/data/app/nodes/127.0.0.1
 
 # 搭建新链时需配置
-fisco.version（节点FISCO-BCOS版本）：sed -i "s%2.0.0%${your_fisco_version}%g" common.properties
-node.counts（节点安装个数，不修改的话默认两个）：sed -i "s%nodeCounts%${your_node_counts}%g" common.properties
-
-示例（将端口由5000改为5008）：sed -i "s%5000%5008%g" common.properties
+# FISCO-BCOS版本
+fisco.version=2.0.0
+# 搭建节点个数（默认两个）
+node.counts=nodeCounts
 ```
 
 ## 部署
@@ -146,9 +159,9 @@ http://{deployIP}:{webPort}
 
 ## 附录
 
-### Java环境部署
+### 1. Java环境部署
 
-此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
 #### ① 安装包下载
 
@@ -188,7 +201,7 @@ source /etc/profile
 java -version
 ```
 
-### 数据库部署
+### 2. 数据库部署
 
 此处以Centos安装*MariaDB*为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
 
@@ -270,7 +283,7 @@ mysql -utest -p123456 -h localhost -P 3306
 mysql > create database webasenodemanager;
 ```
 
-### Python部署
+### 3. Python部署
 
 - CentOS
 
@@ -284,7 +297,7 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### MySQL-python部署
+### 4. MySQL-python部署
 
 - CentOS
 
@@ -296,12 +309,35 @@ mysql > create database webasenodemanager;
 
   ```
   sudo apt-get install -y python-pip
-  sudo -H pip install MySQL-python
+  sudo pip install MySQL-python
+  ```
+
+### 5. PyMySQL部署
+
+- CentOS
+
+  ```
+  sudo pip3 install PyMySQL
+  ```
+
+  不支持pip命令的话，可以使用以下方式：
+
+  ```
+  git clone https://github.com/PyMySQL/PyMySQL
+  cd PyMySQL/
+  python3 setup.py install
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python3-pip
+  sudo pip3 install PyMySQL
   ```
 
 ## 常见问题
 
-### Python命令出错
+### 1. Python命令出错
 
 ```
   File "deploy.py", line 62
@@ -312,7 +348,7 @@ SyntaxError: Missing parentheses in call to "print". Did you mean print(helpMsg)
 
 答：检查Python版本
 
-### 找不到MySQLdb
+### 2. 使用Python2时找不到MySQLdb
 
 ```
 Traceback (most recent call last):
@@ -322,7 +358,17 @@ ImportError: No module named MySQLdb
 
 答：需要安装MySQL-python，安装请参看 [附录](#mysql-python)
 
-### 安装MySQL-python遇到问题
+### 3. 使用Python3时找不到pymysql
+
+```
+Traceback (most recent call last):
+...
+ImportError: No module named 'pymysql'
+```
+
+答：需要安装PyMySQL，安装请参看 [附录](#pymysql)
+
+### 4. 安装MySQL-python遇到问题
 
 ```
 Command "python setup.py egg_info" failed with error code 1
@@ -334,21 +380,11 @@ pip install --upgrade setuptools
 python -m pip install --upgrade pip
 ```
 
-### 部署时编译包下载慢
+### 5. 部署时某个组件失败，重新部署提示端口被占用问题
 
-```
-...
-Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.112.19|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 22793550 (22M) [application/octet-stream]
-Saving to: ‘webase-front.zip’
+答：因为有个别组件是启动成功的，需先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py installAll”部署全部。
 
- 0% [                                                                                                                                ] 77,974      37.8KB/s    
-```
-
-答：部署过程会下载工程编译包，可能会因为网络原因导致过慢。此时，可以先手动下载（ [WeBASE-Web](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-web.zip) 、[WeBASE-Node-Manager](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-node-mgr.zip) 、[WeBASE-Front](https://www.fisco.com.cn/cdn/WeBASE/release/download/v1.0.2/webase-front.zip)），再上传至服务器webase-deploy目录，在部署过程中根据提示不再重新下载编译包。
-
-### 管理平台启动时Nginx报错
+### 6. 管理平台启动时Nginx报错
 
 ```
 ...
@@ -360,7 +396,7 @@ Exception: execute cmd  error ,cmd : sudo /usr/local/nginx/sbin/nginx -c /data/a
 
 答：检查服务器是否安装了nginx，如果未安装，则通过"which nginx"查询nginx文件路径并删除。
 
-### 部署时数据库访问报错
+### 7. 部署时数据库访问报错
 
 ```
 ...
@@ -377,7 +413,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认数据库用户名和密码
 
-### 节点sdk目录不存在
+### 8. 节点sdk目录不存在
 
 ```
 ...
@@ -385,3 +421,12 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 ```
 
 答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
+
+### 9. 前置启动报“nested exception is javax.net.ssl.SSLException”
+
+```
+...
+nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
+```
+
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。
