@@ -12,9 +12,10 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 2. 节点管理
 3. 合约管理
 4. 私钥管理
-5. 系统监控
-6. 交易审计
-7. 登陆账号管理
+5. 系统管理
+6. 系统监控
+7. 交易审计
+8. 账号管理
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -82,13 +83,19 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 #### 2、部署合约
 
-编译后的合约可以部署。
+合约编译时会自动保存合约内容，编译成功后可以执行合约部署。
 
 ![](../../images/WeBASE-Console-Suit/contract_compile_deploy_2.png)
 
 #### 3、合约调用
 
+在合约部署成功后，可以在合约IDE页面的右上角点击发交易，向合约发送交易进行合约调用。
+
 ![](../../images/WeBASE-Console-Suit/contract_send_transaction.png)
+
+交易发送成功后，将返回交易回执。可以在数据概览-交易列表-更多中根据transactionHash搜索交易，通过交易解析和Event解析查看可视化的交易回执信息。具体操作方法参考下文的区块链数据概览章节中的交易解析与Event解析。
+
+![](../../images/WeBASE-Console-Suit/transaction_output.png)
 
 ### 私钥管理
 
@@ -108,6 +115,22 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 - 交易信息列表：展示了最近5个交易的概览信息，点击更多可以查看更多历史交易；
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
+
+其中右下角的交易信息列表点击可跳入具体一条交易中查看交易详细信息：交易详细信息还包含了
+- 交易解析：可以将交易返回的交易回执数据进行解析并可视化；
+- Event解析：可以将交易返回的Event数据进行解析并可视化；
+
+未解析的raw数据如下图所示：
+
+![](../../images/WeBASE-Console-Suit/transaction_analysis_raw.png)
+
+进行交易解析后如下图所示：
+
+![](../../images/WeBASE-Console-Suit/transaction_analysis.png)
+
+同样的，Event数据解析后可以看到：
+
+![](../../images/WeBASE-Console-Suit/transaction_event.png)
 
 ### 节点管理
 
