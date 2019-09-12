@@ -4,7 +4,7 @@
 
 ### 1.1 Java部署
 
-此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 
 （1）从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到相应目录
 
@@ -73,7 +73,7 @@ FAILURE: Build failed with an exception.
 
 * 3：节点运行一段时间后新增了一个群组，前置查不到新群组的信息。 
 
-   答：调用 http://{ip}:{port}/WeBASE-Front/5002/1/web3/refresh 方法，即可手动更新。
+   答：调用 http://{ip}:{port}/WeBASE-Front/1/web3/refresh 方法，即可手动更新。
 
 - 4：升级1.0.2版本时，数据库报错：
 
@@ -112,3 +112,13 @@ FAILURE: Build failed with an exception.
     monitorDisk: /            // 要监控的磁盘目录，配置节点所在目录（如：/home）
   ...
   ```
+
+- 6：启动报“nested exception is javax.net.ssl.SSLException”：
+
+```
+...
+nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
+```
+
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。
+

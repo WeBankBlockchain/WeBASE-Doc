@@ -4,11 +4,10 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Gradle | Gradle4.10或以上版本 |
 | Java | jdk1.8或以上版本 |
 | FISCO-BCOS | V2.0.x版本 |
 
-备注：安装说明请参看 [附录-1](./appendix.html#id2)。
+**备注：** Java推荐[Oracle JDK](./appendix.html#java)。如果使用OpenJDK，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
 ## 2. 拉取代码
 执行命令：
@@ -24,11 +23,18 @@ cd WeBASE-Front
 
 ## 3. 编译代码
 
-执行构建命令，如果出现问题可以查看 [附录-2](./appendix.html#id3) ：
+使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id3) ：
 
+方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+
+```shell
+gradle build -x test
 ```
-chmod +x ./gradlew
-./gradlew build -x test
+
+方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+
+```shell
+chmod +x ./gradlew && ./gradlew build -x test
 ```
 
 构建完成后，会在根目录WeBASE-Front下生成已编译的代码目录dist。
@@ -74,10 +80,11 @@ sdk:
   ...
   ip: 127.0.0.1                 // 连接节点的监听ip
   channelPort: 20200            // 连接节点的链上链下端口
-constant:  
-  transMaxWait: 30              // 交易等待时间
-  monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
+constant: 
   keyServer: 127.0.0.1:5001     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
+  transMaxWait: 30              // 交易最大等待时间
+  monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
+  monitorEnabled: true          // 是否监控数据，默认true
 ...
 ```
 
