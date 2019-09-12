@@ -86,6 +86,7 @@ HTTP POST
 | 4        | 合约Bin      | contractBin | String         |              | 是       |                                                    |
 | 5        | 合约Abi      | contractAbi | List\<Object\> |              | 是       | JSON数组                                           |
 | 6        | 构造方法参数 | funcParam   | List\<Object\> |              | 否       | JSON数组                                           |
+| 7 | 签名用户编号 | signUserId | int | | 否 | signType为2时必填 |
 
 **2）数据格式**
 ```
@@ -95,7 +96,8 @@ HTTP POST
   "signType":0,
   "contractBin":"0xXXXXX",
   "contractAbi":[],
-  "funcParam":["hello"]
+  "funcParam":["hello"],
+  "signUserId":100001
 }
 ```
 #### 响应参数
@@ -335,6 +337,7 @@ HTTP POST
 | 6        | 合约Abi    | contractAbi     | List\<Object\> |              | 否       | JSON数组                                           |
 | 7        | 调用方法名 | funcName        | String         |              | 是       |                                                    |
 | 8        | 方法参数   | funcParam       | List\<Object\> |              | 否       | JSON数组                                           |
+| 9 | 签名用户编号 | signUserId | int | | 否 | signType为2时必填 |
 
 **2）数据格式**
 ```
@@ -346,7 +349,8 @@ HTTP POST
   "contractAddress":"0xXXXXX",
   "contractAbi":[],
   "funcName":"set",
-  "funcParam":["hello"]
+  "funcParam":["hello"],
+  "signUserId":100001
 }
 ```
 #### 响应参数
@@ -604,3 +608,6 @@ b.异常返回结果示例（信息详情请参看附录1）
 | 303017  | trans output is empty                 | 交易返回值为空             |
 | 303018  | trans is not exist                    | 交易不存在                 |
 | 303019  | request group id has not been configured | 请求的群组编号未配置   |
+| 303020 | sign user id cannot be empty while sign type is 2 | 签名类型为2是签名用户编号不能为空 |
+| 303021 | sign user id check failed | 签名用户编号校验失败 |
+| 303022 | function is not exists | 合约方法不存在 |

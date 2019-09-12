@@ -36,8 +36,7 @@ gradle build -x test
 方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10或以上，使用gradlew编译
 
 ```shell
-chmod +x ./gradlew
-./gradlew build -x test
+chmod +x ./gradlew && ./gradlew build -x test
 ```
 
 构建完成后，会在根目录WeBASE-Transaction下生成已编译的代码目录dist。
@@ -80,12 +79,12 @@ server:
 spring: 
   datasource: 
     # 数据库连接信息
-    url: jdbc:mysql://127.0.0.1:3306/webasetransaction?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/webasetransaction?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     # 数据库用户名
     username: dbUsername
     # 数据库密码
     password: dbPassword
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 sdk:
   # 机构名
@@ -104,11 +103,9 @@ sdk:
       - 127.0.0.1:20201
 
 constant: 
-  # 签名服务url，需要调用签名服务进行签名的话则对应修改，使用本地签名的话可以不修改
-  signServiceUrl: http://127.0.0.1:5004/WeBASE-Sign/sign
-  # 签名服务用户编号，需要调用签名服务进行签名的话则对应修改，使用本地签名的话可以不修改
-  signUserId: 100001
-  # 本地配置私钥进行签名，使用这种模式则对应修改
+  # WeBASE-Sign签名服务ip端口，使用本签名方式则对应修改，使用本地签名的话可以不修改
+  signServer: 127.0.0.1:5004
+  # 本地配置私钥进行签名，使用本签名方式则对应修改
   privateKey: edf02a4a69b14ee6b1650a95de71d5f50496ef62ae4213026bd8d6651d030995
   cronTrans: 0/1 * * * * ?
   requestCountMax: 6
