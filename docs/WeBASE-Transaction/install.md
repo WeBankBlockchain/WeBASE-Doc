@@ -70,7 +70,7 @@ cd conf
 
 ### 4.3 修改配置
 
-**说明：** 有注释的地方根据实际情况修改，完整配置项说明请查看 [附录-3](./appendix.html#id9)
+**说明：** 有注释的地方根据实际情况修改，完整配置项说明请查看 [附录-3](./appendix.html#application.properties)
 
 ```shell
 vi application.properties
@@ -123,7 +123,7 @@ job.regCenter.namespace=elasticjob-transaction
 # 分片数（如多活3个的话可分成3片）
 job.dataflow.shardingTotalCount=3
 
-###################################        数据源配置         ###################################
+###################################       数据源配置       ###################################
 # * 说明：本工程试使用Sharding-JDBC分库分表，需事先初始化数据库和表，dist/script下提供了样例
 # * 样例：以两个数据源为例，每张表根据年分表，每年再分成两个子表，以2019和2020年的表为例
 
