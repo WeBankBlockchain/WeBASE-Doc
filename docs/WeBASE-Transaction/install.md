@@ -70,7 +70,7 @@ cd conf
 
 ### 4.3 修改配置
 
-**说明：** 有注释的地方根据实际情况修改，完整配置项说明请查看 [附录-3](./appendix.html#application.properties)
+**说明：** 有注释的地方根据实际情况修改，完整配置项说明请查看 [附录-3](./appendix.html#application-properties)
 
 ```shell
 vi application.properties
