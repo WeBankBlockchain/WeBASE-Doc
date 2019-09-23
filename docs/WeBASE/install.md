@@ -12,7 +12,7 @@
 | ------ | ---------------------- |
 | Java   | jdk1.8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python2或Python3 |
+| Python | Python2.7或Python3.4+ |
 | MySQL-python | 使用python2时需安装 |
 | PyMySQL | 使用python3时需安装 |
 
@@ -297,7 +297,7 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. MySQL-python部署
+### 4. MySQL-python部署（Python2.7）
 
 - CentOS
 
@@ -312,7 +312,7 @@ mysql > create database webasenodemanager;
   sudo pip install MySQL-python
   ```
 
-### 5. PyMySQL部署
+### 5. PyMySQL部署（Python3.4+）
 
 - CentOS
 
