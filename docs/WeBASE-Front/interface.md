@@ -2192,6 +2192,97 @@ HTTP GET
 }
 ```
 
+### 4.3. 监测机器性能的启停状态
+
+
+#### 接口描述
+
+获取机器历史性能信息的开启或关闭状态
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/performance/toggle**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| --- | --- | --- | --- | --- | --- | --- |
+| - | - | - | - |   |   |   |
+
+#### 响应参数
+**1）参数表** 
+``` 
+{
+    "code": 0,
+    "message": "Sync Status is ON",
+    "data": true
+}
+```
+
+### 4.4. 管理监测机器性能的状态
+
+
+#### 接口描述
+
+管理监测机器历史性能信息的状态，开启或关闭；默认状态为开启，可通过修改配置文件中constant的monitorEnable值改变监测默认开关状态
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/performance/toggle**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 开关 | enable | boolean |     | 是  | 开启为"1", 关闭为"0"  |
+**2）数据格式**
+
+```
+{
+    "enable": 0
+}
+```
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"enable": 0}' http://127.0.0.1:5002/WeBASE-Front/performance/toggle
+```
+
+#### 响应参数
+
+a、关闭监测机器性能信息
+
+```
+{
+    "code": 0,
+    "message": "Sync Status is OFF",
+    "data": false
+}
+```
+
+b、开启监测机器性能信息
+
+```
+{
+    "code": 0,
+    "message": "Sync Status is ON",
+    "data": true
+}
+```
+
 ## 5. 交易接口
 
 ### 5.1. 交易处理接口
@@ -2374,7 +2465,7 @@ b、正确发送数据上链返回值信息（交易收据）
 }
 ```
 
-## 6. 预编译接口（系统管理）
+## 6. 系统管理接口
 
 ### 6.1. 查询权限接口
 
@@ -2477,6 +2568,71 @@ http://localhost:5002/WeBASE-Front/permission/full?groupId=1&permissionType=cns&
         }
     ],
     "totalCount": 1
+}
+```
+
+
+#### 6.1.3 获取权限状态列表接口（不分页）
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/permission/sorted/full?groupId={groupId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+
+**2）数据格式**
+
+
+```
+http://localhost:5002/WeBASE-Front/permission/sorted/full?groupId=1
+```
+
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "0x2cbca2910b650e5816b4731b097eb8985be39805": {
+            "deployAndCreate": 1,
+            "cns": 0,
+            "sysConfig": 0,
+            "node": 0
+        },
+        "0x79d3632a8bc9b3e823a8e475436d5aa6e0fb88a7": {
+            "deployAndCreate": 1,
+            "cns": 1,
+            "sysConfig": 1,
+            "node": 1
+        },
+        "0x202b4245087dbf797f954d8425459bfee3c790f8": {
+            "deployAndCreate": 1,
+            "cns": 1,
+            "sysConfig": 1,
+            "node": 1
+        },
+        "0x7db73896a6db5e86563af18f206405030bd569f8": {
+            "deployAndCreate": 0,
+            "cns": 1,
+            "sysConfig": 0,
+            "node": 0
+        }
+    },
+    "totalCount": 4
 }
 ```
 
@@ -2612,7 +2768,83 @@ b、失败：
 ```
 
 
-### 6.4. 查询CNS接口
+### 6.4. 批量管理用户权限接口
+
+#### 接口描述
+
+批量管理用户权限，修改用户权限来赋予/去除用户的权限
+
+注：目前只支持cns、deployAndCreate、sysConfig、node四种权限管理
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/permission/sorted**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
+| 3        | 被授予权限地址         | address        | String   |           | 是       |                                                |
+| 4        | 用户权限状态       | permissionState       | Object     |              |     是     | 使用{"permissionType": 1}格式，参照下文数据格式；1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限
+
+**2）数据格式**
+
+```
+{
+ "groupId": "2",
+ "fromAddress": "0x09fb217b6d7f010f12e7876d31a738389fecd517",
+ "address": "0x09fb217b6d7f010f12e7876d31a738389fecd517",
+ "permissionState": {
+  "deployAndCreate": 1,
+  "node": 1,
+  "sysConfig": 1,
+  "cns": 1             
+ }
+}
+```
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"groupId": "2","fromAddress": "0x09fb217b6d7f010f12e7876d31a738389fecd517","address":"0x09fb217b6d7f010f12e7876d31a738389fecd517","permissionState": {"deployAndCreate": 1,"node": 1,"sysConfig": 1,"cns": 1}}'  http://localhost:5002/WeBASE-Front/permission/sorted
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "node": 1,
+        "sysConfig": 1,
+        "cns": 1,
+        "deployAndCreate": 1
+    }
+}
+```
+
+b、失败：
+```
+{
+    "code": 201202,
+    "message": "permission denied, please check chain administrator permission"
+}
+```
+
+
+### 6.5. 查询CNS接口
 
 #### 接口描述
 
@@ -2665,7 +2897,7 @@ http://localhost:5002/WeBASE-Front/precompiled/cns/list?groupId=1&contractNameAn
 }
 ```
 
-### 6.5. 查询系统配置接口
+### 6.6. 查询系统配置接口
 
 #### 接口描述
 
@@ -2724,7 +2956,7 @@ http://localhost:5002/WeBASE-Front/sys/config/list?groupId=1&pageSize=5&pageNumb
 }
 ```
 
-### 6.6. 设置系统配置接口
+### 6.7. 设置系统配置接口
 
 #### 接口描述
 
@@ -2787,7 +3019,7 @@ b、失败：
 ```
 
 
-### 6.7. 查询节点接口（节点管理）
+### 6.8. 查询节点接口（节点管理）
 
 #### 接口描述
 
@@ -2844,7 +3076,7 @@ http://localhost:5002/WeBASE-Front/precompiled/consensus/list?groupId=1&pageSize
 }
 ```
 
-### 6.8. 设置节点共识状态接口（节点管理）
+### 6.9. 设置节点共识状态接口（节点管理）
 
 #### 接口描述
 
@@ -2908,7 +3140,7 @@ b、失败：
 
 
 
-### 6.9. CRUD表格操作接口
+### 6.10. CRUD表格操作接口
 
 #### 接口描述
 
@@ -2981,6 +3213,49 @@ b、失败：
     "code": 2012228,
     "message": "table not exists",
     "data": "Table not exists "
+}
+```
+
+
+
+### 6.11. 查询节点证书接口
+
+#### 接口描述
+
+获取Front对应的节点的链证书和sdk证书（包含节点证书和机构证书）
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/cert**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| -        | -       | -            | -   |              |        |                            |
+      
+**2）数据格式**
+
+
+```
+http://localhost:5002/WeBASE-Front/cert
+```
+
+#### 响应参数
+
+**1）数据格式**
+```
+{
+    "code": 201231,
+    "message": "Cert file not found, please check cert path in config",
+    "data": "FileNotFound, node cert(node.crt) path prefix error"
 }
 ```
 
