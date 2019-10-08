@@ -2247,6 +2247,7 @@ HTTP POST
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 开关 | enable | boolean |     | 是  | 开启为"1", 关闭为"0"  |
+
 **2）数据格式**
 
 ```
@@ -2768,11 +2769,11 @@ b、失败：
 ```
 
 
-### 6.4. 批量管理用户权限接口
+### 6.4. 管理用户权限状态接口
 
 #### 接口描述
 
-批量管理用户权限，修改用户权限来赋予/去除用户的权限
+管理用户权限状态，批量修改用户权限
 
 注：目前只支持cns、deployAndCreate、sysConfig、node四种权限管理
 
@@ -2804,10 +2805,10 @@ HTTP POST
  "fromAddress": "0x09fb217b6d7f010f12e7876d31a738389fecd517",
  "address": "0x09fb217b6d7f010f12e7876d31a738389fecd517",
  "permissionState": {
-  "deployAndCreate": 1,
-  "node": 1,
-  "sysConfig": 1,
-  "cns": 1             
+      "deployAndCreate": 1,
+      "node": 1,
+      "sysConfig": 1,
+      "cns": 1             
  }
 }
 ```
