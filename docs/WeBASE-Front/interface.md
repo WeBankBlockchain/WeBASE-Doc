@@ -3223,10 +3223,10 @@ b、失败：
 
 #### 接口描述
 
-获取Front对应的节点的链证书和sdk证书（包含节点证书和机构证书）的内容；
+获取Front对应的节点的链证书和sdk证书（包含节点证书和机构证书）的内容；需要在项目配置文件中constant-nodeCertPath配置Front对应节点的绝对路径；
 
 > 注：接口只返回了证书的文本，未包含开头与结尾以及换行的格式文本；
-> 如需将文本保存为一个证书文件，需要加上开头“-----BEGIN CERTIFICATE-----\n”和结尾“\n-----END CERTIFICATE-----\n”
+> 如需将文本保存为一个证书文件，需要加上开头“-----BEGIN CERTIFICATE-----\n”和结尾“\n-----END CERTIFICATE-----\n”；
 
 #### 接口URL
 
@@ -3350,6 +3350,7 @@ b、失败：
 | 201227  | crud sql fail              |    执行sql语句失败      |
 | 201228  | table not exists              |    操作的表格不存在      |
 | -51503  | crud sql execute error                |     执行sql失败     |
+| 201231  | Cert file not found, please check cert path in config |     配置文件中的证书地址错误，未找到证书文件     |
 
 
 ### 2. Precompiled Service API 错误码
