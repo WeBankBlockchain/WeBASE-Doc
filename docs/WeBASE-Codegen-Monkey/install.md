@@ -278,7 +278,6 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 选择点击对应的http请求集，可以点开相关的http请求。此时，你可以选择点击“try it out”，手动修改发送的Json报文，点击“Excute”按钮，即可发送并查收结果。
 
 我们以查询区块信息为例，如下列图所示：
-
-![[选择请求]](../../images/WeBASE-Codegen-Monkey/swag_test1.png)
-![[编辑报文]](../../images/WeBASE-Codegen-Monkey/swag_test2.png)
-![[查收结果]](../../images/WeBASE-Codegen-Monkey/swag_test3.png)
+![[选择请求]](../../images/WeBASE-Collect-Bee/swag_test1.png)
+![[编辑报文]](../../images/WeBASE-Collect-Bee/swag_test2.png)
+![[查收结果]](../../images/WeBASE-Collect-Bee/swag_test3.png)
