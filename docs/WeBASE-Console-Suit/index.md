@@ -185,22 +185,22 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 ### 系统管理
 
-系统管理目前支持权限管理、配置系统属性、证书管理的功能。
+系统管理目前支持权限管理、系统配置管理、证书管理的功能。
 
-权限管理支持链权限管理和普通权限（四种）管理：
+**权限管理**：支持链权限管理和普通权限（四种）管理：
 - 链管理员为分配权限的权限管理与，其为空时，不限制分配权限；
 - 普通权限包含四种权限： 部署合约和创建用户表权限, 节点管理权限, 使用CNS权限, 系统参数管理权限；
 
 链权限管理：
 
-<!-- // 图片 -->
+![](../../images/WeBASE-Console-Suit/permission_admin.png)
 
 普通权限管理：
 
-<!-- // 图片 -->
+![](../../images/WeBASE-Console-Suit/permission_normal_admin.png)
 
 
-系统属性包含FISCO-BCOS链的tx_count_limit和tx_gas_limit两种属性值的配置。注：一般不建议随意修改tx_count_limit和tx_gas_limit，如下情况可修改这些参数：
+**系统配置管理**：系统属性包含FISCO-BCOS链的tx_count_limit和tx_gas_limit两种属性值的配置。注：一般不建议随意修改tx_count_limit和tx_gas_limit，如下情况可修改这些参数：
 - 机器网络或CPU等硬件性能有限：调小tx_count_limit，降低业务压力； 
 - 业务逻辑太复杂，执行区块时gas不足：调大tx_gas_limit。
 
@@ -212,15 +212,17 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 ![](../../images/WeBASE-Console-Suit/system_config_edit.png)
 
-证书管理支持导入和查看证书信息，包括查看Front对应的节点的链证书和sdk证书，可查看证书内容、证书有效期、证书链关系等信息
+**证书管理**：支持导入和查看证书信息，包括查看Front对应节点的链证书、机构证书、节点证书，可查看证书内容、证书有效期、证书链关系等信息；
+
+注：证书链通过比对证书指纹与父证书指纹查找，平台将默认加载所有Front的证书；
 
 证书列表：
 
-<!-- // 图片 -->
+![](../../images/WeBASE-Console-Suit/cert_manage.png)
 
 导入证书：
 
-<!-- // 图片 -->
+![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
 
 
 ### 系统监控
