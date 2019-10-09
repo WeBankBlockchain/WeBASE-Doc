@@ -257,7 +257,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 [WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
-![[swagger控制台]](../../images/WeBASE-Codegen-Monkey/swagger.png)
+![[swagger控制台]](../../images/WeBASE-Collect-Bee/swagger.png)
 
 **请注意，swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件**
 
