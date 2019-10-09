@@ -89,6 +89,8 @@ if.exist.fisco=no
 # 已有链的路径，start_all.sh脚本所在路径
 # 路径下要存在sdk目录，里面存放节点证书（ca.crt、node.crt和node.key）
 fisco.dir=/data/app/nodes/127.0.0.1
+# 前置连接节点相对于fiscoDir的路径
+node.path=/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
