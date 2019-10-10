@@ -3377,7 +3377,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 ```
 
 
-## 13 预编译接口
+## 13 系统管理模块
 
 
 ### 13.1 查看权限管理
@@ -3399,10 +3399,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | int        | 否     | 群组id                                     
 | 2    | permissionType      | String           | 否     | 查看拥有某个权限的address list|
-| 3    | tableName   | String           | 是     |
+| 3    | tableName   | String           | 是     |  type=UserTable的时候不能为空。查看某个表的管理员list
 | 4   | pageSize   | int           | 否     |
 | 5    | pageNumber   | int           | 否     |
-type=UserTable的时候不能为空。查看某个表的管理员list                         
+                         
 
 ***2）入参示例***
 
@@ -3450,7 +3450,7 @@ http://localhost:5001/WeBASE-Node-Manager/permission?groupId=1&permissionType=cn
 }
 ```
 
-### 13.2 查看权限管理列表（全量不分页）
+### 13.2 查看权限管理列表（不分页）
 
 根据PermissionType权限类型，查询该类权限记录列表。共支持查看六种权限的管理员列表：权限管理权限permission, 用户表管理权限userTable, 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
 
@@ -3476,7 +3476,7 @@ http://localhost:5001/WeBASE-Node-Manager/permission?groupId=1&permissionType=cn
 ***2）入参示例***
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/permission/full?groupId=1&permissionType=cns&pageSize=5&pageNumber=1
+http://localhost:5001/WeBASE-Node-Manager/permission/full?groupId=1&permissionType=cns
 ```
 
 
@@ -3661,6 +3661,165 @@ http://localhost:5001/WeBASE-Node-Manager/permission
 ```
 
 
+### 13.5 获取用户权限状态列表
+
+获取所有用户的权限状态列表，权限状态包含有四种权限： 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig
+
+
+#### 13.5.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/permission/sorted**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.5.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2    | pageSize      | int           | 是     |  分页大小  |
+| 3    | pageNumber   | int           | 是     |    分页页码
+                     
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/permission/sorted?groupId=1&pageSize=3&pageNumber=1
+```
+
+
+#### 13.5.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | List数组        |      |  返回权限状态数组，每个item为<address, PermissionState>的Map结构体，以用户地址为key，以用户的权限状态为value，1为赋予，0为去除                     
+| 4   | totalCount     | int        |      | 总数目                          
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "0x17de6cd8e173bac6f457f3f73d8d9a1b1dd33451": {
+                "deployAndCreate": 0,
+                "cns": 1,
+                "sysConfig": 0,
+                "node": 0
+            }
+        },
+        {
+            "0x202b4245087dbf797f954d8425459bfee3c790f8": {
+                "deployAndCreate": 1,
+                "cns": 1,
+                "sysConfig": 1,
+                "node": 1
+            }
+        },
+        {
+            "0x99af2eb68db52ba21a033af235e680feb0ca7ae5": {
+                "deployAndCreate": 0,
+                "cns": 0,
+                "sysConfig": 0,
+                "node": 0
+            }
+        }
+    ],
+    "totalCount": 11
+}
+```
+
+
+### 13.6 管理用户权限状态接口
+
+管理用户的权限状态，权限状态包含有四种权限： 部署合约和创建用户表权限deployAndCreate, 节点管理权限node, 使用CNS权限cns, 系统参数管理权限sysConfig；1代表赋予权限，0代表去除权限
+
+#### 13.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/permission/sorted**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
+| 3    | address   | String           | 否     | 分配链管理员的用户地址         
+| 4        | permissionState       | Object |      否   |   使用{"permissionType": 1}的结构格式，1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限     
+                           
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/permission/sorted
+```
+
+```
+{
+ "groupId": "2",
+ "fromAddress": "0x09fb217b6d7f010f12e7876d31a738389fecd517",
+ "address": "0x09fb217b6d7f010f12e7876d31a738389fecd517",
+ "permissionState": {
+      "deployAndCreate": 1,
+      "node": 1,
+      "sysConfig": 1,
+      "cns": 1             
+ }
+}
+```
+
+
+#### 13.6.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+| 3    | data     | Object        | 否     |     返回用户的权限状态，1为赋予，0为去除                       
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "node": 1,
+        "sysConfig": 1,
+        "cns": 1,
+        "deployAndCreate": 1
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 201202,
+    "message": "permission denied, please check chain administrator permission"
+}
+```
+
+
 
 
 
@@ -3685,6 +3844,7 @@ http://localhost:5001/WeBASE-Node-Manager/permission
 | 2    | contractNameAndVersion   | String           | 否     | 只需要合约名,version缺乏时返回所有版本，version与contractName用英文冒号":"连接                             |
 | 4   | pageSize   | int           | 否     |
 | 5    | pageNumber   | int           | 否     |
+
 ***2）入参示例***
 
 ```
@@ -3867,7 +4027,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config
 
 
 
-### 16.1 获取节点list(节点管理)
+### 16.1 获取节点列表(节点管理)
 
 获取节点的list列表，包含节点id，节点共识状态。
 
@@ -4017,14 +4177,14 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
 具体sql要求语法参考Fisco-bcos技术文档的  [Precompiled Crud API](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
 
 
-#### 5.1.1 传输协议规范
+#### 17.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/crud**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.1.2 请求参数
+#### 17.1.2 请求参数
 
 ***1）入参表***
 
@@ -4050,7 +4210,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 ```
 
 
-#### 5.1.3 返回参数
+#### 17.1.3 返回参数
 
 ***1）出参表***
 
@@ -4101,3 +4261,257 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
     "data": "Table not exists "
 }
 ```
+
+### 18.1 获取证书列表接口
+
+获取证书的list列表，返回的列表包含证书指纹、证书内容、证书名字、证书的父证书、证书对应nodeid（节点证书）、证书有效期
+
+注：首次启动项目会自动拉取每一个Front的证书
+
+#### 18.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 18.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+|     | -     | -        |      |     
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/cert/list
+```
+
+
+#### 18.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "fingerPrint": "814D51FB7CBAB33676FE73E8FBBFECB3D3B1301A",
+            "certName": "sdk",
+            "content": "-----BEGIN CERTIFICATE-----\nMIICOTCCASGgAwIBAgIJAKHsAYI3TsAOMA0GCSqGSIb3DQEBCwUAMDgxEDAOBgNV\nBAMMB2FnZW5jeUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5j\neTAeFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDIxDDAKBgNVBAMMA3Nk\nazETMBEGA1UECgwKZmlzY28tYmNvczENMAsGA1UECwwEbm9kZTBWMBAGByqGSM49\nAgEGBSuBBAAKA0IABJ79rSKIb97xZwByW58xH6tzoNKNLaKG7J5wxAEgAb03O2h4\nMkEMLtf/LB7tELOiyCiIEhLScprb1LjvDDt2RDGjGjAYMAkGA1UdEwQCMAAwCwYD\nVR0PBAQDAgXgMA0GCSqGSIb3DQEBCwUAA4IBAQC0u2lfclRmCszBTi2rtvMibZec\noalRC0sQPBPRb7UQhGCodxmsAT3dBUf+s4wLLrmN/cnNhq5HVObbWxzfu7gn3+IN\nyQEeqdbGdzlu1EDcaMgAz6p2W3+FG/tmx/yrNza29cYekWRL44OT5LOUPEKrJ4bJ\neOBRY4QlwZPFmM0QgP7DoKxHXldRopkmvqT4pbW51hWvPgj7KrdqwbVWzuWQuI3i\n3j3O96XZJsaDZ0+IGa5093+TsTNPfWUZzp5Kg+EyNR6Ea1evuMDNq9NAqqcd5bX9\nO9kgkb8+llO8I5ZhdnN0BuhGvv9wpsa9hW8BImOLzUBwfSVYouGCkoqlVq9X\n-----END CERTIFICATE-----\n",
+            "certType": "node",
+            "publicKey": "9efdad22886fdef16700725b9f311fab73a0d28d2da286ec9e70c4012001bd373b687832410c2ed7ff2c1eed10b3a2c828881212d2729adbd4b8ef0c3b764431",
+            "address": "5cb81b06ef0734fff99929c5deae4a5b25e800cc",
+            "father": "EEBAAB2F674D05CF1EAD70367B4D2A928D894EF8",
+            "validityFrom": 1562860800000,
+            "validityTo": 1878220800000,
+            "createTime": 1569686400000
+        }
+    ],
+    "totalCount": 1
+}
+
+```
+
+
+### 18.2 根据指纹获取证书接口
+
+根据指纹获取单个证书
+
+
+#### 18.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 18.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | fingerPrint     | String        | 否     | 证书指纹，证书唯一标识   
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE73E8FBBFECB3D3B1301A
+```
+
+
+#### 18.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "fingerPrint": "EEBAAB2F674D05CF1EAD70367B4D2A928D894EF8",
+        "certName": "agencyA",
+        "content": "-----BEGIN CERTIFICATE-----\nMIIDADCCAeigAwIBAgIJAJUF2Dp1a9U6MA0GCSqGSIb3DQEBCwUAMDUxDjAMBgNV\nBAMMBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAe\nFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDgxEDAOBgNVBAMMB2FnZW5j\neUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTCCASIwDQYJ\nKoZIhvcNAQEBBQADggEPADCCAQoCggEBANBT4CTciIYdSeEabgJzif+CFB0y3GzG\ny+XQYtWK+TtdJWduXqhnnZiYAZs7OPGEu79Yx/bEpjEXsu2cXH0D6BHZk+wvuxG6\nezXWq5MYjCw3fQiSRWkDYoxzWgulkRyYROF1xoZeNGQssReFmCgP+pcQwRxjcq8z\nIA9iT61YxyW5nrS7xnra9uZq/EE3tsJ0ae3ax6zixCT66aV49S27cMcisS+XKP/q\nEVPxhO7SUjnzZY69MgZzNSFxCzIbapnlmYAOS26vIT0taSkoKXmIsYssga45XPwI\n7YBVCc/34kHzW9xrNjyyThMWOgDsuBqZN9xvapGSQ82Lsh7ObN0dZVUCAwEAAaMQ\nMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAu3aHxJnCZnICpHbQ\nv1Lc5tiXtAYE9aEP5cxb/cO14xY8dS+t0wiLIvyrE2aTcgImzr4BYNBm1XDt5suc\nMpzha1oJytGv79M9/WnI/BKmgUqTaaXOV2Ux2yPX9SadNcsD9/IbrV0b/hlsPd6M\nK8w7ndowvBgopei+A1NQY6jTDUKif4RxD4u5HZFWUu7pByNLFaydU4qBKVkucXOq\nxmWoupL5XrDk5o490kiz/Zgufqtb4w6oUr3lrQASAbFB3lID/P1ipi0DwX7kZwVX\nECDLYvr+eX6GbTClzn0JGuzqV4OoRo1rrRv+0tp1aLZKpCYn0Lhf6s1iw/kCeM2O\nnP9l2Q==\n-----END CERTIFICATE-----\n",
+        "certType": "agency",
+        "publicKey": "",
+        "address": "",
+        "father": "",
+        "validityFrom": 1562860800000,
+        "validityTo": 1878220800000,
+        "createTime": 1569686400000
+    }
+}
+
+```
+
+
+### 18.3 导入证书接口
+
+导入保存证书文件
+
+#### 18.3.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 18.3.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | content     | String        | 否     | 证书文件的内容，需保留开头与结尾以及证书原有的回车\n的格式文本；证书中包含多个证书亦可 
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/cert
+```
+
+```
+{
+    "content": "-----BEGIN CERTIFICATE-----\nMIICOzCCASOgAwIBAgIJANJZtoFLZsGcMA0GCSqGSIb3DQEBCwUAMDgxEDAOBgNVBAMMB2FnZW5jeUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTAeFw0xOTA5MDUwNzQ3NDdaFw0yOTA5MDIwNzQ3NDdaMDQxDjAMBgNVBAMMBW5vZGUzMRMwEQYDVQQKDApmaXNjby1iY29zMQ0wCwYDVQQLDARub2RlMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAE9CwTicQwi5Gx1gckJ0ibZbcIoL13IHyLK7z4xuzkAi+PbgI9M3vKDuMzZ73IFKCYOwzfhvqM8ksFonpBZqT0NqMaMBgwCQYDVR0TBAIwADALBgNVHQ8EBAMCBeAwDQYJKoZIhvcNAQELBQADggEBAIv+PE8bQlxxVDxfUlevf3jJeaK97U5tmP8Tx1pesblzcMWTC8OxfUtYP0zy4CQL0zo6OjmSn4FYvTyDUSVqj5BXXDXiZQwtWxnPgLD75tqSTlFcR2jB+amhmzWQ7mXgfepvL+RV+1OL8WXJy7Xl01fL0nCwHaWCCwaBg+KnUgbc9YXhhyH8X8aqDDpjz9oYpZcbLITGI0V8lvr1EU3NII6LudgGp/xNolQDBOYZX1E0XtUwMUp6Az2xbmSH/7S3sXJCwgHZrtoiKkcFLbss1TDk/UdUya4n/dz4BcH3OzR2MvMHenA8kh4yaofJNsJeXFqPHAbI5+yUVK2+VK2hI0o=\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDPTCCAiWgAwIBAgIJAKUGxOHHqV05MA0GCSqGSIb3DQEBCwUAMDUxDjAMBgNVBAMMBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAeFw0xOTA5MDUwNzI2MTJaFw0yOTA5MDIwNzI2MTJaMDUxDjAMBgNVBAMMBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAM9LlTwIAKp36uB8sjoai2O3R+3KPMN9xAt8/k5+B943CUPF/RDxZ8/7Q2v6Z+t+1v3Dc81aszMr/8YyyCQWh0I3EdWyInsocZ2pBkjymetyE5VOSd+p7I8qc9PpHJKZjy2M9J5bePVjHJxleHP2u6I4QctjZoE8PJnZYT5Q0On0MJATpY856vHbF3Amvxj9dmeLKjF62T/KtyDKlyPTETXOFGMiLerWusXZxFgj0K0xhuXaNkbJI6AdhQnywgn755ugfBDzi24rfsk/BkUf5DVitfWePh4C7zaCZIeTTr8whV3twE2BTv4LENdidxCVUHN1JBvZNGyHaH4gIbwtsZcCAwEAAaNQME4wHQYDVR0OBBYEFNTCWbm1EzCYIXyoF7j3l6IXX3BoMB8GA1UdIwQYMBaAFNTCWbm1EzCYIXyoF7j3l6IXX3BoMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAIjYTyxP5ikaGYdwYzQZdF4aqx+7UL3Wo/6LNJa8w2m+pAvC3ILIBcvpDe6lH3cMOz2HwCzFkKlT8Ji1HwsKPywx/9fmO60RvEoPIBanziqONLb8HDUT0QHz3jgCTj46URM6hXIEhFwg4KekpzvqaLPRHHtoCrcebUAmySOlNvlwkSnxJnufp0zFpdNu+kSl1/r21ZRMeu/hNaUb1gOzP06NOB7NodOQ5MR7ItVXyN9rl3fABP3rUFIJ+Z11WmSldaCRCQMlEOkdD8LGFYVj4Q5fx06hcJlPd2arnxALWrZUl2cs+K+MW9qQUUKAQ+7FirdRRk6ZfZtlpHMdlTfAVWA=\n-----END CERTIFICATE-----\n"
+}
+```
+
+
+#### 18.3.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | String        | 否     | 成功保存证书的个数或错误信息                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 2
+}
+```
+
+* 失败：
+```
+{
+    "code": 202060,
+    "message": "cert handle error",
+    "data": "Could not parse certificate: java.io.IOException: Empty input"
+}
+```
+
+
+
+### 18.4 删除证书接口
+
+根据证书指纹删除一个证书
+
+#### 18.4.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 18.4.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | fingerPrint     | String        | 否     | 证书指纹，证书的唯一标识
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/cert
+```
+
+```
+{
+    "fingerPrint": "F588C511F5471860120F7BE8127DE026ADD8378C"
+}
+```
+
+
+#### 18.4.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | String        | 否     | 成功删除证书的个数或错误信息                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 1
+}
+```
+
