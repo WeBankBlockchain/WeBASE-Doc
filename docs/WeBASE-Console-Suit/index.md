@@ -167,7 +167,7 @@ CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版�
 
 ![](../../images/WeBASE-Console-Suit/contract_cns.png)
 
-CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。CRUD可以在FISCO-BCOS链上创建数据表，并对表进行增删改查操作，具体CRUD操作教程查看FISCO-BCOS的[控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
+CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。CRUD可以在FISCO-BCOS链上创建数据表，并对表进行增删改查操作，具体CRUD操作教程查看[FISCO-BCOS控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
 
 ![](../../images/WeBASE-Console-Suit/contract_crud.png)
 
@@ -185,7 +185,28 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 ### 系统管理
 
-系统管理目前支持配置系统属性值的功能。系统属性包含FISCO-BCOS链的tx_count_limit和tx_gas_limit两种属性值的配置。注：一般不建议随意修改tx_count_limit和tx_gas_limit，如下情况可修改这些参数：
+系统管理目前支持权限管理、系统配置管理、证书管理的功能。
+
+**权限管理**：支持链权限管理和普通权限（四种）管理:
+- 链权限管理为分配权限的链管理员，可以使用权限分配功能，非链管理员账户无权限分配功能；
+- 普通权限管理包含四种权限： 部署合约和创建用户表权限, 节点管理权限, CNS管理权限, 系统参数管理权限；
+
+> 注：链管理员为空时，不作权限限制，所有用户拥有权限，可以自由给自身或其他用户添加权限；设置了第一个链管理员后，非管理员用户无权限分配功能；请谨慎设置第一个链管理员;
+> 
+> 普通权限管理员为空时，所有用户拥有特定功能，如：节点管理员为空时，所有用户可以管理节点状态，设置了第一个节点管理员后，非节点管理员不可管理节点状态;
+
+FISCO-BCOS权限管理机制详情可以参考文档[FISCO-BCOS权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html)
+
+链权限管理：
+
+![](../../images/WeBASE-Console-Suit/permission_admin.png)
+
+普通权限管理：
+
+![](../../images/WeBASE-Console-Suit/permission_normal_admin.png)
+
+
+**系统配置管理**：系统属性包含FISCO-BCOS链的tx_count_limit和tx_gas_limit两种属性值的配置。注：一般不建议随意修改tx_count_limit和tx_gas_limit，如下情况可修改这些参数：
 - 机器网络或CPU等硬件性能有限：调小tx_count_limit，降低业务压力； 
 - 业务逻辑太复杂，执行区块时gas不足：调大tx_gas_limit。
 
@@ -197,11 +218,24 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 ![](../../images/WeBASE-Console-Suit/system_config_edit.png)
 
+**证书管理**：支持导入和查看证书信息，包括查看Front对应节点的链证书、机构证书、节点证书，可查看证书内容、证书有效期、证书链关系等信息；
+
+证书列表：
+
+注：平台将默认加载所有Front的证书；证书链关系可通过比对父证书指纹与证书指纹查找；
+
+![](../../images/WeBASE-Console-Suit/cert_manage.png)
+
+导入证书：
+
+![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
+
+
 ### 系统监控
 
-系统监控主要包括节点监控和主机监控,可以选择节点、时间范围等条件进行筛选查看:
-- 节点监控主要有区块高度，pbftview，待打包交易;
-- 主机监控主要有主机的CPU，内存，网络和硬盘IO;
+系统监控主要包括节点监控和主机监控，可以选择节点、时间范围等条件进行筛选查看：
+- 节点监控主要有区块高度，pbftview，待打包交易；
+- 主机监控主要有主机的CPU，内存，网络和硬盘IO；
 
 节点监控：
 
