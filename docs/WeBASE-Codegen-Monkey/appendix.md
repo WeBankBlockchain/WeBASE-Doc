@@ -33,6 +33,7 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | system.nameStyle | N | 数据库表名和字段命名规则，支持下划线命名和原始数据命名 | system.nameStyle=rawCase | underScoreCase |
 | system.namePrefix | N | 数据库表字段命名前缀，默认为空 | system.namePrefix=_ | 空 |
 | system.namePostfix | N | 数据库表字段命名后缀，默认为空 | system.namePostfix=_ | 空 |
+| system.dbIdentifierSplit | N | 是否开启自动裁剪过长的数据库表名，默认为false | system.namePostfix=true | false |
 
 
 其中**sysTableName**对应区块数据表和账户数据表，详情见 **数据存储模型** 章节。
