@@ -124,8 +124,10 @@ job.regCenter.namespace=elasticjob-transaction
 job.dataflow.shardingTotalCount=3
 
 ###################################       数据源配置       ###################################
-# * 说明：本工程试使用Sharding-JDBC分库分表，需事先初始化数据库和表，dist/script下提供了样例
-# * 样例：以两个数据源为例，每张表根据年分表，每年再分成两个子表，以2019和2020年的表为例
+# * 说明：本工程使用Sharding-JDBC分库分表，支持单一数据源，也支持多库多表。
+# *      单库单表：配置单个数据源，将分库策略和分表策略注释或删除
+# *      多库多表：配置多数据源，以群组分库，以年份分表，用户自定义每年分成几个表（注：分表策略的路由字段不可修改[id,gmt_create]）
+# * 样例：以两个数据源为例（数据库需事先创建），每张表根据年分表，每年再分成两个子表，以2019和2020年的表为例
 
 # 配置所有的数据源，如此处定义了ds0,ds1两个数据源，对应两个库
 sharding.jdbc.datasource.names=ds0,ds1
@@ -163,23 +165,7 @@ sharding.jdbc.config.sharding.tables.tb_stateless_transaction.key-generator-colu
 sharding.jdbc.config.props.sql.show=false
 ```
 
-## 5. 初始化数据库
-
-进入数据库脚本目录dist/script：
-
-```shell
-cd  ../../script
-```
-
-执行命令：bash  webase.sh  *username* *password* *ip* *port*
-
-```shell
-如： bash webase.sh root 123456 127.0.0.1 3306
-```
-
-**备注：** 初始化脚本初始的数据库和表与4.3的数据源配置样例对应，若4.3修改了，需对应修改。
-
-## 6. 服务启停
+## 5. 服务启停
 
 返回到dist目录执行：
 
@@ -196,7 +182,7 @@ cd  ../../script
 转格式：dos2unix *.sh
 ```
 
-## 7. 查看日志
+## 6. 查看日志
 
 在dist目录查看：
 

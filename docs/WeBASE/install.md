@@ -26,7 +26,7 @@
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.1.0/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -54,7 +54,7 @@ cd webase-deploy
 
 ```shell
 # WeBASE版本(v1.1.0或以上版本)
-webase.version=v1.1.0
+webase.version=v1.2.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -433,3 +433,19 @@ nested exception is javax.net.ssl.SSLException: Failed to initialize the client-
 ```
 
 答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。
+
+### 9. 启动失败，日志却没有异常
+
+```
+...
+print ("==============     WeBASE-Front     start...  ==============")
+print ("=======     WeBASE-Front    start  fail. Please view log file (default path:./webase-front/log/).    =======")
+```
+
+答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改子系统目录下的start.sh脚本，将启动等待时间设置久一点（默认60，单位：秒），然后启动。
+
+```
+...
+startWaitTime=60
+...
+```
