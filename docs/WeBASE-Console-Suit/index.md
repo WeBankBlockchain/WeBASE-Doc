@@ -219,10 +219,12 @@ FISCO-BCOS权限管理机制详情可以参考文档[FISCO-BCOS权限控制](htt
 ![](../../images/WeBASE-Console-Suit/system_config_edit.png)
 
 **证书管理**：支持导入和查看证书信息，包括查看Front对应节点的链证书、机构证书、节点证书，可查看证书内容、证书有效期、证书链关系等信息；
+- 证书链关系可通过比对父证书指纹与证书指纹查找；
+- 平台将默认加载所有Front的证书，需要在Webase-Front配置文件中配置nodePath节点路径；
+
+FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/certificates.html)
 
 证书列表：
-
-注：平台将默认加载所有Front的证书；证书链关系可通过比对父证书指纹与证书指纹查找；
 
 ![](../../images/WeBASE-Console-Suit/cert_manage.png)
 
