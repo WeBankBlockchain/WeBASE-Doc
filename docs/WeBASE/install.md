@@ -12,7 +12,7 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python2或Python3 |
+| Python | Python2.7或Python3.4+ |
 | MySQL-python | 使用python2时需安装 |
 | PyMySQL | 使用python3时需安装 |
 
@@ -90,8 +90,8 @@ if.exist.fisco=no
 # 路径下要存在sdk目录，sdk里存放sdk证书（ca.crt、node.crt和node.key）
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
-# 路径下有conf文件夹，里面存放节点证书（ca.crt、node.crt和node.key）
-node.dir=/data/app/nodes/127.0.0.1/node0
+# 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
+node.path=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
@@ -300,7 +300,7 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. MySQL-python部署
+### 4. MySQL-python部署（Python2.7）
 
 - CentOS
 
@@ -315,7 +315,7 @@ mysql > create database webasenodemanager;
   sudo pip install MySQL-python
   ```
 
-### 5. PyMySQL部署
+### 5. PyMySQL部署（Python3.4+）
 
 - CentOS
 
@@ -434,6 +434,7 @@ nested exception is javax.net.ssl.SSLException: Failed to initialize the client-
 
 答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
 
+
 ### 10.前置启动报错“Processing bcos message timeout”
 
 ```
@@ -460,3 +461,4 @@ print ("=======     WeBASE-Front    start  fail. Please view log file (default p
 startWaitTime=600
 ...
 ```
+
