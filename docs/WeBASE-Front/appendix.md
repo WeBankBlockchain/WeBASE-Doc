@@ -4,21 +4,44 @@
 
 ### 1.1 Java部署
 
-此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
 
-（1）从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到相应目录
+#### ① 安装包下载
+
+从[官网](https://jdk.java.net/java-se-ri/11)下载对应版本的java安装包，并解压到服务器相关目录
 
 ```shell
 mkdir /software
-tar -zxvf jdkXXX.tar.gz /software/
+tar -zxvf openjdkXXX.tar.gz /software/
 ```
 
-（2）配置环境变量
+#### ② 配置环境变量
+
+- 修改/etc/profile
+
+```
+sudo vi /etc/profile
+```
+
+- 在/etc/profile末尾添加以下信息
 
 ```shell
-export JAVA_HOME=/software/jdk1.8.0_121
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+JAVA_HOME=/software/jdk-11
+PATH=$PATH:$JAVA_HOME/bin
+CLASSPATH==.:$JAVA_HOME/lib
+export JAVA_HOME CLASSPATH PATH
+```
+
+- 重载/etc/profile
+
+```
+source /etc/profile
+```
+
+#### ③ 查看版本
+
+```
+java -version
 ```
 
 ### 1.2 Gradle部署
@@ -113,12 +136,41 @@ FAILURE: Build failed with an exception.
   ...
   ```
 
-- 6：启动报“nested exception is javax.net.ssl.SSLException”：
+- 6：启动报错“nested exception is javax.net.ssl.SSLException”：
 
 ```
 ...
 nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
 ```
 
-答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
+
+- 7：启动报错“Processing bcos message timeout”
+
+```
+...
+[main] ERROR SpringApplication() - Application startup failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractController': Unsatisfied dependency expressed through field 'contractService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractService': Unsatisfied dependency expressed through field 'web3jMap'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'web3j' defined in class path resource [com/webank/webase/front/config/Web3Config.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [java.util.HashMap]: Factory method 'web3j' threw exception; nested exception is java.io.IOException: Processing bcos message timeout
+...
+```
+
+答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
+
+- 8：启动失败，日志却没有异常
+
+```
+===============================================================================================
+Starting Server com.webank.webase.front.Application Port 5002 ................................[Failed]. Please view log file (default path:./log/).
+Because port 5002 not up in 20 seconds.Script finally killed the process.
+===============================================================================================
+```
+
+答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改dist目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
+
+```
+...
+startWaitTime=600
+...
+```
+
 

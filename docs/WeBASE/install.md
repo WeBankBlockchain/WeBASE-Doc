@@ -10,7 +10,7 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | jdk1.8或以上版本 |
+| Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
 | Python | Python2.7或Python3.4+ |
 | MySQL-python | 使用python2时需安装 |
@@ -18,15 +18,15 @@
 
 **备注：** 
 
-- Java推荐[Oracle JDK](#java )。如果使用OpenJDK，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+- Java推荐使用[OpenJDK](#java ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
-- 安装说明可以参看[附录](#id8)示例，也可以自行安装
+- 安装说明可以参看[安装示例](#id8) ，也可以自行安装
 
 ## 拉取部署脚本
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.1.0/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -39,7 +39,7 @@ cd webase-deploy
 
 ## 修改配置
 
-① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id9)；
+① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id12)；
 
 ② 修改配置文件（vi common.properties），没有变化的可以不修改；
 
@@ -54,7 +54,7 @@ cd webase-deploy
 
 ```shell
 # WeBASE版本(v1.1.0或以上版本)
-webase.version=v1.1.0
+webase.version=v1.2.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -87,8 +87,11 @@ if.exist.fisco=no
 
 # 使用已有链时需配置
 # 已有链的路径，start_all.sh脚本所在路径
-# 路径下要存在sdk目录，里面存放节点证书（ca.crt、node.crt和node.key）
+# 路径下要存在sdk目录，sdk里存放sdk证书（ca.crt、node.crt和node.key）
 fisco.dir=/data/app/nodes/127.0.0.1
+# 前置所连接节点的绝对路径
+# 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
+node.path=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
@@ -122,7 +125,7 @@ python deploy.py stopAll
 
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
-- 部署过程出现问题可以查看[常见问题](#id10)
+- 部署过程出现问题可以查看[常见问题解答](#id15)
 
 ## 访问
 
@@ -161,15 +164,15 @@ http://{deployIP}:{webPort}
 
 ### 1. Java环境部署
 
-此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
 
 #### ① 安装包下载
 
-从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到服务器相关目录
+从[官网](https://jdk.java.net/java-se-ri/11)下载对应版本的java安装包，并解压到服务器相关目录
 
 ```shell
 mkdir /software
-tar -zxvf jdkXXX.tar.gz /software/
+tar -zxvf openjdkXXX.tar.gz /software/
 ```
 
 #### ② 配置环境变量
@@ -183,7 +186,7 @@ sudo vi /etc/profile
 - 在/etc/profile末尾添加以下信息
 
 ```shell
-JAVA_HOME=/nemo/jdk1.8.0_181
+JAVA_HOME=/software/jdk-11
 PATH=$PATH:$JAVA_HOME/bin
 CLASSPATH==.:$JAVA_HOME/lib
 export JAVA_HOME CLASSPATH PATH
@@ -422,11 +425,40 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
 
-### 9. 前置启动报“nested exception is javax.net.ssl.SSLException”
+### 9. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
 ```
 ...
 nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
 ```
 
-答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
+
+
+### 10.前置启动报错“Processing bcos message timeout”
+
+```
+...
+[main] ERROR SpringApplication() - Application startup failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractController': Unsatisfied dependency expressed through field 'contractService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractService': Unsatisfied dependency expressed through field 'web3jMap'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'web3j' defined in class path resource [com/webank/webase/front/config/Web3Config.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [java.util.HashMap]: Factory method 'web3j' threw exception; nested exception is java.io.IOException: Processing bcos message timeout
+...
+```
+
+答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
+
+### 11. 启动失败，日志却没有异常
+
+```
+...
+print ("==============     WeBASE-Front     start...  ==============")
+print ("=======     WeBASE-Front    start  fail. Please view log file (default path:./webase-front/log/).    =======")
+```
+
+答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改子系统目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
+
+```
+...
+startWaitTime=600
+...
+```
+

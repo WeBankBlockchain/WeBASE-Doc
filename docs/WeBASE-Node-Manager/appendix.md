@@ -48,6 +48,23 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`
 
+- 启动失败，日志却没有异常
+
+```
+===============================================================================================
+Starting Server com.webank.webase.node.mgr.Application Port 5001 ................................[Failed]. Please view log file (default path:./log/).
+Because port 5001 not up in 20 seconds.Script finally killed the process.
+===============================================================================================
+```
+
+答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改dist目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
+
+```
+...
+startWaitTime=600
+...
+```
+
 
 ### 2. 配置文件解析
 
