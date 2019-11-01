@@ -4,21 +4,44 @@
 
 ### 1.1 Java部署
 
-此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
 
-（1）从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到相应目录
+#### ① 安装包下载
+
+从[官网](https://jdk.java.net/java-se-ri/11)下载对应版本的java安装包，并解压到服务器相关目录
 
 ```shell
 mkdir /software
-tar -zxvf jdkXXX.tar.gz /software/
+tar -zxvf openjdkXXX.tar.gz /software/
 ```
 
-（2）配置环境变量
+#### ② 配置环境变量
+
+- 修改/etc/profile
+
+```
+sudo vi /etc/profile
+```
+
+- 在/etc/profile末尾添加以下信息
 
 ```shell
-export JAVA_HOME=/software/jdk1.8.0_121
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+JAVA_HOME=/software/jdk-11
+PATH=$PATH:$JAVA_HOME/bin
+CLASSPATH==.:$JAVA_HOME/lib
+export JAVA_HOME CLASSPATH PATH
+```
+
+- 重载/etc/profile
+
+```
+source /etc/profile
+```
+
+#### ③ 查看版本
+
+```
+java -version
 ```
 
 ### 1.2 Gradle部署
