@@ -12,7 +12,7 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python2或Python3 |
+| Python | Python2.7或Python3.4+ |
 | MySQL-python | 使用python2时需安装 |
 | PyMySQL | 使用python3时需安装 |
 
@@ -300,7 +300,7 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. MySQL-python部署
+### 4. MySQL-python部署（Python2.7）
 
 - CentOS
 
@@ -315,7 +315,7 @@ mysql > create database webasenodemanager;
   sudo pip install MySQL-python
   ```
 
-### 5. PyMySQL部署
+### 5. PyMySQL部署（Python3.4+）
 
 - CentOS
 
@@ -434,7 +434,8 @@ nested exception is javax.net.ssl.SSLException: Failed to initialize the client-
 
 答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载。
 
-### 9. 启动失败，日志却没有异常
+
+### 10. 启动失败，日志却没有异常
 
 ```
 ...
@@ -449,3 +450,4 @@ print ("=======     WeBASE-Front    start  fail. Please view log file (default p
 startWaitTime=600
 ...
 ```
+
