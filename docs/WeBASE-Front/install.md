@@ -23,7 +23,7 @@ cd WeBASE-Front
 
 ## 3. 编译代码
 
-使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id3) ：
+使用以下方式编译构建，如果出现问题可以查看 [常见问题解答](./appendix.html#id6) ：
 
 方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
 
