@@ -7,12 +7,13 @@
 | 1    | FISCO-BCOS 2.0        |
 | 2    | WeBASE-Front 对应版本 |
 | 3    | MySQL5.6或以上版本    |
-| 4    | Java1.8或以上版本     |
+| 4    | Java8或以上版本       |
 
 
 ## 2. 注意事项
+*  Java推荐使用[OpenJDK](https://openjdk.java.net/ )，建议从OpenJDK网站自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）[下载地址](https://jdk.java.net/java-se-ri/11) [安装指南](https://openjdk.java.net/install/index.html)
 * 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.md)
-* 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略。
+* 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
 
 ## 3. 拉取代码
 执行命令：

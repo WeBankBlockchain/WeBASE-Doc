@@ -4,11 +4,15 @@
 
 | 环境      | 版本                |
 | --------- | ------------------- |
-| Java      | jdk1.8或以上版本    |
+| Java      | JDK8或以上版本      |
 | 数据库    | MySQL-5.6或以上版本 |
 | ZooKeeper | ZooKeeper-3.4.10    |
 
-备注：安装说明请参看 [附录-1](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
+**备注：**
+
+-  Java推荐使用[OpenJDK](./appendix.html#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+
+- 安装说明请参看 [附录-1](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
 
 ## 2. 拉取代码
 
