@@ -12,7 +12,7 @@
 
 -  Java推荐使用[OpenJDK](./appendix.html#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
-- 安装说明请参看 [部署示例](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
+- 安装说明请参看 [安装示例](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
 
 ## 2. 拉取代码
 

@@ -20,7 +20,7 @@
 
 - Java推荐使用[OpenJDK](#java ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
-- 安装说明可以参看[部署示例](#id8) ，也可以自行安装
+- 安装说明可以参看[安装示例](#id8) ，也可以自行安装
 
 ## 拉取部署脚本
 
