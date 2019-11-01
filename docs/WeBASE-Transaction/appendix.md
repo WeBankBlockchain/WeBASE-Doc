@@ -4,15 +4,15 @@
 
 ### 1.1 Java部署
 
-此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
 
 #### ① 安装包下载
 
-从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到服务器相关目录
+从[官网](https://jdk.java.net/java-se-ri/11)下载对应版本的java安装包，并解压到服务器相关目录
 
 ```shell
 mkdir /software
-tar -zxvf jdkXXX.tar.gz /software/
+tar -zxvf openjdkXXX.tar.gz /software/
 ```
 
 #### ② 配置环境变量
@@ -26,7 +26,7 @@ sudo vi /etc/profile
 - 在/etc/profile末尾添加以下信息
 
 ```shell
-JAVA_HOME=/nemo/jdk1.8.0_181
+JAVA_HOME=/software/jdk-11
 PATH=$PATH:$JAVA_HOME/bin
 CLASSPATH==.:$JAVA_HOME/lib
 export JAVA_HOME CLASSPATH PATH

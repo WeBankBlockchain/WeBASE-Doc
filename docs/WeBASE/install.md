@@ -10,7 +10,7 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | jdk1.8或以上版本 |
+| Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
 | Python | Python2或Python3 |
 | MySQL-python | 使用python2时需安装 |
@@ -18,7 +18,7 @@
 
 **备注：** 
 
-- Java推荐[Oracle JDK](#java )。如果使用OpenJDK，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+- Java推荐使用[OpenJDK](#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
 - 安装说明可以参看[附录](#id8)示例，也可以自行安装
 
@@ -164,15 +164,15 @@ http://{deployIP}:{webPort}
 
 ### 1. Java环境部署
 
-此处给出Oracle JDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
+此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
 
 #### ① 安装包下载
 
-从[官网](http://www.oracle.com/technetwork/java/javase/downloads/index.html)下载对应版本的java安装包，并解压到服务器相关目录
+从[官网](https://jdk.java.net/java-se-ri/11)下载对应版本的java安装包，并解压到服务器相关目录
 
 ```shell
 mkdir /software
-tar -zxvf jdkXXX.tar.gz /software/
+tar -zxvf openjdkXXX.tar.gz /software/
 ```
 
 #### ② 配置环境变量
@@ -186,7 +186,7 @@ sudo vi /etc/profile
 - 在/etc/profile末尾添加以下信息
 
 ```shell
-JAVA_HOME=/nemo/jdk1.8.0_181
+JAVA_HOME=/software/jdk-11
 PATH=$PATH:$JAVA_HOME/bin
 CLASSPATH==.:$JAVA_HOME/lib
 export JAVA_HOME CLASSPATH PATH
