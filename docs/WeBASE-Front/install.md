@@ -4,10 +4,10 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Java | jdk1.8或以上版本 |
+| Java | JDK8或以上版本 |
 | FISCO-BCOS | V2.0.x版本 |
 
-**备注：** Java推荐[Oracle JDK](./appendix.html#java)。如果使用OpenJDK，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/8)自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+**备注：** Java推荐使用[OpenJDK](./appendix.html#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
 ## 2. 拉取代码
 执行命令：
@@ -23,7 +23,7 @@ cd WeBASE-Front
 
 ## 3. 编译代码
 
-使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id3) ：
+使用以下方式编译构建，如果出现问题可以查看 [常见问题解答](./appendix.html#id6) ：
 
 方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
 
@@ -85,6 +85,7 @@ constant:
   transMaxWait: 30              // 交易最大等待时间
   monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
   monitorEnabled: true          // 是否监控数据，默认true
+  nodePath: /fisco/nodes/127.0.0.1/node0      //配置连接节点的绝对路径
 ...
 ```
 
