@@ -12,7 +12,7 @@
 
 -  Java推荐使用[OpenJDK](./appendix.html#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
-- 安装说明请参看 [附录-1](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
+- 安装说明请参看 [部署示例](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
 
 ## 2. 拉取代码
 
@@ -30,7 +30,7 @@ cd WeBASE-Transaction
 
 ## 3. 编译代码
 
-使用以下方式编译构建，如果出现问题可以查看 [附录-2](./appendix.html#id9)</br>
+使用以下方式编译构建，如果出现问题可以查看 [常见问题解答](./appendix.html#id9)</br>
 方式一：如果服务器已安装Gradle，且版本为gradle-4.10或以上
 
 ```shell
@@ -74,7 +74,7 @@ cd conf
 
 ### 4.3 修改配置
 
-**说明：** 有注释的地方根据实际情况修改，完整配置项说明请查看 [附录-3](./appendix.html#application-properties)
+**说明：** 有注释的地方根据实际情况修改，完整配置项说明请查看 [配置说明](./appendix.html#application-properties)
 
 ```shell
 vi application.properties
