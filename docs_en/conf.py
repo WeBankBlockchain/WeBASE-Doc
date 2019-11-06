@@ -89,7 +89,7 @@ extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['../_templates']
 
 
 
@@ -100,7 +100,7 @@ templates_path = ['_templates']
 master_doc = 'index'
 
 # General information about the project.
-project = u'WeBASE'
+project = u'WeBASE EN'
 copyright = u'© 2019. All rights reserved.'
 author = u'WeBankFinTech'
 
@@ -119,7 +119,7 @@ release = 'v1.0.0'
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
 #language = None
-language = 'zh_CN'
+language = 'en'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -200,7 +200,7 @@ html_context = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['../_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -253,7 +253,7 @@ html_show_sourcelink = True
 #   'da', 'de', 'en', 'es', 'fi', 'fr', 'hu', 'it', 'ja'
 #   'nl', 'no', 'pt', 'ro', 'ru', 'sv', 'tr'
 #html_search_language = 'en'
-html_search_language = 'zh'
+html_search_language = 'en'
 
 # A dictionary with options for the search language support, empty by default.
 # Now only 'ja' uses this config value
@@ -264,7 +264,7 @@ html_search_language = 'zh'
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'WeBASE_doc'
+htmlhelp_basename = 'WeBASE_doc_en'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -306,7 +306,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'WeBASE.tex', u'WeBASE Documentation',
+  (master_doc, 'WeBASE_en.tex', u'WeBASE EN Documentation',
    u'WeBankFinTech', 'manual'),
 ]
 
@@ -336,7 +336,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'WeBASE', u'WeBASE Documentation',
+    (master_doc, 'WeBASE', u'WeBASE EN Documentation',
      [author], 1)
 ]
 
@@ -350,8 +350,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'WeBASE', u'WeBASE Documentation',
-   author, 'WeBankFinTech', 'documents of WeBASE',
+  (master_doc, 'WeBASE', u'WeBASE EN Documentation',
+   author, 'WeBankFinTech', 'english documents of WeBASE',
    'Miscellaneous'),
 ]
 
