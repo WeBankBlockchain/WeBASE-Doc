@@ -6,6 +6,6 @@
 
    README.md
    install.md
-   interfaces.md
+   interface.md
    appendix.md
 ```
