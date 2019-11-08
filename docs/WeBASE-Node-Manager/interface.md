@@ -1565,7 +1565,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 ```
 
 
-#### .3 5.4返回参数 
+#### 5.4.3 返回参数 
 
 ***1）出参表***
 
@@ -1926,6 +1926,679 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
     "data": {}
 }
 ```
+
+
+### 6.3 获取邮件告警配置
+
+配置邮件告警的邮件服务器的相关参数，包含协议类型`protocol`、邮件服务器地址`host`、端口`port`、用户邮箱地址`username`、用户邮箱授权码`password`；包含Authentication验证开关（默认开启）`authentication`，以及邮件告警模块的开关`status`；
+
+注：邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
+
+#### 6.3.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/mailServer/config/{serverId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.3.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+|  1   | serverId     | Int       |   否   | 邮件服务的编号
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
+```
+
+
+#### 6.3.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "serverId": 1,
+            "serverName": "Default config",
+            "host": "smtp.qq.com",
+            "port": 25,
+            "username": "yourmail@qq.com",
+            "password": "yourpassword",
+            "protocol": "smtp",
+            "defaultEncoding": "UTF-8",
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "authentication": 1,
+            "starttlsEnable": 1,
+            "starttlsRequired": 0,
+            "socketFactoryPort": 465,
+            "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+            "socketFactoryFallback": 0,
+            "status": 0,
+            "timeout": 5000,
+            "connectionTimeout": 5000,
+            "writeTimeout": 5000
+        }
+    ]
+}
+
+```
+
+
+### 6.4 获取全部邮件告警配置
+
+返回所有的邮件告警的邮件服务配置
+
+#### 6.4.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/mailServer/config/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.4.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| -    | -     | -        | -     | -  
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
+```
+
+
+#### 6.4.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "serverId": 1,
+            "serverName": "Default config",
+            "host": "smtp.qq.com",
+            "port": 25,
+            "username": "yourmail@qq.com",
+            "password": "yourpassword",
+            "protocol": "smtp",
+            "defaultEncoding": "UTF-8",
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "authentication": 1,
+            "starttlsEnable": 1,
+            "starttlsRequired": 0,
+            "socketFactoryPort": 465,
+            "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+            "socketFactoryFallback": 0,
+            "status": 0,
+            "timeout": 5000,
+            "connectionTimeout": 5000,
+            "writeTimeout": 5000
+        }
+    ]
+}
+
+```
+
+### 6.5 更新邮件告警配置
+
+更新邮件告警的配置内容；目前仅支持单个邮件服务器配置，不支持新增配置；
+
+#### 6.5.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/mailServer/config**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.5.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | serverId     | int        | 否     |  邮件告警配置的编号 
+| 2    | protocol     | String        | 是     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）
+| 3    | host         | String        | 是     |  邮件服务的地址
+| 4    | port         | int        | 是     |  邮件服务使用的端口，默认25
+| 5    | username     | String        | 是     |  邮件服务的用户邮箱地址
+| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码
+| 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启
+| 8    | status       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config
+```
+
+```
+{
+    "serverId": 1,
+    "host": "smtp.qq.com",
+    "port": 25,
+    "username": "yourmail@qq.com",
+    "password": "yourpassword",
+    "protocol": "smtp",
+    "authentication": 1,
+    "status": 1
+}
+```
+
+
+#### 6.5.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "serverId": 1,
+        "serverName": "Default config 22222222",
+        "host": "smtp.qq.com",
+        "port": 25,
+        "username": "yourmail@qq.com",
+        "password": "yourpassword",
+        "protocol": "smtp",
+        "defaultEncoding": "UTF-8",
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-11-07 10:04:47",
+        "authentication": 1,
+        "starttlsEnable": 1,
+        "starttlsRequired": 0,
+        "socketFactoryPort": 465,
+        "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+        "socketFactoryFallback": 0,
+        "status": 1,
+        "timeout": 5000,
+        "connectionTimeout": 5000,
+        "writeTimeout": 5000
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+### 6.6 发送测试邮件
+
+使用当前的邮件服务配置，向指定的邮箱地址发送测试邮件，如果配置错误将发送失败；
+
+注：需要确保配置正确才能使用后续的邮件告警功能；返回成功信息后，需要用户到自己的邮箱查看是否收到邮测试邮件；
+
+#### 6.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/mail/test/{toMailAddress}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | toMailAddress     | String        | 否     |  接收测试邮件的邮箱地址 
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
+```
+
+#### 6.6.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 错误时返回错误原因                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+}
+```
+
+* 失败：
+```
+{
+    "code": 202080,
+    "message": "Send mail error, please check mail server configuration.",
+    "data": "Failed messages: javax.mail.SendFailedException: No recipient addresses"
+}
+```
+
+
+### 6.7 获取告警类型配置
+
+获取单个告警配置的内容；告警类型配置是对不同告警类型下的不同内容，包含告警邮件标题`ruleName`，告警邮件内容`alertContent`，告警邮件发送时间间隔`alertIntervalSeconds`，上次告警时间`lastAlertTime`，目标告警邮箱地址`userList`，是否启用该类型的邮件告警`enable`，告警等级`alertLevel`等；
+
+
+#### 6.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/{ruleId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+|  1   | ruleId     | Int       |   否   | 告警配置的编号
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/1
+```
+
+
+#### 6.7.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 成功时返回                           
+
+
+
+***2）出参示例***
+
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ruleId": 1,
+        "ruleName": "节点异常告警",
+        "enable": 0,
+        "alertType": 1,
+        "alertLevel": "high",
+        "alertIntervalSeconds": 3600,
+        "alertContent": "{nodeId}节点异常，请到\"节点管理\"页面查看具体信息",
+        "contentParamList": "[\"{nodeId}\"]",
+        "description": null,
+        "lessThan": null,
+        "lessAndEqual": null,
+        "largerThan": null,
+        "largerAndEqual": null,
+        "equal": null,
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-10-29 20:02:30",
+        "isAllUser": 0,
+        "userList": "[\"targetmail@qq.com\"]",
+        "lastAlertTime": null
+    }
+}
+
+```
+
+
+### 6.8 获取全部告警类型配置列表
+
+返回所有的告警类型配置
+
+#### 6.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| -    | -     | -        | -     | -  
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/list
+```
+
+
+#### 6.8.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "ruleId": 1,
+            "ruleName": "节点异常告警",
+            "enable": 0,
+            "alertType": 1,
+            "alertLevel": "high",
+            "alertIntervalSeconds": 3600,
+            "alertContent": "{nodeId}节点异常，请到\"节点管理\"页面查看具体信息",
+            "contentParamList": "[\"{nodeId}\"]",
+            "description": null,
+            "lessThan": null,
+            "lessAndEqual": null,
+            "largerThan": null,
+            "largerAndEqual": null,
+            "equal": null,
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "isAllUser": 0,
+            "userList": "[\"targetmail@qq.com\"]",
+            "lastAlertTime": null
+        },
+        {
+            "ruleId": 2,
+            "ruleName": "审计异常",
+            "enable": 0,
+            "alertType": 2,
+            "alertLevel": "high",
+            "alertIntervalSeconds": 3600,
+            "alertContent": "审计异常：{auditType}，请到\"交易审计\"页面查看具体信息",
+            "contentParamList": "[\"{auditType}\"]",
+            "description": null,
+            "lessThan": null,
+            "lessAndEqual": null,
+            "largerThan": null,
+            "largerAndEqual": null,
+            "equal": null,
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "isAllUser": 0,
+            "userList": "[\"targetmail@qq.com\"]",
+            "lastAlertTime": null
+        },
+        {
+            "ruleId": 3,
+            "ruleName": "证书有效期告警",
+            "enable": 0,
+            "alertType": 3,
+            "alertLevel": "high",
+            "alertIntervalSeconds": 3600,
+            "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+            "contentParamList": "[\"{time}\"]",
+            "description": null,
+            "lessThan": null,
+            "lessAndEqual": null,
+            "largerThan": null,
+            "largerAndEqual": null,
+            "equal": null,
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "isAllUser": 0,
+            "userList": "[\"targetmail@qq.com\"]",
+            "lastAlertTime": null
+        }
+    ]
+}
+
+```
+
+
+### 6.9 更新告警类型配置
+
+更新告警类型配置的内容；目前仅支持更新原有的三个邮件告警的配置，不支持新增配置；
+
+#### 6.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.9.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | ruleId     | int        | 否     |  告警类型配置编号 
+| 2    | ruleName     | String        | 是     |  告警邮件的标题
+| 3    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
+| 4    | alertType         | int        | 是     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警
+| 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒）默认3600
+| 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`内的变量不可去除
+| 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以List序列化得到的字符串
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config
+```
+
+```
+{
+    "ruleId": 3,
+    "ruleName": "证书有效期告警",
+    "enable": 0,
+    "alertType": 3,
+    "alertIntervalSeconds": 1800,
+    "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+    "userList": "[\"targetmail@qq.com\"]"
+}
+```
+
+
+#### 6.9.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ruleId": 3,
+        "ruleName": "证书有效期告警",
+        "enable": 0,
+        "alertType": 3,
+        "alertLevel": "high",
+        "alertIntervalSeconds": 1800,
+        "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+        "contentParamList": "[\"{time}\"]",
+        "description": null,
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-11-07 10:35:03",
+        "isAllUser": 0,
+        "userList": "[\"targetmail@qq.com\"]",
+        "lastAlertTime": null
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+
+### 6.9 开启/关闭 告警类型
+
+修改告警类型配置中的`enable`，0-关闭，1-开启；
+
+#### 6.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/toggle**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.9.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | ruleId     | int        | 否     |  告警类型配置编号 
+| 2    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
+
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/toggle
+```
+
+```
+{
+   "ruleId": 3,
+   "enable": 1
+}
+```
+
+
+#### 6.9.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ruleId": 3,
+        "ruleName": "证书有效期告警",
+        "enable": 1,
+        "alertType": 3,
+        "alertLevel": "high",
+        "alertIntervalSeconds": 1800,
+        "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+        "contentParamList": "[\"{time}\"]",
+        "description": null,
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-11-07 10:35:03",
+        "isAllUser": 0,
+        "userList": "[\"targetmail@qq.com\"]",
+        "lastAlertTime": null
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
 
 ## 7 审计相关模块
 
