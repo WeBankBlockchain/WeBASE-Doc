@@ -109,6 +109,9 @@ startWaitTime=600
 | constant.isMonitorIgnoreUser | false | 审计逻辑是否忽略私钥用户  |
 | constant.isMonitorIgnoreContract | false |  审计逻辑是否忽略合约 |
 | constant.monitorUnusualMaxCount | 20 | 审计异常数据被允许最大值，到达后会停止审计  |
+| constant.auditMonitorTaskFixedDelay | 86400000 | 监控审计数据任务的间隔时间，异常时将发送告警邮件（毫秒）  |
+| constant.nodeStatusMonitorTaskFixedDelay | 86400000 | 监控节点状态任务的间隔时间，异常时将发送告警邮件（毫秒）  |
+| constant.certMonitorTaskFixedDelay | 86400000 | 监控证书任务的间隔时间，有效期结束7天前时将发送告警邮件（毫秒）  |
 
 
 
