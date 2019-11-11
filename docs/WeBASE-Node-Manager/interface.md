@@ -1264,7 +1264,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 | 2      | message         | String        | 否     | 描述                                            |
 | 3      | totalCount      | Int           | 否     | 总记录数                                        |
 | 4      | data            | List          | 是     | 列表                                            |
-| 5.1    |                 | Oject         |        | 返回信息实体                                    |
+| 5.1    |                 | Object         |        | 返回信息实体                                    |
 | 5.1.1  | contractId      | int           | 否     | 合约编号                                        |
 | 5.1.2  | contractPath    | String        | 否     | 合约所在目录                              |
 | 5.1.3  | contractName    | String        | 否     | 合约名称                                        |
@@ -1354,7 +1354,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Oject         |        | 返回信息实体                                    |
+| 3    |                 | Object         |        | 返回信息实体                                    |
 | 3.1  | contractId      | int           | 否     | 合约编号                                        |
 | 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
 | 3.3  | contractName    | String        | 否     | 合约名称                                        |
@@ -1465,7 +1465,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Oject         |        | 返回信息实体                                    |
+| 3    |                 | Object         |        | 返回信息实体                                    |
 | 3.1  | contractId      | int           | 否     | 合约编号                                        |
 | 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
 | 3.3  | contractName    | String        | 否     | 合约名称                                        |
@@ -1636,7 +1636,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Oject         |        | 返回信息实体                                    |
+| 3    |                 | Object         |        | 返回信息实体                                    |
 | 3.1  | contractId      | int           | 否     | 合约编号                                        |
 | 3.2  | contractName    | String        | 否     | 合约名称                                        |
 | 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
@@ -1734,13 +1734,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginD
 | 1         | code              | int             | 否     | 返回码                                                         |
 | 2         | message           | String          | 否     | 描述信息                                                       |
 | 3         | data              | Array           | 否     | 返回信息列表                                                   |
-| 3.1       |                   | Oject           |        | 返回信息实体                                                   |
+| 3.1       |                   | Object           |        | 返回信息实体                                                   |
 | 3.1.1     | metricType        | String          | 否     | 测量类型：blockHeight、pbftView                                |
-| 3.1.2     | data              | Oject           | 否     |                                                                |
-| 3.1.2.1   | lineDataList      | Oject           | 否     |                                                                |
+| 3.1.2     | data              | Object           | 否     |                                                                |
+| 3.1.2.1   | lineDataList      | Object           | 否     |                                                                |
 | 3.1.2.1.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.1.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
-| 3.1.2.2   | contrastDataList  | Oject           | 否     |                                                                |
+| 3.1.2.2   | contrastDataList  | Object           | 否     |                                                                |
 | 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
 
@@ -1852,13 +1852,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
 | 1         | code              | int             | 否     | 返回码                                                         |
 | 2         | message           | String          | 否     | 描述信息                                                       |
 | 3         | data              | Array           | 否     | 返回信息列表                                                   |
-| 3.1       |                   | Oject           |        | 返回信息实体                                                   |
+| 3.1       |                   | Object           |        | 返回信息实体                                                   |
 | 3.1.1     | metricType        | String          | 否     | 测量类型: cpu、memory、disk、txbps、rxbps                      |
-| 3.1.2     | data              | Oject           | 否     |                                                                |
-| 3.1.2.1   | lineDataList      | Oject           | 否     |                                                                |
+| 3.1.2     | data              | Object           | 否     |                                                                |
+| 3.1.2.1   | lineDataList      | Object           | 否     |                                                                |
 | 3.1.2.1.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.1.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
-| 3.1.2.2   | contrastDataList  | Oject           | 否     |                                                                |
+| 3.1.2.2   | contrastDataList  | Object           | 否     |                                                                |
 | 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
 
@@ -1966,8 +1966,27 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | Object        | 否     | 成功时返回                           
-
-
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | serverId        | Int          | 否     |    邮件服务器的编号      |
+| 3.1.2     | serverName      | String           | 否     |  邮件服务器的名字      |
+| 3.1.3     | host      | String           | 否     |  邮件服务器的主机地址      |
+| 3.1.4     | port      | Int           | 否     |  邮件服务器的端口号      |
+| 3.1.5     | username      | String           | 否     |  邮件服务器的用户地址      |
+| 3.1.6     | password      | String           | 否     |  邮件服务器的用户授权码      |
+| 3.1.7     | protocol      | String           | 否     |  邮件服务器的协议      |
+| 3.1.8     | defaultEncoding      | String           | 否     |  邮件服务器的编码      |
+| 3.1.9     | authentication      | Int           | 否     |  开启验证      |
+| 3.1.10    | starttlsEnable      | Int           | 否     |  开启优先使用STARTTLS      |
+| 3.1.11    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS      |
+| 3.1.12    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
+| 3.1.13    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
+| 3.1.14    | socketFactoryFallback      | Int           | 否     |  开启TLS Fallback函数      |
+| 3.1.15    | status      | Int           | 否     |  开启邮件服务器      |
+| 3.1.16    | timeout      | Int           | 否     |  从邮箱服务器读取超时时间      |
+| 3.1.17    | connectionTimeout      | Int           | 否     |  邮箱服务器连接超时时间      |
+| 3.1.18    | writeTimeout      | Int           | 否     |  从邮箱服务器写超时时间      |
+| 3.1.19    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.20    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
 
 ***2）出参示例***
 * 成功：
@@ -2039,6 +2058,27 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | List        | 否     | 成功时返回                           
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | serverId        | Int          | 否     |    邮件服务器的编号      |
+| 3.1.2     | serverName      | String           | 否     |  邮件服务器的名字      |
+| 3.1.3     | host      | String           | 否     |  邮件服务器的主机地址      |
+| 3.1.4     | port      | Int           | 否     |  邮件服务器的端口号      |
+| 3.1.5     | username      | String           | 否     |  邮件服务器的用户地址      |
+| 3.1.6     | password      | String           | 否     |  邮件服务器的用户授权码      |
+| 3.1.7     | protocol      | String           | 否     |  邮件服务器的协议      |
+| 3.1.8     | defaultEncoding      | String           | 否     |  邮件服务器的编码      |
+| 3.1.9     | authentication      | Int           | 否     |  开启验证：0-关闭，1-开启      |
+| 3.1.10    | starttlsEnable      | Int           | 否     |  优先使用STARTTLS：0-关闭，1-开启      |
+| 3.1.11    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS：0-关闭，1-开启      |
+| 3.1.12    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
+| 3.1.13    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
+| 3.1.14    | socketFactoryFallback      | Int           | 否     |  TLS Fallback函数：0-关闭，1-开启      |
+| 3.1.15    | status      | Int           | 否     |  邮件服务器状态：0-关闭，1-开启      |
+| 3.1.16    | timeout      | Int           | 否     |  从邮箱服务器读取超时时间      |
+| 3.1.17    | connectionTimeout      | Int           | 否     |  邮箱服务器连接超时时间      |
+| 3.1.18    | writeTimeout      | Int           | 否     |  从邮箱服务器写超时时间      |
+| 3.1.19    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.20    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
 
 
 
@@ -2270,6 +2310,26 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | Object        | 否     | 成功时返回                           
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | ruleId        | Int          | 否     |    告警类型配置的编号      |
+| 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题      |
+| 3.1.3     | enable      | Int           | 否     |  是否开启该告警：0-关闭，1-开启     |
+| 3.1.4     | alertType      | Int           | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期      |
+| 3.1.5     | alertLevel      | String           | 否     |  告警等级      |
+| 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
+| 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
+| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由List<String>序列化为String      |
+| 3.1.9     | description      | String           | 否     |  告警描述      |
+| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由List<String>序列化为String      |
+| 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
+| 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
+| 3.1.13    | lessThan      | String           | 否     |  告警中自定义规则：小于      |
+| 3.1.14    | lessAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
+| 3.1.15    | largerThan      | String           | 否     |  告警中自定义规则：小于      |
+| 3.1.16    | largerAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
+| 3.1.17    | equal      | String           | 否     |  告警中自定义规则：等于      |
+| 3.1.18    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.19    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
 
 
 
@@ -2343,6 +2403,26 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | List        | 否     | 成功时返回                           
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | ruleId        | Int          | 否     |    告警类型配置的编号      |
+| 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题      |
+| 3.1.3     | enable      | Int           | 否     |  是否开启该告警：0-关闭，1-开启     |
+| 3.1.4     | alertType      | Int           | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期      |
+| 3.1.5     | alertLevel      | String           | 否     |  告警等级      |
+| 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
+| 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
+| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由List<String>序列化为String      |
+| 3.1.9     | description      | String           | 否     |  告警描述      |
+| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由List<String>序列化为String      |
+| 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
+| 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
+| 3.1.13    | lessThan      | String           | 否     |  告警中自定义规则：小于      |
+| 3.1.14    | lessAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
+| 3.1.15    | largerThan      | String           | 否     |  告警中自定义规则：小于      |
+| 3.1.16    | largerAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
+| 3.1.17    | equal      | String           | 否     |  告警中自定义规则：等于      |
+| 3.1.18    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.19    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
 
 
 
@@ -4369,8 +4449,13 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted?groupId=1&pageSize=3
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        |      | 描述    
-| 3   | data     | List数组        |      |  返回权限状态数组，每个item为<address, PermissionState>的Map结构体，以用户地址为key，以用户的权限状态为value，1为赋予，0为去除                     
-| 4   | totalCount     | int        |      | 总数目                          
+| 3   | data     | List数组        |      |  返回权限状态数组               
+| 3.1   |      | Object        |      |  以用户地址为key，以用户的权限状态为value的<address, PermissionState>的Map结构体，1为赋予，0为去除                     
+| 3.1.1 | deployAndCreate    | Int    |      |  用户的部署与建表权限状态：0-已去除，1-已赋予
+| 3.1.2 | cns    | Int    |      |  用户的CNS管理权限状态：0-已去除，1-已赋予
+| 3.1.3 | sysConfig    | Int    |      |  用户的系统配置管理权限状态：0-已去除，1-已赋予
+| 3.1.4 | node    | Int    |      |  用户的节点共识管理权限状态：0-已去除，1-已赋予
+| 4   | totalCount     | Int        |      | 总数目                          
       
 
 
@@ -4463,8 +4548,12 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述                           
-| 3    | data     | Object        | 否     |     返回用户的权限状态，1为赋予，0为去除                       
-
+| 3   | data     | List数组        |      |  返回权限状态数组               
+| 3.1   |      | Object        |      |  以用户地址为key，以用户的权限状态为value的<address, PermissionState>的Map结构体，1为赋予，0为去除                     
+| 3.1.1 | deployAndCreate    | Int    |      |  用户的部署与建表权限状态：0-已去除，1-已赋予
+| 3.1.2 | cns    | Int    |      |  用户的CNS管理权限状态：0-已去除，1-已赋予
+| 3.1.3 | sysConfig    | Int    |      |  用户的系统配置管理权限状态：0-已去除，1-已赋予
+| 3.1.4 | node    | Int    |      |  用户的节点共识管理权限状态：0-已去除，1-已赋予
 
 ***2）出参示例***
 * 成功：
@@ -4970,8 +5059,18 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
-| 3    |  data    | List        | 否     | 成功时返回                           
-
+| 3    |  data    | List        | 否     | 成功时返回证书相关信息的列表                          
+| 3    |      | Object        | 否     | 单个证书相关信息                           
+| 3.1    |  fingerPrint    | String        | 否     | 证书的指纹                           
+| 3.1    |  certName    | String        | 否     | 证书名字                           
+| 3.1    |  content    | String        | 否     | 证书文件的内容                           
+| 3.1    |  certType    | String        | 否     | 证书类型                           
+| 3.1    |  publicKey    | String        | 否     | 证书对应nodeid（仅限节点证书公钥）                           
+| 3.1    |  address    | String        | 否     | 证书对应地址（仅限节点证书公钥）                         
+| 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
+| 3.1    |  validityFrom    | Date        | 否     | 证书有效期开始时间                           
+| 3.1    |  validityTo    | Date        | 否     | 证书有效期结束时间                           
+| 3.1    |  createTime    | LocalDateTime        | 否     | 证书的指纹                           
 
 
 ***2）出参示例***
@@ -5038,7 +5137,17 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | List        | 否     | 成功时返回                           
-
+| 3    |      | Object        | 否     | 单个证书相关信息                           
+| 3.1    |  fingerPrint    | String        | 否     | 证书的指纹                           
+| 3.1    |  certName    | String        | 否     | 证书名字                           
+| 3.1    |  content    | String        | 否     | 证书文件的内容                           
+| 3.1    |  certType    | String        | 否     | 证书类型                           
+| 3.1    |  publicKey    | String        | 否     | 证书对应nodeid（仅限节点证书公钥）                           
+| 3.1    |  address    | String        | 否     | 证书对应地址（仅限节点证书公钥）                         
+| 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
+| 3.1    |  validityFrom    | Date        | 否     | 证书有效期开始时间                           
+| 3.1    |  validityTo    | Date        | 否     | 证书有效期结束时间                           
+| 3.1    |  createTime    | LocalDateTime        | 否     | 证书的指纹 
 
 
 ***2）出参示例***
