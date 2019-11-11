@@ -1965,7 +1965,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
-| 3    |  data    | List        | 否     | 成功时返回                           
+| 3    |  data    | Object        | 否     | 成功时返回                           
 
 
 
@@ -1975,30 +1975,28 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 {
     "code": 0,
     "message": "success",
-    "data": [
-        {
-            "serverId": 1,
-            "serverName": "Default config",
-            "host": "smtp.qq.com",
-            "port": 25,
-            "username": "yourmail@qq.com",
-            "password": "yourpassword",
-            "protocol": "smtp",
-            "defaultEncoding": "UTF-8",
-            "createTime": "2019-10-29 20:02:30",
-            "modifyTime": "2019-10-29 20:02:30",
-            "authentication": 1,
-            "starttlsEnable": 1,
-            "starttlsRequired": 0,
-            "socketFactoryPort": 465,
-            "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
-            "socketFactoryFallback": 0,
-            "status": 0,
-            "timeout": 5000,
-            "connectionTimeout": 5000,
-            "writeTimeout": 5000
-        }
-    ]
+    "data": {
+        "serverId": 1,
+        "serverName": "Default config",
+        "host": "smtp.qq.com",
+        "port": 25,
+        "username": "yourmail@qq.com",
+        "password": "yourpassword",
+        "protocol": "smtp",
+        "defaultEncoding": "UTF-8",
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-10-29 20:02:30",
+        "authentication": 1,
+        "starttlsEnable": 1,
+        "starttlsRequired": 0,
+        "socketFactoryPort": 465,
+        "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+        "socketFactoryFallback": 0,
+        "status": 0,
+        "timeout": 5000,
+        "connectionTimeout": 5000,
+        "writeTimeout": 5000
+    }
 }
 
 ```
@@ -2144,7 +2142,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
     "message": "success",
     "data": {
         "serverId": 1,
-        "serverName": "Default config 22222222",
+        "serverName": "Default config",
         "host": "smtp.qq.com",
         "port": 25,
         "username": "yourmail@qq.com",
@@ -2223,7 +2221,6 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
     "message": "success",
     "data": null
 }
-}
 ```
 
 * 失败：
@@ -2238,7 +2235,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 
 ### 6.7 获取告警类型配置
 
-获取单个告警配置的内容；告警类型配置是对不同告警类型下的不同内容，包含告警邮件标题`ruleName`，告警邮件内容`alertContent`，告警邮件发送时间间隔`alertIntervalSeconds`，上次告警时间`lastAlertTime`，目标告警邮箱地址`userList`，是否启用该类型的邮件告警`enable`，告警等级`alertLevel`等；
+获取单个告警配置的内容；告警类型配置是对不同告警类型下的不同内容，包含告警邮件标题`ruleName`，告警邮件内容`alertContent`，告警邮件发送时间间隔`alertIntervalSeconds`，上次告警时间`lastAlertTime`，目标告警邮箱地址列表`userList`，是否启用该类型的邮件告警`enable`，告警等级`alertLevel`等；
 
 
 #### 6.7.1 传输协议规范
@@ -2447,8 +2444,8 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 | 3    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
 | 4    | alertType         | int        | 是     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警
 | 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒）默认3600
-| 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`内的变量不可去除
-| 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以List序列化得到的字符串
+| 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除
+| 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串
 
 
 ***2）入参示例***
