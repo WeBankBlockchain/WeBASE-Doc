@@ -2318,9 +2318,9 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 | 3.1.5     | alertLevel      | String           | 否     |  告警等级      |
 | 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
 | 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
-| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由List<String>序列化为String      |
+| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由`List<String>`序列化为String      |
 | 3.1.9     | description      | String           | 否     |  告警描述      |
-| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由List<String>序列化为String      |
+| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由`List<String>`序列化为String      |
 | 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
 | 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
 | 3.1.13    | lessThan      | String           | 否     |  告警中自定义规则：小于      |
@@ -2411,9 +2411,9 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 | 3.1.5     | alertLevel      | String           | 否     |  告警等级      |
 | 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
 | 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
-| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由List<String>序列化为String      |
+| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由`List<String>`序列化为String      |
 | 3.1.9     | description      | String           | 否     |  告警描述      |
-| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由List<String>序列化为String      |
+| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由`List<String>`序列化为String      |
 | 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
 | 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
 | 3.1.13    | lessThan      | String           | 否     |  告警中自定义规则：小于      |
@@ -2523,7 +2523,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 | 2    | ruleName     | String        | 是     |  告警邮件的标题
 | 3    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
 | 4    | alertType         | int        | 是     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警
-| 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒）默认3600
+| 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒），默认3600s
 | 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除
 | 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串
 
@@ -5070,7 +5070,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 | 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
 | 3.1    |  validityFrom    | Date        | 否     | 证书有效期开始时间                           
 | 3.1    |  validityTo    | Date        | 否     | 证书有效期结束时间                           
-| 3.1    |  createTime    | LocalDateTime        | 否     | 证书的指纹                           
+| 3.1    |  createTime    | LocalDateTime        | 否     | 导入创建时间                          
 
 
 ***2）出参示例***
@@ -5147,7 +5147,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 | 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
 | 3.1    |  validityFrom    | Date        | 否     | 证书有效期开始时间                           
 | 3.1    |  validityTo    | Date        | 否     | 证书有效期结束时间                           
-| 3.1    |  createTime    | LocalDateTime        | 否     | 证书的指纹 
+| 3.1    |  createTime    | LocalDateTime        | 否     | 导入创建时间 
 
 
 ***2）出参示例***
