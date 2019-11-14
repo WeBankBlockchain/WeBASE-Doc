@@ -257,7 +257,16 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 注：邮件告警功能需要确保邮件服务器配置正确；务必使用`测试`按键，向指定的邮箱地址发送测试邮件，如果配置错误将发送测试邮件失败；
 
+邮件告警配置：
+
 ![](../../images/WeBASE-Console-Suit/mail_server_config.png)
+
+邮件告警配置测试：
+
+以当前表单中输入的配置值发送测试邮件（无论是否已保存，都以表单中当前的值为配置发送测试邮件）
+
+![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
+
 
 告警类型配置（告警邮件配置）：
 
