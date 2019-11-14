@@ -1930,7 +1930,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
 
 ### 6.3 获取邮件告警配置
 
-配置邮件告警的邮件服务器的相关参数，包含协议类型`protocol`、邮件服务器地址`host`、端口`port`、用户邮箱地址`username`、用户邮箱授权码`password`；包含Authentication验证开关（默认开启）`authentication`，以及邮件告警模块的开关`status`；
+配置邮件告警的邮件服务器的相关参数，包含协议类型`protocol`、邮件服务器地址`host`、端口`port`、用户邮箱地址`username`、用户邮箱授权码`password`；包含Authentication验证开关（默认开启）`authentication`，以及邮件告警模块的开关`enable`；
 
 注：邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
 
@@ -1975,13 +1975,13 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 | 3.1.6     | password      | String           | 否     |  邮件服务器的用户授权码      |
 | 3.1.7     | protocol      | String           | 否     |  邮件服务器的协议      |
 | 3.1.8     | defaultEncoding      | String           | 否     |  邮件服务器的编码      |
-| 3.1.9     | authentication      | Int           | 否     |  开启验证      |
-| 3.1.10    | starttlsEnable      | Int           | 否     |  开启优先使用STARTTLS      |
-| 3.1.11    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS      |
-| 3.1.12    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
-| 3.1.13    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
-| 3.1.14    | socketFactoryFallback      | Int           | 否     |  开启TLS Fallback函数      |
-| 3.1.15    | status      | Int           | 否     |  开启邮件服务器      |
+| 3.1.9     | authentication      | Int           | 否     |  开启验证：0-关闭，1-开启      |
+| 3.1.10    | starttlsEnable      | Int           | 否     |  开启优先使用STARTTLS：0-关闭，1-开启      |
+| 3.1.11    | enable      | Int           | 否     |  开启邮件服务器：0-关闭，1-开启      |
+| 3.1.12    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS：0-关闭，1-开启      |
+| 3.1.13    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
+| 3.1.14    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
+| 3.1.15    | socketFactoryFallback      | Int           | 否     |  开启TLS Fallback函数：0-关闭，1-开启      |
 | 3.1.16    | timeout      | Int           | 否     |  从邮箱服务器读取超时时间      |
 | 3.1.17    | connectionTimeout      | Int           | 否     |  邮箱服务器连接超时时间      |
 | 3.1.18    | writeTimeout      | Int           | 否     |  从邮箱服务器写超时时间      |
@@ -2011,7 +2011,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
         "socketFactoryPort": 465,
         "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
         "socketFactoryFallback": 0,
-        "status": 0,
+        "enable": 0,
         "timeout": 5000,
         "connectionTimeout": 5000,
         "writeTimeout": 5000
@@ -2068,12 +2068,12 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 | 3.1.7     | protocol      | String           | 否     |  邮件服务器的协议      |
 | 3.1.8     | defaultEncoding      | String           | 否     |  邮件服务器的编码      |
 | 3.1.9     | authentication      | Int           | 否     |  开启验证：0-关闭，1-开启      |
-| 3.1.10    | starttlsEnable      | Int           | 否     |  优先使用STARTTLS：0-关闭，1-开启      |
-| 3.1.11    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS：0-关闭，1-开启      |
-| 3.1.12    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
-| 3.1.13    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
-| 3.1.14    | socketFactoryFallback      | Int           | 否     |  TLS Fallback函数：0-关闭，1-开启      |
-| 3.1.15    | status      | Int           | 否     |  邮件服务器状态：0-关闭，1-开启      |
+| 3.1.10    | starttlsEnable      | Int           | 否     |  开启优先使用STARTTLS：0-关闭，1-开启      |
+| 3.1.11    | enable      | Int           | 否     |  开启邮件服务器：0-关闭，1-开启      |
+| 3.1.12    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS：0-关闭，1-开启      |
+| 3.1.13    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
+| 3.1.14    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
+| 3.1.15    | socketFactoryFallback      | Int           | 否     |  开启TLS Fallback函数：0-关闭，1-开启      |
 | 3.1.16    | timeout      | Int           | 否     |  从邮箱服务器读取超时时间      |
 | 3.1.17    | connectionTimeout      | Int           | 否     |  邮箱服务器连接超时时间      |
 | 3.1.18    | writeTimeout      | Int           | 否     |  从邮箱服务器写超时时间      |
@@ -2106,7 +2106,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
             "socketFactoryPort": 465,
             "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
             "socketFactoryFallback": 0,
-            "status": 0,
+            "enable": 0,
             "timeout": 5000,
             "connectionTimeout": 5000,
             "writeTimeout": 5000
@@ -2134,13 +2134,13 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | serverId     | int        | 否     |  邮件告警配置的编号 
-| 2    | protocol     | String        | 是     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）
-| 3    | host         | String        | 是     |  邮件服务的地址
-| 4    | port         | int        | 是     |  邮件服务使用的端口，默认25
-| 5    | username     | String        | 是     |  邮件服务的用户邮箱地址
-| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码
+| 2    | protocol     | String        | 否     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）
+| 3    | host         | String        | 否     |  邮件服务的地址
+| 4    | port         | int        | 否     |  邮件服务使用的端口，默认25
+| 5    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填
+| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，authentication开启时为必填
 | 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启
-| 8    | status       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启
+| 8    | enable       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启
 
 ***2）入参示例***
 
@@ -2157,7 +2157,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
     "password": "yourpassword",
     "protocol": "smtp",
     "authentication": 1,
-    "status": 1
+    "enable": 1
 }
 ```
 
@@ -2171,6 +2171,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
 
 
 
@@ -2197,7 +2198,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
         "socketFactoryPort": 465,
         "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
         "socketFactoryFallback": 0,
-        "status": 1,
+        "enable": 1,
         "timeout": 5000,
         "connectionTimeout": 5000,
         "writeTimeout": 5000
@@ -2233,12 +2234,47 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | toMailAddress     | String        | 否     |  接收测试邮件的邮箱地址 
+| 1    | {toMailAddress} | String        | 否     |  接收测试邮件的邮箱地址 
+| 3    | host         | String        | 否     |  邮件服务的地址
+| 4    | port         | int        | 否     |  邮件服务使用的端口，默认25
+| 2    | protocol     | String        | 是     |  邮件服务的协议类型，默认使用smtp
+| 8    | defaultEncoding  | String        | 是     | 邮件服务的邮件编码格式，默认为UTF-8编码
+| 5    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填
+| 6    | password     | String        | 否     |  邮件服务的用户邮箱授权码，authentication开启时为必填
+| 7    | authentication | int        | 否     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启
+| 7    | starttlsEnable | int        | 是     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启
+| 7    | starttlsRequired | int        | 是     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启
+| 7    | socketFactoryPort | String        | 是     |  TLS/SSL的Socket端口，默认465
+| 7    | socketFactoryClass | String        | 是     |  TLS/SSL的Socket工厂类
+| 7    | socketFactoryFallback | int        | 是     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启
+| 7    | timeout | int        | 是     |  读超时时间值，默认5000ms
+| 7    | connectionTimeout | int        | 是     |  连接超时时间值，默认5000ms
+| 7    | writeTimeout | int        | 是     |  写超时时间值，默认5000ms
 
 ***2）入参示例***
 
 ```
 http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
+```
+
+```
+{
+    "host": "smtp.qq.com",
+    "port": 25,
+    "username": "yourmail@qq.com",
+    "password": "yourpassword",
+    "protocol": "smtp",
+    "defaultEncoding": "UTF-8",
+    "authentication": 1,
+    "starttlsEnable": 1,
+    "starttlsRequired": 0,
+    "socketFactoryPort": 465,
+    "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+    "socketFactoryFallback": 0,
+    "timeout": 5000,
+    "connectionTimeout": 5000,
+    "writeTimeout": 5000
+}
 ```
 
 #### 6.6.3 返回参数
