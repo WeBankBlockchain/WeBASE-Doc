@@ -140,6 +140,8 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 节点管理：
 
+显示所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
+
 ![](../../images/WeBASE-Console-Suit/node_manager_2.png)
 
 
