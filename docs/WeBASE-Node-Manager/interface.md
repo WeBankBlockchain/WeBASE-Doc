@@ -2235,21 +2235,21 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | {toMailAddress} | String        | 否     |  接收测试邮件的邮箱地址 
-| 3    | host         | String        | 否     |  邮件服务的地址
-| 4    | port         | int        | 否     |  邮件服务使用的端口，默认25
-| 2    | protocol     | String        | 是     |  邮件服务的协议类型，默认使用smtp
-| 8    | defaultEncoding  | String        | 是     | 邮件服务的邮件编码格式，默认为UTF-8编码
-| 5    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填
-| 6    | password     | String        | 否     |  邮件服务的用户邮箱授权码，authentication开启时为必填
-| 7    | authentication | int        | 否     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启
-| 7    | starttlsEnable | int        | 是     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启
-| 7    | starttlsRequired | int        | 是     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启
-| 7    | socketFactoryPort | String        | 是     |  TLS/SSL的Socket端口，默认465
-| 7    | socketFactoryClass | String        | 是     |  TLS/SSL的Socket工厂类
-| 7    | socketFactoryFallback | int        | 是     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启
-| 7    | timeout | int        | 是     |  读超时时间值，默认5000ms
-| 7    | connectionTimeout | int        | 是     |  连接超时时间值，默认5000ms
-| 7    | writeTimeout | int        | 是     |  写超时时间值，默认5000ms
+| 2    | host         | String        | 否     |  邮件服务的地址
+| 3    | port         | int        | 否     |  邮件服务使用的端口，默认25
+| 4    | protocol     | String        | 是     |  邮件服务的协议类型，默认使用smtp
+| 5    | defaultEncoding  | String        | 是     | 邮件服务的邮件编码格式，默认为UTF-8编码
+| 6    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填
+| 7    | password     | String        | 否     |  邮件服务的用户邮箱授权码，authentication开启时为必填
+| 8    | authentication | int        | 否     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启
+| 9    | starttlsEnable | int        | 是     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启
+| 10   | starttlsRequired | int        | 是     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启
+| 11   | socketFactoryPort | String        | 是     |  TLS/SSL的Socket端口，默认465
+| 12   | socketFactoryClass | String        | 是     |  TLS/SSL的Socket工厂类
+| 13   | socketFactoryFallback | int        | 是     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启
+| 14   | timeout | int        | 是     |  读超时时间值，默认5000ms
+| 15   | connectionTimeout | int        | 是     |  连接超时时间值，默认5000ms
+| 16   | writeTimeout | int        | 是     |  写超时时间值，默认5000ms
 
 ***2）入参示例***
 
@@ -2351,7 +2351,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 | 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题      |
 | 3.1.3     | enable      | Int           | 否     |  是否开启该告警：0-关闭，1-开启     |
 | 3.1.4     | alertType      | Int           | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期      |
-| 3.1.5     | alertLevel      | String           | 否     |  告警等级      |
+| 3.1.5     | alertLevel      | Int           | 否     |  告警等级：1-高，2-中，3-低      |
 | 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
 | 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
 | 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由`List<String>`序列化为String      |
@@ -2359,13 +2359,8 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 | 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由`List<String>`序列化为String      |
 | 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
 | 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
-| 3.1.13    | lessThan      | String           | 否     |  告警中自定义规则：小于      |
-| 3.1.14    | lessAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
-| 3.1.15    | largerThan      | String           | 否     |  告警中自定义规则：小于      |
-| 3.1.16    | largerAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
-| 3.1.17    | equal      | String           | 否     |  告警中自定义规则：等于      |
-| 3.1.18    | createTime  | LocalDateTime           | 否     |  创建时间      |
-| 3.1.19    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
+| 3.1.13    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.14    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
 
 
 
@@ -2381,16 +2376,11 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
         "ruleName": "节点异常告警",
         "enable": 0,
         "alertType": 1,
-        "alertLevel": "high",
+        "alertLevel": 1,
         "alertIntervalSeconds": 3600,
         "alertContent": "{nodeId}节点异常，请到\"节点管理\"页面查看具体信息",
         "contentParamList": "[\"{nodeId}\"]",
         "description": null,
-        "lessThan": null,
-        "lessAndEqual": null,
-        "largerThan": null,
-        "largerAndEqual": null,
-        "equal": null,
         "createTime": "2019-10-29 20:02:30",
         "modifyTime": "2019-10-29 20:02:30",
         "isAllUser": 0,
@@ -2444,7 +2434,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 | 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题      |
 | 3.1.3     | enable      | Int           | 否     |  是否开启该告警：0-关闭，1-开启     |
 | 3.1.4     | alertType      | Int           | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期      |
-| 3.1.5     | alertLevel      | String           | 否     |  告警等级      |
+| 3.1.5     | alertLevel      | Int           | 否     |  告警等级：1-高，2-中，3-低      |
 | 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
 | 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
 | 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由`List<String>`序列化为String      |
@@ -2452,13 +2442,8 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 | 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由`List<String>`序列化为String      |
 | 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
 | 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
-| 3.1.13    | lessThan      | String           | 否     |  告警中自定义规则：小于      |
-| 3.1.14    | lessAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
-| 3.1.15    | largerThan      | String           | 否     |  告警中自定义规则：小于      |
-| 3.1.16    | largerAndEqual      | String           | 否     |  告警中自定义规则：小于或等于      |
-| 3.1.17    | equal      | String           | 否     |  告警中自定义规则：等于      |
-| 3.1.18    | createTime  | LocalDateTime           | 否     |  创建时间      |
-| 3.1.19    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
+| 3.1.13    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.14    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
 
 
 
@@ -2474,16 +2459,11 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
             "ruleName": "节点异常告警",
             "enable": 0,
             "alertType": 1,
-            "alertLevel": "high",
+            "alertLevel": 1,
             "alertIntervalSeconds": 3600,
             "alertContent": "{nodeId}节点异常，请到\"节点管理\"页面查看具体信息",
             "contentParamList": "[\"{nodeId}\"]",
             "description": null,
-            "lessThan": null,
-            "lessAndEqual": null,
-            "largerThan": null,
-            "largerAndEqual": null,
-            "equal": null,
             "createTime": "2019-10-29 20:02:30",
             "modifyTime": "2019-10-29 20:02:30",
             "isAllUser": 0,
@@ -2495,16 +2475,11 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
             "ruleName": "审计异常",
             "enable": 0,
             "alertType": 2,
-            "alertLevel": "high",
+            "alertLevel": 1,
             "alertIntervalSeconds": 3600,
             "alertContent": "审计异常：{auditType}，请到\"交易审计\"页面查看具体信息",
             "contentParamList": "[\"{auditType}\"]",
             "description": null,
-            "lessThan": null,
-            "lessAndEqual": null,
-            "largerThan": null,
-            "largerAndEqual": null,
-            "equal": null,
             "createTime": "2019-10-29 20:02:30",
             "modifyTime": "2019-10-29 20:02:30",
             "isAllUser": 0,
@@ -2516,16 +2491,11 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
             "ruleName": "证书有效期告警",
             "enable": 0,
             "alertType": 3,
-            "alertLevel": "high",
+            "alertLevel": 1,
             "alertIntervalSeconds": 3600,
             "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
             "contentParamList": "[\"{time}\"]",
             "description": null,
-            "lessThan": null,
-            "lessAndEqual": null,
-            "largerThan": null,
-            "largerAndEqual": null,
-            "equal": null,
             "createTime": "2019-10-29 20:02:30",
             "modifyTime": "2019-10-29 20:02:30",
             "isAllUser": 0,
@@ -2562,6 +2532,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 | 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒），默认3600s
 | 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除
 | 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串
+| 9    | alertLevel      | Int           | 是     |  告警等级：1-高，2-中，3-低      |
 
 
 ***2）入参示例***
@@ -2578,7 +2549,8 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
     "alertType": 3,
     "alertIntervalSeconds": 1800,
     "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
-    "userList": "[\"targetmail@qq.com\"]"
+    "userList": "[\"targetmail@qq.com\"]",
+    "alertLevel": 1
 }
 ```
 
@@ -2592,6 +2564,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
 
 
 
@@ -2606,7 +2579,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
         "ruleName": "证书有效期告警",
         "enable": 0,
         "alertType": 3,
-        "alertLevel": "high",
+        "alertLevel": 1,
         "alertIntervalSeconds": 1800,
         "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
         "contentParamList": "[\"{time}\"]",
@@ -2675,6 +2648,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
 
 
 
@@ -2689,7 +2663,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
         "ruleName": "证书有效期告警",
         "enable": 1,
         "alertType": 3,
-        "alertLevel": "high",
+        "alertLevel": 1,
         "alertIntervalSeconds": 1800,
         "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
         "contentParamList": "[\"{time}\"]",
