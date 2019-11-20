@@ -251,22 +251,20 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 告警部分主要包括邮件服务配置和告警类型配置：
 
-邮件告警配置：
+邮件服务配置：
 
-可配置邮件告警所用到的邮件服务器相关参数，包含邮件协议类型protocol、邮件服务器地址host、服务使用端口port、用户邮箱地址username、用户邮箱授权码password；鉴权选项包含Authentication验证开关（默认开启）authentication；
+可配置邮件告警所用到的邮件服务器相关参数，包含邮件协议类型protocol、邮件服务器地址host、服务使用端口port、用户邮箱地址username、用户邮箱授权码password；鉴权选项包含Authentication验证开关authentication（默认开启）；
 - 邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
 - 目前仅支持更新原有的邮件服务器配置，不支持新增配置；
 - 使用测试功能时需要到“告警类型配置”中，在左上角**开启邮件服务总开关**；
 
 注：邮件告警功能需要确保邮件服务器配置正确；务必使用`测试`按键，向指定的邮箱地址发送测试邮件，如果配置错误将发送测试邮件失败；
 
-邮件告警配置：
-
 ![](../../images/WeBASE-Console-Suit/mail_server_config.png)
 
-邮件告警配置测试：
+邮件服务配置测试：
 
-以当前表单中输入的配置值发送测试邮件（无论是否已保存，都以表单中当前的值为配置发送测试邮件）
+以当前表单中输入的配置值发送测试邮件（无论是否已保存，都以表单中当前的值为配置发送测试邮件）；需要提前开启邮件服务开关；
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
 
