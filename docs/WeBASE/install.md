@@ -26,7 +26,7 @@
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.0/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.1/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -54,7 +54,7 @@ cd webase-deploy
 
 ```shell
 # WeBASE版本(v1.1.0或以上版本)
-webase.version=v1.2.0
+webase.version=v1.2.1
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
