@@ -77,7 +77,7 @@ system.dbUser=[user_name]
 system.dbPassword=[password]
 
 # 合约Java文件的包名
-monitor.contractPackName=[编译Solidity合约时指定的包名]
+system.contractPackName=[编译Solidity合约时指定的包名]
 ```
 
 更多配置详情可参考附件1：配置参数。
