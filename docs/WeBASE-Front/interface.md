@@ -2318,7 +2318,7 @@ HTTP POST
 
 ```
 {
-    "useAes ":false,
+    "useAes":false,
     "user":"700001",
     "contractName":"HelloWorld",
     "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
@@ -2334,6 +2334,17 @@ HTTP POST
 curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
 "HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
 ```
+
+if response context as follow:
+```json
+{
+    "code": 201015,
+    "errorMessage": "user's privateKey is null"
+}
+```
+then change from `id` to `address`  
+
+such change id `"user":"700001"` to address `"user":"0x55c05a9a01ebab205c69d9362707b8f05ad6aa2c"`
 
 #### 响应参数
 
