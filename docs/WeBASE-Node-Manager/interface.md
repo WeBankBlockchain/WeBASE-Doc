@@ -4305,7 +4305,8 @@ http://localhost:5001/WeBASE-Node-Manager/permission/full?groupId=1&permissionTy
 | 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
 | 4    | address   | String           | 否     | 分配链管理员的用户地址         
 | 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
-                           
+| 6    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+          
 
 ***2）入参示例***
 
@@ -4375,7 +4376,8 @@ http://localhost:5001/WeBASE-Node-Manager/permission
 | 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
 | 4    | address   | String           | 否     | 分配链管理员的用户地址         
 | 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
-                           
+| 6    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+                    
 
 ***2）入参示例***
 
@@ -4527,7 +4529,8 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted?groupId=1&pageSize=3
 | 2    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
 | 3    | address   | String           | 否     | 分配链管理员的用户地址         
 | 4        | permissionState       | Object |      否   |   使用{"permissionType": 1}的结构格式，1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限     
-                           
+| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+                      
 
 ***2）入参示例***
 
@@ -4746,6 +4749,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config/list?groupId=1&pageSize=10&
 | 2    | fromAddress     | String        | 否     | 管理员自己的地址
 | 3    | configKey     | String        | 否     | 目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price
  | 4    | configValue     | String        | 否     |  
+| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
 
                           
 
@@ -4888,7 +4892,8 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus/list?groupId=1&p
 | 2    | fromAddress     | String        | 否     | 管理员的地址    
 | 3    | nodeType     | String        | 否     | 节点类型：observer,sealer,remove  
 | 4    | nodeId     | String        | 否     | 节点id    
-                          
+| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+                
 
 ***2）入参示例***
 
@@ -4963,6 +4968,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
 | 1    | groupId     | int        | 否     | 群组id      
 | 2    | fromAddress     | String        | 否     | UserTable管理员的地址  
 | 3    | sql     | String        | 否     | 需要调用的sql语句  
+| 4    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
 
 
 ***2）入参示例***
@@ -5305,3 +5311,52 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 }
 ```
 
+### 19.1 查询是否使用国密
+
+获取WeBASE-Node-Manager是否使用国密版
+
+#### 18.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/encrypt**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 18.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | --     | -        | 否     | -   
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/encrypt
+```
+
+
+#### 18.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Int        | 否     | 1: 国密，0：非国密                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 1 
+}
+
+```

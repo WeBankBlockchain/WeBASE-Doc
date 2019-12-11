@@ -75,6 +75,10 @@ spring:
 constant: 
   # aes加密key（16位）
   aesKey: EfdsW23D23d3df43
+
+sdk:
+  # web3sdk国密与非国密切换 0: standard, 1: guomi
+  encryptType: 0
 ```
 
 ## 5. 服务启停
