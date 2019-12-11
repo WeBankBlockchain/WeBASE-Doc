@@ -496,6 +496,62 @@ http://localhost:5002/WeBASE-Front/contract/ifChanged/1/10
 true
 ```
 
+### 1.10. 后台编译合约
+
+#### 接口描述
+
+> 通过后台的solcJ对solidity合约进行编译，返回合约的BIN与ABI
+
+注：合约编译默认使用ethereum solcj-0.4.25.jar，如需使用其他版本在/dist/lib中替换solcJ的jar包；
+或将新的solcJ jar包放置在项目根目录的/lib文件夹中，在build.gradle中引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中的solcJ-gm jar包
+
+下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/contractCompile**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 合约名称     | contractName     | String            |            | 是       |          |
+| 2        | 合约源码     | solidityBase64    | String          |            | 是       |    经过Base64编码的合约源码内容 |
+
+**2）数据格式**
+```
+{
+    "contractName": "HelloWorld",
+    "solidityBase64": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsKCmICB9Cn0"
+}
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 合约名称 | contractName        | String         |              | 是        |           |
+| 3        | 合约bin  | bytecodeBin | String         |     | 是       | |   合约Bin
+| 4        | 合约abi | contractAbi | String         |              | 是        |   |
+
+**2）数据格式**
+```
+{
+    "contractName": "HeHe",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsKCmICB9Cn0=",
+    "bytecodeBin": "608060405234801561001057600080fd5b506029",
+    "contractAbi": "[{\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+}
+```
+
+
 ## 2. 密钥接口
 
 ### 2.1. 获取公私钥接口
@@ -2665,6 +2721,7 @@ HTTP POST
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false 
 
 **2）数据格式**
 
@@ -2731,6 +2788,7 @@ HTTP DELETE
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -2796,6 +2854,7 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 4        | 用户权限状态       | permissionState       | Object     |              |     是     | 使用{"permissionType": 1}格式，参照下文数据格式；1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限
+| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -2982,6 +3041,7 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 配置的键         | configKey        | String   |           | 是       |   目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price                                             |
 | 4        | 配置的值       | configValue       | String     |              |     是    | tx_gas_limit范围为 [100000, 2147483647]
+| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3104,6 +3164,7 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 节点类型       | nodeType       | String     |              |     是    | 节点类型：observer,sealer,remove 
 | 4      | 节点ID         | nodeId        | String   |           | 是       |   节点id，从节点根目录/conf/node.id获取                                             |
+| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3169,7 +3230,7 @@ HTTP POST
 | 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |                                             |
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | SQL语句       | sql       | String     |              |     是    | 包含create, desc, insert, update, select, remove，小写
-
+| 4        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3276,6 +3337,47 @@ b、失败：
 }
 ```
 
+
+### 7.1. 查询是否使用国密
+
+#### 接口描述
+
+获取WeBASE-Front的`encryptType`，即是否使用国密版；
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/encrypt**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/encrypt
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+    1 // 1: 国密版，0: 非国密
+}
+```
 
 
 ## 7. 附录

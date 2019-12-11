@@ -76,6 +76,8 @@ sed -i "s/defaultAccount/root/g" webase.sh
 bash webase.sh 127.0.0.1 3306
 ```
 
+注：如果使用国密版本，上述操作应在`script/gm`的webase.sh上进行操作，运行时则运行/gm目录下的webase.sh
+
 ## 6. 服务配置及启停
 ### 6.1 服务配置修改
 （1）回到dist目录，dist目录提供了一份配置模板conf_template：
@@ -94,6 +96,8 @@ bash webase.sh 127.0.0.1 3306
 修改数据库用户：sed -i "s/defaultAccount/${your_db_account}/g" conf/application.yml
 修改数据库密码：sed -i "s/defaultPassword/${your_db_password}/g" conf/application.yml
 ```
+
+如果使用国密版本，则将application.yml中`sdk-encryptType`由`0`改为`1`
 
 ### 6.2 服务启停
 在dist目录下执行：

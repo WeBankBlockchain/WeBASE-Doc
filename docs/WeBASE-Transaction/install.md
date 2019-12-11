@@ -101,7 +101,8 @@ sdk.groupConfig.allChannelConnections[0].connectionsStr[1]=127.0.0.1:20201
 sdk.groupConfig.allChannelConnections[1].groupId=2
 sdk.groupConfig.allChannelConnections[1].connectionsStr[0]=127.0.0.1:20200
 sdk.groupConfig.allChannelConnections[1].connectionsStr[1]=127.0.0.1:20201
-
+# 切换国密与非国密 0: standard, 1: guomi
+sdk.encryptType=0
 ################################### constant Configuration ###################################
 # WeBASE-Sign签名服务ip端口，使用本签名方式则对应修改
 constant.signServer=127.0.0.1:5004
