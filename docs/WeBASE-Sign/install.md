@@ -9,6 +9,8 @@
 
 备注：安装说明请参看 [附录-1](./appendix.html#id2)。
 
+**国密支持**： 需要在配置文件`application.yml`中将`encryptType`从`0`设置为`1`以开启web3sdk的国密开关
+
 ## 2. 拉取代码
 
 执行命令：
