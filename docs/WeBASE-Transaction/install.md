@@ -14,6 +14,26 @@
 
 - 安装说明请参看 [安装示例](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
 
+**国密支持：**
+
+WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
+
+```eval_rst
+.. important::
+使用国密版WeBASE-Transaction需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
+```
+
+开启web3sdk的国密开关:
+- 开启web3sdk的国密开关：将配置文件`application.properties`中web3sdk配置的`encryptType`从`0`修改为`1`；
+
+使用国密版solcJ Jar包，需要替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar
+以下操作()二选一执行即可：
+- 编译项目前替换：将国密版solcJ的jar包放置在项目根目录的/lib文件夹中，在build.gradle引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中国密版solcJ的jar包
+- 编译项目后替换：在编译得到的/dist中，将文件夹/lib中的solcJ-all的jar包替换为国密版solcJ的jar包；
+
+下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+
+
 ## 2. 拉取代码
 
 执行命令：
