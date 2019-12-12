@@ -15,10 +15,15 @@ WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-do
 
 ```eval_rst
 .. important::
-国密版WeBASE-Node-Manager需要
-- 开启web3sdk的国密开关：将配置文件application.yml/applicationContext.xml中web3sdk配置的encryptType从0修改为1；
-- 部署中初始化数据库时，不再执行script中的webase.sh，而是执行script/gm中的webase.sh脚本进行初始化；
+使用国密版WeBASE-Node-Manager需要开启web3sdk的国密开关和script/gm中的webase-gm.sh脚本进行数据库初始化
 ```
+
+开启web3sdk的国密开关：
+- 将配置文件`application.yml/applicationContext.xml`中web3sdk配置的`encryptType`从`0`修改为`1`；
+
+部署时初始化数据库：
+- 执行`dist/script/gm`中的webase-gm.sh脚本进行初始化，而非`dist/script`中的webase.sh，；
+
 
 ## 2. 注意事项
 *  Java推荐使用[OpenJDK](https://openjdk.java.net/ )，建议从OpenJDK网站自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）[下载地址](https://jdk.java.net/java-se-ri/11) [安装指南](https://openjdk.java.net/install/index.html)
@@ -64,15 +69,16 @@ CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_g
 
 ### 5.2 修改脚本配置
 
-```eval_rst
-.. important::
-	如果使用国密版，以下操作应在script/gm的webase.sh上进行操作，运行时则运行/gm目录下的webase.sh
-```
-
 进入数据库脚本目录
 ```shell
 cd  dist/script
 ```
+
+```eval_rst
+.. important::
+	如果使用国密版，应进入dist/script/gm目录，对/gm目录下的webase-gm.sh进行下文的操作，并在最后运行webase-gm.sh
+```
+
 修改数据库连接信息：
 ```shell
 修改数据库名称：sed -i "s/webasenodemanager/${your_db_name}/g" webase.sh

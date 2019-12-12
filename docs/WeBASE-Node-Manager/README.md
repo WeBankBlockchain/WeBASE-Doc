@@ -25,6 +25,6 @@ WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-do
 
 具体需要适配国密版FISCO-BCOS与WeBASE-Front的地方有：
 - 在配置文件`application.yml/applicationContext.xml`中开启web3sdk的国密开关；
-- 国密版部署时，初始化数据库执行国密版的数据库初始化脚本`script/gm/webase,sh`；
+- 国密版部署初始化数据库时，执行国密版的初始化脚本`script/gm/webase-gm.sh`；
 
 安装详情可查看下一章节的[WeBASE-Node-Manager部署说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/install.html)
