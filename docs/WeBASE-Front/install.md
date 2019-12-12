@@ -9,6 +9,23 @@
 
 **备注：** Java推荐使用[OpenJDK](./appendix.html#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
+**国密支持：**
+
+WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
+
+```eval_rst
+.. important::
+    国密版WeBASE-Node-Manager需要
+    - 开启web3sdk的国密开关：将配置文件`application.yml/applicationContext.xml`中web3sdk配置的`encryptType`从`0`修改为`1`；
+
+    - 合约编译默认使用ethereum的solcJ-0.4.25.jar，使用国密版或其他版本的solcJ编译合约，以下操作**二选一执行**即可：
+      - 编译项目前替换，将国密版solcJ的jar包放置在项目根目录的/lib文件夹中，在build.gradle引入web3sdk处`exclude`去除ethereum的solcJ jar包，同时通过`fileTree`引入lib中国密版solcJ的jar包
+      - 编译项目后替换，在编译得到的/dist中，将文件夹/lib中的solcJ-all的jar包替换为国密版solcJ的jar包；
+
+    下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+
+```
+
 ## 2. 拉取代码
 执行命令：
 ```
