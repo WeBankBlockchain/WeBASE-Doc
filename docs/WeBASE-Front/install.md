@@ -16,12 +16,12 @@ WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documenta
 ```eval_rst
 .. important::
 国密版WeBASE-Node-Manager需要
-  - 开启web3sdk的国密开关：将配置文件application.yml/applicationContext.xml中web3sdk配置的encryptType从0修改为1；
-  - 合约编译使用国密版需要替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar
+- 开启web3sdk的国密开关：将配置文件application.yml/applicationContext.xml中web3sdk配置的encryptType从0修改为1；
+- 合约编译使用国密版需要替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar
 
 替换solc jar包，以下操作二选一执行即可：
-  - 编译项目前替换，将国密版solcJ的jar包放置在项目根目录的/lib文件夹中，在build.gradle引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中国密版solcJ的jar包
-  - 编译项目后替换，在编译得到的/dist中，将文件夹/lib中的solcJ-all的jar包替换为国密版solcJ的jar包；
+- 编译项目前替换，将国密版solcJ的jar包放置在项目根目录的/lib文件夹中，在build.gradle引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中国密版solcJ的jar包
+- 编译项目后替换，在编译得到的/dist中，将文件夹/lib中的solcJ-all的jar包替换为国密版solcJ的jar包；
 
 下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
 

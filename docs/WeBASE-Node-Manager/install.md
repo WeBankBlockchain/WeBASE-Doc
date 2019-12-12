@@ -16,8 +16,8 @@ WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-do
 ```eval_rst
 .. important::
 国密版WeBASE-Node-Manager需要
-  - 开启web3sdk的国密开关：将配置文件application.yml/applicationContext.xml中web3sdk配置的encryptType从0修改为1；
-  - 部署中初始化数据库时，不再执行script中的webase.sh，而是执行script/gm中的webase.sh脚本进行初始化；
+- 开启web3sdk的国密开关：将配置文件application.yml/applicationContext.xml中web3sdk配置的encryptType从0修改为1；
+- 部署中初始化数据库时，不再执行script中的webase.sh，而是执行script/gm中的webase.sh脚本进行初始化；
 ```
 
 ## 2. 注意事项
