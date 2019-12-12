@@ -502,11 +502,6 @@ true
 
 > 通过后台的solcJ对solidity合约进行编译，返回合约的BIN与ABI
 
-注：合约编译默认使用ethereum solcj-0.4.25.jar，如需使用其他版本在/dist/lib中替换solcJ的jar包；
-或将新的solcJ jar包放置在项目根目录的/lib文件夹中，在build.gradle中引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中的solcJ-gm jar包
-
-下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
-
 #### 接口URL
 
 **http://localhost:5002/WeBASE-Front/contract/contractCompile**

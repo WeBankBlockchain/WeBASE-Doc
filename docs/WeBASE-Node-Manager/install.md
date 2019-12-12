@@ -9,6 +9,16 @@
 | 3    | MySQL5.6或以上版本    |
 | 4    | Java8或以上版本       |
 
+**国密支持：**
+
+WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，与[WeBASE-Front v1.2.2+](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/index.html)配合使用
+
+```eval_rst
+.. important::
+    国密版WeBASE-Node-Manager需要
+    - 开启web3sdk的国密开关：将配置文件`application.yml/applicationContext.xml`中web3sdk配置的`encryptType`从`0`修改为`1`；
+    - 部署中初始化数据库时，不再执行script中的webase.sh，而是执行script/gm中的webase.sh脚本进行初始化；
+```
 
 ## 2. 注意事项
 *  Java推荐使用[OpenJDK](https://openjdk.java.net/ )，建议从OpenJDK网站自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）[下载地址](https://jdk.java.net/java-se-ri/11) [安装指南](https://openjdk.java.net/install/index.html)
@@ -53,6 +63,12 @@ CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_g
 ```
 
 ### 5.2 修改脚本配置
+
+```eval_rst
+.. important::
+	如果使用国密版，以下操作应在script/gm的webase.sh上进行操作，运行时则运行/gm目录下的webase.sh
+```
+
 进入数据库脚本目录
 ```shell
 cd  dist/script
@@ -75,8 +91,6 @@ sed -i "s/defaultAccount/root/g" webase.sh
 ```shell
 bash webase.sh 127.0.0.1 3306
 ```
-
-注：如果使用国密版本，上述操作应在`script/gm`的webase.sh上进行操作，运行时则运行/gm目录下的webase.sh
 
 ## 6. 服务配置及启停
 ### 6.1 服务配置修改
