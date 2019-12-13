@@ -20,7 +20,7 @@ WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-doc
 
 ```eval_rst
 .. important::
-使用国密版WeBASE-Transaction需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
+    使用国密版WeBASE-Transaction需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
 ```
 
 开启web3sdk的国密开关:
