@@ -237,7 +237,9 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ### 系统监控
 
-系统监控包含了监控与异常告警两部分，其中监控主要包括节点监控和主机监控，可以选择节点、时间范围等条件进行筛选查看：
+系统监控包含了**监控**与**异常告警**两部分；
+
+监控主要包括节点监控和主机监控，可以选择节点、时间范围等条件进行筛选查看：
 - 节点监控主要有区块高度，pbftview，待打包交易；
 - 主机监控主要有主机的CPU，内存，网络和硬盘IO；
 
@@ -249,9 +251,9 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/host_mornitor_2.png)
 
-告警部分主要包括邮件服务配置和告警类型配置：
+异常告警部分主要包括**邮件服务配置**和**告警类型配置**：
 
-邮件服务配置：
+**邮件服务配置：**
 
 可配置邮件告警所用到的邮件服务器相关参数，包含邮件协议类型protocol、邮件服务器地址host、服务使用端口port、用户邮箱地址username、用户邮箱授权码password；鉴权选项包含Authentication验证开关authentication（默认开启）；
 - 邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
@@ -269,7 +271,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 ![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
 
 
-告警类型配置（告警邮件配置）：
+**告警类型配置（告警邮件配置）：**
 
 包含了告警类型的配置，告警日志的查看；可配置告警类型的参数值，包含告警邮件标题ruleName，告警邮件内容alertContent，告警邮件发送时间间隔alertIntervalSeconds（单位：秒），上次告警时间lastAlertTime，目标告警邮箱地址userList，是否启用该类型的邮件告警enable，告警等级alertLevel等；
 - 包含了节点状态告警、审计告警、证书有效期告警三种；
@@ -330,3 +332,48 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 添加登陆账号并指定账号类型：
 
 ![](../../images/WeBASE-Console-Suit/login_user_add_2.png)
+
+## 附录
+
+### 如何配置邮件服务
+
+请先阅读管理平台使用手册中各模块的详细介绍的[系统监控-邮件服务配置](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id26)
+
+问：邮件服务怎么用？
+
+答：在后台搭建邮件服务（邮箱服务器），用于后台监控到系统异常情况时，发送告警邮件到指定邮箱，方便运维；
+
+下面介绍具体的使用方法：
+
+邮件服务所使用的邮箱服务器可以是企业自行搭建的邮箱服务器，比如企业邮箱；普通用户可以使用QQ邮箱、网易邮箱等第三方邮箱
+
+下面以163邮箱配置邮件服务为例：
+
+- 登陆邮箱后，在邮箱的“设置”中找到包含“SMTP”的设置项；
+
+![](../../images/WeBASE-Console-Suit/mail_guide_setting.png)
+
+- 勾选`IMAP/SMTP`和`POP3/SMTP`，初次开启时，会提醒用户设置**授权码**，并进行手机安全验证；
+- 设置授权码后，勾选`IMAP`, `POP3`, `SMTP`开启全部服务；
+
+![](../../images/WeBASE-Console-Suit/mail_guide.png)
+
+
+记下所设置的**授权码**，授权码即邮件服务中用到的“密码”，按照[系统监控-邮件服务配置](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id26)进行配置：
+
+第一步，进入“告警类型配置”中，点击左上角“启用告警”以**开启邮件服务开关**
+
+![](../../images/WeBASE-Console-Suit/alert_rule.png)
+
+第二步，进入“邮件告警配置”，配置邮件服务
+
+- 因为Node-Manager仅使用邮箱服务器的发件服务，因此**协议类型**填写`smtp`；（IMAP/POP3均为收件服务协议）
+- 邮箱服务器填写`smtp.xx.com`，端口号默认为`25`即可启用邮件服务；如需使用其他端口如465则需要开启WeBASE-Node-Manager所在服务器的对应端口；
+- 用户名填写邮箱地址，密码填写上文设置的**授权码**；
+
+![](../../images/WeBASE-Console-Suit/mail_server_config.png)
+
+配置完成后，点击“测试”后，输入接收测试邮件的邮箱地址，测试成功即可“保存”邮件服务的配置
+
+![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
+
