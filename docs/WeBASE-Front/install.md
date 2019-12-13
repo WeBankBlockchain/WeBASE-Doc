@@ -9,13 +9,13 @@
 
 **备注：** Java推荐使用[OpenJDK](./appendix.html#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
-**国密支持：**
+### 国密支持
 
 WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
 
 ```eval_rst
 .. important::
-使用国密版WeBASE-Front需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
+    使用国密版WeBASE-Front需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
 ```
 
 开启web3sdk的国密开关:
