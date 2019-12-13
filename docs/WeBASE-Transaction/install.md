@@ -20,16 +20,24 @@ WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-doc
 
 ```eval_rst
 .. important::
-    使用国密版WeBASE-Transaction需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
+    使用国密版WeBASE-Transaction需要开启web3sdk的国密开关和使用国密版solcJ jar包编译合约
 ```
 
 开启web3sdk的国密开关:
 - 开启web3sdk的国密开关：将配置文件`application.properties`中web3sdk配置的`encryptType`从`0`修改为`1`；
 
-使用国密版solcJ Jar包，需要替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar
-以下操作()二选一执行即可：
-- 编译项目前替换：将国密版solcJ的jar包放置在项目根目录的/lib文件夹中，在build.gradle引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中国密版solcJ的jar包
-- 编译项目后替换：在编译得到的/dist中，将文件夹/lib中的solcJ-all的jar包替换为国密版solcJ的jar包；
+使用国密版solcJ jar包：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
+1. 下载国密版solcJ的jar包后，放置在项目根目录的`/lib`文件夹中
+2. 在build.gradle引入web3sdk处通过`exclude`去除ethereum的solcJ jar包
+3. 通过`fileTree`引入`/lib`的国密版solcJ的jar包
+
+```
+compile ('org.fisco-bcos:web3sdk:2.1.2')
+    {
+        exclude group:"org.ethereum"
+    }
+compile fileTree(dir:'lib',includes:['solcJ-all-0.4.25-gm.jar'])
+```
 
 下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
 
