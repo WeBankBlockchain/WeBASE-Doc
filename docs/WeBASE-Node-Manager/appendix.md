@@ -112,6 +112,7 @@ startWaitTime=600
 | constant.auditMonitorTaskFixedDelay | 86400000 | 监控审计数据任务的间隔时间，异常时将发送告警邮件（毫秒）  |
 | constant.nodeStatusMonitorTaskFixedDelay | 86400000 | 监控节点状态任务的间隔时间，异常时将发送告警邮件（毫秒）  |
 | constant.certMonitorTaskFixedDelay | 86400000 | 监控证书任务的间隔时间，有效期结束7天前时将发送告警邮件（毫秒）  |
+| sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 
 
 
