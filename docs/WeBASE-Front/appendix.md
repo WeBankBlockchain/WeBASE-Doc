@@ -62,6 +62,12 @@ export GRADLE_HOME=/software/gradle-4.9
 export PATH=$GRADLE_HOME/bin:$PATH
 ```
 
+（3）查看版本
+
+```
+gradle -version
+```
+
 ## 2. 常见问题
 
 * 1：执行shell脚本报错"permission denied"
