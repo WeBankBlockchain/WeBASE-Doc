@@ -258,18 +258,23 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 可配置邮件告警所用到的邮件服务器相关参数，包含邮件协议类型protocol、邮件服务器地址host、服务使用端口port、用户邮箱地址username、用户邮箱授权码password；鉴权选项包含Authentication验证开关authentication（默认开启）；
 - 邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
 - 目前仅支持更新原有的邮件服务器配置，不支持新增配置；
-- 使用测试功能时需要到“告警类型配置”中，在左上角**开启邮件服务总开关**；
 
-注：邮件告警功能需要确保邮件服务器配置正确；务必使用`测试`按键，向指定的邮箱地址发送测试邮件，如果配置错误将发送测试邮件失败；
+```eval_rst
+.. important::
+	使用测试功能前，需要到“告警类型配置”中，在左上角**开启邮件服务总开关**；
+```
+
+注：邮件告警功能需要确保邮件服务器配置正确；务必使用`测试`按键，向指定的邮箱地址发送测试邮件并查收邮件。如果配置错误，将发送测试邮件失败，指定邮箱将收不到测试邮件；
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config.png)
 
 邮件服务配置测试：
 
-以当前表单中输入的配置值发送测试邮件（无论是否已保存，都以表单中当前的值为配置发送测试邮件）；需要提前开启邮件服务开关；
+以当前表单中输入的配置值发送测试邮件（无论是否已保存，都以表单中当前的值为配置发送测试邮件）；**需要提前开启邮件服务开关**；
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
 
+如有配置邮箱服务的疑惑，可查看[附录-配置邮件服务指南](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id30)
 
 **告警类型配置（告警邮件配置）：**
 
@@ -335,7 +340,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ## 附录
 
-### 如何配置邮件服务
+### 配置邮件服务指南
 
 请先阅读管理平台使用手册中各模块的详细介绍的[系统监控-邮件服务配置](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id26)
 
@@ -345,11 +350,13 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 下面介绍具体的使用方法：
 
-邮件服务所使用的邮箱服务器可以是企业自行搭建的邮箱服务器，比如企业邮箱；普通用户可以使用QQ邮箱、网易邮箱等第三方邮箱
+邮件服务所使用的邮箱服务器：
+1. 企业可使用自行搭建的邮箱服务器；
+2. 普通用户可以使用QQ邮箱、网易邮箱等第三方邮箱；
 
 下面以163邮箱配置邮件服务为例：
 
-- 登陆邮箱后，在邮箱的“设置”中找到包含“SMTP”的设置项；
+- 登陆邮箱后，在邮箱的`设置`中找到包含`SMTP`的设置项；
 
 ![](../../images/WeBASE-Console-Suit/mail_guide_setting.png)
 
@@ -367,13 +374,13 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 第二步，进入“邮件告警配置”，配置邮件服务
 
-- 因为Node-Manager仅使用邮箱服务器的发件服务，因此**协议类型**填写`smtp`；（IMAP/POP3均为收件服务协议）
-- 邮箱服务器填写`smtp.xx.com`，端口号默认为`25`即可启用邮件服务；如需使用其他端口如465则需要开启WeBASE-Node-Manager所在服务器的对应端口；
+- 因为Node-Manager仅使用邮箱服务器的发件服务，因此**协议类型**填写`smtp`（IMAP/POP3均为收件服务协议）；
+- 邮箱服务器填写`smtp.xx.com`，端口号默认为`25`即可启用邮件服务；如需使用其他端口如465则需要开放WeBASE-Node-Manager所在服务器的相应端口限制；
 - 用户名填写邮箱地址，密码填写上文设置的**授权码**；
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config.png)
 
-配置完成后，点击“测试”后，输入接收测试邮件的邮箱地址，测试成功即可“保存”邮件服务的配置
+配置完成后，点击“测试”后，输入接收测试邮件的邮箱地址，测试成功即可“保存”邮件服务的配置；
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
 
