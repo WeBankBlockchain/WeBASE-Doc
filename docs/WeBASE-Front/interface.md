@@ -3452,7 +3452,34 @@ a、成功：
 | 201231  | Cert file not found, please check cert path in config |     配置文件中的证书地址错误，未找到证书文件     |
 
 
-### 2. Precompiled Service API 错误码
+### 2. Precompiled Service说明
+
+对预编译合约接口的使用有疑惑，可以查看FISCO BCOS的[PreCompiledService API说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk.html#precompiled-service-api)
+
+查看预编译合约的solidity接口代码，可以查看FISCO BCOS的[web3sdk precompile模块](https://github.com/FISCO-BCOS/web3sdk/tree/master/src/main/java/org/fisco/bcos/web3j/precompile)，如TableFactory.sol:
+
+```
+pragma solidity ^0.4.2;
+
+contract TableFactory {
+    function createTable(string tableName, string key, string valueField) public returns (int);
+}
+```
+
+查看FISCO BCOS中实现的precompild合约列表、地址分配及源码：
+
+| 地址   | 功能   | 源码([libprecompiled目录](https://github.com/FISCO-BCOS/FISCO-BCOS/tree/master/libprecompiled)) |
+|--------|--------|---------|
+| 0x1000 | 系统参数管理 | SystemConfigPrecompiled.cpp |
+| 0x1001 | 表工厂合约 | TableFactoryPrecompiled.cpp |
+| 0x1002 | CRUD合约 | CRUDPrecompiled.cpp |
+| 0x1003 | 共识节点管理 | ConsensusPrecompiled.cpp |
+| 0x1004 | CNS功能  | CNSPrecompiled.cpp |
+| 0x1005 | 存储表权限管理 | AuthorityPrecompiled.cpp |
+| 0x1006 | 并行合约配置 | ParallelConfigPrecompiled.cpp |
+
+
+**Precompiled Service API 错误码**
 
 | 错误码 | 消息内容                                          | 备注      |
 | :----- | :----------------------------------------------  | :-----   |
