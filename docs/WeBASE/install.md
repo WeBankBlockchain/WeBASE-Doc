@@ -24,7 +24,7 @@ JDK8或以上版本：
 java -version
 ```
 
-- Java推荐使用[OpenJDK](#java ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+- Java推荐使用[OpenJDK](#id10 ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
 #### 检查mysql
 
@@ -33,7 +33,7 @@ MySQL-5.6或以上版本：
 mysql --version
 ```
 
-- Mysql安装部署可参考[数据库部署](#id12)
+- Mysql安装部署可参考[数据库部署](#id14)
 
 #### 检查Python
 
@@ -42,9 +42,13 @@ Python3.4或以上版本：
 python --version
 ```
 
-- Python安装部署可参考[Python部署](#python)
+- Python安装部署可参考[Python部署](#id17)
 
 #### PyMySQL部署（Python3.4+）
+
+**备注** 使用python2.7+时，需安装MySQL-python，推荐参考[Mysql-python安装示例](#mysql-python)的python2指南进行安装；
+
+Python3.4及以上版本，需安装PyMysql依赖包：
 
 - CentOS
 
@@ -66,9 +70,6 @@ python --version
   sudo apt-get install -y python3-pip
   sudo pip3 install PyMySQL
   ```
-
-
-- 使用python2.7+时，需安装MySQL-python，推荐参考[Mysql-python安装示例](#id8)的python2指南进行安装；
 
 
 ## 拉取部署脚本
@@ -357,7 +358,7 @@ mysql > create database webasenodemanager;
 python --version
 ```
 
-python3.4+ 安装Mysql依赖包，可参考 [检查环境-pymysql](#pymysql)
+python3.4+ 安装Mysql依赖包，可参考 [检查环境-PyMysql](#pymysql-python3-4)
 
 #### 4.1 MySQL-python部署（Python2.7）
 
