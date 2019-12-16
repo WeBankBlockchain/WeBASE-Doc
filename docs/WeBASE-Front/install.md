@@ -114,6 +114,7 @@ constant:
   transMaxWait: 30              // 交易最大等待时间
   monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
   monitorEnabled: true          // 是否监控数据，默认true
+  aesKey: EfdsW23D23d3df43          // aes加密key(16位) 如启用，各互联的子系统的加密key需保持一致
   nodePath: /fisco/nodes/127.0.0.1/node0      //配置连接节点的绝对路径
 ...
 ```

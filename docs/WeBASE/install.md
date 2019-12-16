@@ -12,15 +12,27 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python2.7或Python3.4+ |
-| MySQL-python | 使用python2时需安装 |
+| Python | Python3.4+ |
 | PyMySQL | 使用python3时需安装 |
+
+check java 
+
+安装则跳转到附录java处
+
+check mysql
+
+安装则跳转到附录mysql处
+
+check python 
+
+安装python3即pymysql（附录的剪切过来）
+
 
 **备注：** 
 
 - Java推荐使用[OpenJDK](#java ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+- 使用python2.7+时，需安装MySQL-python；**推荐参考[安装示例](#id8)的python2指南进行安装** 
 
-**推荐参考[安装示例](#id8)进行安装** 
 
 ## 拉取部署脚本
 
