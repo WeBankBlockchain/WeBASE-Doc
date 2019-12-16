@@ -342,7 +342,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ### 配置邮件服务指南
 
-请先阅读管理平台使用手册中各模块的详细介绍的[系统监控-邮件服务配置](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id26)
+请先阅读管理平台使用手册中各模块的详细介绍的[系统监控-邮件服务配置](#id26)
 
 问：邮件服务怎么用？
 
@@ -366,7 +366,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 ![](../../images/WeBASE-Console-Suit/mail_guide.png)
 
 
-记下所设置的**授权码**，授权码即邮件服务中用到的“密码”，按照[系统监控-邮件服务配置](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id26)进行配置：
+记下所设置的**授权码**，授权码即邮件服务中用到的“密码”，按照[系统监控-邮件服务配置](#id26)进行配置：
 
 第一步，进入“告警类型配置”中，点击左上角“启用告警”以**开启邮件服务开关**
 
