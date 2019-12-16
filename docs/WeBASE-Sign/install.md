@@ -75,7 +75,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     
 constant: 
-  # aes加密key（16位）
+  # aes加密key(16位)，如启用，各互联的子系统的加密key需保持一致
   aesKey: EfdsW23D23d3df43
 
 sdk:
