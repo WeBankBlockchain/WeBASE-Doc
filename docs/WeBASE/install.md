@@ -15,23 +15,60 @@
 | Python | Python3.4+ |
 | PyMySQL | 使用python3时需安装 |
 
-check java 
+### 检查环境
 
-安装则跳转到附录java处
+#### 检查Java
 
-check mysql
-
-安装则跳转到附录mysql处
-
-check python 
-
-安装python3即pymysql（附录的剪切过来）
-
-
-**备注：** 
+JDK8或以上版本：
+```
+java -version
+```
 
 - Java推荐使用[OpenJDK](#java ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
-- 使用python2.7+时，需安装MySQL-python；**推荐参考[安装示例](#id8)的python2指南进行安装** 
+
+#### 检查mysql
+
+MySQL-5.6或以上版本：
+```
+mysql --version
+```
+
+- Mysql安装部署可参考[数据库部署](#id12)
+
+#### 检查Python
+
+Python3.4或以上版本：
+```
+python --version
+```
+
+- Python安装部署可参考[Python部署](#python)
+
+#### PyMySQL部署（Python3.4+）
+
+- CentOS
+
+  ```
+  sudo pip3 install PyMySQL
+  ```
+
+  不支持pip命令的话，可以使用以下方式：
+
+  ```
+  git clone https://github.com/PyMySQL/PyMySQL
+  cd PyMySQL/
+  python3 setup.py install
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python3-pip
+  sudo pip3 install PyMySQL
+  ```
+
+
+- 使用python2.7+时，需安装MySQL-python，推荐参考[Mysql-python安装示例](#id8)的python2指南进行安装；
 
 
 ## 拉取部署脚本
@@ -317,8 +354,10 @@ mysql > create database webasenodemanager;
 #### 查看python版本
 
 ```
-python -V
+python --version
 ```
+
+python3.4+ 安装Mysql依赖包，可参考 [检查环境-pymysql](#pymysql)
 
 #### 4.1 MySQL-python部署（Python2.7）
 
@@ -335,28 +374,7 @@ python -V
   sudo pip install MySQL-python
   ```
 
-#### 4.2 PyMySQL部署（Python3.4+）
 
-- CentOS
-
-  ```
-  sudo pip3 install PyMySQL
-  ```
-
-  不支持pip命令的话，可以使用以下方式：
-
-  ```
-  git clone https://github.com/PyMySQL/PyMySQL
-  cd PyMySQL/
-  python3 setup.py install
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt-get install -y python3-pip
-  sudo pip3 install PyMySQL
-  ```
 
 ## 常见问题
 
