@@ -525,7 +525,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=0&userName=test
+http://localhost:5002/WeBASE-Front/privateKey?useAes=false&type=0&userName=test
 ```
 
 #### 响应参数
