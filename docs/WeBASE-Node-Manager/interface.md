@@ -5081,7 +5081,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 | 3.1    |  fingerPrint    | String        | 否     | 证书的指纹                           
 | 3.1    |  certName    | String        | 否     | 证书名字                           
 | 3.1    |  content    | String        | 否     | 证书文件的内容                           
-| 3.1    |  certType    | String        | 否     | 证书类型                           
+| 3.1    |  certType    | String        | 否     | 证书类型：chain, agency, node, sdk等，国密版中node证书分为加密ennode证书与签名gmnode证书                           
 | 3.1    |  publicKey    | String        | 否     | 证书对应nodeid（仅限节点证书公钥）                           
 | 3.1    |  address    | String        | 否     | 证书对应地址（仅限节点证书公钥）                         
 | 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
@@ -5158,7 +5158,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 | 3.1    |  fingerPrint    | String        | 否     | 证书的指纹                           
 | 3.1    |  certName    | String        | 否     | 证书名字                           
 | 3.1    |  content    | String        | 否     | 证书文件的内容                           
-| 3.1    |  certType    | String        | 否     | 证书类型                           
+| 3.1    |  certType    | String        | 否     | 证书类型：chain, agency, node, sdk等，国密版node证书分为加密ennode证书与签名gmnode证书                          
 | 3.1    |  publicKey    | String        | 否     | 证书对应nodeid（仅限节点证书公钥）                           
 | 3.1    |  address    | String        | 否     | 证书对应地址（仅限节点证书公钥）                         
 | 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
