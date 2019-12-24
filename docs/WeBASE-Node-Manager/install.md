@@ -118,7 +118,7 @@ bash webase.sh 127.0.0.1 3306
 修改数据库密码：sed -i "s/defaultPassword/${your_db_password}/g" conf/application.yml
 ```
 
-如果使用国密版本，则将application.yml中`sdk-encryptType`由`0`改为`1`
+**备注**：如果使用国密版本，则将application.yml中`sdk-encryptType`由`0`改为`1`
 
 ### 6.2 服务启停
 在dist目录下执行：
@@ -127,14 +127,14 @@ bash webase.sh 127.0.0.1 3306
 停止：bash stop.sh
 检查：bash status.sh
 ```
-**备注**：如果脚本执行错误，尝试以下命令:
+**备注**：服务进程起来后，需通过日志确认是否正常启动，出现以下内容表示正常；如果服务出现异常，确认修改配置后，重启提示服务进程在运行，则先执行stop.sh，再执行start.sh。
 
 ```
-赋权限：chmod + *.sh
-转格式：dos2unix *.sh
+...
+	Application() - main run success...
 ```
 
-### 6.3 查看日志
+## 6.3 查看日志
 
 在dist目录查看：
 ```shell
