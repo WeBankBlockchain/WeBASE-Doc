@@ -6,6 +6,11 @@
 
 调用此接口编译合约。上传合约文件zip压缩包（压缩包里的每个合约的文件名要和合约名一致，合约引用需使用“./xxx.sol”），返回合约编译信息。
 
+注：合约编译默认使用ethereum solcj-0.4.25.jar，如需使用其他版本在/dist/lib中替换solcJ的jar包；
+或将新的solcJ jar包放置在项目根目录的/lib文件夹中，在build.gradle中引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中的solcJ-gm jar包
+
+下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+
 #### 接口URL
 
 http://localhost:5003/WeBASE-Transaction/contract/compile
@@ -796,3 +801,53 @@ b.异常返回结果示例（信息详情请参看附录1）
 | 303021 | sign user id check failed | 签名用户编号校验失败 |
 | 303022 | function is not exists | 合约方法不存在 |
 | 303023 | data is not exists | 数据不存在 |
+
+## 4. 其他接口
+
+### 4.1. 获取EncryptType接口 
+#### 接口描述
+
+返回Transaction服务中web3sdk所使用的`encryptType`，0：标准，1：国密
+
+#### 接口URL
+
+http://localhost:5003/WeBASE-Transaction/encrypt
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+|----------|------------|------------|----------|--------------|----------|----------|
+| 1        | -          | -         | -       | -           | -       |          |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5003/WeBASE-Transaction/encrypt
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
+| 2        | 提示信息 | message    | String   |              | 是       |                   |
+| 3        | 返回数据 | data       | Integer   |              |          |  encryptType: 0:标准, 1:国密  |
+
+**2）数据格式**
+
+a.请求正常返回结果
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": 0
+}
+```

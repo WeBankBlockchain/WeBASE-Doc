@@ -496,6 +496,57 @@ http://localhost:5002/WeBASE-Front/contract/ifChanged/1/10
 true
 ```
 
+### 1.10. 后台编译合约
+
+#### 接口描述
+
+> 通过后台的solcJ对solidity合约进行编译，返回合约的BIN与ABI
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/contractCompile**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 合约名称     | contractName     | String            |            | 是       |          |
+| 2        | 合约源码     | solidityBase64    | String          |            | 是       |    经过Base64编码的合约源码内容 |
+
+**2）数据格式**
+```
+{
+    "contractName": "HelloWorld",
+    "solidityBase64": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsKCmICB9Cn0"
+}
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 合约名称 | contractName        | String         |              | 是        |           |
+| 3        | 合约bin  | bytecodeBin | String         |     | 是       | |   合约Bin
+| 4        | 合约abi | contractAbi | String         |              | 是        |   |
+
+**2）数据格式**
+```
+{
+    "contractName": "HeHe",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsKCmICB9Cn0=",
+    "bytecodeBin": "608060405234801561001057600080fd5b506029",
+    "contractAbi": "[{\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+}
+```
+
+
 ## 2. 密钥接口
 
 ### 2.1. 获取公私钥接口
@@ -2665,6 +2716,7 @@ HTTP POST
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false 
 
 **2）数据格式**
 
@@ -2731,6 +2783,7 @@ HTTP DELETE
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -2796,6 +2849,7 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 4        | 用户权限状态       | permissionState       | Object     |              |     是     | 使用{"permissionType": 1}格式，参照下文数据格式；1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限
+| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -2982,6 +3036,7 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 配置的键         | configKey        | String   |           | 是       |   目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price                                             |
 | 4        | 配置的值       | configValue       | String     |              |     是    | tx_gas_limit范围为 [100000, 2147483647]
+| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3104,6 +3159,7 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 节点类型       | nodeType       | String     |              |     是    | 节点类型：observer,sealer,remove 
 | 4      | 节点ID         | nodeId        | String   |           | 是       |   节点id，从节点根目录/conf/node.id获取                                             |
+| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3169,7 +3225,7 @@ HTTP POST
 | 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |                                             |
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | SQL语句       | sql       | String     |              |     是    | 包含create, desc, insert, update, select, remove，小写
-
+| 4        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3225,9 +3281,12 @@ b、失败：
 
 #### 接口描述
 
-获取Front对应的节点的链证书和sdk证书（包含节点证书和机构证书）的内容；需要在项目配置文件中constant-nodePath配置Front连接节点的绝对路径；
+获取Front对应节点的Fisco证书和sdk证书（包含链证书、机构证书和节点证书）的内容；
 
-> 注：接口只返回了证书的文本，未包含开头与结尾以及换行的格式文本；
+需要在项目配置文件中`constant-nodePath`配置Front连接节点的绝对路径；
+
+**注：**
+> 接口只返回了证书的文本(Base64编码)，未包含开头与结尾以及换行的格式文本；
 > 如需将文本保存为一个证书文件，需要加上开头“-----BEGIN CERTIFICATE-----\n”和结尾“\n-----END CERTIFICATE-----\n”；
 
 #### 接口URL
@@ -3276,6 +3335,47 @@ b、失败：
 }
 ```
 
+
+### 7.1. 查询是否使用国密
+
+#### 接口描述
+
+获取WeBASE-Front的`encryptType`，即是否使用国密版；
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/encrypt**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/encrypt
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+    1 // 1: 国密版，0: 非国密
+}
+```
 
 
 ## 7. 附录
@@ -3355,7 +3455,34 @@ b、失败：
 | 201231  | Cert file not found, please check cert path in config |     配置文件中的证书地址错误，未找到证书文件     |
 
 
-### 2. Precompiled Service API 错误码
+### 2. Precompiled Service说明
+
+对预编译合约接口的使用有疑惑，可以查看FISCO BCOS的[PreCompiledService API说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk.html#precompiled-service-api)
+
+查看预编译合约的solidity接口代码，可以查看FISCO BCOS的[web3sdk precompile模块](https://github.com/FISCO-BCOS/web3sdk/tree/master/src/main/java/org/fisco/bcos/web3j/precompile)，如crud/TableFactory.sol:
+
+```
+pragma solidity ^0.4.2;
+
+contract TableFactory {
+    function createTable(string tableName, string key, string valueField) public returns (int);
+}
+```
+
+查看FISCO BCOS中实现的precompild合约列表、地址分配及源码：
+
+| 地址   | 功能   | 源码([libprecompiled目录](https://github.com/FISCO-BCOS/FISCO-BCOS/tree/master/libprecompiled)) |
+|--------|--------|---------|
+| 0x1000 | 系统参数管理 | SystemConfigPrecompiled.cpp |
+| 0x1001 | 表工厂合约 | TableFactoryPrecompiled.cpp |
+| 0x1002 | CRUD合约 | CRUDPrecompiled.cpp |
+| 0x1003 | 共识节点管理 | ConsensusPrecompiled.cpp |
+| 0x1004 | CNS功能  | CNSPrecompiled.cpp |
+| 0x1005 | 存储表权限管理 | AuthorityPrecompiled.cpp |
+| 0x1006 | 并行合约配置 | ParallelConfigPrecompiled.cpp |
+
+
+**Precompiled Service API 错误码**
 
 | 错误码 | 消息内容                                          | 备注      |
 | :----- | :----------------------------------------------  | :-----   |

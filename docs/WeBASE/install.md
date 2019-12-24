@@ -12,15 +12,65 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python2.7或Python3.4+ |
-| MySQL-python | 使用python2时需安装 |
+| Python | Python3.4+ |
 | PyMySQL | 使用python3时需安装 |
 
-**备注：** 
+### 检查环境
 
-- Java推荐使用[OpenJDK](#java ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+#### 检查Java
 
-- 安装说明可以参看[安装示例](#id8) ，也可以自行安装
+JDK8或以上版本：
+```
+java -version
+```
+
+- Java推荐使用[OpenJDK](#id10 ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+
+#### 检查mysql
+
+MySQL-5.6或以上版本：
+```
+mysql --version
+```
+
+- Mysql安装部署可参考[数据库部署](#id14)
+
+#### 检查Python
+
+Python3.4或以上版本：
+```
+python --version
+```
+
+- Python安装部署可参考[Python部署](#id17)
+
+#### PyMySQL部署（Python3.4+）
+
+**备注** 使用python2.7+时，需安装MySQL-python，推荐参考[Mysql-python安装示例](#mysql-python)的python2指南进行安装；
+
+Python3.4及以上版本，需安装PyMysql依赖包：
+
+- CentOS
+
+  ```
+  sudo pip3 install PyMySQL
+  ```
+
+  不支持pip命令的话，可以使用以下方式：
+
+  ```
+  git clone https://github.com/PyMySQL/PyMySQL
+  cd PyMySQL/
+  python3 setup.py install
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python3-pip
+  sudo pip3 install PyMySQL
+  ```
+
 
 ## 拉取部署脚本
 
@@ -300,7 +350,17 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. MySQL-python部署（Python2.7）
+### 4. 安装MySql python依赖包
+
+#### 查看python版本
+
+```
+python --version
+```
+
+python3.4+ 安装Mysql依赖包，可参考 [检查环境-PyMysql](#pymysql-python3-4)
+
+#### 4.1 MySQL-python部署（Python2.7）
 
 - CentOS
 
@@ -315,28 +375,7 @@ mysql > create database webasenodemanager;
   sudo pip install MySQL-python
   ```
 
-### 5. PyMySQL部署（Python3.4+）
 
-- CentOS
-
-  ```
-  sudo pip3 install PyMySQL
-  ```
-
-  不支持pip命令的话，可以使用以下方式：
-
-  ```
-  git clone https://github.com/PyMySQL/PyMySQL
-  cd PyMySQL/
-  python3 setup.py install
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt-get install -y python3-pip
-  sudo pip3 install PyMySQL
-  ```
 
 ## 常见问题
 
