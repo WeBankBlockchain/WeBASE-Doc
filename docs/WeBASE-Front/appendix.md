@@ -70,9 +70,12 @@ gradle -version
 
 ## 2. 常见问题
 
-* 1：执行shell脚本报错"permission denied"
+* 1：执行shell脚本报错误"permission denied"或格式错误
 
-   答：chmod +x filename 给文件增加权限 
+   ```
+   赋权限：chmod + *.sh
+   转格式：dos2unix *.sh
+   ```
 
  * 2：eclipse环境编译源码失败，错误提示如下：
 ```
@@ -161,22 +164,3 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ```
 
 答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
-
-- 8：启动失败，日志却没有异常
-
-```
-===============================================================================================
-Starting Server com.webank.webase.front.Application Port 5002 ................................[Failed]. Please view log file (default path:./log/).
-Because port 5002 not up in 20 seconds.Script finally killed the process.
-===============================================================================================
-```
-
-答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改dist目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
-
-```
-...
-startWaitTime=600
-...
-```
-
-
