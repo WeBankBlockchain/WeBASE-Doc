@@ -9,6 +9,34 @@
 
 **备注：** Java推荐使用[OpenJDK](./appendix.html#java )，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
+### 国密支持
+
+WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
+
+```eval_rst
+.. important::
+    使用国密版WeBASE-Front需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
+```
+
+开启web3sdk的国密开关:
+- 开启web3sdk的国密开关：将配置文件`application.properties`中web3sdk配置的`encryptType`从`0`修改为`1`；
+
+使用国密版solcJ jar包：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
+1. 下载国密版solcJ的jar包后，放置在项目根目录的`/lib`文件夹中
+2. 在`build.gradle`引入web3sdk处通过`exclude`去除ethereum的solcJ jar包
+3. 通过`fileTree`引入`/lib`的国密版solcJ的jar包
+
+```
+compile ('org.fisco-bcos:web3sdk:2.1.2')
+    {
+        exclude group:"org.ethereum"
+    }
+compile fileTree(dir:'lib',includes:['solcJ-all-0.4.25-gm.jar'])
+```
+
+下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+
+
 ## 2. 拉取代码
 执行命令：
 ```
@@ -80,11 +108,13 @@ sdk:
   ...
   ip: 127.0.0.1                 // 连接节点的监听ip
   channelPort: 20200            // 连接节点的链上链下端口
+  encryptType: 0                // 国密开关，0:standard, 1:guomi
 constant: 
   keyServer: 127.0.0.1:5001     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
   transMaxWait: 30              // 交易最大等待时间
   monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
   monitorEnabled: true          // 是否监控数据，默认true
+  aesKey: EfdsW23D23d3df43          // aes加密key(16位) 如启用，各互联的子系统的加密key需保持一致
   nodePath: /fisco/nodes/127.0.0.1/node0      //配置连接节点的绝对路径
 ...
 ```
