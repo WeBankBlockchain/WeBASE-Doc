@@ -148,9 +148,12 @@ ZooKeeper的安装包括单机模式安装，以及集群模式安装。具体�
 
 ### 2.1 脚本没权限
 
-执行shell脚本报错误"permission denied"
+执行shell脚本报错误"permission denied"或格式错误
 
-答：使用 “chmod +x 文件” 给文件增加权限
+```
+赋权限：chmod + *.sh
+转格式：dos2unix *.sh
+```
 
 ### 2.2 构建失败
 
@@ -200,22 +203,15 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
 
-### 2.5 启动失败，日志却没有异常
+### 2.5 启动出现异常，重启提示已在运行
 
 ```
 ===============================================================================================
-Starting Server com.webank.webase.transaction.Application Port 5003 ................................[Failed]. Please view log file (default path:./log/).
-Because port 5003 not up in 20 seconds.Script finally killed the process.
+Server com.webank.webase.transaction.Application Port 5003 is running PID(21434)
 ===============================================================================================
 ```
 
-答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改dist目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
-
-```
-...
-startWaitTime=600
-...
-```
+答：确认配置后，先执行stop.sh，再执行start.sh。
 
 ## 3. application.properties配置项说明
 
@@ -226,11 +222,14 @@ startWaitTime=600
 | mybatis.mapper-locations                                     | mapper路径                                                   |
 | logging.config                                               | 日志文件路径                                                 |
 | sdk.orgName                                                  | 机构名                                                       |
-| sdk.timeoutsdk                                               | sdk连接超时时间                                              |
+| sdk.timeout                                                  | sdk连接超时时间                                              |
+| sdk.corePoolSize                                             | sdk线程池配置                                                |
+| sdk.maxPoolSize                                              | sdk线程池配置                                                |
+| sdk.queueCapacity                                            | sdk线程池配置                                                |
+| sdk.keepAlive                                                | sdk线程池配置                                                |
 | sdk.groupConfig.allChannelConnections[0].groupId             | sdk连接的群组id                                              |
 | sdk.groupConfig.allChannelConnections[0].connectionsStr[0]   | sdk连接的节点的ip和channelPort                               |
-| sdk.encryptType   										|
- sdk的加密类型：0：标准，1：国密，需要与链的类型一致               |
+| sdk.encryptType                                              | sdk的加密类型：0：标准，1：国密，需要与链的类型一致          |
 | constant.signServer                                          | WeBASE-Sign签名服务ip端口                                    |
 | constant.privateKey                                          | 本地配置私钥                                                 |
 | constant.cronTrans                                           | 轮询上链时间间隔                                             |
