@@ -203,16 +203,6 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
 
-### 2.5 启动出现异常，重启提示已在运行
-
-```
-===============================================================================================
-Server com.webank.webase.transaction.Application Port 5003 is running PID(21434)
-===============================================================================================
-```
-
-答：确认配置后，先执行stop.sh，再执行start.sh。
-
 ## 3. application.properties配置项说明
 
 | 配置项                                                       | 说明                                                         |

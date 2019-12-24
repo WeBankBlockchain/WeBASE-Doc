@@ -89,7 +89,7 @@ cd webase-deploy
 
 ## 修改配置
 
-① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id12)；
+① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id14)；
 
 ② 修改配置文件（vi common.properties），没有变化的可以不修改；
 
@@ -132,6 +132,9 @@ node.channelPort=20200
 # 节点rpc端口
 node.rpcPort=8545
 
+# 是否使用国密（0: standard, 1: guomi）
+encrypt.type=0
+
 # 是否使用已有的链（yes/no）
 if.exist.fisco=no
 
@@ -145,7 +148,7 @@ node.path=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.0.0
+fisco.version=2.1.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
@@ -175,7 +178,7 @@ python deploy.py stopAll
 
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
-- 部署过程出现问题可以查看[常见问题解答](#id15)
+- 部署过程出现问题可以查看[常见问题解答](#id19)
 
 ## 访问
 
@@ -408,7 +411,7 @@ Traceback (most recent call last):
 ImportError: No module named 'pymysql'
 ```
 
-答：需要安装PyMySQL，安装请参看 [附录](#pymysql)
+答：需要安装PyMySQL，安装请参看 [pymysql](#pymysql-python3-4)
 
 ### 4. 安装MySQL-python遇到问题
 
@@ -485,19 +488,11 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
 
-### 11. 启动失败，日志却没有异常
+### 11. 服务进程起来了，服务不正常
 
 ```
 ...
-print ("==============     WeBASE-Front     start...  ==============")
-print ("=======     WeBASE-Front    start  fail. Please view log file (default path:./webase-front/log/).    =======")
+======= WeBASE-Node-Manager  starting . Please check through the log file (default path:./webase-node-mgr/log/). =======
 ```
 
-答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改子系统目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
-
-```
-...
-startWaitTime=600
-...
-```
-
+答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。
