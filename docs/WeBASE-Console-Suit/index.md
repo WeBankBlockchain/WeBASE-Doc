@@ -360,18 +360,18 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 - 登陆邮箱后，在邮箱的`设置`中找到包含`SMTP`的设置项；
 
-![](../../images/WeBASE-Console-Suit/mail_guide_setting.png)
+![](../../images/WeBASE-Console-Suit/mail_guide_setting_163.png)
 
 - 勾选`IMAP/SMTP`和`POP3/SMTP`，初次开启时，会提醒用户设置**授权码**，并进行手机安全验证；
 - 设置授权码后，勾选`IMAP`, `POP3`, `SMTP`开启全部服务；
 
-![](../../images/WeBASE-Console-Suit/mail_guide.png)
+![](../../images/WeBASE-Console-Suit/mail_guide_163.png)
 
 QQ邮箱开通邮箱服务：
 
 - 登陆邮箱后，在邮箱的`设置账户`中找到`POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务`项；
 
-![](../../images/WeBASE-Console-Suit/mail_guide_setting_qq)
+![](../../images/WeBASE-Console-Suit/mail_guide_setting_qq.png)
 
 - 开启`POP3/SMTP服务`和`IMAP/SMTP服务`并按照指引进行手机安全验证并设置授权码，；
 
