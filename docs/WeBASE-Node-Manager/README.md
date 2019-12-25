@@ -27,4 +27,4 @@ WeBASE-Node-Manager具体需要适配国密版FISCO-BCOS与WeBASE-Front的地方
 - 在配置文件`application.yml/applicationContext.xml`中开启web3sdk的国密开关；
 - 国密版部署初始化数据库时，执行国密版的初始化脚本`script/gm/webase-gm.sh`；
 
-安装详情可查看下一章节的[WeBASE-Node-Manager部署说明](./install.html)
+安装详情可查看下一章节的[WeBASE-Node-Manager部署说明](install.html)
