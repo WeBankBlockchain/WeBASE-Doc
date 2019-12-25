@@ -255,6 +255,8 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 **邮件服务配置：**
 
+如何配置邮件服务可查看[附录-配置邮件服务指南](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id30)
+
 可配置邮件告警所用到的邮件服务器相关参数，包含邮件协议类型protocol、邮件服务器地址host、服务使用端口port、用户邮箱地址username、用户邮箱授权码password；鉴权选项包含Authentication验证开关authentication（默认开启）；
 - 邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
 - 目前仅支持更新原有的邮件服务器配置，不支持新增配置；
@@ -274,7 +276,6 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
 
-如有配置邮箱服务的疑惑，可查看[附录-配置邮件服务指南](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id30)
 
 **告警类型配置（告警邮件配置）：**
 
@@ -403,4 +404,4 @@ QQ邮箱开通邮箱服务：
 目前已知的包含：
 - SMTP协议：默认使用25端口(非SSL)，SSL默认465端口(SSL)或587端口(TLS)
 - POP3/IMAP协议：因为邮箱服务使用的是发邮件功能，未用到POP3或IMAP收件协议，此处仅作端口说明：其中POP3默认110端口(非SSL)和995端口(SSL)，IMAP默认143端口(非SSL)和993端口(SSL)
-- 126邮箱的SSL端口除了587，还可尝试994；在阿里云下25端口被禁用，请尝试465端口或其他端口；
+- 126邮箱的SSL端口除了587，还可尝试994；在阿里云下25端口被禁用，请尝试587端口或其他端口；
