@@ -255,6 +255,8 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 **邮件服务配置：**
 
+如何配置邮件服务可查看[附录-配置邮件服务指南](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id30)
+
 可配置邮件告警所用到的邮件服务器相关参数，包含邮件协议类型protocol、邮件服务器地址host、服务使用端口port、用户邮箱地址username、用户邮箱授权码password；鉴权选项包含Authentication验证开关authentication（默认开启）；
 - 邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
 - 目前仅支持更新原有的邮件服务器配置，不支持新增配置；
@@ -274,7 +276,6 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
 
-如有配置邮箱服务的疑惑，可查看[附录-配置邮件服务指南](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id30)
 
 **告警类型配置（告警邮件配置）：**
 
@@ -354,17 +355,29 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 1. 企业可使用自行搭建的邮箱服务器；
 2. 普通用户可以使用QQ邮箱、网易邮箱等第三方邮箱；
 
-下面以163邮箱配置邮件服务为例：
+#### 开通邮箱服务
+
+163邮箱开通邮箱服务：
 
 - 登陆邮箱后，在邮箱的`设置`中找到包含`SMTP`的设置项；
 
-![](../../images/WeBASE-Console-Suit/mail_guide_setting.png)
+![](../../images/WeBASE-Console-Suit/mail_guide_setting_163.png)
 
 - 勾选`IMAP/SMTP`和`POP3/SMTP`，初次开启时，会提醒用户设置**授权码**，并进行手机安全验证；
 - 设置授权码后，勾选`IMAP`, `POP3`, `SMTP`开启全部服务；
 
-![](../../images/WeBASE-Console-Suit/mail_guide.png)
+![](../../images/WeBASE-Console-Suit/mail_guide_163.png)
 
+QQ邮箱开通邮箱服务：
+
+- 登陆邮箱后，在邮箱的`设置账户`中找到`POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务`项；
+
+![](../../images/WeBASE-Console-Suit/mail_guide_setting_qq.png)
+
+- 开启`POP3/SMTP服务`和`IMAP/SMTP服务`并按照指引进行手机安全验证并设置授权码，；
+
+
+#### 配置邮件服务
 
 记下所设置的**授权码**，授权码即邮件服务中用到的“密码”，按照[系统监控-邮件服务配置](#id26)进行配置：
 
@@ -384,3 +397,11 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/mail_server_config_test.png)
 
+#### 注意事项
+
+“邮件告警配置”中填写的端口默认为25，在不同服务器环境和不同邮箱所需的端口号有所差异，如果需要开启SSL进行邮箱安全验证则需要开通服务器防火墙相应的端口号。
+
+目前已知的包含：
+- SMTP协议：默认使用25端口(非SSL)，SSL默认465端口(SSL)或587端口(TLS)
+- POP3/IMAP协议：因为邮箱服务使用的是发邮件功能，未用到POP3或IMAP收件协议，此处仅作端口说明：其中POP3默认110端口(非SSL)和995端口(SSL)，IMAP默认143端口(非SSL)和993端口(SSL)
+- 126邮箱的SSL端口除了587，还可尝试994；在阿里云下25端口被禁用，请尝试587端口或其他端口；
