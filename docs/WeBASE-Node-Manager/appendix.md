@@ -114,7 +114,9 @@ startWaitTime=600
 | constant.certMonitorTaskFixedDelay | 86400000 | 监控证书任务的间隔时间，有效期结束7天前时将发送告警邮件（毫秒）  |
 | sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 
+### 3. 升级兼容性
 
+请查看[升级说明](upgrade.md)
 
 
 
