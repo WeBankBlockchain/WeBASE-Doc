@@ -25,7 +25,7 @@ mysql -uroot -p123456
 mysql> use webasenodemanager;
 ```
 
-可以参考WeBASE-Node-Manager v1.2.2源码中的[webase-dml.sql](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.2)
+可以参考[WeBASE-Node-Manager v1.2.2](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.2)源码中的webase-dml.sql
 
 - 修改`tb_alert_rule`的默认数据：
 
@@ -59,7 +59,7 @@ mysql -uroot -p123456
 mysql> use webasenodemanager;
 ```
 
-可以参考WeBASE-Node-Manager v1.2.1源码中的[webase-ddl.sql与webase-dml.sql](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.1)
+可以参考[WeBASE-Node-Manager v1.2.1](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.1)源码中的webase-ddl.sql与webase-dml.sql
 
 - 执行`tb_alert_rule`, `tb_mail_server_config`, `tb_alert_log`，建表操作
 ```
@@ -184,7 +184,7 @@ mysql> alter table tb_method add column contract_type tinyint(4) DEFAULT '0' COM
 
 - 在表`tb_method`插入系统合约的默认数据
 
-可以参考WeBASE-Node-Manager v1.2.0源码中的[webase-dml.sql](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.0)
+可以参考[WeBASE-Node-Manager v1.2.0](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.1)源码中的webase-dml.sql
 
 ```
 -- (system config info 0x1000) setValueByKey
