@@ -8,6 +8,9 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 
 1. 初始化数据修改：数据表的`tb_method`默认数据需要替换为国密版默认数据，可参考项目中`scripts/gm`中的`webase-dml-gm.sql`中的第5项进行数据初始化；
 2. 初始化数据修改：数据表`tb_alert_rule`默认数据支持中英文告警，可结合项目中`scripts/webase-dml.sql`第6项进行数据更新；
+3. 数据表字段增加：数据表`tb_front`增加一列`client_version`，用于记录节点版本与是否为国密；
+4. 数据表字段增加：动态增加的数据表`tb_trans_hash_x`增加一列`trans_number`，用于记录交易数；该更改无法与前一版本兼容；**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
+
 
 **国密支持说明**
 
@@ -41,6 +44,41 @@ INSERT INTO `tb_alert_rule`(`rule_name`,`enable`,`alert_type`,`alert_level`,`ale
 -- add cert alert rule template
 INSERT INTO `tb_alert_rule`(`rule_name`,`enable`,`alert_type`,`alert_level`,`alert_interval_seconds`,`alert_content`,`content_param_list`,`create_time`,`modify_time`) VALUES ('证书有效期告警/Cert Validity Exception', 0, 3, 1, 3600, '证书将在{time}过期，请到“证书管理”页面查看具体信息 / Cert validity exception：invalid at {timeEn}，please check out in \"Cert Management\"', '[\"{time}\", \"{timeEn}\"]', '2019-10-29 20:02:30', '2019-10-29 20:02:30');
 ```
+
+**数据表字段增加**
+
+- 获取Front的IP与端口，登陆mysql同上操作
+```
+mysql> select * from tb_front;
+```
+- 获取相应Front的**节点版本**：通过访问WeBASE-Front的`front_ip:front_port/{groupId}/web3/clientVersion`接口获取节点版本`FISCO-BCOS Version`
+```
+// 获取clientVersion
+curl http://front_ip:front_port/WeBASE-Front/1/web3/clientVersion
+
+// response:
+{
+    "Build Time": "20191224 11:10:06",
+    "Build Type": "Linux/clang/Release",
+    "Chain Id": "1",
+    "FISCO-BCOS Version": "2.1.0 gm",
+    "Git Branch": "HEAD",
+    "Git Commit Hash": "cb68124d4fbf3df563a57dfff5f0c6eedc1419cc",
+    "Supported Version": "2.1.0"
+}
+
+```
+
+- 在`tb_front`增加`client_version`一列
+- 更新其数据值为上面获取的`FISCO-BCOS Version`值，如国密节点`2.1.0 gm`
+
+```
+mysql> alter table tb_front add column client_version varchar(32) NOT NULL COMMENT '节点版本（国密/非国密）';
+mysql> update tb_front set client_version='2.1.0 gm' where front_id=‘{front_id}’;
+```
+
+- 更新由TableService动态生成的数据表`tb_trans_hash_xx`的字段：该更改无法与前一版本兼容；**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
+
 
 #### v1.2.1
 
