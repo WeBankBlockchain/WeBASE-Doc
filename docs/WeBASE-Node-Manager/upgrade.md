@@ -82,8 +82,25 @@ mysql> alter table tb_front add column client_version varchar(32) NOT NULL COMME
 mysql> update tb_front set client_version='2.1.0 gm' where front_id='{front_id}';
 ```
 
-- 更新由TableService动态生成的数据表`tb_trans_hash_xx`的字段：该更改无法与前一版本兼容；**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
+**数据表字段增加-tb_trans_hash_xx**
 
+- 更新由TableService动态生成的数据表`tb_trans_hash_xx`的字段：该更改无法与前一版本兼容；**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
+```
+package com.webank.webase.node.mgr.transaction;
+
+...
+public Integer queryCountOfTranByMinus(int groupId)
+        throws NodeMgrException {
+    ...
+    try{
+      ...
+      // getCount(String tableName,TransParam transParam);
+      Integer count = transHashMapper.getCountByMinMax(tableName); 
+      ...
+    }
+    ...
+    }
+```
 
 #### v1.2.1
 
