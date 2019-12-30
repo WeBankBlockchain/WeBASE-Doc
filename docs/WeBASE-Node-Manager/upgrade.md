@@ -45,12 +45,20 @@ INSERT INTO `tb_alert_rule`(`rule_name`,`enable`,`alert_type`,`alert_level`,`ale
 INSERT INTO `tb_alert_rule`(`rule_name`,`enable`,`alert_type`,`alert_level`,`alert_interval_seconds`,`alert_content`,`content_param_list`,`create_time`,`modify_time`) VALUES ('证书有效期告警/Cert Validity Exception', 0, 3, 1, 3600, '证书将在{time}过期，请到“证书管理”页面查看具体信息 / Cert validity exception：invalid at {timeEn}，please check out in \"Cert Management\"', '[\"{time}\", \"{timeEn}\"]', '2019-10-29 20:02:30', '2019-10-29 20:02:30');
 ```
 
-**数据表字段增加**
+**数据表字段增加-tb_front**
 
 - 获取Front的IP与端口，登陆mysql同上操作
 ```
 mysql> select * from tb_front;
+
++----------+----------------------------------------------------------------------------------------------------------------------------------+------------+------------+--------+---------------------+---------------------+----------------+
+| front_id | node_id                                                                                                                          | front_ip   | front_port | agency | create_time         | modify_time         | client_version |
++----------+----------------------------------------------------------------------------------------------------------------------------------+------------+------------+--------+---------------------+---------------------+----------------+
+|   500001 | b44c4f713b40b67ed2f9dae2ef208808b7f31112efe1a822de046604fe0bbdffdf46b7c0cf1ca9aa468752d514958cb603670a6d345c78faff6e69d825e851b8 | 127.0.0.1 |       5002 | agency0     | 2019-12-23 17:57:35 | 2019-12-23 17:57:35 | 2.1.0 gm       |
++----------+----------------------------------------------------------------------------------------------------------------------------------+------------+------------+--------+---------------------+---------------------+----------------+
+1 row in set (0.00 sec)
 ```
+
 - 获取相应Front的**节点版本**：通过访问WeBASE-Front的`front_ip:front_port/{groupId}/web3/clientVersion`接口获取节点版本`FISCO-BCOS Version`
 ```
 // 获取clientVersion
@@ -58,13 +66,10 @@ curl http://front_ip:front_port/WeBASE-Front/1/web3/clientVersion
 
 // response:
 {
-    "Build Time": "20191224 11:10:06",
-    "Build Type": "Linux/clang/Release",
+    ...
     "Chain Id": "1",
     "FISCO-BCOS Version": "2.1.0 gm",
-    "Git Branch": "HEAD",
-    "Git Commit Hash": "cb68124d4fbf3df563a57dfff5f0c6eedc1419cc",
-    "Supported Version": "2.1.0"
+    ...
 }
 
 ```
@@ -74,7 +79,7 @@ curl http://front_ip:front_port/WeBASE-Front/1/web3/clientVersion
 
 ```
 mysql> alter table tb_front add column client_version varchar(32) NOT NULL COMMENT '节点版本（国密/非国密）';
-mysql> update tb_front set client_version='2.1.0 gm' where front_id=‘{front_id}’;
+mysql> update tb_front set client_version='2.1.0 gm' where front_id='{front_id}';
 ```
 
 - 更新由TableService动态生成的数据表`tb_trans_hash_xx`的字段：该更改无法与前一版本兼容；**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
