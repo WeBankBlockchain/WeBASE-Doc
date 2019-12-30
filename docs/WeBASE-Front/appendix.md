@@ -70,9 +70,12 @@ gradle -version
 
 ## 2. 常见问题
 
-* 1：执行shell脚本报错"permission denied"
+* 1：执行shell脚本报错误"permission denied"或格式错误
 
-   答：chmod +x filename 给文件增加权限 
+   ```
+   赋权限：chmod + *.sh
+   转格式：dos2unix *.sh
+   ```
 
  * 2：eclipse环境编译源码失败，错误提示如下：
 ```
