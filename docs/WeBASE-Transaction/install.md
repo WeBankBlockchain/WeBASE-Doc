@@ -19,7 +19,7 @@
 WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
 
 ```eval_rst
-.. important::
+.. important:
     使用国密版WeBASE-Transaction需要开启web3sdk的国密开关和使用国密版solcJ jar包编译合约
 ```
 
@@ -39,7 +39,7 @@ compile ('org.fisco-bcos:web3sdk:2.1.2')
 compile fileTree(dir:'lib',includes:['solcJ-all-0.4.25-gm.jar'])
 ```
 
-下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+下载其他版本或国密版合约编译包请到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载。
 
 
 ## 2. 拉取代码
@@ -120,6 +120,11 @@ logging.config=classpath:log4j2.xml
 # 机构名
 sdk.orgName=webank
 sdk.timeoutsdk=10000
+# 线程池配置
+sdk.corePoolSize=100
+sdk.maxPoolSize=500
+sdk.queueCapacity=500
+sdk.keepAlive=60
 # 群组信息，可配置多群组和多节点
 # 群组id（下同）
 sdk.groupConfig.allChannelConnections[0].groupId=1
@@ -208,11 +213,11 @@ sharding.jdbc.config.props.sql.show=false
 检查：bash status.sh
 ```
 
-**备注**：如果脚本执行错误，尝试以下命令:
+**备注**：服务进程起来后，需通过日志确认是否正常启动，出现以下内容表示正常；如果服务出现异常，确认修改配置后，重启提示服务进程在运行，则先执行stop.sh，再执行start.sh。
 
 ```
-赋权限：chmod + *.sh
-转格式：dos2unix *.sh
+...
+	Application() - main run success...
 ```
 
 ## 6. 查看日志
