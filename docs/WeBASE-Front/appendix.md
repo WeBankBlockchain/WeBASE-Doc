@@ -164,3 +164,79 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ```
 
 答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
+
+- 8：启动失败，日志却没有异常
+
+```
+===============================================================================================
+Starting Server com.webank.webase.front.Application Port 5002 ................................[Failed]. Please view log file (default path:./log/).
+Because port 5002 not up in 20 seconds.Script finally killed the process.
+===============================================================================================
+```
+
+答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改dist目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
+
+```
+...
+startWaitTime=600
+...
+```
+
+## 3. 使用说明
+
+### 私钥管理
+
+#### 3.1. 导入私钥
+
+支持txt私钥文件导入和pem私钥文件导入
+
+导入.txt私钥格式示例：
+
+```
+{
+  "address":"0x06f81c8e1cb59b5df2cdeb87a212d17fba79aad7",
+  "publicKey":"0x4b1041710a4427dc1c0d542c8f0fd312d92b0d03a989f512d1f8d3cafb851967f3592df0035e01fa63b2626165d0f5cffab15792161aa0360b8dfba2f3a7cf59",
+  "privateKey":"71f1479d9051e8d6b141a3b3ef9c01a7756da823a0af280c6bf62d18ee0cc978",
+  "userName":"111",
+  "type":0
+}
+```
+其中用户类型为0代表用户为WeBASE-Front的本地私钥用户，导入的私钥均为该类型；
+
+导入.pem私钥内容示例：
+
+```
+-----BEGIN PRIVATE KEY-----
+MIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/
+XmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP+H7iljbTIqXOFM6qm5aVs
+fM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK
+-----END PRIVATE KEY-----
+```
+其中pem文件开头的`-----BEGIN PRIVATE KEY-----\n`和结尾的`\n-----END PRIVATE KEY-----\n`格式不可更改，否则将读取pem文件失败
+
+#### 3.2. 导出私钥
+
+目前仅支持导出txt私钥
+
+**Java中如何使用导出的私钥**
+
+以上文中的私钥加载：
+
+```
+@Test
+public void loadPrivateKeyTest() {
+  String privateKey = "71f1479d9051e8d6b141a3b3ef9c01a7756da823a0af280c6bf62d18ee0cc978";
+  Credentials credentials = GenCredential.create(privateKey);
+  // private key 实例
+  BigInteger privateKeyInstance = credentials.getEcKeyPair().getPrivateKey();
+  System.out.println(Numeric.toHexStringNoPrefix(privateKeyInstance));
+  // public key 实例
+  BigInteger publicKeyInstance = credentials.getEcKeyPair().getPublicKey();
+  System.out.println(Numeric.toHexString(publicKeyInstance));
+  // address 地址
+  String address = credentials.getAddress();
+  System.out.println(address);
+}
+
+```
+
