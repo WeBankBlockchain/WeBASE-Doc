@@ -99,7 +99,7 @@ vi application.yml
 ``` 
 spring:
   datasource:
-    url: jdbc:h2:file:./h2/webasefront;DB_CLOSE_ON_EXIT=FALSE // 默认H2库为webasefront
+    url: jdbc:h2:file:./h2/webasefront;DB_CLOSE_ON_EXIT=FALSE // 默认H2库为webasefront，建议修改数据库存放路径
 ...
 server: 
   port: 5003                    // 服务端口
