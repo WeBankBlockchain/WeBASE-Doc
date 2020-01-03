@@ -80,8 +80,36 @@ nodejs下载地址：https://nodejs.org/en/download/
             },
         },
 
+### 1.4  修改solidity版本
 
-### 1.4 模拟数据
+solidity版本默认0.4.25,如果需要修改请按以下步骤修改：
+
+> 获取所需solidity版本的编译文件；
+    自行编译或者[点击此处](https://github.com/ethereum/solc-bin)下载，将其移动到路径/static/js下面，并删除之前的solidity编译文件。
+
+> 修改solc依赖版本；
+    找到package.json的dependencies部分的solc，将其版本修改成和上面下载的solidity编译文件一致，执行命令
+
+        npm install
+
+> 修改引入solidity编译文件名称
+    在路径 /src/views/chaincode/code   找到引入文件的位置，修改为下载solidity编译文件名称。
+    在生命周期beforeMount时引入改文件，修改这里就可以了
+
+        beforeMount() {
+        var head = document.head;
+        var script = document.createElement("script");
+        script.src = "./static/js/soljson-v0.4.25+commit.59dbf8f1.js";
+        script.setAttribute('id', 'soljson');
+        if (!document.getElementById('soljson')) {
+            head.append(script)
+        }
+    },
+
+> 修改完后，即可进行打包或本地开发测试。
+
+
+### 1.5 模拟数据
 
 模拟数据在mock.js中，在开发联调前使用，使用中注意mock.js的url和axios请求的url要保持一致。`包括get拼接在url上面的参数`
 
