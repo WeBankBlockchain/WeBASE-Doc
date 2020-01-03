@@ -32,7 +32,7 @@ WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-doc
 3. 通过`fileTree`引入`/lib`的国密版solcJ的jar包
 
 ```
-compile ('org.fisco-bcos:web3sdk:2.1.2')
+compile ('org.fisco-bcos:web3sdk:2.2.0')
     {
         exclude group:"org.ethereum"
     }
