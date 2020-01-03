@@ -25,7 +25,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**        |
 |----------|----------|------------|----------|--------------|----------|-----------------|
-| 1        | 合约文件 | file       | zip      |              | 是       | 必须是zip压缩包 |
+| 1        | 合约文件 | file       | zip      |              | 是       | 必须是zip压缩包，直接压缩.sol文件；压缩包中不包含文件夹 |
 
 **2）数据格式**
 
@@ -428,8 +428,8 @@ HTTP POST
 | 2        | 交易业务流水号 | uuidStateless            | String         | 64           | 是       |                                                    |
 | 3        | 部署业务流水号   | uuidDeploy        | String         | 64           | 否       |                                                    |
 | 4        | 签名类型   | signType        | int            | 2            | 是       | 0-本地配置私钥签名，1-本地随机私钥签名，2-调用WeBASE-Sign签名 |
-| 5        | 合约地址   | contractAddress | String         |              | 否       |                                                    |
-| 6        | 合约Abi    | contractAbi     | List\<Object\> |              | 否       | JSON数组                                           |
+| 5        | 合约地址   | contractAddress | String         |              | 是       |                                                    |
+| 6        | 合约Abi    | contractAbi     | List\<Object\> |              | 是       | JSON数组                                           |
 | 7        | 调用方法名 | funcName        | String         |              | 是       |                                                    |
 | 8        | 方法参数   | funcParam       | List\<Object\> |              | 否       | JSON数组                                           |
 | 9 | 签名用户编号 | signUserId | int | | 否 | signType为2时必填 |

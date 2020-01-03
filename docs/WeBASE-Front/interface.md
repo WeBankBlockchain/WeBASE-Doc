@@ -576,7 +576,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=0&userName=test
+http://localhost:5002/WeBASE-Front/privateKey?useAes=false&type=0&userName=test
 ```
 
 #### 响应参数
@@ -2371,7 +2371,7 @@ HTTP POST
 不传入合约abi:
 ```
 {
-    "useAes ":false,
+    "useAes":false,
     "user":"700001",
     "contractName":"HelloWorld",
     "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
@@ -2401,7 +2401,6 @@ curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
     "groupId" :"1"
 }
 ```
-
 
 #### 响应参数
 
