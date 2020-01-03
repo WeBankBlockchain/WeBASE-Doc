@@ -15,6 +15,22 @@
 * 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.md)
 * 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
 
+**国密支持：**
+
+WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，与[WeBASE-Front v1.2.2+](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/index.html)配合使用
+
+```eval_rst
+.. important::
+    使用国密版WeBASE-Node-Manager需要开启web3sdk的国密开关和script/gm中的webase-gm.sh脚本进行数据库初始化
+```
+
+开启web3sdk的国密开关：
+- 将配置文件`application.yml/applicationContext.xml`中web3sdk配置的`encryptType`从`0`修改为`1`；
+
+部署时初始化数据库：
+- 执行`dist/script/gm`中的webase-gm.sh脚本进行初始化，而非`dist/script`中的webase.sh，；
+
+
 ## 3. 拉取代码
 执行命令：
 ```shell
@@ -53,10 +69,17 @@ CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_g
 ```
 
 ### 5.2 修改脚本配置
+
 进入数据库脚本目录
 ```shell
 cd  dist/script
 ```
+
+```eval_rst
+.. important::
+	如果使用国密版，应进入dist/script/gm目录，对/gm目录下的webase-gm.sh进行下文的操作，并在最后运行webase-gm.sh
+```
+
 修改数据库连接信息：
 ```shell
 修改数据库名称：sed -i "s/webasenodemanager/${your_db_name}/g" webase.sh
@@ -95,6 +118,8 @@ bash webase.sh 127.0.0.1 3306
 修改数据库密码：sed -i "s/defaultPassword/${your_db_password}/g" conf/application.yml
 ```
 
+**备注**：如果使用国密版本，则将application.yml中`sdk-encryptType`由`0`改为`1`
+
 ### 6.2 服务启停
 在dist目录下执行：
 ```shell
@@ -102,14 +127,14 @@ bash webase.sh 127.0.0.1 3306
 停止：bash stop.sh
 检查：bash status.sh
 ```
-**备注**：如果脚本执行错误，尝试以下命令:
+**备注**：服务进程起来后，需通过日志确认是否正常启动，出现以下内容表示正常；如果服务出现异常，确认修改配置后，重启提示服务进程在运行，则先执行stop.sh，再执行start.sh。
 
 ```
-赋权限：chmod + *.sh
-转格式：dos2unix *.sh
+...
+	Application() - main run success...
 ```
 
-### 6.3 查看日志
+## 6.3 查看日志
 
 在dist目录查看：
 ```shell

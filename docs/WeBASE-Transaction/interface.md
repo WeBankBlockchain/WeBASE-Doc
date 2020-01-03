@@ -6,6 +6,11 @@
 
 调用此接口编译合约。上传合约文件zip压缩包（压缩包里的每个合约的文件名要和合约名一致，合约引用需使用“./xxx.sol”），返回合约编译信息。
 
+注：合约编译默认使用ethereum solcj-0.4.25.jar，如需使用其他版本在/dist/lib中替换solcJ的jar包；
+或将新的solcJ jar包放置在项目根目录的/lib文件夹中，在build.gradle中引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中的solcJ-gm jar包
+
+下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+
 #### 接口URL
 
 http://localhost:5003/WeBASE-Transaction/contract/compile
@@ -757,42 +762,92 @@ b.异常返回结果示例（信息详情请参看附录1）
 }
 ```
 
+## 4. 其他接口
+
+### 4.1. 获取EncryptType接口 
+#### 接口描述
+
+返回Transaction服务中web3sdk所使用的`encryptType`，0：标准，1：国密
+
+#### 接口URL
+
+http://localhost:5003/WeBASE-Transaction/encrypt
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+|----------|------------|------------|----------|--------------|----------|----------|
+| 1        | -          | -         | -       | -           | -       |          |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5003/WeBASE-Transaction/encrypt
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
+| 2        | 提示信息 | message    | String   |              | 是       |                   |
+| 3        | 返回数据 | data       | Integer   |              |          |  encryptType: 0:标准, 1:国密  |
+
+**2）数据格式**
+
+a.请求正常返回结果
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": 0
+}
+```
+
 ## 附录 
 
 ### 1. 返回码信息列表
 
-| Code    | message                               | 描述                       |
-|---------|---------------------------------------|----------------------------|
-| 0       | success                               | 正常                       |
-| 103001  | system error                          | 系统异常                   |
-| 103002  | param valid fail                      | 参数校验异常               |
-| 203001  | group id cannot be empty              | 群组编号不能为空           |
-| 203002  | uuid cannot be empty                  | 业务流水号不能为空         |
-| 203003  | sign type cannot be empty             | 签名类型不能为空           |
-| 203004  | contract bin cannot be empty          | 合约bin不能为空            |
-| 203005  | contract abi cannot be empty          | 合约abi不能为空            |
-| 203006  | contract address cannot be empty      | 合约地址不能为空           |
-| 203007  | function name cannot be empty         | 方法名不能为空             |
-| 303001  | uuid is already exists                | 业务流水号已经存在         |
-| 303002  | get sign data from sign service error | 调用签名服务签名错误       |
-| 303003  | contract funcParam is error           | 合约方法参数错误           |
-| 303004  | sign type is not exists               | 签名类型不存在             |
-| 303005  | contract abi is empty                 | 合约abi不存在              |
-| 303006  | request function can not be constant  | 交易上链不能为constant方法 |
-| 303007  | query function must be constant       | 查询方法必须是constant     |
-| 303008  | query data from chain failed          | 查询链上数据失败           |
-| 303009  | file cannot be empty                  | 文件不能为空               |
-| 303010  | it is not a zip file                  | 文件不是zip格式            |
-| 303011  | contract has not been deployed        | 合约还没有部署             |
-| 303012  | contract compile error                | 合约编译错误               |
-| 303013  | node request failed                   | 节点请求失败               |
-| 303014  | there is not event                    | 不存在event                |
-| 303015  | trans has not been sent to the chain  | 交易还没有上链             |
-| 303016  | if deploy uuid is empty, contract address and contract abi cannot be empty | 部署业务流水号为空时，合约地址和abi不能为空 |
-| 303017  | trans output is empty                 | 交易返回值为空             |
-| 303018  | trans is not exists                   | 交易不存在                 |
-| 303019  | request group id has not been configured | 请求的群组编号未配置   |
-| 303020 | sign user id cannot be empty while sign type is 2 | 签名类型为2是签名用户编号不能为空 |
-| 303021 | sign user id check failed | 签名用户编号校验失败 |
-| 303022 | function is not exists | 合约方法不存在 |
-| 303023 | data is not exists | 数据不存在 |
+| Code   | message                                                      | 描述                                        |
+| ------ | ------------------------------------------------------------ | ------------------------------------------- |
+| 0      | success                                                      | 正常                                        |
+| 103001 | system error                                                 | 系统异常                                    |
+| 103002 | param valid fail                                             | 参数校验异常                                |
+| 203001 | group id cannot be empty                                     | 群组编号不能为空                            |
+| 203002 | uuid cannot be empty                                         | 业务流水号不能为空                          |
+| 203003 | sign type cannot be empty                                    | 签名类型不能为空                            |
+| 203004 | contract bin cannot be empty                                 | 合约bin不能为空                             |
+| 203005 | contract abi cannot be empty                                 | 合约abi不能为空                             |
+| 203006 | contract address cannot be empty                             | 合约地址不能为空                            |
+| 203007 | function name cannot be empty                                | 方法名不能为空                              |
+| 303001 | uuid is already exists                                       | 业务流水号已经存在                          |
+| 303002 | get sign data from sign service error                        | 调用签名服务签名错误                        |
+| 303003 | contract funcParam is error                                  | 合约方法参数错误                            |
+| 303004 | sign type is not exists                                      | 签名类型不存在                              |
+| 303005 | contract abi is empty                                        | 合约abi不存在                               |
+| 303006 | request function can not be constant                         | 交易上链不能为constant方法                  |
+| 303007 | query function must be constant                              | 查询方法必须是constant                      |
+| 303008 | query data from chain failed                                 | 查询链上数据失败                            |
+| 303009 | file cannot be empty                                         | 文件不能为空                                |
+| 303010 | it is not a zip file                                         | 文件不是zip格式                             |
+| 303011 | contract has not been deployed                               | 合约还没有部署                              |
+| 303012 | contract compile error                                       | 合约编译错误                                |
+| 303013 | node request failed                                          | 节点请求失败                                |
+| 303014 | there is not event                                           | 不存在event                                 |
+| 303015 | trans has not been sent to the chain                         | 交易还没有上链                              |
+| 303016 | if deploy uuid is empty, contract address and contract abi cannot be empty | 部署业务流水号为空时，合约地址和abi不能为空 |
+| 303017 | trans output is empty                                        | 交易返回值为空                              |
+| 303018 | trans is not exists                                          | 交易不存在                                  |
+| 303019 | request group id has not been configured                     | 请求的群组编号未配置                        |
+| 303020 | sign user id cannot be empty while sign type is 2            | 签名类型为2是签名用户编号不能为空           |
+| 303021 | sign user id check failed                                    | 签名用户编号校验失败                        |
+| 303022 | function is not exists                                       | 合约方法不存在                              |
+| 303023 | data is not exists                                           | 数据不存在                                  |
