@@ -76,7 +76,7 @@ Python3.4及以上版本，需安装PyMysql依赖包：
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.1/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.2/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -104,7 +104,7 @@ cd webase-deploy
 
 ```shell
 # WeBASE版本(v1.1.0或以上版本)
-webase.version=v1.2.1
+webase.version=v1.2.2
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
