@@ -4,19 +4,21 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 
 #### v1.2.2
 
-兼容性说明：支持国密
+##### 国密支持说明
+
+国密版FISCO-BCOS与非国密版**不可互通**，同理，WeBASE组件的国密与非国密也不可互通，因此如果需要切换到国密版，需要**重新建链与搭建WeBASE平台**
+
+可根据[WeBASE一键部署](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/install.html)重新搭建国密的FISCO BCOS + WeBASE平台
+
+详细子系统的国密参数设置可参考[FISCO-BCOS 国密支持](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)、[WeBASE-Node-Manager 国密支持](README.html#id3)和[WeBASE-Front 国密支持](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/README.html#id3)
 
 1. 初始化数据修改：数据表的`tb_method`默认数据需要替换为国密版默认数据，可参考项目中`scripts/gm`中的`webase-dml-gm.sql`中的第5项进行数据初始化；
-2. 初始化数据修改：数据表`tb_alert_rule`默认数据支持中英文告警，可结合项目中`scripts/webase-dml.sql`第6项进行数据更新；
-3. 数据表字段增加：数据表`tb_front`增加一列`client_version`，用于记录节点版本与是否为国密；
-4. 数据表字段增加：动态增加的数据表`tb_trans_hash_x`增加一列`trans_number`，用于记录交易数；该更改无法与前一版本兼容；**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
 
+##### 兼容性说明：中英文支持，优化部分功能
 
-**国密支持说明**
-
-因为国密版FISCO-BCOS与非国密版不可互通，同理WeBASE组件的国密与非国密也不可互通，因此如果需要切换到国密版，需要重新建链与搭建WeBASE平台
-
-可参考[FISCO-BCOS 国密支持](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)、[WeBASE-Node-Manager 国密支持](README.html#id3)和[WeBASE-Front 国密支持](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/README.html#id3)
+1. 初始化数据修改：数据表`tb_alert_rule`默认数据支持中英文告警，可结合项目中`scripts/webase-dml.sql`第6项进行数据更新；
+2. 数据表字段增加：数据表`tb_front`增加一列`client_version`，用于记录节点版本与是否为国密；
+3. 数据表字段增加：动态增加的数据表`tb_trans_hash_x`增加一列`trans_number`，用于记录交易数；该更改无法与前一版本兼容；**如需升级v1.2.2，可根据下文将getCountByMinMax()方法替换为原来的getCount()方法**
 
 **升级中英文告警操作说明**
 
@@ -84,7 +86,9 @@ mysql> update tb_front set client_version='2.1.0 gm' where front_id='{front_id}'
 
 **数据表字段增加-tb_trans_hash_xx**
 
-- 更新由TableService动态生成的数据表`tb_trans_hash_xx`的字段：该更改无法与前一版本兼容；**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
+- 更新由TableService动态生成的数据表`tb_trans_hash_xx`的字段：该更改无法与前一版本兼容；
+
+**如需升级v1.2.2，可将代码中使用TransHashMapper/getCountByMinMax()方法替换为原来的getCount()方法**
 ```
 package com.webank.webase.node.mgr.transaction;
 
