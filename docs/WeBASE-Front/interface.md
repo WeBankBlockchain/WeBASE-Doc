@@ -78,6 +78,7 @@ HTTP POST
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |                      |
 | 5        | 合约bin      | bytecodeBin  | String   |              | 是       |                      |
 | 6        | 构造函数参数 | funcParam    | List     |              | 否       |                      |
+| 7        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
 
 **2）数据格式**
 
