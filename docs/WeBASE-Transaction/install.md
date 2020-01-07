@@ -220,7 +220,18 @@ sharding.jdbc.config.props.sql.show=false
 	Application() - main run success...
 ```
 
-## 6. 查看日志
+## 6. 接口测试
+
+WeBASE-Transaction提供的是REST接口，整合了swagger。服务正常启动后，可以通过swagger调用接口（也可以通过postman或CURL命令调用）。swagger访问路径如下：
+
+```
+http://{deployIP}:{deployPort}/WeBASE-Transaction/swagger-ui.html
+示例：http://localhost:5003/WeBASE-Transaction/swagger-ui.html
+```
+
+**备注：** 部署服务器IP和服务端口需对应修改，网络策略需开通
+
+## 7. 查看日志
 
 在dist目录查看：
 
