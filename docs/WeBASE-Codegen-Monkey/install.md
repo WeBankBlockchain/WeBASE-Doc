@@ -22,7 +22,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/V1.1.0/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/V1.2.0/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
@@ -53,9 +53,9 @@ cd install_scripts
 请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考附录1.3 数据库配置。
 
 
-##### 2.2.2 配置密钥文件
+##### 2.2.2 配置证书文件
 
-复制密钥相关的配置文件：请将你的配置文件**复制到./config/resources目录**下。配置文件包括：
+将节点sdk目录下的相关的证书文件：请将你的配置文件**复制到./config/resources目录**下。配置文件包括：
 
 -     ca.crt
 -     node.crt
@@ -66,10 +66,11 @@ cd install_scripts
 修改application.properties文件：该文件包含了所有的配置信息。以下配置信息是必须要修改的，否则跑不起来：
 
 ```
-# 节点的IP及通讯端口、组号。 NODE_NAME可以是任意字符和数字的组合
+# 节点的IP及通讯端口、组号。 
+## NODE_NAME可以是任意字符和数字的组合，IP为节点运行的IP，PORT为节点运行的channel_port，默认为20200。
 system.nodeStr=[NODE_NAME]@[IP]:[PORT]
+## GROUP_ID必须与FISCO-BCOS中配置的groupId一致。
 system.groupId=[GROUP_ID]
-# 最新版本的FISCO-BCOS平台中的NODE_NAME可以为任意值。
 
 # 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
 system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
@@ -77,7 +78,7 @@ system.dbUser=[user_name]
 system.dbPassword=[password]
 
 # 合约Java文件的包名
-monitor.contractPackName=[编译Solidity合约时指定的包名]
+system.contractPackName=[编译Solidity合约时指定的包名]
 ```
 
 更多配置详情可参考附件1：配置参数。
