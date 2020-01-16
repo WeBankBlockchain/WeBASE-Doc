@@ -169,7 +169,7 @@ curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "ac
 
 #### 调用方法
 
-HTTP POST
+HTTP GET
 
 #### 请求参数
 
@@ -218,7 +218,7 @@ HTTP POST
 | -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
 | 1        | 合约名称     | contractName | String         |              | 是       |          |
 | 2        | 合约abi      | abiInfo      | List |              | 是       |          |
-| 3        | 合约bin      | bytecodeBin  | String         |              | 是       |          |
+| 3        | 合约bin      | contractBin  | String         |              | 是       |          |
 | 4        | 所在目录      | packageName  | String         |              | 是       | 生成java所在的包名 |
 
 **2）数据格式**
@@ -2364,7 +2364,7 @@ HTTP POST
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
 | 5        | 方法参数       | funcParam       | List     |              |          | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
 | 6        | 群组ID         | groupId         | int      |              |          |                                                |
-| 7        | 是否是加密私钥 | useAes          | boolean  |              | 否       |                                                |
+| 7        | 是否是加密私钥 | useAes          | boolean  |              | 是       |                                                |
 
 **2）数据格式**
 
