@@ -577,7 +577,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey?useAes=false&userName=0&userName=test
+http://localhost:5002/WeBASE-Front/privateKey?useAes=false&type=0&userName=test
 ```
 
 #### 响应参数
@@ -2362,15 +2362,17 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
+| 5        | 合约abi        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
 | 5        | 方法参数       | funcParam       | List     |              |          | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
 | 6        | 群组ID         | groupId         | int      |              |          |                                                |
 | 7        | 是否是加密私钥 | useAes          | boolean  |              | 是       |                                                |
 
 **2）数据格式**
 
+不传入合约abi:
 ```
 {
-    "useAes ":false,
+    "useAes":false,
     "user":"700001",
     "contractName":"HelloWorld",
     "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
@@ -2385,6 +2387,20 @@ HTTP POST
 ```
 curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
 "HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+```
+
+传入合约abi:
+```
+{
+    "useAes ":false,
+    "user":"700001",
+    "contractName":"HelloWorld",
+    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
+    "funcName":"set",
+    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
+    "funcParam":["Hi,Welcome!"],
+    "groupId" :"1"
+}
 ```
 
 #### 响应参数
