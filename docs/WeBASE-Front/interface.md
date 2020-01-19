@@ -1526,11 +1526,11 @@ http://localhost:5002/WeBASE-Front/1/web3/consensusStatus
 
 #### 接口描述
 
-> 返回节点的快高、pbftview及状态
+> 返回节点的快高、pbftview及状态。（查看nodeHeartBeat
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/{groupId}/web3/nodeHeartBeat**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/getNodeStatusList**
 
 #### 调用方法
 
@@ -2248,8 +2248,8 @@ HTTP POST
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
 | 5        | 合约abi        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
-| 5        | 方法参数       | funcParam       | List     |              |          | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
-| 6        | 群组ID         | groupId         | int      |              |          |                                                |
+| 5        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| 6        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
 | 7        | 是否是加密私钥 | useAes          | boolean  |              | 是       |                                                |
 
 **2）数据格式**
@@ -2342,12 +2342,12 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号                                       |
+| 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号，默认为1                                       |
 | 2        | 用户编号 | signUserId      | int      |              | 否       | 签名用户编号（查询方法可不传）                 |
 | 3        | 合约abi  | contractAbi     | List     |              | 是       |                                                |
 | 4        | 合约地址 | contractAddress | String   |              | 是       |                                                |
 | 5        | 方法名   | funcName        | String   |              | 是       |                                                |
-| 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
+| 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
 
 **2）数据格式**
 
