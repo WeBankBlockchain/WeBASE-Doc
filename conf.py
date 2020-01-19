@@ -83,7 +83,7 @@ source_suffix = ['.rst', '.md']
 # ones.
 extensions = [
   'sphinx_markdown_tables',
-  'sphinx_copybutton',
+  # 'sphinx_copybutton',
   'sphinxcontrib.mermaid',
 
 ]
