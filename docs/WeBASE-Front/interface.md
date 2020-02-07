@@ -2093,6 +2093,18 @@ HTTP GET
 无入参
 
 #### 响应参数
+**1）参数表**
+``` 
+{
+    "memoryTotalSize": "8010916",
+    "cpuAmount": "4",
+    "memoryUsedSize": "7818176",
+    "cpuSize": "2599",
+    "ip": "127.0.0.1",
+    "diskUsedSize": "313811828",
+    "diskTotalSize": "515928320"
+}
+```
 
 ### 4.2. 获取机器历史性能信息  
 
@@ -2125,7 +2137,68 @@ HTTP GET
 **1）参数表**
 ``` 
 {
-[{"metricType":"cpu","data":{"lineDataList":{"timestampList":[],"valueList":[]},"contrastDataList":{"timestampList":[],"valueList":[]}}},{"metricType":"memory","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"disk","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"txbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"rxbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}}]}
+    [{
+        "metricType": "cpu",
+        "data": {
+            "lineDataList": {
+                "timestampList": [],
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": [],
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "memory",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "disk",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "txbps",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "rxbps",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }]
+}
 }
 ```
 
