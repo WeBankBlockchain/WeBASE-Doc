@@ -8,9 +8,9 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 
 国密版FISCO-BCOS与非国密版**不可互通**，同理，WeBASE组件的国密与非国密也不可互通，因此如果需要切换到国密版，需要**重新建链与搭建WeBASE平台**
 
-可根据[WeBASE一键部署](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/install.html)重新搭建国密的FISCO BCOS + WeBASE平台
+可根据[WeBASE一键部署](../WeBASE/install.html)重新搭建国密的FISCO BCOS + WeBASE平台
 
-详细子系统的国密参数设置可参考[FISCO-BCOS 国密支持](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)、[WeBASE-Node-Manager 国密支持](README.html#id3)和[WeBASE-Front 国密支持](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/README.html#id3)
+详细子系统的国密参数设置可参考[FISCO-BCOS 国密支持](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)、[WeBASE-Node-Manager 国密支持](README.html#id3)和[WeBASE-Front 国密支持](../WeBASE-Front/README.html#id3)
 
 1. 初始化数据修改：数据表的`tb_method`默认数据需要替换为国密版默认数据，可参考项目中`scripts/gm`中的`webase-dml-gm.sql`中的第5项进行数据初始化；
 

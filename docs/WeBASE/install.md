@@ -192,7 +192,7 @@ http://{deployIP}:{webPort}
 **备注：** 
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
-- WeBASE管理平台使用说明请查看[使用手册](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
+- WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
 
 ## 日志路径
 
