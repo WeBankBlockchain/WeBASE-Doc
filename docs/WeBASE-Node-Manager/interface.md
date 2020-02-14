@@ -1273,8 +1273,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 | 5.1.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 5.1.7  | contractSource  | String        | 否     | 合约源码base64                                        |
 | 5.1.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
-| 5.1.9  | contractBin     | String        | 是     | 合约编译后生成的bin,用于交易解析                             |
-| 5.1.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，用于合约部署                                         |
+| 5.1.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                             |
+| 5.1.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                         |
 | 5.1.11 | contractAddress | String        | 是     | 合约地址                                        |
 | 5.1.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 5.1.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
@@ -1363,8 +1363,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 | 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 3.7  | contractSource  | String        | 否     | 合约源码base64                                        |
 | 3.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,用于交易解析                                         |
-| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，用于合约部署                                       |
+| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                                         |
+| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                       |
 | 3.11 | contractAddress | String        | 是     | 合约地址                                        |
 | 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
@@ -1474,8 +1474,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 3.7  | contractSource  | String        | 否     | 合约源码base64                                        |
 | 3.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,用于交易解析                                      |
-| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，用于合约部署                                          |
+| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                                      |
+| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                          |
 | 3.11 | contractAddress | String        | 是     | 合约地址                                        |
 | 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
@@ -1643,8 +1643,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 3.4  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 3.5  | contractSource  | String        | 否     | 合约源码的base64                                        |
 | 3.6  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
-| 3.7  | contractBin     | String        | 是     | 合约编译后生成的bin,用于交易解析                                      |
-| 3.8 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，用于合约部署                                          |
+| 3.7  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                                      |
+| 3.8 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                          |
 | 3.9 | contractAddress | String        | 是     | 合约地址                                        |
 | 3.10 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 3.11 | contractVersion | String        | 否     | 合约版本                                        |
@@ -1712,8 +1712,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 4    | contractPath      | String           | 否     | 合约所在目录         |
 | 5    | contractSource      | String           | 是     | 合约源码的base64         |
 | 6    | contractAbi      | String           | 是     | 合约编译后生成的abi文件内容         |
-| 7    | contractBin      | String           | 是     | 合约编译后生成的bin,用于交易解析           |
-| 8    | bytecodeBin      | String           | 是     | 合约编译后生成的bytecodeBin，用于合约部署         |
+| 7    | contractBin      | String           | 是     | 合约编译后生成的bin,可用于交易解析           |
+| 8    | bytecodeBin      | String           | 是     | 合约编译后生成的bytecodeBin，可用于合约部署         |
 
 
 
@@ -1750,8 +1750,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 3.7  | contractSource  | String        | 否     | 合约源码base64                                        |
 | 3.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,用于交易解析                                      |
-| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，用于合约部署                                          |
+| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                                      |
+| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                          |
 | 3.11 | contractAddress | String        | 是     | 合约地址                                        |
 | 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
