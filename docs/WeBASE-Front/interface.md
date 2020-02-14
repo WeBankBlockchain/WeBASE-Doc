@@ -169,7 +169,7 @@ curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "ac
 
 #### 调用方法
 
-HTTP POST
+HTTP GET
 
 #### 请求参数
 
@@ -218,7 +218,7 @@ HTTP POST
 | -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
 | 1        | 合约名称     | contractName | String         |              | 是       |          |
 | 2        | 合约abi      | abiInfo      | List |              | 是       |          |
-| 3        | 合约bin      | bytecodeBin  | String         |              | 是       |          |
+| 3        | 合约bin      | contractBin  | String         |              | 是       |          |
 | 4        | 所在目录      | packageName  | String         |              | 是       | 生成java所在的包名 |
 
 **2）数据格式**
@@ -1517,34 +1517,7 @@ http://localhost:5002/WeBASE-Front/1/web3/consensusStatus
             "nodeId": "dde0bbf5eb3a731e6da861586e98e088e16e6fdd9afae2f2c213cead20a4f5eaa3910042b70d62266d2350d98a43c1f235c8e0da384448384893857873abdb75",
             "view": 499822
         }
-    ],
-    {
-        "prepareCache_blockHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-        "prepareCache_height": -1,
-        "prepareCache_idx": "65535",
-        "prepareCache_view": "9223372036854775807"
-    },
-    {
-        "rawPrepareCache_blockHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-        "rawPrepareCache_height": -1,
-        "rawPrepareCache_idx": "65535",
-        "rawPrepareCache_view": "9223372036854775807"
-    },
-    {
-        "committedPrepareCache_blockHash": "0x15cf36c1f15572c448f7d4295958972e6b876deef319c532b8f7d79fcbde072f",
-        "committedPrepareCache_height": 125,
-        "committedPrepareCache_idx": "1",
-        "committedPrepareCache_view": "62209"
-    },
-    {
-        "signCache_cachedSize": "0"
-    },
-    {
-        "commitCache_cachedSize": "0"
-    },
-    {
-        "viewChangeCache_cachedSize": "0"
-    }
+    ]
 ]
 ```
 
@@ -1553,11 +1526,11 @@ http://localhost:5002/WeBASE-Front/1/web3/consensusStatus
 
 #### 接口描述
 
-> 返回节点的快高、pbftview及状态
+> 返回节点的快高、pbftview及状态。（查看nodeHeartBeat
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/{groupId}/web3/nodeHeartBeat**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/getNodeStatusList**
 
 #### 调用方法
 
@@ -1728,43 +1701,8 @@ http://localhost:5002/WeBASE-Front/1/web3/observerList
 ]
 ```
 
-### 3.18. 获取群组最新的pbftview视图
-#### 接口描述
 
-> 返回指定群组内的pbftview
-
-#### 接口URL
-
-**http://localhost:5002/WeBASE-Front/{groupId}/web3/pbftView**
-
-#### 调用方法
-
-HTTP GET
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
-
-
-**2）数据格式**
-
-```
-http://localhost:5002/WeBASE-Front/1/web3/pbftView
-```
-
-#### 响应参数
-
-**1）数据格式**
-```
-859
-```
-
-
-### 3.19. 获取已连接的P2P节点信息
+### 3.18. 获取已连接的P2P节点信息
 
 #### 接口描述
 
@@ -1831,7 +1769,7 @@ http://localhost:5002/WeBASE-Front/1/web3/peers
 ]
 ```
 
-### 3.20. 获取群组内正在处理的交易数
+### 3.19. 获取群组内正在处理的交易数
 
 #### 接口描述
 
@@ -1868,7 +1806,7 @@ http://localhost:5002/WeBASE-Front/1/web3/pending-transactions-count
 ```
 
 
-### 3.21. 获取共识节点接口
+### 3.20. 获取共识节点接口
 
 #### 接口描述
 
@@ -1910,7 +1848,7 @@ http://localhost:5002/WeBASE-Front/1/web3/sealerList
 ```
 
 
-### 3.22. 区块/交易
+### 3.21. 区块/交易
 
 #### 接口描述
 
@@ -2004,7 +1942,7 @@ http://localhost:5002/WeBASE-Front/1/web3/search?input=1
 }
 ```
 
-### 3.23. 获取群组内同步状态信息
+### 3.22. 获取群组内同步状态信息
 
 #### 接口描述
 
@@ -2068,15 +2006,15 @@ http://localhost:5002/WeBASE-Front/1/web3/syncStatus
 }
 ```
 
-### 3.24. 获取交易信息接口
+### 3.23. 刷新前置
 
 #### 接口描述
 
-> 根据交易hash查询交易信息
+> 刷新前置的群组列表，功能与`groupList`类似
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/{groupId}/web3/transaction/{transHash}**
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/refresh**
 
 #### 调用方法
 
@@ -2088,13 +2026,13 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
-| 2        | 交易hash | transHash | String      |             | 是        |                      |
+| 1        | 群组编号 | groupId         | int           |             | 是        |         |
+
 
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/1/web3/transaction/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
+http://localhost:5002/WeBASE-Front/1/web3/refresh
 ```
 
 #### 响应参数
@@ -2102,86 +2040,33 @@ http://localhost:5002/WeBASE-Front/1/web3/transaction/0x4145b921309fcaa92b05b782
 **1）数据格式**
 ```
 {
-    "hash": "0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9",
-    "nonce": 1.47418536037145E+75,
-    "blockHash": "0x3875dbec6e0ad0790dc0a0e8535b7c286ef7cee4149e5b1494f5c65631a9e321",
-    "blockNumber": 1,
-    "transactionIndex": 0,
-    "from": "0x33a41878e78fb26735bf425f9328990e3a1a89df",
-    "to": "0x0000000000000000000000000000000000000000",
-    "value": 0,
-    "gasPrice": 1,
-    "gas": 100000000,
-    "input": "0x6080604052348015600f57600080fd5b5060868061001e6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806335b09a6e146044575b600080fd5b348015604f57600080fd5b5060566058565b005b5600a165627a7a723058204aacdb57d6f2ae0f7f6c89c28236bba0205631183fd99785de220481566e683f0029",
-    "creates": null,
-    "publicKey": null,
-    "raw": null,
-    "r": null,
-    "s": null,
-    "v": 0,
-    "transactionIndexRaw": "0x0",
-    "valueRaw": "0x0",
-    "gasPriceRaw": "0x1",
-    "blockNumberRaw": "0x1",
-    "gasRaw": "0x5f5e100",
-    "nonceRaw": "0x3425bfe0f36e343686ccbe34a4fe8b05e0e0257ea7ee87417a6d898f0eb43ec"
-}
-```
-
-
-### 3.25. 获取交易回执接口
-
-#### 接口描述
-
-> 根据交易hash查询交易回执
-
-#### 接口URL
-
-**http://localhost:5002/WeBASE-Front/{groupId}/web3/transactionReceipt/{transHash}**
-
-#### 调用方法
-
-HTTP GET
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
-| 2        | 交易hash | transHash | String      |             | 是        |                      |
-
-**2）数据格式**
-
-```
-http://localhost:5002/WeBASE-Front/1/web3/transactionReceipt/0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9
-```
-
-#### 响应参数
-
-**1）数据格式**
-```
-{
-    "transactionHash": "0x4145b921309fcaa92b05b782e0181d671b8e68fc6d61d939358ed558fa3489c9",
-    "transactionIndex": 0,
-    "blockHash": "0x3875dbec6e0ad0790dc0a0e8535b7c286ef7cee4149e5b1494f5c65631a9e321",
-    "blockNumber": 1,
-    "cumulativeGasUsed": 0,
-    "gasUsed": 88537,
-    "contractAddress": "0x30905b39fa9f08822f342377d229d781ae8f9be6",
-    "root": null,
-    "status": "0x0",
-    "from": "0x33a41878e78fb26735bf425f9328990e3a1a89df",
-    "to": "0x0000000000000000000000000000000000000000",
-    "output": "0x",
-    "logs": [],
-    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "transactionIndexRaw": "0x0",
-    "blockNumberRaw": "0x1",
-    "statusOK": true,
-    "cumulativeGasUsedRaw": null,
-    "gasUsedRaw": "0x159d9"
+    "blockNumber": 126,
+    "genesisHash": "0xed3350d191d23cbc609c98e920baa583403b9a02fa934df868e7f425cd72f5c3",
+    "isSyncing": false,
+    "latestHash": "0x49ca6eb004f372c71ed900ec6992582cd107e4f3ea36aaa5a0a78829ebef1f14",
+    "nodeId": "d822165959a0ed217df6541f1a7dd38b79336ff571dd5f8f85ad76f3e7ec097e1eabd8b03e4a757fd5a9fb0eea905aded56aaf44df83c34b73acb9ab7ac65010",
+    "peers": [
+        {
+            "blockNumber": 126,
+            "genesisHash": "0xed3350d191d23cbc609c98e920baa583403b9a02fa934df868e7f425cd72f5c3",
+            "latestHash": "0x49ca6eb004f372c71ed900ec6992582cd107e4f3ea36aaa5a0a78829ebef1f14",
+            "nodeId": "552398be0eef124c000e632b0b76a48c52b6cfbd547d92c15527c2d1df15fab2bcded48353db22526c3540e4ab2027630722889f20a4a614bb11a7887a85941b"
+        },
+        {
+            "blockNumber": 126,
+            "genesisHash": "0xed3350d191d23cbc609c98e920baa583403b9a02fa934df868e7f425cd72f5c3",
+            "latestHash": "0x49ca6eb004f372c71ed900ec6992582cd107e4f3ea36aaa5a0a78829ebef1f14",
+            "nodeId": "adfa2f9116d7ff68e0deb75307fa1595d636bf097ad1de4fb55cff00e4fef40b453abb30388aa2112bf5cd4c987afe2e047250f7049791aa1ee7091c9e2ab7bb"
+        },
+        {
+            "blockNumber": 126,
+            "genesisHash": "0xed3350d191d23cbc609c98e920baa583403b9a02fa934df868e7f425cd72f5c3",
+            "latestHash": "0x49ca6eb004f372c71ed900ec6992582cd107e4f3ea36aaa5a0a78829ebef1f14",
+            "nodeId": "dde0bbf5eb3a731e6da861586e98e088e16e6fdd9afae2f2c213cead20a4f5eaa3910042b70d62266d2350d98a43c1f235c8e0da384448384893857873abdb75"
+        }
+    ],
+    "protocolId": 265,
+    "txPoolSize": "0"
 }
 ```
 
@@ -2208,6 +2093,18 @@ HTTP GET
 无入参
 
 #### 响应参数
+**1）参数表**
+``` 
+{
+    "memoryTotalSize": "8010916",
+    "cpuAmount": "4",
+    "memoryUsedSize": "7818176",
+    "cpuSize": "2599",
+    "ip": "127.0.0.1",
+    "diskUsedSize": "313811828",
+    "diskTotalSize": "515928320"
+}
+```
 
 ### 4.2. 获取机器历史性能信息  
 
@@ -2240,7 +2137,68 @@ HTTP GET
 **1）参数表**
 ``` 
 {
-[{"metricType":"cpu","data":{"lineDataList":{"timestampList":[],"valueList":[]},"contrastDataList":{"timestampList":[],"valueList":[]}}},{"metricType":"memory","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"disk","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"txbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}},{"metricType":"rxbps","data":{"lineDataList":{"timestampList":null,"valueList":[]},"contrastDataList":{"timestampList":null,"valueList":[]}}}]}
+    [{
+        "metricType": "cpu",
+        "data": {
+            "lineDataList": {
+                "timestampList": [],
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": [],
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "memory",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "disk",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "txbps",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }, {
+        "metricType": "rxbps",
+        "data": {
+            "lineDataList": {
+                "timestampList": null,
+                "valueList": []
+            },
+            "contrastDataList": {
+                "timestampList": null,
+                "valueList": []
+            }
+        }
+    }]
+}
 }
 ```
 
@@ -2363,9 +2321,9 @@ HTTP POST
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
 | 5        | 合约abi        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
-| 5        | 方法参数       | funcParam       | List     |              |          | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
-| 6        | 群组ID         | groupId         | int      |              |          |                                                |
-| 7        | 是否是加密私钥 | useAes          | boolean  |              | 否       |                                                |
+| 5        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| 6        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
+| 7        | 是否是加密私钥 | useAes          | boolean  |              | 是       |                                                |
 
 **2）数据格式**
 
@@ -2457,12 +2415,12 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号                                       |
+| 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号，默认为1                                       |
 | 2        | 用户编号 | signUserId      | int      |              | 否       | 签名用户编号（查询方法可不传）                 |
 | 3        | 合约abi  | contractAbi     | List     |              | 是       |                                                |
 | 4        | 合约地址 | contractAddress | String   |              | 是       |                                                |
 | 5        | 方法名   | funcName        | String   |              | 是       |                                                |
-| 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔 |
+| 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
 
 **2）数据格式**
 
@@ -2560,11 +2518,11 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |
+| 1        | 群组ID       | groupId            | int   |              | 是      | 节点所属群组ID，默认为1         |
 | 2        | 权限类型       | permissionType    | String   |              | 是       |  分配权限的类型                                     |
-| 3        | 分页大小         | pageSize        | int   |           | 是       | 默认为10
-| 4        | 分页页码         | pageNumber        | int   |           | 是       |  默认为1             
-5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
+| 3        | 分页大小         | pageSize        | int   |           | 否       | 默认为10
+| 4        | 分页页码         | pageNumber        | int   |           | 否       |  默认为1             
+5        | 表名       | tableName       | String     |              |     否     | 当`permissionType`为`userTable`时为**必填**
 
 **2）数据格式**
 
