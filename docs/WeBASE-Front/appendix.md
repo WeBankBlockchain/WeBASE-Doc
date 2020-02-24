@@ -240,6 +240,50 @@ public void loadPrivateKeyTest() {
 
 ```
 
+## 4. 事件通知
+
+支持通过消息队列服务来获取Front的事件通知，目前支持出块事件与智能合约Event事件的Push通知；
+
+### 4.1 RabbitMQ消息队列事件通知
+
+#### 配置
+
+通过配置applcation.yml中`spring`的`rabbitmq`配置，Front即可连接到RabbitMQ-Server，将出块通知与合约Event通知推送到消息队列中：
+```
+spring:
+  datasource:
+    ...
+  jpa:
+    ...
+  h2:
+    ...
+  rabbitmq:
+    host: 127.0.0.1 # rabbitmq部署所在主机的ip
+    port: 5672 # rabbitmq默认连接端口
+    username: defaultAccount # 要求具有Administrator权限的用户，本地连接rabbitmq可用guest账户
+    password: defaultPassword 
+    virtual-host: defaultVirtualHost # 消息队列和Exchange所在虚拟节点，默认为空或"/"
+    publisher-confirm: true # 消息发布确认开启
+    ssl:
+      enabled: false
+```
+
+
+#### 客户端（区块链应用/消息消费者）使用说明
+
+客户端开发流程
+
+1. 客户端用户向mq-server运维管理员申请账号（用户名和密码、virtual host），运维管理员创建账号，并创建以用户名为名字的队列，然后赋予该账户read其专属队列的权限(topic permission-read)。
+
+   运维管理员提供用户名（队列名）和密码、virtual host、消息交换机名（exchangeName）。
+
+图1
+
+2. 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`contractEvent`)，注册事件监听；接口内容请查看[接口文档](./interface.md)
+
+3. 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；如上小节的配置所示，可参考[WeBASE-Event-Client](https://github.com/Sayou1989/WeBASE-Event-Client)的消费者实现
+
+
 <!-- ### 配置https
 
 
