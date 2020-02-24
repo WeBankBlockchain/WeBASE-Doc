@@ -281,10 +281,12 @@ spring:
 
 ![创建用户](../../images/WeBASE/front-event/add_user.png)
 
-创建同名队列，并赋予用户访问该队列的read权限
+赋予用户访问同名队列的read权限
+![赋予read权限](../../images/WeBASE/front-event/user_config.png)
+
+创建同名队列
 
 ![创建同名队列](../../images/WeBASE/front-event/add_queue.png)
-![赋予read权限](../../images/WeBASE/front-event/user_config.png)
 
 2. 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`contractEvent`)，注册事件监听；接口内容请查看[接口文档](./interface.md)
 
