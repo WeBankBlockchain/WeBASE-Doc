@@ -248,7 +248,7 @@ public void loadPrivateKeyTest() {
 
 #### 配置
 
-通过配置applcation.yml中`spring`的`rabbitmq`配置，Front即可连接到RabbitMQ-Server，将出块通知与合约Event通知推送到消息队列中：
+通过配置applcation.yml中`spring-rabbitmq`配置，Front即可连接到RabbitMQ-Server，将出块通知与合约Event通知推送到消息队列中：
 ```
 spring:
   datasource:
@@ -273,15 +273,29 @@ spring:
 
 客户端开发流程
 
-1. 客户端用户向mq-server运维管理员申请账号（用户名和密码、virtual host），运维管理员创建账号，并创建以用户名为名字的队列，然后赋予该账户read其专属队列的权限(topic permission-read)。
+1. 客户端用户向mq-server运维管理员**申请账号**（用户名和密码、virtual host），运维管理员创建账号，并**创建以用户名为名字的队列**，然后赋予该账户read其专属队列的权限( permission-read:queueName)。
 
-   运维管理员提供用户名（队列名）和密码、virtual host、消息交换机名（exchangeName）。
+    运维管理员提供用户名（队列名）和密码、virtual host、消息交换机名（exchangeName）。
 
-图1
+创建用户：
+
+![创建用户](../../images/WeBASE/front-event/add_user.png)
+
+创建同名队列，并赋予用户访问该队列的read权限
+
+![创建同名队列](../../images/WeBASE/front-event/add_queue.png)
+![赋予read权限](../../images/WeBASE/front-event/user_config.png)
 
 2. 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`contractEvent`)，注册事件监听；接口内容请查看[接口文档](./interface.md)
 
-3. 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；如上小节的配置所示，可参考[WeBASE-Event-Client](https://github.com/Sayou1989/WeBASE-Event-Client)的消费者实现
+用户调用注册事件接口之后，实际上是以`queueName+事件名+appId`的routingKey绑定到群组的Exchange中：
+
+![绑定到群组Exchange](../../images/WeBASE/front-event/after_register.png)
+
+3. 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；
+
+    如上小节的配置所示，可参考[WeBASE-Event-Client](https://github.com/Sayou1989/WeBASE-Event-Client)的消费者实现
+
 
 
 <!-- ### 配置https
