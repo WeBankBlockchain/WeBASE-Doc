@@ -3310,9 +3310,389 @@ b、失败：
 }
 ```
 
-## 7 其他接口
+## 7. 链上事件订阅接口
 
-### 7.1. 查询是否使用国密
+
+### 7.1. 获取出块事件的订阅信息
+
+#### 接口描述
+
+根据应用编号appId获取该应用订阅的出块事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent/{appId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 应用编号       | appId            | String   |              | 是       |                            |
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/newBlockEvent/{appId}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b5707a1f5701707a248c340000",
+            "eventType": 1,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "user1_block_app1"
+        }
+    ]
+}
+```
+
+### 7.2. 订阅出块事件通知
+
+#### 接口描述
+
+订阅后将在消息队列中获取出块的事件通知
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
+| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
+
+
+**2）数据格式**
+
+
+```
+{
+    "appId": "app1",
+    "groupId": 1,
+    "exchangeName": "group001",
+    "queueName": "user2"
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功则返回该app中剩余已订阅的事件通知：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b57057a8a8017057a982ad0001",
+            "eventType": 1,
+            "appId": "app2",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user2",
+            "routingKey": "user2_block_app2"
+        }
+    ]
+}
+```
+
+失败（如：重复订阅）
+```
+{
+    "code": 201242,
+    "errorMessage": "This data is already in db."
+}
+```
+
+
+### 7.3. 取消订阅出块事件通知
+
+#### 接口描述
+
+取消在消息队列中获取出块的事件通知的订阅
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 数据编号 | id    | String         |              | 是        |   注册事件通知数据的唯一编号，可通过GET接口获取                  |
+| 2        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 3        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 4        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
+| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
+
+
+**2）数据格式**
+
+```
+{
+    "id":"8aba82b5707a1f5701707a248c340000",
+    "appId": "app1",
+    "groupId": 1,
+    "exchangeName": "group001",
+    "queueName": "user1"
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功则返回该app中剩余已订阅的出块事件通知：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": []
+}
+```
+
+
+### 7.4. 获取合约Event事件订阅信息
+
+#### 接口描述
+
+根据应用编号appId获取该应用订阅的合约Event事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey及合约Event配置内容(fromBlock, toBlock, contractAddress..)等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractEvent/{appId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 应用编号       | appId            | String   |              | 是       |                            |
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/contractEvent/{appId}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b57076ae09017076ae403a0001",
+            "eventType": 2,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "user1_event_app1",
+            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+            "fromBlock": "latest",
+            "toBlock": "latest",
+            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+            "topicList": "SetName(string)"
+        }
+    ]
+}
+```
+
+
+### 7.5. 订阅合约event事件通知
+
+#### 接口描述
+
+订阅后将在消息队列中获取相应智能合约的event事件通知
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractEvent**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
+| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，**一般以用户名作队列名**  |
+| 5        | 合约abi  | contractAbi | String         |     |  是      | 合约的ABI，用于合约event解析 |
+| 6        | event起始区块  | fromBlock | String         |     | 是       | 最小值为0；默认值latest，表示监听最新区块|
+| 7        | event末区块  | toBlock | String         |     | 是       |最小值为0；默认值latest，表示监听最新区块|
+| 8        | 合约地址  | contractAddress | String   |     | 是       |合约地址 |
+| 9        | 合约event名列表  | topicList | List<String>         |     |  是    | 合约event事件名的list，以中括号括住，以英文逗号相隔，不带空格；如`[HelloWorld(string)]`|
+
+
+**2）数据格式**
+
+
+```
+{
+   {
+    "id": ,
+    "appId": "app2",
+    "groupId": 1,
+    "exchangeName": "group001",
+    "queueName": "user2",
+    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+    "fromBlock": "latest",
+    "toBlock": "latest",
+    "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+    "topicList": ["SetName(string)","TransferEvent(string,address)"]
+}
+}
+```
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b57057a8a8017057aa95940003",
+            "eventType": 2,
+            "appId": "app2",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user2",
+            "routingKey": "user2_event_app2",
+            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+            "fromBlock": "latest",
+            "toBlock": "latest",
+            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+            "topicList": ["SetName(string)","TransferEvent(string,address)"]
+        }
+    ]
+}
+```
+
+失败（如：重复订阅）
+```
+{
+    "code": 201242,
+    "errorMessage": "This data is already in db."
+}
+```
+
+### 7.6. 取消合约Event事件通知的订阅
+
+#### 接口描述
+
+取消在消息队列中获取合约Event事件通知的订阅
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractEvent**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 数据编号 | id    | String         |              | 是        |   注册事件通知数据的唯一编号，可通过GET接口获取                  |
+| 2        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 3        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 4        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
+| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
+
+
+**2）数据格式**
+
+
+```
+{
+    "id": "8aba82b57076ae09017076ae403a0001",
+    "appId": "app2",
+    "groupId": 1,
+    "exchangeName": "group001",
+    "queueName": "user2"
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功则返回该app中剩余已订阅的合约Event事件通知：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": []
+}
+```
+
+
+## 8 其他接口
+
+### 8.1. 查询是否使用国密
 
 #### 接口描述
 
@@ -3354,166 +3734,7 @@ a、成功：
 ```
 
 
-### 7.2. 出块事件通知注册
-
-#### 接口描述
-
-注册后将在消息队列中获取出块的事件通知
-
-#### 接口URL
-
-**http://localhost:5002/WeBASE-Front/event/newBlockEvent**
-
-#### 调用方法
-
-HTTP POST
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
-| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
-| 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
-| 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
-
-
-**2）数据格式**
-
-注册出块事件通知
-
-```
-{
-    "appId": "100001",
-    "groupId": 1,
-    "exchangeName": "exchange_001",
-    "queueName": "Alice"
-}
-```
-
-#### 响应参数
-
-**1）数据格式** 
-
-成功则返回该订阅消息：
-```
-{
-    "code": 0,
-    "message": "success",
-    "data": [
-        {
-            "id": "8aba82b57057a8a8017057a982ad0001",
-            "eventType": 1,
-            "appId": "app2",
-            "groupId": 1,
-            "exchangeName": "group001",
-            "queueName": "user2",
-            "routingKey": "user2_block_app2"
-        }
-    ]
-}
-```
-
-失败（如：重复注册）
-```
-{
-    "code": 201242,
-    "errorMessage": "This data is already in db."
-}
-```
-
-
-### 7.3. 合约event事件通知注册
-
-#### 接口描述
-
-注册后将在消息队列中获取相应智能合约的event事件通知
-
-#### 接口URL
-
-**http://localhost:5002/WeBASE-Front/event/contractEvent**
-
-#### 调用方法
-
-HTTP POST
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
-| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
-| 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
-| 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，**一般以用户名作队列名**  |
-| 5        | 合约abi  | contractAbi | String         |     |  是      | 合约的ABI，用于合约event解析 |
-| 6        | event起始区块  | fromBlock | String         |     | 是       | 最小值为0；默认值latest，表示监听最新区块|
-| 7        | event末区块  | toBlock | String         |     | 是       |最小值为0；默认值latest，表示监听最新区块|
-| 8        | 合约地址  | contractAddress | String   |     | 是       |合约地址 |
-| 9        | 合约event名列表  | topicList | List<String>         |     |  是    | 合约event事件名的list，以中括号括住，以英文逗号相隔，不带空格；如`[HelloWorld(string)]`|
-
-
-**2）数据格式**
-
-
-注册合约event事件通知：
-```
-{
-   {
-    "id": ,
-    "appId": "100001",
-    "groupId": 1,
-    "exchangeName": "exchange_001",
-    "queueName": "Alice",
-    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
-    "fromBlock": "latest",
-    "toBlock": "latest",
-    "contractAddress": "0x31b26e43651e9371c88af3d36c14cfd938baf4fd",
-    "topicList": ["HelloWorld(string)","TransferEvent(string,address)"]
-}
-}
-```
-#### 响应参数
-
-**1）数据格式** 
-
-成功：
-```
-{
-    "code": 0,
-    "message": "success",
-    "data": [
-        {
-            "id": "8aba82b57057a8a8017057aa95940003",
-            "eventType": 2,
-            "appId": "app2",
-            "groupId": 1,
-            "exchangeName": "group001",
-            "queueName": "user2",
-            "routingKey": "user2_event_app2",
-            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
-            "fromBlock": "latest",
-            "toBlock": "latest",
-            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
-            "topicList": "SetName(string)"
-        }
-    ]
-}
-```
-
-失败（如：重复注册）
-```
-{
-    "code": 201242,
-    "errorMessage": "This data is already in db."
-}
-```
-
-
-## 8. 附录
+## 9. 附录
 
 ### 1. 返回码信息列表 
 
