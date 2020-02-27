@@ -36,12 +36,13 @@ http://localhost:5004/WeBASE-Sign/user/newUser
 |----------|----------|------------|----------|--------------|----------|-------------------|
 | 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
 | 2        | 提示信息 | message    | String   |              | 是       |                   |
-| 3        | 返回数据 | data       | Object   |              | 是       |       |
-| 3.1 | 用户编号 | userId | Integer | | 是 | |
-| 3.2 | 私钥信息 | privateKey | String |  | 是 | |
-| 3.3 | 账户地址 | address | String | | 是 | |
-| 3.4 | 公钥 | publicKey | String | | 是 | |
-| 3.5 | 描述 | description | String | | 是 | |
+| 3        | 返回数据 | data       | Object   |              | 是       |                    |
+| 3.1      | 用户编号 | userId     | Integer  |              | 是        |                    |
+| 3.2      | 私钥信息 | privateKey | String   |              | 是        |                   |
+| 3.3      | 账户地址 | address    | String   |              | 是        |                   |
+| 3.4       | 公钥    | publicKey  | toHexString |           | 是        |                  |
+| 3.5       | 描述    | description| String   |              | 是        |                  |
+| 3.6       | 加密类型 |encryptType| Integer |               | 是        | 1: guomi, 0: ecdsa|
 
 **2）数据格式**
 
@@ -55,7 +56,8 @@ a.请求正常返回结果
         "address": "0xaf7f9ad9560aa7cde37c693ba373707ab31d7823",
         "publicKey": "0x6efc55a03436057c4181160c195581e4f6b8a2135ea1030a326d5339a4f4a2a9bf2d603e020c77fa5b52af109f18955747bd0bcfa249955707d3932b544a9c65",
         "privateKey": "d3d8583b27bc5be0bca0ffb9d53db5a3324585148cd88e629a0b1084d2755bc8",
-        "description": null
+        "description": null,
+        "encryptType": 0
     }
 }
 ```
@@ -103,12 +105,13 @@ http://localhost:5004/WeBASE-Sign/user/newUserGuomi
 |----------|----------|------------|----------|--------------|----------|-------------------|
 | 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
 | 2        | 提示信息 | message    | String   |              | 是       |                   |
-| 3        | 返回数据 | data       | Object   |              | 是       |       |
-| 3.1 | 用户编号 | userId | Integer | | 是 | |
-| 3.2 | 私钥信息 | privateKey | String |  | 是 | |
-| 3.3 | 账户地址 | address | String | | 是 | |
-| 3.4 | 公钥 | publicKey | String | | 是 | |
-| 3.5 | 描述 | description | String | | 是 | |
+| 3        | 返回数据 | data       | Object   |              | 是       |                    |
+| 3.1      | 用户编号 | userId     | Integer  |              | 是        |                    |
+| 3.2      | 私钥信息 | privateKey | String   |              | 是        |                   |
+| 3.3      | 账户地址 | address    | String   |              | 是        |                   |
+| 3.4       | 公钥    | publicKey  | toHexString |           | 是        |                  |
+| 3.5       | 描述    | description| String   |              | 是        |                  |
+| 3.6       | 加密类型 |encryptType| Integer |               | 是        | 1: guomi, 0: ecdsa|
 
 **2）数据格式**
 
@@ -119,10 +122,11 @@ a.请求正常返回结果
     "message": "success",
     "data": {
         "userId": 100001,
-        "address": "0xaf7f9ad9560aa7cde37c693ba373707ab31d7823",
-        "publicKey": "0x6efc55a03436057c4181160c195581e4f6b8a2135ea1030a326d5339a4f4a2a9bf2d603e020c77fa5b52af109f18955747bd0bcfa249955707d3932b544a9c65",
-        "privateKey": "d3d8583b27bc5be0bca0ffb9d53db5a3324585148cd88e629a0b1084d2755bc8",
-        "description": null
+        "address": "0x4b8728db5124e184f2b627943baf7ce4c9664eea",
+        "publicKey": "0x552b77dc1640047bb8ef29bad51a190cf2b0529fcfa5f9171685f4ee200e7cc12f6ff115e7a68d64e0bb521fc81a34073972df1f71316e83fc1e018abbc326ff",
+        "privateKey": "c2c13451cfd0811bde19f0256624b3ee58c21065fb9abbe56c4633f1cccb6504",
+        "description": null,
+        "encryptType": 1
     }
 }
 ```
@@ -180,11 +184,13 @@ http://localhost:5004/WeBASE-Sign/user/100001/userInfo
 | 3.3      | 账户地址 | address     | String   |              | 是       | 链上地址          |
 | 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
 | 3.5      | 描述     | description | String   |              | 是       |                   |
+| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 1: guomi, 0: ecdsa|
 
 **2）数据格式**
 
 a.请求正常返回结果
 
+ECDSA用户：
 ```
 {
     "code": 0,
@@ -194,7 +200,24 @@ a.请求正常返回结果
         "address": "0xaf7f9ad9560aa7cde37c693ba373707ab31d7823",
         "publicKey": "0x6efc55a03436057c4181160c195581e4f6b8a2135ea1030a326d5339a4f4a2a9bf2d603e020c77fa5b52af109f18955747bd0bcfa249955707d3932b544a9c65",
         "privateKey": "d3d8583b27bc5be0bca0ffb9d53db5a3324585148cd88e629a0b1084d2755bc8",
-        "description": null
+        "description": null,
+        "encryptType": 0
+    }
+}
+```
+
+国密用户：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "userId": 100001,
+        "address": "0xe3f82951067906e9147444152f38a4f00ad0b76a",
+        "publicKey": "0x1d9048b891183878fba9ad4efa948486ae41b8ca8ca8f4a8aed0c5beb59ae9e55d8b2e86c96ec8e9126e95b88e9fa8228de73f254c737980489b56798aa4c73f",
+        "privateKey": "d0540b7e62915474c4dcd2032a23688fbd76c3995d139e95de544aac5533eb63",
+        "description": null,
+        "encryptType": 1
     }
 }
 ```
@@ -251,6 +274,7 @@ http://localhost:5004/WeBASE-Sign/user/list
 | 3.3      | 账户地址 | address     | String   |              | 是       |                   |
 | 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
 | 3.5      | 描述     | description | String   |              | 是       |                   |
+| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 1: guomi, 0: ecdsa|
 
 **2）数据格式**
 
@@ -266,14 +290,16 @@ a.请求正常返回结果
       "address": "0x27a5f691c5a51047536f2696cc43f4c50646d0e2",
       "publicKey": "0x2b1fd1d0aabd000d1dffff564a5684ddf1ca99c6207a09157e8fb19cdcb2753d29ce46bc20cf001dc13db88cd69a1de87171719a1174996393ee5b1120a93b1f",
       "privateKey": "714366fd634fb655203753e33925ea778c86626fc72b2552f09f2f2baa8b9cba",
-      "description": null
+      "description": null,
+      "encryptType": 0
     },
     {
       "userId": 100002,
       "address": "0xf70c3fe19644bc1c86783e4e3c1e9ebc1404c557",
       "publicKey": "0x6963e90daddfa21dd816c29aac967869c82bb83efc4552243971fda0dff817eded322d4067d4d75fdcfdf17221bd0a8b1089406e1192d2479123e3b1d87fb542",
       "privateKey": "5804b992e2df805bfc23009a5bedc614e52f9b8d07f4a7bbe786cea9d234c3f8",
-      "description": null
+      "description": null,
+      "encryptType": 0
     }
   ]
 }
@@ -312,7 +338,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/list
+http://localhost:5004/WeBASE-Sign/user/listGuomi
 ```
 
 #### 响应参数
@@ -329,6 +355,7 @@ http://localhost:5004/WeBASE-Sign/user/list
 | 3.3      | 账户地址 | address     | String   |              | 是       |                   |
 | 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
 | 3.5      | 描述     | description | String   |              | 是       |                   |
+| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 1: guomi, 0: ecdsa|
 
 **2）数据格式**
 
@@ -341,17 +368,19 @@ a.请求正常返回结果
   "data": [
     {
       "userId": 100001,
-      "address": "0x27a5f691c5a51047536f2696cc43f4c50646d0e2",
-      "publicKey": "0x2b1fd1d0aabd000d1dffff564a5684ddf1ca99c6207a09157e8fb19cdcb2753d29ce46bc20cf001dc13db88cd69a1de87171719a1174996393ee5b1120a93b1f",
-      "privateKey": "714366fd634fb655203753e33925ea778c86626fc72b2552f09f2f2baa8b9cba",
-      "description": null
+      "address": "0x4b8728db5124e184f2b627943baf7ce4c9664eea",
+      "publicKey": "0x552b77dc1640047bb8ef29bad51a190cf2b0529fcfa5f9171685f4ee200e7cc12f6ff115e7a68d64e0bb521fc81a34073972df1f71316e83fc1e018abbc326ff",
+      "privateKey": "c2c13451cfd0811bde19f0256624b3ee58c21065fb9abbe56c4633f1cccb6504",
+      "description": null,
+      "encryptType": 1
     },
     {
       "userId": 100002,
-      "address": "0xf70c3fe19644bc1c86783e4e3c1e9ebc1404c557",
-      "publicKey": "0x6963e90daddfa21dd816c29aac967869c82bb83efc4552243971fda0dff817eded322d4067d4d75fdcfdf17221bd0a8b1089406e1192d2479123e3b1d87fb542",
-      "privateKey": "5804b992e2df805bfc23009a5bedc614e52f9b8d07f4a7bbe786cea9d234c3f8",
-      "description": null
+      "address": "0xe3f82951067906e9147444152f38a4f00ad0b76a",
+      "publicKey": "0x1d9048b891183878fba9ad4efa948486ae41b8ca8ca8f4a8aed0c5beb59ae9e55d8b2e86c96ec8e9126e95b88e9fa8228de73f254c737980489b56798aa4c73f",
+      "privateKey": "d0540b7e62915474c4dcd2032a23688fbd76c3995d139e95de544aac5533eb63",
+      "description": null,
+      "encryptType": 1
     }
   ]
 }
