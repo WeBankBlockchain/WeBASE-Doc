@@ -191,7 +191,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口描述
 
-查询所有ECDSA/国密用户信息列表。
+根据传入的`encryptType`值，查询所有ECDSA/国密用户信息列表。
 
 #### 接口URL
 
@@ -316,7 +316,7 @@ HTTP POST
 | -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
 | 1        | 用户编号 | userId         | Integer      |              | 是       |                                                              |
 | 2        | 请求数据 | encodedDataStr | String   |              | 是       | 使用web3sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString|
-| 1        | 加密类型 | encryptType   | Integer |               | 否       | 0: ecdsa, 1: guomi, 默认为0 |
+| 1        | 加密类型 | encryptType   | Integer |               | 否       | 0: ECDSA, 1: guomi, 默认为0 |
 
 **2）数据格式**
 
