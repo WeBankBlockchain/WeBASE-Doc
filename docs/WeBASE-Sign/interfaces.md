@@ -2,15 +2,15 @@
 
 ## 1. 新增用户接口
 
-### 1.1. 新增ECDSA用户接口
+### 1.1. 新增ECDSA/国密用户接口
 
 #### 接口描述
 
-新增ECDSA用户。
+根据传入的`encryptType`值，新增ECDSA或国密公私钥用户。
 
 #### 接口URL
 
-http://localhost:5004/WeBASE-Sign/user/newUser
+http://localhost:5004/WeBASE-Sign/user/newUser?encryptType={encryptType}
 
 #### 调用方法
 
@@ -20,12 +20,14 @@ HTTP GET
 
 **1）参数表**
 
-无
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 加密类型  | encryptType| Integer |              | 否       | 0: ecdsa, 1: guomi, 默认为0 |
 
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/newUser
+http://localhost:5004/WeBASE-Sign/user/newUser?encryptType=0
 ```
 
 #### 响应参数
@@ -42,11 +44,13 @@ http://localhost:5004/WeBASE-Sign/user/newUser
 | 3.3      | 账户地址 | address    | String   |              | 是        |                   |
 | 3.4       | 公钥    | publicKey  | toHexString |           | 是        |                  |
 | 3.5       | 描述    | description| String   |              | 是        |                  |
-| 3.6       | 加密类型 |encryptType| Integer |               | 是        | 1: guomi, 0: ecdsa|
+| 3.6       | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
 
 **2）数据格式**
 
 a.请求正常返回结果
+
+ECDSA用户：
 ```
 {
     "code": 0,
@@ -61,61 +65,8 @@ a.请求正常返回结果
     }
 }
 ```
-b.异常返回结果示例（信息详情请参看附录1）
-```
-{
-  "code": 103001,
-  "message": "system error",
-  "data": null
-}
-```
 
-
-### 1.2. 新增国密用户接口
-
-#### 接口描述
-
-新增国密用户。
-
-#### 接口URL
-
-http://localhost:5004/WeBASE-Sign/user/newUserGuomi
-
-#### 调用方法
-
-HTTP GET
-
-#### 请求参数
-
-**1）参数表**
-
-无
-
-**2）数据格式**
-
-```
-http://localhost:5004/WeBASE-Sign/user/newUserGuomi
-```
-
-#### 响应参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
-|----------|----------|------------|----------|--------------|----------|-------------------|
-| 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
-| 2        | 提示信息 | message    | String   |              | 是       |                   |
-| 3        | 返回数据 | data       | Object   |              | 是       |                    |
-| 3.1      | 用户编号 | userId     | Integer  |              | 是        |                    |
-| 3.2      | 私钥信息 | privateKey | String   |              | 是        |                   |
-| 3.3      | 账户地址 | address    | String   |              | 是        |                   |
-| 3.4       | 公钥    | publicKey  | toHexString |           | 是        |                  |
-| 3.5       | 描述    | description| String   |              | 是        |                  |
-| 3.6       | 加密类型 |encryptType| Integer |               | 是        | 1: guomi, 0: ecdsa|
-
-**2）数据格式**
-
-a.请求正常返回结果
+国密用户：
 ```
 {
     "code": 0,
@@ -130,6 +81,7 @@ a.请求正常返回结果
     }
 }
 ```
+
 b.异常返回结果示例（信息详情请参看附录1）
 ```
 {
@@ -184,7 +136,7 @@ http://localhost:5004/WeBASE-Sign/user/100001/userInfo
 | 3.3      | 账户地址 | address     | String   |              | 是       | 链上地址          |
 | 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
 | 3.5      | 描述     | description | String   |              | 是       |                   |
-| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 1: guomi, 0: ecdsa|
+| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 0: ECDSA, 1: guomi |
 
 **2）数据格式**
 
@@ -232,17 +184,18 @@ b.异常返回结果示例（信息详情请参看附录1）
 }
 ```
 
+
 ## 3. 用户列表接口
 
-### 3.1. 查询ECDSA用户列表
+### 3.1. 查询ECDSA/国密用户列表
 
 #### 接口描述
 
-查询所有ECDSA用户信息列表。
+查询所有ECDSA/国密用户信息列表。
 
 #### 接口URL
 
-http://localhost:5004/WeBASE-Sign/user/list
+http://localhost:5004/WeBASE-Sign/user/list?encryptType={encryptType}
 
 #### 调用方法
 
@@ -252,12 +205,15 @@ HTTP GET
 
 **1）参数表**
 
-无
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 加密类型  | encryptType| Integer |              | 否       | 0: ECDSA, 1: guomi, 默认为0 |
+
 
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/list
+http://localhost:5004/WeBASE-Sign/user/list?encryptType=0
 ```
 
 #### 响应参数
@@ -274,12 +230,13 @@ http://localhost:5004/WeBASE-Sign/user/list
 | 3.3      | 账户地址 | address     | String   |              | 是       |                   |
 | 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
 | 3.5      | 描述     | description | String   |              | 是       |                   |
-| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 1: guomi, 0: ecdsa|
+| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 0: ECDSA, 1: guomi |
 
 **2）数据格式**
 
 a.请求正常返回结果
 
+ECDSA用户列表：
 ```
 {
   "code": 0,
@@ -305,62 +262,7 @@ a.请求正常返回结果
 }
 ```
 
-b.异常返回结果示例（信息详情请参看附录1）
-
-```
-{
-  "code": 103001,
-  "message": "system error",
-  "data": null
-}
-```
-
-### 3.2. 查询国密用户列表
-
-#### 接口描述
-
-查询所有国密用户信息列表。
-
-#### 接口URL
-
-http://localhost:5004/WeBASE-Sign/user/listGuomi
-
-#### 调用方法
-
-HTTP GET
-
-#### 请求参数
-
-**1）参数表**
-
-无
-
-**2）数据格式**
-
-```
-http://localhost:5004/WeBASE-Sign/user/listGuomi
-```
-
-#### 响应参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明**          |
-| -------- | -------- | ----------- | -------- | ------------ | -------- | ----------------- |
-| 1        | 返回码   | code        | String   |              | 是       | 返回码信息请附录1 |
-| 2        | 提示信息 | message     | String   |              | 是       |                   |
-| 3        | 返回数据 | data        | List     |              | 是       |                   |
-| 3.1      | 用户编号 | userId      | Integer  |              | 是       |                   |
-| 3.2      | 私钥信息 | privateKey  | String   |              | 是       |                   |
-| 3.3      | 账户地址 | address     | String   |              | 是       |                   |
-| 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
-| 3.5      | 描述     | description | String   |              | 是       |                   |
-| 3.6      | 加密类型 |  encryptType | Integer |              |  是      | 1: guomi, 0: ecdsa|
-
-**2）数据格式**
-
-a.请求正常返回结果
-
+国密用户列表：
 ```
 {
   "code": 0,
@@ -368,14 +270,6 @@ a.请求正常返回结果
   "data": [
     {
       "userId": 100001,
-      "address": "0x4b8728db5124e184f2b627943baf7ce4c9664eea",
-      "publicKey": "0x552b77dc1640047bb8ef29bad51a190cf2b0529fcfa5f9171685f4ee200e7cc12f6ff115e7a68d64e0bb521fc81a34073972df1f71316e83fc1e018abbc326ff",
-      "privateKey": "c2c13451cfd0811bde19f0256624b3ee58c21065fb9abbe56c4633f1cccb6504",
-      "description": null,
-      "encryptType": 1
-    },
-    {
-      "userId": 100002,
       "address": "0xe3f82951067906e9147444152f38a4f00ad0b76a",
       "publicKey": "0x1d9048b891183878fba9ad4efa948486ae41b8ca8ca8f4a8aed0c5beb59ae9e55d8b2e86c96ec8e9126e95b88e9fa8228de73f254c737980489b56798aa4c73f",
       "privateKey": "d0540b7e62915474c4dcd2032a23688fbd76c3995d139e95de544aac5533eb63",
@@ -384,6 +278,7 @@ a.请求正常返回结果
     }
   ]
 }
+
 ```
 
 b.异常返回结果示例（信息详情请参看附录1）
@@ -395,14 +290,15 @@ b.异常返回结果示例（信息详情请参看附录1）
   "data": null
 }
 ```
+
 
 ## 4. 数据签名接口
 
-### 4.1. ECDSA数据签名接口
+### 4.1. ECDSA/国密数据签名接口
 
 #### 接口描述
 
-指定用户通过ECDSA对数据进行签名。
+指定用户通过ECDSA/国密SM2对数据进行签名。
 
 #### 接口URL
 
@@ -418,8 +314,9 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
 | -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
-| 1        | 用户编号 | userId         | int      |              | 是       |                                                              |
-| 2        | 请求数据 | encodedDataStr | String   |              | 是       | 使用web3sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString |
+| 1        | 用户编号 | userId         | Integer      |              | 是       |                                                              |
+| 2        | 请求数据 | encodedDataStr | String   |              | 是       | 使用web3sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString|
+| 1        | 加密类型 | encryptType   | Integer |               | 否       | 0: ecdsa, 1: guomi, 默认为0 |
 
 **2）数据格式**
 
@@ -430,78 +327,8 @@ http://localhost:5004/WeBASE-Sign/sign
 ```
 {
   "userId":100001,
-  "encodedDataStr":"XXX"
-}
-```
-
-#### 响应参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明**          |
-| -------- | -------- | ----------- | -------- | ------------ | -------- | ----------------- |
-| 1        | 返回码   | code        | String   |              | 是       | 返回码信息请附录1 |
-| 2        | 提示信息 | message     | String   |              | 是       |                   |
-| 3        | 返回数据 | data        | Object   |              | 是       |                   |
-| 3.1      | 签名数据 | signDataStr | String   |              | 是       |                   |
-
-**2）数据格式**
-
-a.请求正常返回结果
-
-```
-{
-    "code": 0,
-    "message": "success",
-    "data": {
-        "signDataStr": "xxx"
-    }
-}
-```
-
-b.异常返回结果示例（信息详情请参看附录1）
-
-```
-{
-  "code": 103001,
-  "message": "system error",
-  "data": null
-}
-```
-
-### 4.2. 国密数据签名接口
-
-#### 接口描述
-
-指定用户通过国密SM2对数据进行签名。
-
-#### 接口URL
-
-http://localhost:5004/WeBASE-Sign/sign/guomi
-
-#### 调用方法
-
-HTTP POST
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
-| -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
-| 1        | 用户编号 | userId         | int      |              | 是       |                                                              |
-| 2        | 请求数据 | encodedDataStr | String   |              | 是       | 使用web3sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString |
-
-**2）数据格式**
-
-```
-http://localhost:5004/WeBASE-Sign/sign/guomi
-```
-
-```
-{
-  "userId":100001,
-  "encodedDataStr":"XXX"
+  "encodedDataStr":"XXX",
+  "encryptType":0
 }
 ```
 
