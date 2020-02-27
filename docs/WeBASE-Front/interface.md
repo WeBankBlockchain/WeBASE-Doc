@@ -3313,17 +3313,17 @@ b、失败：
 ## 7. 链上事件订阅接口
 
 
-### 7.1. 获取出块事件的订阅信息
+### 7.1. 获取出块事件的订阅信息列表
 
 #### 接口描述
 
-根据应用编号appId获取该应用订阅的出块事件配置信息
+获取所有订阅的出块事件配置信息
 
 将返回对应的id值, exchange, queue, routingKey等信息
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/event/newBlockEvent/{appId}**
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{pageNumber}/{pageSize}**
 
 #### 调用方法
 
@@ -3335,12 +3335,73 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-|     1    | 应用编号       | appId            | String   |              | 是       |                            |
+|     1    | 页码       | pageNumber            | int   |              | 是       |                            |
+|     2    | 页大小       | pageSize            | int   |              | 是       |                            |
+
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{pageNumber}/{pageSize}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b5707a1f5701707a248c340000",
+            "eventType": 1,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "user1_block_app1"
+        }
+    ],
+    "totalCount":1
+}
+```
+
+
+### 7.2. 获取出块事件的订阅信息
+
+#### 接口描述
+
+根据群组编号，应用编号获取该应用订阅的出块事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent/{groupId}/{appId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 群组编号       | groupId            | int   |              | 是       |                            |
+|     2    | 应用编号       | appId            | String   |              | 是       |                            |
+
+
       
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/event/newBlockEvent/{appId}
+http://localhost:5002/WeBASE-Front/event/newBlockEvent/{groupId}/{appId}
 ```
 
 #### 响应参数
@@ -3367,7 +3428,7 @@ http://localhost:5002/WeBASE-Front/event/newBlockEvent/{appId}
 }
 ```
 
-### 7.2. 订阅出块事件通知
+### 7.3. 订阅出块事件通知
 
 #### 接口描述
 
@@ -3437,7 +3498,7 @@ HTTP POST
 ```
 
 
-### 7.3. 取消订阅出块事件通知
+### 7.4. 取消订阅出块事件通知
 
 #### 接口描述
 
@@ -3490,17 +3551,17 @@ HTTP DELETE
 ```
 
 
-### 7.4. 获取合约Event事件订阅信息
+### 7.1. 获取合约Event事件订阅信息列表
 
 #### 接口描述
 
-根据应用编号appId获取该应用订阅的合约Event事件配置信息
+获取所有订阅的合约Event事件配置信息
 
 将返回对应的id值, exchange, queue, routingKey及合约Event配置内容(fromBlock, toBlock, contractAddress..)等信息
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/event/contractEvent/{appId}**
+**http://localhost:5002/WeBASE-Front/event/contractEvent/list/{pageNumber}/{pageSize}**
 
 #### 调用方法
 
@@ -3512,12 +3573,78 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-|     1    | 应用编号       | appId            | String   |              | 是       |                            |
+|     1    | 页码       | pageNumber            | int   |              | 是       |                            |
+|     2    | 页大小       | pageSize            | int   |              | 是       |                            |
+
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/contractEvent/list/{pageNumber}/{pageSize}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b57076ae09017076ae403a0001",
+            "eventType": 2,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "user1_event_app1",
+            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+            "fromBlock": "latest",
+            "toBlock": "latest",
+            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+            "topicList": "SetName(string)"
+        }
+    ],
+    "totalCount":1
+}
+```
+
+
+
+### 7.6. 获取合约Event事件订阅信息
+
+#### 接口描述
+
+根据群组编号，应用编号获取该应用订阅的合约Event事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey及合约Event配置内容(fromBlock, toBlock, contractAddress..)等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractEvent/{groupId}/{appId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 群组编号       | groupId            | int   |              | 是       |                            |
+|     2    | 应用编号       | appId            | String   |              | 是       |                            |
+
       
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/event/contractEvent/{appId}
+http://localhost:5002/WeBASE-Front/event/contractEvent/{groupId}/{appId}
 ```
 
 #### 响应参数
@@ -3550,7 +3677,7 @@ http://localhost:5002/WeBASE-Front/event/contractEvent/{appId}
 ```
 
 
-### 7.5. 订阅合约event事件通知
+### 7.7. 订阅合约event事件通知
 
 #### 接口描述
 
@@ -3636,7 +3763,7 @@ HTTP POST
 }
 ```
 
-### 7.6. 取消合约Event事件通知的订阅
+### 7.8. 取消合约Event事件通知的订阅
 
 #### 接口描述
 
