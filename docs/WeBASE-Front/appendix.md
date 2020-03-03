@@ -287,7 +287,7 @@ spring:
 
 ![创建同名队列](../../images/WeBASE/front-event/add_queue.png)
 
-- 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`contractEvent`)，注册事件监听；接口内容请查看[接口文档](./interface.md)
+- 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档](./interface.md#id330)
 
 用户调用注册事件接口之后，实际上是以`queueName+事件名+appId`的routingKey绑定到群组的Exchange中：
 
