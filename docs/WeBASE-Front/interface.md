@@ -2316,7 +2316,7 @@ HTTP POST
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 用户编号       | user            | String   |              | 是       | 用户编号或者用户地址                           |
+| 1        | 用户编号       | user            | String   |              | 是       | 用户地址(WeBASE-Front)或者用户编号(WeBASE-Sign)                           |
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
@@ -3470,22 +3470,11 @@ HTTP POST
 
 **1）数据格式** 
 
-成功则返回该app中剩余已订阅的事件通知：
+成功：
 ```
 {
     "code": 0,
-    "message": "success",
-    "data": [
-        {
-            "id": "8aba82b57057a8a8017057a982ad0001",
-            "eventType": 1,
-            "appId": "app2",
-            "groupId": 1,
-            "exchangeName": "group001",
-            "queueName": "user2",
-            "routingKey": "user2_block_app2"
-        }
-    ]
+    "message": "success"
 }
 ```
 
@@ -3701,9 +3690,9 @@ HTTP POST
 | 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
 | 4        | 队列名  | queueName      | String   |              | 是       | 队列名，**一般以用户名作队列名**  |
-| 5        | 合约abi  | contractAbi | String         |     |  是      | 合约的ABI，用于合约event解析 |
-| 6        | event起始区块  | fromBlock | String         |     | 是       | 最小值为0；默认值latest，表示监听最新区块|
-| 7        | event末区块  | toBlock | String         |     | 是       |最小值为0；默认值latest，表示监听最新区块|
+| 5        | 合约abi  | contractAbi | List<Object>         |     |  是      | 合约的ABI，用于合约event解析 |
+| 6        | event起始区块  | fromBlock | String         |     | 是       | 最小值为1；填写`latest`，表示一直监听最新区块|
+| 7        | event末区块  | toBlock | String         |     | 是       |最小值为1，最大值为当前区块高度，需   要大于等于`fromBlock`；填写`latest`，表示一直监听最新区块|
 | 8        | 合约地址  | contractAddress | String   |     | 是       |合约地址 |
 | 9        | 合约event名列表  | topicList | List<String>         |     |  是    | 合约event事件名的list，以中括号括住，以英文逗号相隔，不带空格；如`[HelloWorld(string)]`|
 
@@ -3713,18 +3702,15 @@ HTTP POST
 
 ```
 {
-   {
-    "id": ,
     "appId": "app2",
     "groupId": 1,
     "exchangeName": "group001",
     "queueName": "user2",
-    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}],
     "fromBlock": "latest",
     "toBlock": "latest",
     "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
     "topicList": ["SetName(string)","TransferEvent(string,address)"]
-}
 }
 ```
 #### 响应参数
@@ -3735,23 +3721,7 @@ HTTP POST
 ```
 {
     "code": 0,
-    "message": "success",
-    "data": [
-        {
-            "id": "8aba82b57057a8a8017057aa95940003",
-            "eventType": 2,
-            "appId": "app2",
-            "groupId": 1,
-            "exchangeName": "group001",
-            "queueName": "user2",
-            "routingKey": "user2_event_app2",
-            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
-            "fromBlock": "latest",
-            "toBlock": "latest",
-            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
-            "topicList": ["SetName(string)","TransferEvent(string,address)"]
-        }
-    ]
+    "message": "success"
 }
 ```
 
