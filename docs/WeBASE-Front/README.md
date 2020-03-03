@@ -14,7 +14,7 @@ WeBASE-Front使用方式有以下三种：
 
 3、结合[WeBASE-Sign](https://github.com/WeBankFinTech/WeBASE-Sign)服务一起部署使用，调用WeBASE-Sign进行数据签名，再发送上链。此方式在方式1的基础上再部署WeBASE-Sign服务，然后需调用以下两个接口进行合约部署和调用：[合约部署（结合WeBASE-Sign）](interface.html#webase-sign)、[交易处理（结合WeBASE-Sign）](interface.html#id223)。
 
- **注意：** WeBASE-Front需要跟节点同机部署。一台机器部署多个节点，部署一个WeBASE-Front服务即可。
+ **注意：** WeBASE-Front需要跟节点同机部署，一个节点对应一个WeBASE-Front服务。
 
 ## 国密支持
 
