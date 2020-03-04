@@ -26,7 +26,7 @@ HTTP POST
 | 2        | 合约名称 | contractName | String         |              | 是        |                      |
 | 3        | 合约地址 | address      | String         |              | 是       |                        |
 | 4        | 合约abi  | abiInfo      | List   |              | 是       | abi文件里面的内容，是一个JSONArray |
-| 5        | 合约bin  | contractBin | String         |     | 是       | |
+| 5        | 合约bin  | contractBin | String         |     | 是       | 合约编译的bytecode(bin)，用于部署合约 |
 
 
 **2）数据格式**
@@ -76,7 +76,7 @@ HTTP POST
 | 2        | 用户编号     | user         | String   |              | 是       | 用户编号或者用户地址 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |                      |
-| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |                      |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |   合约编译的bytecode(bin)，用于部署合约|
 | 6        | 构造函数参数 | funcParam    | List     |              | 否       |                      |
 | 7        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
 
@@ -124,7 +124,7 @@ HTTP POST
 | -------- | ------------ | ----------- | -------- | ------------ | -------- | ------------------------- |
 | 1        | 所属群组     | groupId     | int      |              | 是       |                           |
 | 2        | 签名用户编号 | signUserId  | String   |              | 是       | WeBASE-Sign服务的用户编号 |
-| 3        | 合约bin      | contractBin | String   |              | 是       |                           |
+| 3        | 合约bin      | contractBin | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
 | 4        | 合约abi      | contractAbi | List     |              | 是       |                           |
 | 5        | 构造函数参数 | funcParam   | List     |              | 否       |                           |
 
@@ -218,7 +218,7 @@ HTTP POST
 | -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
 | 1        | 合约名称     | contractName | String         |              | 是       |          |
 | 2        | 合约abi      | abiInfo      | List |              | 是       |          |
-| 3        | 合约bin      | contractBin  | String         |              | 是       |          |
+| 3        | 合约bin      | contractBin  | String         |              | 是       |  合约编译的bytecode(bin)，用于部署合约        |
 | 4        | 所在目录      | packageName  | String         |              | 是       | 生成java所在的包名 |
 
 **2）数据格式**
@@ -262,8 +262,8 @@ HTTP POST
 | 3        | 合约名称     | contractName | String         |              | 是       |          |
 | 4        | 合约所在目录  | contractPath | String         |              | 是       |          |
 | 5        | 合约abi      | contractAbi      | String |              | 否       |          |
-| 6        | bytecodeBin      | bytecodeBin  | String         |              | 否       |          |
-| 7        | 合约bin | contractBin    | String|              | 否       |          |
+| 6        | bytecodeBin      | bytecodeBin  | String         |              | 否       |  合约编译的bytecode(bin)，用于部署合约        |
+| 7        | 合约bin | contractBin    | String|              | 否       |   合约编译的runtime-bytecode(runtime-bin)，用于交易解析       |
 | 8        | 合约源码 | contractSource    | String|              | 否       |          |
 
 **2）数据格式**
@@ -287,19 +287,18 @@ HTTP POST
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
 | 1        | 合约编号 | id            | Integer         |              | 是        |           |
 | 2        | 所在目录  | contractPath | String         |     | 是       | |
-| 3        | 合约bin  | contractBin | String         |     | 是       | |
-| 4        | 合约名称 | contractName | String         |              | 是        |   |
-| 5        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
-| 6        | 所属群组 | groupId | Integer         |              | 是        |                      |
-| 7        | 合约源码 | contractSource | String         |      | 否       |           |
-| 8        | 合约abi | contractAbi | String         |      | 否       |           |
-| 9        | 合约bin | contractBin | String         |      | 否       |           |
-| 10        | bytecodeBin | bytecodeBin | String         |      | 否       |           |
-| 11        | 合约地址 | contractAddress | String         |      | 否       |           |
-| 12        | 部署时间 | deployTime | String         |      | 否       |           |
-| 13        | 修改时间 | modifyTime | String         |      | 是       |           |
-| 14        | 创建时间 | createTime | String         |      | 是       |           |
-| 15        | 备注 | description | String         |      | 否       |           |
+| 3        | 合约名称 | contractName | String         |              | 是        |   |
+| 4        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
+| 5        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 6        | 合约源码 | contractSource | String         |      | 否       |           |
+| 7        | 合约abi | contractAbi | String         |      | 否       |           |
+| 8        | 合约bin | contractBin | String         |      | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
+| 9        | bytecodeBin | bytecodeBin | String         |      | 否       |  合约编译的bytecode(bin)，用于部署合约        |
+| 10        | 合约地址 | contractAddress | String         |      | 否       |           |
+| 11        | 部署时间 | deployTime | String         |      | 否       |           |
+| 12        | 修改时间 | modifyTime | String         |      | 是       |           |
+| 13        | 创建时间 | createTime | String         |      | 是       |           |
+| 14        | 备注 | description | String         |      | 否       |           |
 
 **2）数据格式**
 ```
@@ -419,19 +418,18 @@ HTTP POST
 | 3        | 返回数据 | data       | Object   |  否        |                       |
 | 3.1        | 合约编号 | id            | Integer                      | 是        |           |
 | 3.2        | 所在目录  | contractPath | String             | 是       | |
-| 3.3        | 合约bin  | contractBin | String          | 是       | |
-| 3.4        | 合约名称 | contractName | String                    | 是        |   |
-| 3.5        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
-| 3.6        | 所属群组 | groupId | Integer                  | 是        |                      |
-| 3.7        | 合约源码 | contractSource | String            | 否       |           |
-| 3.8        | 合约abi | contractAbi | String          | 否       |           |
-| 3.9        | 合约bin | contractBin | String            | 否       |           |
-| 3.10        | bytecodeBin | bytecodeBin | String           | 否       |           |
-| 3.11        | 合约地址 | contractAddress | String           | 否       |           |
-| 3.12        | 部署时间 | deployTime | String            | 否       |           |
-| 3.13        | 修改时间 | modifyTime | String            | 是       |           |
-| 3.14        | 创建时间 | createTime | String             | 是       |           |
-| 3.15        | 备注 | description | String           | 否       |           |
+| 3.3        | 合约名称 | contractName | String                    | 是        |   |
+| 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
+| 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
+| 3.6        | 合约源码 | contractSource | String            | 否       |           |
+| 3.7        | 合约abi | contractAbi | String          | 否       |           |
+| 3.8        | 合约bin | contractBin | String            | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
+| 3.9        | bytecodeBin | bytecodeBin | String           | 否       |  合约编译的bytecode(bin)，用于部署合约     |
+| 3.10        | 合约地址 | contractAddress | String           | 否       |           |
+| 3.11        | 部署时间 | deployTime | String            | 否       |           |
+| 3.12        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.13        | 创建时间 | createTime | String             | 是       |           |
+| 3.14        | 备注 | description | String           | 否       |           |
 
 **2）数据格式**
 ```
@@ -534,7 +532,7 @@ HTTP POST
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
 | 1        | 合约名称 | contractName        | String         |              | 是        |           |
-| 3        | 合约bin  | bytecodeBin | String         |     | 是       | |   合约Bin
+| 3        | 合约bin  | bytecodeBin | String         |     | 是       | |   合约编译的bytecode(bin)，用于部署合约
 | 4        | 合约abi | contractAbi | String         |              | 是        |   |
 
 **2）数据格式**
