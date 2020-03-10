@@ -76,7 +76,7 @@ HTTP POST
 | 2        | 用户编号     | user         | String   |              | 是       | 用户编号或者用户地址 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |                      |
-| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |                      |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |   合约编译的bytecode(bin)，用于部署合约|
 | 6        | 构造函数参数 | funcParam    | List     |              | 否       |                      |
 | 7        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
 
@@ -124,7 +124,7 @@ HTTP POST
 | -------- | ------------ | ----------- | -------- | ------------ | -------- | ------------------------- |
 | 1        | 所属群组     | groupId     | int      |              | 是       |                           |
 | 2        | 签名用户编号 | signUserId  | String   |              | 是       | WeBASE-Sign服务的用户编号 |
-| 3        | 合约bin      | contractBin | String   |              | 是       |                           |
+| 3        | 合约bin      | bytecodeBin | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
 | 4        | 合约abi      | contractAbi | List     |              | 是       |                           |
 | 5        | 构造函数参数 | funcParam   | List     |              | 否       |                           |
 
@@ -134,7 +134,7 @@ HTTP POST
 {
     "groupId":1,
     "signUserId":100001,
-    "contractBin":"xxx",
+    "bytecodeBin":"xxx",
     "contractAbi": [],
     "funcParam":[]
 }
@@ -143,7 +143,7 @@ HTTP POST
 示例：
 
 ```
-curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractBin\": \"608060405234801561001057600080fd5b506040805190810160405280600681526020017f68656c6c6f2100000000000000000000000000000000000000000000000000008152506000908051906020019061005c92919061011c565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d899600060405180806020018281038252838181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101095780601f106100de57610100808354040283529160200191610109565b820191906000526020600020905b8154815290600101906020018083116100ec57829003601f168201915b50509250505060405180910390a16101c1565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061015d57805160ff191683800117855561018b565b8280016001018555821561018b579182015b8281111561018a57825182559160200191906001019061016f565b5b509050610198919061019c565b5090565b6101be91905b808211156101ba5760008160009055506001016101a2565b5090565b90565b610391806101d06000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634ed3885e146100515780636d4ce63c146100ba575b600080fd5b34801561005d57600080fd5b506100b8600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061014a565b005b3480156100c657600080fd5b506100cf61021e565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561010f5780820151818401526020810190506100f4565b50505050905090810190601f16801561013c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b80600090805190602001906101609291906102c0565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d8996000604051808060200182810382528381815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561020d5780601f106101e25761010080835404028352916020019161020d565b820191906000526020600020905b8154815290600101906020018083116101f057829003601f168201915b50509250505060405180910390a150565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102b65780601f1061028b576101008083540402835291602001916102b6565b820191906000526020600020905b81548152906001019060200180831161029957829003601f168201915b5050505050905090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061030157805160ff191683800117855561032f565b8280016001018555821561032f579182015b8281111561032e578251825591602001919060010190610313565b5b50905061033c9190610340565b5090565b61036291905b8082111561035e576000816000905550600101610346565b5090565b905600a165627a7a723058201be6d6e6936e66c64b93771f9bd7ee708553fb6faf82e0273336fac2b1c6d83d0029\", \"funcParam\": [ ], \"groupId\": 1, \"signUserId\": 100001}"
+curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"bytecodeBin\": \"608060405234801561001057600080fd5b506040805190810160405280600681526020017f68656c6c6f2100000000000000000000000000000000000000000000000000008152506000908051906020019061005c92919061011c565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d899600060405180806020018281038252838181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101095780601f106100de57610100808354040283529160200191610109565b820191906000526020600020905b8154815290600101906020018083116100ec57829003601f168201915b50509250505060405180910390a16101c1565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061015d57805160ff191683800117855561018b565b8280016001018555821561018b579182015b8281111561018a57825182559160200191906001019061016f565b5b509050610198919061019c565b5090565b6101be91905b808211156101ba5760008160009055506001016101a2565b5090565b90565b610391806101d06000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634ed3885e146100515780636d4ce63c146100ba575b600080fd5b34801561005d57600080fd5b506100b8600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061014a565b005b3480156100c657600080fd5b506100cf61021e565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561010f5780820151818401526020810190506100f4565b50505050905090810190601f16801561013c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b80600090805190602001906101609291906102c0565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d8996000604051808060200182810382528381815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561020d5780601f106101e25761010080835404028352916020019161020d565b820191906000526020600020905b8154815290600101906020018083116101f057829003601f168201915b50509250505060405180910390a150565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102b65780601f1061028b576101008083540402835291602001916102b6565b820191906000526020600020905b81548152906001019060200180831161029957829003601f168201915b5050505050905090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061030157805160ff191683800117855561032f565b8280016001018555821561032f579182015b8281111561032e578251825591602001919060010190610313565b5b50905061033c9190610340565b5090565b61036291905b8082111561035e576000816000905550600101610346565b5090565b905600a165627a7a723058201be6d6e6936e66c64b93771f9bd7ee708553fb6faf82e0273336fac2b1c6d83d0029\", \"funcParam\": [ ], \"groupId\": 1, \"signUserId\": 100001}"
 ```
 
 #### 响应参数
@@ -218,7 +218,7 @@ HTTP POST
 | -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
 | 1        | 合约名称     | contractName | String         |              | 是       |          |
 | 2        | 合约abi      | abiInfo      | List |              | 是       |          |
-| 3        | 合约bin      | contractBin  | String         |              | 是       |          |
+| 3        | 合约bin      | contractBin  | String         |              | 是       |  合约编译的runtime-bytecode(runtime-bin)       |
 | 4        | 所在目录      | packageName  | String         |              | 是       | 生成java所在的包名 |
 
 **2）数据格式**
@@ -262,8 +262,8 @@ HTTP POST
 | 3        | 合约名称     | contractName | String         |              | 是       |          |
 | 4        | 合约所在目录  | contractPath | String         |              | 是       |          |
 | 5        | 合约abi      | contractAbi      | String |              | 否       |          |
-| 6        | bytecodeBin      | bytecodeBin  | String         |              | 否       |          |
-| 7        | 合约bin | contractBin    | String|              | 否       |          |
+| 6        | bytecodeBin      | bytecodeBin  | String         |              | 否       |  合约编译的bytecode(bin)，用于部署合约        |
+| 7        | 合约bin | contractBin    | String|              | 否       |   合约编译的runtime-bytecode(runtime-bin)，用于交易解析       |
 | 8        | 合约源码 | contractSource    | String|              | 否       |          |
 
 **2）数据格式**
@@ -287,19 +287,18 @@ HTTP POST
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
 | 1        | 合约编号 | id            | Integer         |              | 是        |           |
 | 2        | 所在目录  | contractPath | String         |     | 是       | |
-| 3        | 合约bin  | contractBin | String         |     | 是       | |
-| 4        | 合约名称 | contractName | String         |              | 是        |   |
-| 5        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
-| 6        | 所属群组 | groupId | Integer         |              | 是        |                      |
-| 7        | 合约源码 | contractSource | String         |      | 否       |           |
-| 8        | 合约abi | contractAbi | String         |      | 否       |           |
-| 9        | 合约bin | contractBin | String         |      | 否       |           |
-| 10        | bytecodeBin | bytecodeBin | String         |      | 否       |           |
-| 11        | 合约地址 | contractAddress | String         |      | 否       |           |
-| 12        | 部署时间 | deployTime | String         |      | 否       |           |
-| 13        | 修改时间 | modifyTime | String         |      | 是       |           |
-| 14        | 创建时间 | createTime | String         |      | 是       |           |
-| 15        | 备注 | description | String         |      | 否       |           |
+| 3        | 合约名称 | contractName | String         |              | 是        |   |
+| 4        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
+| 5        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 6        | 合约源码 | contractSource | String         |      | 否       |           |
+| 7        | 合约abi | contractAbi | String         |      | 否       |           |
+| 8        | 合约bin | contractBin | String         |      | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
+| 9        | bytecodeBin | bytecodeBin | String         |      | 否       |  合约编译的bytecode(bin)，用于部署合约        |
+| 10        | 合约地址 | contractAddress | String         |      | 否       |           |
+| 11        | 部署时间 | deployTime | String         |      | 否       |           |
+| 12        | 修改时间 | modifyTime | String         |      | 是       |           |
+| 13        | 创建时间 | createTime | String         |      | 是       |           |
+| 14        | 备注 | description | String         |      | 否       |           |
 
 **2）数据格式**
 ```
@@ -419,19 +418,19 @@ HTTP POST
 | 3        | 返回数据 | data       | Object   |  否        |                       |
 | 3.1        | 合约编号 | id            | Integer                      | 是        |           |
 | 3.2        | 所在目录  | contractPath | String             | 是       | |
-| 3.3        | 合约bin  | contractBin | String          | 是       | |
-| 3.4        | 合约名称 | contractName | String                    | 是        |   |
-| 3.5        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
-| 3.6        | 所属群组 | groupId | Integer                  | 是        |                      |
-| 3.7        | 合约源码 | contractSource | String            | 否       |           |
-| 3.8        | 合约abi | contractAbi | String          | 否       |           |
-| 3.9        | 合约bin | contractBin | String            | 否       |           |
-| 3.10        | bytecodeBin | bytecodeBin | String           | 否       |           |
-| 3.11        | 合约地址 | contractAddress | String           | 否       |           |
-| 3.12        | 部署时间 | deployTime | String            | 否       |           |
-| 3.13        | 修改时间 | modifyTime | String            | 是       |           |
-| 3.14        | 创建时间 | createTime | String             | 是       |           |
-| 3.15        | 备注 | description | String           | 否       |           |
+| 3.3        | 合约名称 | contractName | String                    | 是        |   |
+| 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
+| 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
+| 3.6        | 合约源码 | contractSource | String            | 否       |           |
+| 3.7        | 合约abi | contractAbi | String          | 否       |           |
+| 3.8        | 合约bin | contractBin | String            | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
+| 3.9        | bytecodeBin | bytecodeBin | String           | 否       |  合约编译的bytecode(bin)，用于部署合约     |
+| 3.10        | 合约地址 | contractAddress | String           | 否       |           |
+| 3.11        | 部署时间 | deployTime | String            | 否       |           |
+| 3.12        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.13        | 创建时间 | createTime | String             | 是       |           |
+| 3.14        | 备注 | description | String           | 否       |           |
+
 
 **2）数据格式**
 ```
@@ -534,7 +533,7 @@ HTTP POST
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
 | 1        | 合约名称 | contractName        | String         |              | 是        |           |
-| 3        | 合约bin  | bytecodeBin | String         |     | 是       | |   合约Bin
+| 3        | 合约bin  | bytecodeBin | String         |     | 是       | |   合约编译的bytecode(bin)，用于部署合约
 | 4        | 合约abi | contractAbi | String         |              | 是        |   |
 
 **2）数据格式**
@@ -3499,7 +3498,7 @@ a、成功：
 | 201004 | version cannot be empty                      | 合约版本不能为空           |
 | 201005 | funcName cannot be empty                     | 方法名不能为空             |
 | 201006 | abiInfo cannot be empty                      | abi内容不能为空            |
-| 201007 | contractBin cannot be empty                  | 合约bin不能为空            |
+| 201007 | bytecodeBin cannot be empty                  | 合约bin不能为空            |
 | 201008 | contract's current version has been deployed | 该合约版本已部署           |
 | 201009 | contract is not deployed                     | 合约未部署                 |
 | 201010 | save abi error                               | abi保存错误                |
@@ -3520,7 +3519,7 @@ a、成功：
 | 201025 | invalid contract id                          | 无效的合约编号             |
 | 201026 | contract has been deployed                   | 合约已部署                 |
 | 201027 | send abiInfo fail                            | 发送abi失败                |
-| 201028 | contractbin is null                          | 合约bin为空                |
+| 201028 | bytecodeBin is null                          | 合约bin为空                |
 | 201029 | contractAddress is null                      | 合约地址为空               |
 | 201030 | contractAddress invalid                      | 合约地址无效               |
 | 201031 | privateKey decode fail                       | 私钥编码失败               |
