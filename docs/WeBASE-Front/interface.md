@@ -26,7 +26,7 @@ HTTP POST
 | 2        | 合约名称 | contractName | String         |              | 是        |                      |
 | 3        | 合约地址 | address      | String         |              | 是       |                        |
 | 4        | 合约abi  | abiInfo      | List   |              | 是       | abi文件里面的内容，是一个JSONArray |
-| 5        | 合约bin  | contractBin | String         |     | 是       | |
+| 5        | 合约bin      | contractBin  | String         |              | 是       |  合约编译的runtime-bytecode(runtime-bin)       |
 
 
 **2）数据格式**

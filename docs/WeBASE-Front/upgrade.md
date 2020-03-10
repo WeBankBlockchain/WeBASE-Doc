@@ -9,6 +9,18 @@
 
 #### v1.2.3
 
+##### 修复api中的合约Bin字段
+
+修复了WeBASE-Front接口中`contractBin`与`bytecodeBin`字段的bug
+
+- `contractBin`是指合约编译后的运行时二进制码(runtime-bin)，多用于交易解析用
+- `bytecodeBin`是指合约编译的完整二进制码(bytecode bin)，一般用于部署合约
+
+将部分接口的`contractBin`字段修改为`bytecodeBin`字段，修改的接口包含`contract/deployWithSign`，共1个；
+
+其余包含以上两个字段的接口，均在接口文档中丰富了字段说明，方便区分
+
+##### 事件推送服务
 WeBASE-Front在v1.2.3版本后，将支持通过RabbitMQ消息队列服务，对**出块事件**与**合约Event**进行事件消息实时推送；若不适用此功能，不影响原有功能的使用
 
 启用消息队列的事件推送服务，需要
