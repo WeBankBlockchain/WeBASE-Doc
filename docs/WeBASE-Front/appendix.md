@@ -242,14 +242,14 @@ public void loadPrivateKeyTest() {
 
 ## 4. 事件通知
 
-支持通过消息队列(Message Queue)来获取WeBASE-Front的事件Push通知
+支持通过**消息队列**(Message Queue)来获取WeBASE-Front的事件Push通知
 
 目前支持出块事件与智能合约Event事件的事件Push通知，大致流程为：
 1. WeBASE-Front连接到MQ-Server;
 2. WeBASE-Front接收节点的事件Push后，如出块通知，WeBASE-Front将出块消息发送到Message Queue中；
 2. 区块链应用连接MQ-Server，获取Message Queue中待消费的消息，即可获得事件通知；
 
-下面介绍如何搭建RabbitMQ服务与具体配置方法
+下面介绍如何搭建RabbitMQ的消息队列服务与WeBASE-Front的配置方法
 
 ### 4.1 RabbitMQ消息队列事件通知
 
@@ -326,7 +326,7 @@ spring:
 
 ![创建同名队列](../../images/WeBASE/front-event/add_queue.png)
 
-- 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档](./interface.md#id330)
+- 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档-事件通知](./interface.md#id330)
 
 用户调用注册事件接口之后，实际上是以`queueName+事件名+appId`的routingKey绑定到群组的Exchange中：
 
@@ -334,7 +334,7 @@ spring:
 
 - 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；
 
-  - 如上小节的配置所示，可参考[WeBASE-Event-Client](https://github.com/Sayou1989/WeBASE-Event-Client)的消费者实现
+  - 如上小节的配置所示，可参考[WeBASE-Event-Client](https://github.com/WeBankFinTech/WeBASE-Event-Client)的消费者实现
 
 
 
