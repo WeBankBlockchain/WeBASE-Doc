@@ -357,6 +357,8 @@ public void receive(Channel channel, Message message) throws IOException {
       log.error("++++++++ mq 消息消费失败：id：{} Exception: {}", message.getMessageProperties().getDeliveryTag(), e);
       ...
     }
+    ...
+}
 ```
 
 <!-- ### 配置https
