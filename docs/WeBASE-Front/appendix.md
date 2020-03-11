@@ -310,33 +310,54 @@ spring:
 
 #### 客户端（区块链应用/消息消费者）使用说明
 
-客户端开发流程
+##### 客户端开发流程
 
-- 客户端用户向mq-server运维管理员**申请账号**（用户名和密码、virtual host），运维管理员创建账号，并**创建以用户名为名字的队列**，然后赋予该账户read其专属队列的权限( permission-read:queueName)。
-  - 运维管理员提供用户名（队列名）和密码、virtual host、消息交换机名（exchangeName）。
+- 申请账号：客户端用户向mq-server运维管理员申请MQ服务的账号（用户名和密码、virtual host）。
+- 创建队列与赋予权限：运维管理员创建账号，并**创建以用户名为名字的队列**，然后赋予该账户read其专属队列的权限( permission-read:queueName)。
+- 客户端连接到MQ：用户根据运维管理员提供的MQ账户名（队列名）和密码、virtual host、消息交换机名（exchangeName），将自己的区块链应用连接到相应队列中，获取消息推送。
 
-创建用户：
+下面简单展示运维管理员通过RabbitMQ的Web工具管理MQ服务：
+
+**创建用户：**
 
 ![创建用户](../../images/WeBASE/front-event/add_user.png)
 
-赋予用户访问同名队列的read权限
+**赋予用户访问同名队列的read权限：**
 ![赋予read权限](../../images/WeBASE/front-event/user_config.png)
 
-创建同名队列
+**创建同名队列**
 
 ![创建同名队列](../../images/WeBASE/front-event/add_queue.png)
 
+##### 客户端订阅事件推送流程：
+
 - 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档-事件通知](./interface.md#id330)
 
-用户调用注册事件接口之后，实际上是以`queueName+事件名+appId`的routingKey绑定到群组的Exchange中：
+用户调用注册事件接口之后，实际上WeBASE-Front将以`queueName+事件名+appId`的routingKey，将用户所拥有的的队列Queue绑定到对应的Exchange中：
 
 ![绑定到群组Exchange](../../images/WeBASE/front-event/after_register.png)
 
 - 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；
 
-  - 如上小节的配置所示，可参考[WeBASE-Event-Client](https://github.com/WeBankFinTech/WeBASE-Event-Client)的消费者实现
+客户端获取事件通知过程需如上进行配置，可参考[WeBASE-Event-Client](https://github.com/WeBankFinTech/WeBASE-Event-Client)的消费者客户端的代码实现（Dev分支）
 
+核心代码逻辑为：
+```
 
+@RabbitListener(queues = "${spring.rabbitmq.username}")
+public void receive(Channel channel, Message message) throws IOException {
+    log.info("++++++++ mq message body: {}, queue:{}", new String(message.getBody()),
+            message.getMessageProperties());
+    try {
+        String bodyStr = new String(message.getBody());
+        JSONObject json = JSONObject.parseObject(bodyStr);
+        ...
+        // 处理json消息体
+    } catch (Exception e) {
+      log.error("++++++++ mq 消息消费失败：id：{} Exception: {}", message.getMessageProperties().getDeliveryTag(), e);
+      ...
+    }
+```
 
 <!-- ### 配置https
 
