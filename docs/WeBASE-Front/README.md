@@ -27,3 +27,14 @@ WeBASE-Front具体需要适配国密版FISCO-BCOS的地方有：
     2. WeBASE-Front后台编译国密版智能合约，需要用solcJ-gm的jar包替换web3sdk默认使用的ethereum的solcJ jar包;
 
 安装详情可查看下一章节的[WeBASE-Front部署说明](install.html)
+
+## 事件通知服务
+
+WeBASE-Front在v1.2.3版本后，将支持通过RabbitMQ消息队列服务，对**出块事件**与**合约Event事件**进行消息实时推送；
+
+启用消息队列的事件推送服务，需要
+1. 安装RabbitMQ Server并启动mq服务
+2. 启用RabbitMQ的`rabbitmq_managerment`功能；
+3. 配置`application.yml`中`spring-rabbitmq`的配置项；
+
+具体使用说明请参考[附录-事件通知](./appendix.md#id11)
