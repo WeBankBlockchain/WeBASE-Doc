@@ -28,13 +28,12 @@ WeBASE-Front具体需要适配国密版FISCO-BCOS的地方有：
 
 安装详情可查看下一章节的[WeBASE-Front部署说明](install.html)
 
-## 事件通知服务
+## 支持链上事件订阅和通知
 
-WeBASE-Front在v1.2.3版本后，将支持通过RabbitMQ消息队列服务，对**出块事件**与**合约Event事件**进行消息实时推送；
+在某些业务场景中，应用层需要实时获取链上的事件，如出块事件、合约Event事件等。应用层通过WeBASE连接节点后，**由于无法和节点直接建立长连接**，难以实时获取链上的消息。
 
-启用消息队列的事件推送服务，需要
-1. 安装RabbitMQ Server并启动mq服务
-2. 启用RabbitMQ的`rabbitmq_managerment`功能；
-3. 配置`application.yml`中`spring-rabbitmq`的配置项；
+为了解决这个问题，应用层可通过WeBASE-Front订阅链上事件，当事件触发时，可通过RabbitMQ消息队列通知到应用层，架构如下：
 
-具体使用说明请参考[附录-事件通知](./appendix.md#id11)
+![链上事件通知架构](../../images/WeBASE/front-event/event_structure.png)
+
+WeBASE-Front默认不启用消息推送功能，如需启用请参考[附录-链上事件订阅和通知](./appendix.md#id11)
