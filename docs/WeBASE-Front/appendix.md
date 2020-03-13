@@ -240,14 +240,16 @@ public void loadPrivateKeyTest() {
 
 ```
 
-## 4. 事件通知
+## 4. 支持链上事件订阅和通知
 
-支持通过**消息队列**(Message Queue)来获取WeBASE-Front的事件Push通知
+在某些业务场景中，应用层需要实时获取链上的事件，如出块事件、合约Event事件等。应用层通过WeBASE连接节点后，**由于无法和节点直接建立长连接**，难以实时获取链上的消息。
+
+支持通过**消息队列**(Message Queue)来获取WeBASE-Front(v1.2.3+)的链上事件的消息推送
 
 目前支持出块事件与智能合约Event事件的事件Push通知，大致流程为：
-1. WeBASE-Front连接到MQ-Server;
-2. WeBASE-Front接收节点的事件Push后，如出块通知，WeBASE-Front将出块消息发送到Message Queue中；
-2. 区块链应用连接MQ-Server，获取Message Queue中待消费的消息，即可获得事件通知；
+1. WeBASE-Front连接到MQ-Server(目前支持RabbitMQ-Server);
+2. WeBASE-Front接收节点的事件Push后，如出块通知，WeBASE-Front将出块消息发送到消息队列中；
+2. 区块链应用连接MQ-Server，获取消息队列中待消费的消息，即可获得事件通知；
 
 下面介绍如何搭建RabbitMQ的消息队列服务与WeBASE-Front的配置方法
 
@@ -305,7 +307,7 @@ spring:
     virtual-host: defaultVirtualHost # 消息队列和Exchange所在虚拟节点，默认为空或"/"
     publisher-confirm: true # 消息发布确认开启
     ssl:
-      enabled: false
+      enabled: false # 是否启用ssl连接，默认false
 ```
 
 #### 客户端（区块链应用/消息消费者）使用说明

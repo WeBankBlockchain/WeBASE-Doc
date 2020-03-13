@@ -20,13 +20,18 @@
 
 其余包含以上两个字段的接口，均在接口文档中丰富了字段说明，方便区分
 
-##### 事件推送服务
-WeBASE-Front在v1.2.3版本后，将支持通过RabbitMQ消息队列服务，对**出块事件**与**合约Event事件**进行消息实时推送；若不使用此功能，不影响原有功能的使用
+##### 支持链上事件订阅和通知
 
-启用消息队列的事件推送服务，需要
+在某些业务场景中，应用层需要实时获取链上的事件，如出块事件、合约Event事件等。应用层通过WeBASE连接节点后，**由于无法和节点直接建立长连接**，难以实时获取链上的消息。
+
+为了解决这个问题，应用层可通过WeBASE-Front订阅链上事件，当事件触发时，可通过RabbitMQ消息队列通知到应用层，架构如下：
+
+![链上事件通知架构](../../images/WeBASE/front-event/event_structure.png)
+
+启用消息队列的事件推送服务，需要以下几步操作：
 1. 安装RabbitMQ Server，启动mq服务，并确保RabbitMQ Server服务所在服务器的`5672`, `15672`端口可访问；
 2. 启用RabbitMQ的`rabbitmq_managerment`功能,（在mq服务所在主机中运行`rabbitmq-plugins enable rabbitmq_management`）；
 3. 配置`application.yml`中`spring-rabbitmq`项，通过`host`, `port`连接mq server, 且`username`, `password`有足够权限配置管理mq服务；
 
-具体使用说明请参考[附录-事件通知](./appendix.md#id11)
+**WeBASE-Front默认不启用事件消息推送功能**，如需启用请参考[附录-链上事件订阅和通知](./appendix.md#id11)
 
