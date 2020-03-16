@@ -27,3 +27,13 @@ WeBASE-Front具体需要适配国密版FISCO-BCOS的地方有：
     2. WeBASE-Front后台编译国密版智能合约，需要用solcJ-gm的jar包替换web3sdk默认使用的ethereum的solcJ jar包;
 
 安装详情可查看下一章节的[WeBASE-Front部署说明](install.html)
+
+## 支持链上事件订阅和通知
+
+在某些业务场景中，应用层需要实时获取链上的事件，如出块事件、合约Event事件等。应用层通过WeBASE连接节点后，**由于无法和节点直接建立长连接**，难以实时获取链上的消息。
+
+为了解决这个问题，应用层可通过WeBASE-Front订阅链上事件，当事件触发时，可通过RabbitMQ消息队列通知到应用层，架构如下：
+
+![链上事件通知架构](../../images/WeBASE/front-event/event_structure.png)
+
+WeBASE-Front默认不启用消息推送功能，如需启用请参考[附录-链上事件订阅和通知](./appendix.md#id11)
