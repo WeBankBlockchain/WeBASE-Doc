@@ -92,7 +92,7 @@ http://{deployIP}:{webPort}
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
 - 默认账号密码：admin/Abcd1234
-- WeBASE管理平台使用说明请查看[使用手册](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id13)
+- WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)
 
 ### 6. 查看日志
 

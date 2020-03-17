@@ -12,21 +12,71 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python2.7或Python3.4+ |
-| MySQL-python | 使用python2时需安装 |
+| Python | Python3.4+ |
 | PyMySQL | 使用python3时需安装 |
 
-**备注：** 
+### 检查环境
 
-- Java推荐使用[OpenJDK](#java ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+#### 检查Java
 
-- 安装说明可以参看[安装示例](#id8) ，也可以自行安装
+JDK8或以上版本：
+```
+java -version
+```
+
+- Java推荐使用[OpenJDK](#id10 ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+
+#### 检查mysql
+
+MySQL-5.6或以上版本：
+```
+mysql --version
+```
+
+- Mysql安装部署可参考[数据库部署](#id14)
+
+#### 检查Python
+
+Python3.4或以上版本：
+```
+python --version
+```
+
+- Python安装部署可参考[Python部署](#id17)
+
+#### PyMySQL部署（Python3.4+）
+
+**备注** 使用python2.7+时，需安装MySQL-python，推荐参考[Mysql-python安装示例](#mysql-python)的python2指南进行安装；
+
+Python3.4及以上版本，需安装PyMysql依赖包：
+
+- CentOS
+
+  ```
+  sudo pip3 install PyMySQL
+  ```
+
+  不支持pip命令的话，可以使用以下方式：
+
+  ```
+  git clone https://github.com/PyMySQL/PyMySQL
+  cd PyMySQL/
+  python3 setup.py install
+  ```
+
+- Ubuntu
+
+  ```
+  sudo apt-get install -y python3-pip
+  sudo pip3 install PyMySQL
+  ```
+
 
 ## 拉取部署脚本
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.0/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.3/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -39,7 +89,7 @@ cd webase-deploy
 
 ## 修改配置
 
-① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id12)；
+① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id14)；
 
 ② 修改配置文件（vi common.properties），没有变化的可以不修改；
 
@@ -53,8 +103,10 @@ cd webase-deploy
 ④ 服务端口不能小于1024。
 
 ```shell
-# WeBASE版本(v1.1.0或以上版本)
-webase.version=v1.2.0
+# WeBASE子系统的最新版本(v1.1.0或以上版本)
+webase.web.version=v1.2.2
+webase.mgr.version=v1.2.2
+webase.front.version=v1.2.3
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -82,6 +134,9 @@ node.channelPort=20200
 # 节点rpc端口
 node.rpcPort=8545
 
+# 是否使用国密（0: standard, 1: guomi）
+encrypt.type=0
+
 # 是否使用已有的链（yes/no）
 if.exist.fisco=no
 
@@ -95,7 +150,7 @@ node.path=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.0.0
+fisco.version=2.2.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
@@ -125,7 +180,7 @@ python deploy.py stopAll
 
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
-- 部署过程出现问题可以查看[常见问题解答](#id15)
+- 部署过程出现问题可以查看[常见问题解答](#id19)
 
 ## 访问
 
@@ -139,7 +194,7 @@ http://{deployIP}:{webPort}
 **备注：** 
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
-- WeBASE管理平台使用说明请查看[使用手册](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
+- WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
 
 ## 日志路径
 
@@ -300,7 +355,17 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. MySQL-python部署（Python2.7）
+### 4. 安装MySql python依赖包
+
+#### 查看python版本
+
+```
+python --version
+```
+
+python3.4+ 安装Mysql依赖包，可参考 [检查环境-PyMysql](#pymysql-python3-4)
+
+#### 4.1 MySQL-python部署（Python2.7）
 
 - CentOS
 
@@ -315,28 +380,7 @@ mysql > create database webasenodemanager;
   sudo pip install MySQL-python
   ```
 
-### 5. PyMySQL部署（Python3.4+）
 
-- CentOS
-
-  ```
-  sudo pip3 install PyMySQL
-  ```
-
-  不支持pip命令的话，可以使用以下方式：
-
-  ```
-  git clone https://github.com/PyMySQL/PyMySQL
-  cd PyMySQL/
-  python3 setup.py install
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt-get install -y python3-pip
-  sudo pip3 install PyMySQL
-  ```
 
 ## 常见问题
 
@@ -369,7 +413,7 @@ Traceback (most recent call last):
 ImportError: No module named 'pymysql'
 ```
 
-答：需要安装PyMySQL，安装请参看 [附录](#pymysql)
+答：需要安装PyMySQL，安装请参看 [pymysql](#pymysql-python3-4)
 
 ### 4. 安装MySQL-python遇到问题
 
@@ -446,19 +490,11 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
 
-### 11. 启动失败，日志却没有异常
+### 11. 服务进程起来了，服务不正常
 
 ```
 ...
-print ("==============     WeBASE-Front     start...  ==============")
-print ("=======     WeBASE-Front    start  fail. Please view log file (default path:./webase-front/log/).    =======")
+======= WeBASE-Node-Manager  starting . Please check through the log file (default path:./webase-node-mgr/log/). =======
 ```
 
-答：确认机器是否满足硬件要求。机器性能过低会导致服务端口一定时间内没起来，脚本会自动杀掉进程。可以尝试手动修改子系统目录下的start.sh脚本，将启动等待时间设置久一点（默认600，单位：秒），然后启动。
-
-```
-...
-startWaitTime=600
-...
-```
-
+答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。

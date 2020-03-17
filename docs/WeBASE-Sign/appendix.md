@@ -130,6 +130,9 @@ mysql > create database webasesign;
 
 ### 2.1 脚本没权限
 
-- 执行shell脚本报错误"permission denied"
+- 执行shell脚本报错误"permission denied"或格式错误
 
-答：使用 “chmod +x 文件” 给文件增加权限
+```
+赋权限：chmod + *.sh
+转格式：dos2unix *.sh
+```

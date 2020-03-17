@@ -14,6 +14,34 @@
 
 - 安装说明请参看 [安装示例](./appendix.html#id2)，不使用分布式任务可以不部署ZooKeeper。
 
+**国密支持：**
+
+WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
+
+```eval_rst
+.. important:
+    使用国密版WeBASE-Transaction需要开启web3sdk的国密开关和使用国密版solcJ jar包编译合约
+```
+
+开启web3sdk的国密开关:
+- 开启web3sdk的国密开关：将配置文件`application.properties`中web3sdk配置的`encryptType`从`0`修改为`1`；
+
+使用国密版solcJ jar包：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
+1. 下载国密版solcJ的jar包后，放置在项目根目录的`/lib`文件夹中
+2. 在`build.gradle`引入web3sdk处通过`exclude`去除ethereum的solcJ jar包
+3. 通过`fileTree`引入`/lib`的国密版solcJ的jar包
+
+```
+compile ('org.fisco-bcos:web3sdk:2.2.0')
+    {
+        exclude group:"org.ethereum"
+    }
+compile fileTree(dir:'lib',includes:['solcJ-all-0.4.25-gm.jar'])
+```
+
+下载其他版本或国密版合约编译包请到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载。
+
+
 ## 2. 拉取代码
 
 执行命令：
@@ -92,6 +120,11 @@ logging.config=classpath:log4j2.xml
 # 机构名
 sdk.orgName=webank
 sdk.timeoutsdk=10000
+# 线程池配置
+sdk.corePoolSize=100
+sdk.maxPoolSize=500
+sdk.queueCapacity=500
+sdk.keepAlive=60
 # 群组信息，可配置多群组和多节点
 # 群组id（下同）
 sdk.groupConfig.allChannelConnections[0].groupId=1
@@ -101,7 +134,8 @@ sdk.groupConfig.allChannelConnections[0].connectionsStr[1]=127.0.0.1:20201
 sdk.groupConfig.allChannelConnections[1].groupId=2
 sdk.groupConfig.allChannelConnections[1].connectionsStr[0]=127.0.0.1:20200
 sdk.groupConfig.allChannelConnections[1].connectionsStr[1]=127.0.0.1:20201
-
+# 切换国密与非国密 0: standard, 1: guomi
+sdk.encryptType=0
 ################################### constant Configuration ###################################
 # WeBASE-Sign签名服务ip端口，使用本签名方式则对应修改
 constant.signServer=127.0.0.1:5004
@@ -179,11 +213,11 @@ sharding.jdbc.config.props.sql.show=false
 检查：bash status.sh
 ```
 
-**备注**：如果脚本执行错误，尝试以下命令:
+**备注**：服务进程起来后，需通过日志确认是否正常启动，出现以下内容表示正常；如果服务出现异常，确认修改配置后，重启提示服务进程在运行，则先执行stop.sh，再执行start.sh。
 
 ```
-赋权限：chmod + *.sh
-转格式：dos2unix *.sh
+...
+	Application() - main run success...
 ```
 
 ## 6. 查看日志

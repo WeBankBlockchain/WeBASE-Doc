@@ -1264,17 +1264,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 | 2      | message         | String        | 否     | 描述                                            |
 | 3      | totalCount      | Int           | 否     | 总记录数                                        |
 | 4      | data            | List          | 是     | 列表                                            |
-| 5.1    |                 | Oject         |        | 返回信息实体                                    |
+| 5.1    |                 | Object         |        | 返回信息实体                                    |
 | 5.1.1  | contractId      | int           | 否     | 合约编号                                        |
 | 5.1.2  | contractPath    | String        | 否     | 合约所在目录                              |
 | 5.1.3  | contractName    | String        | 否     | 合约名称                                        |
 | 5.1.4  | groupId       | Int           | 否     | 所属群组编号                                    |
 | 5.1.5  | contractStatus      | int           | 否     | 1未部署，2已部署                        |
 | 5.1.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
-| 5.1.7  | contractSource  | String        | 否     | 合约源码                                        |
-| 5.1.8  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 5.1.9  | contractBin     | String        | 是     | 合约binary                                      |
-| 5.1.10 | bytecodeBin     | String        | 是     | 合约bin                                         |
+| 5.1.7  | contractSource  | String        | 否     | 合约源码base64                                        |
+| 5.1.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
+| 5.1.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                             |
+| 5.1.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                         |
 | 5.1.11 | contractAddress | String        | 是     | 合约地址                                        |
 | 5.1.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 5.1.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
@@ -1354,7 +1354,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Oject         |        | 返回信息实体                                    |
+| 3    |                 | Object         |        | 返回信息实体                                    |
 | 3.1  | contractId      | int           | 否     | 合约编号                                        |
 | 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
 | 3.3  | contractName    | String        | 否     | 合约名称                                        |
@@ -1363,8 +1363,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 | 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 3.7  | contractSource  | String        | 否     | 合约源码                                        |
 | 3.8  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约binary                                      |
-| 3.10 | bytecodeBin     | String        | 是     | 合约bin                                         |
+| 3.9  | contractBin     | String        | 是     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析|
+| 3.10 | bytecodeBin     | String        | 是     | 合约编译的bytecode(bin)，用于部署合约            |
 | 3.11 | contractAddress | String        | 是     | 合约地址                                        |
 | 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
@@ -1428,8 +1428,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 | 2    | contractName      | String         | 否     | 合约名称               |
 | 3    | contractSource    | String         | 否     | 合约源码                   |
 | 4    | contractAbi       | String         | 否     | 编译合约生成的abi文件内容  |
-| 5    | contractBin       | String         | 否     | 合约binary                 |
-| 6    | bytecodeBin       | String         | 否     | 合约bin                    |
+| 5    | contractBin       | String         | 否     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析                 |
+| 6    | bytecodeBin       | String         | 否     | 合约编译的bytecode(bin)，用于部署合约                    |
 | 7    | contractId      | String         | 否     | 合约名称               |
 | 8    | contractPath      | String         | 否     | 合约所在目录               |
 | 9    | user              | String         | 否     | 私钥用户               |
@@ -1465,7 +1465,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Oject         |        | 返回信息实体                                    |
+| 3    |                 | Object         |        | 返回信息实体                                    |
 | 3.1  | contractId      | int           | 否     | 合约编号                                        |
 | 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
 | 3.3  | contractName    | String        | 否     | 合约名称                                        |
@@ -1474,8 +1474,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 3.7  | contractSource  | String        | 否     | 合约源码                                        |
 | 3.8  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约binary                                      |
-| 3.10 | bytecodeBin     | String        | 是     | 合约bin                                         |
+| 3.9  | contractBin     | String        | 是     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析|
+| 3.10 | bytecodeBin     | String        | 是     | 合约编译的bytecode(bin)，用于部署合约            |
 | 3.11 | contractAddress | String        | 是     | 合约地址                                        |
 | 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
@@ -1565,7 +1565,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 ```
 
 
-#### .3 5.4返回参数 
+#### 5.4.3 返回参数 
 
 ***1）出参表***
 
@@ -1599,13 +1599,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 ### 5.5 根据包含bytecodeBin的字符串查询合约  
 
 
-#### 5.2.1 传输协议规范
+#### 5.5.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/contract/findByPartOfBytecodeBin**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 5.2.2 请求参数
+#### 5.5.2 请求参数
 
 ***1）入参表***
 
@@ -1628,7 +1628,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 ```
 
 
-#### 5.2.3 返回参数 
+#### 5.5.3 返回参数 
 
 ***1）出参表***
 
@@ -1636,15 +1636,15 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
 | 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Oject         |        | 返回信息实体                                    |
+| 3    |                 | Object         |        | 返回信息实体                                    |
 | 3.1  | contractId      | int           | 否     | 合约编号                                        |
 | 3.2  | contractName    | String        | 否     | 合约名称                                        |
 | 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
 | 3.4  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
 | 3.5  | contractSource  | String        | 否     | 合约源码                                        |
 | 3.6  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 3.7  | contractBin     | String        | 是     | 合约binary                                      |
-| 3.8 | bytecodeBin     | String        | 是     | 合约bin                                         |
+| 3.7  | contractBin     | String        | 是     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析|
+| 3.8 | bytecodeBin     | String        | 是     | 合约编译的bytecode(bin)，用于部署合约             |
 | 3.9 | contractAddress | String        | 是     | 合约地址                                        |
 | 3.10 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
 | 3.11 | contractVersion | String        | 否     | 合约版本                                        |
@@ -1688,8 +1688,81 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 }
 ```
 
-## 6 服务器监控相关
+### 5.6. 保存合约接口
 
+#### 5.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/save**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+
+
+#### 5.6.2 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 所属群组编号                                        |
+| 2    | contractId      | int           | 是     | 合约编号，传入contractId表示更新，否则新增  |
+| 3    | contractName      | String           | 否     | 合约名称         |
+| 4    | contractPath      | String           | 否     | 合约所在目录         |
+| 5    | contractSource      | String           | 是     | 合约源码的base64         |
+| 6    | contractAbi      | String           | 是     | 合约编译后生成的abi文件内容         |
+| 7    | contractBin      | String           | 是     | 合约编译后生成的bin,可用于交易解析           |
+| 8    | bytecodeBin      | String           | 是     | 合约编译后生成的bytecodeBin，可用于合约部署         |
+
+
+
+
+***2）入参示例***
+
+```
+{
+    "groupId": "1",
+    "contractName": "HeHe",
+    "contractPath": "/",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsn0=",
+    "contractAbi": “[]”
+    "contractBin": "60806040526004361061004c576000357c0100000000000000000000000029",
+    "bytecodeBin": "6080604052348015610010572269b80029",
+    "contractId": 1
+}
+```
+
+#### 5.6.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | contractId      | int           | 否     | 合约编号                                        |
+| 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
+| 3.3  | contractName    | String        | 否     | 合约名称                                        |
+| 3.4  | groupId         | Int           | 否     | 所属群组编号                                    |
+| 3.5  | contractStatus  | int           | 否     | 1未部署，2已部署                        |
+| 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
+| 3.7  | contractSource  | String        | 否     | 合约源码base64                                        |
+| 3.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
+| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                                      |
+| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                          |
+| 3.11 | contractAddress | String        | 是     | 合约地址                                        |
+| 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
+| 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
+| 3.14 | description     | String        | 是     | 备注                                            |
+| 3.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间  
+
+
+
+
+## 6 服务器监控相关
 
 ### 6.1 获取节点监控信息  
 
@@ -1734,13 +1807,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginD
 | 1         | code              | int             | 否     | 返回码                                                         |
 | 2         | message           | String          | 否     | 描述信息                                                       |
 | 3         | data              | Array           | 否     | 返回信息列表                                                   |
-| 3.1       |                   | Oject           |        | 返回信息实体                                                   |
+| 3.1       |                   | Object           |        | 返回信息实体                                                   |
 | 3.1.1     | metricType        | String          | 否     | 测量类型：blockHeight、pbftView                                |
-| 3.1.2     | data              | Oject           | 否     |                                                                |
-| 3.1.2.1   | lineDataList      | Oject           | 否     |                                                                |
+| 3.1.2     | data              | Object           | 否     |                                                                |
+| 3.1.2.1   | lineDataList      | Object           | 否     |                                                                |
 | 3.1.2.1.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.1.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
-| 3.1.2.2   | contrastDataList  | Oject           | 否     |                                                                |
+| 3.1.2.2   | contrastDataList  | Object           | 否     |                                                                |
 | 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
 
@@ -1852,13 +1925,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
 | 1         | code              | int             | 否     | 返回码                                                         |
 | 2         | message           | String          | 否     | 描述信息                                                       |
 | 3         | data              | Array           | 否     | 返回信息列表                                                   |
-| 3.1       |                   | Oject           |        | 返回信息实体                                                   |
+| 3.1       |                   | Object           |        | 返回信息实体                                                   |
 | 3.1.1     | metricType        | String          | 否     | 测量类型: cpu、memory、disk、txbps、rxbps                      |
-| 3.1.2     | data              | Oject           | 否     |                                                                |
-| 3.1.2.1   | lineDataList      | Oject           | 否     |                                                                |
+| 3.1.2     | data              | Object           | 否     |                                                                |
+| 3.1.2.1   | lineDataList      | Object           | 否     |                                                                |
 | 3.1.2.1.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.1.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
-| 3.1.2.2   | contrastDataList  | Oject           | 否     |                                                                |
+| 3.1.2.2   | contrastDataList  | Object           | 否     |                                                                |
 | 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
 | 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
 
@@ -1926,6 +1999,766 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
     "data": {}
 }
 ```
+
+
+### 6.3 获取邮件告警配置
+
+配置邮件告警的邮件服务器的相关参数，包含协议类型`protocol`、邮件服务器地址`host`、端口`port`、用户邮箱地址`username`、用户邮箱授权码`password`；包含Authentication验证开关（默认开启）`authentication`，以及邮件告警模块的开关`enable`；
+
+注：邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
+
+#### 6.3.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/mailServer/config/{serverId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.3.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+|  1   | serverId     | Int       |   否   | 邮件服务的编号
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
+```
+
+
+#### 6.3.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 成功时返回                           
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | serverId        | Int          | 否     |    邮件服务器的编号      |
+| 3.1.2     | serverName      | String           | 否     |  邮件服务器的名字      |
+| 3.1.3     | host      | String           | 否     |  邮件服务器的主机地址      |
+| 3.1.4     | port      | Int           | 否     |  邮件服务器的端口号      |
+| 3.1.5     | username      | String           | 否     |  邮件服务器的用户地址      |
+| 3.1.6     | password      | String           | 否     |  邮件服务器的用户授权码      |
+| 3.1.7     | protocol      | String           | 否     |  邮件服务器的协议      |
+| 3.1.8     | defaultEncoding      | String           | 否     |  邮件服务器的编码      |
+| 3.1.9     | authentication      | Int           | 否     |  开启验证：0-关闭，1-开启      |
+| 3.1.10    | starttlsEnable      | Int           | 否     |  开启优先使用STARTTLS：0-关闭，1-开启      |
+| 3.1.11    | enable      | Int           | 否     |  开启邮件服务器：0-关闭，1-开启      |
+| 3.1.12    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS：0-关闭，1-开启      |
+| 3.1.13    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
+| 3.1.14    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
+| 3.1.15    | socketFactoryFallback      | Int           | 否     |  开启TLS Fallback函数：0-关闭，1-开启      |
+| 3.1.16    | timeout      | Int           | 否     |  从邮箱服务器读取超时时间      |
+| 3.1.17    | connectionTimeout      | Int           | 否     |  邮箱服务器连接超时时间      |
+| 3.1.18    | writeTimeout      | Int           | 否     |  从邮箱服务器写超时时间      |
+| 3.1.19    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.20    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "serverId": 1,
+        "serverName": "Default config",
+        "host": "smtp.qq.com",
+        "port": 25,
+        "username": "yourmail@qq.com",
+        "password": "yourpassword",
+        "protocol": "smtp",
+        "defaultEncoding": "UTF-8",
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-10-29 20:02:30",
+        "authentication": 1,
+        "starttlsEnable": 1,
+        "starttlsRequired": 0,
+        "socketFactoryPort": 465,
+        "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+        "socketFactoryFallback": 0,
+        "enable": 0,
+        "timeout": 5000,
+        "connectionTimeout": 5000,
+        "writeTimeout": 5000
+    }
+}
+
+```
+
+
+### 6.4 获取全部邮件告警配置
+
+返回所有的邮件告警的邮件服务配置
+
+#### 6.4.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/mailServer/config/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.4.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| -    | -     | -        | -     | -  
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
+```
+
+
+#### 6.4.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | serverId        | Int          | 否     |    邮件服务器的编号      |
+| 3.1.2     | serverName      | String           | 否     |  邮件服务器的名字      |
+| 3.1.3     | host      | String           | 否     |  邮件服务器的主机地址      |
+| 3.1.4     | port      | Int           | 否     |  邮件服务器的端口号      |
+| 3.1.5     | username      | String           | 否     |  邮件服务器的用户地址      |
+| 3.1.6     | password      | String           | 否     |  邮件服务器的用户授权码      |
+| 3.1.7     | protocol      | String           | 否     |  邮件服务器的协议      |
+| 3.1.8     | defaultEncoding      | String           | 否     |  邮件服务器的编码      |
+| 3.1.9     | authentication      | Int           | 否     |  开启验证：0-关闭，1-开启      |
+| 3.1.10    | starttlsEnable      | Int           | 否     |  开启优先使用STARTTLS：0-关闭，1-开启      |
+| 3.1.11    | enable      | Int           | 否     |  开启邮件服务器：0-关闭，1-开启      |
+| 3.1.12    | starttlsRequired      | Int           | 否     |  必须使用STARTTLS：0-关闭，1-开启      |
+| 3.1.13    | socketFactoryPort      | Int           | 否     |  TLS使用的端口号      |
+| 3.1.14    | socketFactoryClass      | String           | 否     |  TLS使用的java类      |
+| 3.1.15    | socketFactoryFallback      | Int           | 否     |  开启TLS Fallback函数：0-关闭，1-开启      |
+| 3.1.16    | timeout      | Int           | 否     |  从邮箱服务器读取超时时间      |
+| 3.1.17    | connectionTimeout      | Int           | 否     |  邮箱服务器连接超时时间      |
+| 3.1.18    | writeTimeout      | Int           | 否     |  从邮箱服务器写超时时间      |
+| 3.1.19    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.20    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "serverId": 1,
+            "serverName": "Default config",
+            "host": "smtp.qq.com",
+            "port": 25,
+            "username": "yourmail@qq.com",
+            "password": "yourpassword",
+            "protocol": "smtp",
+            "defaultEncoding": "UTF-8",
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "authentication": 1,
+            "starttlsEnable": 1,
+            "starttlsRequired": 0,
+            "socketFactoryPort": 465,
+            "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+            "socketFactoryFallback": 0,
+            "enable": 0,
+            "timeout": 5000,
+            "connectionTimeout": 5000,
+            "writeTimeout": 5000
+        }
+    ]
+}
+
+```
+
+### 6.5 更新邮件告警配置
+
+更新邮件告警的配置内容；目前仅支持单个邮件服务器配置，不支持新增配置；
+
+#### 6.5.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/mailServer/config**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.5.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | serverId     | int        | 否     |  邮件告警配置的编号 
+| 2    | protocol     | String        | 否     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）
+| 3    | host         | String        | 否     |  邮件服务的地址
+| 4    | port         | int        | 否     |  邮件服务使用的端口，默认25
+| 5    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填
+| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，authentication开启时为必填
+| 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启
+| 8    | enable       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config
+```
+
+```
+{
+    "serverId": 1,
+    "host": "smtp.qq.com",
+    "port": 25,
+    "username": "yourmail@qq.com",
+    "password": "yourpassword",
+    "protocol": "smtp",
+    "authentication": 1,
+    "enable": 1
+}
+```
+
+
+#### 6.5.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "serverId": 1,
+        "serverName": "Default config",
+        "host": "smtp.qq.com",
+        "port": 25,
+        "username": "yourmail@qq.com",
+        "password": "yourpassword",
+        "protocol": "smtp",
+        "defaultEncoding": "UTF-8",
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-11-07 10:04:47",
+        "authentication": 1,
+        "starttlsEnable": 1,
+        "starttlsRequired": 0,
+        "socketFactoryPort": 465,
+        "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+        "socketFactoryFallback": 0,
+        "enable": 1,
+        "timeout": 5000,
+        "connectionTimeout": 5000,
+        "writeTimeout": 5000
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+### 6.6 发送测试邮件
+
+使用当前的邮件服务配置，向指定的邮箱地址发送测试邮件，如果配置错误将发送失败；
+
+注：需要确保配置正确才能使用后续的邮件告警功能；返回成功信息后，需要用户到自己的邮箱查看是否收到邮测试邮件；
+
+#### 6.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/mail/test/{toMailAddress}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | {toMailAddress} | String        | 否     |  接收测试邮件的邮箱地址 
+| 2    | host         | String        | 否     |  邮件服务的地址
+| 3    | port         | int        | 否     |  邮件服务使用的端口，默认25
+| 4    | protocol     | String        | 是     |  邮件服务的协议类型，默认使用smtp
+| 5    | defaultEncoding  | String        | 是     | 邮件服务的邮件编码格式，默认为UTF-8编码
+| 6    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填
+| 7    | password     | String        | 否     |  邮件服务的用户邮箱授权码，authentication开启时为必填
+| 8    | authentication | int        | 否     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启
+| 9    | starttlsEnable | int        | 是     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启
+| 10   | starttlsRequired | int        | 是     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启
+| 11   | socketFactoryPort | String        | 是     |  TLS/SSL的Socket端口，默认465
+| 12   | socketFactoryClass | String        | 是     |  TLS/SSL的Socket工厂类
+| 13   | socketFactoryFallback | int        | 是     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启
+| 14   | timeout | int        | 是     |  读超时时间值，默认5000ms
+| 15   | connectionTimeout | int        | 是     |  连接超时时间值，默认5000ms
+| 16   | writeTimeout | int        | 是     |  写超时时间值，默认5000ms
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
+```
+
+```
+{
+    "host": "smtp.qq.com",
+    "port": 25,
+    "username": "yourmail@qq.com",
+    "password": "yourpassword",
+    "protocol": "smtp",
+    "defaultEncoding": "UTF-8",
+    "authentication": 1,
+    "starttlsEnable": 1,
+    "starttlsRequired": 0,
+    "socketFactoryPort": 465,
+    "socketFactoryClass": "javax.net.ssl.SSLSocketFactory",
+    "socketFactoryFallback": 0,
+    "timeout": 5000,
+    "connectionTimeout": 5000,
+    "writeTimeout": 5000
+}
+```
+
+#### 6.6.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 错误时返回错误原因                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+```
+
+* 失败：
+```
+{
+    "code": 202080,
+    "message": "Send mail error, please check mail server configuration.",
+    "data": "Failed messages: javax.mail.SendFailedException: No recipient addresses"
+}
+```
+
+
+### 6.7 获取告警类型配置
+
+获取单个告警配置的内容；告警类型配置是对不同告警类型下的不同内容，包含告警邮件标题`ruleName`，告警邮件内容`alertContent`，告警邮件发送时间间隔`alertIntervalSeconds`，上次告警时间`lastAlertTime`，目标告警邮箱地址列表`userList`，是否启用该类型的邮件告警`enable`，告警等级`alertLevel`等；
+
+
+#### 6.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/{ruleId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+|  1   | ruleId     | Int       |   否   | 告警配置的编号
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/1
+```
+
+
+#### 6.7.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 成功时返回                           
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | ruleId        | Int          | 否     |    告警类型配置的编号      |
+| 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题      |
+| 3.1.3     | enable      | Int           | 否     |  是否开启该告警：0-关闭，1-开启     |
+| 3.1.4     | alertType      | Int           | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期      |
+| 3.1.5     | alertLevel      | Int           | 否     |  告警等级：1-高，2-中，3-低      |
+| 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
+| 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
+| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由`List<String>`序列化为String      |
+| 3.1.9     | description      | String           | 否     |  告警描述      |
+| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由`List<String>`序列化为String      |
+| 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
+| 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
+| 3.1.13    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.14    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
+
+
+
+***2）出参示例***
+
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ruleId": 1,
+        "ruleName": "节点异常告警",
+        "enable": 0,
+        "alertType": 1,
+        "alertLevel": 1,
+        "alertIntervalSeconds": 3600,
+        "alertContent": "{nodeId}节点异常，请到\"节点管理\"页面查看具体信息",
+        "contentParamList": "[\"{nodeId}\"]",
+        "description": null,
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-10-29 20:02:30",
+        "isAllUser": 0,
+        "userList": "[\"targetmail@qq.com\"]",
+        "lastAlertTime": null
+    }
+}
+
+```
+
+
+### 6.8 获取全部告警类型配置列表
+
+返回所有的告警类型配置
+
+#### 6.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| -    | -     | -        | -     | -  
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/list
+```
+
+
+#### 6.8.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | List        | 否     | 成功时返回                           
+| 3.1       |                   | Object           |        |返回信息实体          |
+| 3.1.1     | ruleId        | Int          | 否     |    告警类型配置的编号      |
+| 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题      |
+| 3.1.3     | enable      | Int           | 否     |  是否开启该告警：0-关闭，1-开启     |
+| 3.1.4     | alertType      | Int           | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期      |
+| 3.1.5     | alertLevel      | Int           | 否     |  告警等级：1-高，2-中，3-低      |
+| 3.1.6     | alertIntervalSeconds      | Long           | 否     |  告警邮件发送时间间隔      |
+| 3.1.7     | alertContent      | String           | 否     |  告警邮件内容，其中包含{}括起来的变量      |
+| 3.1.8     | contentParamList      | String           | 否     |  告警邮件内容中变量的列表，由`List<String>`序列化为String      |
+| 3.1.9     | description      | String           | 否     |  告警描述      |
+| 3.1.10    | userList      | Int           | 否     |  目标告警邮箱地址列表，由`List<String>`序列化为String      |
+| 3.1.11    | lastAlertTime      | LocalDateTime           | 否     |  上次告警时间      |
+| 3.1.12    | isAllUser      | Int           | 否     |  发送给所有用户：0-关闭，1-开启      |
+| 3.1.13    | createTime  | LocalDateTime           | 否     |  创建时间      |
+| 3.1.14    | modifyTime      | LocalDateTime           | 否     |  修改时间      |
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "ruleId": 1,
+            "ruleName": "节点异常告警",
+            "enable": 0,
+            "alertType": 1,
+            "alertLevel": 1,
+            "alertIntervalSeconds": 3600,
+            "alertContent": "{nodeId}节点异常，请到\"节点管理\"页面查看具体信息",
+            "contentParamList": "[\"{nodeId}\"]",
+            "description": null,
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "isAllUser": 0,
+            "userList": "[\"targetmail@qq.com\"]",
+            "lastAlertTime": null
+        },
+        {
+            "ruleId": 2,
+            "ruleName": "审计异常",
+            "enable": 0,
+            "alertType": 2,
+            "alertLevel": 1,
+            "alertIntervalSeconds": 3600,
+            "alertContent": "审计异常：{auditType}，请到\"交易审计\"页面查看具体信息",
+            "contentParamList": "[\"{auditType}\"]",
+            "description": null,
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "isAllUser": 0,
+            "userList": "[\"targetmail@qq.com\"]",
+            "lastAlertTime": null
+        },
+        {
+            "ruleId": 3,
+            "ruleName": "证书有效期告警",
+            "enable": 0,
+            "alertType": 3,
+            "alertLevel": 1,
+            "alertIntervalSeconds": 3600,
+            "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+            "contentParamList": "[\"{time}\"]",
+            "description": null,
+            "createTime": "2019-10-29 20:02:30",
+            "modifyTime": "2019-10-29 20:02:30",
+            "isAllUser": 0,
+            "userList": "[\"targetmail@qq.com\"]",
+            "lastAlertTime": null
+        }
+    ]
+}
+
+```
+
+
+### 6.9 更新告警类型配置
+
+更新告警类型配置的内容；目前仅支持更新原有的三个邮件告警的配置，不支持新增配置；
+
+#### 6.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.9.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | ruleId     | int        | 否     |  告警类型配置编号 
+| 2    | ruleName     | String        | 是     |  告警邮件的标题
+| 3    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
+| 4    | alertType         | int        | 是     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警
+| 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒），默认3600s
+| 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除
+| 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串
+| 9    | alertLevel      | Int           | 是     |  告警等级：1-高，2-中，3-低      |
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/mailServer/config
+```
+
+```
+{
+    "ruleId": 3,
+    "ruleName": "证书有效期告警",
+    "enable": 0,
+    "alertType": 3,
+    "alertIntervalSeconds": 1800,
+    "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+    "userList": "[\"targetmail@qq.com\"]",
+    "alertLevel": 1
+}
+```
+
+
+#### 6.9.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ruleId": 3,
+        "ruleName": "证书有效期告警",
+        "enable": 0,
+        "alertType": 3,
+        "alertLevel": 1,
+        "alertIntervalSeconds": 1800,
+        "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+        "contentParamList": "[\"{time}\"]",
+        "description": null,
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-11-07 10:35:03",
+        "isAllUser": 0,
+        "userList": "[\"targetmail@qq.com\"]",
+        "lastAlertTime": null
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+
+### 6.9 开启/关闭 告警类型
+
+修改告警类型配置中的`enable`，0-关闭，1-开启；
+
+#### 6.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/alert/toggle**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 6.9.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | ruleId     | int        | 否     |  告警类型配置编号 
+| 2    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
+
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/alert/toggle
+```
+
+```
+{
+   "ruleId": 3,
+   "enable": 1
+}
+```
+
+
+#### 6.9.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ruleId": 3,
+        "ruleName": "证书有效期告警",
+        "enable": 1,
+        "alertType": 3,
+        "alertLevel": 1,
+        "alertIntervalSeconds": 1800,
+        "alertContent": "证书将在{time}过期，请到\"证书管理\"页面查看具体信息",
+        "contentParamList": "[\"{time}\"]",
+        "description": null,
+        "createTime": "2019-10-29 20:02:30",
+        "modifyTime": "2019-11-07 10:35:03",
+        "isAllUser": 0,
+        "userList": "[\"targetmail@qq.com\"]",
+        "lastAlertTime": null
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
 
 ## 7 审计相关模块
 
@@ -3545,7 +4378,8 @@ http://localhost:5001/WeBASE-Node-Manager/permission/full?groupId=1&permissionTy
 | 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
 | 4    | address   | String           | 否     | 分配链管理员的用户地址         
 | 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
-                           
+| 6    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+          
 
 ***2）入参示例***
 
@@ -3615,7 +4449,8 @@ http://localhost:5001/WeBASE-Node-Manager/permission
 | 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
 | 4    | address   | String           | 否     | 分配链管理员的用户地址         
 | 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
-                           
+| 6    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+                    
 
 ***2）入参示例***
 
@@ -3699,8 +4534,13 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted?groupId=1&pageSize=3
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        |      | 描述    
-| 3   | data     | List数组        |      |  返回权限状态数组，每个item为<address, PermissionState>的Map结构体，以用户地址为key，以用户的权限状态为value，1为赋予，0为去除                     
-| 4   | totalCount     | int        |      | 总数目                          
+| 3   | data     | List数组        |      |  返回权限状态数组               
+| 3.1   |      | Object        |      |  以用户地址为key，以用户的权限状态为value的<address, PermissionState>的Map结构体，1为赋予，0为去除                     
+| 3.1.1 | deployAndCreate    | Int    |      |  用户的部署与建表权限状态：0-已去除，1-已赋予
+| 3.1.2 | cns    | Int    |      |  用户的CNS管理权限状态：0-已去除，1-已赋予
+| 3.1.3 | sysConfig    | Int    |      |  用户的系统配置管理权限状态：0-已去除，1-已赋予
+| 3.1.4 | node    | Int    |      |  用户的节点共识管理权限状态：0-已去除，1-已赋予
+| 4   | totalCount     | Int        |      | 总数目                          
       
 
 
@@ -3762,7 +4602,8 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted?groupId=1&pageSize=3
 | 2    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
 | 3    | address   | String           | 否     | 分配链管理员的用户地址         
 | 4        | permissionState       | Object |      否   |   使用{"permissionType": 1}的结构格式，1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限     
-                           
+| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+                      
 
 ***2）入参示例***
 
@@ -3793,8 +4634,12 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述                           
-| 3    | data     | Object        | 否     |     返回用户的权限状态，1为赋予，0为去除                       
-
+| 3   | data     | List数组        |      |  返回权限状态数组               
+| 3.1   |      | Object        |      |  以用户地址为key，以用户的权限状态为value的<address, PermissionState>的Map结构体，1为赋予，0为去除                     
+| 3.1.1 | deployAndCreate    | Int    |      |  用户的部署与建表权限状态：0-已去除，1-已赋予
+| 3.1.2 | cns    | Int    |      |  用户的CNS管理权限状态：0-已去除，1-已赋予
+| 3.1.3 | sysConfig    | Int    |      |  用户的系统配置管理权限状态：0-已去除，1-已赋予
+| 3.1.4 | node    | Int    |      |  用户的节点共识管理权限状态：0-已去除，1-已赋予
 
 ***2）出参示例***
 * 成功：
@@ -3977,6 +4822,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config/list?groupId=1&pageSize=10&
 | 2    | fromAddress     | String        | 否     | 管理员自己的地址
 | 3    | configKey     | String        | 否     | 目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price
  | 4    | configValue     | String        | 否     |  
+| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
 
                           
 
@@ -4031,6 +4877,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config
 
 获取节点的list列表，包含节点id，节点共识状态。
 
+注：接口返回所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
 
 #### 16.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -4118,7 +4965,8 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus/list?groupId=1&p
 | 2    | fromAddress     | String        | 否     | 管理员的地址    
 | 3    | nodeType     | String        | 否     | 节点类型：observer,sealer,remove  
 | 4    | nodeId     | String        | 否     | 节点id    
-                          
+| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+                
 
 ***2）入参示例***
 
@@ -4193,6 +5041,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
 | 1    | groupId     | int        | 否     | 群组id      
 | 2    | fromAddress     | String        | 否     | UserTable管理员的地址  
 | 3    | sql     | String        | 否     | 需要调用的sql语句  
+| 4    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
 
 
 ***2）入参示例***
@@ -4300,8 +5149,18 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
-| 3    |  data    | List        | 否     | 成功时返回                           
-
+| 3    |  data    | List        | 否     | 成功时返回证书相关信息的列表                          
+| 3    |      | Object        | 否     | 单个证书相关信息                           
+| 3.1    |  fingerPrint    | String        | 否     | 证书的指纹                           
+| 3.1    |  certName    | String        | 否     | 证书名字                           
+| 3.1    |  content    | String        | 否     | 证书文件的内容                           
+| 3.1    |  certType    | String        | 否     | 证书类型：chain, agency, node, sdk等，国密版中node证书分为加密ennode证书与签名gmnode证书                           
+| 3.1    |  publicKey    | String        | 否     | 证书对应nodeid（仅限节点证书公钥）                           
+| 3.1    |  address    | String        | 否     | 证书对应地址（仅限节点证书公钥）                         
+| 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
+| 3.1    |  validityFrom    | Date        | 否     | 证书有效期开始时间                           
+| 3.1    |  validityTo    | Date        | 否     | 证书有效期结束时间                           
+| 3.1    |  createTime    | LocalDateTime        | 否     | 导入创建时间                          
 
 
 ***2）出参示例***
@@ -4368,7 +5227,17 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
 | 3    |  data    | List        | 否     | 成功时返回                           
-
+| 3    |      | Object        | 否     | 单个证书相关信息                           
+| 3.1    |  fingerPrint    | String        | 否     | 证书的指纹                           
+| 3.1    |  certName    | String        | 否     | 证书名字                           
+| 3.1    |  content    | String        | 否     | 证书文件的内容                           
+| 3.1    |  certType    | String        | 否     | 证书类型：chain, agency, node, sdk等，国密版node证书分为加密ennode证书与签名gmnode证书                          
+| 3.1    |  publicKey    | String        | 否     | 证书对应nodeid（仅限节点证书公钥）                           
+| 3.1    |  address    | String        | 否     | 证书对应地址（仅限节点证书公钥）                         
+| 3.1    |  father    | String        | 否     | 证书的父证书指纹                           
+| 3.1    |  validityFrom    | Date        | 否     | 证书有效期开始时间                           
+| 3.1    |  validityTo    | Date        | 否     | 证书有效期结束时间                           
+| 3.1    |  createTime    | LocalDateTime        | 否     | 导入创建时间 
 
 
 ***2）出参示例***
@@ -4514,4 +5383,82 @@ http://localhost:5001/WeBASE-Node-Manager/cert
     "data": 1
 }
 ```
+
+### 19.1 查询是否使用国密
+
+获取WeBASE-Node-Manager是否使用国密版
+
+#### 18.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/encrypt**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 18.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | --     | -        | 否     | -   
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/encrypt
+```
+
+
+#### 18.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    |  data    | Int        | 否     | 1: 国密，0：非国密                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 1 
+}
+
+```
+
+## 附录
+
+### 2. Precompiled Service说明
+
+对预编译合约接口的使用有疑惑，可以查看FISCO BCOS的[PreCompiledService API说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk.html#precompiled-service-api)
+
+查看预编译合约的solidity接口代码，可以查看FISCO BCOS的[web3sdk precompile模块](https://github.com/FISCO-BCOS/web3sdk/tree/master/src/main/java/org/fisco/bcos/web3j/precompile)，如crud/TableFactory.sol:
+
+```
+pragma solidity ^0.4.2;
+
+contract TableFactory {
+    function createTable(string tableName, string key, string valueField) public returns (int);
+}
+```
+
+查看FISCO BCOS中实现的precompild合约列表、地址分配及源码：
+
+| 地址   | 功能   | 源码([libprecompiled目录](https://github.com/FISCO-BCOS/FISCO-BCOS/tree/master/libprecompiled)) |
+|--------|--------|---------|
+| 0x1000 | 系统参数管理 | SystemConfigPrecompiled.cpp |
+| 0x1001 | 表工厂合约 | TableFactoryPrecompiled.cpp |
+| 0x1002 | CRUD合约 | CRUDPrecompiled.cpp |
+| 0x1003 | 共识节点管理 | ConsensusPrecompiled.cpp |
+| 0x1004 | CNS功能  | CNSPrecompiled.cpp |
+| 0x1005 | 存储表权限管理 | AuthorityPrecompiled.cpp |
+| 0x1006 | 并行合约配置 | ParallelConfigPrecompiled.cpp |
 
