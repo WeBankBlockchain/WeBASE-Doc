@@ -1,5 +1,7 @@
 # 概要介绍
 
+## 功能介绍
+
 ​        本系统为交易上链代理子系统。主要接收无状态交易请求，缓存到数据库中，再异步上链。本系统可大幅提升吞吐量，解决区块链的tps瓶颈。
 
 ![架构图](./architecture.png)
@@ -21,3 +23,14 @@
 - 调用[WeBASE-Sign](https://github.com/WeBankFinTech/WeBASE-Sign)进行签名
 
 本工程支持单机部署，也支持分布式任务多活部署（使用分布式任务的话需部署Zookeeper）。
+
+## 国密支持
+
+WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用WeBASE v1.2.2及以上版本
+
+具体需要适配国密版FISCO-BCOS的地方有：
+1. 在配置文件`application.properties`中开启web3sdk的国密开关；
+2. 合约编译支持国密版：
+    1. WeBASE-Transaction编译国密版智能合约，需要用solcJ-gm的jar包替换web3sdk默认使用的ethereum的solcJ jar包;
+
+安装详情可查看下一章节的[WeBASE-Transaction部署说明](../WeBASE-Transaction/install.html)

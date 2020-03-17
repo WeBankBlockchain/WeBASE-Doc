@@ -11,7 +11,7 @@ WeBASE-Node-Manager可以是处理前端页面所有web请求，管理各个节�
 | 3     | 帐号管理模块               |  维护系统登录账号信息  |
 | 4     | 区块管理模块               |  查看区块信息 |
 | 5     | 合约管理模块               |  维护合约信息  |
-| 6     | 服务器监控                 |  监控节点服务器状态   |
+| 6     | 服务器监控                 |  监控节点服务器状态与邮件告警   |
 | 7     | 审计模块                   |  查看异常合约及异常用户信息   |
 | 8     | 群组信息模块               |  查看群组信息   |
 | 9     | 节点管理模块               |  查看节点信息   |
@@ -19,3 +19,12 @@ WeBASE-Node-Manager可以是处理前端页面所有web请求，管理各个节�
 | 11    | 用户管理模块               |  维护密钥信息    |
 | 12    | 合约方法管理模块            |  维护合约abi文件中所包含的的方法信息    |
 
+## 2. 国密支持
+
+WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用[WeBASE-Front v1.2.2](../WeBASE-Front/index.html)及以上版本
+
+WeBASE-Node-Manager具体需要适配国密版FISCO-BCOS与WeBASE-Front的地方有：
+- 在配置文件`application.yml/applicationContext.xml`中开启web3sdk的国密开关；
+- 国密版部署初始化数据库时，执行国密版的初始化脚本`script/gm/webase-gm.sh`；
+
+安装详情可查看下一章节的[WeBASE-Node-Manager部署说明](install.html)

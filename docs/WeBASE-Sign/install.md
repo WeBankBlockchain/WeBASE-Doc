@@ -9,6 +9,8 @@
 
 备注：安装说明请参看 [附录-1](./appendix.html#id2)。
 
+**国密支持**： 需要在配置文件`application.yml`中将`encryptType`从`0`设置为`1`以开启web3sdk的国密开关
+
 ## 2. 拉取代码
 
 执行命令：
@@ -73,8 +75,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     
 constant: 
-  # aes加密key（16位）
+  # aes加密key(16位)，如启用，各互联的子系统的加密key需保持一致
   aesKey: EfdsW23D23d3df43
+
+sdk:
+  # web3sdk国密与非国密切换 0: standard, 1: guomi
+  encryptType: 0
 ```
 
 ## 5. 服务启停
@@ -86,10 +92,11 @@ constant:
 停止：bash stop.sh
 检查：bash status.sh
 ```
-**备注**：如果脚本执行错误，尝试以下命令:
+**备注**：服务进程起来后，需通过日志确认是否正常启动，出现以下内容表示正常；如果服务出现异常，确认修改配置后，重启提示服务进程在运行，则先执行stop.sh，再执行start.sh。
+
 ```
-赋权限：chmod + *.sh
-转格式：dos2unix *.sh
+...
+	Application() - main run success...
 ```
 
 ## 6. 查看日志
