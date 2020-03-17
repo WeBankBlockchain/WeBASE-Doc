@@ -4,7 +4,7 @@
 
 ### 1.1 节点搭建
 
-节点搭建的方法建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/release-2.0/docs/installation.html)。
+节点搭建的方法建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
 
 
 ### 1.2 节点前置服务(WeBASE-Front)搭建
@@ -18,7 +18,7 @@
 
 1. 下载安装包
     ```shell
-    wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.2.0/webase-front.zip
+    wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.2.2/webase-front.zip
     ```
 
 
