@@ -17,7 +17,7 @@
 
 **国密支持：**
 
-WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，与[WeBASE-Front v1.2.2+](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/index.html)配合使用
+WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，与[WeBASE-Front v1.2.2+](../WeBASE-Front/index.html)配合使用
 
 ```eval_rst
 .. important::

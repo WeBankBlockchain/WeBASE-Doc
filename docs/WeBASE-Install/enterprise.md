@@ -6,7 +6,7 @@ WeBASE三个服务的部署架构如下图：节点前置需要和区块链节�
 
 ![](../../images/WeBASE-Console-Suit/Framework.png)
 
-具体部署可以参考《WeBASE管理平台使用说明》中[手动搭建](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html#id9)部分。
+具体部署可以参考《WeBASE管理平台使用说明》中[手动搭建](../WeBASE-Console-Suit/index.html#id9)部分。
 
 ## 2、使用手册
-WeBASE管理平台的使用请查看[使用手册](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Console-Suit/index.html)。
+WeBASE管理平台的使用请查看[使用手册](../WeBASE-Console-Suit/index.html)。
