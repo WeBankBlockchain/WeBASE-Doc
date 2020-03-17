@@ -7,5 +7,7 @@
 
 WeBASE-Sign v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用WeBASE v1.2.2及以上版本
 
-具体需要适配国密版FISCO-BCOS的地方有：
-1. 在配置文件`application.yml`中开启web3sdk的国密开关；
+本系统同时支持国密与非国密，分别提供了ECDSA与国密两类接口，可生成/管理ECDSA和国密公私钥用户，可对数据进行国密或非国密的签名
+
+<!-- 具体需要适配国密版FISCO-BCOS的地方有：
+1. 在配置文件`application.yml`中开启web3sdk的国密开关； -->
