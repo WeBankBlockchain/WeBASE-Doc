@@ -26,7 +26,7 @@ HTTP POST
 | 2        | 合约名称 | contractName | String         |              | 是        |                      |
 | 3        | 合约地址 | address      | String         |              | 是       |                        |
 | 4        | 合约abi  | abiInfo      | List   |              | 是       | abi文件里面的内容，是一个JSONArray |
-| 5        | 合约bin  | contractBin | String         |     | 是       | 合约编译的runtime-bytecode(runtime-bin) |
+| 5        | 合约bin      | contractBin  | String         |              | 是       |  合约编译的runtime-bytecode(runtime-bin)       |
 
 
 **2）数据格式**
@@ -75,7 +75,7 @@ HTTP POST
 | 1        | 所属群组     | groupId      | int      |              | 是       |                      |
 | 2        | 用户编号     | user         | String   |              | 是       | 用户编号或者用户地址 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
-| 4        | 合约abi      | abiInfo      | List     |              | 是       |                      |
+| 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
 | 5        | 合约bin      | bytecodeBin  | String   |              | 是       |   合约编译的bytecode(bin)，用于部署合约|
 | 6        | 构造函数参数 | funcParam    | List     |              | 否       |                      |
 | 7        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
@@ -125,7 +125,7 @@ HTTP POST
 | 1        | 所属群组     | groupId     | int      |              | 是       |                           |
 | 2        | 签名用户编号 | signUserId  | String   |              | 是       | WeBASE-Sign服务的用户编号 |
 | 3        | 合约bin      | bytecodeBin | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
-| 4        | 合约abi      | contractAbi | List     |              | 是       |                           |
+| 4        | 合约abi      | contractAbi | List     |              | 是       | 合约编译后生成的abi文件内容    |
 | 5        | 构造函数参数 | funcParam   | List     |              | 否       |                           |
 
 **2）数据格式**
@@ -262,7 +262,7 @@ HTTP POST
 | 3        | 合约名称     | contractName | String         |              | 是       |          |
 | 4        | 合约所在目录  | contractPath | String         |              | 是       |          |
 | 5        | 合约abi      | contractAbi      | String |              | 否       |          |
-| 6        | bytecodeBin      | bytecodeBin  | String         |              | 否       |  合约编译的bytecode(bin)，用于部署合约        |
+| 6        | 合约bytecodeBin      | bytecodeBin  | String         |              | 否       |  合约编译的bytecode(bin)，用于部署合约        |
 | 7        | 合约bin | contractBin    | String|              | 否       |   合约编译的runtime-bytecode(runtime-bin)，用于交易解析       |
 | 8        | 合约源码 | contractSource    | String|              | 否       |          |
 
@@ -291,9 +291,9 @@ HTTP POST
 | 4        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
 | 5        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 6        | 合约源码 | contractSource | String         |      | 否       |           |
-| 7        | 合约abi | contractAbi | String         |      | 否       |           |
+| 7        | 合约abi | contractAbi | String         |      | 否       |   合约编译后生成的abi文件内容 |
 | 8        | 合约bin | contractBin | String         |      | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
-| 9        | bytecodeBin | bytecodeBin | String         |      | 否       |  合约编译的bytecode(bin)，用于部署合约        |
+| 9        | 合约bytecodeBin | bytecodeBin | String         |      | 否       |  合约编译的bytecode(bin)，用于部署合约        |
 | 10        | 合约地址 | contractAddress | String         |      | 否       |           |
 | 11        | 部署时间 | deployTime | String         |      | 否       |           |
 | 12        | 修改时间 | modifyTime | String         |      | 是       |           |
@@ -422,7 +422,7 @@ HTTP POST
 | 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
 | 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
 | 3.6        | 合约源码 | contractSource | String            | 否       |           |
-| 3.7        | 合约abi | contractAbi | String          | 否       |           |
+| 3.7        | 合约abi | contractAbi | String          | 否       |   合约编译后生成的abi文件内容  |
 | 3.8        | 合约bin | contractBin | String            | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
 | 3.9        | bytecodeBin | bytecodeBin | String           | 否       |  合约编译的bytecode(bin)，用于部署合约     |
 | 3.10        | 合约地址 | contractAddress | String           | 否       |           |
@@ -430,6 +430,7 @@ HTTP POST
 | 3.12        | 修改时间 | modifyTime | String            | 是       |           |
 | 3.13        | 创建时间 | createTime | String             | 是       |           |
 | 3.14        | 备注 | description | String           | 否       |           |
+
 
 **2）数据格式**
 ```
@@ -2318,10 +2319,11 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约abi        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
 | 5        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
 | 6        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
 | 7        | 是否是加密私钥 | useAes          | boolean  |              | 是       |                                                |
+
 
 **2）数据格式**
 
@@ -2415,7 +2417,7 @@ HTTP POST
 | -------- | -------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
 | 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号，默认为1                                       |
 | 2        | 用户编号 | signUserId      | int      |              | 否       | 签名用户编号（查询方法可不传）                 |
-| 3        | 合约abi  | contractAbi     | List     |              | 是       |                                                |
+| 3        | 合约编译后生成的abi文件内容  | contractAbi     | List     |              | 是       |                                                |
 | 4        | 合约地址 | contractAddress | String   |              | 是       |                                                |
 | 5        | 方法名   | funcName        | String   |              | 是       |                                                |
 | 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
@@ -3310,7 +3312,6 @@ b、失败：
 
 ## 7. 链上事件订阅接口
 
-
 ### 7.1. 获取出块事件的订阅信息列表
 
 #### 接口描述
@@ -3528,12 +3529,11 @@ HTTP DELETE
 
 **1）数据格式** 
 
-成功则返回该app中剩余已订阅的出块事件通知：
+成功：
 ```
 {
     "code": 0,
-    "message": "success",
-    "data": []
+    "message": "success"
 }
 ```
 
