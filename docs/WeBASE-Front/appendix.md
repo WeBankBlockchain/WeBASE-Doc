@@ -240,15 +240,57 @@ public void loadPrivateKeyTest() {
 
 ```
 
-## 4. 事件通知
+## 4. 支持链上事件订阅和通知
 
-支持通过消息队列服务来获取Front的事件通知，目前支持出块事件与智能合约Event事件的Push通知；
+在某些业务场景中，应用层需要实时获取链上的事件，如出块事件、合约Event事件等。应用层通过WeBASE连接节点后，**由于无法和节点直接建立长连接**，难以实时获取链上的消息。
+
+支持通过**消息队列**(Message Queue)来获取WeBASE-Front(v1.2.3+)的链上事件的消息推送
+
+目前支持出块事件与智能合约Event事件的事件Push通知，大致流程为：
+1. WeBASE-Front连接到MQ-Server(目前支持RabbitMQ-Server);
+2. WeBASE-Front接收节点的事件Push后，如出块通知，WeBASE-Front将出块消息发送到消息队列中；
+2. 区块链应用连接MQ-Server，获取消息队列中待消费的消息，即可获得事件通知；
+
+下面介绍如何搭建RabbitMQ的消息队列服务与WeBASE-Front的配置方法
 
 ### 4.1 RabbitMQ消息队列事件通知
 
-#### 配置
+#### 安装RabbitMQ服务并启用管理功能
 
-通过配置applcation.yml中`spring-rabbitmq`配置，Front即可连接到RabbitMQ-Server，将出块通知与合约Event通知推送到消息队列中：
+启用消息队列的事件推送服务，需要
+- 安装RabbitMQ Server
+
+参考RabbitMQ官网的[下载与安装教程](https://www.rabbitmq.com/download.html)，安装并启动RabbitMQ-Server服务
+
+*注：RabbitMQ依赖Erlang环境，可根据官网教程安装Erlang*
+
+- 启动mq服务，并确保RabbitMQ Server服务所在主机的`5672`, `15672`端口可访问；
+
+- 启用RabbitMQ的`rabbitmq_managerment`功能
+
+启用该功能可通过访问`localhost:15672`页面，可视化管理MQ的队列与用户；否则，需要通过rabbitmqctl命令行工具管理；
+
+启用方法：服务启动后，在mq所在主机运行以下命令，命令行显示启用成功即可：
+```
+  rabbitmq-plugins enable rabbitmq_management
+```
+
+#### 添加RabbitMQ管理员账户
+
+若启用了`rabbitmq_managerment`的功能，可在浏览器访问mq服务所在主机的`ip:15672`端口，如访问本机`localhost:15672`
+
+通过默认用户`guest`(密码也为`guest`)登录管理页，在Web页面上方的`Admin`项中，选择`add user`，新增tag为`Administrator`的管理员用户
+
+注：
+可通过RabbitMQ的命令行工具，添加管理员账户(`Administrator`)，具体可参考[rabbitmqctl文档](https://www.rabbitmq.com/rabbitmqctl.8.html)
+
+*guest用户不支持远程登录Web管理页，如需远程登录管理页面，需要通过ctl新增一个管理员用户*
+
+#### WeBASE-Front的配置
+
+通过配置applcation.yml中`spring-rabbitmq`项，WeBASE-Front即可连接到RabbitMQ-Server，将出块通知与合约Event通知推送到消息队列中：
+
+**需要配置mq服务所在主机与管理员账户密码**
 ```
 spring:
   datasource:
@@ -265,39 +307,61 @@ spring:
     virtual-host: defaultVirtualHost # 消息队列和Exchange所在虚拟节点，默认为空或"/"
     publisher-confirm: true # 消息发布确认开启
     ssl:
-      enabled: false
+      enabled: false # 是否启用ssl连接，默认false
 ```
-
 
 #### 客户端（区块链应用/消息消费者）使用说明
 
-客户端开发流程
+##### 客户端开发流程
 
-- 客户端用户向mq-server运维管理员**申请账号**（用户名和密码、virtual host），运维管理员创建账号，并**创建以用户名为名字的队列**，然后赋予该账户read其专属队列的权限( permission-read:queueName)。
-  - 运维管理员提供用户名（队列名）和密码、virtual host、消息交换机名（exchangeName）。
+- 申请账号：客户端用户向mq-server运维管理员申请MQ服务的账号（用户名和密码、virtual host）。
+- 创建队列与赋予权限：运维管理员创建账号，并**创建以用户名为名字的队列**，然后赋予该账户read其专属队列的权限( permission-read:queueName)。
+- 客户端连接到MQ：用户根据运维管理员提供的MQ账户名（队列名）和密码、virtual host、消息交换机名（exchangeName），将自己的区块链应用连接到相应队列中，获取消息推送。
 
-创建用户：
+下面简单展示运维管理员通过RabbitMQ的Web工具管理MQ服务：
+
+**创建用户：**
 
 ![创建用户](../../images/WeBASE/front-event/add_user.png)
 
-赋予用户访问同名队列的read权限
+**赋予用户访问同名队列的read权限：**
 ![赋予read权限](../../images/WeBASE/front-event/user_config.png)
 
-创建同名队列
+**创建同名队列**
 
 ![创建同名队列](../../images/WeBASE/front-event/add_queue.png)
 
-- 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档](./interface.md#id330)
+##### 客户端订阅事件推送流程：
 
-用户调用注册事件接口之后，实际上是以`queueName+事件名+appId`的routingKey绑定到群组的Exchange中：
+- 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档-事件通知](./interface.md#id330)
+
+用户调用注册事件接口之后，实际上WeBASE-Front将以`queueName+事件名+appId`的routingKey，将用户所拥有的的队列Queue绑定到对应的Exchange中：
 
 ![绑定到群组Exchange](../../images/WeBASE/front-event/after_register.png)
 
 - 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；
 
-  - 如上小节的配置所示，可参考[WeBASE-Event-Client](https://github.com/Sayou1989/WeBASE-Event-Client)的消费者实现
+客户端获取事件通知过程需如上进行配置，可参考[WeBASE-Event-Client](https://github.com/WeBankFinTech/WeBASE-Event-Client)的消费者客户端的代码实现（Dev分支）
 
+核心代码逻辑为：
+```
 
+@RabbitListener(queues = "${spring.rabbitmq.username}")
+public void receive(Channel channel, Message message) throws IOException {
+    log.info("++++++++ mq message body: {}, queue:{}", new String(message.getBody()),
+            message.getMessageProperties());
+    try {
+        String bodyStr = new String(message.getBody());
+        JSONObject json = JSONObject.parseObject(bodyStr);
+        ...
+        // 处理json消息体
+    } catch (Exception e) {
+      log.error("++++++++ mq 消息消费失败：id：{} Exception: {}", message.getMessageProperties().getDeliveryTag(), e);
+      ...
+    }
+    ...
+}
+```
 
 <!-- ### 配置https
 

@@ -1,7 +1,7 @@
 # 使用WeBASE开发区块链应用
 
 ## 部署WeBASE
-搭建WeBASE, 请参考[快速部署](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/install.html)
+搭建WeBASE, 请参考[快速部署](../WeBASE/install.html)
 
 ## 登录WeBASE管理平台进行配置
 安装WeBASE完成后，需要将节点信息添加到WeBASE平台中，这样WeBASE才可和节点进行通信。需要添加的信息包含节点信息，生成用户的私钥等。如下图所示：
@@ -43,7 +43,7 @@ contract HelloWorld{
 
 * 调用交易接口
 
-请参考[交易接口](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html#id235)
+请参考[交易接口](../WeBASE-Front/interface.html#id235)
 
 从IDE中的输出信息，拷贝合约地址，合约名，方法名等信息，同时获取用户的公钥地址信息，调用交易接口。
 具体代码请参考 [HelloWorld范例](https://github.com/WeBankFinTech/WeBASE/tree/master/quick-start)

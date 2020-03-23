@@ -2,7 +2,7 @@
 WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应用和FISCO-BCOS节点之间搭建的一套通用组件。围绕交易、合约、密钥管理，数据，可视化管理来设计各个模块，开发者可以根据业务所需，选择子系统进行部署。WeBASE屏蔽了区块链底层的复杂度，降低开发者的门槛，大幅提高区块链应用的开发效率，包含节点前置、节点管理、交易链路，数据导出，Web管理平台等子系统。
 
 ## 建立区块链应用开发标准
-WeBASE将区块链应用开发标准化，按照部署、配置、开发智能合约、开发应用层、在线运维管理五个步骤即可完成一个区块链应用的开发，详细开发流程请参阅 [使用WeBASE开发区块链应用](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/quick-start.html)
+WeBASE将区块链应用开发标准化，按照部署、配置、开发智能合约、开发应用层、在线运维管理五个步骤即可完成一个区块链应用的开发，详细开发流程请参阅 [使用WeBASE开发区块链应用](../WeBASE/quick-start.html)
 
 ## 设计原则
 **按需部署**
