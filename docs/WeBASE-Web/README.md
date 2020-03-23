@@ -26,6 +26,6 @@
 
 ### 国密支持
 
-WeBASE-Web v1.2.2+已支持国密功能，使用[WeBASE-Node-Manager v1.2.2](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/index.html)，使用[WeBASE-Front v1.2.2](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/index.html)及以上版本
+WeBASE-Web v1.2.2+已支持国密功能，使用[WeBASE-Node-Manager v1.2.2](../WeBASE-Node-Manager/index.html)，使用[WeBASE-Front v1.2.2](../WeBASE-Front/index.html)及以上版本
 
 WeBASE-Web将根据WeBASE-Node-Manager的版本，自动在国密与非国密之间切换，合约编译、合约部署、调用合约、发送交易等功能均已支持国密。
