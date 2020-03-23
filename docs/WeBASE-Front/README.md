@@ -36,4 +36,4 @@ WeBASE-Front具体需要适配国密版FISCO-BCOS的地方有：
 
 ![链上事件通知架构](../../images/WeBASE/front-event/event_structure.png)
 
-WeBASE-Front默认不启用消息推送功能，如需启用请参考[附录-链上事件订阅和通知](./appendix.md#id11)
+WeBASE-Front默认不启用消息推送功能，如需启用请参考[附录-链上事件订阅和通知](./appendix.html#id11)
