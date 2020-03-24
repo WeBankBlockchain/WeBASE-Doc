@@ -76,9 +76,9 @@ HTTP POST
 | 2        | 用户编号     | user         | String   |              | 是       | 用户编号或者用户地址 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
-| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |   合约编译的bytecode(bin)，用于部署合约|
-| 6        | 构造函数参数 | funcParam    | List     |              | 否       |                      |
-| 7        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
+| 6        | 构造函数参数 | funcParam    | List     |              | 否       |    合约构造函数所需参数 |
+| 7        | 合约版本     | version     | String    |             |   否       |  用于指定合约在CNS中的版本    |
 
 **2）数据格式**
 
@@ -120,13 +120,15 @@ HTTP POST
 
 **1）参数表**
 
-| **序号** | **中文**     | **参数名**  | **类型** | **最大长度** | **必填** | **说明**                  |
-| -------- | ------------ | ----------- | -------- | ------------ | -------- | ------------------------- |
-| 1        | 所属群组     | groupId     | int      |              | 是       |                           |
-| 2        | 签名用户编号 | signUserId  | String   |              | 是       | WeBASE-Sign服务的用户编号 |
-| 3        | 合约bin      | bytecodeBin | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
-| 4        | 合约abi      | contractAbi | List     |              | 是       | 合约编译后生成的abi文件内容    |
-| 5        | 构造函数参数 | funcParam   | List     |              | 否       |                           |
+| **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
+| -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
+| 1        | 所属群组     | groupId      | int      |              | 是       |                      |
+| 2        | 用户编号     | signUserId    | String   |              | 是       | WeBASE-Sign中的用户编号 |
+| 3        | 合约名称     | contractName | String   |              | 是       |                      |
+| 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
+| 6        | 构造函数参数 | funcParam    | List     |              | 否       |   合约构造函数所需参数                   |
+| 7        | 合约版本     | version     | String    |             |   否       |  用于指定合约在CNS中的版本    |
 
 **2）数据格式**
 
@@ -135,7 +137,7 @@ HTTP POST
     "groupId":1,
     "signUserId":100001,
     "bytecodeBin":"xxx",
-    "contractAbi": [],
+    "abiInfo": [],
     "funcParam":[]
 }
 ```
@@ -557,7 +559,7 @@ HTTP POST
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/privateKey?useAes={useAes}&type={type}&userName={userName}**
+**http://localhost:5002/WeBASE-Front/privateKey?type={type}&userName={userName}**
 
 #### 调用方法
 
@@ -569,14 +571,13 @@ HTTP GET
 
 | **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
-| 1        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
-| 2 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户 |
+| 1 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户 |
 | 2        | 用户名 | userName | String        |             | 否   | 类型为本地用户时必填 |
 
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey?useAes=false&type=0&userName=test
+http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test
 ```
 
 #### 响应参数
@@ -618,7 +619,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=8cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=lili
+http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=8cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&userName=lili
 ```
 
 #### 响应参数
@@ -2315,23 +2316,22 @@ HTTP POST
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 用户编号       | user            | String   |              | 是       | 用户地址(WeBASE-Front)或者用户编号(WeBASE-Sign)                           |
+| 1        | 用户编号       | user            | String   |              | 是       | 用户地址                          |
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
 | 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
-| 5        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
-| 6        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 7        | 是否是加密私钥 | useAes          | boolean  |              | 是       |                                                |
-
+| 6        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
+| 8        | 合约版本       | version           | String      |         |   否       |                                            |
+| 9        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
 
 **2）数据格式**
 
 不传入合约abi:
 ```
 {
-    "useAes":false,
-    "user":"700001",
+    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName":"HelloWorld",
     "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
     "funcName":"set",
@@ -2344,14 +2344,13 @@ HTTP POST
 
 ```
 curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
 ```
 
 传入合约abi:
 ```
 {
-    "useAes ":false,
-    "user":"700001",
+    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName":"HelloWorld",
     "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
     "funcName":"set",
@@ -2413,21 +2412,24 @@ HTTP POST
 
 **1）参数表**
 
-| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
-| -------- | -------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号，默认为1                                       |
-| 2        | 用户编号 | signUserId      | int      |              | 否       | 签名用户编号（查询方法可不传）                 |
-| 3        | 合约编译后生成的abi文件内容  | contractAbi     | List     |              | 是       |                                                |
-| 4        | 合约地址 | contractAddress | String   |              | 是       |                                                |
-| 5        | 方法名   | funcName        | String   |              | 是       |                                                |
-| 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 用户编号       | signUserId      | String   |              | 是       | WeBASE-Sign用户编号（查询方法可不传）                          |
+| 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
+| 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
+| 4        | 方法名         | funcName        | String   |              | 是       |                                                |
+| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 6        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
+| 8        | 合约版本       | version           | String      |         |   否       |        CNS中的合约版本，不传入contractAbi时可传入合约地址与版本获取CNS上存储的合约ABI                                    |
+
 
 **2）数据格式**
 
 ```
 {
     "groupId" :1,
-    "signUserId":100001,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
     "contractAbi":[],
     "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
     "funcName":"set",
@@ -2438,7 +2440,7 @@ HTTP POST
 示例：
 
 ```
-curl -X POST "http://localhost:5002/WeBASE-Front/trans/handleWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractAddress\": \"0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266\", \"funcName\": \"set\", \"funcParam\": [ \"test\" ], \"groupId\": 1, \"signUserId\": 100001}"
+curl -X POST "http://localhost:5002/WeBASE-Front/trans/handleWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractAddress\": \"0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266\", \"funcName\": \"set\", \"funcParam\": [ \"test\" ], \"groupId\": 1, \"signUserId\": "458ecc77a08c486087a3dcbc7ab5a9c3"}"
 ```
 
 #### 响应参数
@@ -2691,7 +2693,6 @@ HTTP POST
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
-| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false 
 
 **2）数据格式**
 
@@ -2758,7 +2759,6 @@ HTTP DELETE
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
-| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -2824,7 +2824,6 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 4        | 用户权限状态       | permissionState       | Object     |              |     是     | 使用{"permissionType": 1}格式，参照下文数据格式；1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限
-| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3011,7 +3010,6 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 配置的键         | configKey        | String   |           | 是       |   目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price                                             |
 | 4        | 配置的值       | configValue       | String     |              |     是    | tx_gas_limit范围为 [100000, 2147483647]
-| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3134,7 +3132,6 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 节点类型       | nodeType       | String     |              |     是    | 节点类型：observer,sealer,remove 
 | 4      | 节点ID         | nodeId        | String   |           | 是       |   节点id，从节点根目录/conf/node.id获取                                             |
-| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3200,7 +3197,6 @@ HTTP POST
 | 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |                                             |
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | SQL语句       | sql       | String     |              |     是    | 包含create, desc, insert, update, select, remove，小写
-| 4        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3841,7 +3837,7 @@ a、成功：
 | 101002 | param valid fail                             | 参数校验异常               |
 | 201001 | groupId cannot be empty                      | 群组编号不能为空           |
 | 201002 | user cannot be empty                         | 用户不能为空               |
-| 201003 | useAes cannot be empty                       | 是否为加密私钥不能为空     |
+| 201003 | useAes cannot be empty                       | 是否为加密私钥不能为空      |
 | 201004 | version cannot be empty                      | 合约版本不能为空           |
 | 201005 | funcName cannot be empty                     | 方法名不能为空             |
 | 201006 | abiInfo cannot be empty                      | abi内容不能为空            |
