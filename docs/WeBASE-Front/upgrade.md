@@ -1,10 +1,22 @@
 # 升级说明
 
-<!-- #### v1.3.0
+#### v1.3.0
 
-- WeBASE-Front中私钥管理转由WeBASE-Sign管理，接口调用方式不变（传入用户地址`address`）；WeBASE-Front数据库中原有的私钥无需删除修改，且需要通过以下sql脚本，插入到WeBASE-Sign数据库中；
+##### 私钥管理调整
+- WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产；因此web页面中的私钥管理转移至合约管理Tab下，改为测试用户管理；在WeBASE-Front的页面部署合约、发交易时所使用的的均为本地私钥，与WeBASE-Node-Manager私钥区分开；
 
-- WeBASE-Front的接口中`useAes`字段(私钥是否采用aes加密)将默认为`true`，且私钥由WeBASE-Sign同一加密管理； -->
+##### WeBASE-Node-Manager私钥调整
+- WeBASE-Node-Manager将通过WeBASE-Front的**`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易**
+，即WeBASE-Node-Manager的私钥将由WeBASE-Sign托管（通过传入`signUserId`新建私钥和交易签名），WeBASE-Front将不保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
+
+<!-- 
+因此用户需要通过以下操作将已存在与Front H2数据库中的私钥数据导出，并导入到WeBASE-Sign数据库中
+1. 打开WeBASE-Front H2数据库中的`KeyStoreInfo`表，通过`SELECT * FROM KEY_STORE_INFO WHERE TYPE = 2;`的SQL指令，获取所有属于WeBASE-Node-Manager的私钥；
+2. 检查WeBASE-Front的application.yml和WeBASE-Sign的application.yml中的`aesKey`字段的值是否一样，一样的话，直接新建一个webasesign的mysql database，将 -->
+
+##### API字段更新
+- WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口传参修改，改为与`/trans/handle`接口和`/contract/deploy`一致，**WeBASE-Node-Manager**将通过且（传入用户地址`address`）；WeBASE-Front数据库中原有的私钥无需删除修改，且需要通过以下sql脚本，插入到WeBASE-Sign数据库中；
+- WeBASE-Front的所有接口中`useAes`字段(私钥是否采用aes加密保存)将默认为`true`，调用时不需要传入`useAes`；
 
 
 #### v1.2.3
