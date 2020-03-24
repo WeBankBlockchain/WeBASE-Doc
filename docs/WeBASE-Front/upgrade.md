@@ -16,7 +16,7 @@
 
 ##### API字段更新
 - WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口传参修改，改为与`/trans/handle`接口和`/contract/deploy`一致，**WeBASE-Node-Manager**将通过且（传入用户地址`address`）；WeBASE-Front数据库中原有的私钥无需删除修改，且需要通过以下sql脚本，插入到WeBASE-Sign数据库中；
-- WeBASE-Front的所有接口中`useAes`字段(私钥是否采用aes加密保存)将默认为`true`，调用时不需要传入`useAes`；
+- WeBASE-Front的所有接口中`useAes`字段将默认为`true`，即私钥默认采用aes加密保存，调用时可不传入`useAes`；
 
 
 #### v1.2.3
