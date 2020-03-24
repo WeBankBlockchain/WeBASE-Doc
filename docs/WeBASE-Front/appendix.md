@@ -184,13 +184,13 @@ startWaitTime=600
 
 ## 3. 使用说明
 
-### 私钥管理
+### 测试用户管理
 
 #### 3.1. 导入私钥
 
-支持txt私钥文件导入和pem私钥文件导入
+支持txt文件和pem文件导入测试用户的私钥信息
 
-导入.txt私钥格式示例：
+导入.txt私钥内容格式示例：
 
 ```
 {
@@ -198,7 +198,7 @@ startWaitTime=600
   "publicKey":"0x4b1041710a4427dc1c0d542c8f0fd312d92b0d03a989f512d1f8d3cafb851967f3592df0035e01fa63b2626165d0f5cffab15792161aa0360b8dfba2f3a7cf59",
   "privateKey":"71f1479d9051e8d6b141a3b3ef9c01a7756da823a0af280c6bf62d18ee0cc978",
   "userName":"111",
-  "type":0
+  "type":0  // type为0，不可修改
 }
 ```
 其中用户类型为0代表用户为WeBASE-Front的本地私钥用户，导入的私钥均为该类型；
@@ -216,7 +216,7 @@ fM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK
 
 #### 3.2. 导出私钥
 
-目前仅支持导出txt私钥
+目前仅支持导出测试用户的txt格式私钥
 
 **Java中如何使用导出的私钥**
 
@@ -284,7 +284,7 @@ public void loadPrivateKeyTest() {
 注：
 可通过RabbitMQ的命令行工具，添加管理员账户(`Administrator`)，具体可参考[rabbitmqctl文档](https://www.rabbitmq.com/rabbitmqctl.8.html)
 
-*guest用户不支持远程登录Web管理页，如需远程登录管理页面，需要通过ctl新增一个管理员用户*
+**guest用户不支持远程登录Web管理页，如需远程登录管理页面，需要通过rabbitmqctl新增一个管理员用户**
 
 #### WeBASE-Front的配置
 
@@ -314,36 +314,36 @@ spring:
 
 ##### 客户端开发流程
 
-- 申请账号：客户端用户向mq-server运维管理员申请MQ服务的账号（用户名和密码、virtual host）。
-- 创建队列与赋予权限：运维管理员创建账号，并**创建以用户名为名字的队列**，然后赋予该账户read其专属队列的权限( permission-read:queueName)。
-- 客户端连接到MQ：用户根据运维管理员提供的MQ账户名（队列名）和密码、virtual host、消息交换机名（exchangeName），将自己的区块链应用连接到相应队列中，获取消息推送。
+- 申请账号：客户端用户提供自己**客户端应用编号appId**，向mq-server运维管理员申请MQ服务的账号（可设置账户名和密码、virtual host）。
+- 创建队列与赋予权限：运维管理员创建账号后，管理员以用户提供的客户端应用的`appId`为名字，创建一个该账户专属的队列，然后赋予该账户read其专属队列的权限( permission-read中设置)。
+- 客户端连接到MQ：用户根据运维管理员提供的MQ账户名和密码、virtual host、消息交换机名（exchangeName），将自己的区块链应用连接到相应队列中，获取消息推送。
 
 下面简单展示运维管理员通过RabbitMQ的Web工具管理MQ服务：
 
-**创建用户：**
+**创建MQ账户：**
 
-![创建用户](../../images/WeBASE/front-event/add_user.png)
+![创建MQ账户](../../images/WeBASE/front-event/add_user.png)
 
-**赋予用户访问同名队列的read权限：**
-![赋予read权限](../../images/WeBASE/front-event/user_config.png)
+**赋予MQ账户访问appId队列的read权限：**
+![赋予read权限](../../images/WeBASE/front-event/set_permission.png)
 
-**创建同名队列**
+**创建以appId命名的队列**
 
-![创建同名队列](../../images/WeBASE/front-event/add_queue.png)
+![创建appId队列](../../images/WeBASE/front-event/add_queue.png)
 
 ##### 客户端订阅事件推送流程：
 
 - 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档-事件通知](./interface.html#id330)
 
-用户调用注册事件接口之后，实际上WeBASE-Front将以`queueName+事件名+appId`的routingKey，将用户所拥有的的队列Queue绑定到对应的Exchange中：
+用户调用注册事件接口之后，实际上WeBASE-Front将以`appId+事件名+{randomString}`的routingKey，将用户所拥有的的队列Queue绑定到对应的Exchange中：
 
-![绑定到群组Exchange](../../images/WeBASE/front-event/after_register.png)
+![appId队列绑定到群组Exchange](../../images/WeBASE/front-event/after_register.png)
 
 - 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；
 
 客户端获取事件通知过程需如上进行配置，可参考[WeBASE-Event-Client](https://github.com/WeBankFinTech/WeBASE-Event-Client)的消费者客户端的代码实现（Dev分支）
 
-核心代码逻辑为：
+消费者客户端核心代码逻辑为：
 ```
 
 @RabbitListener(queues = "${spring.rabbitmq.username}")
