@@ -5388,14 +5388,14 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 获取WeBASE-Node-Manager是否使用国密版
 
-#### 18.2.1 传输协议规范
+#### 19.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/encrypt**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 18.2.2 请求参数
+#### 19.1.2 请求参数
 
 ***1）入参表***
 
@@ -5412,7 +5412,7 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
 ```
 
 
-#### 18.2.3 返回参数
+#### 19.1.3 返回参数
 
 ***1）出参表***
 
@@ -5432,6 +5432,164 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
     "data": 1 
 }
 
+```
+
+### 20.1 获取已订阅的出块事件列表
+
+获取所有前置中已订阅的节点出块事件列表
+
+#### 20.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/event/newBlockEvent/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 20.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | groupId     | Integer      | 否     | 群组编号                       |
+| 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
+| 3    | pageSize    | Integer      | 否     | 页容量                       |
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pageNumber}/{pageSize}
+```
+
+
+#### 20.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | List        | 否       | newBlockEvent info                         
+| 3.1  | frontInfo   | String        | 否       | 前置对应IP                         
+| 3.1  | id          | String        | 否       | 订阅信息的id     
+| 3.1  | eventType   | Integer        | 否       | 事件通知类型，1: newBlockEvent, 2: contractEvent, 3: others                          
+| 3.1  | appId       | String        | 否       |  事件通知对应的应用Id 
+| 3.1  | groupId   | Integer        | 否       |    群组编号                       
+| 3.1  | exchangeName  | String        | 否       |   exchange名    
+| 3.1  | queueName   | String        | 否       |     队列名                 
+| 3.1  | routingKey   | String        | 否       |   路由键值
+| 3.1  | createTime   | String        | 否       |       订阅信息创建时间                 
+| 4    | totalCount  | Integer       | 否     | 1: 国密，0：非国密                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "frontInfo": "127.0.0.1",
+            "id": "8aba82b570f22a750170f22bcab90000",
+            "eventType": 1,
+            "appId": "app2",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "app2_block_b63",
+            "createTime": "2020-03-19 17:42:01"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+### 20.2 获取已订阅的合约Event事件列表
+
+获取所有前置中已订阅的合约Event事件列表
+
+#### 20.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/event/contractEvent/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 20.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | groupId     | Integer      | 否     | 群组编号                       |
+| 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
+| 3    | pageSize    | Integer      | 否     | 页容量                       |
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/event/contractEvent/list/{groupId}/{pageNumber}/{pageSize}
+```
+
+
+#### 20.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | List        | 否       | newBlockEvent info                         
+| 3.1  | frontInfo   | String        | 否       | 前置对应IP                         
+| 3.1  | id          | String        | 否       | 订阅信息的id     
+| 3.1  | eventType   | Integer        | 否       | 事件通知类型，1: newBlockEvent, 2: contractEvent, 3: others                          
+| 3.1  | appId       | String        | 否       |  事件通知对应的应用Id 
+| 3.1  | groupId   | Integer        | 否       |    群组编号                       
+| 3.1  | exchangeName  | String        | 否       |   exchange名    
+| 3.1  | queueName   | String        | 否       |     队列名                 
+| 3.1  | routingKey   | String        | 否       |   路由键值
+| 3.1  | createTime   | String        | 否       |     起始区块范围                 
+| 3.1  | fromBlock   | String        | 否       |      末区块范围                 
+| 3.1  | toBlock   | String        | 否       |       订阅信息创建时间                 
+| 3.1  | contractAddress  | String        | 否       |       订阅的合约地址                 
+| 3.1  | contractAbi   | String        | 否       |     对应合约ABI                 
+| 3.1  | topicList   | String        | 否       |       订阅的合约Event                 
+| 4    | totalCount  | Integer       | 否     | 1: 国密，0：非国密                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "frontInfo": "127.0.0.1",
+            "id": "8aba82b5708095af01708095e4f70001",
+            "eventType": 2,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "user1_event_app1",
+            "fromBlock": "latest",
+            "toBlock": "latest",
+            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+            "topicList": "SetName(string)",
+            "createTime": "2020-02-26 16:21:12"
+        }
+    ],
+    "totalCount": 1
+}
 ```
 
 ## 附录
