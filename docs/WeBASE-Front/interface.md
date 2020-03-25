@@ -3330,8 +3330,8 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-|     1    | 页码         | pageNumber            | int   |              | 否       | 缺省则返回全量数据                           |
-|     2    | 页大小       | pageSize            | int   |              | 否       |    缺省则返回全量数据                        |
+|     1    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
+|     2    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
 
 
 **2）数据格式**
@@ -3352,16 +3352,17 @@ http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{pageNumber}/{pageSi
     "message": "success",
     "data": [
         {
-            "id": "8aba82b5707a1f5701707a248c340000",
+            "id": "8aba82b570f22a750170f22bcab90000",
             "eventType": 1,
-            "appId": "app1",
+            "appId": "app2",
             "groupId": 1,
             "exchangeName": "group001",
-            "queueName": "user1",
-            "routingKey": "user1_block_app1"
+            "queueName": "app2",
+            "routingKey": "app2_block_b63",
+            "createTime": "2020-03-19 17:42:01"
         }
     ],
-    "totalCount":1
+    "totalCount": 1
 }
 ```
 
@@ -3411,13 +3412,14 @@ http://localhost:5002/WeBASE-Front/event/newBlockEvent/{groupId}/{appId}
     "message": "success",
     "data": [
         {
-            "id": "8aba82b5707a1f5701707a248c340000",
+            "id": "8aba82b570f22a750170f22bcab90000",
             "eventType": 1,
-            "appId": "app1",
+            "appId": "app2",
             "groupId": 1,
             "exchangeName": "group001",
-            "queueName": "user1",
-            "routingKey": "user1_block_app1"
+            "queueName": "app2",
+            "routingKey": "app2_block_b63",
+            "createTime": "2020-03-19 17:42:01"
         }
     ]
 }
@@ -3446,7 +3448,7 @@ HTTP POST
 | 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
 | 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
+| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
 
 
 **2）数据格式**
@@ -3457,7 +3459,7 @@ HTTP POST
     "appId": "app1",
     "groupId": 1,
     "exchangeName": "group001",
-    "queueName": "user2"
+    "queueName": "app1"
 }
 ```
 
@@ -3506,7 +3508,7 @@ HTTP DELETE
 | 2        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
 | 3        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 4        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
+| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
 
 
 **2）数据格式**
@@ -3517,7 +3519,7 @@ HTTP DELETE
     "appId": "app1",
     "groupId": 1,
     "exchangeName": "group001",
-    "queueName": "user1"
+    "queueName": "app1"
 }
 ```
 
@@ -3556,8 +3558,8 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-|     1    | 页码         | pageNumber            | int   |              | 否       | 缺省则返回全量数据                           |
-|     2    | 页大小       | pageSize            | int   |              | 否       |    缺省则返回全量数据                        |
+|     1    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
+|     2    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
 
 
 **2）数据格式**
@@ -3647,13 +3649,14 @@ http://localhost:5002/WeBASE-Front/event/contractEvent/{groupId}/{appId}
             "appId": "app1",
             "groupId": 1,
             "exchangeName": "group001",
-            "queueName": "user1",
+            "queueName": "app2",
             "routingKey": "user1_event_app1",
             "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
             "fromBlock": "latest",
             "toBlock": "latest",
             "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
-            "topicList": "SetName(string)"
+            "topicList": "SetName(string)",
+            "createTime": "2020-02-26 16:21:12"
         }
     ]
 }
@@ -3683,13 +3686,12 @@ HTTP POST
 | 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
 | 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，**一般以用户名作队列名**  |
+| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
 | 5        | 合约abi  | contractAbi | List<Object>         |     |  是      | 合约的ABI，用于合约event解析 |
-| 6        | event起始区块  | fromBlock | String         |     | 是       | 最小值为1；填写`latest`，表示一直监听最新区块|
+| 6        | event起始区块  | fromBlock | String         |     | 是       | 默认`latest`，表示一直监听最新区块，最小值为1|
 | 7        | event末区块  | toBlock | String         |     | 是       |最小值为1，最大值为当前区块高度，需   要大于等于`fromBlock`；填写`latest`，表示一直监听最新区块|
 | 8        | 合约地址  | contractAddress | String   |     | 是       |合约地址 |
 | 9        | 合约event名列表  | topicList | List<String>         |     |  是    | 合约event事件名的list，以中括号括住，以英文逗号相隔，不带空格；如`[HelloWorld(string)]`|
-
 
 **2）数据格式**
 
@@ -3699,12 +3701,13 @@ HTTP POST
     "appId": "app2",
     "groupId": 1,
     "exchangeName": "group001",
-    "queueName": "user2",
+    "queueName": "app2",
     "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}],
     "fromBlock": "latest",
     "toBlock": "latest",
     "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
-    "topicList": ["SetName(string)","TransferEvent(string,address)"]
+    "topicList": ["SetName(string)","TransferEvent(string,address)"],
+    "createTime": "2020-02-26 16:21:12"
 }
 ```
 #### 响应参数
@@ -3751,7 +3754,7 @@ HTTP DELETE
 | 2        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
 | 3        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 4        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
+| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
 
 
 **2）数据格式**
@@ -3763,7 +3766,7 @@ HTTP DELETE
     "appId": "app2",
     "groupId": 1,
     "exchangeName": "group001",
-    "queueName": "user2"
+    "queueName": "app2"
 }
 ```
 
