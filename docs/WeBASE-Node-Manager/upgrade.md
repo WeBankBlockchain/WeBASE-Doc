@@ -2,6 +2,44 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager/blob/master/Changelog.md)进行阅读
 
+#### v1.3.0
+
+##### 交易签名修改
+
+WeBASE-Node-Manager v1.3.0将通过WeBASE-Front调用WeBASE-Sign来管理私钥和交易签名，因此
+- 数据库中的`tb_user`新增了String类型的字段`sign_user_id`和`app_id`，并在后台用随机的UUID String赋值
+
+```
+CREATE TABLE IF NOT EXISTS tb_user (
+  user_id int(11) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
+  user_name varchar(64) binary NOT NULL COMMENT '用户名',
+  ...
+  sign_user_id varchar(64) NOT NULL COMMENT '签名服务中的user的业务id',
+  app_id varchar(64) DEFAULT NULL COMMENT '区块链应用的编号',
+  ...
+) ENGINE=InnoDB AUTO_INCREMENT=700001 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+```
+
+**升级操作说明**
+
+登陆mysql后，进入到相应database中，以`webasenodemanager`的database为例；
+```
+mysql -uroot -p123456
+
+// mysql 命令行
+mysql> use webasenodemanager;
+
+// 在tb_user中添加列
+mysql> alter table tb_user add column sign_user_id varchar(64) not null;
+mysql> alter table tb_user add column app_id varchar(64) not null;
+```
+
+<!-- ##### 已有私钥移植
+
+WeBASE-Node-Manager v1.3.0的私钥将在WeBASE-Sign托管，因此提供以下操作进行私钥迁移；
+
+ -->
+
 #### v1.2.2
 
 ##### 国密支持说明
