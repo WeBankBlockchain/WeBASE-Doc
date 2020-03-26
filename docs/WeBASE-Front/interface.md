@@ -3877,6 +3877,8 @@ a、成功：
 | 201037 | user name is null                            | 用户名为空                 |
 | 201038 | user name already exists                     | 用户名已存在               |
 | 201039 | private key already exists                   | 私钥已存在                 |
+| 201040 | private key not exists                       | 私钥不存在                 |
+| 201041 | external user's appId and signUserId cannot be empty        | 私钥已存在                 |
 | 201101  | groupId cannot be empty                   |    群组编号不能为空      | 
 | 201102  | tableName cannot be empty         |    表名不能为空      |
 | 201103  | permissionType cannot be empty             |    权限类型不能为空      |
@@ -3887,6 +3889,7 @@ a、成功：
 | 201108  | system config value cannot be empty      |    系统配置value值不能为空 |
 | 201109  | node id cannot be empty                 |    节点id不能为空      |
 | 201110  | node type cannot be empty           |   节点类型（共识状态不能为空） |
+| 201130  | signUserId cannot be empty           |   signUserId不可为空 |
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
 | 201208  | unsupported for this system config key     |    不支持设置该系统配置      |
@@ -3907,6 +3910,10 @@ a、成功：
 | 201233  | Pem file content error |     pem证书内容错误     |
 | 201241  | Exchange or message queue not exists, please check mq server or mq configuration |     交换机或消息队列不存在，请检查mq-server运行状态及其配置     |
 | 201242  | Database error: data already exists in db |     数据库错误：该数据记录已存在于数据库中     |
+| 201243  | Block range error, from/toBlock must greater than 0, toBlock must be greater than fromBlock |  合约Event区块范围错误，from大于0，to大于from     |
+| 201244  | Database error: data not exists in db, please check your params |     该数据记录不存在，请检查参数     |
+| 201245  | Only support letter and digit, please check your params |     仅支持使用数字字母与下划线，请检查参数     |
+| 201246  | Register contractEvent failed, please check your param |     注册合约事件失败，请检查参数格式     |
 
 
 ### 2. Precompiled Service说明
