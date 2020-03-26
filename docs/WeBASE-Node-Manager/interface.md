@@ -4210,7 +4210,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 ```
 
 
-## 13 系统管理模块（预编译）
+## 13 系统管理模块
 
 
 ### 13.1 查看权限管理
