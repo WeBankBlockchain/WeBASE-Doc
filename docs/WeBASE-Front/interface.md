@@ -3838,6 +3838,8 @@ a、成功：
 | 0      | success                                      | 成功                       |
 | 101001 | system error                                 | 系统异常                   |
 | 101002 | param valid fail                             | 参数校验异常               |
+| 101003 | web3jMap of groupId is null, please call /{groupId}/web3/refresh to refresh  | 连接当前群组失败，请调用/{groupId}/web3/refresh刷新群组               |
+| 101004 | groupList error for no group, web3jMap is empty | 群组列表为空，请检查节点共识状态|
 | 201001 | groupId cannot be empty                      | 群组编号不能为空           |
 | 201002 | user cannot be empty                         | 用户不能为空               |
 | 201003 | useAes cannot be empty                       | 是否为加密私钥不能为空      |
@@ -3913,7 +3915,9 @@ a、成功：
 | 201243  | Block range error, from/toBlock must greater than 0, toBlock must be greater than fromBlock |  合约Event区块范围错误，from大于0，to大于from     |
 | 201244  | Database error: data not exists in db, please check your params |     该数据记录不存在，请检查参数     |
 | 201245  | Only support letter and digit, please check your params |     仅支持使用数字字母与下划线，请检查参数     |
-| 201246  | Register contractEvent failed, please check your param |     注册合约事件失败，请检查参数格式     |
+| 201246  | Register contractEvent failed, please check your param |     订阅合约事件失败，请检查参数格式     |
+| 201247  | Unregister event failed, please check mq server exchange |     取消订阅事件失败，请检查参数格式     |
+| 201248  | Contract abi invalid, please check abi          |     合约ABI格式错误，请检查入参     |
 
 
 ### 2. Precompiled Service说明
