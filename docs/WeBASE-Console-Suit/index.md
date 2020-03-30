@@ -330,7 +330,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 出块事件列表：
 
-![出块事件列表：](../../images/WeBASE-Console-Suit/new_block.png)
+![出块事件列表：](../../images/WeBASE-Console-Suit/event_new_block.png)
 
 合约Event事件列表：
 ![合约Event事件列表](../../images/WeBASE-Console-Suit/event_contract_event.png)
