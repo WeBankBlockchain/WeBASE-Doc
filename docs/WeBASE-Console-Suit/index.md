@@ -15,7 +15,8 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 5. 系统管理
 6. 系统监控
 7. 交易审计
-8. 账号管理
+8. 订阅事件
+9. 账号管理
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -322,6 +323,18 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 异常合约审计：
 
 ![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_contract_2.png)
+
+### 订阅事件
+
+订阅事件管理：可查看前置中已订阅的链上事件通知，包括出块事件列表和合约Event事件列表
+
+出块事件列表：
+
+![出块事件列表：](../../images/WeBASE-Console-Suit/new_block.png)
+
+合约Event事件列表：
+![合约Event事件列表](../../images/WeBASE-Console-Suit/event_contract_event.png)
+
 
 ### 账号管理
 
