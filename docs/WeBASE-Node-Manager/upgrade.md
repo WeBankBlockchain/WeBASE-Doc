@@ -34,11 +34,21 @@ mysql> alter table tb_user add column sign_user_id varchar(64) not null;
 mysql> alter table tb_user add column app_id varchar(64) not null;
 ```
 
-<!-- ##### 已有私钥移植
+##### WeBASE-Node-Manager私钥移植
 
-WeBASE-Node-Manager v1.3.0的私钥将在WeBASE-Sign托管，因此提供以下操作进行私钥迁移；
+- WeBASE-Node-Manager将通过WeBASE-Front的**`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易**
+，即WeBASE-Node-Manager原来存于前置的私钥将由WeBASE-Sign托管，前置将不保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
 
- -->
+**转移WeBASE-Node-Manager私钥到WeBASE-Sign的操作说明**
+用户需要通过以下操作将存于前置H2数据库中属于节点管理的私钥数据导出，并导入到WeBASE-Sign数据库中
+1. 打开WeBASE-Front H2数据库中的`KeyStoreInfo`表，通过`SELECT * FROM KEY_STORE_INFO WHERE TYPE = 2;`的SQL指令，获取所有属于WeBASE-Node-Manager的私钥；
+2. 需保证WeBASE-Front、WeBASE-Node-Manager和WeBASE-Sign application.yml中的`aesKey`字段的值一样（使用AES加密落盘的Key）
+3. 在mysql中将所有私钥数据按对应字段，并添加相应的`signUserId`值和`appId`值，执行insert操作，插入到WeBASE-Sign数据库的`tb_user`表中；如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后，再执行插入操作；
+
+<!-- 可参考下列mysql脚本：
+```
+mysql>insert into tb_user values()
+``` -->
 
 #### v1.2.2
 
