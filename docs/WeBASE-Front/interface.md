@@ -3445,7 +3445,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号，仅支持数字字母和下划线                   |
 | 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
 | 4        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
@@ -3585,8 +3585,8 @@ http://localhost:5002/WeBASE-Front/event/contractEvent/list/{pageNumber}/{pageSi
             "appId": "app1",
             "groupId": 1,
             "exchangeName": "group001",
-            "queueName": "user1",
-            "routingKey": "user1_event_app1",
+            "queueName": "app1",
+            "routingKey": "app1_event_b3c",
             "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
             "fromBlock": "latest",
             "toBlock": "latest",
@@ -3649,8 +3649,8 @@ http://localhost:5002/WeBASE-Front/event/contractEvent/{groupId}/{appId}
             "appId": "app1",
             "groupId": 1,
             "exchangeName": "group001",
-            "queueName": "app2",
-            "routingKey": "user1_event_app1",
+            "queueName": "app1",
+            "routingKey": "app1_event_b3c",
             "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
             "fromBlock": "latest",
             "toBlock": "latest",
@@ -3683,7 +3683,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号，仅支持数字字母和下划线                   |
 | 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
 | 4        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
@@ -3691,7 +3691,7 @@ HTTP POST
 | 6        | event起始区块  | fromBlock | String         |     | 是       | 默认`latest`，表示一直监听最新区块，最小值为1|
 | 7        | event末区块  | toBlock | String         |     | 是       |最小值为1，最大值为当前区块高度，需   要大于等于`fromBlock`；填写`latest`，表示一直监听最新区块|
 | 8        | 合约地址  | contractAddress | String   |     | 是       |合约地址 |
-| 9        | 合约event名列表  | topicList | List<String>         |     |  是    | 合约event事件名的list，以中括号括住，以英文逗号相隔，不带空格；如`[HelloWorld(string)]`|
+| 9        | 合约event列表  | topicList | List<String>         |     |  是    | List类型，合约Event事件列表，Event参数之间不带空格|
 
 **2）数据格式**
 
