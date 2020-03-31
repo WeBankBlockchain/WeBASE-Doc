@@ -6,17 +6,41 @@
 - WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产；因此web页面中的**私钥管理**转移至**合约管理**Tab下，改为**测试用户**管理；在WeBASE-Front的页面部署合约、发交易时所使用的的均为本地私钥，与WeBASE-Node-Manager私钥区分开；
 
 ##### 节点管理与节点前置调整
-- 节点管理WeBASE-Node-Manager原通过节点前置WeBASE-Front的`/trans/handle`和`/contract/deploy`进行合约交易与部署，v1.3.0后将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
+- 节点管理**WeBASE-Node-Manager**原通过节点前置**WeBASE-Front**的`/trans/handle`和`/contract/deploy`进行合约交易与部署，**v1.3.0后**将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
 
-即：WeBASE-Node-Manager的私钥将由WeBASE-Sign托管（通过传入`signUserId`新建私钥和交易签名），WeBASE-Front将不保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
+即：**WeBASE-Node-Manager**的私钥将由**WeBASE-Sign**托管（通过传入`signUserId`新建私钥和交易签名），**WeBASE-Front**将不保存**WeBASE-Node-Manager**的私钥（仅保存公钥与地址）；
 
-因此WeBASE-Node-Manager私钥需要转移到WeBASE-Sign数据库中，具体操作请参考节点管理服务的[v1.3.0升级说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/upgrade.html#v1-3-0)
-
-如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后，再执行私钥数据转移操作；
+因此**WeBASE-Node-Manager**私钥需要转移到**WeBASE-Sign**数据库中，具体操作请参考节点管理服务的[v1.3.0升级说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/upgrade.html#v1-3-0)
 
 ##### API字段更新
-- WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口传参修改，改为与`/trans/handle`接口和`/contract/deploy`一致，**WeBASE-Node-Manager**将通过且（传入用户地址`address`）；WeBASE-Front数据库中原有的私钥无需删除修改，且需要通过以下sql脚本，插入到WeBASE-Sign数据库中；
+- WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口传参修改如下；
+
+`/trans/handleWithSign`接口：
+```
+{
+    "groupId" :1,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
+    "contractAbi":[],
+    "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
+    "funcName":"set",
+    "funcParam":["test"]
+}
+```
+
+`/contract/deployWithSign`接口
+```
+{
+    "groupId":1,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
+    "bytecodeBin":"xxx",
+    "abiInfo": [],
+    "funcParam":[]
+}
+```
+
 - WeBASE-Front的所有接口中`useAes`字段将默认为`true`，即私钥默认采用aes加密保存，调用时可不传入`useAes`；
+
+具体修改可参考[接口文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html)
 
 #### v1.2.3
 
