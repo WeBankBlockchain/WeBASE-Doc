@@ -18,7 +18,7 @@ mysql> use webasesign;
 mysql> alter table tb_user add column sign_user_id varchar(64) not null;
 mysql> alter table tb_user add column app_id varchar(64) not null;
 
-// 赋予sign_user_id和app_id随机的值即可，sign_user_id需赋予唯一值
+// 为已存在的user赋予sign_user_id和app_id随机的值即可，sign_user_id需赋予唯一值
 // app_id设置为所有都一样
 mysql> update table tb_user set app_id = 'app_default' where 1=1;
 // sign_user_id随意设置一个值
