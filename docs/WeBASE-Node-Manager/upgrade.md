@@ -51,7 +51,7 @@ mysql> alter table tb_user add column app_id varchar(64) not null;
 2. 由于私钥保存到数据库时，是经过AES加密后存储的，因此，需保证WeBASE-Node-Manager和WeBASE-Sign application.yml中的`aesKey`字段的值一样；
 3. 在mysql中将所有私钥数据按对应字段，并添加相应的`signUserId`值和`appId`值，执行insert操作，插入到WeBASE-Sign数据库的`tb_user`表中；
 
-如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后，再执行插入操作；
+如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后，再执行私钥数据转移操作；
 
 **升级操作说明**
 
