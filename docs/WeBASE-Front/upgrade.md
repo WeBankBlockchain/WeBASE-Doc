@@ -5,20 +5,15 @@
 ##### 私钥管理调整
 - WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产；因此web页面中的私钥管理转移至合约管理Tab下，改为测试用户管理；在WeBASE-Front的页面部署合约、发交易时所使用的的均为本地私钥，与WeBASE-Node-Manager私钥区分开；
 
-##### WeBASE-Node-Manager私钥调整
-- WeBASE-Node-Manager将通过WeBASE-Front的**`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易**
-，即WeBASE-Node-Manager的私钥将由WeBASE-Sign托管（通过传入`signUserId`新建私钥和交易签名），WeBASE-Front将不保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
+##### 节点管理与节点前置调整
+- 节点管理WeBASE-Node-Manager原通过节点前置WeBASE-Front的`/trans/handle`和`/contract/deploy`进行合约交易与部署，v1.3.0后将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
 
-**转移WeBASE-Node-Manager私钥到WeBASE-Sign的操作说明**
-用户需要通过以下操作将存于前置H2数据库中属于节点管理的私钥数据导出，并导入到WeBASE-Sign数据库中
-1. 打开WeBASE-Front H2数据库中的`KeyStoreInfo`表，通过`SELECT * FROM KEY_STORE_INFO WHERE TYPE = 2;`的SQL指令，获取所有属于WeBASE-Node-Manager的私钥；
-2. 需保证WeBASE-Front、WeBASE-Node-Manager和WeBASE-Sign application.yml中的`aesKey`字段的值一样（使用AES加密落盘的Key）
-3. 在mysql中将所有私钥数据按对应字段，并添加相应的`signUserId`值和`appId`值，执行insert操作，插入到WeBASE-Sign数据库的`tb_user`表中；如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后，再执行插入操作；
+即：WeBASE-Node-Manager的私钥将由WeBASE-Sign托管（通过传入`signUserId`新建私钥和交易签名），WeBASE-Front将不保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
 
-<!-- 可参考下列mysql脚本：
-```
-mysql>insert into tb_user values()
-``` -->
+因此WeBASE-Node-Manager私钥需要转移到WeBASE-Sign数据库中，具体操作请参考节点管理服务的[v1.3.0升级说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/upgrade.html#v1-3-0)
+
+如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后，再执行私钥数据转移操作；
+
 ##### API字段更新
 - WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口传参修改，改为与`/trans/handle`接口和`/contract/deploy`一致，**WeBASE-Node-Manager**将通过且（传入用户地址`address`）；WeBASE-Front数据库中原有的私钥无需删除修改，且需要通过以下sql脚本，插入到WeBASE-Sign数据库中；
 - WeBASE-Front的所有接口中`useAes`字段将默认为`true`，即私钥默认采用aes加密保存，调用时可不传入`useAes`；
