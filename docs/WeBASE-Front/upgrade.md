@@ -3,7 +3,7 @@
 #### v1.3.0
 
 ##### 私钥管理调整
-- WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产；因此web页面中的私钥管理转移至合约管理Tab下，改为测试用户管理；在WeBASE-Front的页面部署合约、发交易时所使用的的均为本地私钥，与WeBASE-Node-Manager私钥区分开；
+- WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产；因此web页面中的**私钥管理**转移至**合约管理**Tab下，改为**测试用户**管理；在WeBASE-Front的页面部署合约、发交易时所使用的的均为本地私钥，与WeBASE-Node-Manager私钥区分开；
 
 ##### 节点管理与节点前置调整
 - 节点管理WeBASE-Node-Manager原通过节点前置WeBASE-Front的`/trans/handle`和`/contract/deploy`进行合约交易与部署，v1.3.0后将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
