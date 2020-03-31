@@ -10,10 +10,10 @@ WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产�
 在WeBASE-Front的Web页面部署合约、发交易时所使用的私钥均为本地私钥，与WeBASE-Node-Manager私钥区分开；
 
 ##### 节点管理与节点前置调整
-- **WeBASE-Node-Manager**的私钥将由**WeBASE-Sign**托管（通过传入`signUserId`新建私钥和交易签名），**WeBASE-Front**将不保存**WeBASE-Node-Manager**的私钥（仅保存公钥与地址）；
-- 节点管理**WeBASE-Node-Manager**原通过节点前置**WeBASE-Front**的`/trans/handle`和`/contract/deploy`进行合约交易与部署，**v1.3.0后**将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
+- WeBASE-Node-Manager的私钥将由WeBASE-Sign托管（通过传入`signUserId`新建私钥和交易签名），WeBASE-Front将不保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
+- 节点管理WeBASE-Node-Manager **v1.3.0前**通过节点前置WeBASE-Front的`/trans/handle`和`/contract/deploy`进行合约交易与部署，**v1.3.0后**将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
 
-因此**WeBASE-Node-Manager**私钥数据需要转移到**WeBASE-Sign**数据库中，具体操作请参考节点管理服务的[v1.3.0升级说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/upgrade.html#v1-3-0)
+因此WeBASE-Node-Manager私钥数据需要转移到WeBASE-Sign数据库中，具体操作请参考节点管理服务的[v1.3.0升级说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/upgrade.html#v1-3-0)
 
 ##### API字段更新
 - WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口传参修改如下；
