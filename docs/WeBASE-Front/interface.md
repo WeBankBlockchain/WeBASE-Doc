@@ -583,16 +583,30 @@ http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test
 #### 响应参数
 
 **1）数据格式**
+本地用户时：
 ```
 {
   "address": "0x2007e1430f41f75c850464307c0994472bd92ee0",
   "publicKey": "0x9bd35211855f9f8de22d8a8da7f30d35d62ab2c3d36ea5162008fcbb9faff4d83809f7033deb20049bf51e081105076ec7a09a847f852530f81e978b1eda0392",
   "privateKey": "42caa160cadcb635381b980ddd981171c862d3105981fe92d6db330f30615f21",
   "userName": "test",
-  "type": 0
+  "type": 0,
+  "signUserId": null, // 本地用户则为空
+  "appId": null // 本地用户则为空
 }
 ```
 
+外部用户时（来自WeBASE-Sign）：
+```
+{
+  "address": "0x2007e1430f41f75c850464307c0994472bd92ee0",
+  "publicKey": "0x9bd35211855f9f8de22d8a8da7f30d35d62ab2c3d36ea5162008fcbb9faff4d83809f7033deb20049bf51e081105076ec7a09a847f852530f81e978b1eda0392",
+  "userName": "test",
+  "type": 0,
+  "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
+  "appId": "458ecc77a08c486087a3dcbc7ab5a9c3"
+}
+```
 ### 2.2. 导入私钥接口
 
 #### 接口描述
