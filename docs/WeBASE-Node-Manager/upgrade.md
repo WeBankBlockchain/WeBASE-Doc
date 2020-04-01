@@ -4,7 +4,7 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 
 #### v1.3.0
 
-##### 用户私钥字段新增
+##### 私钥用户数据表字段新增
 
 WeBASE-Node-Manager v1.3.0后，将通过WeBASE-Sign来管理私钥和对交易签名，因此作出以下修改：
 - 数据库中的`tb_user`新增了varchar类型的字段`sign_user_id`和`app_id`，其中`signUserId`会在新建私钥时用随机的UUID String赋值并保存；
