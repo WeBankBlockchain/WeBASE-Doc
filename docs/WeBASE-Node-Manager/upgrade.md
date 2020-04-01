@@ -31,7 +31,7 @@ mysql -uroot -p123456
 mysql> use webasenodemanager;
 
 // 在tb_user中添加列
-mysql> alter table tb_user add column sign_user_id varchar(64) not null;
+mysql> alter table tb_user add column sign_user_id varchar(64) default null;
 mysql> alter table tb_user add column app_id varchar(64) not null;
 
 // 生成唯一的sign_user_id和app_id
@@ -40,21 +40,22 @@ mysql> alter table tb_user add column app_id varchar(64) not null;
 ...
 ```
 
-**注意，此处生成的sign_user_id与app_id**
+**注意，此处生成的sign_user_id与app_id将用于节点管理迁移至WeBASE-Sign的私钥数据**
 
 ##### 私钥数据移植到WeBASE-Sign
 
-- WeBASE-Node-Manager原来存于前置的私钥将由WeBASE-Sign托管，前置将不保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
+- WeBASE-Node-Manager原来存储于WeBASE-Front的私钥将由WeBASE-Sign托管，前置将不再保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
 - WeBASE-Node-Manager将通过WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
 
 **转移WeBASE-Node-Manager私钥到WeBASE-Sign的操作说明**
 
 用户需要通过以下操作将存于节点服务数据库(如`webasenodemanager`数据库)的私钥数据导出，并导入到WeBASE-Sign数据库(如`webasesign`数据库)中
-1. 打开WeBASE-Node-Manager数据库中的`tb_user`表和`tb_user_key_mapping`表，通过SQL指令获取所有WeBASE-Node-Manager的私钥数据，包括`tb_user`表中的`sign_user_id`和`app_id`（前文所插入的值），地址`address`与公钥`publick_key`，还有`tb_user_key_mapping`表中的私钥`private_key`；
-2. 由于私钥保存到数据库时，是经过AES加密后存储的，因此，需保证WeBASE-Node-Manager和WeBASE-Sign application.yml中的`aesKey`字段的值一样；
-3. 在mysql中将所有私钥数据按对应字段，并添加相应的`signUserId`值和`appId`值，执行insert操作，插入到WeBASE-Sign数据库的`tb_user`表中；
+1. 由于保存到数据库的私钥值是经过AES加密后存储的，因此，需**保证WeBASE-Front和WeBASE-Sign application.yml中的`constant-aesKey`字段的值一样**；
+2. 在WeBASE-Node-Manager数据库中的`tb_user`表和`tb_user_key_mapping`表，获取所有WeBASE-Node-Manager的私钥数据，包括`tb_user`表中的`sign_user_id`和`app_id`（前文所插入的值），地址`address`与公钥`publick_key`，还有`tb_user_key_mapping`表中的私钥`private_key`；
+3. 在WeBASE-Sign数据库中，将上文获得的所有私钥数据按对应字段，执行insert操作，插入到其`tb_user`表中；
 
-如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后，再执行私钥数据转移操作；
+如已安装WeBASE-Sign，则安装[WeBASE-Sign升级文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/upgrade.html#v1-3-0)更新其`tb_user`表；
+如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后（运行WeBASE-Sign服务后会自动创建tb_user表），再执行私钥数据转移操作；
 
 **升级操作说明**
 
@@ -65,19 +66,14 @@ mysql -uroot -p123456
 // mysql 命令行
 mysql> use webasenodemanager;
 
-// 导出所有私钥数据
-mysql> 
+// 使用left join查询所有私钥数据(address,public_key,sign_user_id,app_id,private_key)
+mysql> select a.address,a.public_key,a.sign_user_id,a.app_id,b.private_key from tb_user a left join tb_user_key_mapping b on(a.user_id=b.user_id) where b.map_status=1
 
-// 获取sign_user_id, app_id, user_id
-mysql> select * from tb_user where xxx;
-// 根据user_id获取private_key
-mysql> select * from tb_user_key_mapping where xxx;
-
-// 选择webase-sign数据库
+// 选择webase-sign数据库进行插入操作
 mysql> use webasesign;
 
-// 插入上述操作获取的address, publick_key, private_key, sign_user_id, app_id
-...
+// 将上述操作获取的(address,public_key,sign_user_id,app_id,private_key)插入到webase-sign的tb_user表
+// 略
 ```
 
 #### v1.2.2

@@ -7,6 +7,8 @@
 
 **升级操作说明**
 
+如果WeBASE-Sign中有已存在的私钥数据，则在`tb_user`表新增列`sign_user_id`和`app_id`后，还需要赋予初始值且`sign_user_id`需赋予唯一值
+
 登陆mysql后，进入到相应database中，以`webasesign`的database为例；
 ```
 mysql -uroot -p123456
