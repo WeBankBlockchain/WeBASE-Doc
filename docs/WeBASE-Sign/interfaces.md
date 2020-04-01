@@ -45,9 +45,10 @@ http://localhost:5004/WeBASE-Sign/user/newUser?signUserId=&?appId=&encryptType=0
 | 3.2      | 应用编号 | appId      | String  |              | 是        |                    |
 | 3.3      | 私钥信息 | privateKey | String   |              | 是        |                   |
 | 3.4      | 账户地址 | address    | String   |              | 是        |                   |
-| 3.5       | 公钥    | publicKey  | toHexString |           | 是        |                  |
-| 3.6       | 描述    | description| String   |              | 是        |                  |
-| 3.7       | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
+| 3.5      | 公钥    | publicKey  | toHexString |           | 是        |                  |
+| 3.6      | 描述    | description| String   |              | 是        |                  |
+| 3.7      | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
+| 3.8      | 用户状态 |status     | String |               | 是        | 0: 作废, 1: 正常 |
 
 **2）数据格式**
 
@@ -65,7 +66,8 @@ ECDSA用户：
         "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
         "privateKey": "",
         "description": null,
-        "encryptType": 0
+        "encryptType": 0,
+        "status": "1"
     }
 }
 ```
@@ -82,7 +84,8 @@ ECDSA用户：
         "publicKey": "0xd09d4efe3c127898186c197ae6004a9b40d7c7805fc7e31f7c4a835a4b9cf4148155cbd6dfcf3e5fd84acf1ea55c26b5a9b05d118b456738be2becf0e667c0d6",
         "privateKey": "",
         "description": null,
-        "encryptType": 1
+        "encryptType": 1,
+        "status": "1"
     }
 }
 ```
@@ -144,6 +147,7 @@ http://localhost:5004/WeBASE-Sign/user/user_111/userInfo
 | 3.5       | 公钥    | publicKey  | toHexString |           | 是        |                  |
 | 3.6       | 描述    | description| String   |              | 是        |                  |
 | 3.7       | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
+| 3.8      | 用户状态 |status     | String |               | 是        | 0: 作废, 1: 正常 |
 
 
 **2）数据格式**
@@ -162,7 +166,8 @@ ECDSA用户：
         "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
         "privateKey": "",
         "description": null,
-        "encryptType": 0
+        "encryptType": 0,
+        "status": "1"
     }
 }
 ```
@@ -179,9 +184,76 @@ b.异常返回结果示例（信息详情请参看附录1）
 ```
 
 
-## 3. 用户列表接口
+## 3. 私钥用户管理接口
 
-### 3.1. 根据appId查询用户列表（分页）
+### 3.1. 停用私钥用户
+
+#### 接口描述
+
+通过修改私钥用户的`status`状态值来停用私钥用户
+
+#### 接口URL
+
+http://localhost:5004/WeBASE-Sign/user
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
+| -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
+| 1        | 用户编号  | signUserId | String |               | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
+
+**2）数据格式**
+
+```
+http://localhost:5004/WeBASE-Sign/user
+```
+
+```
+{
+  "signUserId": "user_111"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明**          |
+| -------- | -------- | ----------- | -------- | ------------ | -------- | ----------------- |
+| 1        | 返回码   | code        | String   |              | 是       | 返回码信息请附录1 |
+| 2        | 提示信息 | message     | String   |              | 是       |                   |
+
+**2）数据格式**
+
+a.请求正常返回结果
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+b.异常返回结果示例（信息详情请参看附录1）
+
+```
+{
+    "code": 303002,
+    "message": "user does not exist",
+    "data": null
+}
+```
+
+
+## 4. 用户列表接口
+
+### 4.1. 根据appId查询用户列表（分页）
 
 #### 接口描述
 
@@ -228,6 +300,7 @@ http://localhost:5004/WeBASE-Sign/user/list/group_01/1/5
 | 3.5       | 公钥    | publicKey  | toHexString |           | 是        |                  |
 | 3.6       | 描述    | description| String   |              | 是        |                  |
 | 3.7       | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
+| 3.8      | 用户状态 |status     | String |               | 是        | 0: 作废, 1: 正常 |
 | 4        | 总量    | totalCount   | Long      |             | 否       | 数据总量 |
 
 **2）数据格式**
@@ -247,7 +320,8 @@ ECDSA用户列表：
             "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
             "privateKey": "",
             "description": null,
-            "encryptType": 0
+            "encryptType": 0,
+            "status": "1"
         }
     ],
     "totalCount": 1
@@ -265,9 +339,9 @@ b.异常返回结果示例（信息详情请参看附录1）
 ```
 
 
-## 4. 数据签名接口
+## 5. 数据签名接口
 
-### 4.1. ECDSA/国密数据签名接口
+### 5.1. ECDSA/国密数据签名接口
 
 #### 接口描述
 
