@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
   sign_user_id varchar(64) NOT NULL COMMENT '签名服务中的user的业务id',
   app_id varchar(64) DEFAULT NULL COMMENT '区块链应用的编号',
   ...
+  UNIQUE KEY unique_uuid (sign_user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=700001 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 ```
 
