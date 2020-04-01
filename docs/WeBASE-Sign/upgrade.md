@@ -7,7 +7,7 @@
 
 **升级操作说明**
 
-如果WeBASE-Sign中有已存在的私钥数据，则在`tb_user`表新增列`sign_user_id`和`app_id`后，还需要赋予初始值且`sign_user_id`需赋予唯一值
+如果WeBASE-Sign中有已存在的私钥数据，则在`tb_user`表新增列`sign_user_id`和`app_id`后，还需要赋予其初始值，且`sign_user_id`需赋予唯一值
 
 登陆mysql后，进入到相应database中，以`webasesign`的database为例；
 ```
@@ -20,11 +20,20 @@ mysql> use webasesign;
 mysql> alter table tb_user add column sign_user_id varchar(64) not null;
 mysql> alter table tb_user add column app_id varchar(64) not null;
 
-// 为已存在的user赋予sign_user_id和app_id随机的值即可，sign_user_id需赋予唯一值
-// app_id设置为所有都一样
-mysql> update table tb_user set app_id = 'app_default' where 1=1;
-// sign_user_id随意设置一个值
-mysql> update table tb_user set sign_user_id = '{yourValue}'' where userId = '{yourUserId}';
+// 添加sign_user_id的唯一约束
+mysql> alter table tb_user add unique key unique_uuid (sign_user_id);
+
+```
+
+**如果仅将WeBASE-Node-Manager的私钥迁移至WeBASE-Sign中，则无需进行下面的sign_user_id赋值操作**
+
+如果有已存在的user的sign_user_id和app_id赋值，sign_user_id赋予唯一的随机值即可；
+
+```
+// app_id可以设置为一样，也可根据user具体标签赋予不同的app_id值
+mysql> update tb_user set app_id = 'app_default' where 1=1;
+// 为每个user的sign_user_id设置一个唯一的随机值
+mysql> update tb_user set sign_user_id = '{yourValue}'' where user_id = '{yourUserId}';
 ```
 
 
@@ -33,6 +42,6 @@ mysql> update table tb_user set sign_user_id = '{yourValue}'' where userId = '{y
 
 值得注意的是，现在WeBASE-Sign新建私钥用户后，不再返回`privateKey字段`，即私钥不离开WeBASE-Sign数据库。
 
-- WeBASE-Sign的数据签名接口`/sign`传参修改，原用的`userId`改为传入`signUserId`，且可以传值`encryptType`指定该用户的类型为ECDSA或国密算法；
+- WeBASE-Sign的数据签名接口`/sign`传参修改，原用的`userId`改为传入`signUserId`，签名时会根据user的类型选择ECDSA或国密算法进行签名；
 
-- WeBASE-Sign新增停用用户的接口`/user`(DELETE)，可根据`signUserId`停用相应用户
+- WeBASE-Sign新增停用用户的接口`/user`(DELETE)，可根据`signUserId`停用相应用户；

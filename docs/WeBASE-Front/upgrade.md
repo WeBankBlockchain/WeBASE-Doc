@@ -10,7 +10,7 @@ WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产�
 在WeBASE-Front的Web页面部署合约、发交易时所使用的私钥均为本地私钥，与WeBASE-Node-Manager私钥区分开；
 
 ##### 节点管理与节点前置调整
-- WeBASE-Node-Manager原来存储于WeBASE-Front的私钥将由WeBASE-Sign托管（通过传入`signUserId`和`appId`来新建私钥和交易签名），WeBASE-Front将不再保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
+- WeBASE-Node-Manager的私钥将通过WeBASE-Sign托管（新建私钥、保存私钥和交易签名），不再由WeBASE-Front生成和保存（仅保存公钥与地址）；
 - 节点管理WeBASE-Node-Manager **v1.3.0前**通过节点前置WeBASE-Front的`/trans/handle`和`/contract/deploy`进行合约交易与部署，**v1.3.0后**将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
 
 因此WeBASE-Node-Manager私钥数据需要转移到WeBASE-Sign数据库中，具体操作请参考[WeBASE-Node-Manager v1.3.0升级说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/upgrade.html#v1-3-0)

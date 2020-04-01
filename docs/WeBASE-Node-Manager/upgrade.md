@@ -34,18 +34,25 @@ mysql> use webasenodemanager;
 mysql> alter table tb_user add column sign_user_id varchar(64) default null;
 mysql> alter table tb_user add column app_id varchar(64) not null;
 
+// 添加sign_user_id的唯一约束
+mysql> alter table tb_user add unique key unique_uuid (sign_user_id);
+
 // 生成唯一的sign_user_id和app_id
 ...
 // 为已存在的用户的sign_user_id和app_id赋值
 ...
 ```
 
-**注意，此处生成的sign_user_id与app_id将用于节点管理迁移至WeBASE-Sign的私钥数据**
+**注意，WeBASE-Node-Manager赋值的sign_user_id与app_id将在私钥数据迁移时，一同赋值给WeBASE-Sign tb_user表的对应字段**
 
 ##### 私钥数据移植到WeBASE-Sign
 
-- WeBASE-Node-Manager原来存储于WeBASE-Front的私钥将由WeBASE-Sign托管，前置将不再保存WeBASE-Node-Manager的私钥（仅保存公钥与地址）；
+- WeBASE-Node-Manager的私钥将通过WeBASE-Sign托管（新建私钥、保存私钥和交易签名），不再由WeBASE-Front生成和保存（仅保存公钥与地址）；
 - WeBASE-Node-Manager将通过WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
+
+如已安装WeBASE-Sign，则按照[WeBASE-Sign v1.3.0升级文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/upgrade.html#v1-3-0)更新其`tb_user`表，再执行私钥数据转移操作；
+
+如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后（运行WeBASE-Sign服务后会自动创建tb_user表），再执行私钥数据转移操作；
 
 **转移WeBASE-Node-Manager私钥到WeBASE-Sign的操作说明**
 
@@ -54,16 +61,14 @@ mysql> alter table tb_user add column app_id varchar(64) not null;
 2. 在WeBASE-Node-Manager数据库中的`tb_user`表和`tb_user_key_mapping`表，获取所有WeBASE-Node-Manager的私钥数据，包括`tb_user`表中的`sign_user_id`和`app_id`（前文所插入的值），地址`address`与公钥`publick_key`，还有`tb_user_key_mapping`表中的私钥`private_key`；
 3. 在WeBASE-Sign数据库中，将上文获得的所有私钥数据按对应字段，执行insert操作，插入到其`tb_user`表中；
 
-如已安装WeBASE-Sign，则安装[WeBASE-Sign升级文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/upgrade.html#v1-3-0)更新其`tb_user`表；
-如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后（运行WeBASE-Sign服务后会自动创建tb_user表），再执行私钥数据转移操作；
 
 **升级操作说明**
 
-登陆mysql后，进入到相应database中，以`webasenodemanager`和`webasesign`的database为例；
+登陆mysql，进入到相应database中，以`webasenodemanager`和`webasesign`的database为例；
 ```
-mysql -uroot -p123456
+> mysql -uroot -p123456
 
-// mysql 命令行
+// 选择webase-node-manager数据库
 mysql> use webasenodemanager;
 
 // 使用left join查询所有私钥数据(address,public_key,sign_user_id,app_id,private_key)
