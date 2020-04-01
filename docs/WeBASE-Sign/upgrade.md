@@ -1,5 +1,7 @@
 # 升级说明
 
+WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign/blob/master/Changelog.md)进行阅读
+
 #### v1.3.0
 
 ##### 私钥数据表字段更新
