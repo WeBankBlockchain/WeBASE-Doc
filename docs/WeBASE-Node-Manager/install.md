@@ -15,6 +15,10 @@
 * 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.md)
 * 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
 
+**通过WeBASE-Sign私钥管理**
+WeBASE-Node-Manager v1.3.0+将通过WeBASE-Sign进行私钥管理，即使用WeBASE-Node-Manager v1.3.0+的版本需要同步安装WeBASE-Sign v1.3.0，详情可参考[升级文档](upgrade.html)进行阅读
+
+
 **国密支持：**
 
 WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，与[WeBASE-Front v1.2.2+](../WeBASE-Front/index.html)配合使用
