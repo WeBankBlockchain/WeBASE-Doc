@@ -51,9 +51,9 @@ mysql> alter table tb_user add unique key unique_uuid (sign_user_id);
 - WeBASE-Node-Manager的私钥将通过WeBASE-Sign托管（新建私钥、保存私钥和交易签名），不再由WeBASE-Front生成和保存（仅保存公钥与地址）；
 - WeBASE-Node-Manager将通过WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
 
-如已安装WeBASE-Sign，则按照[WeBASE-Sign v1.3.0升级文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/upgrade.html#v1-3-0)更新其`tb_user`表，再执行私钥数据转移操作；
+如已安装WeBASE-Sign，则按照[WeBASE-Sign v1.3.0升级文档](../WeBASE-Sign/upgrade.html#v1-3-0)更新其`tb_user`表，再执行私钥数据转移操作；
 
-如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后（运行WeBASE-Sign服务后会自动创建tb_user表），再执行私钥数据转移操作；
+如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](../WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后（运行WeBASE-Sign服务后会自动创建tb_user表），再执行私钥数据转移操作；
 
 **转移WeBASE-Node-Manager私钥到WeBASE-Sign的操作说明**
 
