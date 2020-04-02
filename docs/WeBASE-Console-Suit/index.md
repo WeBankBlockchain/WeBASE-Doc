@@ -360,11 +360,11 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ### v1.3.0
 
-WeBASE-Front升级至最新版v1.3.0，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front/blob/master/Changelog.md)进行阅读
+WeBASE-Front升级至最新版v1.3.0，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
-WeBASE-Node-Manager升级至最新版v1.3.0，可查看[节点管理服务升级说明](../WeBASE-Node-Manager/upgrade.md)，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager/blob/master/Changelog.md)进行阅读
+WeBASE-Node-Manager升级至最新版v1.3.0，可查看[节点管理服务升级说明](../WeBASE-Node-Manager/upgrade.md)，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
-WeBASE-Sign升级至最新版v1.3.0，可查看[签名服务升级说明](../WeBASE-Sign/upgrade.md)，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign/blob/master/Changelog.md)进行阅读
+WeBASE-Sign升级至最新版v1.3.0，可查看[签名服务升级说明](../WeBASE-Sign/upgrade.md)，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
 ## 附录
 
