@@ -73,5 +73,7 @@ WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产�
 2. 启用RabbitMQ的`rabbitmq_managerment`功能,（在mq服务所在主机中运行`rabbitmq-plugins enable rabbitmq_management`）；
 3. 配置`application.yml`中`spring-rabbitmq`项，通过`host`, `port`连接mq server, 且`username`, `password`有足够权限配置管理mq服务；
 
+*注：需要在build.gradle的dependency中添加`org.springframework.boot:spring-boot-starter-amqp:1.5.9.RELEASE`的依赖*
+
 **WeBASE-Front默认不启用事件消息推送功能**，如需启用请参考[附录-链上事件订阅和通知](./appendix.html#id11)
 
