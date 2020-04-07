@@ -4,7 +4,9 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 
 #### v1.3.0
 
-WeBASE-Node-Manager v1.3.0后，将通过WeBASE-Sign来管理私钥和对交易签名，因此作出以下修改：
+WeBASE-Node-Manager v1.3.0后，将通过WeBASE-Sign来管理私钥和对交易签名，可查看以下升级说明进行修改：
+1. 私钥用户数据表`tb_user`新增字段`sign_user_id`和`app_id`
+2. 将WeBASE-Node-Manager的私钥数据移植到WeBASE-Sign数据库
 
 生成私钥的流程
 ![使用sign生成私钥的流程](../../images/WeBASE/new_generate_pri.png)
