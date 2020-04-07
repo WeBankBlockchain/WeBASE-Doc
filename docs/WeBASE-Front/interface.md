@@ -123,7 +123,7 @@ HTTP POST
 | **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
 | -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
 | 1        | 所属群组     | groupId      | int      |              | 是       |                      |
-| 2        | 用户编号     | signUserId    | String   |              | 是       | WeBASE-Sign中的用户编号 |
+| 2        | 用户编号     | signUserId    | String   |     64         | 是       | WeBASE-Sign中的用户编号 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
 | 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
@@ -2428,7 +2428,7 @@ HTTP POST
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 用户编号       | signUserId      | String   |              | 是       | WeBASE-Sign用户编号（查询方法可不传）                          |
+| 1        | 用户编号       | signUserId      | String   |     64         | 是       | WeBASE-Sign用户编号（查询方法可不传）                          |
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
