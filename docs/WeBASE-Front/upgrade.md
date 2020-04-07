@@ -4,16 +4,22 @@ WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https:/
 
 #### v1.3.0
 
-##### 私钥管理调整
+##### 私钥管理修改
 - 节点前置Web页面中的**私钥管理**转移至**合约管理**Tab下，改为**测试用户**管理
 
 WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产；因此Web页面中的**私钥管理**转移至**合约管理**Tab下，改为**测试用户**管理；
 
 在WeBASE-Front的Web页面部署合约、发交易时所使用的私钥均为本地私钥，与WeBASE-Node-Manager私钥区分开；
 
-##### 节点管理与节点前置调整
+##### 节点管理与前置私钥模块调整
 - WeBASE-Node-Manager的私钥将通过WeBASE-Sign托管（新建私钥、保存私钥和交易签名），不再由WeBASE-Front生成和保存（仅保存公钥与地址）；
 - 节点管理WeBASE-Node-Manager **v1.3.0前**通过节点前置WeBASE-Front的`/trans/handle`和`/contract/deploy`进行合约交易与部署，**v1.3.0后**将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
+
+生成私钥的流程（此处为type=2的外部私钥，WeBASE-Front的私钥始终留在Front的数据库中）
+![使用sign生成私钥的流程](../../images/WeBASE/new_generate_pri.png)
+
+交易签名的流程
+![使用sign交易签名的流程](../../images/WeBASE/new_tx_sign.png)
 
 因此WeBASE-Node-Manager私钥数据需要转移到WeBASE-Sign数据库中，具体操作请参考[WeBASE-Node-Manager v1.3.0升级说明](../WeBASE-Node-Manager/upgrade.html#v1-3-0)
 
