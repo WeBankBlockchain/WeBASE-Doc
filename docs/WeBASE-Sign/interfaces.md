@@ -29,7 +29,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/newUser?signUserId=&?appId=&encryptType=0
+http://localhost:5004/WeBASE-Sign/user/newUser?signUserId={signUserId}?appId={appId}&encryptType=0
 ```
 
 #### 响应参数
@@ -127,7 +127,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/user_111/userInfo
+http://localhost:5004/WeBASE-Sign/user/{signUserId}/userInfo
 ```
 
 #### 响应参数
