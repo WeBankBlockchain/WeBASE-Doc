@@ -2344,7 +2344,7 @@ HTTP POST
 
 ```
 curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "user": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
 ```
 
 传入合约abi:
