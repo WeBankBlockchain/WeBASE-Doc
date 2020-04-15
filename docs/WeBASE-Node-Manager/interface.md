@@ -1545,6 +1545,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 5    | funcName     | String         | 否     | 合约方法名                 |
 | 6    | contractAddress     | String         | 是     | 合约地址   |
 | 7   | funcParam    | List | 是     | 合约方法入参               |
+| 8   | contractAbi    | List | 否     | 合约abi/合约单个函数的abi               |
 
 ***2）入参示例***
 
@@ -1559,6 +1560,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
     "contractName":"HelloWorld",
     "funcName":"set",
     "funcParam":["gwes"],
+    "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],
     "contractId":200002,
     "contractAddress":"0x7bd586b045e3684dbcd5506cb175c5d771f38d13"
 }
