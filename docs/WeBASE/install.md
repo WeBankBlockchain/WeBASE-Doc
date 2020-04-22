@@ -76,7 +76,7 @@ Python3.4及以上版本，需安装PyMysql依赖包：
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.3/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.4/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -104,9 +104,9 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.2.2
-webase.mgr.version=v1.2.2
-webase.front.version=v1.2.3
+webase.web.version=v1.2.4
+webase.mgr.version=v1.2.4
+webase.front.version=v1.2.4
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -150,7 +150,7 @@ node.path=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.2.0
+fisco.version=2.3.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
