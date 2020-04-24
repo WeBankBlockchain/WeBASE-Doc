@@ -468,7 +468,7 @@ grafana将自动绑定3000端口并自动安装时钟和Json的插件。
 
 #### 3.5 导入Dashboard模板
 
-[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)会自动生成数据的dashboard模板，数据的路径位于：WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json
+[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)会自动生成数据的dashboard模板，数据的路径位于：WeBASE-Collect-Bee/WeBASE-Collect-Bee-core/src/main/scripts/grafana/default_dashboard.json
 
 请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json文件
 
