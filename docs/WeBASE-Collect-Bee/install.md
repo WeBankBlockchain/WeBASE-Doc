@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | FISCO-BCOS | >= 2.0， 1.x版本请参考V0.5版本 |
 | Bash | 需支持Bash（理论上来说支持所有ksh、zsh等其他unix shell，但未测试）|
-| Java | >= JDK[1.8] | |
+| Java | JDK[1.8] | |
 | Git | 下载的安装包使用Git | |
 | MySQL | >= mysql-community-server[5.7] | |
 | zookeeper | >= zookeeper[3.4] | 只有在进行集群部署的时候需要安装|
@@ -492,6 +492,14 @@ WeBASE-Collect-Bee默认集成了swagger的插件，支持通过可视化的控�
 ![[swagger控制台]](../../images/WeBASE-Collect-Bee/swagger.png)
 
 **请注意， swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件**
+
+swagger可使用配置开启或关闭，配置文件修改及操作可参考2.2章节。
+```
+## 打开swagger
+button.swagger=on
+## 关闭swagger
+button.swagger=off
+```
 
 #### 4.1 查看API文档：
 
