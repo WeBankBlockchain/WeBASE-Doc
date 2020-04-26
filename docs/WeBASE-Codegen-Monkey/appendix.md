@@ -196,8 +196,6 @@ mysql > GRANT ALL PRIVILEGES ON *.* TO 'test'@localhost IDENTIFIED BY '123456' W
 mysql > flush PRIVILEGES;
 ```
 
-  **注意，以上语句仅适用于开发环境，不能直接在实际生产中使用！！！以上设置会使数据库在所有网络上都可以访问，请按具体的网络拓扑和权限控制情况，设置网络和权限帐号 **
-
 （6）测试是否成功
 
 - 登录数据库
@@ -212,6 +210,8 @@ mysql -utest -p123456 -h localhost -P 3306
 mysql > create database webasesign;
 ```
 
+  **以上语句仅适用于开发环境，不能直接在实际生产中使用！！！以上设置会使数据库在所有网络上都可以访问，请按具体的网络拓扑和权限控制情况，设置网络和权限帐号**
+  
 #### 5. zookeeper 安装
 zookeeper 支持单机和集群部署，推荐使用集群部署的方式，请参考zookeeper官网的说明：
 
