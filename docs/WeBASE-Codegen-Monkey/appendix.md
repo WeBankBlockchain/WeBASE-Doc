@@ -207,7 +207,9 @@ mysql -utest -p123456 -h localhost -P 3306
 - 创建数据库
 
 ```sql
-mysql > create database webasesign;
+mysql > create database webasebee;
+mysql > use webasebee;
+
 ```
 
   **以上语句仅适用于开发环境，不能直接在实际生产中使用！！！以上设置会使数据库在所有网络上都可以访问，请按具体的网络拓扑和权限控制情况，设置网络和权限帐号**
