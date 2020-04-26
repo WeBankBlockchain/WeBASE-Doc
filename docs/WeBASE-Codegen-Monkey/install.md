@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | FISCO-BCOS | >= 2.0， 1.x版本请参考V0.5版本 |
 | Bash | 需支持Bash（理论上来说支持所有ksh、zsh等其他unix shell，但未测试）|
-| Java | >= JDK[1.8] |JAVA安装可参考附录2|
+| Java | JDK[1.8] |JAVA安装可参考附录2|
 | Git | 下载的安装包使用Git | Git安装可参考附录3|
 | MySQL | >= mysql-community-server[5.7] | MySQL安装可参考附录4|
 | zookeeper | >= zookeeper[3.4] | 只有在进行集群部署的时候需要安装，zookeeper安装可参考附录5|
@@ -260,7 +260,17 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 ![[swagger控制台]](../../images/WeBASE-Collect-Bee/swagger.png)
 
-**请注意，swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件**
+**请注意，swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件。 **
+
+如果未在monkey工程中配置打开swagger选项，则默认关闭，需要在配置文件中打开。
+
+打开方法：
+
+打开config/resources/application.properties，添加：
+```
+button.swagger=on
+```
+
 
 #### 4.1 查看API文档：
 
