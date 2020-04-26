@@ -2334,7 +2334,7 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
 | 8        | 合约版本       | version           | String      |         |   否       |                                            |
@@ -2342,23 +2342,11 @@ HTTP POST
 
 **2）数据格式**
 
-不传入合约abi:
-```
-{
-    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
-    "contractName":"HelloWorld",
-    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
-    "funcName":"set",
-    "funcParam":["Hi,Welcome!"],
-    "groupId" :"1"
-}
-```
-
 示例：
 
 ```
 curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "userId": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+"HelloWorld", "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}], funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
 ```
 
 传入合约abi:

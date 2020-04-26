@@ -29,8 +29,7 @@
 WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用WeBASE v1.2.2及以上版本
 
 具体需要适配国密版FISCO-BCOS的地方有：
-1. 在配置文件`application.properties`中开启web3sdk的国密开关；
-2. 合约编译支持国密版：
-    1. WeBASE-Transaction编译国密版智能合约，需要用solcJ-gm的jar包替换web3sdk默认使用的ethereum的solcJ jar包;
+- 合约编译支持国密版：
+    - WeBASE-Transaction编译国密版智能合约，需要用solcJ-gm的jar包替换web3sdk默认使用的ethereum的solcJ jar包;
 
 安装详情可查看下一章节的[WeBASE-Transaction部署说明](../WeBASE-Transaction/install.html)
