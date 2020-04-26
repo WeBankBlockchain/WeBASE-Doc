@@ -56,9 +56,6 @@ WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产�
 
 具体修改可参考[接口文档](../WeBASE-Front/interface.html)
 
-##### 国密与非国密切换将自动配置
-
-web3sdk的国密切换将在前置启动时，自动配置`encryptType`，无需手动设置
 
 #### v1.2.3
 

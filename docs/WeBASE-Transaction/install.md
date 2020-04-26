@@ -24,9 +24,10 @@ WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-doc
 ```
 
 开启web3sdk的国密开关:
-- web3sdk的国密切换将在启动时自动配置`encryptType`，无需手动设置
 
-使用国密版solcJ jar包：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
+- 开启web3sdk的国密开关：将配置文件`application.properties`中sdk配置的`encryptType`从`0`修改为`1`；
+
+使用国密版solcJ jar包进行合约编译：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
 1. 下载国密版solcJ的jar包后，放置在项目根目录的`/lib`文件夹中
 2. 在`build.gradle`引入web3sdk处通过`exclude`去除ethereum的solcJ jar包
 3. 通过`fileTree`引入`/lib`的国密版solcJ的jar包
