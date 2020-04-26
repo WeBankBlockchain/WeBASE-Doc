@@ -18,6 +18,8 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | --- | --- | --- | --- | --- |
 | system.orgId | N | 组织机构ID，用于区分不同的机构 | 10000 | FB001 |
 | system.nodeStr | Y | 连接区块链节点的nodeStr，nodeName@[IP]:[PORT], 其中prot为channel port | node1@ip:8822 | - |
+| system.encryptType | N | 加密类型： 0-RSA, 1-gm | 0 | 0 |
+
 
 #### 1.3 数据库配置
 
@@ -73,6 +75,7 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | monitor.[contractName].[methodName/eventName].generated=false | N | 是否抓取特定合约中特定method或event的数据 | on/off | on |
 | monitor.[contractName].[eventName].ignoreParam=XXX,XXX | N | 忽略特定合约特定event的特定字段不进行抓取 | xxx,xxx |  |
 | length.[contractName].[methodName or eventName].paraName | N | 指定特定字段在数据库表中的长度 |  | 512 |
+| button.swagger | N | 是否打开swagger功能，请务必在生成环境关闭此开关 | on/off | off |
 
 ### 2. Java安装
 
