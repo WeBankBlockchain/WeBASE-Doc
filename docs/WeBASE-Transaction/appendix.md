@@ -219,7 +219,6 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 | sdk.keepAlive                                                | sdk线程池配置                                                |
 | sdk.groupConfig.allChannelConnections[0].groupId             | sdk连接的群组id                                              |
 | sdk.groupConfig.allChannelConnections[0].connectionsStr[0]   | sdk连接的节点的ip和channelPort                               |
-| sdk.encryptType                                              | sdk的加密类型：0：标准，1：国密，需要与链的类型一致          |
 | constant.signServer                                          | WeBASE-Sign签名服务ip端口                                    |
 | constant.privateKey                                          | 本地配置私钥                                                 |
 | constant.cronTrans                                           | 轮询上链时间间隔                                             |
