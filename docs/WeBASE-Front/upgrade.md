@@ -51,7 +51,14 @@ WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产�
 
 - WeBASE-Front的所有接口中`useAes`字段将默认为`true`，即私钥默认采用aes加密保存，调用时可不传入`useAes`；
 
+##### 部署合约时不再自动注册CNS
+- `/trans/handle`接口中，`contractAbi`修改为必填，即需要传入合约abi或合约单个函数的abi。
+
 具体修改可参考[接口文档](../WeBASE-Front/interface.html)
+
+##### 国密与非国密切换将自动配置
+
+web3sdk的国密切换将在前置启动时，自动配置`encryptType`，无需手动设置
 
 #### v1.2.3
 
