@@ -519,7 +519,7 @@ a.请求正常返回结果
 | 203005  | invalid sign user id, only support letter and digit  | signUserId不正确，仅支持数字字母下划线               |
 | 203006  | app id cannot be blank                | appId不可为空               |
 | 203007  | app id invalid, only support letter and digit | appId不正确，仅支持数字字母下划线               |
-| 203008  | encrypt type should be 0 (guomi) or 1 (ecdsa) | encryptType仅支持0或1               |
+| 203008  | encrypt type should be 0 (ecdsa) or 1 (guomi) | encryptType仅支持0或1               |
 | 203009  | encoded data string must be hex string  | encodedDataStr仅支持十六进制String               |
 | 303001  | user is already exists                | 用户已存在          |
 | 303002  | user does not exist                   | 用户不存在          |
