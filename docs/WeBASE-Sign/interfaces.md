@@ -269,8 +269,8 @@ HTTP GET
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
 |----------|----------|------------|----------|------------|----------|-------------------|
 | 1        | 应用编号 | appId     | String    |               | 是       | 用于标志用户的应用编号 |
-| 2        | 页码     | pageNumber | Integer |              | 否       | 页码，同时为空则返回全部 |
-| 3        | 页大小    | pageSize | Integer |              | 否       | 页大小，同时为空则返回全部 |
+| 2        | 页码     | pageNumber | Integer |              | 是       | 页码，同时为空则返回全部 |
+| 3        | 页大小    | pageSize | Integer |              | 是       | 页大小，同时为空则返回全部 |
 
 
 **2）数据格式**
@@ -295,7 +295,6 @@ http://localhost:5004/WeBASE-Sign/user/list/group_01/1/5
 | 3.5       | 公钥    | publicKey  | toHexString |           | 是        |                  |
 | 3.6       | 描述    | description| String   |              | 是        |                  |
 | 3.7       | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
-| 3.8      | 用户状态 |status     | String |               | 是        | 0: 作废, 1: 正常 |
 | 4        | 总量    | totalCount   | Long      |             | 否       | 数据总量 |
 
 **2）数据格式**
@@ -315,8 +314,7 @@ ECDSA用户列表：
             "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
             "privateKey": "",
             "description": null,
-            "encryptType": 0,
-            "status": "1"
+            "encryptType": 0
         }
     ],
     "totalCount": 1
