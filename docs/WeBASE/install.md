@@ -160,7 +160,7 @@ node.path=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.2.0
+fisco.version=2.4.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
