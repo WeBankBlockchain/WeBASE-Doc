@@ -1,6 +1,95 @@
 # 升级说明
 
-WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager/blob/master/Changelog.md)进行阅读
+WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
+
+#### v1.3.0
+
+WeBASE-Node-Manager v1.3.0后，将通过WeBASE-Sign来管理私钥和对交易签名，可查看以下升级说明进行修改：
+1. 私钥用户数据表`tb_user`新增字段`sign_user_id`和`app_id`
+2. 将WeBASE-Node-Manager的私钥数据移植到WeBASE-Sign数据库
+
+生成私钥的流程
+![使用sign生成私钥的流程](../../images/WeBASE/new_generate_pri.png)
+
+交易签名的流程
+![使用sign交易签名的流程](../../images/WeBASE/new_tx_sign.png)
+
+##### 私钥用户数据表字段新增
+
+- 数据库中的`tb_user`新增了varchar类型的字段`sign_user_id`和`app_id`，其中`signUserId`会在新建私钥时用随机的UUID String赋值并保存；
+
+tb_user表字段的修改：
+```
+CREATE TABLE IF NOT EXISTS tb_user (
+  user_id int(11) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
+  user_name varchar(64) binary NOT NULL COMMENT '用户名',
+  ...
+  sign_user_id varchar(64) NOT NULL COMMENT '签名服务中的user的业务id',
+  app_id varchar(64) DEFAULT NULL COMMENT '区块链应用的编号',
+  ...
+  UNIQUE KEY unique_uuid (sign_user_id)
+) ENGINE=InnoDB AUTO_INCREMENT=700001 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+```
+
+**新增字段升级操作说明**
+
+登陆mysql后，进入到相应database中，以`webasenodemanager`的database为例；
+```
+mysql -uroot -p123456
+
+// mysql 命令行
+mysql> use webasenodemanager;
+
+// 在tb_user中添加列
+mysql> alter table tb_user add column sign_user_id varchar(64) default null;
+mysql> alter table tb_user add column app_id varchar(64) not null;
+
+// 添加sign_user_id的唯一约束
+mysql> alter table tb_user add unique key unique_uuid (sign_user_id);
+
+// 生成唯一的sign_user_id和app_id
+...
+// 为已存在的用户的sign_user_id和app_id赋值
+...
+```
+
+**注意，WeBASE-Node-Manager赋值的sign_user_id与app_id将在私钥数据迁移时，一同赋值给WeBASE-Sign tb_user表的对应字段**
+
+##### 私钥数据移植到WeBASE-Sign
+
+- WeBASE-Node-Manager的私钥将通过WeBASE-Sign托管（新建私钥、保存私钥和交易签名），不再由WeBASE-Front生成和保存（仅保存公钥与地址）；
+- WeBASE-Node-Manager将通过WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
+
+如已安装WeBASE-Sign，则按照[WeBASE-Sign v1.3.0升级文档](../WeBASE-Sign/upgrade.html#v1-3-0)更新其`tb_user`表，再执行私钥数据转移操作；
+
+如未安装WeBASE-Sign，则按照[WeBASE-Sign安装文档](../WeBASE-Sign/install.html)配置环境并运行WeBASE-Sign后（运行WeBASE-Sign服务后会自动创建tb_user表），再执行私钥数据转移操作；
+
+**转移WeBASE-Node-Manager私钥到WeBASE-Sign的操作说明**
+
+用户需要通过以下操作将存于节点服务数据库(如`webasenodemanager`数据库)的私钥数据导出，并导入到WeBASE-Sign数据库(如`webasesign`数据库)中
+1. 由于保存到数据库的私钥值是经过AES加密后存储的，因此，需**保证WeBASE-Front和WeBASE-Sign application.yml中的`constant-aesKey`字段的值一样**；
+2. 在WeBASE-Node-Manager数据库中的`tb_user`表和`tb_user_key_mapping`表，获取所有WeBASE-Node-Manager的私钥数据，包括`tb_user`表中的`sign_user_id`和`app_id`（前文所插入的值），地址`address`与公钥`publick_key`，还有`tb_user_key_mapping`表中的私钥`private_key`；
+3. 在WeBASE-Sign数据库中，将上文获得的所有私钥数据按对应字段，执行insert操作，插入到其`tb_user`表中；
+
+
+**升级操作说明**
+
+登陆mysql，进入到相应database中，以`webasenodemanager`和`webasesign`的database为例；
+```
+> mysql -uroot -p123456
+
+// 选择webase-node-manager数据库
+mysql> use webasenodemanager;
+
+// 使用left join查询所有私钥数据(address,public_key,sign_user_id,app_id,private_key)
+mysql> select a.address,a.public_key,a.sign_user_id,a.app_id,b.private_key from tb_user a left join tb_user_key_mapping b on(a.user_id=b.user_id) where b.map_status=1
+
+// 选择webase-sign数据库进行插入操作
+mysql> use webasesign;
+
+// 将上述操作获取的(address,public_key,sign_user_id,app_id,private_key)插入到webase-sign的tb_user表
+// 略
+```
 
 #### v1.2.2
 
@@ -248,7 +337,7 @@ mysql> alter table tb_method add column contract_type tinyint(4) DEFAULT '0' COM
 
 - 在表`tb_method`插入系统合约的默认数据
 
-可以参考[WeBASE-Node-Manager v1.2.0](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.1)源码中的webase-dml.sql
+可以参考[WeBASE-Node-Manager v1.2.0](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.0)源码中的webase-dml.sql
 
 ```
 -- (system config info 0x1000) setValueByKey

@@ -91,7 +91,7 @@ HTTP POST
 | 4        | 合约Bin      | contractBin | String         |              | 是       |                                                    |
 | 5        | 合约Abi      | contractAbi | List\<Object\> |              | 是       | JSON数组                                           |
 | 6        | 构造方法参数 | funcParam   | List\<Object\> |              | 否       | JSON数组                                           |
-| 7 | 签名用户编号 | signUserId | int | | 否 | signType为2时必填 |
+| 7        | 签名用户编号 | signUserId | String         |               | 否       | signType为2时必填                                 |
 
 **2）数据格式**
 ```
@@ -102,7 +102,7 @@ HTTP POST
   "contractBin":"0xXXXXX",
   "contractAbi":[],
   "funcParam":["hello"],
-  "signUserId":100001
+  "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3"
 }
 ```
 #### 响应参数
@@ -304,7 +304,7 @@ http://127.0.0.1:5003/WeBASE-Transaction/contract/deployInfo/1/10001
 | 3.6      | 合约地址     | contractAddress | String   |              | 是       |                      |
 | 3.7      | 方法参数     | funcParam       | String   |              | 是       |                      |
 | 3.8      | 签名类型     | signType        | int      |              | 是       |                      |
-| 3.9      | 签名用户编号 | signUserId      | int      |              | 是       |                      |
+| 3.9      | 签名用户编号 | signUserId      | String      |              | 是       |                      |
 | 3.10     | 请求上链次数 | requestCount    | int      |              | 是       |                      |
 | 3.11     | 处理状态     | handleStatus    | int      |              | 是       | 0-待处理，1-处理成功 |
 | 3.12     | 交易hash     | transHash       | String   |              | 是       |                      |
@@ -328,7 +328,7 @@ a.请求正常返回结果
     "contractAddress": "XXX",
     "funcParam": "[]",
     "signType": 0,
-    "signUserId": 0,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
     "requestCount": 1,
     "handleStatus": 1,
     "transHash": "XXX",
@@ -432,7 +432,7 @@ HTTP POST
 | 6        | 合约Abi    | contractAbi     | List\<Object\> |              | 是       | JSON数组                                           |
 | 7        | 调用方法名 | funcName        | String         |              | 是       |                                                    |
 | 8        | 方法参数   | funcParam       | List\<Object\> |              | 否       | JSON数组                                           |
-| 9 | 签名用户编号 | signUserId | int | | 否 | signType为2时必填 |
+| 9       | 签名用户编号 | signUserId     | String        |               | 否        | signType为2时必填 |
 
 **2）数据格式**
 ```
@@ -445,7 +445,7 @@ HTTP POST
   "contractAbi":[],
   "funcName":"set",
   "funcParam":["hello"],
-  "signUserId":100001
+  "signUserId":"458ecc77a08c486087a3dcbc7ab5a9c3"
 }
 ```
 #### 响应参数
@@ -715,7 +715,7 @@ http://127.0.0.1:5003/WeBASE-Transaction/trans/transInfo/1/20001
 | 3.7      | 方法名       | funcName        | String   |              | 是       |                      |
 | 3.8      | 方法参数     | funcParam       | String   |              | 是       |                      |
 | 3.9      | 签名类型     | signType        | int      |              | 是       |                      |
-| 3.10     | 签名用户编号 | signUserId      | int      |              | 是       |                      |
+| 3.10     | 签名用户编号 | signUserId      | String      |              | 是       |                      |
 | 3.11     | 请求上链次数 | requestCount    | int      |              | 是       |                      |
 | 3.12     | 处理状态     | handleStatus    | int      |              | 是       | 0-待处理，1-处理成功 |
 | 3.13     | 交易hash     | transHash       | String   |              | 是       |                      |
@@ -741,7 +741,7 @@ a.请求正常返回结果
     "funcName": "set",
     "funcParam": "XXX",
     "signType": 0,
-    "signUserId": 0,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
     "requestCount": 1,
     "handleStatus": 1,
     "transHash": "XXX",

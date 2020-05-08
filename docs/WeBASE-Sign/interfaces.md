@@ -2,31 +2,37 @@
 
 ## 1. 新增用户接口
 
-### 接口描述
+### 1.1. 新增ECDSA/国密用户接口
 
-新增用户。
+#### 接口描述
 
-### 接口URL
+根据传入的`encryptType`值，新增ECDSA或国密公私钥用户。
 
-http://localhost:5004/WeBASE-Sign/user/newUser
+#### 接口URL
 
-### 调用方法
+http://localhost:5004/WeBASE-Sign/user/newUser?signUserId={signUserId}?appId={appId}&encryptType={encryptType}
+
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
-无
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 用户编号  | signUserId | String |  64           | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
+| 2        | 应用编号 | appId   | String |      64       | 是       | 用于标志用户的应用编号,仅支持数字字母下划线 |
+| 3        | 加密类型  | encryptType  | Integer |              | 否       | 默认为0，0: ECDSA, 1: 国密  |
 
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/newUser
+http://localhost:5004/WeBASE-Sign/user/newUser?signUserId={signUserId}?appId={appId}&encryptType=0
 ```
 
-### 响应参数
+#### 响应参数
 
 **1）参数表**
 
@@ -34,67 +40,182 @@ http://localhost:5004/WeBASE-Sign/user/newUser
 |----------|----------|------------|----------|--------------|----------|-------------------|
 | 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
 | 2        | 提示信息 | message    | String   |              | 是       |                   |
-| 3        | 返回数据 | data       | Object   |              | 是       |       |
-| 3.1 | 用户编号 | userId | Integer | | 是 | |
-| 3.2 | 私钥信息 | privateKey | String |  | 是 | |
-| 3.3 | 账户地址 | address | String | | 是 | |
-| 3.4 | 公钥 | publicKey | String | | 是 | |
-| 3.5 | 描述 | description | String | | 是 | |
+| 3        | 返回数据 | data       | Object   |              | 是       |                    |
+| 3.1      | 用户编号 | signUserId | String  |              | 是        |                    |
+| 3.2      | 应用编号 | appId      | String  |              | 是        |                    |
+| 3.3      | 私钥信息 | privateKey | String   |              | 是        |                   |
+| 3.4      | 账户地址 | address    | String   |              | 是        |                   |
+| 3.5      | 公钥    | publicKey  | toHexString |           | 是        |                  |
+| 3.6      | 描述    | description| String   |              | 是        |                  |
+| 3.7      | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
 
 **2）数据格式**
 
 a.请求正常返回结果
+
+ECDSA用户：
 ```
 {
     "code": 0,
     "message": "success",
     "data": {
-        "userId": 100001,
-        "address": "0xaf7f9ad9560aa7cde37c693ba373707ab31d7823",
-        "publicKey": "0x6efc55a03436057c4181160c195581e4f6b8a2135ea1030a326d5339a4f4a2a9bf2d603e020c77fa5b52af109f18955747bd0bcfa249955707d3932b544a9c65",
-        "privateKey": "d3d8583b27bc5be0bca0ffb9d53db5a3324585148cd88e629a0b1084d2755bc8",
-        "description": null
+        "signUserId": "user_111",
+        "appId": "group_01",
+        "address": "0x2df87ff79e8c85a318c00c82ee76e2581fbab0a8",
+        "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
+        "privateKey": "",
+        "description": null,
+        "encryptType": 0
     }
 }
 ```
-b.异常返回结果示例（信息详情请参看附录1）
+
+国密用户：
 ```
 {
-  "code": 103001,
-  "message": "system error",
-  "data": null
+    "code": 0,
+    "message": "success",
+    "data": {
+        "signUserId": "user_222",
+        "appId": "group_02",
+        "address": "0x0bc3465986845864fc1646dedf2dd892c0fe11be",
+        "publicKey": "0xd09d4efe3c127898186c197ae6004a9b40d7c7805fc7e31f7c4a835a4b9cf4148155cbd6dfcf3e5fd84acf1ea55c26b5a9b05d118b456738be2becf0e667c0d6",
+        "privateKey": "",
+        "description": null,
+        "encryptType": 1
+    }
 }
 ```
 
+b.异常返回结果示例（信息详情请参看附录1）
+```
+{
+    "code": 303001,
+    "message": "user of this sign user id is already exists",
+    "data": null
+}
+```
+
+
 ## 2. 查询用户接口
 
-### 接口描述
+### 2.1 根据userId查询用户
+
+####  接口描述
 
 根据用户编号查询用户信息。
 
-### 接口URL
+#### 接口URL
 
-http://localhost:5004/WeBASE-Sign/user/{userId}/userInfo
+http://localhost:5004/WeBASE-Sign/user/{signUserId}/userInfo
 
-### 调用方法
+#### 调用方法
 
 HTTP GET
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
-| 1        | 用户编号 | userId     | int      |              | 是       |          |
+| 1        | 用户编号  | signUserId | String |        64       | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
 
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/100001/userInfo
+http://localhost:5004/WeBASE-Sign/user/{signUserId}/userInfo
 ```
 
-### 响应参数
+#### 响应参数
+
+**1）参数表**
+
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
+| 2        | 提示信息 | message    | String   |              | 是       |                   |
+| 3        | 返回数据 | data       | Object   |              | 是       |                    |
+| 3.1      | 用户编号 | signUserId | String  |              | 是        |                    |
+| 3.2      | 应用编号 | appId      | String  |              | 是        |                    |
+| 3.3      | 私钥信息 | privateKey | String   |              | 是        |                   |
+| 3.4      | 账户地址 | address    | String   |              | 是        |                   |
+| 3.5       | 公钥    | publicKey  | toHexString |           | 是        |                  |
+| 3.6       | 描述    | description| String   |              | 是        |                  |
+| 3.7       | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
+
+
+**2）数据格式**
+
+a.请求正常返回结果
+
+ECDSA用户：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "signUserId": "user_111",
+        "appId": "group_01",
+        "address": "0x2df87ff79e8c85a318c00c82ee76e2581fbab0a8",
+        "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
+        "privateKey": "",
+        "description": null,
+        "encryptType": 0
+    }
+}
+```
+
+
+b.异常返回结果示例（信息详情请参看附录1）
+
+```
+{
+    "code": 303002,
+    "message": "user does not exist",
+    "data": null
+}
+```
+
+
+## 3. 私钥用户管理接口
+
+### 3.1. 停用私钥用户
+
+#### 接口描述
+
+通过修改私钥用户的`status`状态值来停用私钥用户；停用后，其他接口将不返回被停用的私钥用户
+
+#### 接口URL
+
+http://localhost:5004/WeBASE-Sign/user
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
+| -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
+| 1        | 用户编号  | signUserId | String |       64        | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
+
+**2）数据格式**
+
+```
+http://localhost:5004/WeBASE-Sign/user
+```
+
+```
+{
+  "signUserId": "user_111"
+}
+```
+
+#### 响应参数
 
 **1）参数表**
 
@@ -102,12 +223,6 @@ http://localhost:5004/WeBASE-Sign/user/100001/userInfo
 | -------- | -------- | ----------- | -------- | ------------ | -------- | ----------------- |
 | 1        | 返回码   | code        | String   |              | 是       | 返回码信息请附录1 |
 | 2        | 提示信息 | message     | String   |              | 是       |                   |
-| 3        | 返回数据 | data        | Object   |              | 是       |                   |
-| 3.1      | 用户编号 | userId      | Integer  |              | 是       |                   |
-| 3.2      | 用户私钥 | privateKey  | String   |              | 是       |                   |
-| 3.3      | 账户地址 | address     | String   |              | 是       | 链上地址          |
-| 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
-| 3.5      | 描述     | description | String   |              | 是       |                   |
 
 **2）数据格式**
 
@@ -116,14 +231,7 @@ a.请求正常返回结果
 ```
 {
     "code": 0,
-    "message": "success",
-    "data": {
-        "userId": 100001,
-        "address": "0xaf7f9ad9560aa7cde37c693ba373707ab31d7823",
-        "publicKey": "0x6efc55a03436057c4181160c195581e4f6b8a2135ea1030a326d5339a4f4a2a9bf2d603e020c77fa5b52af109f18955747bd0bcfa249955707d3932b544a9c65",
-        "privateKey": "d3d8583b27bc5be0bca0ffb9d53db5a3324585148cd88e629a0b1084d2755bc8",
-        "description": null
-    }
+    "message": "success"
 }
 ```
 
@@ -131,39 +239,96 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 ```
 {
-  "code": 103001,
-  "message": "system error",
-  "data": null
+    "code": 303002,
+    "message": "user does not exist",
+    "data": null
 }
 ```
 
-## 3. 用户列表接口
 
-### 接口描述
+### 3.2. 清除私钥用户缓存
 
-查询所有用户信息列表。
+#### 接口描述
 
-### 接口URL
+私钥用户的缓存用于缓存私钥数据到内存中，提高私钥签名效率；此接口可删除所有用户缓存信息
 
-http://localhost:5004/WeBASE-Sign/user/list
+#### 接口URL
 
-### 调用方法
+http://localhost:5004/WeBASE-Sign/user/all
 
-HTTP GET
+#### 调用方法
 
-### 请求参数
+HTTP DELETE
+
+#### 请求参数
 
 **1）参数表**
 
-无
+| **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
+| -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
+| -        | -  | - | - |       -        | -       | -  |
 
 **2）数据格式**
 
 ```
-http://localhost:5004/WeBASE-Sign/user/list
+http://localhost:5004/WeBASE-Sign/user/all
 ```
 
-### 响应参数
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明**          |
+| -------- | -------- | ----------- | -------- | ------------ | -------- | ----------------- |
+| 1        | 返回码   | code        | String   |              | 是       | 返回码信息请附录1 |
+| 2        | 提示信息 | message     | String   |              | 是       |                   |
+
+**2）数据格式**
+
+a.请求正常返回结果
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+## 4. 用户列表接口
+
+### 4.1. 根据appId查询用户列表（分页）
+
+#### 接口描述
+
+根据传入的`appId`值，查询所有所有属于该appId的用户信息列表。
+
+#### 接口URL
+
+http://localhost:5004/WeBASE-Sign/user/list/{appId}/{pageNumber}/{pageSize}
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|------------|----------|-------------------|
+| 1        | 应用编号 | appId     | String    |               | 是       | 用于标志用户的应用编号 |
+| 2        | 页码     | pageNumber | Integer |              | 是       | 页码，同时为空则返回全部 |
+| 3        | 页大小    | pageSize | Integer |              | 是       | 页大小，同时为空则返回全部 |
+
+
+**2）数据格式**
+
+```
+http://localhost:5004/WeBASE-Sign/user/list/group_01/1/5
+```
+
+#### 响应参数
 
 **1）参数表**
 
@@ -172,36 +337,36 @@ http://localhost:5004/WeBASE-Sign/user/list
 | 1        | 返回码   | code        | String   |              | 是       | 返回码信息请附录1 |
 | 2        | 提示信息 | message     | String   |              | 是       |                   |
 | 3        | 返回数据 | data        | List     |              | 是       |                   |
-| 3.1      | 用户编号 | userId      | Integer  |              | 是       |                   |
-| 3.2      | 私钥信息 | privateKey  | String   |              | 是       |                   |
-| 3.3      | 账户地址 | address     | String   |              | 是       |                   |
-| 3.4      | 公钥     | publicKey   | String   |              | 是       |                   |
-| 3.5      | 描述     | description | String   |              | 是       |                   |
+| 3.1      | 用户编号 | signUserId | String  |              | 是        |                    |
+| 3.2      | 应用编号 | appId      | String  |              | 是        |                    |
+| 3.3      | 私钥信息 | privateKey | String   |              | 是        |                   |
+| 3.4      | 账户地址 | address    | String   |              | 是        |                   |
+| 3.5       | 公钥    | publicKey  | toHexString |           | 是        |                  |
+| 3.6       | 描述    | description| String   |              | 是        |                  |
+| 3.7       | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
+| 4        | 总量    | totalCount   | Long      |             | 否       | 数据总量 |
 
 **2）数据格式**
 
 a.请求正常返回结果
 
+ECDSA用户列表：
 ```
 {
-  "code": 0,
-  "message": "success",
-  "data": [
-    {
-      "userId": 100001,
-      "address": "0x27a5f691c5a51047536f2696cc43f4c50646d0e2",
-      "publicKey": "0x2b1fd1d0aabd000d1dffff564a5684ddf1ca99c6207a09157e8fb19cdcb2753d29ce46bc20cf001dc13db88cd69a1de87171719a1174996393ee5b1120a93b1f",
-      "privateKey": "714366fd634fb655203753e33925ea778c86626fc72b2552f09f2f2baa8b9cba",
-      "description": null
-    },
-    {
-      "userId": 100002,
-      "address": "0xf70c3fe19644bc1c86783e4e3c1e9ebc1404c557",
-      "publicKey": "0x6963e90daddfa21dd816c29aac967869c82bb83efc4552243971fda0dff817eded322d4067d4d75fdcfdf17221bd0a8b1089406e1192d2479123e3b1d87fb542",
-      "privateKey": "5804b992e2df805bfc23009a5bedc614e52f9b8d07f4a7bbe786cea9d234c3f8",
-      "description": null
-    }
-  ]
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "signUserId": "user_111",
+            "appId": "group_01",
+            "address": "0x2df87ff79e8c85a318c00c82ee76e2581fbab0a8",
+            "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
+            "privateKey": "",
+            "description": null,
+            "encryptType": 0
+        }
+    ],
+    "totalCount": 1
 }
 ```
 
@@ -215,39 +380,46 @@ b.异常返回结果示例（信息详情请参看附录1）
 }
 ```
 
-## 4. 数据签名接口
 
-### 接口描述
+## 5. 数据签名接口
 
-指定用户对数据进行签名。
+### 5.1. ECDSA/国密数据签名接口
 
-### 接口URL
+#### 接口描述
+
+指定用户通过ECDSA/国密SM2对数据进行签名。
+
+#### 接口URL
 
 http://localhost:5004/WeBASE-Sign/sign
 
-### 调用方法
+#### 调用方法
 
 HTTP POST
 
-### 请求参数
+#### 请求参数
 
 **1）参数表**
 
 | **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
 | -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
-| 1        | 用户编号 | userId         | int      |              | 是       |                                                              |
-| 2        | 请求数据 | encodedDataStr | String   |              | 是       | 使用web3sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString |
+| 1        | 用户编号  | signUserId | String |         64      | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
+| 2        | 请求数据 | encodedDataStr | String   |              | 是       | 十六进制String类型，使用web3sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString|
 
 **2）数据格式**
 
 ```
+http://localhost:5004/WeBASE-Sign/sign
+```
+
+```
 {
-  "userId":100001,
-  "encodedDataStr":"XXX"
+  "signUserId": "user_111",
+  "encodedDataStr": "0xba001"
 }
 ```
 
-### 响应参数
+#### 响应参数
 
 **1）参数表**
 
@@ -267,7 +439,7 @@ a.请求正常返回结果
     "code": 0,
     "message": "success",
     "data": {
-        "signDataStr": "xxx"
+        "signDataStr": "1c3f59a48593b66de4c57fe99f9c429811aa2dc9b495823cd99faa3e72b4a4d02e04bb7c3da6390a17adc00b0e740293c6306229a26a0c0cf2974581880d19e57b"
     }
 }
 ```
@@ -276,12 +448,14 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 ```
 {
-  "code": 103001,
-  "message": "system error",
-  "data": null
+    "code": 203009,
+    "message": "encoded data string must be hex string",
+    "data": null
 }
 ```
 
+
+<!-- 
 
 ## 5. 查询EncryptType接口
 
@@ -330,7 +504,7 @@ a.请求正常返回结果
   "data": 0
 }
 ```
-
+ -->
 ## 附录
 
 ### 1. 返回码信息列表
@@ -339,9 +513,16 @@ a.请求正常返回结果
 |---------|---------------------------------------|----------------------------|
 | 0       | success                               | 正常                       |
 | 103001  | system error                          | 系统异常                   |
-| 203003  | param exception              | 参数校验异常               |
-| 303001  | user is already exists                     | 用户已存在          |
-| 303002  | user does not exist                     | 用户不存在          |
-| 303003  | privateKey is null                     | 用户私钥为空          |
-| 303004  | privateKey decode fail                   | 私钥解码失败          |
+| 103002  | param valid fail                      | 参数校验失败                   |
+| 203003  | param exception                       | 参数校验异常               |
+| 203004  | sign user id cannot be blank          | signUserId不可为空               |
+| 203005  | invalid sign user id, only support letter and digit  | signUserId不正确，仅支持数字字母下划线               |
+| 203006  | app id cannot be blank                | appId不可为空               |
+| 203007  | app id invalid, only support letter and digit | appId不正确，仅支持数字字母下划线               |
+| 203008  | encrypt type should be 0 (ecdsa) or 1 (guomi) | encryptType仅支持0或1               |
+| 203009  | encoded data string must be hex string  | encodedDataStr仅支持十六进制String               |
+| 303001  | user is already exists                | 用户已存在          |
+| 303002  | user does not exist                   | 用户不存在          |
+| 303003  | privateKey is null                    | 用户私钥为空          |
+| 303004  | privateKey decode fail                | 私钥解码失败          |
 | 303005  | privateKey format error | 私钥格式错误 |

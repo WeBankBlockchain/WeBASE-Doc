@@ -160,4 +160,4 @@ solidity版本默认0.4.25,如果需要修改请按以下步骤修改：
 
 ### 2.2 部署
 
-请参考[部署说明](https://webase-web.readthedocs.io/en/latest/docs/WeBASE-Web/install.html)
+请参考[部署说明](install.html)
