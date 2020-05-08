@@ -1,10 +1,60 @@
 # 升级说明
 
-<!-- #### v1.3.0
+WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
-- WeBASE-Front中私钥管理转由WeBASE-Sign管理，接口调用方式不变（传入用户地址`address`）；WeBASE-Front数据库中原有的私钥无需删除修改，且需要通过以下sql脚本，插入到WeBASE-Sign数据库中；
+#### v1.3.0
 
-- WeBASE-Front的接口中`useAes`字段(私钥是否采用aes加密)将默认为`true`，且私钥由WeBASE-Sign同一加密管理； -->
+##### 私钥管理修改
+- 节点前置Web页面中的**私钥管理**转移至**合约管理**Tab下，改为**测试用户**管理
+
+WeBASE-Front本地私钥仅用于本地的合约调试，不建议用于生产；因此Web页面中的**私钥管理**转移至**合约管理**Tab下，改为**测试用户**管理；
+
+在WeBASE-Front的Web页面部署合约、发交易时所使用的私钥均为本地私钥，与WeBASE-Node-Manager私钥区分开；
+
+##### 节点管理与前置私钥模块调整
+- WeBASE-Node-Manager的私钥将通过WeBASE-Sign托管（新建私钥、保存私钥和交易签名），不再由WeBASE-Front生成和保存（仅保存公钥与地址）；
+- 节点管理WeBASE-Node-Manager **v1.3.0前**通过节点前置WeBASE-Front的`/trans/handle`和`/contract/deploy`进行合约交易与部署，**v1.3.0后**将通过`/trans/handleWithSign`接口和`/contract/deployWithSign`接口进行合约部署与交易
+
+生成私钥的流程（此处为type=2的外部私钥，WeBASE-Front的私钥始终留在Front的数据库中）
+![使用sign生成私钥的流程](../../images/WeBASE/new_generate_pri.png)
+
+交易签名的流程
+![使用sign交易签名的流程](../../images/WeBASE/new_tx_sign.png)
+
+因此WeBASE-Node-Manager私钥数据需要转移到WeBASE-Sign数据库中，具体操作请参考[WeBASE-Node-Manager v1.3.0升级说明](../WeBASE-Node-Manager/upgrade.html#v1-3-0)
+
+##### API字段更新
+- WeBASE-Front的`/trans/handleWithSign`接口和`/contract/deployWithSign`接口传参修改如下；
+
+`/trans/handleWithSign`接口：
+```
+{
+    "groupId" :1,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
+    "contractAbi":[],
+    "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
+    "funcName":"set",
+    "funcParam":["test"]
+}
+```
+
+`/contract/deployWithSign`接口
+```
+{
+    "groupId":1,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
+    "bytecodeBin":"xxx",
+    "abiInfo": [],
+    "funcParam":[]
+}
+```
+
+- WeBASE-Front的所有接口中`useAes`字段将默认为`true`，即私钥默认采用aes加密保存，调用时可不传入`useAes`；
+
+##### 部署合约时不再自动注册CNS
+- `/trans/handle`接口中，`contractAbi`修改为必填，即需要传入合约abi或合约单个函数的abi。
+
+具体修改可参考[接口文档](../WeBASE-Front/interface.html)
 
 
 #### v1.2.3
@@ -32,6 +82,8 @@
 1. 安装RabbitMQ Server，启动mq服务，并确保RabbitMQ Server服务所在服务器的`5672`, `15672`端口可访问；
 2. 启用RabbitMQ的`rabbitmq_managerment`功能,（在mq服务所在主机中运行`rabbitmq-plugins enable rabbitmq_management`）；
 3. 配置`application.yml`中`spring-rabbitmq`项，通过`host`, `port`连接mq server, 且`username`, `password`有足够权限配置管理mq服务；
+
+*注：需要在build.gradle的dependencies中添加`org.springframework.boot:spring-boot-starter-amqp:1.5.9.RELEASE`的依赖*
 
 **WeBASE-Front默认不启用事件消息推送功能**，如需启用请参考[附录-链上事件订阅和通知](./appendix.html#id11)
 

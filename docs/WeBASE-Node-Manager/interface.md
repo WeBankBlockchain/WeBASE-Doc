@@ -1299,8 +1299,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
             "contractType": 0,
             "contractSource": "cHJhZ21hIHNvbGlkaXgICAJbmFtZSA9IG47CiAgICB9Cn0=",
             "contractAbi": "[\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
-            "contractBin": "60806040526004361061004c576000398de7e4ddf5fdc9ccbcfd44565fed695cd960b0029",
-            "bytecodeBin": "608060405234801561001057600080004d4c",
+            "contractBin": "608060405234801561001057600080004d4c",
+            "bytecodeBin": "60806040526004361061004c576000398de7e4ddf5fdc9ccbcfd44565fed695cd960b0029",
             "deployTime": "2019-06-11 18:11:33",
             "description": null,
             "createTime": "2019-06-05 16:40:40",
@@ -1389,8 +1389,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
         "contractType": 0,
         "contractSource": "cHJhZ21hIHNvbGlkaXgICAJbmFtZSA9IG47CiAgICB9Cn0=",
         "contractAbi": "[\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
-        "contractBin": "60806040526004361061004c576000398de7e4ddf5fdc9ccbcfd44565fed695cd960b0029",
-        "bytecodeBin": "608060405234801561001057600080004d4c",
+        "bytecodeBin": "60806040526004361061004c576000398de7e4ddf5fdc9ccbcfd44565fed695cd960b0029",
+        "contractBin": "608060405234801561001057600080004d4c",
         "deployTime": "2019-06-11 18:11:33",
         "description": null,
         "createTime": "2019-06-05 16:40:40",
@@ -1500,8 +1500,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
         "contractType": null,
         "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuM0=",
         "contractAbi": "[]",
-        "contractBin": "60806040526004361061004c576000357c010274c87bff322ea2269b80029",
-        "bytecodeBin": "608060405234801561001057629",
+        "bytecodeBin": "60806040526004361061004c576000357c010274c87bff322ea2269b80029",
+        "contractBin": "608060405234801561001057629",
         "contractAddress": "0xa2ea2280b3a08a3ae2e1785dff09561e13915fb2",
         "deployTime": "2019-06-11 18:58:33",
         "description": null,
@@ -3919,7 +3919,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 }
 ```
 
-### 11.4 查询私钥
+### 11.4 查询私钥（1.3.0已移除）
 
 
 #### 11.4.1 传输协议规范
@@ -4670,18 +4670,18 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted
 
 
 
-### 14.1 查询CNS接口
+### 13.7 查询CNS接口
 
 根据群组id和合约名（或合约名加版本）获取CNS的list列表。
 
-#### 14.1.1 传输协议规范
+#### 13.7.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/cns/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 14.1.2 请求参数
+#### 13.7.2 请求参数
 
 ***1）入参表***
 
@@ -4700,7 +4700,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/cns/list?groupId=1&contrac
 
 
 
-#### 14.1.3 返回参数
+#### 13.7.3 返回参数
 
 ***1）出参表***
 
@@ -4734,19 +4734,19 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/cns/list?groupId=1&contrac
 ```
 
 
-### 15.1 获取系统配置
+### 13.8 获取系统配置
 
 根据群组id获取系统配置SystemConfig的list列表，目前只支持tx_count_limit, tx_gas_limit两个参数。
 
 
-#### 15.1.1 传输协议规范
+#### 13.8.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/sys/config/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 15.1.2 请求参数
+#### 13.8.2 请求参数
 
 ***1）入参表***
 
@@ -4763,7 +4763,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config/list?groupId=1&pageSize=10&
 ```
 
 
-#### 15.1.3 返回参数
+#### 13.8.3 返回参数
 
 ***1）出参表***
 
@@ -4802,19 +4802,19 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config/list?groupId=1&pageSize=10&
 ```
 
 
-### 15.2 设置系统配置
+### 13.9 设置系统配置
 
 系统配置管理员设置系统配置，目前只支持tx_count_limit, tx_gas_limit两个参数。
 
 
-#### 15.2.1 传输协议规范
+#### 13.9.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/sys/config**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 15.2.2 请求参数
+#### 13.9.2 请求参数
 
 ***1）入参表***
 
@@ -4844,7 +4844,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config
 ```
 
 
-#### 15.2.3 返回参数
+#### 13.9.3 返回参数
 
 ***1）出参表***
 
@@ -4875,20 +4875,20 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config
 
 
 
-### 16.1 获取节点列表(节点管理)
+### 13.10 获取节点列表(节点管理)
 
 获取节点的list列表，包含节点id，节点共识状态。
 
 注：接口返回所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
 
-#### 16.1.1 传输协议规范
+#### 13.10.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/consensus/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 16.1.2 请求参数
+#### 13.10.2 请求参数
 
 ***1）入参表***
 
@@ -4907,7 +4907,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus/list?groupId=1&p
 ```
 
 
-#### 16.1.3 返回参数
+#### 13.10.3 返回参数
 
 ***1）出参表***
 
@@ -4945,19 +4945,19 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus/list?groupId=1&p
 ```
 
 
-### 16.2 设置节点共识状态接口（节点管理）
+### 13.11 设置节点共识状态接口（节点管理）
 
 节点管理相关接口，可用于节点三种共识状态的切换。分别是共识节点sealer, 观察节点observer, 游离节点remove
 
 
-#### 16.2.1 传输协议规范
+#### 13.11.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/consensus**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 16.2.2 请求参数
+#### 13.11.2 请求参数
 
 ***1）入参表***
 
@@ -4986,7 +4986,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
 ```
 
 
-#### 16.2.3 返回参数
+#### 13.12.3 返回参数
 
 ***1）出参表***
 
@@ -5020,21 +5020,21 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
 
 
 
-### 17.1 CRUD表格操作接口
+### 13.13 CRUD表格操作接口
 
 用于操作用户表的CRUD操作，包含create, desc, insert, update, select, remove。
 
 具体sql要求语法参考Fisco-bcos技术文档的  [Precompiled Crud API](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
 
 
-#### 17.1.1 传输协议规范
+#### 13.13.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/crud**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 17.1.2 请求参数
+#### 13.13.2 请求参数
 
 ***1）入参表***
 
@@ -5061,7 +5061,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 ```
 
 
-#### 17.1.3 返回参数
+#### 13.13.3 返回参数
 
 ***1）出参表***
 
@@ -5113,20 +5113,22 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 }
 ```
 
-### 18.1 获取证书列表接口
+## 14 证书管理模块
+
+### 14.1 获取证书列表接口
 
 获取证书的list列表，返回的列表包含证书指纹、证书内容、证书名字、证书的父证书、证书对应nodeid（节点证书）、证书有效期
 
 注：首次启动项目会自动拉取每一个Front的证书
 
-#### 18.1.1 传输协议规范
+#### 14.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 18.1.2 请求参数
+#### 14.1.2 请求参数
 
 ***1）入参表***
 
@@ -5143,7 +5145,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 ```
 
 
-#### 18.1.3 返回参数
+#### 14.1.3 返回参数
 
 ***1）出参表***
 
@@ -5191,19 +5193,19 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 ```
 
 
-### 18.2 根据指纹获取证书接口
+### 14.2 根据指纹获取证书接口
 
 根据指纹获取单个证书
 
 
-#### 18.2.1 传输协议规范
+#### 14.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 18.2.2 请求参数
+#### 14.2.2 请求参数
 
 ***1）入参表***
 
@@ -5220,7 +5222,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 ```
 
 
-#### 18.2.3 返回参数
+#### 14.2.3 返回参数
 
 ***1）出参表***
 
@@ -5265,18 +5267,18 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 ```
 
 
-### 18.3 导入证书接口
+### 14.3 导入证书接口
 
 导入保存证书文件
 
-#### 18.3.1 传输协议规范
+#### 14.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 18.3.2 请求参数
+#### 14.3.2 请求参数
 
 ***1）入参表***
 
@@ -5298,7 +5300,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 ```
 
 
-#### 18.3.3 返回参数
+#### 14.3.3 返回参数
 
 ***1）出参表***
 
@@ -5331,18 +5333,18 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 
 
-### 18.4 删除证书接口
+### 14.4 删除证书接口
 
 根据证书指纹删除一个证书
 
-#### 18.4.1 传输协议规范
+#### 14.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：DELETE
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 18.4.2 请求参数
+#### 14.4.2 请求参数
 
 ***1）入参表***
 
@@ -5364,7 +5366,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 ```
 
 
-#### 18.4.3 返回参数
+#### 14.4.3 返回参数
 
 ***1）出参表***
 
@@ -5386,18 +5388,181 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 }
 ```
 
-### 19.1 查询是否使用国密
+## 15 订阅事件管理
+
+### 15.1 获取已订阅的出块事件列表
+
+获取所有前置中已订阅的节点出块事件列表
+
+#### 15.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/event/newBlockEvent/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 15.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | groupId     | Integer      | 否     | 群组编号                       |
+| 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
+| 3    | pageSize    | Integer      | 否     | 页容量                       |
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pageNumber}/{pageSize}
+```
+
+
+#### 15.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | List        | 否       | newBlockEvent info                         
+| 3.1  | frontInfo   | String        | 否       | 前置对应IP                         
+| 3.1  | id          | String        | 否       | 订阅信息的id     
+| 3.1  | eventType   | Integer        | 否       | 事件通知类型，1: newBlockEvent, 2: contractEvent, 3: others                          
+| 3.1  | appId       | String        | 否       |  事件通知对应的应用Id 
+| 3.1  | groupId   | Integer        | 否       |    群组编号                       
+| 3.1  | exchangeName  | String        | 否       |   exchange名    
+| 3.1  | queueName   | String        | 否       |     队列名                 
+| 3.1  | routingKey   | String        | 否       |   路由键值
+| 3.1  | createTime   | String        | 否       |       订阅信息创建时间                 
+| 4    | totalCount  | Integer       | 否     | 1: 国密，0：非国密                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "frontInfo": "127.0.0.1",
+            "id": "8aba82b570f22a750170f22bcab90000",
+            "eventType": 1,
+            "appId": "app2",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "app2_block_b63",
+            "createTime": "2020-03-19 17:42:01"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+### 15.2 获取已订阅的合约Event事件列表
+
+获取所有前置中已订阅的合约Event事件列表
+
+#### 15.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/event/contractEvent/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 15.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | groupId     | Integer      | 否     | 群组编号                       |
+| 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
+| 3    | pageSize    | Integer      | 否     | 页容量                       |
+
+         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/event/contractEvent/list/{groupId}/{pageNumber}/{pageSize}
+```
+
+
+#### 15.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | List        | 否       | newBlockEvent info                         
+| 3.1  | frontInfo   | String        | 否       | 前置对应IP                         
+| 3.1  | id          | String        | 否       | 订阅信息的id     
+| 3.1  | eventType   | Integer        | 否       | 事件通知类型，1: newBlockEvent, 2: contractEvent, 3: others                          
+| 3.1  | appId       | String        | 否       |  事件通知对应的应用Id 
+| 3.1  | groupId   | Integer        | 否       |    群组编号                       
+| 3.1  | exchangeName  | String        | 否       |   exchange名    
+| 3.1  | queueName   | String        | 否       |     队列名                 
+| 3.1  | routingKey   | String        | 否       |   路由键值
+| 3.1  | createTime   | String        | 否       |     起始区块范围                 
+| 3.1  | fromBlock   | String        | 否       |      末区块范围                 
+| 3.1  | toBlock   | String        | 否       |       订阅信息创建时间                 
+| 3.1  | contractAddress  | String        | 否       |       订阅的合约地址                 
+| 3.1  | contractAbi   | String        | 否       |     对应合约ABI                 
+| 3.1  | topicList   | String        | 否       |       订阅的合约Event                 
+| 4    | totalCount  | Integer       | 否     | 1: 国密，0：非国密                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "frontInfo": "127.0.0.1",
+            "id": "8aba82b5708095af01708095e4f70001",
+            "eventType": 2,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "user1",
+            "routingKey": "user1_event_app1",
+            "fromBlock": "latest",
+            "toBlock": "latest",
+            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+            "topicList": "SetName(string)",
+            "createTime": "2020-02-26 16:21:12"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+## 16 其他接口
+
+### 16.1 查询是否使用国密
 
 获取WeBASE-Node-Manager是否使用国密版
 
-#### 18.2.1 传输协议规范
+#### 16.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/encrypt**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 18.2.2 请求参数
+#### 16.1.2 请求参数
 
 ***1）入参表***
 
@@ -5414,7 +5579,7 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
 ```
 
 
-#### 18.2.3 返回参数
+#### 16.1.3 返回参数
 
 ***1）出参表***
 

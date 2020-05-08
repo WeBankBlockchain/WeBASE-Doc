@@ -76,9 +76,9 @@ HTTP POST
 | 2        | 用户编号     | user         | String   |              | 是       | 用户编号或者用户地址 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
-| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |   合约编译的bytecode(bin)，用于部署合约|
-| 6        | 构造函数参数 | funcParam    | List     |              | 否       |                      |
-| 7        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
+| 6        | 构造函数参数 | funcParam    | List     |              | 否       |    合约构造函数所需参数 |
+| 7        | 合约版本     | version     | String    |             |   否       |  用于指定合约在CNS中的版本    |
 
 **2）数据格式**
 
@@ -120,22 +120,24 @@ HTTP POST
 
 **1）参数表**
 
-| **序号** | **中文**     | **参数名**  | **类型** | **最大长度** | **必填** | **说明**                  |
-| -------- | ------------ | ----------- | -------- | ------------ | -------- | ------------------------- |
-| 1        | 所属群组     | groupId     | int      |              | 是       |                           |
-| 2        | 签名用户编号 | signUserId  | String   |              | 是       | WeBASE-Sign服务的用户编号 |
-| 3        | 合约bin      | bytecodeBin | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
-| 4        | 合约abi      | contractAbi | List     |              | 是       | 合约编译后生成的abi文件内容    |
-| 5        | 构造函数参数 | funcParam   | List     |              | 否       |                           |
+| **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
+| -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
+| 1        | 所属群组     | groupId      | int      |              | 是       |                      |
+| 2        | 用户编号     | signUserId    | String   |     64         | 是       | WeBASE-Sign中的用户编号 |
+| 3        | 合约名称     | contractName | String   |              | 是       |                      |
+| 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
+| 6        | 构造函数参数 | funcParam    | List     |              | 否       |   合约构造函数所需参数                   |
+| 7        | 合约版本     | version     | String    |             |   否       |  用于指定合约在CNS中的版本    |
 
 **2）数据格式**
 
 ```
 {
     "groupId":1,
-    "signUserId":100001,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
     "bytecodeBin":"xxx",
-    "contractAbi": [],
+    "abiInfo": [],
     "funcParam":[]
 }
 ```
@@ -143,7 +145,7 @@ HTTP POST
 示例：
 
 ```
-curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"bytecodeBin\": \"608060405234801561001057600080fd5b506040805190810160405280600681526020017f68656c6c6f2100000000000000000000000000000000000000000000000000008152506000908051906020019061005c92919061011c565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d899600060405180806020018281038252838181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101095780601f106100de57610100808354040283529160200191610109565b820191906000526020600020905b8154815290600101906020018083116100ec57829003601f168201915b50509250505060405180910390a16101c1565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061015d57805160ff191683800117855561018b565b8280016001018555821561018b579182015b8281111561018a57825182559160200191906001019061016f565b5b509050610198919061019c565b5090565b6101be91905b808211156101ba5760008160009055506001016101a2565b5090565b90565b610391806101d06000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634ed3885e146100515780636d4ce63c146100ba575b600080fd5b34801561005d57600080fd5b506100b8600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061014a565b005b3480156100c657600080fd5b506100cf61021e565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561010f5780820151818401526020810190506100f4565b50505050905090810190601f16801561013c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b80600090805190602001906101609291906102c0565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d8996000604051808060200182810382528381815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561020d5780601f106101e25761010080835404028352916020019161020d565b820191906000526020600020905b8154815290600101906020018083116101f057829003601f168201915b50509250505060405180910390a150565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102b65780601f1061028b576101008083540402835291602001916102b6565b820191906000526020600020905b81548152906001019060200180831161029957829003601f168201915b5050505050905090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061030157805160ff191683800117855561032f565b8280016001018555821561032f579182015b8281111561032e578251825591602001919060010190610313565b5b50905061033c9190610340565b5090565b61036291905b8082111561035e576000816000905550600101610346565b5090565b905600a165627a7a723058201be6d6e6936e66c64b93771f9bd7ee708553fb6faf82e0273336fac2b1c6d83d0029\", \"funcParam\": [ ], \"groupId\": 1, \"signUserId\": 100001}"
+curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"bytecodeBin\": \"608060405234801561001057600080fd5b506040805190810160405280600681526020017f68656c6c6f2100000000000000000000000000000000000000000000000000008152506000908051906020019061005c92919061011c565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d899600060405180806020018281038252838181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156101095780601f106100de57610100808354040283529160200191610109565b820191906000526020600020905b8154815290600101906020018083116100ec57829003601f168201915b50509250505060405180910390a16101c1565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061015d57805160ff191683800117855561018b565b8280016001018555821561018b579182015b8281111561018a57825182559160200191906001019061016f565b5b509050610198919061019c565b5090565b6101be91905b808211156101ba5760008160009055506001016101a2565b5090565b90565b610391806101d06000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634ed3885e146100515780636d4ce63c146100ba575b600080fd5b34801561005d57600080fd5b506100b8600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061014a565b005b3480156100c657600080fd5b506100cf61021e565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561010f5780820151818401526020810190506100f4565b50505050905090810190601f16801561013c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b80600090805190602001906101609291906102c0565b507f9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d8996000604051808060200182810382528381815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561020d5780601f106101e25761010080835404028352916020019161020d565b820191906000526020600020905b8154815290600101906020018083116101f057829003601f168201915b50509250505060405180910390a150565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102b65780601f1061028b576101008083540402835291602001916102b6565b820191906000526020600020905b81548152906001019060200180831161029957829003601f168201915b5050505050905090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061030157805160ff191683800117855561032f565b8280016001018555821561032f579182015b8281111561032e578251825591602001919060010190610313565b5b50905061033c9190610340565b5090565b61036291905b8082111561035e576000816000905550600101610346565b5090565b905600a165627a7a723058201be6d6e6936e66c64b93771f9bd7ee708553fb6faf82e0273336fac2b1c6d83d0029\", \"funcParam\": [ ], \"groupId\": 1, \"signUserId\": "458ecc77a08c486087a3dcbc7ab5a9c3"}"
 ```
 
 #### 响应参数
@@ -557,7 +559,7 @@ HTTP POST
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/privateKey?useAes={useAes}&type={type}&userName={userName}**
+**http://localhost:5002/WeBASE-Front/privateKey?type={type}&userName={userName}**
 
 #### 调用方法
 
@@ -569,29 +571,42 @@ HTTP GET
 
 | **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
-| 1        | 是否需要加密私钥 | useAes | boolean      |             | 是        |                      |
-| 2 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户 |
+| 1 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户 |
 | 2        | 用户名 | userName | String        |             | 否   | 类型为本地用户时必填 |
 
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey?useAes=false&type=0&userName=test
+http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test
 ```
 
 #### 响应参数
 
 **1）数据格式**
+本地用户时：
 ```
 {
   "address": "0x2007e1430f41f75c850464307c0994472bd92ee0",
   "publicKey": "0x9bd35211855f9f8de22d8a8da7f30d35d62ab2c3d36ea5162008fcbb9faff4d83809f7033deb20049bf51e081105076ec7a09a847f852530f81e978b1eda0392",
   "privateKey": "42caa160cadcb635381b980ddd981171c862d3105981fe92d6db330f30615f21",
   "userName": "test",
-  "type": 0
+  "type": 0,
+  "signUserId": null, // 本地用户则为空
+  "appId": null // 本地用户则为空
 }
 ```
 
+外部用户时（来自WeBASE-Sign）：
+```
+{
+  "address": "0x2007e1430f41f75c850464307c0994472bd92ee0",
+  "publicKey": "0x9bd35211855f9f8de22d8a8da7f30d35d62ab2c3d36ea5162008fcbb9faff4d83809f7033deb20049bf51e081105076ec7a09a847f852530f81e978b1eda0392",
+  "userName": "test",
+  "type": 0,
+  "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
+  "appId": "458ecc77a08c486087a3dcbc7ab5a9c3"
+}
+```
 ### 2.2. 导入私钥接口
 
 #### 接口描述
@@ -618,7 +633,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=8cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&useAes=lili
+http://localhost:5002/WeBASE-Front/privateKey/import?privateKey=8cf98bd0f37fb0984ab43ed6fc2dcdf58811522af7e4a3bedbe84636a79a501c&userName=lili
 ```
 
 #### 响应参数
@@ -2315,43 +2330,29 @@ HTTP POST
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 用户编号       | user            | String   |              | 是       | 用户编号或者用户地址                           |
+| 1        | 用户编号       | user            | String   |              | 是       | 用户地址                          |
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
-| 5        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
-| 6        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 7        | 是否是加密私钥 | useAes          | boolean  |              | 是       |                                                |
-
+| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 6        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
+| 8        | 合约版本       | version           | String      |         |   否       |                                            |
+| 9        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
 
 **2）数据格式**
-
-不传入合约abi:
-```
-{
-    "useAes":false,
-    "user":"700001",
-    "contractName":"HelloWorld",
-    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
-    "funcName":"set",
-    "funcParam":["Hi,Welcome!"],
-    "groupId" :"1"
-}
-```
 
 示例：
 
 ```
 curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "funcName": "set", "funcParam": ["Hi,Welcome!"], "user": 700001, "useAes": false, "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+"HelloWorld", "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}], funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
 ```
 
 传入合约abi:
 ```
 {
-    "useAes ":false,
-    "user":"700001",
+    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName":"HelloWorld",
     "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
     "funcName":"set",
@@ -2413,21 +2414,24 @@ HTTP POST
 
 **1）参数表**
 
-| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
-| -------- | -------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 群组编号 | groupId         | int      |              | 是       | 群组编号，默认为1                                       |
-| 2        | 用户编号 | signUserId      | int      |              | 否       | 签名用户编号（查询方法可不传）                 |
-| 3        | 合约编译后生成的abi文件内容  | contractAbi     | List     |              | 是       |                                                |
-| 4        | 合约地址 | contractAddress | String   |              | 是       |                                                |
-| 5        | 方法名   | funcName        | String   |              | 是       |                                                |
-| 6        | 方法参数 | funcParam       | List     |              | 否       | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 用户编号       | signUserId      | String   |     64         | 是       | WeBASE-Sign用户编号（查询方法可不传）                          |
+| 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
+| 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
+| 4        | 方法名         | funcName        | String   |              | 是       |                                                |
+| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 6        | 方法参数       | funcParam       | List     |              | 否         | JSONArray，对应合约方法参数，多个参数以“,”分隔，根据所调用的合约方法判断是否必填 |
+| 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
+| 8        | 合约版本       | version           | String      |         |   否       |        CNS中的合约版本，不传入contractAbi时可传入合约地址与版本获取CNS上存储的合约ABI                                    |
+
 
 **2）数据格式**
 
 ```
 {
     "groupId" :1,
-    "signUserId":100001,
+    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
     "contractAbi":[],
     "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
     "funcName":"set",
@@ -2438,7 +2442,7 @@ HTTP POST
 示例：
 
 ```
-curl -X POST "http://localhost:5002/WeBASE-Front/trans/handleWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractAddress\": \"0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266\", \"funcName\": \"set\", \"funcParam\": [ \"test\" ], \"groupId\": 1, \"signUserId\": 100001}"
+curl -X POST "http://localhost:5002/WeBASE-Front/trans/handleWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractAddress\": \"0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266\", \"funcName\": \"set\", \"funcParam\": [ \"test\" ], \"groupId\": 1, \"signUserId\": "458ecc77a08c486087a3dcbc7ab5a9c3"}"
 ```
 
 #### 响应参数
@@ -2691,7 +2695,6 @@ HTTP POST
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
-| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false 
 
 **2）数据格式**
 
@@ -2758,7 +2761,6 @@ HTTP DELETE
 | 3        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 4        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 5        | 表名       | tableName       | String     |              |     否     | 当permissionType为userTable时不可为空 
-| 6        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -2824,7 +2826,6 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 被授予权限地址         | address        | String   |           | 是       |                                                |
 | 4        | 用户权限状态       | permissionState       | Object     |              |     是     | 使用{"permissionType": 1}格式，参照下文数据格式；1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限
-| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3011,7 +3012,6 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 配置的键         | configKey        | String   |           | 是       |   目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price                                             |
 | 4        | 配置的值       | configValue       | String     |              |     是    | tx_gas_limit范围为 [100000, 2147483647]
-| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3134,7 +3134,6 @@ HTTP POST
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | 节点类型       | nodeType       | String     |              |     是    | 节点类型：observer,sealer,remove 
 | 4      | 节点ID         | nodeId        | String   |           | 是       |   节点id，从节点根目录/conf/node.id获取                                             |
-| 5        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3200,7 +3199,6 @@ HTTP POST
 | 1        | 群组ID       | groupId            | int   |              | 是       | 节点所属群组ID                           |                                             |
 | 2        | 管理员地址       | fromAddress | String   |              | 是       |                                                |
 | 3        | SQL语句       | sql       | String     |              |     是    | 包含create, desc, insert, update, select, remove，小写
-| 4        | 是否为加密私钥       | useAes       | Boolean     |              |     否     | 默认值为false
 
 **2）数据格式**
 
@@ -3312,8 +3310,124 @@ b、失败：
 
 ## 7. 链上事件订阅接口
 
+### 7.1. 获取出块事件的订阅信息列表
 
-### 7.1. 订阅出块事件通知
+#### 接口描述
+
+获取所有订阅的出块事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{pageNumber}/{pageSize}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
+|     2    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
+
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{pageNumber}/{pageSize}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b570f22a750170f22bcab90000",
+            "eventType": 1,
+            "appId": "app2",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "app2",
+            "routingKey": "app2_block_b63",
+            "createTime": "2020-03-19 17:42:01"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 7.2. 获取出块事件的订阅信息
+
+#### 接口描述
+
+根据群组编号，应用编号获取该应用订阅的出块事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent/{groupId}/{appId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 群组编号       | groupId            | int   |              | 是       |                            |
+|     2    | 应用编号       | appId            | String   |              | 是       |                            |
+
+
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/newBlockEvent/{groupId}/{appId}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b570f22a750170f22bcab90000",
+            "eventType": 1,
+            "appId": "app2",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "app2",
+            "routingKey": "app2_block_b63",
+            "createTime": "2020-03-19 17:42:01"
+        }
+    ]
+}
+```
+
+### 7.3. 订阅出块事件通知
 
 #### 接口描述
 
@@ -3333,10 +3447,10 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号，仅支持数字字母和下划线                   |
 | 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，一般以用户名作队列名  |
+| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
 
 
 **2）数据格式**
@@ -3347,7 +3461,7 @@ HTTP POST
     "appId": "app1",
     "groupId": 1,
     "exchangeName": "group001",
-    "queueName": "user2"
+    "queueName": "app1"
 }
 ```
 
@@ -3371,7 +3485,187 @@ HTTP POST
 }
 ```
 
-### 7.2. 订阅合约event事件通知
+
+### 7.4. 取消订阅出块事件通知
+
+#### 接口描述
+
+取消在消息队列中获取出块的事件通知的订阅
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 数据编号 | id    | String         |              | 是        |   注册事件通知数据的唯一编号，可通过GET接口获取                  |
+| 2        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 3        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 4        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
+| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
+
+
+**2）数据格式**
+
+```
+{
+    "id":"8aba82b5707a1f5701707a248c340000",
+    "appId": "app1",
+    "groupId": 1,
+    "exchangeName": "group001",
+    "queueName": "app1"
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+### 7.5. 获取合约Event事件订阅信息列表
+
+#### 接口描述
+
+获取所有订阅的合约Event事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey及合约Event配置内容(fromBlock, toBlock, contractAddress..)等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractEvent/list/{pageNumber}/{pageSize}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
+|     2    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
+
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/contractEvent/list/{pageNumber}/{pageSize}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b57076ae09017076ae403a0001",
+            "eventType": 2,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "app1",
+            "routingKey": "app1_event_b3c",
+            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+            "fromBlock": "latest",
+            "toBlock": "latest",
+            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+            "topicList": "SetName(string)"
+        }
+    ],
+    "totalCount":1
+}
+```
+
+
+
+### 7.6. 获取合约Event事件订阅信息
+
+#### 接口描述
+
+根据群组编号，应用编号获取该应用订阅的合约Event事件配置信息
+
+将返回对应的id值, exchange, queue, routingKey及合约Event配置内容(fromBlock, toBlock, contractAddress..)等信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractEvent/{groupId}/{appId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|     1    | 群组编号       | groupId            | int   |              | 是       |                            |
+|     2    | 应用编号       | appId            | String   |              | 是       |                            |
+
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/contractEvent/{groupId}/{appId}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": "8aba82b57076ae09017076ae403a0001",
+            "eventType": 2,
+            "appId": "app1",
+            "groupId": 1,
+            "exchangeName": "group001",
+            "queueName": "app1",
+            "routingKey": "app1_event_b3c",
+            "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"}]",
+            "fromBlock": "latest",
+            "toBlock": "latest",
+            "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
+            "topicList": "SetName(string)",
+            "createTime": "2020-02-26 16:21:12"
+        }
+    ]
+}
+```
+
+
+### 7.7. 订阅合约event事件通知
 
 #### 接口描述
 
@@ -3391,16 +3685,15 @@ HTTP POST
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 1        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号，仅支持数字字母和下划线                   |
 | 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
 | 3        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
-| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，**一般以用户名作队列名**  |
+| 4        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
 | 5        | 合约abi  | contractAbi | List<Object>         |     |  是      | 合约的ABI，用于合约event解析 |
-| 6        | event起始区块  | fromBlock | String         |     | 是       | 最小值为1；填写`latest`，表示一直监听最新区块|
+| 6        | event起始区块  | fromBlock | String         |     | 是       | 默认`latest`，表示一直监听最新区块，最小值为1|
 | 7        | event末区块  | toBlock | String         |     | 是       |最小值为1，最大值为当前区块高度，需   要大于等于`fromBlock`；填写`latest`，表示一直监听最新区块|
 | 8        | 合约地址  | contractAddress | String   |     | 是       |合约地址 |
-| 9        | 合约event名列表  | topicList | List<String>         |     |  是    | 合约event事件名的list，以中括号括住，以英文逗号相隔，不带空格；如`[HelloWorld(string)]`|
-
+| 9        | 合约event列表  | topicList | List<String>         |     |  是    | List类型，合约Event事件列表，Event参数之间不带空格|
 
 **2）数据格式**
 
@@ -3410,12 +3703,13 @@ HTTP POST
     "appId": "app2",
     "groupId": 1,
     "exchangeName": "group001",
-    "queueName": "user2",
+    "queueName": "app2",
     "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}],
     "fromBlock": "latest",
     "toBlock": "latest",
     "contractAddress": "0x657201d59ec41d1dc278a67916f751f86ca672f7",
-    "topicList": ["SetName(string)","TransferEvent(string,address)"]
+    "topicList": ["SetName(string)","TransferEvent(string,address)"],
+    "createTime": "2020-02-26 16:21:12"
 }
 ```
 #### 响应参数
@@ -3438,8 +3732,61 @@ HTTP POST
 }
 ```
 
+### 7.8. 取消合约Event事件通知的订阅
 
-## 8 其他接口
+#### 接口描述
+
+取消在消息队列中获取合约Event事件通知的订阅
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractEvent**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 数据编号 | id    | String         |              | 是        |   注册事件通知数据的唯一编号，可通过GET接口获取                  |
+| 2        | 应用编号 | appId | String         |              | 是        |   注册事件通知的应用的唯一编号                   |
+| 3        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 4        | 交换机名字 | exchangeName      | String         |              | 是       |     队列所属交换机                   |
+| 5        | 队列名  | queueName      | String   |              | 是       | 队列名，以appId作队列名  |
+
+
+**2）数据格式**
+
+
+```
+{
+    "id": "8aba82b57076ae09017076ae403a0001",
+    "appId": "app2",
+    "groupId": 1,
+    "exchangeName": "group001",
+    "queueName": "app2"
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功则返回该app中剩余已订阅的合约Event事件通知：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": []
+}
+```
+
+
+## 8. 其他接口
 
 ### 8.1. 查询是否使用国密
 
@@ -3493,9 +3840,11 @@ a、成功：
 | 0      | success                                      | 成功                       |
 | 101001 | system error                                 | 系统异常                   |
 | 101002 | param valid fail                             | 参数校验异常               |
+| 101003 | web3jMap of groupId is null, please call /{groupId}/web3/refresh to refresh  | 连接当前群组失败，请调用/{groupId}/web3/refresh刷新群组               |
+| 101004 | groupList error for no group, web3jMap is empty | 群组列表为空，请检查节点共识状态|
 | 201001 | groupId cannot be empty                      | 群组编号不能为空           |
 | 201002 | user cannot be empty                         | 用户不能为空               |
-| 201003 | useAes cannot be empty                       | 是否为加密私钥不能为空     |
+| 201003 | useAes cannot be empty                       | 是否为加密私钥不能为空      |
 | 201004 | version cannot be empty                      | 合约版本不能为空           |
 | 201005 | funcName cannot be empty                     | 方法名不能为空             |
 | 201006 | abiInfo cannot be empty                      | abi内容不能为空            |
@@ -3532,6 +3881,8 @@ a、成功：
 | 201037 | user name is null                            | 用户名为空                 |
 | 201038 | user name already exists                     | 用户名已存在               |
 | 201039 | private key already exists                   | 私钥已存在                 |
+| 201040 | private key not exists                       | 私钥不存在                 |
+| 201041 | external user's appId and signUserId cannot be empty        | 私钥已存在                 |
 | 201101  | groupId cannot be empty                   |    群组编号不能为空      | 
 | 201102  | tableName cannot be empty         |    表名不能为空      |
 | 201103  | permissionType cannot be empty             |    权限类型不能为空      |
@@ -3542,6 +3893,7 @@ a、成功：
 | 201108  | system config value cannot be empty      |    系统配置value值不能为空 |
 | 201109  | node id cannot be empty                 |    节点id不能为空      |
 | 201110  | node type cannot be empty           |   节点类型（共识状态不能为空） |
+| 201130  | signUserId cannot be empty           |   signUserId不可为空 |
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
 | 201208  | unsupported for this system config key     |    不支持设置该系统配置      |
@@ -3562,6 +3914,12 @@ a、成功：
 | 201233  | Pem file content error |     pem证书内容错误     |
 | 201241  | Exchange or message queue not exists, please check mq server or mq configuration |     交换机或消息队列不存在，请检查mq-server运行状态及其配置     |
 | 201242  | Database error: data already exists in db |     数据库错误：该数据记录已存在于数据库中     |
+| 201243  | Block range error, from/toBlock must greater than 0, toBlock must be greater than fromBlock |  合约Event区块范围错误，from大于0，to大于from     |
+| 201244  | Database error: data not exists in db, please check your params |     该数据记录不存在，请检查参数     |
+| 201245  | Only support letter and digit, please check your params |     仅支持使用数字字母与下划线，请检查参数     |
+| 201246  | Register contractEvent failed, please check your param |     订阅合约事件失败，请检查参数格式     |
+| 201247  | Unregister event failed, please check mq server exchange |     取消订阅事件失败，请检查参数格式     |
+| 201248  | Contract abi invalid, please check abi          |     合约ABI格式错误，请检查入参     |
 
 
 ### 2. Precompiled Service说明
