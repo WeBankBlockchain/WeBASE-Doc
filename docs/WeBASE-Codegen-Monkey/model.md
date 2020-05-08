@@ -147,7 +147,8 @@ contract UserInfo {
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
 | block_height | bigint(20) | index |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
-| **function-paralist** |  |  |  | 方法字段列表 |
+| **function-paralist** |  |  |  | 函数入参字段列表 |
+| **function-outputlist** |  |  |  | 函数输出字段列表，以output1开始，到outputn |
 | tx_hash | varchar(255) | index |  | 交易哈希 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 

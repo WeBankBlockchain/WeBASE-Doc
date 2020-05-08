@@ -4,7 +4,7 @@
 
 ### 基本描述
 
-WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联盟链的工具集。
+WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联盟链的工具集。
 
 ### 主要功能
 
@@ -15,15 +15,16 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 5. 系统管理
 6. 系统监控
 7. 交易审计
-8. 账号管理
+8. 订阅事件
+9. 账号管理
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
 ### 部署架构
 
-这套管理工具主要由：节点前置，节点管理，WeBASE管理平台三个WeBASE子系统构成。WeBASE三个服务的部署架构如下图：节点前置需要和区块链节点部署在同一台机器；节点管理和WeBASE管理平台可以同机部署，也可以分开部署。
+这套管理工具主要由：节点前置，签名服务，节点管理，WeBASE管理平台四个WeBASE子系统构成。WeBASE四个服务的部署架构如下图：节点前置需要和区块链节点部署在同一台机器；节点管理和WeBASE管理平台可以同机部署，也可以分开部署。
 
-![](../../images/WeBASE-Console-Suit/Framework.png)
+![](../../images/WeBASE-Console-Suit/Framework_2.png)
 
 
 ## 使用前提
@@ -39,7 +40,7 @@ WeBASE管理平台是由三个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 ### WeBASE管理平台搭建
 
-WeBASE管理平台分为三个部分：节点前置，节点管理，WeBASE管理台。
+WeBASE管理平台分为四个部分：节点前置，签名服务，节点管理，WeBASE管理台。
 
 当前版本我们提供了两种搭建方式：[**一键搭建**](../WeBASE/install.md)和手动搭建。
 
@@ -53,11 +54,15 @@ WeBASE管理平台分为三个部分：节点前置，节点管理，WeBASE管�
 
 节点前置使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点前置安装说明》](../WeBASE-Front/install.md)。
 
-##### 2.2、节点管理搭建
+##### 2.2、签名服务搭建
+
+签名服务使用Spring Boot的JAVA后台服务，具体搭建流程参见[《签名服务安装说明》](../WeBASE-Sign/install.md)。
+
+##### 2.3、节点管理搭建
 
 节点管理使用Spring Boot的JAVA后台服务，具体搭建流程参见[《节点管理安装说明》](../WeBASE-Node-Manager/install.md)。
 
-##### 2.3、WeBASE管理平台
+##### 2.4、WeBASE管理平台
 
 WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
 
@@ -99,7 +104,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ### 私钥管理
 
-私钥管理提供了新建私钥用户和导入公钥用户两种用户导入方式。第一种方式主要用于新建用户在管理平台的合约管理中部署和调用合约。第二种方式主要用于把交易和用户关联起来。
+私钥管理提供了新建私钥用户和导入公钥用户两种用户导入方式。第一种方式主要用于新建用户（私钥托管在签名服务中），在管理平台的合约管理中部署和调用合约。第二种方式主要用于把交易和用户关联起来。
 
 ![](../../images/WeBASE-Console-Suit/key_manager_tx_audit.png)
 
@@ -175,7 +180,7 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 ### 私钥管理
 
-私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，然后拿新建用户的私钥来做合约部署和合约调用的签名。注：外部账户可通过新建公钥账户导入，主要用于把交易和用户关联起来。
+私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，私钥将托管在签名服务中，然后通过签名服务对合约部署和合约调用进行签名。注：外部账户可通过新建公钥账户导入，主要用于把交易和用户关联起来。
 
 私钥管理：
 
@@ -323,6 +328,18 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_contract_2.png)
 
+### 订阅事件
+
+订阅事件管理：可查看前置中已订阅的链上事件通知，包括出块事件列表和合约Event事件列表
+
+出块事件列表：
+
+![出块事件列表：](../../images/WeBASE-Console-Suit/event_new_block.png)
+
+合约Event事件列表：
+![合约Event事件列表](../../images/WeBASE-Console-Suit/event_contract_event.png)
+
+
 ### 账号管理
 
 账号管理提供管理台登陆账号的管理功能。管理台用户分为两种角色：
@@ -338,6 +355,16 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 添加登陆账号并指定账号类型：
 
 ![](../../images/WeBASE-Console-Suit/login_user_add_2.png)
+
+## 升级兼容说明
+
+### v1.3.0
+
+WeBASE-Front升级至最新版v1.3.0，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
+
+WeBASE-Node-Manager升级至最新版v1.3.0，可查看[节点管理服务升级说明](../WeBASE-Node-Manager/upgrade.md)，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
+
+WeBASE-Sign升级至最新版v1.3.0，可查看[签名服务升级说明](../WeBASE-Sign/upgrade.md)，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
 ## 附录
 
