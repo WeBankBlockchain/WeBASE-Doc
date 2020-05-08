@@ -24,7 +24,7 @@ WeBASE-Node-Manager可以是处理前端页面所有web请求，管理各个节�
 
 ## 2. 国密支持
 
-WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用[WeBASE-Front v1.2.2](../WeBASE-Front/index.html)及以上版本
+WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用WeBASE-Front v1.2.2及以上版本
 
 WeBASE-Node-Manager具体需要适配国密版FISCO-BCOS与WeBASE-Front的地方有：
 - 在配置文件`application.yml/applicationContext.xml`中开启web3sdk的国密开关；

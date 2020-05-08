@@ -337,7 +337,7 @@ mysql> alter table tb_method add column contract_type tinyint(4) DEFAULT '0' COM
 
 - 在表`tb_method`插入系统合约的默认数据
 
-可以参考[WeBASE-Node-Manager v1.2.0](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.1)源码中的webase-dml.sql
+可以参考[WeBASE-Node-Manager v1.2.0](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.0)源码中的webase-dml.sql
 
 ```
 -- (system config info 0x1000) setValueByKey

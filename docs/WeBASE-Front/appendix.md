@@ -333,7 +333,7 @@ spring:
 
 ##### 客户端订阅事件推送流程：
 
-- 客户端调用[WeBASE-Front](https://github.com/WeBankFinTech/WeBASE-Front)前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档-事件通知](./interface.html#id330)
+- 客户端调用WeBASE-Front节点前置服务接口(`/event/newBlockEvent`和`event/contractEvent`)，注册事件监听；接口内容请查看[接口文档-事件通知](./interface.html#id330)
 
 用户调用注册事件接口之后，实际上WeBASE-Front将以`appId+事件名+{randomString}`的routingKey，将用户所拥有的的队列Queue绑定到对应的Exchange中：
 
