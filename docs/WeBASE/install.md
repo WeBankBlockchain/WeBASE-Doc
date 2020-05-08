@@ -2,9 +2,9 @@
 
 ​	一键部署可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
-​	一键部署会搭建：节点（FISCO-BCOS 2.0）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
+​	一键部署会搭建：节点（FISCO-BCOS 2.0）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-![[]](../../images/WeBASE/deploy.png)
+![[]](../../images/WeBASE/one_click_struct.png)
 
 ## 前提条件
 
@@ -76,7 +76,7 @@ Python3.4及以上版本，需安装PyMysql依赖包：
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.2.3/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.3.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -104,9 +104,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.2.2
-webase.mgr.version=v1.2.2
-webase.front.version=v1.2.3
+webase.web.version=v1.3.0
+webase.mgr.version=v1.3.0
+webase.sign.version=v1.3.0
+webase.front.version=v1.3.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -114,6 +115,13 @@ mysql.port=3306
 mysql.user=dbUsername
 mysql.password=dbPassword
 mysql.database=webasenodemanager
+
+# 签名服务子系统mysql数据库配置
+sign.mysql.ip=localhost
+sign.mysql.port=3306
+sign.mysql.user=dbUsername
+sign.mysql.password=dbPassword
+sign.mysql.database=webasesign
 
 # 节点前置子系统h2数据库名
 front.h2.name=webasefront
@@ -124,6 +132,8 @@ web.port=5000
 mgr.port=5001
 # 节点前置子系统端口
 front.port=5002
+# 签名服务子系统端口
+sign.port=5004
 
 # 节点监听Ip
 node.listenIp=127.0.0.1
@@ -150,7 +160,7 @@ node.path=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.2.0
+fisco.version=2.4.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
@@ -172,6 +182,8 @@ python deploy.py stopAll
 停止WeBASE-Web:          python deploy.py stopWeb
 启动WeBASE-Node-Manager: python deploy.py startManager
 停止WeBASE-Node-Manager: python deploy.py stopManager
+启动WeBASE-Sign:        python deploy.py startSign
+停止WeBASE-Sign:        python deploy.py stopSign
 启动WeBASE-Front:        python deploy.py startFront
 停止WeBASE-Front:        python deploy.py stopFront
 ```
@@ -205,6 +217,8 @@ http://{deployIP}:{webPort}
 |--|--|-- log # 管理平台日志目录
 |--|-- webase-node-mgr # 节点管理服务目录
 |--|--|-- log # 节点管理服务日志目录
+|--|-- webase-sign # 签名服务目录
+|--|--|-- log # 签名服务日志目录
 |--|-- webase-front # 节点前置服务目录
 |--|--|-- log # 节点前置服务日志目录
 |--|-- nodes # 一件部署搭链节点目录

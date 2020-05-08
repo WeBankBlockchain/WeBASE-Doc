@@ -19,9 +19,10 @@ WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documenta
 ```
 
 开启web3sdk的国密开关:
-- 开启web3sdk的国密开关：将配置文件`application.properties`中web3sdk配置的`encryptType`从`0`修改为`1`；
 
-使用国密版solcJ jar包：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
+- 开启web3sdk的国密开关：将配置文件`application.yml`中`sdk`的`encryptType`从`0`修改为`1`；
+
+使用国密版solcJ jar包进行合约编译：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
 1. 下载国密版solcJ的jar包后，放置在项目根目录的`/lib`文件夹中
 2. 在`build.gradle`引入web3sdk处通过`exclude`去除ethereum的solcJ jar包
 3. 通过`fileTree`引入`/lib`的国密版solcJ的jar包
@@ -108,7 +109,7 @@ sdk:
   ...
   ip: 127.0.0.1                 // 连接节点的监听ip
   channelPort: 20200            // 连接节点的链上链下端口
-  encryptType: 0                // 国密开关，0:standard, 1:guomi
+  encryptType: 0                // 0: ECDSA, 1: 国密
 constant: 
   keyServer: 127.0.0.1:5001     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
   transMaxWait: 30              // 交易最大等待时间
