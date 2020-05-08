@@ -121,7 +121,7 @@ sign.mysql.ip=localhost
 sign.mysql.port=3306
 sign.mysql.user=dbUsername
 sign.mysql.password=dbPassword
-sign.mysql.database=webasenodesign
+sign.mysql.database=webasesign
 
 # 节点前置子系统h2数据库名
 front.h2.name=webasefront
