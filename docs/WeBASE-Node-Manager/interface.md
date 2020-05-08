@@ -3393,6 +3393,393 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 }
 ```
 
+### 8.4 向单个节点生成新群组
+
+​向单个节点请求生成新群组配置信息，节点和前置一一对应，节点编号可以从前置列表获取。   
+
+`nodeList`需要填入新群组中所有的nodeId，通过本接口分别请求每个节点，在每个节点生成群组配置信息。
+
+** 群组生成后，需对应调用新群组启动的接口。**
+
+
+#### 8.4.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/generate/{nodeId}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.4.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 2    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
+| 3    | nodeList     | List<String>           | 否     | 新群组中所有节点的nodeId |
+| 4    | description     | String           | 是    | 群组描述                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
+```
+
+```
+{
+    "generateGroupId": 2,
+    "timestamp": 1574853659000,
+    "nodeList": [
+       "78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2",
+       "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+    ],
+    "description": "test"
+}
+```
+
+
+#### 8.4.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Object        |        | 组织信息对象               |
+| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
+| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
+| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
+| 3.1.5 | description   | String | 否     | 描述                   |
+| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
+| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "groupId": 2,
+        "groupName": "group2",
+        "nodeCount": 2,
+        "groupStatus": 2,
+        "groupType": 2,
+        "description": "test",
+        "createTime": "2019-02-14 17:33:50",
+        "modifyTime": "2019-03-15 09:36:17"
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 202301,
+    "message": "node's front not exists",
+    "data": {}
+}
+```
+
+
+### 8.5 向多个节点生成新群组
+
+​向`nodeList`中所有节点的前置发起请求，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
+
+**群组生成后，需对应调用新群组启动的接口。**
+
+
+#### 8.5.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/generate**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.5.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 2    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
+| 3    | nodeList     | List<String>           | 否     | 新群组中所有节点的nodeId |
+| 4    | description     | String           | 是    | 群组描述                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
+```
+
+```
+{
+    "generateGroupId": 2,
+    "timestamp": 1574853659000,
+    "nodeList": [
+       "78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2",
+       "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+    ],
+    "description": "test"
+}
+```
+
+
+#### 8.5.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Object        |        | 组织信息对象               |
+| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
+| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
+| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
+| 3.1.5 | description   | String | 否     | 描述                   |
+| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
+| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "groupId": 2,
+        "groupName": "group2",
+        "nodeCount": 2,
+        "groupStatus": 2,
+        "groupType": 2,
+        "description": "test",
+        "createTime": "2019-02-14 17:33:50",
+        "modifyTime": "2019-03-15 09:36:17"
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 202301,
+    "message": "node's front not exists",
+    "data": {}
+}
+```
+
+
+
+### 8.6 动态操作群组
+
+​​可以对已存在的群组或新生成的群组进行动态操作，包括启动、停止、删除、恢复、状态查询。
+
+​**说明：** 生成新群组时，新群组下每一个节点都要启动，节点和前置一一对应。
+
+
+
+#### 8.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group//operate/{nodeId}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 2    | type      | String        | 否     | 操作类型： start, stop, remove, recover, getStatus|
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
+```
+
+```
+{
+    "generateGroupId": 2,
+    "type": "start"
+}
+```
+
+
+#### 8.6.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Object        |        | 组织信息对象               |
+| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
+| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
+| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
+| 3.1.5 | description   | String | 否     | 描述                   |
+| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
+| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {}
+}
+```
+
+* 失败：
+```
+{
+  "code": 205032,
+  "message": "Group 2 is already running",
+  "data": null
+}
+```
+
+
+### 8.7 批量启动群组
+
+​向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
+
+
+#### 8.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group//batchStart**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 2    | nodeList      | List<String>        | 否     | 新群组中所有节点的nodeId |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
+```
+
+```
+{
+    "generateGroupId": 2,
+    "nodeList": [
+       "78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2",
+       "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+    ]
+}
+```
+
+
+#### 8.7.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Object        |        | 组织信息对象               |
+| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
+| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
+| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
+| 3.1.5 | description   | String | 否     | 描述                   |
+| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
+| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {}
+}
+```
+
+* 失败：
+```
+{
+  "code": 205032,
+  "message": "Group 2 is already running",
+  "data": null
+}
+```
+
+
+### 8.7 刷新群组列表
+
+刷新节点管理服务的群组列表，此操作会删除后台中群组状态为2（未启动/异常）的群组Id，并从脸上拉取最新的群组列表
+
+#### 8.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/update**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 8.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | -    | -    | -     | -                     |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
+```
+
+
+#### 8.7.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code       | Int    | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message    | String | 否     | 描述                       |
+| 3    | data       | list   | 否     | 返回信息列表               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {}
+}
+```
+
 
 ## 9 节点管理模块
 
