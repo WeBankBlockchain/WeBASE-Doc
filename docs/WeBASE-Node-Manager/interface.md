@@ -5396,7 +5396,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 #### 15.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/event/newBlockEvent/list**
+* 请求地址： **/event/newBlockEvent/list/{groupId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -5470,7 +5470,7 @@ http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pa
 
 #### 15.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/event/contractEvent/list**
+* 请求地址： **/event/contractEvent/list/{groupId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
