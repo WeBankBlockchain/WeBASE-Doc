@@ -3320,7 +3320,7 @@ b、失败：
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{pageNumber}/{pageSize}**
+**http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{groupId}/{pageNumber}/{pageSize}**
 
 #### 调用方法
 
@@ -3332,14 +3332,15 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-|     1    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
-|     2    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
+|     1    | 群组编号        | groupId            | int   |              | 是       | 群组编号                           |
+|     2    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
+|     3    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
 
 
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{pageNumber}/{pageSize}
+http://localhost:5002/WeBASE-Front/event/newBlockEvent/list/{groupId}/{pageNumber}/{pageSize}
 ```
 
 #### 响应参数
@@ -3548,7 +3549,7 @@ HTTP DELETE
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/event/contractEvent/list/{pageNumber}/{pageSize}**
+**http://localhost:5002/WeBASE-Front/event/contractEvent/list/{groupId}/{pageNumber}/{pageSize}**
 
 #### 调用方法
 
@@ -3560,14 +3561,15 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-|     1    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
-|     2    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
+|     1    | 群组编号        | groupId            | int   |              | 是       | 群组编号                           |
+|     2    | 页码         | pageNumber            | int   |              | 否       | 同时缺省则返回全量数据                           |
+|     3    | 页大小       | pageSize            | int   |              | 否       |    同时缺省则返回全量数据                        |
 
 
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/event/contractEvent/list/{pageNumber}/{pageSize}
+http://localhost:5002/WeBASE-Front/event/contractEvent/list/{groupId}/{pageNumber}/{pageSize}
 ```
 
 #### 响应参数
