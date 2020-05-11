@@ -3752,7 +3752,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 
 #### 8.8.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：**/group/queryGroupStatus**
+* 请求地址：**/group/queryGroupStatus/list**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -3763,18 +3763,20 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | nodeId    | String        | 否     | 节点前置对应的节点编号                           |
+| 1    | nodeIdList    | List<String>        | 否     | 节点编号列表                           |
 | 2    | groupIdList      | List<Integer>        | 否     | 需要查询群组状态的群组编号列表 |
 
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
 ```
 
 ```
 {
-    "nodeId": "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c",
+    "nodeIdList": [
+        "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+    ]
     "groupIdList": [1,2,2020,5]
 }
 ```
@@ -3788,8 +3790,8 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus
 |------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Integer           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
-| 3     | data          | List          | 否     | 组织列表                   |
-| 3.1   |               | Map        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
+| 3     | data          | Map          | 否     | 由`nodeId`为key和`Map<Integer,String>`为value组成的Map 如下示例                  |
+| 3.1   | nodeId    | String        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
 | 3.1.1 | groupId       | Integer           | 否     | 群组编号                   |
 | 3.1.2 | groupStatus   | String    | 否         | 群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED" |
 
@@ -3799,12 +3801,14 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus
 {
     "code": 0,
     "message": "success",
-    "data": {
-        "1":"STOPPED",
-        "2":"INEXISTENT",
-        "2020":"RUNNING",
-        "5":"STOPPED"
-    }
+    "data": [
+        "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c":{
+            "1":"STOPPED",
+            "2":"INEXISTENT",
+            "2020":"RUNNING",
+            "5":"STOPPED"
+        }
+    ]
 }
 ```
 
