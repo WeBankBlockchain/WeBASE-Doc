@@ -3254,8 +3254,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 ```
 
 
-### 8.2 获取所有群组列表
+### 8.2 获取所有群组列表（不包含异常群组）
 
+只返回正常运行的群组ID
 
 #### 8.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -3286,12 +3287,16 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all
 | 3     | totalCount    | Int           | 否     | 总记录数                   |
 | 4     | data          | List          | 否     | 组织列表                   |
 | 4.1   |               | Object        |        | 组织信息对象               |
-| 4.1.1 | groupId       | int           | 否     | 群组编号                   |
+| 4.1.1 | groupId       | Integer           | 否     | 群组编号                   |
 | 4.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常，2-异常                  |
+| 4.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
 | 4.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
 | 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
 | 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
 | 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 4.1.2 | description     | String        | 否     | 群组描述                   |
+| 4.1.2 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
 
 
 ***2）出参示例***
@@ -3303,12 +3308,16 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all
     "totalCount": 1,
     "data": [
         {
-            "groupId": 300001,
-            "groupName": "group1",
-            "latestBlock": 133,
-            "transCount": 133,
-            "createTime": "2019-02-14 17:33:50",
-            "modifyTime": "2019-03-15 09:36:17"
+            "groupId":1,
+            "groupName":"group1",
+            "groupStatus":1,
+            "nodeCount":4,
+            "latestBlock":0,
+            "transCount":0,
+            "createTime":"2020-05-07 16:32:02",
+            "modifyTime":"2020-05-08 10:50:13",
+            "description":"synchronous",
+            "groupType":1
         }
     ]
 }
@@ -3590,7 +3599,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 
 #### 8.6.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：**/group//operate/{nodeId}**
+* 请求地址：**/group/operate/{nodeId}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -3664,7 +3673,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b95
 
 #### 8.7.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：**/group//batchStart**
+* 请求地址：**/group/batchStart**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -3734,17 +3743,92 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 ```
 
 
-### 8.7 刷新群组列表
+
+### 8.8 单个节点获取所有群组状态
+
+​向`nodeId`节点获取该**节点视角下**所有群组的状态；nodeId可以从前置列表获取。
+
+群组状态包含：群组不存在"INEXISTENT"、群组正在停止"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
+
+#### 8.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/queryGroupStatus**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | nodeId    | String        | 否     | 节点前置对应的节点编号                           |
+| 2    | groupIdList      | List<Integer>        | 否     | 需要查询群组状态的群组编号列表 |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus
+```
+
+```
+{
+    "nodeId": "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c",
+    "groupIdList": [1,2,2020,5]
+}
+```
+
+
+#### 8.8.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Integer           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Map        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
+| 3.1.1 | groupId       | Integer           | 否     | 群组编号                   |
+| 3.1.2 | groupStatus   | String    | 否         | 群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED" |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "1":"STOPPED",
+        "2":"INEXISTENT",
+        "2020":"RUNNING",
+        "5":"STOPPED"
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 202301,
+    "message": "node's front not exists"
+}
+```
+
+
+
+### 8.9 刷新群组列表
 
 刷新节点管理服务的群组列表，此操作会删除后台中群组状态为2（未启动/异常）的群组Id，并从脸上拉取最新的群组列表
 
-#### 8.7.1 传输协议规范
+#### 8.9.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/update**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.7.2 请求参数
+#### 8.9.2 请求参数
 
 ***1）入参表***
 
@@ -3759,7 +3843,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 ```
 
 
-#### 8.7.3 返回参数 
+#### 8.9.3 返回参数 
 
 ***1）出参表***
 
@@ -3780,6 +3864,95 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 }
 ```
 
+### 获取所有群组列表（包含异常群组）
+
+只返回正常运行的群组ID
+
+#### 8.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/all/invalidIncluded**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 8.2.2 请求参数
+
+***1）入参表***
+无
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded
+```
+
+
+#### 8.2.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Integer           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | totalCount    | Integer           | 否     | 总记录数                   |
+| 4     | data          | List          | 否     | 组织列表                   |
+| 4.1   |               | Object        |        | 组织信息对象               |
+| 4.1.1 | groupId       | Integer           | 否     | 群组编号                   |
+| 4.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常，2-异常                  |
+| 4.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
+| 4.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
+| 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
+| 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 4.1.2 | description     | String        | 否     | 群组描述                   |
+| 4.1.2 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "totalCount": 1,
+    "data": [
+        {
+            "groupId":1,
+            "groupName":"group1",
+            "groupStatus":1,
+            "nodeCount":4,
+            "latestBlock":0,
+            "transCount":0,
+            "createTime":"2020-05-07 16:32:02",
+            "modifyTime":"2020-05-08 10:50:13",
+            "description":"synchronous",
+            "groupType":1
+        },
+         {
+            "groupId":2020,
+            "groupName":"group2020",
+            "groupStatus":2,
+            "nodeCount":2,
+            "latestBlock":0,
+            "transCount":0,
+            "createTime":"2020-05-07 16:32:02",
+            "modifyTime":"2020-05-08 10:50:13",
+            "description":"",
+            "groupType":2
+        }
+    ]
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
 
 ## 9 节点管理模块
 
