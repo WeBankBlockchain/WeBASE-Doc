@@ -3793,7 +3793,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
 | 3     | data          | List          | 否     |  GroupStatusInfo的列表                |
 | 3.1   | nodeId    | String        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
 | 3.2   | groupStatusMap    | Map        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
-| 3.2.1 | groupId       |  Integer       | 否     | 群组编号                   |
+| 3.2.1 | groupId       |  String       | 否     | 群组编号                   |
 | 3.2.2 | groupStatus   | String    | 否         | 群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED" |
 
 ***2）出参示例***
@@ -3885,12 +3885,15 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 #### 8.2.2 请求参数
 
 ***1）入参表***
-无
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | pageSize    | Integer           | 否     | 每页记录数                                 |
+| 2      | pageNumber  | Integer           | 否     | 当前页码                                   |
 
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}/{pageSize}
 ```
 
 
