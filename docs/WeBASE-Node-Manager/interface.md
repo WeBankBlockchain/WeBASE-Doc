@@ -3790,10 +3790,11 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
 |------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Integer           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
-| 3     | data          | Map          | 否     | 由`nodeId`为key和`Map<Integer,String>`为value组成的Map 如下示例                  |
+| 3     | data          | List          | 否     |  GroupStatusInfo的列表                |
 | 3.1   | nodeId    | String        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
-| 3.1.1 | groupId       | Integer           | 否     | 群组编号                   |
-| 3.1.2 | groupStatus   | String    | 否         | 群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED" |
+| 3.2   | groupStatusMap    | Map        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
+| 3.2.1 | groupId       |  Integer       | 否     | 群组编号                   |
+| 3.2.2 | groupStatus   | String    | 否         | 群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED" |
 
 ***2）出参示例***
 * 成功：
@@ -3802,11 +3803,14 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
     "code": 0,
     "message": "success",
     "data": [
-        "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c":{
-            "1":"STOPPED",
-            "2":"INEXISTENT",
-            "2020":"RUNNING",
-            "5":"STOPPED"
+        {
+            nodeId:"dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c",
+            groupStatusMap:{
+                "1":"STOPPED",
+                "2":"INEXISTENT",
+                "2020":"RUNNING",
+                "5":"STOPPED"
+            }
         }
     ]
 }
