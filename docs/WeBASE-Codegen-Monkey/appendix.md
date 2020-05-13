@@ -16,7 +16,6 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| system.orgId | N | 组织机构ID，用于区分不同的机构 | 10000 | FB001 |
 | system.nodeStr | Y | 连接区块链节点的nodeStr，nodeName@[IP]:[PORT], 其中prot为channel port | node1@ip:8822 | - |
 | system.encryptType | N | 加密类型： 0-RSA, 1-gm | 0 | 0 |
 
