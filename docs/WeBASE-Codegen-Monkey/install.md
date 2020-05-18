@@ -118,7 +118,7 @@ tail -f *.log
 supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程。
 编译生成代码的部署同2.2.3.2
 
-使用supervisor来安装与部署的步骤请参阅附录6
+使用supervisor来安装与部署的步骤请参阅[附录6](appendix.html#supervisor)
 
 #### 2.4 检查运行状态及退出
 
