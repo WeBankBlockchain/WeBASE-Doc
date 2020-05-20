@@ -1129,7 +1129,10 @@ http://localhost:5002/WeBASE-Front/1/web3/transactionReceipt/0xb2c733b742045e61c
     "gasUsedRaw": "0x1d8ce",
     "blockNumberRaw": "100",
     "transactionIndexRaw": "0",
-    "cumulativeGasUsedRaw": "0x1d8ce"
+    "cumulativeGasUsedRaw": "0x1d8ce",
+    "message": null,
+    "txProof": null,
+    "receiptProof": null
 }
 ```
 
@@ -3785,10 +3788,261 @@ HTTP DELETE
 }
 ```
 
+## 8. Abi管理接口
 
-## 8. 其他接口
+### 8.1. 获取Abi信息
 
-### 8.1. 查询是否使用国密
+#### 接口描述
+
+根据abiId获取abi信息
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/abi/{abiId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | abi编号       | abiId           | Long   |              |   是    |    abi编号                        |
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/abi/{abiId}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "abiId": 1,
+    "groupId": 1,
+    "contractName": "TTT",
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+    "contractBin": "608060405260043610610057576000357...",
+    "createTime": "2020-05-18 10:59:02",
+    "modifyTime": "2020-05-18 10:59:02"
+  }
+}
+```
+
+### 8.2. 获取Abi信息分页列表
+
+#### 接口描述
+
+获取abi信息的列表
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/abi/list/{groupId}/{pageNumber}/{pageSize}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | 群组id       | groupId           | int   |              |   是     |    群组编号                        |
+|    2     | 页码         | pageNumber            | int   |              | 是       |                            |
+|    3     | 页大小       | pageSize            | int   |              | 是       |                            |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/abi/list/{groupId}/{pageNumber}/{pageSize}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "abiId": 1,
+      "groupId": 1,
+      "contractName": "TTT",
+      "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+      "contractBin": "608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463fffff...29",
+      "createTime": "2020-05-18 10:59:02",
+      "modifyTime": "2020-05-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+### 8.3. 导入已部署合约的abi
+
+#### 接口描述
+
+将其他平台已部署的合约导入到本平台进行管理
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/abi**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约地址 | contractAddress    | String         |              | 是       |     合约地址                   |
+| 3        | 合约名  | contractName      | String   |              | 是       |   |
+| 4        | 合约abi  | contractAbi | List<Object>         |     |  是      | 合约的ABI |
+
+**2）数据格式**
+
+
+```
+{
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+### 8.4. 修改已导入的合约abi
+
+#### 接口描述
+
+更新已导入的合约abi内容
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/abi**
+
+#### 调用方法
+
+HTTP PUT
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | abi编号 | abiId   | Long         |              | 是        |                      |
+| 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 3        | 合约地址 | contractAddress    | String         |              | 是       |     合约地址                   |
+| 4        | 合约名  | contractName      | String   |              | 是       |   |
+| 5        | 合约abi  | contractAbi | List<Object>         |     |  是      | 合约的ABI |
+
+**2）数据格式**
+
+
+```
+{
+    "abiId": 1,
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+### 8.5. 修改合约abi
+
+#### 接口描述
+
+删除合约abi
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/abi/{abiId}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | abi编号 | abiId   | Long         |              | 是        |                      |
+
+**2）数据格式**
+
+
+```
+{
+    "abiId": 1
+}
+```
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+## 9. 其他接口
+
+### 9.1. 查询是否使用国密
 
 #### 接口描述
 
@@ -3830,7 +4084,7 @@ a、成功：
 ```
 
 
-## 9. 附录
+## 10. 附录
 
 ### 1. 返回码信息列表 
 
