@@ -168,10 +168,10 @@ spring.shardingsphere.datasource.ds.username=
 spring.shardingsphere.datasource.ds.password=
 
 #将block_detail_info取模5路由到5张表
-spring.shardingsphere.sharding.tables.block_detail_info.actual-data-nodes=ds.block_detail_info_$->{0..4}
-spring.shardingsphere.sharding.tables.block_detail_info.table-strategy.inline.sharding-column=block_height
-spring.shardingsphere.sharding.tables.block_detail_info.table-strategy.inline.algorithm-expression=block_detail_info_$->{block_height % 5}
-spring.shardingsphere.sharding.tables.block_detail_info.key-generator-column-name=pk_id
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.actual-data-nodes=ds.block_detail_info_$->{0..4}
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.table-strategy.inline.sharding-column=block_height
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.table-strategy.inline.algorithm-expression=block_detail_info_$->{block_height % 5}
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.key-generator-column-name=pk_id
 
  ```
 
@@ -211,15 +211,15 @@ spring.shardingsphere.sharding.default-database-strategy.inline.sharding-column=
 spring.shardingsphere.sharding.default-database-strategy.inline.algorithm-expression=ds$->{block_height % 2}
 
 # 定义block_detail_info的分表策略，以block_height取模2来路由到ds0的block_detail_info0或ds1的block_detail_info1
-spring.shardingsphere.sharding.tables.block_detail_info.actual-data-nodes=ds0.block_detail_info0,ds1.block_detail_info1
-spring.shardingsphere.sharding.tables.block_detail_info.table-strategy.inline.sharding-column=block_height
-spring.shardingsphere.sharding.tables.block_detail_info.table-strategy.inline.algorithm-expression=block_detail_info$->{block_height % 2}
-spring.shardingsphere.sharding.tables.block_detail_info.key-generator-column-name=pk_id
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.actual-data-nodes=ds0.block_detail_info0,ds1.block_detail_info1
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.table-strategy.inline.sharding-column=block_height
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.table-strategy.inline.algorithm-expression=block_detail_info$->{block_height % 2}
+spring.shardingsphere.rules.sharding-rule.tables.block_detail_info.key-generator-column-name=pk_id
 
-spring.shardingsphere.sharding.tables.block_task_pool.actual-data-nodes=ds0.block_task_pool0,ds1.block_task_pool1
-spring.shardingsphere.sharding.tables.block_task_pool.table-strategy.inline.sharding-column=block_height
-spring.shardingsphere.sharding.tables.block_task_pool.table-strategy.inline.algorithm-expression=block_task_pool$->{block_height % 2}
-spring.shardingsphere.sharding.tables.block_task_pool.key-generator-column-name=pk_id
+spring.shardingsphere.rules.sharding-rule.tables.block_task_pool.actual-data-nodes=ds0.block_task_pool0,ds1.block_task_pool1
+spring.shardingsphere.rules.sharding-rule.tables.block_task_pool.table-strategy.inline.sharding-column=block_height
+spring.shardingsphere.rules.sharding-rule.tables.block_task_pool.table-strategy.inline.algorithm-expression=block_task_pool$->{block_height % 2}
+spring.shardingsphere.rules.sharding-rule.tables.block_task_pool.key-generator-column-name=pk_id
 
 # 打印sql日志的开关
 spring.shardingsphere.props.sql.show=true
@@ -286,9 +286,9 @@ spring.shardingsphere.datasource.slave0.password=
 spring.shardingsphere.sharding.master-slave-rules.ds0.master-data-source-name=master
 spring.shardingsphere.sharding.master-slave-rules.ds0.slave-data-source-names=slave0
 
-spring.shardingsphere.sharding.tables.activity_activity.actual-data-nodes=ds0.block_tx_detail_info$->{0..1}
-spring.shardingsphere.sharding.tables.activity_activity.table-strategy.inline.sharding-column=block_height
-spring.shardingsphere.sharding.tables.activity_activity.table-strategy.inline.algorithm-expression=block_tx_detail_info$->{block_height % 2}
+spring.shardingsphere.rules.sharding-rule.tables.activity_activity.actual-data-nodes=ds0.block_tx_detail_info$->{0..1}
+spring.shardingsphere.rules.sharding-rule.tables.activity_activity.table-strategy.inline.sharding-column=block_height
+spring.shardingsphere.rules.sharding-rule.tables.activity_activity.table-strategy.inline.algorithm-expression=block_tx_detail_info$->{block_height % 2}
 
 
 ```
