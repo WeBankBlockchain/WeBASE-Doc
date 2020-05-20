@@ -2087,6 +2087,193 @@ http://localhost:5002/WeBASE-Front/1/web3/refresh
 }
 ```
 
+### 3.24. 动态生成群组
+
+
+#### 接口描述
+
+在节点上动态生成新群组的配置文件与创世块文件
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/generateGroup**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1        | 群组编号 | groupId         | int           |             | 是        |    此处groupId可填写任意已有群组     |
+| 1        | 生成群组的编号 | generateGroupId         | int           |             | 是        |    待生成新群组的id     |
+| 1        | 共识节点列表 | nodeList         | List<String>           |             | 是        |   新群组的共识节点列表，可通过getNodeIdList获取      |
+| 1        | 群组时间戳 | timestamp         | BigInteger           |             | 是        |     新群组的创世块时间戳    |
+
+**2）数据格式**
+
+```
+{
+  "generateGroupId": 5,
+  "nodeList": [
+    "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c",
+    "59db64100da70db9c2911f2925bcd0c2f9a1b84f4f8bfef0f6a7edf6d511b2a79203a486c268fb97bc19636f91f71ae9dca076973a4bd551b4a8cdf6d7e7710c"
+  ],
+  "timestamp": 1589286309000 
+}
+```
+
+示例：
+
+```
+curl -X POST "http://localhost:5002/WeBASE-Front/{groupId}/web3/generateGroup" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"generateGroupId\": 8, \"nodeList\": [ \"dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c\" ], \"timestamp\":1589286309000}"
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+b、失败：
+```
+{
+  "code": 201128,
+  "errorMessage": "group peers not connected"
+}
+```
+
+
+### 3.25. 操作动态群组的状态
+
+#### 接口描述
+
+启动群组、停止群组、移除群组、恢复群组、查询群组状态等操作
+
+创建群组后，需要对群组内每个节点分别调用`start`来启动群组，群组才是完全创建
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/operateGroup/{type}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | 群组id       | groupId           | int   |              |   是     |    操作的群组编号                        |
+|    2     | 操作类型         | type            | String   |              | 是       |  start, stop, remove, recover, getStatus |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/5/web3/operateGroup/start
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+b、失败：
+```
+{
+  "code": 201123,
+  "errorMessage": "group already running"
+}
+```
+
+
+### 3.26. 获取当前节点的多个群组状态
+
+#### 接口描述
+
+传入多个群组编号，对单个节点查询多个群组的状态
+
+包含五种群组状态：该节点不存在该群组"INEXISTENT"、正在停止群组"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/queryGroupStatus**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | 群组id       | groupId           | int   |              |   是     |    该编号与所查询群组编号无关                        |
+|    2     | 群组id列表         | groupIdList            | List<Integer>   |              | 是       |  传入多个群组id |
+
+**2）数据格式**
+
+```
+{
+  "groupIdList": [
+    1,2,3,4,5
+  ]
+}
+```
+
+示例：
+
+```
+curl -X POST "http://localhost:5002/WeBASE-Front/{groupId}/web3/queryGroupStatus" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"groupIdList\": [ 1,2,3,4,5 ]}"
+```
+
+#### 响应参数
+
+
+**1）参数表**
+
+| **序号** | **中文**         | **参数名**             | **类型**   | **最大长度** | **必填** | **说明**                                               |
+| -------- | ---------------- | ---------------------- | ---------- | ------------ | -------- | ------------------------------------------------------ |
+| 1        | 群组与状态Map      | -                 | Map     |              | 是       |                                                        |
+| 1.1        | 群组id         |             | String   |              | 是       |   群组id   |
+| 1.2        | 群组状态         |             | String   |              | 是       |   包含五种状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED"   |
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "1": "RUNNING",
+    "2": "RUNNING",
+    "3": "INEXISTENT",
+    "4": "INEXISTENT",
+    "5": "INEXISTENT"
+  }
+}
+```
+
 ## 4. 性能检测接口
 
 ### 4.1. 获取机器配置信息  
