@@ -2,6 +2,10 @@
 
 WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
+#### v1.3.1
+
+- 新增`Credential`实例的缓存机制，优化签名性能
+
 #### v1.3.0
 
 ##### 私钥数据表字段更新
