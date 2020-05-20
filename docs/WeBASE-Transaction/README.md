@@ -31,6 +31,6 @@ WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-doc
 具体需要适配国密版FISCO-BCOS的地方有：
 - 开启web3sdk的国密开关：修改`application.properties`中的`encryptType`改为`1`；
 - 合约编译支持国密版：
-    - WeBASE-Transaction编译国密版智能合约，需要用solcJ-gm的jar包替换web3sdk默认使用的ethereum的solcJ jar包;
+    - WeBASE-Transaction编译国密版智能合约，v1.3.1+版本已支持自动切换国密版soclJ jar包；
 
 安装详情可查看下一章节的[WeBASE-Transaction部署说明](../WeBASE-Transaction/install.html)
