@@ -71,6 +71,8 @@ cd install_scripts
 system.nodeStr=[NODE_NAME]@[IP]:[PORT]
 ## GROUP_ID必须与FISCO-BCOS中配置的groupId一致。
 system.groupId=[GROUP_ID]
+### 加密类型，根据FISCO BCOS链的加密类型配置，0-ECC, 1-gm。默认为非国密类型。
+system.encryptType=0
 
 # 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
 system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
