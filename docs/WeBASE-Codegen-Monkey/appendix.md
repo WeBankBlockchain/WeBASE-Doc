@@ -8,7 +8,7 @@ WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankF
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| server.port | N | 启动WeBASE-Collect-Bee组件实例的服务端口 | 8082 | 8080 |
+| server.port | N | 启动WeBASE-Collect-Bee组件实例的服务端口 | 8082 | 5200 |
 
 #### 1.2 FISCO-BCOS节点配置
 
