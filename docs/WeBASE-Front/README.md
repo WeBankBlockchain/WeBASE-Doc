@@ -23,8 +23,8 @@ WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documenta
 WeBASE-Front具体需要适配国密版FISCO-BCOS的地方有：
 - 开启web3sdk的国密开关：修改`application.yml/application.properties`中的`encryptType`改为`1`；
 - 合约编译支持国密版：
-    - WeBASE-Front的Web已引入sol-0.4.25-gm.js，已无缝支持国密版智能合约的编译/部署/调用；
-    - WeBASE-Front后台编译国密版智能合约，需要用solcJ-gm的jar包替换web3sdk默认使用的ethereum的solcJ jar包；
+    - WeBASE-Front Web编译智能合约已引入sol-0.4.25-gm.js，已自动切换支持国密版智能合约的编译/部署/调用；
+    - WeBASE-Front后台编译国密版智能合约，已引入solcJ:0.4.25-rc1.jar，自动切换支持国密版智能合约的编译/部署/调用；
 
 安装详情可查看下一章节的[WeBASE-Front部署说明](install.html)
 
