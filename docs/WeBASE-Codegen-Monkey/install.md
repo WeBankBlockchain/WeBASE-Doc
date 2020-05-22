@@ -39,7 +39,8 @@ cd install_scripts
 │   │   │   └── HelloWorld.java
 │   │   └── resources
 │   │       └── application.properties
-│   └── generate_bee.sh
+│   │       └── web3j.def
+│   └── generate_bee.sh
 ```
 
 #### 2.2 配置安装包
