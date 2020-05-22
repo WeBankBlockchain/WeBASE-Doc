@@ -22,7 +22,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/V1.2.0/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/master/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
@@ -50,7 +50,7 @@ cd install_scripts
 
 如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [利用控制台将合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)
 
-请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考附录1.3 数据库配置。
+请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考[附录1.3](appendix.html#id2) 数据库配置。
 
 
 ##### 2.2.2 配置证书文件
@@ -71,6 +71,8 @@ cd install_scripts
 system.nodeStr=[NODE_NAME]@[IP]:[PORT]
 ## GROUP_ID必须与FISCO-BCOS中配置的groupId一致。
 system.groupId=[GROUP_ID]
+### 加密类型，根据FISCO BCOS链的加密类型配置，0-ECC, 1-gm。默认为非国密类型。
+system.encryptType=0
 
 # 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
 system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
@@ -118,7 +120,7 @@ tail -f *.log
 supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程。
 编译生成代码的部署同2.2.3.2
 
-使用supervisor来安装与部署的步骤请参阅附录6
+使用supervisor来安装与部署的步骤请参阅[附录6](appendix.html#supervisor)
 
 #### 2.4 检查运行状态及退出
 
@@ -195,7 +197,7 @@ mysql -u[用户名] -p[密码] -e "use [数据库名]; select count(*) from bloc
 bash stop.sh
 ```
 
-恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考2.3
+恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考3.3章节。
 
 #### 2.4.5 注意事项
 
