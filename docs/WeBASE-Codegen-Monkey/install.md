@@ -84,7 +84,7 @@ system.dbPassword=[password]
 system.contractPackName=[编译Solidity合约时指定的包名]
 ```
 
-更多配置详情可参考附件1：配置参数。
+更多配置详情可参考[附录1：配置参数](appendix.html#id1)。
 
 #### 2.3 生成代码并运行程序
 
