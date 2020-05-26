@@ -4229,14 +4229,215 @@ HTTP DELETE
 
 ## 9. 其他接口
 
-### 9.1. 查询是否使用国密
+### 9.1. 查询已上传solc js文件
+
+#### 接口描述
+
+获取上传已上传的solc js编译文件
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/solc/list**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/solc/list
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "solcId": 1,
+      "solcName": "solc-0.4.25.js",
+      "fileSize": 8276063,
+      "md5": e201c5913e0982cb90cdb2a711e36f63,
+      "description": "soljson-v0.4.25+commit.59dbf8f1.js",
+      "createTime": "2020-05-19 10:13:55"
+    }
+  ]
+}
+```
+
+### 9.2. 上传solc js文件
+
+#### 接口描述
+
+上传js文件，在编译合约时，进行选择替换
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/solc/upload**
+
+#### 调用方法
+
+HTTP POST | Content-Type: multipart/form-data
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 文件名 | fileName  | String         |              | 是        |   文件名（使用formData传值）                    |
+| 2        | 文件内容 | solcFile     | File         |              | 是       |     solc js文件（使用formData传值）                   |
+| 3        | 描述  | description      | String   |              | 是       |   | （使用formData传值）
+
+**2）数据格式**
+
+示例：
+
+```
+curl -X POST "http://localhost:5002/WeBASE-Front/solc/upload?fileName=solcjs-0.4.25.js&description=test" -H "accept: */*" -H "Content-Type: multipart/form-data" -F "solcFile=@soljson-v0.4.25+commit.59dbf8f1.js;type=text/javascript"
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+错误：（文件已存在）
+```
+{
+  "code": 201263,
+  "data": null,
+  "errorMessage": "Solc js file name already exist"
+}
+```
+
+
+### 9.3. 删除已有solc js文件
+
+#### 接口描述
+
+删除已上传的js文件
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/solc/{abiId}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | solc编号 | abiId  | Integer         |              | 是        |                       |
+
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+错误：（文件不存在）
+```
+{
+    "code": 201016,
+    "data": null,
+    "errorMessage": "file is not exist"
+}
+```
+
+
+### 9.4. 下载已上传的solc js文件
+
+#### 接口描述
+
+根据文件名下载solc js文件
+
+#### 接口URL
+
+HTTP POST: 
+**http://localhost:5002/WeBASE-Front/solc/download**
+
+文件服务器：
+**http://localhost:5002/WeBASE-Front/solcjs/{fileName}**
+
+#### 调用方法
+
+HTTP POST | File Server
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 文件名 | fileName  | String         |              | 是        |   HTTP POST: 使用formData传值| 文件服务器： url中输入文件名即可                   |
+
+
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+var Module;if(!Module)Module=(typeof Module!=="undefined"?Module:null)||{};var moduleOverrides={};for(var key in Module){if(Module.hasOwnProperty(key)){moduleOverrides[key]=Module[key]}}var ENVIRONMENT_IS_WEB=typeof window==="object";var ENVIRONMENT_IS_WORKER=typeof importScripts==="function";var ENVIRONMENT_IS_NODE=typeof process==="object"&&typeof require==="function"&&!ENVIRONMENT_IS_WEB&&!ENVIRONMENT_IS_WORKER;var ENVIRONMENT_IS_SHELL=!ENVIRONMENT_IS_WEB&&!
+...
+}
+```
+
+错误：（文件已存在）
+```
+{
+  "code": 201263,
+  "data": null,
+  "errorMessage": "Solc js file name not exist in db"
+}
+```
+
+
+## 10. 其他接口
+
+### 10.1. 查询是否使用国密
 
 #### 接口描述
 
 获取WeBASE-Front的`encryptType`，即是否使用国密版；
 
 #### 接口URL
-
 
 **http://localhost:5002/WeBASE-Front/encrypt**
 
@@ -4271,7 +4472,7 @@ a、成功：
 ```
 
 
-## 10. 附录
+## 11. 附录
 
 ### 1. 返回码信息列表 
 
