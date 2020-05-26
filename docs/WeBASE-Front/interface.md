@@ -747,6 +747,168 @@ http://localhost:5002/WeBASE-Front/privateKey/0x2e8ff65fb1b2ce5b0c9476b8f8beb221
 }
 ```
 
+
+### 2.5. 导入.pem私钥用户
+
+#### 接口描述
+
+导入.pem格式的私钥
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/importPem**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | pem文件内容 | pemContent    | String   |              | 是       | 必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式         |
+| 2        | 用户名 | userName    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/importPem
+```
+
+```
+{
+    "pemContent":"-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/\nXmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP+H7iljbTIqXOFM6qm5aVs\nfM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK\n-----END PRIVATE KEY-----\n",
+    "userName":"test222"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+```
+
+
+
+### 2.6. 导入.p12私钥用户
+
+#### 接口描述
+
+导入.p12格式的私钥
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/importP12**
+
+#### 调用方法
+
+HTTP POST | Content-type: form-data
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | p12文件 | p12File    | MultipartFile   |              | 是       |          |
+| 2        | p12文件密码 | p12Password    | String   |              | 是       | 不包含中文          |
+| 2        | 用户名 | userName    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/importP12
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+```
+
+
+### 2.7. 导入私钥到WeBASE-Sign
+
+#### 接口描述
+
+导入私钥到WeBASE-Sign，其中privateKey经过Base64加密
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/importWithSign**
+
+#### 调用方法
+
+HTTP POST | Content-type: form-data
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 用户编号 | signUserId    | String   |   64           | 是       |          |
+| 2        | 应用编号 | appId    | String   |     64         | 是       |           |
+| 2        | 私钥 | privateKey    | String   |              | 是       |  经过Base64加密后的内容        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/importWithSign
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+```
+
+
+
 ## 3. web3接口
 
 ### 3.1. 获取块高接口 
