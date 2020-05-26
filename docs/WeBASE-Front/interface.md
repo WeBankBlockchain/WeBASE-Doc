@@ -4390,7 +4390,7 @@ HTTP DELETE
 HTTP POST: 
 **http://localhost:5002/WeBASE-Front/solc/download**
 
-文件服务器：
+文件服务器：（需要服务器支持）
 **http://localhost:5002/WeBASE-Front/solcjs/{fileName}**
 
 #### 调用方法
@@ -4403,7 +4403,7 @@ HTTP POST | File Server
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 文件名 | fileName  | String         |              | 是        |   HTTP POST: 使用formData传值| 文件服务器： url中输入文件名即可                   |
+| 1        | 文件名 | fileName  | String         |              | 是        |   HTTP POST: 使用formData传值| 文件服务器： url中输入文件名                 |
 
 
 
@@ -4419,12 +4419,23 @@ var Module;if(!Module)Module=(typeof Module!=="undefined"?Module:null)||{};var m
 }
 ```
 
-错误：（文件已存在）
+错误：
 ```
+// 文件不存在
 {
   "code": 201263,
   "data": null,
   "errorMessage": "Solc js file name not exist in db"
+}
+
+// 服务器无法映射
+{
+    "timestamp": 1590493955523,
+    "status": 500,
+    "error": "Internal Server Error",
+    "exception": "java.net.UnknownHostException",
+    "message": "data",
+    "path": "/WeBASE-Front/solcjs/test.js"
 }
 ```
 
