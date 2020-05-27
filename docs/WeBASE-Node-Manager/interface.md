@@ -3503,9 +3503,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 ```
 
 
-### 8.2 获取所有群组列表（不包含异常群组）
+### 8.2 获取所有群组列表
 
-只返回正常运行的群组ID
+默认只返回groupStatus为1的群组ID，可传入groupStatus筛选群组 (1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data)
 
 #### 8.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -3516,12 +3516,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 #### 8.2.2 请求参数
 
 ***1）入参表***
-无
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupStatus   | int    | 是    | 群组状态，1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data|
+
 
 ***2）入参示例***
 
 ```
 http://127.0.0.1:5001/WeBASE-Node-Manager/group/all
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 ```
 
 
@@ -3657,8 +3662,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 
 `nodeList`需要填入新群组中所有的nodeId，通过本接口分别请求每个节点，在每个节点生成群组配置信息。
 
-** 群组生成后，需对应调用新群组启动的接口。**
+** 群组生成后，需对应调用启动群组的接口**
 
+节点加入已存在群组并启动后，需要调用`/precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
 #### 8.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -3844,7 +3850,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 
 ​**说明：** 生成新群组时，新群组下每一个节点都要启动，节点和前置一一对应。
 
-
+节点加入已存在群组并启动后，需要调用`/precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
 #### 8.6.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -4219,13 +4225,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 
 删除指定群组编号的群组的所有数据，包含节点数据、交易数据、交易审计数据等等。
 
-#### 8.10.1 传输协议规范
+#### 8.11.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/{groupId}**
 * 请求方式：DELETE
 * 返回格式：JSON
 
-#### 8.10.2 请求参数
+#### 8.11.2 请求参数
 
 ***1）入参表***
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
@@ -4239,7 +4245,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/{groupId}
 ```
 
 
-#### 8.10.3 返回参数 
+#### 8.11.3 返回参数 
 
 ***1）出参表***
 
