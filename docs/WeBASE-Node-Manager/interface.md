@@ -1760,6 +1760,255 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间  
 
 
+### 5.7 获取Abi信息  
+
+
+#### 5.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/abi/{abiId}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 5.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | abiId         | Long           | 否     | abi编号                                        |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
+```
+
+
+#### 5.7.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | abiId        | int           | 否     | 合约编号                                        |
+| 3.2  | contractName    | String        | 否     | 合约名称                                        |
+| 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.4  | contractAddress  | String        | 否     | 合约地址                                        |
+| 3.5  | contractAbi     | String        | 是     | 导入的abi文件内容                       |
+| 3.6  | contractBin     | String        | 是     | 合约runtime-bytecode(runtime-bin)|
+| 3.7 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.8 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "abiId": 1,
+    "groupId": 1,
+    "contractName": "TTT",
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+    "contractBin": "608060405260043610610057576000357...",
+    "createTime": "2020-05-18 10:59:02",
+    "modifyTime": "2020-05-18 10:59:02"
+  }
+}
+```
+
+
+### 5.8 获取Abi信息分页列表  
+
+
+#### 5.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/abi/list/{groupId}/{pageNumber}/{pageSize}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 5.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
+```
+
+
+#### 5.8.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | abiId        | int           | 否     | 合约编号                                        |
+| 3.2  | contractName    | String        | 否     | 合约名称                                        |
+| 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.4  | contractAddress  | String        | 否     | 合约地址                                        |
+| 3.5  | contractAbi     | String        | 是     | 导入的abi文件内容                       |
+| 3.6  | contractBin     | String        | 是     | 合约runtime-bytecode(runtime-bin)|
+| 3.7 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.8 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "abiId": 1,
+      "groupId": 1,
+      "contractName": "TTT",
+      "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+      "contractBin": "608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463fffff...29",
+      "createTime": "2020-05-18 10:59:02",
+      "modifyTime": "2020-05-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+
+### 5.9. 导入已部署合约的abi
+
+> 将其他平台已部署的合约导入到本平台进行管理
+
+#### 5.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/abi**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 5.9.2 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 所属群组编号                                        |
+| 2    | contractAddress      | String           | 否     | 合约地址  |
+| 3    | contractName      | String           | 否     | 合约名称         |
+| 4    | contractAbi      | String           | 否     | 合约编译后生成的abi文件内容         |
+
+
+
+
+***2）入参示例***
+
+```
+{
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+
+#### 5.9.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message      | String         | 否     | 描述                       |
+| 3    | data         | object         | 是     | 返回信息实体（空）         |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+### 5.10. 导入已部署合约的abi
+
+> 将其他平台已部署的合约导入到本平台进行管理
+
+#### 5.10.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/abi**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 5.10.2 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | abiId         | long           | 否     | abi编号                                        |
+| 2    | groupId         | int           | 否     | 所属群组编号                                        |
+| 3    | contractAddress      | String           | 否     | 合约地址  |
+| 4    | contractName      | String           | 否     | 合约名称         |
+| 5    | contractAbi      | String           | 否     | 合约编译后生成的abi文件内容         |
+
+
+
+
+***2）入参示例***
+
+```
+{
+    "abiId": 1,
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+
+#### 5.10.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message      | String         | 否     | 描述                       |
+| 3    | data         | object         | 是     | 返回信息实体（空）         |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
 
 
 ## 6 服务器监控相关
