@@ -887,6 +887,14 @@ HTTP POST | Content-type: form-data
 http://localhost:5002/WeBASE-Front/privateKey/importWithSign
 ```
 
+```
+{
+    "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
+    "appId": "app_001",
+    "signUserId": "user_001"
+}
+```
+
 #### 响应参数
 
 **1）参数表**

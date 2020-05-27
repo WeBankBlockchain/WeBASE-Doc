@@ -3681,7 +3681,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
 | 2    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
-| 3    | nodeList     | List<String>           | 否     | 新群组中所有节点的nodeId |
+| 3    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
 | 4    | description     | String           | 是    | 群组描述                           |
 
 ***2）入参示例***
@@ -3773,7 +3773,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b9
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
 | 2    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
-| 3    | nodeList     | List<String>           | 否     | 新群组中所有节点的nodeId |
+| 3    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
 | 4    | description     | String           | 是    | 群组描述                           |
 
 ***2）入参示例***
@@ -3940,7 +3940,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b95
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
-| 2    | nodeList      | List<String>        | 否     | 新群组中所有节点的nodeId |
+| 2    | nodeList      | List<String>        | 否     | 新群组中所有需要启动的节点nodeId |
 
 ***2）入参示例***
 
@@ -4018,7 +4018,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | nodeIdList    | List<String>        | 否     | 节点编号列表                           |
+| 1    | nodeIdList    | List<String>        | 否     | 需要获取群组状态的节点编号列表    |
 | 2    | groupIdList      | List<Integer>        | 否     | 需要查询群组状态的群组编号列表 |
 
 ***2）入参示例***
