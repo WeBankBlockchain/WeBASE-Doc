@@ -4651,7 +4651,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 ```
 
 
-#### 1.1.3 返回参数 
+#### 11.2.3 返回参数 
 
 ***1）出参表***
 
@@ -4815,7 +4815,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 ```
 
 
-#### 1.1.3 返回参数 
+#### 11.4.3 返回参数 
 
 ***1）出参表***
 
@@ -4878,7 +4878,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 ```
 
 
-#### 1.1.3 返回参数 
+#### 11.5.3 返回参数 
 
 ***1）出参表***
 
@@ -4932,6 +4932,202 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+
+### 11.6 导入私钥用户
+
+可在页面导入WeBASE-Front所导出的私钥txt文件
+
+其中私钥字段用Base64加密
+
+#### 11.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/import**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 11.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | privateKey  | string        | 否     | Base64加密后的私钥内容                           |
+| 2    | userName    | string        | 否     | 用户名称                           |
+| 3    | description | string        | 是     | 备注                               |
+| 4    | groupId     | Int           | 否     | 所属群组                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
+```
+
+```
+{
+    "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
+    "groupId": "300001",
+    "description": "密钥拥有者",
+    "userName": "user1"
+}
+```
+
+
+#### 11.6.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否     | 描述                               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": 201031,
+    "message": "privateKey decode fail",
+    "data": null
+}
+```
+
+
+### 11.7 导入.pem私钥
+
+可导入控制台所生成的私钥.pem文件
+
+#### 11.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/importPem**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 11.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | pemContent  | string        | 否     | pem文件的内容，必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式                           |
+| 2    | userName    | string        | 否     | 用户名称                           |
+| 3    | description | string        | 是     | 备注                               |
+| 4    | groupId     | Int           | 否     | 所属群组                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
+```
+
+```
+{
+    "pemContent":"-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/\nXmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP+H7iljbTIqXOFM6qm5aVs\nfM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK\n-----END PRIVATE KEY-----\n",
+    "groupId": "1",
+    "description": "密钥拥有者",
+    "userName": "user2"
+}
+```
+
+
+#### 11.7.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否     | 描述                               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": 201232,
+    "message": "Pem file format error, must surrounded by -----XXXXX PRIVATE KEY-----"",
+    "data": null
+}
+```
+
+
+### 11.8 导入.p12私钥
+
+可导入控制台生成的私钥.p12文件
+
+#### 11.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/importP12**
+* 请求方式：POST
+* 请求头：Content-type: **form-data**
+* 返回格式：JSON
+
+#### 11.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | p12File     | MultipartFile        | 否     | .p12文件                           |
+| 2    | p12Password  | string        | 否     | .p12文件的密码                       |
+| 3    | userName    | string        | 否     | 用户名称                           |
+| 4    | description | string        | 是     | 备注                               |
+| 5    | groupId     | Int           | 否     | 所属群组                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/user/importP12
+```
+
+> 使用form-data传参
+
+#### 11.8.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否     | 描述                               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：（p12文件的密码错误）
+```
+{
+    "code": 201236,
+    "message": "p12's password not match",
+    "data": null
 }
 ```
 
