@@ -827,7 +827,7 @@ HTTP POST | Content-type: form-data
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
 | 1        | p12文件 | p12File    | MultipartFile   |              | 是       |          |
-| 2        | p12文件密码 | p12Password    | String   |              | 是       | 不包含中文          |
+| 2        | p12文件密码 | p12Password    | String   |              | 否       | 缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文          |
 | 2        | 用户名 | userName    | String   |              | 是       |          |
 
 **2）数据格式**
@@ -4389,7 +4389,7 @@ HTTP DELETE
 ```
 
 
-## 9. 其他接口
+## 9. solc js文件管理接口
 
 ### 9.1. 查询已上传solc js文件
 
@@ -4552,7 +4552,7 @@ HTTP DELETE
 HTTP POST: 
 **http://localhost:5002/WeBASE-Front/solc/download**
 
-文件服务器：（需要服务器支持）
+文件服务器：
 **http://localhost:5002/WeBASE-Front/solcjs/{fileName}**
 
 #### 调用方法
@@ -4565,7 +4565,7 @@ HTTP POST | File Server
 
 | **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
 | -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
-| 1        | 文件名 | fileName  | String         |              | 是        |   HTTP POST: 使用formData传值| 文件服务器： url中输入文件名                 |
+| 1        | 文件名 | fileName  | String         |              | 是        |   HTTP POST: 使用formData传值； 文件服务器： url中输入文件名                 |
 
 
 
