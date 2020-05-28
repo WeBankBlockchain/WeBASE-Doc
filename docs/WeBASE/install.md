@@ -512,3 +512,8 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ```
 
 答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。
+
+### 12. WeBASE-Web登录页面的验证码加载不出来
+
+答：检查WeBASE-Node-Manager后台服务是否已启动成功：在webase-node-mgr目录下，运行`bash status.sh`或者查看目录中`log/WeBASE-Node-Manager.log`日志文件，查看是否启动失败；
+
