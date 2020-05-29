@@ -4059,7 +4059,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
 }
 ```
 
-* 获取某个节点的群组状态失败：
+* 获取群组状态成功，但某个节点的获取请求失败：
 ```
 {
     "code": 0,
