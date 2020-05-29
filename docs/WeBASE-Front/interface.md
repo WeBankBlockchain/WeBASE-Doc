@@ -4705,7 +4705,10 @@ a、成功：
 | 201038 | user name already exists                     | 用户名已存在               |
 | 201039 | private key already exists                   | 私钥已存在                 |
 | 201040 | private key not exists                       | 私钥不存在                 |
-| 201041 | external user's appId and signUserId cannot be empty        | 私钥已存在                 |
+| 201041 | external user's appId and signUserId cannot be empty        | 外部用户的appId和signUserId不能为空  |
+| 201042 | There is no sol files in source              | solidity文件不存在                 |
+| 201043 | invalid group operate type                   | 群组操作类型不正确                 |
+| 201044 | invalid data type                            | 不正确的数据类型                 |
 | 201101  | groupId cannot be empty                   |    群组编号不能为空      | 
 | 201102  | tableName cannot be empty         |    表名不能为空      |
 | 201103  | permissionType cannot be empty             |    权限类型不能为空      |
@@ -4716,9 +4719,35 @@ a、成功：
 | 201108  | system config value cannot be empty      |    系统配置value值不能为空 |
 | 201109  | node id cannot be empty                 |    节点id不能为空      |
 | 201110  | node type cannot be empty           |   节点类型（共识状态不能为空） |
-| 201130  | signUserId cannot be empty           |   signUserId不可为空 |
+| 201111  | Permission state cannot be all empty           |   更新的用户权限状态不能为空 |
+| 201112  | contract address cannot be empty           |   合约地址不能为空 |
+| 201113  | contract handle type cannot be empty          |   合约操作类型不能为空 |
+| 201114  | grantAddress cannot be empty          |   赋值的地址不能为空 |
+| 201115  | invalid contract handle type          |   不正确的合约操作类型 |
+| 201116  | contract status handle fail         |   合约状态修改失败 |
+| 201120  | group operate fail          |   群组操作失败 |
+| 201121  | node internal error          |   节点内部错误 |
+| 201122  | group already exists          |  群组已存在 |
+| 201123  | group already running          |   群组已运行 |
+| 201124  | group already stopped          |   群组已停止 |
+| 201125  | group already deleted          |   群组已删除 |
+| 201126  | group not found          |   未找到群组 |
+| 201127  | group operate param error          |   群组操作入参错误 |
+| 201128  | group peers not connected          |   群组内节点未连接 |
+| 201129  | group genesis conf already exists          |   群组创世块文件已存在 |
+| 201130  | group config.ini already exists          |   群组的配置文件已存在 |
+| 201131  | group genesis conf not found          |   未找到群组创世块文件 |
+| 201132  | group config.ini not found          |   未找到群组的配置文件 |
+| 201133  | group is stopping          |   群组正在停止 |
+| 201134  | group not deleted          |   群组未删除 |
+| 201151  | Unsupported contract param type to encoded           |   不支持编码的合约参数类型 |
+| 201152  | Unsupported contract param type to decoded           |   不支持解码的合约参数类型 |
+| 201153  | unable to create instance of type, check input params           |  无法创建该合约参数类型的实例，请检查入参 |
+
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
+| 201202  | permission denied, please check chain administrator permission           |    权限不足，请检查用户 |
+
 | 201208  | unsupported for this system config key     |    不支持设置该系统配置      |
 | 201209  | provide value by positive integer mode, from 100000 to 2147483647              |    请输入正值或[100000, 2147483647]范围的值      |
 | 201210  | set system config value fail for params error or permission denied               |    设置系统配置失败，请检查权限      |
@@ -4731,10 +4760,12 @@ a、成功：
 | 201226  | sql syntax error              |    sql语句错误      |
 | 201227  | crud sql fail              |    执行sql语句失败      |
 | 201228  | table not exists              |    操作的表格不存在      |
-| -51503  | crud sql execute error                |     执行sql失败     |
 | 201231  | Cert file not found, please check cert path in config |     配置文件中的证书地址错误，未找到证书文件     |
 | 201232  | Pem file format error, must surrounded by -----XXXXX PRIVATE KEY----- |     pem证书格式错误，必须以"-----XXXXX PRIVATE KEY-----"开头结尾     |
 | 201233  | Pem file content error |     pem证书内容错误     |
+| 201235  | p12's password cannot be chinese |     p12证书密码不能是中文  |
+| 201236  | p12's password not match |     p12证书密码错误     |
+| 201237  | P12 file content error |     p12证书内容错误     |
 | 201241  | Exchange or message queue not exists, please check mq server or mq configuration |     交换机或消息队列不存在，请检查mq-server运行状态及其配置     |
 | 201242  | Database error: data already exists in db |     数据库错误：该数据记录已存在于数据库中     |
 | 201243  | Block range error, from/toBlock must greater than 0, toBlock must be greater than fromBlock |  合约Event区块范围错误，from大于0，to大于from     |
@@ -4743,6 +4774,15 @@ a、成功：
 | 201246  | Register contractEvent failed, please check your param |     订阅合约事件失败，请检查参数格式     |
 | 201247  | Unregister event failed, please check mq server exchange |     取消订阅事件失败，请检查参数格式     |
 | 201248  | Contract abi invalid, please check abi          |     合约ABI格式错误，请检查入参     |
+| 201255  | contract address already exists          |     合约地址已存在 |
+| 201256  | abi info of this id not exists          |     abi不存在     |
+| 201257  | Abi Id cannot be empty          |   abi编号不能为空       |
+| 201261  | Solc js file cannot be empty           |   solc js文件不能为空       |
+| 201262  | Solc js file name cannot be empty           |   solc文件名不能为空       |
+| 201263  | Solc js file name already exist           |   solc文件名已存在       |
+| 201264  | Solc js file name not exist in db           |   solc文件名不存在       |
+| 201265  | Save solc js file error           |   保存solc文件失败       |
+| 201266  | read solc js file error, please check if file deleted           |   读取solc文件失败，请检查是否已删除文件       |
 
 
 ### 2. Precompiled Service说明
