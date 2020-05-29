@@ -17,6 +17,7 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 7. 交易审计
 8. 订阅事件
 9. 账号管理
+10. 群组管理
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -293,7 +294,9 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 下方则是告警日志的内容，可查看告警邮件的具体内容；告警项已处理后，可以点击确认键确认已消除异常；
 
-注：其中在WeBASE-Node-Manager的配置文件application.yml的constant可以配置定时任务监控节点状态、审计状态、证书有效期的频率，监控到异常状态时将触发邮件告警，发送告警邮件到联系人邮箱，同时按配置的间隔时间定时重复发送告警邮件，直到异常状态消除；
+其中在WeBASE-Node-Manager的配置文件application.yml的constant可以配置定时任务定时监控节点状态、审计状态、证书有效期的频率，监控到异常状态时将触发邮件告警，发送告警邮件到联系人邮箱，同时按配置的间隔时间定时重复发送告警邮件，直到异常状态消除；
+
+**注：定时任务的频率为检查系统是否异常的频率，而配置不同的告警类型中的告警时间间隔是发送告警邮件的频率**，如，设置检查频率为1h，配置的告警频率为6h，那么，系统会每小时检查一次系统状态，若出现异常，在定时任务检查到异常时，距离上次告警邮件超过6小时，则会发送一次告警邮件。
 
 ![](../../images/WeBASE-Console-Suit/alert_rule.png)
 
@@ -356,15 +359,27 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/login_user_add_2.png)
 
+
+### 群组管理
+
+群组管理提供动态管理群组的功能，包含：生成群组（生成群组配置文件到单个或多个节点）、启动群组、停止群组、移除群组（仅标记为移除）、恢复群组等操作
+
+群组管理：
+
+<!-- ![](../../images/WeBASE-Console-Suit/login_user_manager_2.png)
+ -->
+
+
+
+
+
 ## 升级兼容说明
 
-### v1.3.0
+WeBASE-Front升级至最新版，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
-WeBASE-Front升级至最新版v1.3.0，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
+WeBASE-Node-Manager升级至最新版，可查看[节点管理服务升级说明](../WeBASE-Node-Manager/upgrade.md)，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
-WeBASE-Node-Manager升级至最新版v1.3.0，可查看[节点管理服务升级说明](../WeBASE-Node-Manager/upgrade.md)，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
-
-WeBASE-Sign升级至最新版v1.3.0，可查看[签名服务升级说明](../WeBASE-Sign/upgrade.md)，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
+WeBASE-Sign升级至最新版，可查看[签名服务升级说明](../WeBASE-Sign/upgrade.md)，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
 ## 附录
 
