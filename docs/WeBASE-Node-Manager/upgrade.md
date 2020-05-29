@@ -2,6 +2,23 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
+#### v1.3.1
+
+##### 新增动态群组接口
+- 新增动态群组接口，包含生成群组、启动/停止群组、删除/恢复群组、单个/批量查询群组状态等接口
+
+注：动态群组注意操作
+
+详情可参考[接口文档](./interface.html)、FISCO BCOS动态群组说明
+
+##### 新增导入已部署合约Abi功能、合约Abi解析功能
+- 前置的“合约管理”Tab中，新增导入合约abi功能，可以导入已部署的合约进行管理
+- 前置的“合约管理”Tab中，新增合约abi解析功能，可用于构造交易input入参
+
+##### 新增导入.p12私钥用户
+- 私钥管理中，新增导入控制台所导出的.p12私钥；
+
+
 #### v1.3.0
 
 WeBASE-Node-Manager v1.3.0后，将通过WeBASE-Sign来管理私钥和对交易签名，可查看以下升级说明进行修改：

@@ -4,6 +4,10 @@ WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://g
 
 #### v1.3.1
 
+##### 支持导入私钥
+- 新增`/user/import`接口，支持导入私钥，详情参考[接口文档](./interfaces.html)
+
+##### 性能优化
 - 新增`Credential`实例的缓存机制，优化签名性能
 
 #### v1.3.0
