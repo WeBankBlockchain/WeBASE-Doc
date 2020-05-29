@@ -3543,7 +3543,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 | 4.1   |               | Object        |        | 组织信息对象               |
 | 4.1.1 | groupId       | Integer           | 否     | 群组编号                   |
 | 4.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常，2-异常                  |
+| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突                  |
 | 4.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
 | 4.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
 | 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
@@ -3658,13 +3658,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 
 ### 8.4 向单个节点生成新群组
 
-​向单个节点请求生成新群组配置信息，节点和前置一一对应，节点编号可以从前置列表获取。   
+​向单个节点的前置发起请求，以当前时间生成`timestamp`时间戳，`nodeList`为群组创世块的**共识节点列表**，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
 
 `nodeList`需要填入新群组中所有的nodeId，通过本接口分别请求每个节点，在每个节点生成群组配置信息。
 
-** 群组生成后，需对应调用启动群组的接口**
+**群组生成后，需对应调用新群组启动的接口，并确保新节点加入新群组的共识节点/观察节点**
 
-节点加入已存在群组并启动后，需要调用`/precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
+节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
 #### 8.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -3679,10 +3679,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
-| 2    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
-| 3    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
-| 4    | description     | String           | 是    | 群组描述                           |
+| 1    | nodeId    | String        | 否     | 路径变量：节点id                           |
+| 2    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 3    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
+| 4    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
+| 5    | description     | String           | 是    | 群组描述                           |
 
 ***2）入参示例***
 
@@ -3715,7 +3716,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b9
 | 3.1   |               | Object        |        | 组织信息对象               |
 | 3.1.1 | groupId       | int           | 否     | 群组编号                   |
 | 3.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
+| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突 |
 | 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
 | 3.1.5 | description   | String | 否     | 描述                   |
 | 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
@@ -3753,9 +3754,11 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b9
 
 ### 8.5 向多个节点生成新群组
 
-​向`nodeList`中所有节点的前置发起请求，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
+​向`nodeList`中所有节点的前置发起请求，以当前时间生成`timestamp`时间戳，以`nodeList`为创世块的**共识节点列表**，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
 
-**群组生成后，需对应调用新群组启动的接口。**
+**群组生成后，需对应调用新群组启动的接口，并确保新节点加入新群组的共识节点/观察节点**
+
+节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
 
 #### 8.5.1 传输协议规范
@@ -3803,16 +3806,9 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 |------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
-| 3     | data          | List          | 否     | 组织列表                   |
-| 3.1   |               | Object        |        | 组织信息对象               |
-| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
-| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
-| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
-| 3.1.5 | description   | String | 否     | 描述                   |
-| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
-| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
-| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 3     | data       | List        | 否     | 群组操作结果                       |
+| 3.1     | frontId       | Integer        | 否     | 群组操作请求的节点前置编号 |
+| 3.2     | code       | Integer        | 否     | 群组操作结果，0-成功，其他：失败  |
 
 ***2）出参示例***
 * 成功：
@@ -3820,16 +3816,13 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 {
     "code": 0,
     "message": "success",
-    "data": {
-        "groupId": 2,
-        "groupName": "group2",
-        "nodeCount": 2,
-        "groupStatus": 2,
-        "groupType": 2,
-        "description": "test",
-        "createTime": "2019-02-14 17:33:50",
-        "modifyTime": "2019-03-15 09:36:17"
-    }
+    "data": [{
+        "frontId": 500011,
+        "code": 0
+    }, {
+        "frontId": 500013,
+        "code": 1
+    }]
 }
 ```
 
@@ -3848,9 +3841,9 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 
 ​​可以对已存在的群组或新生成的群组进行动态操作，包括启动、停止、删除、恢复、状态查询。
 
-​**说明：** 生成新群组时，新群组下每一个节点都要启动，节点和前置一一对应。
+​**说明：** 生成新群组后，需要向每个前置调用启动群组的操作，并确保新节点是新群组中的共识节点/观察节点
 
-节点加入已存在群组并启动后，需要调用`/precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
+节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
 #### 8.6.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -3865,8 +3858,9 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
-| 2    | type      | String        | 否     | 操作类型： start, stop, remove, recover, getStatus|
+| 1    | nodeId    | String        | 否     | 路径变量：节点id                           |
+| 2    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 3    | type      | String        | 否     | 操作类型： start, stop, remove, recover, getStatus|
 
 ***2）入参示例***
 
@@ -3890,16 +3884,6 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b95
 |------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
-| 3     | data          | List          | 否     | 组织列表                   |
-| 3.1   |               | Object        |        | 组织信息对象               |
-| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
-| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
-| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
-| 3.1.5 | description   | String | 否     | 描述                   |
-| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
-| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
-| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
 
 ***2）出参示例***
 * 成功：
@@ -3923,7 +3907,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b95
 
 ### 8.7 批量启动群组
 
-​向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
+​批量启动多个节点的群组，向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
 
 
 #### 8.7.1 传输协议规范
@@ -3967,16 +3951,10 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 |------|-------------|---------------|--------|-------------------------------|
 | 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
-| 3     | data          | List          | 否     | 组织列表                   |
-| 3.1   |               | Object        |        | 组织信息对象               |
-| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
-| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-normal, 2-invalid，创建后未启动默认为2 |
-| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
-| 3.1.5 | description   | String | 否     | 描述                   |
-| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
-| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
-| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 3     | data       | List        | 否     | 群组操作结果                       |
+| 3.1     | frontId       | Integer        | 否     | 群组操作请求的节点前置编号 |
+| 3.2     | code       | Integer        | 否     | 群组操作结果，0-成功，其他：失败                       |
+
 
 ***2）出参示例***
 * 成功：
@@ -3984,7 +3962,13 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 {
     "code": 0,
     "message": "success",
-    "data": {}
+    "data": [{
+        "frontId": 500011,
+        "code": 0  // 启动成功
+    }, {
+        "frontId": 500013,
+        "code": 1 // 启动失败
+    }]
 }
 ```
 
@@ -3999,9 +3983,9 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 
 
 
-### 8.8 单个节点获取所有群组状态
+### 8.8 多个节点获取该节点的多个群组状态
 
-​向`nodeId`节点获取该**节点视角下**所有群组的状态；nodeId可以从前置列表获取。
+​向多个节点获取该**节点视角下**`groupIdList`中所有群组的状态；nodeId可以从前置列表获取。
 
 群组状态包含：群组不存在"INEXISTENT"、群组正在停止"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
 
@@ -4030,9 +4014,10 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
 ```
 {
     "nodeIdList": [
-        "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+        "02ad41a54e5403293855624e6088a1ac6c0a391d6381175bb9c9881f2ae83de6db54fc95a772f22b9e62109393c1a4229dc6d99536548db693e43b244a5b9d84",
+        "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7"
     ]
-    "groupIdList": [1,2,2020,5]
+    "groupIdList": [2]
 }
 ```
 
@@ -4047,27 +4032,50 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
 | 2     | message       | String        | 否     | 描述                       |
 | 3     | data          | List          | 否     |  GroupStatusInfo的列表                |
 | 3.1   | nodeId    | String        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
-| 3.2   | groupStatusMap    | Map        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
-| 3.2.1 | groupId       |  String       | 否     | 群组编号                   |
-| 3.2.2 | groupStatus   | String    | 否         | 群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED" |
+| 3.2   | groupStatusMap    | Map        |        | 包含groupId和GroupStatus的`Map<String,String>`, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
+| 3.2.1 | groupId       |  String       | 否     | 群组编号，如果获取失败，则显示为`<nodeId, "FAIL">`，如下所示                   |
+| 3.2.2 | groupStatus   | String    | 否         | 链上的群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED", 获取失败为"FAIL" |
 
 ***2）出参示例***
+
 * 成功：
 ```
 {
     "code": 0,
     "message": "success",
-    "data": [
-        {
-            nodeId:"dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c",
-            groupStatusMap:{
-                "1":"STOPPED",
-                "2":"INEXISTENT",
-                "2020":"RUNNING",
-                "5":"STOPPED"
-            }
+    "data": [{
+        "nodeId": "02ad41a54e5403293855624e6088a1ac6c0a391d6381175bb9c9881f2ae83de6db54fc95a772f22b9e62109393c1a4229dc6d99536548db693e43b244a5b9d84",
+        "groupStatusMap": {
+            // 当前nodeId获取群组2状态成功
+            "2": "RUNNING" 
         }
-    ]
+    }, {
+        "nodeId": "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7",
+        "groupStatusMap": {
+            // 当前nodeId获取群组2状态成功
+            "2": "RUNNING"
+        }
+    }]
+}
+```
+
+* 获取某个节点的群组状态失败：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "nodeId": "02ad41a54e5403293855624e6088a1ac6c0a391d6381175bb9c9881f2ae83de6db54fc95a772f22b9e62109393c1a4229dc6d99536548db693e43b244a5b9d84",
+        "groupStatusMap": {
+            "2": "RUNNING"
+        }
+    }, {
+        "nodeId": "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7",
+        "groupStatusMap": {
+            // 3fc6..节点的状态获取失败
+            "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7": "FAIL"
+        }
+    }]
 }
 ```
 
@@ -4083,7 +4091,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
 
 ### 8.9 刷新群组列表
 
-刷新节点管理服务的群组列表，此操作会删除后台中群组状态为2（未启动/异常）的群组Id，并从脸上拉取最新的群组列表
+刷新节点管理服务的群组列表，检查本地群组数据与链上群组数据是否有冲突，检查多个节点之间的创世块是否一致，并从链上拉取最新的群组列表
 
 #### 8.9.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -4129,7 +4137,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 
 ### 8.10 获取所有群组列表（包含异常群组）
 
-只返回正常运行的群组ID
+返回所有群组，包含正常运行、维护中、脏数据冲突、创世块冲突4种状态的群组
 
 #### 8.10.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -4165,7 +4173,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 | 4.1   |               | Object        |        | 组织信息对象               |
 | 4.1.1 | groupId       | Integer           | 否     | 群组编号                   |
 | 4.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常，2-异常                  |
+| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突|
 | 4.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
 | 4.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
 | 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
