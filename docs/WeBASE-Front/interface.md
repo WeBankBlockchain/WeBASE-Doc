@@ -747,6 +747,176 @@ http://localhost:5002/WeBASE-Front/privateKey/0x2e8ff65fb1b2ce5b0c9476b8f8beb221
 }
 ```
 
+
+### 2.5. 导入.pem私钥用户
+
+#### 接口描述
+
+导入.pem格式的私钥
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/importPem**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | pem文件内容 | pemContent    | String   |              | 是       | 必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式         |
+| 2        | 用户名 | userName    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/importPem
+```
+
+```
+{
+    "pemContent":"-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/\nXmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP+H7iljbTIqXOFM6qm5aVs\nfM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK\n-----END PRIVATE KEY-----\n",
+    "userName":"test222"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+```
+
+
+
+### 2.6. 导入.p12私钥用户
+
+#### 接口描述
+
+导入.p12格式的私钥
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/importP12**
+
+#### 调用方法
+
+HTTP POST | Content-type: form-data
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | p12文件 | p12File    | MultipartFile   |              | 是       |          |
+| 2        | p12文件密码 | p12Password    | String   |              | 否       | 缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文          |
+| 2        | 用户名 | userName    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/importP12
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+```
+
+
+### 2.7. 导入私钥到WeBASE-Sign
+
+#### 接口描述
+
+导入私钥到WeBASE-Sign，其中privateKey经过Base64加密
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/importWithSign**
+
+#### 调用方法
+
+HTTP POST | Content-type: form-data
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 用户编号 | signUserId    | String   |   64           | 是       |          |
+| 2        | 应用编号 | appId    | String   |     64         | 是       |           |
+| 2        | 私钥 | privateKey    | String   |              | 是       |  经过Base64加密后的内容        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/importWithSign
+```
+
+```
+{
+    "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
+    "appId": "app_001",
+    "signUserId": "user_001"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": null
+}
+```
+
+
+
 ## 3. web3接口
 
 ### 3.1. 获取块高接口 
@@ -1129,7 +1299,10 @@ http://localhost:5002/WeBASE-Front/1/web3/transactionReceipt/0xb2c733b742045e61c
     "gasUsedRaw": "0x1d8ce",
     "blockNumberRaw": "100",
     "transactionIndexRaw": "0",
-    "cumulativeGasUsedRaw": "0x1d8ce"
+    "cumulativeGasUsedRaw": "0x1d8ce",
+    "message": null,
+    "txProof": null,
+    "receiptProof": null
 }
 ```
 
@@ -2081,6 +2254,193 @@ http://localhost:5002/WeBASE-Front/1/web3/refresh
     ],
     "protocolId": 265,
     "txPoolSize": "0"
+}
+```
+
+### 3.24. 动态生成群组
+
+
+#### 接口描述
+
+在节点上动态生成新群组的配置文件与创世块文件
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/generateGroup**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1        | 群组编号 | groupId         | int           |             | 是        |    此处groupId可填写任意已有群组     |
+| 1        | 生成群组的编号 | generateGroupId         | int           |             | 是        |    待生成新群组的id     |
+| 1        | 共识节点列表 | nodeList         | List<String>           |             | 是        |   新群组的共识节点列表，可通过getNodeIdList获取      |
+| 1        | 群组时间戳 | timestamp         | BigInteger           |             | 是        |     新群组的创世块时间戳    |
+
+**2）数据格式**
+
+```
+{
+  "generateGroupId": 5,
+  "nodeList": [
+    "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c",
+    "59db64100da70db9c2911f2925bcd0c2f9a1b84f4f8bfef0f6a7edf6d511b2a79203a486c268fb97bc19636f91f71ae9dca076973a4bd551b4a8cdf6d7e7710c"
+  ],
+  "timestamp": 1589286309000 
+}
+```
+
+示例：
+
+```
+curl -X POST "http://localhost:5002/WeBASE-Front/{groupId}/web3/generateGroup" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"generateGroupId\": 8, \"nodeList\": [ \"dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c\" ], \"timestamp\":1589286309000}"
+```
+
+#### 响应参数
+
+a、成功：
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+b、失败：
+```
+{
+  "code": 201128,
+  "errorMessage": "group peers not connected"
+}
+```
+
+
+### 3.25. 操作动态群组的状态
+
+#### 接口描述
+
+启动群组、停止群组、移除群组、恢复群组、查询群组状态等操作
+
+创建群组后，需要对群组内每个节点分别调用`start`来启动群组，群组才是完全创建
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/operateGroup/{type}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | 群组id       | groupId           | int   |              |   是     |    操作的群组编号                        |
+|    2     | 操作类型         | type            | String   |              | 是       |  start, stop, remove, recover, getStatus |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/5/web3/operateGroup/start
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+b、失败：
+```
+{
+  "code": 201123,
+  "errorMessage": "group already running"
+}
+```
+
+
+### 3.26. 获取当前节点的多个群组状态
+
+#### 接口描述
+
+传入多个群组编号，对单个节点查询多个群组的状态
+
+包含五种群组状态：该节点不存在该群组"INEXISTENT"、正在停止群组"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/queryGroupStatus**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | 群组id       | groupId           | int   |              |   是     |    该编号与所查询群组编号无关                        |
+|    2     | 群组id列表         | groupIdList            | List<Integer>   |              | 是       |  传入多个群组id |
+
+**2）数据格式**
+
+```
+{
+  "groupIdList": [
+    1,2,3,4,5
+  ]
+}
+```
+
+示例：
+
+```
+curl -X POST "http://localhost:5002/WeBASE-Front/{groupId}/web3/queryGroupStatus" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"groupIdList\": [ 1,2,3,4,5 ]}"
+```
+
+#### 响应参数
+
+
+**1）参数表**
+
+| **序号** | **中文**         | **参数名**             | **类型**   | **最大长度** | **必填** | **说明**                                               |
+| -------- | ---------------- | ---------------------- | ---------- | ------------ | -------- | ------------------------------------------------------ |
+| 1        | 群组与状态Map      | -                 | Map     |              | 是       |                                                        |
+| 1.1        | 群组id         |             | String   |              | 是       |   群组id   |
+| 1.2        | 群组状态         |             | String   |              | 是       |   包含五种状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED"   |
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "1": "RUNNING",
+    "2": "RUNNING",
+    "3": "INEXISTENT",
+    "4": "INEXISTENT",
+    "5": "INEXISTENT"
+  }
 }
 ```
 
@@ -3787,17 +4147,267 @@ HTTP DELETE
 }
 ```
 
+## 8. Abi管理接口
 
-## 8. 其他接口
+### 8.1. 获取Abi信息
 
-### 8.1. 查询是否使用国密
+#### 接口描述
+
+根据abiId获取abi信息
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/abi/{abiId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | abi编号       | abiId           | Long   |              |   是    |    abi编号                        |
+      
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/abi/{abiId}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "abiId": 1,
+    "groupId": 1,
+    "contractName": "TTT",
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+    "contractBin": "608060405260043610610057576000357...",
+    "createTime": "2020-05-18 10:59:02",
+    "modifyTime": "2020-05-18 10:59:02"
+  }
+}
+```
+
+### 8.2. 获取Abi信息分页列表
+
+#### 接口描述
+
+获取abi信息的列表
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/abi/list/{groupId}/{pageNumber}/{pageSize}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|    1     | 群组id       | groupId           | int   |              |   是     |    群组编号                        |
+|    2     | 页码         | pageNumber            | int   |              | 是       |                            |
+|    3     | 页大小       | pageSize            | int   |              | 是       |                            |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/abi/list/{groupId}/{pageNumber}/{pageSize}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "abiId": 1,
+      "groupId": 1,
+      "contractName": "TTT",
+      "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+      "contractBin": "608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463fffff...29",
+      "createTime": "2020-05-18 10:59:02",
+      "modifyTime": "2020-05-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+### 8.3. 导入已部署合约的abi
+
+#### 接口描述
+
+将其他平台已部署的合约导入到本平台进行管理
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/abi**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约地址 | contractAddress    | String         |              | 是       |     合约地址                   |
+| 3        | 合约名  | contractName      | String   |              | 是       |   |
+| 4        | 合约abi  | contractAbi | List<Object>         |     |  是      | 合约的ABI |
+
+**2）数据格式**
+
+
+```
+{
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+### 8.4. 修改已导入的合约abi
+
+#### 接口描述
+
+更新已导入的合约abi内容
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/abi**
+
+#### 调用方法
+
+HTTP PUT
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | abi编号 | abiId   | Long         |              | 是        |                      |
+| 2        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 3        | 合约地址 | contractAddress    | String         |              | 是       |     合约地址                   |
+| 4        | 合约名  | contractName      | String   |              | 是       |   |
+| 5        | 合约abi  | contractAbi | List<Object>         |     |  是      | 合约的ABI |
+
+**2）数据格式**
+
+
+```
+{
+    "abiId": 1,
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+### 8.5. 修改合约abi
+
+#### 接口描述
+
+删除合约abi
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/abi/{abiId}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | abi编号 | abiId   | Long         |              | 是        |                      |
+
+**2）数据格式**
+
+
+```
+{
+    "abiId": 1
+}
+```
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+## 9. 其他接口
+
+### 9.1. 查询是否使用国密
 
 #### 接口描述
 
 获取WeBASE-Front的`encryptType`，即是否使用国密版；
 
 #### 接口URL
-
 
 **http://localhost:5002/WeBASE-Front/encrypt**
 
@@ -3832,7 +4442,7 @@ a、成功：
 ```
 
 
-## 9. 附录
+## 10. 附录
 
 ### 1. 返回码信息列表 
 
@@ -3884,7 +4494,10 @@ a、成功：
 | 201038 | user name already exists                     | 用户名已存在               |
 | 201039 | private key already exists                   | 私钥已存在                 |
 | 201040 | private key not exists                       | 私钥不存在                 |
-| 201041 | external user's appId and signUserId cannot be empty        | 私钥已存在                 |
+| 201041 | external user's appId and signUserId cannot be empty        | 外部用户的appId和signUserId不能为空  |
+| 201042 | There is no sol files in source              | solidity文件不存在                 |
+| 201043 | invalid group operate type                   | 群组操作类型不正确                 |
+| 201044 | invalid data type                            | 不正确的数据类型                 |
 | 201101  | groupId cannot be empty                   |    群组编号不能为空      | 
 | 201102  | tableName cannot be empty         |    表名不能为空      |
 | 201103  | permissionType cannot be empty             |    权限类型不能为空      |
@@ -3895,9 +4508,35 @@ a、成功：
 | 201108  | system config value cannot be empty      |    系统配置value值不能为空 |
 | 201109  | node id cannot be empty                 |    节点id不能为空      |
 | 201110  | node type cannot be empty           |   节点类型（共识状态不能为空） |
-| 201130  | signUserId cannot be empty           |   signUserId不可为空 |
+| 201111  | Permission state cannot be all empty           |   更新的用户权限状态不能为空 |
+| 201112  | contract address cannot be empty           |   合约地址不能为空 |
+| 201113  | contract handle type cannot be empty          |   合约操作类型不能为空 |
+| 201114  | grantAddress cannot be empty          |   赋值的地址不能为空 |
+| 201115  | invalid contract handle type          |   不正确的合约操作类型 |
+| 201116  | contract status handle fail         |   合约状态修改失败 |
+| 201120  | group operate fail          |   群组操作失败 |
+| 201121  | node internal error          |   节点内部错误 |
+| 201122  | group already exists          |  群组已存在 |
+| 201123  | group already running          |   群组已运行 |
+| 201124  | group already stopped          |   群组已停止 |
+| 201125  | group already deleted          |   群组已删除 |
+| 201126  | group not found          |   未找到群组 |
+| 201127  | group operate param error          |   群组操作入参错误 |
+| 201128  | group peers not connected          |   群组内节点未连接 |
+| 201129  | group genesis conf already exists          |   群组创世块文件已存在 |
+| 201130  | group config.ini already exists          |   群组的配置文件已存在 |
+| 201131  | group genesis conf not found          |   未找到群组创世块文件 |
+| 201132  | group config.ini not found          |   未找到群组的配置文件 |
+| 201133  | group is stopping          |   群组正在停止 |
+| 201134  | group not deleted          |   群组未删除 |
+| 201151  | Unsupported contract param type to encoded           |   不支持编码的合约参数类型 |
+| 201152  | Unsupported contract param type to decoded           |   不支持解码的合约参数类型 |
+| 201153  | unable to create instance of type, check input params           |  无法创建该合约参数类型的实例，请检查入参 |
+
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
+| 201202  | permission denied, please check chain administrator permission           |    权限不足，请检查用户 |
+
 | 201208  | unsupported for this system config key     |    不支持设置该系统配置      |
 | 201209  | provide value by positive integer mode, from 100000 to 2147483647              |    请输入正值或[100000, 2147483647]范围的值      |
 | 201210  | set system config value fail for params error or permission denied               |    设置系统配置失败，请检查权限      |
@@ -3910,10 +4549,12 @@ a、成功：
 | 201226  | sql syntax error              |    sql语句错误      |
 | 201227  | crud sql fail              |    执行sql语句失败      |
 | 201228  | table not exists              |    操作的表格不存在      |
-| -51503  | crud sql execute error                |     执行sql失败     |
 | 201231  | Cert file not found, please check cert path in config |     配置文件中的证书地址错误，未找到证书文件     |
 | 201232  | Pem file format error, must surrounded by -----XXXXX PRIVATE KEY----- |     pem证书格式错误，必须以"-----XXXXX PRIVATE KEY-----"开头结尾     |
 | 201233  | Pem file content error |     pem证书内容错误     |
+| 201235  | p12's password cannot be chinese |     p12证书密码不能是中文  |
+| 201236  | p12's password not match |     p12证书密码错误     |
+| 201237  | P12 file content error |     p12证书内容错误     |
 | 201241  | Exchange or message queue not exists, please check mq server or mq configuration |     交换机或消息队列不存在，请检查mq-server运行状态及其配置     |
 | 201242  | Database error: data already exists in db |     数据库错误：该数据记录已存在于数据库中     |
 | 201243  | Block range error, from/toBlock must greater than 0, toBlock must be greater than fromBlock |  合约Event区块范围错误，from大于0，to大于from     |
@@ -3922,6 +4563,9 @@ a、成功：
 | 201246  | Register contractEvent failed, please check your param |     订阅合约事件失败，请检查参数格式     |
 | 201247  | Unregister event failed, please check mq server exchange |     取消订阅事件失败，请检查参数格式     |
 | 201248  | Contract abi invalid, please check abi          |     合约ABI格式错误，请检查入参     |
+| 201255  | contract address already exists          |     合约地址已存在 |
+| 201256  | abi info of this id not exists          |     abi不存在     |
+| 201257  | Abi Id cannot be empty          |   abi编号不能为空       |
 
 
 ### 2. Precompiled Service说明

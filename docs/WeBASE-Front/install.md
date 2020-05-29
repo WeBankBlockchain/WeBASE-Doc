@@ -15,27 +15,13 @@ WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documenta
 
 ```eval_rst
 .. important::
-    使用国密版WeBASE-Front需要开启web3sdk的国密开关和使用国密版solcJ Jar包编译合约
+    使用国密版WeBASE-Front需要开启web3sdk的国密开关
 ```
 
 开启web3sdk的国密开关:
 
 - 开启web3sdk的国密开关：将配置文件`application.yml`中`sdk`的`encryptType`从`0`修改为`1`；
-
-使用国密版solcJ jar包进行合约编译：需要编译项目前替换webs3sdk默认使用ethereum的solcJ-0.4.25.jar，具体方法：
-1. 下载国密版solcJ的jar包后，放置在项目根目录的`/lib`文件夹中
-2. 在`build.gradle`引入web3sdk处通过`exclude`去除ethereum的solcJ jar包
-3. 通过`fileTree`引入`/lib`的国密版solcJ的jar包
-
-```
-compile ('org.fisco-bcos:web3sdk:2.2.0')
-    {
-        exclude group:"org.ethereum"
-    }
-compile fileTree(dir:'lib',includes:['solcJ-all-0.4.25-gm.jar'])
-```
-
-下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+- 编译国密版智能合约在v1.3.1版本后，通过引入solcJ:0.4.25-rc1.jar，自动切换支持国密版智能合约的编译/部署/调用；（可自行切换solcJ-0.5.2）
 
 
 ## 2. 拉取代码
