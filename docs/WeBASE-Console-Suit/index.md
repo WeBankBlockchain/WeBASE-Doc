@@ -535,18 +535,18 @@ WeBASE已对这一步骤进行了分装，自动批量调用各个节点前置�
 ![](../../images/WeBASE-Console-Suit/dynamic_group/group_state.png)
 
 创建群组：
-- 创建群组实际上是调用节点的`generateGroup` JSON RPC接口，传入参数`timestamp`和`sealers`(WeBASE中为`nodeList`)，并在节点的conf目录下生成群组配置文件`group.x.genesis`和`group.x.ini`
+- 创建群组实际上是调用节点的`generateGroup` JSON RPC接口，传入参数`timestamp`和`sealers`(WeBASE中为`nodeList`)，并在节点的conf目录下**生成群组配置文件**`group.x.genesis`和`group.x.ini`
 - 其中`group.x.genesis`是群组的创世块配置，包含`timestamp`和`sealers`，，**该配置一旦启动群组之后就不能再修改**，否则引起群组异常。详情可以参考文档[FISCO BCOS-配置文件与配置项](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/configuration.html)
 
 启动群组：
 - 启动群组是将节点的群组状态标记为“RUNNING"
 - 启动后，节点进程将读取上文的`group.x.genesis`中的`sealers`项，将`sealers`中的所有节点设置为共识节点，开始共识
 
-因此，如果需要动态创建一个4节点的群组时，需要设置4个节点均为共识节点，可以在`sealers`中加入所有共识节点，然后启动各个节点的群组即可。
+例如：
+- 如果需要动态创建一个4节点的群组时，需要设置4个节点均为共识节点，可以在`sealers`中加入所有共识节点，然后启动各个节点的群组即可。
+- 但是，如果创建群组时只将其中2个节点设置为`sealers`，那么，**另外2个节点需要加入该群组时，调用创建群组接口时，需要传入相同的`sealers`，即群组原配置中的2个节点**，创建群组并启动后，需要通过“节点管理”（`addSealer/addObserver`接口）将新节点加入共识。不可修改该群组的`sealers`配置，否则将引起群组异常。
 
-但是，如果创建群组时只将其中2个节点设置为`sealers`，那么，**另外2个节点需要加入该群组时，调用创建群组接口时，需要传入相同的`sealers`，即群组原配置中的2个节点**，创建群组并启动后，需要通过“节点管理”（`addSealer/addObserver`接口）将新节点加入共识。不可修改该群组的`sealers`配置，否则将引起群组异常。
-
-下面我们通过**单个管理台批量创建群组**和**多个管理台创建群组并加入群组**这两个例子来了解动态群组管理的注意事项
+下面我们通过**单个管理台批量创建群组**和**多个管理台创建群组并加入群组**这两个例子来了解动态群组管理的操作步骤与注意事项
 
 #### 单个节点管理台-批量创建群组
 
