@@ -498,3 +498,148 @@ QQ邮箱开通邮箱服务：
 - SMTP协议：默认使用25端口(非SSL)，SSL默认465端口(SSL)或587端口(TLS)
 - POP3/IMAP协议：因为邮箱服务使用的是发邮件功能，未用到POP3或IMAP收件协议，此处仅作端口说明：其中POP3默认110端口(非SSL)和995端口(SSL)，IMAP默认143端口(非SSL)和993端口(SSL)
 - 126邮箱的SSL端口除了587，还可尝试994；在阿里云下25端口被禁用，请尝试587端口或其他端口；
+
+### 动态群组管理使用指南
+
+v1.3.1新增的动态群组功能可以支持用户在可视化页面中动态管理群组，包括创建多个节点的群组、节点加入已有群组等功能
+
+**动态群组管理要求各节点间已建立了P2P连接**
+
+下面我们使用2个节点管理平台，4个节点前置，每个管理台包含两个前置来展示：
+
+管理台1中包含前置A和B，管理台2中包含前置C和D：
+
+管理台1：
+![](../../images/WeBASE-Console-Suit/dynamic_group/nodemgr_1.png)
+管理台2：
+![](../../images/WeBASE-Console-Suit/dynamic_group/nodemgr_2.png)
+
+#### 群组配置解释
+
+动态群组管理包含三个基本操作：**创建群组、启动群组、节点加入群组共识**
+
+**注：节点的动态群组操作是针对单个节点进行的**，即，如果创建一个新群组包含4个节点，则需要对4个节点分别调用“创建”、“启动”命令；如果需要查询群组中各节点的群组状态，也需要对4个节点轮询获取群组状态。
+
+WeBASE已对这一步骤进行了分装，自动批量调用各个节点前置的“创建”、“启动”和“查询群组状态”的接口。
+
+创建群组：
+- 创建群组实际上是调用节点的`generateGroup` JSON RPC接口，传入参数`timestamp`和`sealers`(WeBASE中为`nodeList`)，并在节点的conf目录下生成群组配置文件`group.x.genesis`和`group.x.ini`
+- 其中`group.x.genesis`是群组的创世块配置，包含`timestamp`和`sealers`，，**该配置一旦启动群组之后就不能再修改**，否则引起群组异常。详情可以参考文档[FISCO BCOS-配置文件与配置项](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/configuration.html)
+
+启动群组：
+- 启动群组是将节点的群组状态标记为“RUNNING"
+- 启动后，节点进程将读取上文的`group.x.genesis`中的`sealers`项，将`sealers`中的所有节点设置为共识节点，开始共识
+
+因此，如果需要动态创建一个4节点的群组时，需要设置4个节点均为共识节点，可以在`sealers`中加入所有共识节点，然后启动各个节点的群组即可。
+
+但是，如果创建群组时只将其中2个节点设置为`sealers`，那么，**另外2个节点需要加入该群组时，调用创建群组接口时，需要传入相同的`sealers`，即群组原配置中的2个节点**，创建群组并启动后，需要通过“节点管理”（`addSealer/addObserver`接口）将新节点加入共识。不可修改该群组的`sealers`配置，否则将引起群组异常。
+
+下面我们通过**单个管理台批量创建群组**和**多个管理台创建群组并加入群组**这两个例子来了解动态群组管理的注意事项
+
+#### 单个节点管理台-批量创建群组
+
+此处采用单个节点管理台，两个节点前置，动态创建一个2节点的群组group333
+
+批量创建群组指的是向`group.x.genesis-sealers`中所有节点发起创建群组的请求（群组的创世块配置如下所示），这要求所有节点的前置在同一个管理台里，才能一次性对所有节点发起创建群组的请求。
+**若节点分布在多个管理台中，则参考下一小节**。
+
+```
+{
+	// timestamp
+	"groupTimestamp": "1591013023063",
+	"nodeIdList": [
+		// node A
+		"31e2b051abc27b49aff8846a4037e8bdb45acd6ff98fdad42f7b8a9c4887fffcc99edbf4eeafff656f00df07f44ae3609463a7ddc3ba8481f88b43424007fafe",
+		// node B
+		"c867302e786a790663c5cf6fdbbff96570d00a3500b23c9ddd2dd63ada07b85fbc6f4549a9f05cad60bcf7a6199caa95781fd40a25e9098a2c728b90d88938f8"
+	]
+}
+```
+
+选中管理台的两个节点后，将分别对这两个节点发起创建群组、启动群组的请求，
+![](../../images/WeBASE-Console-Suit/dynamic_group/batch_generate_group.png)
+
+创建成功后，可以看到节点A和节点B已经在新群组group333中了；但是可以看到节点列表中还有两个外部节点；节点A、B的群组编号中显示了号码，则代表该群组属于群组的共识节点/观察节点，否则显示"-"代表是游离节点，仅有P2P连接；
+![](../../images/WeBASE-Console-Suit/dynamic_group/batch_generate_after.png)
+
+下一步，我们将处于管理台2的节点C和节点D也加入到这个群组333中来；
+
+#### 多个节点管理台-创建群组并加入群组
+
+此处使用两个节点管理台，更复杂情况可以以此类推。
+
+我们在上面通过管理台1创建了一个由节点A和节点B组成的新群组group333，现在我们把管理台2的节点C和节点D加入到管理台1中创建的群组group333
+
+在管理台1中，进入群组管理，导出群组group333的配置内容
+
+![](../../images/WeBASE-Console-Suit/dynamic_group/export_group_config.png)
+
+加入群组时，用户需要再加入群组后，手动将群组的新节点添加为共识/观察节点；
+
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_tips.png)
+
+点击加入已有群组后，导入群组group333的配置；也可以直接键入群组编号、群组时间戳、创世块共识节点列表
+
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_config_single.png)
+
+
+选中需要加入该群组的节点后，点击确定；
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_select_node.png)
+
+
+
+**注：加入群组后，需要手动将新节点加入到群组的共识/观察节点，节点才会参与新群组的共识**。可以查看新群组的节点，可以看到节点C和节点D的“群组编号”为空，即未参与群组共识
+![](../../images/WeBASE-Console-Suit/dynamic_group/mail_server_config_test.png)
+
+下面我们把节点C和节点D加入到新群组的共识/观察节点列表
+
+由于管理台2中没有已属于群组共识/观察节点的节点，因此需要在**管理台1**中，切换右上角到群组group333，然后将新加入群组的节点C和节点D修改为共识节点/观察节点。（修改节点类型需要管理员权限私钥，如果未启用首个管理员，则任意私钥即可修改）
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_add_sealer.png)
+
+全部修改为观察节点后，
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_add_sealer_after.png)
+
+点击进入群组管理中，查看群组的节点状态，节点C和节点D的“群组编号”已显示333，代表修改成功了
+
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_list_final.png)
+
+**至此，四个节点A/B/C/D成功通过动态群组管理加入到新群组group333中了**
+
+##### 其他情况
+
+- 管理台2中先创建了**含有节点C的群组group9后，将节点D加入group9**；
+
+如果管理台2中的节点C已在新群组group9中，需要将节点D加入该群组，也可以通过点击群组列表中的群组，点击添加，按照与上文类似的提示即可添加成功。
+
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_local.png)
+
+添加完成后，右上角切换到对应的群组group9，到“节点管理”页，将该节点设置为共识/观察节点（需要创建私钥用户来发交易），即完成加入群组的操作
+
+创建群组成功
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_local_after.png)
+
+修改节点类型
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_local_add_sealer.png)
+
+点开群组管理中的group9查看节点状态，可以看到节点C和节点D的群组编号已经显示为"9"，说明节点D已成功加入群组group9
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_local_final.png)
+
+
+- 管理台1中先创建**共识节点包含四个节点A/B/C/D的群组group10后，在管理台2将节点C/D直接加入group10，省略加入为共识/观察节点步骤**；
+
+如果一次性创建一个4节点的新群组group4，需要把4个节点的前置都加入到同一个节点管理台，此时，由于`nodeList`中已经设置了4个节点均为共识节点，只需要分别到两个控制台中，通过“加入已有群组”中填入一致的配置，即可创建群组，并可以省去上文的“加入群组共识”这一步了
+
+我们通过管理台1中的“加入已有群组”来自定义共识节点列表，在节点列表中包含所有的4个节点A/B/C/D，然后生成群组group10
+
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_batch.png)
+
+我们点开群组列表中的群组group10，可以看到4个节点的群组编号已经显示了"10"，说明4个节点都已经在群组group10的共识/观察节点了
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_batch_after.png)
+
+下一步我们只需要按照上文所说的，导出当前群组group10的配置文件，在管理台2中导入配置，选中剩余的节点C和节点D，点击确定
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_batch_config.png)
+
+至此，我们就顺利完成创建群组group10的所有操作了！
+![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_batch_finish.png)
+
+
