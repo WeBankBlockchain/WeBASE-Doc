@@ -6,10 +6,7 @@
 
 调用此接口编译合约。上传合约文件zip压缩包（压缩包里的每个合约的文件名要和合约名一致，合约引用需使用“./xxx.sol”），返回合约编译信息。
 
-注：合约编译默认使用ethereum solcj-0.4.25.jar，如需使用其他版本在/dist/lib中替换solcJ的jar包；
-或将新的solcJ jar包放置在项目根目录的/lib文件夹中，在build.gradle中引入web3sdk处exclude去除ethereum的solcJ jar包，同时通过fileTree引入lib中的solcJ-gm jar包
-
-下载其他版本或国密版合约编译包则到[下载合约编译jar包](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#jar)下载
+WeBASE-Transaction编译国密版智能合约，v1.3.1+版本已支持根据配置项的`encryptType`自动切换国密版soclJ jar包；
 
 #### 接口URL
 
@@ -70,6 +67,14 @@ b.异常返回结果示例（信息详情请参看附录1）
 #### 接口描述
 
 调用此接口发送合约部署相关信息，交易服务子系统会将合约部署请求信息缓存到数据库，通过轮询服务向节点发送交易请求，确保合约成功部署。
+
+构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
+constructor(uint n,bool b) -> [1,true]
+constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
 
 #### 接口URL
 
