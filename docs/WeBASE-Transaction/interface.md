@@ -415,6 +415,15 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 调用此接口发送无状态交易请求，交易服务子系统会将交易请求信息缓存到数据库，通过轮询服务向节点发送交易请求，确保交易成功上链。当部署业务流水号为空时（即不是调用交易子系统部署合约），合约地址和abi不能为空。
 
+
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+```
+function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(uint n,bool b) -> [1,true]
+function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
 #### 接口URL
 
 http://localhost:5003/WeBASE-Transaction/trans/send
@@ -487,6 +496,14 @@ b.异常返回结果示例（信息详情请参看附录1）
 #### 接口描述
 
 调用此接口同步从节点查询交易信息。当部署业务流水号为空时（即不是调用交易子系统部署合约），合约地址和abi不能为空。
+
+
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+```
+function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(uint n,bool b) -> [1,true]
+function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
 
 #### 接口URL
 
