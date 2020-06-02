@@ -1533,6 +1533,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 ### 5.4 发送交易
 
 
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+```
+function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(uint n,bool b) -> [1,true]
+function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
 #### 5.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/transaction**
