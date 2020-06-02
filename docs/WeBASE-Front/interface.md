@@ -548,6 +548,130 @@ HTTP POST
 }
 ```
 
+### 1.11. 已签名交易发送
+
+#### 接口描述
+
+> 发送已签名的交易上链，返回交易收据；
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/trans/signed-transaction**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 已签名字符串     | signedStr     | String            |            | 是       |          |
+| 2        | 是否同步发送    | sync    | bool          |            | 是       |     |
+| 2        | 群组ID     | groupId    | int          |            | 否      |     |
+
+**2）数据格式**
+```
+{
+    "signedStr": "0xddd",
+    "sync": 1,
+    "groupId":1
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+    "transactionHash": "0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b",
+    "transactionIndex": 0,
+    "blockHash": "0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade",
+    "blockNumber": 100,
+    "cumulativeGasUsed": 121038,
+    "gasUsed": 121038,
+    "contractAddress": "0x0000000000000000000000000000000000000000",
+    "root": null,
+    "from": null,
+    "to": null,
+    "logs": [
+        {
+            "removed": false,
+            "logIndex": 0,
+            "transactionIndex": 0,
+            "transactionHash": "0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b",
+            "blockHash": "0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade",
+            "blockNumber": 100,
+            "address": "0x986278eb8e8b4ef98bdfc055c02d65865fc87ad2",
+            "data": "0x00000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000001caf3fbec3675eabb85c0b25e2992d6f0a5e1546dad85c20733fdb27cfa4ca782a5fdfb621b416f3494c7d8ca436c12309884550d402ea79f03ef8ddfdd494f7a40000000000000000000000000000000000000000000000000000000000000040666164363863656230616530316530643731616635356331316561643031613532656638363435343866306134643133633836363164393664326461366239380000000000000000000000000000000000000000000000000000000000000002363000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000023630000000000000000000000000000000000000000000000000000000000000",
+            "type": "mined",
+            "topics": [
+                "0xbf474e795141390215f4f179557402a28c562b860f7b74dce4a3c0e0604cd97e"
+            ],
+            "logIndexRaw": "0",
+            "blockNumberRaw": "100",
+            "transactionIndexRaw": "0"
+        }
+    ],
+    "logsBloom": null,
+    "gasUsedRaw": "0x1d8ce",
+    "blockNumberRaw": "100",
+    "transactionIndexRaw": "0",
+    "cumulativeGasUsedRaw": "0x1d8ce",
+    "message": null,
+    "txProof": null,
+    "receiptProof": null
+}
+```
+
+
+### 1.12. 已编码查询交易发送
+
+#### 接口描述
+
+> 发送已编码的查询交易，返回合约的返回值；
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/trans/query-transaction**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 已编码字符串     | encodeStr     | String            |            | 是       |          |
+| 2        | 合约地址    | contractAddress    | String          |            | 是       |     |
+| 3        | 群组ID     | groupId    | int          |            | 否      |     |
+| 4        | 合约名     | funcName    | String          |            | 是      |     |
+| 5        | 合约abi     | contractAbi    | String          |            | 是      |     |
+| 6        | 用户地址     | userAddress    | String          |            | 否      |     |
+
+**2）数据格式**
+```
+{
+    "encodeStr": "0xddd",
+    "contractAddress": "0x2b5ad5c4795c026514f8317c7a215e218dccd6cf",
+    "groupId":1,
+    "funcName": "get",
+    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"trans\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"TransEvent\",\"type\":\"event\"}]"
+}
+```
+
+#### 响应参数
+ Object返回类型
+
+```
+{"Hi,Welcome!"}
+```
 
 ## 2. 密钥接口
 
