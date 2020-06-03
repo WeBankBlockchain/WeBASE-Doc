@@ -593,9 +593,9 @@ WeBASE已对这一步骤进行了分装，自动批量调用各个节点前置�
 
 此处例子使用两个节点管理台，而更复杂情况可以以此类推。
 
-我们在上面通过管理台1创建了一个由节点A和节点B组成的新群组group333，现在我们把管理台2的节点C和节点D加入到管理台1中创建的群组group333
+我们在上面通过管理台1创建了一个由节点A和节点B组成的新群组group333，现在我们把管理台2的节点C和节点D加入到管理台1中创建的群组group333，实现下图的效果，节点C/D的group333处于running状态，且加入group333的共识
 
-![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group333_nodeCD_runing.png)
+![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group333_all_sealer.png)
 
 具体操作如下：
 
@@ -620,7 +620,8 @@ WeBASE已对这一步骤进行了分装，自动批量调用各个节点前置�
 
 ![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group333_nodeCD_runing.png)
 
-点开可以查看新群组的节点，可以看到节点C和节点D的“群组编号”为空，即未参与群组共识
+点开可以查看新群组的节点，可以看到节点C和节点D的“群组编号”为空，即**未参与群组共识**
+
 ![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_not_sealer.png)
 
 **注：加入群组后，需要手动将新节点加入到群组的共识/观察节点，节点才会参与新群组的共识**。
@@ -638,13 +639,13 @@ WeBASE已对这一步骤进行了分装，自动批量调用各个节点前置�
 ![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_list_final.png)
 
 即如下图所示，节点C/D都已加入群组group333的共识
-![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group333_nodeCD_runing.png)
+![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group333_all_sealer.png)
 
-**至此，四个节点A/B/C/D成功通过动态群组管理加入到新群组group333中了**
+**至此，四个节点A/B/C/D成功通过动态群组管理加入到新群组group333中并参与共识了**
 
 ##### 其他情况
 
-- 管理台2中先创建了**含有节点C的群组group9后，将节点D加入group9**；
+- 案例1：管理台2中先**创建含有节点C的群组group9后，然后将节点D加入group9**；
 
 如果管理台2中的节点C已在新群组group9中，需要将节点D加入该群组，当前群组拓扑如下
 ![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group9_first.png)
@@ -671,7 +672,7 @@ WeBASE已对这一步骤进行了分装，自动批量调用各个节点前置�
 
 ![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group9_all_sealer.png)
 
-- 管理台1中先创建**共识节点包含四个节点A/B/C/D的群组group10后，在管理台2将节点C/D直接加入group10，省略加入为共识/观察节点步骤**；
+- 案例2：管理台1中先创建**共识节点包含四个节点A/B/C/D的群组group10后，在管理台2将节点C/D直接加入group10，省略加入为共识/观察节点步骤**；
 
 
 如果一次性创建一个4节点的新群组group4，需要把4个节点的前置都加入到同一个节点管理台，此时，由于`nodeList`中已经设置了4个节点均为共识节点，只需要**分别到两个管理台**中，通过“加入已有群组”中填入一致的配置，即可创建群组，并可以省去上文的“加入群组共识”这一步了
