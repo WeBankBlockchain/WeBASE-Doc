@@ -20,6 +20,9 @@ v1.3.1主要新增了动态群组接口、导入abi接口、导入.p12私钥接�
 ##### 新增导入.p12私钥用户
 - 私钥管理中，新增导入控制台所导出的.p12私钥；
 
+##### 定时任务优化
+- 定时任务并行化，可通过yml配置线程池大小，线程阻塞时长等加快拉取区块、拉取交易
+
 ##### 数据表的字段修改
 - tb_front新增`status`字段，用于记录已添加的节点前置的状态，与节点状态同步，每过7.5秒更新一次；同时每请求一次节点前置会更新前置状态（每次更新至少间隔3秒）
 - 新增tb_abi数据表，用于记录导入的合约abi
@@ -30,8 +33,42 @@ v1.3.1主要新增了动态群组接口、导入abi接口、导入.p12私钥接�
   - 新增`node_id_list`记录动态创建群组的创世块共识节点列表
 - tb_front_group_map数据表新增`status`字段，记录节点前置某一群组的状态（1-可用，2-不可用）
 
-##### 定时任务优化
-- 定时任务并行化，可通过yml配置线程池大小，线程阻塞时长等加快拉取区块、拉取交易
+**数据表升级操作**
+
+登陆mysql后，进入到相应database中，以`webasenodemanager`的database为例；
+```
+mysql -uroot -p123456
+
+// mysql 命令行
+mysql> use webasenodemanager;
+
+// tb_front表新增status字段
+mysql> alter table tb_front add column status int(11) DEFAULT 1 COMMENT '前置服务状态';
+
+// 新增tb_abi表
+mysql> CREATE TABLE IF NOT EXISTS tb_abi (
+  abi_id int(11) NOT NULL AUTO_INCREMENT COMMENT '合约ABI的编号',
+  group_id int(11) NOT NULL COMMENT '合约ABI所属群组的编号',
+  contract_name varchar(120) NOT NULL COMMENT '合约ABI的合约名',
+  contract_address varchar(64) NOT NULL COMMENT '合约ABI的合约地址',
+  contract_abi text NOT NULL COMMENT '合约ABI的内容',
+  contract_bin text NOT NULL COMMENT '合约ABI的runtime-bin',
+  create_time datetime DEFAULT NULL COMMENT '合约ABI的创建时间',
+  modify_time datetime DEFAULT NULL COMMENT '合约ABI的修改时间',
+  PRIMARY KEY (abi_id),
+  UNIQUE KEY unique_address (group_id,contract_address),
+  UNIQUE KEY unique_name (group_id,contract_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合约ABI表';
+
+// tb_group新增description、group_timestamp、node_id_list字段
+mysql> alter table tb_group add column description varchar(1024) COMMENT '群组描述';
+mysql> alter table tb_group add column group_timestamp varchar(64) COMMENT '群组创世块时间戳';
+mysql> alter table tb_group add column node_id_list text COMMENT '群组成员节点的ID';
+
+// tb_front_group_map新增status字段
+mysql> alter table tb_front_group_map add column status int(11) DEFAULT 1 NOT NULL COMMENT '节点（前置）的群组状态';
+```
+
 
 #### v1.3.0
 
