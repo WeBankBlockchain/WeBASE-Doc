@@ -169,6 +169,14 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ![](../../images/WeBASE-Console-Suit/contract_list_2.png)
 
+ABI列表：支持导入已部署的合约ABI进行合约调用
+
+![](../../images/WeBASE-Console-Suit/import_abi.png)
+
+ABI编码：支持对ABI的方法与入参进行编码
+
+![](../../images/WeBASE-Console-Suit/abi_analysis.png)
+
 CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns)
 
 CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
@@ -185,11 +193,15 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 私钥管理：
 
-![](../../images/WeBASE-Console-Suit/key_manger_2.png)
+![](../../images/WeBASE-Console-Suit/private_key_manage.png)
 
 添加私钥用户：
 
 ![](../../images/WeBASE-Console-Suit/key_manager_add_user_2.png)
+
+导入私钥：支持导入.txt/.pem/.p12格式的私钥，其中.txt私钥可由eBASE-Front导出，.pem/.p12私钥可由console控制台导出。如果需要导入自定义私钥，可根据节点前置导出的.txt私钥，编辑其中的privateKey字段内容。
+
+![](../../images/WeBASE-Console-Suit/import_private.png)
 
 ### 系统管理
 
