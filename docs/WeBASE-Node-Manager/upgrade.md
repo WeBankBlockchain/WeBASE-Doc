@@ -2,6 +2,74 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
+#### v1.3.1
+
+v1.3.1主要新增了动态群组接口、导入abi接口、导入.p12私钥接口、定时任务优化等功能，详情升级说明如下：
+
+##### 新增动态群组接口
+- 新增动态群组接口，包含生成群组、启动/停止群组、删除/恢复群组、单个/批量查询群组状态等接口
+
+注：节点生成新群组或加入新群组需要对节点进行三步操作：生成群组、启动群组、节点加入群组共识节点/观察节点；如何通过WeBASE页面操作可参考[动态群组操作文档](../WeBASE-Console-Suit/index.html)
+
+接口详情可参考[接口文档](./interface.html)中群组管理模块的动态群组接口说明
+
+##### 新增导入已部署合约Abi功能、合约Abi解析功能
+- 前置的“合约管理”Tab中，新增导入合约abi功能，可以导入已部署的合约进行管理
+- 前置的“合约管理”Tab中，新增合约abi解析功能，可用于构造交易input入参
+
+##### 新增导入.p12私钥用户
+- 私钥管理中，新增导入控制台所导出的.p12私钥；
+
+##### 定时任务优化
+- 定时任务并行化，可通过yml配置线程池大小，线程阻塞时长等加快拉取区块、拉取交易
+
+##### 数据表的字段修改
+- tb_front新增`status`字段，用于记录已添加的节点前置的状态，与节点状态同步，每过7.5秒更新一次；同时每请求一次节点前置会更新前置状态（每次更新至少间隔3秒）
+- 新增tb_abi数据表，用于记录导入的合约abi
+- tb_group数据表新增字段：
+  - `group_status`字段新增两种状态，全部状态包括：`1-normal, 2-maintaining, 3-dirty-data, 4-conflict-genesis`
+  - `group_desc`字段修改为`description`，记录群组的描述内容
+  - 新增`group_timestamp`记录动态创建群组的创世块时间戳
+  - 新增`node_id_list`记录动态创建群组的创世块共识节点列表
+- tb_front_group_map数据表新增`status`字段，记录节点前置某一群组的状态（1-可用，2-不可用）
+
+**数据表升级操作**
+
+登陆mysql后，进入到相应database中，以`webasenodemanager`的database为例；
+```
+mysql -uroot -p123456
+
+// mysql 命令行
+mysql> use webasenodemanager;
+
+// tb_front表新增status字段
+mysql> alter table tb_front add column status int(11) DEFAULT 1 COMMENT '前置服务状态';
+
+// 新增tb_abi表
+mysql> CREATE TABLE IF NOT EXISTS tb_abi (
+  abi_id int(11) NOT NULL AUTO_INCREMENT COMMENT '合约ABI的编号',
+  group_id int(11) NOT NULL COMMENT '合约ABI所属群组的编号',
+  contract_name varchar(120) NOT NULL COMMENT '合约ABI的合约名',
+  contract_address varchar(64) NOT NULL COMMENT '合约ABI的合约地址',
+  contract_abi text NOT NULL COMMENT '合约ABI的内容',
+  contract_bin text NOT NULL COMMENT '合约ABI的runtime-bin',
+  create_time datetime DEFAULT NULL COMMENT '合约ABI的创建时间',
+  modify_time datetime DEFAULT NULL COMMENT '合约ABI的修改时间',
+  PRIMARY KEY (abi_id),
+  UNIQUE KEY unique_address (group_id,contract_address),
+  UNIQUE KEY unique_name (group_id,contract_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合约ABI表';
+
+// tb_group新增description、group_timestamp、node_id_list字段
+mysql> alter table tb_group add column description varchar(1024) COMMENT '群组描述';
+mysql> alter table tb_group add column group_timestamp varchar(64) COMMENT '群组创世块时间戳';
+mysql> alter table tb_group add column node_id_list text COMMENT '群组成员节点的ID';
+
+// tb_front_group_map新增status字段
+mysql> alter table tb_front_group_map add column status int(11) DEFAULT 1 NOT NULL COMMENT '节点（前置）的群组状态';
+```
+
+
 #### v1.3.0
 
 WeBASE-Node-Manager v1.3.0后，将通过WeBASE-Sign来管理私钥和对交易签名，可查看以下升级说明进行修改：

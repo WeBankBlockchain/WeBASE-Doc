@@ -76,7 +76,7 @@ Python3.4及以上版本，需安装PyMysql依赖包：
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.3.0/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.3.1/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -104,10 +104,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.3.0
-webase.mgr.version=v1.3.0
-webase.sign.version=v1.3.0
-webase.front.version=v1.3.0
+webase.web.version=v1.3.1
+webase.mgr.version=v1.3.1
+webase.sign.version=v1.3.1
+webase.front.version=v1.3.1
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -512,3 +512,8 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ```
 
 答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。
+
+### 12. WeBASE-Web登录页面的验证码加载不出来
+
+答：检查WeBASE-Node-Manager后台服务是否已启动成功：在webase-node-mgr目录下，运行`bash status.sh`或者查看目录中`log/WeBASE-Node-Manager.log`日志文件，查看是否启动失败；
+

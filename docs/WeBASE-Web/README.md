@@ -26,6 +26,8 @@
 
 9. **帐号管理**，只有admin帐号才能查看此功能，可以新增帐号（登录此系统帐号）、修改密码、修改账户邮箱等等。
 
+10. **群组管理**，动态管理群组，可以创建新群组、将节点加入已有群组、删除群组数据等
+
 ### 国密支持
 
 WeBASE-Web v1.2.2+已支持国密功能，使用[WeBASE-Node-Manager v1.2.2](../WeBASE-Node-Manager/index.html)，使用[WeBASE-Front v1.2.2](../WeBASE-Front/index.html)及以上版本
