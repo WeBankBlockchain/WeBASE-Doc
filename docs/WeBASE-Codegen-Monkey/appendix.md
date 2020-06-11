@@ -8,7 +8,7 @@ WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankF
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| server.port | N | 启动WeBASE-Collect-Bee组件实例的服务端口 | 8082 | 8080 |
+| server.port | N | 启动WeBASE-Collect-Bee组件实例的服务端口 | 8082 | 5200 |
 
 #### 1.2 FISCO-BCOS节点配置
 
@@ -16,7 +16,6 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| system.orgId | N | 组织机构ID，用于区分不同的机构 | 10000 | FB001 |
 | system.nodeStr | Y | 连接区块链节点的nodeStr，nodeName@[IP]:[PORT], 其中prot为channel port | node1@ip:8822 | - |
 | system.encryptType | N | 加密类型： 0-RSA, 1-gm | 0 | 0 |
 
@@ -75,7 +74,7 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | monitor.[contractName].[methodName/eventName].generated=false | N | 是否抓取特定合约中特定method或event的数据 | on/off | on |
 | monitor.[contractName].[eventName].ignoreParam=XXX,XXX | N | 忽略特定合约特定event的特定字段不进行抓取 | xxx,xxx |  |
 | length.[contractName].[methodName or eventName].paraName | N | 指定特定字段在数据库表中的长度 |  | 512 |
-| button.swagger | N | 是否打开swagger功能，请务必在生成环境关闭此开关 | on/off | off |
+| button.swagger | N | 是否打开swagger功能，请务必在生成环境关闭此开关 | on/off | on |
 
 ### 2. Java安装
 
@@ -128,7 +127,7 @@ sudo yum -y install git
 sudo apt install git
 ```
 
-#### 4. Mysql安装
+### 4. Mysql安装
 
 此处以Centos安装MariaDB为例。MariaDB数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。MariaDB完全兼容 MySQL，包括API和命令行。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
 
@@ -214,14 +213,14 @@ mysql > use webasebee;
 
   **以上语句仅适用于开发环境，不能直接在实际生产中使用！！！以上设置会使数据库在所有网络上都可以访问，请按具体的网络拓扑和权限控制情况，设置网络和权限帐号**
   
-#### 5. zookeeper 安装
+### 5. zookeeper 安装
 zookeeper 支持单机和集群部署，推荐使用集群部署的方式，请参考zookeeper官网的说明：
 
 [集群部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_zkMulitServerSetup)
 
 [单机部署](https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_singleAndDevSetup)
 
-#### 6. supervisor安装与部署
+### 6. supervisor安装与部署
 
 ##### 安装脚本
 > sudo yum -y install supervisor
