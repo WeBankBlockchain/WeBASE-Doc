@@ -66,6 +66,14 @@ HTTP POST
 > constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 > ```
 
+构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
+constructor(uint n,bool b) -> [1,true]
+constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
 #### 接口URL
 
 **http://localhost:5002/WeBASE-Front/contract/deploy**
@@ -81,7 +89,7 @@ HTTP POST
 | **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
 | -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
 | 1        | 所属群组     | groupId      | int      |              | 是       |                      |
-| 2        | 用户编号     | user         | String   |              | 是       | 用户编号或者用户地址 |
+| 2        | 用户地址     | user         | String   |              | 是       | 用户地址，可通过`/privateKey`接口创建 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
 | 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
@@ -92,7 +100,7 @@ HTTP POST
 
 ```
 {
-    "user":"700001",
+    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName":"HelloWorld",
     "abiInfo": [],
     "bytecodeBin":"",
@@ -124,6 +132,16 @@ HTTP POST
 > constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 > ```
 
+
+构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
+constructor(uint n,bool b) -> [1,true]
+constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
 #### 接口URL
 
 **http://localhost:5002/WeBASE-Front/contract/deployWithSign**
@@ -139,7 +157,7 @@ HTTP POST
 | **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
 | -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
 | 1        | 所属群组     | groupId      | int      |              | 是       |                      |
-| 2        | 用户编号     | signUserId    | String   |     64         | 是       | WeBASE-Sign中的用户编号 |
+| 2        | 用户编号     | signUserId    | String   |     64         | 是       | WeBASE-Sign中的用户编号，通过webase-sign创建私钥获取 |
 | 3        | 合约名称     | contractName | String   |              | 是       |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
 | 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
@@ -3091,7 +3109,7 @@ HTTP POST
 
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 用户编号       | user            | String   |              | 是       | 用户地址                          |
+| 1        | 用户地址       | user            | String   |              | 是       | 用户地址，可通过`/privateKey`接口创建           |
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
@@ -3167,6 +3185,14 @@ b、正确发送数据上链返回值信息（交易收据）
 
 ```
 function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+function set(uint n,bool b) -> [1,true]
+function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+```
+function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
 function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
@@ -5118,7 +5144,7 @@ a、成功：
 | 101003 | web3jMap of groupId is null, please call /{groupId}/web3/refresh to refresh  | 连接当前群组失败，请调用/{groupId}/web3/refresh刷新群组               |
 | 101004 | groupList error for no group, web3jMap is empty | 群组列表为空，请检查节点共识状态|
 | 201001 | groupId cannot be empty                      | 群组编号不能为空           |
-| 201002 | user cannot be empty                         | 用户不能为空               |
+| 201002 | user cannot be empty                         | 用户地址不能为空               |
 | 201003 | useAes cannot be empty                       | 是否为加密私钥不能为空      |
 | 201004 | version cannot be empty                      | 合约版本不能为空           |
 | 201005 | funcName cannot be empty                     | 方法名不能为空             |
