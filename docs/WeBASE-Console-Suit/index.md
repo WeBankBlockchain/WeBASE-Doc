@@ -273,7 +273,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 **邮件服务配置：**
 
-如何配置邮件服务可查看[附录-配置邮件服务指南](../WeBASE-Console-Suit/index.html#id30)
+如何配置邮件服务可查看本文档末尾的[附录-配置邮件服务指南](../WeBASE-Console-Suit/index.html)
 
 可配置邮件告警所用到的邮件服务器相关参数，包含邮件协议类型protocol、邮件服务器地址host、服务使用端口port、用户邮箱地址username、用户邮箱授权码password；鉴权选项包含Authentication验证开关authentication（默认开启）；
 - 邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
