@@ -22,12 +22,12 @@
       {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright
       }}.{% endtrans %}
       {%- else %}
-      {% trans copyright=copyright|e %}&copy; Copyright WeBASE 2019.{% endtrans %}
+      {% trans copyright=copyright|e %}&copy; Copyright WeBASE 2020.{% endtrans %}
 
       {%- endif %}
       {%- endif %}
 
-      {% trans %}本技术文档适用于WeBASE 1.0版本{%
+      {% trans %}本技术文档适用于WeBASE 1.0及以上版本{%
       endtrans %}。
       {%- if build_id and build_url %}
       {% trans build_url=build_url, build_id=build_id %}

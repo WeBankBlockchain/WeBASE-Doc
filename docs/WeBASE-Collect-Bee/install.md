@@ -211,15 +211,15 @@ spring.shardingsphere.sharding.default-database-strategy.inline.sharding-column=
 spring.shardingsphere.sharding.default-database-strategy.inline.algorithm-expression=ds$->{block_height % 2}
 
 # 定义block_detail_info的分表策略，以block_height取模2来路由到ds0的block_detail_info0或ds1的block_detail_info1
-spring.shardingsphere.sharding.tables.block_detail_info.actual-data-nodes=ds0.block_detail_info0,ds1.block_detail_info1
-spring.shardingsphere.sharding.tables.block_detail_info.table-strategy.inline.sharding-column=block_height
-spring.shardingsphere.sharding.tables.block_detail_info.table-strategy.inline.algorithm-expression=block_detail_info$->{block_height % 2}
-spring.shardingsphere.sharding.tables.block_detail_info.key-generator-column-name=pk_id
+spring.shardingsphere.rules.sharding.tables.block_detail_info.actual-data-nodes=ds0.block_detail_info0,ds1.block_detail_info1
+spring.shardingsphere.rules.sharding.tables.block_detail_info.table-strategy.inline.sharding-column=block_height
+spring.shardingsphere.rules.sharding.tables.block_detail_info.table-strategy.inline.algorithm-expression=block_detail_info$->{block_height % 2}
+spring.shardingsphere.rules.sharding.tables.block_detail_info.key-generator-column-name=pk_id
 
-spring.shardingsphere.sharding.tables.block_task_pool.actual-data-nodes=ds0.block_task_pool0,ds1.block_task_pool1
-spring.shardingsphere.sharding.tables.block_task_pool.table-strategy.inline.sharding-column=block_height
-spring.shardingsphere.sharding.tables.block_task_pool.table-strategy.inline.algorithm-expression=block_task_pool$->{block_height % 2}
-spring.shardingsphere.sharding.tables.block_task_pool.key-generator-column-name=pk_id
+spring.shardingsphere.rules.sharding.tables.block_task_pool.actual-data-nodes=ds0.block_task_pool0,ds1.block_task_pool1
+spring.shardingsphere.rules.sharding.tables.block_task_pool.table-strategy.inline.sharding-column=block_height
+spring.shardingsphere.rules.sharding.tables.block_task_pool.table-strategy.inline.algorithm-expression=block_task_pool$->{block_height % 2}
+spring.shardingsphere.rules.sharding.tables.block_task_pool.key-generator-column-name=pk_id
 
 # 打印sql日志的开关
 spring.shardingsphere.props.sql.show=true
