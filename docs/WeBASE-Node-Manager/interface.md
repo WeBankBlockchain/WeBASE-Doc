@@ -1411,6 +1411,15 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 ### 5.3 部署合约
 
 
+构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
+constructor(uint n,bool b) -> [1,true]
+constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
 #### 5.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/deploy**
@@ -1432,7 +1441,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 | 6    | bytecodeBin       | String         | 否     | 合约编译的bytecode(bin)，用于部署合约                    |
 | 7    | contractId      | String         | 否     | 合约名称               |
 | 8    | contractPath      | String         | 否     | 合约所在目录               |
-| 9    | user              | String         | 否     | 私钥用户               |
+| 9    | user              | String         | 否     | 私钥用户的地址               |
 | 10    | constructorParams | List | 是     | 构造函数入参               |
 
 
@@ -1449,7 +1458,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
     "bytecodeBin": "60806040523480156100105761146031c79ef057dd274c87bff322ea2269b80029",
     "contractAbi": "[]",
     "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLICAJbmFtZSA9IG47CiAgICB9Cn0=",
-    "user": 700006,
+    "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName": "HeHe",
     "contractId": 200008,
     "contractPath": "Hi",
@@ -1524,6 +1533,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 ### 5.4 发送交易
 
 
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+```
+function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(uint n,bool b) -> [1,true]
+function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
 #### 5.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/transaction**
@@ -1539,7 +1556,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId      | Int            | 否     | 所属群组编号               |
-| 2    | user       | String  | 否     | 用户地址             |
+| 2    | user       | String  | 否     | 私钥用户的地址             |
 | 3    | contractName | String         | 否     | 合约名称                   |
 | 4    | contractId      | Int      | 否     | 合约编号               |
 | 5    | funcName     | String         | 否     | 合约方法名                 |
