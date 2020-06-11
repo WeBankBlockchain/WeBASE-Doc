@@ -96,6 +96,93 @@ b.异常返回结果示例（信息详情请参看附录1）
 }
 ```
 
+### 1.2. 导入私钥用户接口
+
+#### 接口描述
+
+导入私钥到Sign，与新增私钥类似
+
+#### 接口URL
+
+http://localhost:5004/WeBASE-Sign/sign
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 私钥  | privateKey | String     |             | 是       | 通过Base64加密后的私钥内容  |
+| 2        | 用户编号  | signUserId | String |  64           | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
+| 3        | 应用编号 | appId   | String |      64       | 是       | 用于标志用户的应用编号,仅支持数字字母下划线 |
+| 4        | 加密类型  | encryptType  | Integer |              | 否       | 默认为0，0: ECDSA, 1: 国密  |
+
+**2）数据格式**
+
+```
+http://localhost:5004/WeBASE-Sign/user/newUser
+```
+
+```
+{
+  "privateKey": "MIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/XmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP"
+  "signUserId": "user_222",
+  "appId": "app_222",
+  "encryptType": 0
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
+|----------|----------|------------|----------|--------------|----------|-------------------|
+| 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
+| 2        | 提示信息 | message    | String   |              | 是       |                   |
+| 3        | 返回数据 | data       | Object   |              | 是       |                    |
+| 3.1      | 用户编号 | signUserId | String  |              | 是        |                    |
+| 3.2      | 应用编号 | appId      | String  |              | 是        |                    |
+| 3.3      | 私钥信息 | privateKey | String   |              | 否        |                   |
+| 3.4      | 账户地址 | address    | String   |              | 是        |                   |
+| 3.5      | 公钥    | publicKey  | toHexString |           | 是        |                  |
+| 3.6      | 描述    | description| String   |              | 是        |                  |
+| 3.7      | 加密类型 |encryptType| Integer |               | 是        | 0: ECDSA, 1: guomi |
+
+**2）数据格式**
+
+a.请求正常返回结果
+
+ECDSA用户：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "signUserId": "user_111",
+        "appId": "group_01",
+        "address": "0x2df87ff79e8c85a318c00c82ee76e2581fbab0a8",
+        "publicKey": "0x1befc9824623dfc2f1541d2fc1df4bc445d9dd26816b0884e24628881d5bb572bf7dfd69520d540adc2d16d295df954d9c34bef4381dbc207942fcbf43c7d622",
+        "privateKey": "", //不返回私钥
+        "description": null,
+        "encryptType": 0
+    }
+}
+```
+
+
+b.异常返回结果示例（信息详情请参看附录1）
+```
+{
+    "code": 303001,
+    "message": "user of this sign user id is already exists",
+    "data": null
+}
+```
 
 ## 2. 查询用户接口
 
@@ -454,57 +541,6 @@ b.异常返回结果示例（信息详情请参看附录1）
 }
 ```
 
-
-<!-- 
-
-## 5. 查询EncryptType接口
-
-### 接口描述
-
-返回Sign服务中web3sdk所使用的`encryptType`，0：标准，1：国密
-
-### 接口URL
-
-http://localhost:5004/WeBASE-Sign/encrypt
-
-### 调用方法
-
-HTTP GET
-
-### 请求参数
-
-**1）参数表**
-
-无
-
-**2）数据格式**
-
-```
-http://localhost:5004/WeBASE-Sign/encrypt
-```
-
-### 响应参数
-
-**1）参数表**
-
-| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
-|----------|----------|------------|----------|--------------|----------|-------------------|
-| 1        | 返回码   | code       | String   |              | 是       | 返回码信息请附录1 |
-| 2        | 提示信息 | message    | String   |              | 是       |                   |
-| 3        | 返回数据 | data       | Integer   |              |  是      |  encryptType: 0:标准, 1:国密  |
-
-
-**2）数据格式**
-
-a.请求正常返回结果
-```
-{
-  "code": 0,
-  "message": "success",
-  "data": 0
-}
-```
- -->
 ## 附录
 
 ### 1. 返回码信息列表

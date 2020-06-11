@@ -1411,6 +1411,15 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 ### 5.3 部署合约
 
 
+构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
+constructor(uint n,bool b) -> [1,true]
+constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
 #### 5.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/deploy**
@@ -1432,7 +1441,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 | 6    | bytecodeBin       | String         | 否     | 合约编译的bytecode(bin)，用于部署合约                    |
 | 7    | contractId      | String         | 否     | 合约名称               |
 | 8    | contractPath      | String         | 否     | 合约所在目录               |
-| 9    | user              | String         | 否     | 私钥用户               |
+| 9    | user              | String         | 否     | 私钥用户的地址               |
 | 10    | constructorParams | List | 是     | 构造函数入参               |
 
 
@@ -1449,7 +1458,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
     "bytecodeBin": "60806040523480156100105761146031c79ef057dd274c87bff322ea2269b80029",
     "contractAbi": "[]",
     "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLICAJbmFtZSA9IG47CiAgICB9Cn0=",
-    "user": 700006,
+    "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName": "HeHe",
     "contractId": 200008,
     "contractPath": "Hi",
@@ -1524,6 +1533,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 ### 5.4 发送交易
 
 
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+```
+function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(uint n,bool b) -> [1,true]
+function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+
 #### 5.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/transaction**
@@ -1539,7 +1556,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId      | Int            | 否     | 所属群组编号               |
-| 2    | user       | String  | 否     | 用户地址             |
+| 2    | user       | String  | 否     | 私钥用户的地址             |
 | 3    | contractName | String         | 否     | 合约名称                   |
 | 4    | contractId      | Int      | 否     | 合约编号               |
 | 5    | funcName     | String         | 否     | 合约方法名                 |
@@ -1761,6 +1778,255 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 3.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
 | 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间  
 
+
+### 5.7 获取Abi信息  
+
+
+#### 5.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/abi/{abiId}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 5.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | abiId         | Long           | 否     | abi编号                                        |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
+```
+
+
+#### 5.7.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | abiId        | int           | 否     | 合约编号                                        |
+| 3.2  | contractName    | String        | 否     | 合约名称                                        |
+| 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.4  | contractAddress  | String        | 否     | 合约地址                                        |
+| 3.5  | contractAbi     | String        | 是     | 导入的abi文件内容                       |
+| 3.6  | contractBin     | String        | 是     | 合约runtime-bytecode(runtime-bin)|
+| 3.7 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.8 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "abiId": 1,
+    "groupId": 1,
+    "contractName": "TTT",
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+    "contractBin": "608060405260043610610057576000357...",
+    "createTime": "2020-05-18 10:59:02",
+    "modifyTime": "2020-05-18 10:59:02"
+  }
+}
+```
+
+
+### 5.8 获取Abi信息分页列表  
+
+
+#### 5.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/abi/list/{groupId}/{pageNumber}/{pageSize}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 5.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
+```
+
+
+#### 5.8.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | abiId        | int           | 否     | 合约编号                                        |
+| 3.2  | contractName    | String        | 否     | 合约名称                                        |
+| 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.4  | contractAddress  | String        | 否     | 合约地址                                        |
+| 3.5  | contractAbi     | String        | 是     | 导入的abi文件内容                       |
+| 3.6  | contractBin     | String        | 是     | 合约runtime-bytecode(runtime-bin)|
+| 3.7 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.8 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "abiId": 1,
+      "groupId": 1,
+      "contractName": "TTT",
+      "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
+      "contractBin": "608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463fffff...29",
+      "createTime": "2020-05-18 10:59:02",
+      "modifyTime": "2020-05-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+
+### 5.9. 导入已部署合约的abi
+
+> 将其他平台已部署的合约导入到本平台进行管理
+
+#### 5.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/abi**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 5.9.2 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 所属群组编号                                        |
+| 2    | contractAddress      | String           | 否     | 合约地址  |
+| 3    | contractName      | String           | 否     | 合约名称         |
+| 4    | contractAbi      | String           | 否     | 合约编译后生成的abi文件内容         |
+
+
+
+
+***2）入参示例***
+
+```
+{
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+
+#### 5.9.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message      | String         | 否     | 描述                       |
+| 3    | data         | object         | 是     | 返回信息实体（空）         |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+### 5.10. 导入已部署合约的abi
+
+> 将其他平台已部署的合约导入到本平台进行管理
+
+#### 5.10.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/abi**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 5.10.2 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | abiId         | long           | 否     | abi编号                                        |
+| 2    | groupId         | int           | 否     | 所属群组编号                                        |
+| 3    | contractAddress      | String           | 否     | 合约地址  |
+| 4    | contractName      | String           | 否     | 合约名称         |
+| 5    | contractAbi      | String           | 否     | 合约编译后生成的abi文件内容         |
+
+
+
+
+***2）入参示例***
+
+```
+{
+    "abiId": 1,
+    "groupId": 1,
+    "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+    "contractName": "HelloWorld",
+    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+}
+```
+
+#### 5.10.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message      | String         | 否     | 描述                       |
+| 3    | data         | object         | 是     | 返回信息实体（空）         |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
 
 
 
@@ -3258,6 +3524,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 
 ### 8.2 获取所有群组列表
 
+默认只返回groupStatus为1的群组ID，可传入groupStatus筛选群组 (1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data)
 
 #### 8.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -3268,12 +3535,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 #### 8.2.2 请求参数
 
 ***1）入参表***
-无
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupStatus   | int    | 是    | 群组状态，1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data|
+
 
 ***2）入参示例***
 
 ```
 http://127.0.0.1:5001/WeBASE-Node-Manager/group/all
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 ```
 
 
@@ -3288,12 +3560,16 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all
 | 3     | totalCount    | Int           | 否     | 总记录数                   |
 | 4     | data          | List          | 否     | 组织列表                   |
 | 4.1   |               | Object        |        | 组织信息对象               |
-| 4.1.1 | groupId       | int           | 否     | 群组编号                   |
+| 4.1.1 | groupId       | Integer           | 否     | 群组编号                   |
 | 4.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突                  |
+| 4.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
 | 4.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
 | 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
 | 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
 | 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 4.1.2 | description     | String        | 否     | 群组描述                   |
+| 4.1.2 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
 
 
 ***2）出参示例***
@@ -3305,12 +3581,16 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all
     "totalCount": 1,
     "data": [
         {
-            "groupId": 300001,
-            "groupName": "group1",
-            "latestBlock": 133,
-            "transCount": 133,
-            "createTime": "2019-02-14 17:33:50",
-            "modifyTime": "2019-03-15 09:36:17"
+            "groupId":1,
+            "groupName":"group1",
+            "groupStatus":1,
+            "nodeCount":4,
+            "latestBlock":0,
+            "transCount":0,
+            "createTime":"2020-05-07 16:32:02",
+            "modifyTime":"2020-05-08 10:50:13",
+            "description":"synchronous",
+            "groupType":1
         }
     ]
 }
@@ -3392,6 +3672,630 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+### 8.4 向单个节点生成新群组
+
+​向单个节点的前置发起请求，以当前时间生成`timestamp`时间戳，`nodeList`为群组创世块的**共识节点列表**，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
+
+`nodeList`需要填入新群组中所有的nodeId，通过本接口分别请求每个节点，在每个节点生成群组配置信息。
+
+**群组生成后，需对应调用新群组启动的接口，并确保新节点加入新群组的共识节点/观察节点**
+
+节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
+
+#### 8.4.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/generate/{nodeId}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.4.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | nodeId    | String        | 否     | 路径变量：节点id                           |
+| 2    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 3    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
+| 4    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
+| 5    | description     | String           | 是    | 群组描述                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
+```
+
+```
+{
+    "generateGroupId": 2,
+    "timestamp": 1574853659000,
+    "nodeList": [
+       "78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2",
+       "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+    ],
+    "description": "test"
+}
+```
+
+
+#### 8.4.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Object        |        | 组织信息对象               |
+| 3.1.1 | groupId       | int           | 否     | 群组编号                   |
+| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 3.1.3 | groupStatus   | Integer    | 否         | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突 |
+| 3.1.4 | nodeCount    | Integer    | 否     | 群组节点数                     |
+| 3.1.5 | description   | String | 否     | 描述                   |
+| 3.1.6 | groupType    | Integer | 否     | 群组类型：  1-同步 2-动态创建|
+| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "groupId": 2,
+        "groupName": "group2",
+        "nodeCount": 2,
+        "groupStatus": 2,
+        "groupType": 2,
+        "description": "test",
+        "createTime": "2019-02-14 17:33:50",
+        "modifyTime": "2019-03-15 09:36:17"
+    }
+}
+```
+
+* 失败：
+```
+{
+    "code": 202301,
+    "message": "node's front not exists",
+    "data": {}
+}
+```
+
+
+### 8.5 向多个节点生成新群组
+
+​向`nodeList`中所有节点的前置发起请求，以当前时间生成`timestamp`时间戳，以`nodeList`为创世块的**共识节点列表**，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
+
+**群组生成后，需对应调用新群组启动的接口，并确保新节点加入新群组的共识节点/观察节点**
+
+节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
+
+
+#### 8.5.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/generate**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.5.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 2    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
+| 3    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
+| 4    | description     | String           | 是    | 群组描述                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
+```
+
+```
+{
+    "generateGroupId": 2,
+    "timestamp": 1574853659000,
+    "nodeList": [
+       "78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2",
+       "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+    ],
+    "description": "test"
+}
+```
+
+
+#### 8.5.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data       | List        | 否     | 群组操作结果                       |
+| 3.1     | frontId       | Integer        | 否     | 群组操作请求的节点前置编号 |
+| 3.2     | code       | Integer        | 否     | 群组操作结果，0-成功，其他：失败  |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "frontId": 500011,
+        "code": 0
+    }, {
+        "frontId": 500013,
+        "code": 1
+    }]
+}
+```
+
+* 失败：
+```
+{
+    "code": 202301,
+    "message": "node's front not exists",
+    "data": {}
+}
+```
+
+
+
+### 8.6 动态操作群组
+
+​​可以对已存在的群组或新生成的群组进行动态操作，包括启动、停止、删除、恢复、状态查询。
+
+​**说明：** 生成新群组后，需要向每个前置调用启动群组的操作，并确保新节点是新群组中的共识节点/观察节点
+
+节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
+
+#### 8.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/operate/{nodeId}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | nodeId    | String        | 否     | 路径变量：节点id                           |
+| 2    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 3    | type      | String        | 否     | 操作类型： start, stop, remove, recover, getStatus|
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
+```
+
+```
+{
+    "generateGroupId": 2,
+    "type": "start"
+}
+```
+
+
+#### 8.6.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {}
+}
+```
+
+* 失败：
+```
+{
+  "code": 205032,
+  "message": "Group 2 is already running",
+  "data": null
+}
+```
+
+
+### 8.7 批量启动群组
+
+​批量启动多个节点的群组，向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
+
+
+#### 8.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/batchStart**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
+| 2    | nodeList      | List<String>        | 否     | 新群组中所有需要启动的节点nodeId |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
+```
+
+```
+{
+    "generateGroupId": 2,
+    "nodeList": [
+       "78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2",
+       "dd7a2964007d583b719412d86dab9dcf773c61bccab18cb646cd480973de0827cc94fa84f33982285701c8b7a7f465a69e980126a77e8353981049831b550f5c"
+    ]
+}
+```
+
+
+#### 8.7.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data       | List        | 否     | 群组操作结果                       |
+| 3.1     | frontId       | Integer        | 否     | 群组操作请求的节点前置编号 |
+| 3.2     | code       | Integer        | 否     | 群组操作结果，0-成功，其他：失败                       |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "frontId": 500011,
+        "code": 0  // 启动成功
+    }, {
+        "frontId": 500013,
+        "code": 1 // 启动失败
+    }]
+}
+```
+
+* 失败：
+```
+{
+  "code": 205032,
+  "message": "Group 2 is already running",
+  "data": null
+}
+```
+
+
+
+### 8.8 多个节点获取该节点的多个群组状态
+
+​向多个节点获取该**节点视角下**`groupIdList`中所有群组的状态；nodeId可以从前置列表获取。
+
+群组状态包含：群组不存在"INEXISTENT"、群组正在停止"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
+
+#### 8.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/queryGroupStatus/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 8.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | nodeIdList    | List<String>        | 否     | 需要获取群组状态的节点编号列表    |
+| 2    | groupIdList      | List<Integer>        | 否     | 需要查询群组状态的群组编号列表 |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
+```
+
+```
+{
+    "nodeIdList": [
+        "02ad41a54e5403293855624e6088a1ac6c0a391d6381175bb9c9881f2ae83de6db54fc95a772f22b9e62109393c1a4229dc6d99536548db693e43b244a5b9d84",
+        "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7"
+    ]
+    "groupIdList": [2]
+}
+```
+
+
+#### 8.8.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Integer           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | data          | List          | 否     |  GroupStatusInfo的列表                |
+| 3.1   | nodeId    | String        |        | 包含groupId和GroupStatus的Map<Integer,String>, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
+| 3.2   | groupStatusMap    | Map        |        | 包含groupId和GroupStatus的`Map<String,String>`, 如`{"1": "RUNNING","20","INEXISTENT"}`       |
+| 3.2.1 | groupId       |  String       | 否     | 群组编号，如果获取失败，则显示为`<nodeId, "FAIL">`，如下所示                   |
+| 3.2.2 | groupStatus   | String    | 否         | 链上的群组状态："INEXISTENT"、"STOPPING"、"RUNNING"、"STOPPED"、"DELETED", 获取失败为"FAIL" |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "nodeId": "02ad41a54e5403293855624e6088a1ac6c0a391d6381175bb9c9881f2ae83de6db54fc95a772f22b9e62109393c1a4229dc6d99536548db693e43b244a5b9d84",
+        "groupStatusMap": {
+            // 当前nodeId获取群组2状态成功
+            "2": "RUNNING" 
+        }
+    }, {
+        "nodeId": "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7",
+        "groupStatusMap": {
+            // 当前nodeId获取群组2状态成功
+            "2": "RUNNING"
+        }
+    }]
+}
+```
+
+* 获取群组状态成功，但某个节点的获取请求失败：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "nodeId": "02ad41a54e5403293855624e6088a1ac6c0a391d6381175bb9c9881f2ae83de6db54fc95a772f22b9e62109393c1a4229dc6d99536548db693e43b244a5b9d84",
+        "groupStatusMap": {
+            "2": "RUNNING"
+        }
+    }, {
+        "nodeId": "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7",
+        "groupStatusMap": {
+            // 3fc6..节点的状态获取失败
+            "3fc60c4dddcb8f64c910b7afc4bd400339a007eff9be22012c5ae2f7eebef67a4b770094bf7564dd100e1456d85a72f3488457e9f4d44d51e289071d995285d7": "FAIL"
+        }
+    }]
+}
+```
+
+* 失败：
+```
+{
+    "code": 202301,
+    "message": "node's front not exists"
+}
+```
+
+
+
+### 8.9 刷新群组列表
+
+刷新节点管理服务的群组列表，检查本地群组数据与链上群组数据是否有冲突，检查多个节点之间的创世块是否一致，并从链上拉取最新的群组列表
+
+#### 8.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/update**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 8.9.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | -    | -    | -     | -                     |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
+```
+
+
+#### 8.9.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code       | Int    | 否     | 返回码，0：成功 其它：失败 |
+| 2    | message    | String | 否     | 描述                       |
+| 3    | data       | list   | 否     | 返回信息列表               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {}
+}
+```
+
+### 8.10 获取所有群组列表（包含异常群组）
+
+返回所有群组，包含正常运行、维护中、脏数据冲突、创世块冲突4种状态的群组
+
+#### 8.10.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/all/invalidIncluded**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 8.10.2 请求参数
+
+***1）入参表***
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | pageSize    | Integer           | 否     | 每页记录数                                 |
+| 2      | pageNumber  | Integer           | 否     | 当前页码                                   |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}/{pageSize}
+```
+
+
+#### 8.10.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Integer           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+| 3     | totalCount    | Integer           | 否     | 总记录数                   |
+| 4     | data          | List          | 否     | 组织列表                   |
+| 4.1   |               | Object        |        | 组织信息对象               |
+| 4.1.1 | groupId       | Integer           | 否     | 群组编号                   |
+| 4.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突|
+| 4.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
+| 4.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
+| 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
+| 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 4.1.2 | description     | String        | 否     | 群组描述                   |
+| 4.1.2 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "totalCount": 1,
+    "data": [
+        {
+            "groupId":1,
+            "groupName":"group1",
+            "groupStatus":1,
+            "nodeCount":4,
+            "latestBlock":0,
+            "transCount":0,
+            "createTime":"2020-05-07 16:32:02",
+            "modifyTime":"2020-05-08 10:50:13",
+            "description":"synchronous",
+            "groupType":1
+        },
+         {
+            "groupId":2020,
+            "groupName":"group2020",
+            "groupStatus":2,
+            "nodeCount":2,
+            "latestBlock":0,
+            "transCount":0,
+            "createTime":"2020-05-07 16:32:02",
+            "modifyTime":"2020-05-08 10:50:13",
+            "description":"",
+            "groupType":2
+        }
+    ]
+}
+```
+
+* 失败：
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+
+### 8.11 删除群组所有数据
+
+删除指定群组编号的群组的所有数据，包含节点数据、交易数据、交易审计数据等等。
+
+#### 8.11.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/{groupId}**
+* 请求方式：DELETE
+* 返回格式：JSON
+
+#### 8.11.2 请求参数
+
+***1）入参表***
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId    | Integer           | 否     | 群组编号                                 |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/{groupId}
+```
+
+
+#### 8.11.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1     | code          | Integer           | 否     | 返回码，0：成功 其它：失败 |
+| 2     | message       | String        | 否     | 描述                       |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": 202006,
+    "message": "invalid group id"
 }
 ```
 
@@ -3780,7 +4684,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 ```
 
 
-#### 1.1.3 返回参数 
+#### 11.2.3 返回参数 
 
 ***1）出参表***
 
@@ -3944,7 +4848,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 ```
 
 
-#### 1.1.3 返回参数 
+#### 11.4.3 返回参数 
 
 ***1）出参表***
 
@@ -4007,7 +4911,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 ```
 
 
-#### 1.1.3 返回参数 
+#### 11.5.3 返回参数 
 
 ***1）出参表***
 
@@ -4061,6 +4965,202 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+
+### 11.6 导入私钥用户
+
+可在页面导入WeBASE-Front所导出的私钥txt文件
+
+其中私钥字段用Base64加密
+
+#### 11.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/import**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 11.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | privateKey  | string        | 否     | Base64加密后的私钥内容                           |
+| 2    | userName    | string        | 否     | 用户名称                           |
+| 3    | description | string        | 是     | 备注                               |
+| 4    | groupId     | Int           | 否     | 所属群组                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
+```
+
+```
+{
+    "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
+    "groupId": "300001",
+    "description": "密钥拥有者",
+    "userName": "user1"
+}
+```
+
+
+#### 11.6.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否     | 描述                               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": 201031,
+    "message": "privateKey decode fail",
+    "data": null
+}
+```
+
+
+### 11.7 导入.pem私钥
+
+可导入控制台所生成的私钥.pem文件
+
+#### 11.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/importPem**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 11.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | pemContent  | string        | 否     | pem文件的内容，必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式                           |
+| 2    | userName    | string        | 否     | 用户名称                           |
+| 3    | description | string        | 是     | 备注                               |
+| 4    | groupId     | Int           | 否     | 所属群组                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
+```
+
+```
+{
+    "pemContent":"-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/\nXmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP+H7iljbTIqXOFM6qm5aVs\nfM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK\n-----END PRIVATE KEY-----\n",
+    "groupId": "1",
+    "description": "密钥拥有者",
+    "userName": "user2"
+}
+```
+
+
+#### 11.7.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否     | 描述                               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": 201232,
+    "message": "Pem file format error, must surrounded by -----XXXXX PRIVATE KEY-----"",
+    "data": null
+}
+```
+
+
+### 11.8 导入.p12私钥
+
+可导入控制台生成的私钥.p12文件
+
+#### 11.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/importP12**
+* 请求方式：POST
+* 请求头：Content-type: **form-data**
+* 返回格式：JSON
+
+#### 11.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | p12File     | MultipartFile        | 否     | .p12文件                           |
+| 2    | p12Password  | string        | 是     | .p12文件的密码，缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文                       |
+| 3    | userName    | string        | 否     | 用户名称                           |
+| 4    | description | string        | 是     | 备注                               |
+| 5    | groupId     | Int           | 否     | 所属群组                           |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001//WeBASE-Node-Manager/user/importP12
+```
+
+> 使用form-data传参
+
+#### 11.8.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否     | 描述                               |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：（p12文件的密码错误）
+```
+{
+    "code": 201236,
+    "message": "p12's password not match",
+    "data": null
 }
 ```
 
