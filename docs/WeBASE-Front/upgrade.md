@@ -10,8 +10,8 @@ WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https:/
 注：动态群组操作指南可参考[动态群组操作指南](../WeBASE-Console-Suit/index.html)，接口详情可参考[接口文档](./interface.html)
 
 ##### 新增导入已部署合约Abi功能、合约Abi编码器
-- 前置的“合约管理”Tab中，新增导入合约abi功能，可以导入已部署的合约进行管理
-- 前置的“合约管理”Tab中，新增ABI编码功能，可用于构造交易input入参
+- “合约管理”Tab中，新增导入合约abi功能，可以导入已部署的合约进行管理
+- “合约管理”Tab中，新增ABI编码功能，可用于构造交易input入参
 
 ##### 新增导入.p12私钥用户
 - 私钥管理中，新增导入控制台所导出的.p12私钥；
