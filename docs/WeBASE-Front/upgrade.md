@@ -2,6 +2,11 @@
 
 WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
+#### v1.3.2
+
+##### 移除fastjson
+- 移除Fastjson，替换为Jackson 2.11.0
+
 #### v1.3.1
 
 ##### 新增动态群组接口

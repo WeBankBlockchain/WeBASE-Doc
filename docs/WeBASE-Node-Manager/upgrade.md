@@ -2,6 +2,11 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
+#### v1.3.2
+
+##### 移除fastjson
+- 移除Fastjson，替换为Jackson 2.11.0
+
 #### v1.3.1
 
 v1.3.1主要新增了动态群组接口、导入abi接口、导入私钥接口、定时任务优化等功能，详情升级说明如下：
