@@ -6,5 +6,6 @@
 
    README.md
    install.md
+   upgrade.md
    appendix.md
 ```
