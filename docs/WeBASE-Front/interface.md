@@ -2470,7 +2470,7 @@ http://localhost:5002/WeBASE-Front/1/web3/refresh
 ```
 
 ### 3.24. 动态生成群组
-
+<span id="dynamic_group_interface"></span>
 
 #### 接口描述
 
