@@ -34,6 +34,8 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | system.nameStyle | N | 数据库表名和字段命名规则，支持下划线命名和原始数据命名 | system.nameStyle=rawCase | underScoreCase |
 | system.namePrefix | N | 数据库表字段命名前缀，默认为_ | system.namePrefix=_ | _ |
 | system.namePostfix | N | 数据库表字段命名后缀，默认为空 | system.namePostfix=_ | 空 |
+| system.tablePrefix | N | 数据库表名命名前缀，默认为空 | system.tablePrefix=_ | 空 |
+| system.tablePostfix | N | 数据库表名命名后缀，默认为空 | system.tablePostfix=_ | 空 |
 | system.dbIdentifierSplit | N | 是否开启自动裁剪过长的数据库表名，默认为false | system.dbIdentifierSplit=true | false |
 
 
