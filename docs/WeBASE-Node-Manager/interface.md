@@ -3676,7 +3676,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 ```
 
 ### 8.4 向单个节点生成新群组
-
+<span id="dynamic_group_interface"></span>
 ​向单个节点的前置发起请求，以当前时间生成`timestamp`时间戳，`nodeList`为群组创世块的**共识节点列表**，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
 
 `nodeList`需要填入新群组中所有的nodeId，通过本接口分别请求每个节点，在每个节点生成群组配置信息。
