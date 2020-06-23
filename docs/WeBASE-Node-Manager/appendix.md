@@ -46,7 +46,14 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 ```
 答：
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
-方法2、直接使用命令：`./gradlew build -x test`
+方法2、直接使用命令：`./gradlew build -x test`，如果提示gradlew为非可执行文件，执行`chmod +x ./gradlew`再次执行build操作即可。
+
+#### 启动问题
+
+* 问：启动Node-Manager进程后，后台日志显示`not found any front`：
+答：此处为正常提示，表示后台没有可访问的节点前置。通过WeBASE-Web连接Node-Manager后台服务后，添加节点前置即可。
+
+
 
 - 2. 配置文件解析
 
