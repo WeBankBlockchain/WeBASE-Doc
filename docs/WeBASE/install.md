@@ -6,6 +6,8 @@
 
 ![[]](../../images/WeBASE/one_click_struct.png)
 
+*注：目前WeBASE支持FISCO BCOS v2.4.x版本，未支持FISCO BCOS 2.5.x*，节点与WeBASE对应版本请查看[WeBASE-ChangeLog](./ChangeLOG.html)
+
 ## 前提条件
 
 | 环境   | 版本                   |
