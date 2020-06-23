@@ -14,20 +14,19 @@
 
 import sys
 import os
-import shlex
 
 #sys.path.insert(0, os.path.abspath('..'))
 import sphinx_rtd_theme
-from recommonmark.parser import CommonMarkParser
 from recommonmark.transform import AutoStructify
 
-DOC_SOURCES_DIR = os.path.dirname(os.path.abspath(__file__))	
-PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(DOC_SOURCES_DIR))	
-sys.path.insert(0, DOC_SOURCES_DIR)	
-print('PROJECT_ROOT_DIR', PROJECT_ROOT_DIR)	
 
-# If runs on ReadTheDocs environment	
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'	
+DOC_SOURCES_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(DOC_SOURCES_DIR))
+sys.path.insert(0, DOC_SOURCES_DIR)
+print('PROJECT_ROOT_DIR', PROJECT_ROOT_DIR)
+
+# If runs on ReadTheDocs environment
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
 # Hack for lacking git-lfs support ReadTheDocs
 # if on_rtd:
@@ -82,10 +81,10 @@ source_suffix = ['.rst', '.md']
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-  'sphinx_markdown_tables',
   'sphinx_copybutton',
   'sphinxcontrib.mermaid',
-
+  'sphinx.ext.mathjax',
+  'sphinx_markdown_tables',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -157,7 +156,7 @@ pygments_style = 'sphinx'
 
 
 # -- Options for HTML output ----------------------------------------------
-
+html_theme = 'sphinx_rtd_theme'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme_options = {'navigation_depth': 4,}
@@ -300,8 +299,6 @@ latex_elements = {
 #'figure_align': 'htbp',
 }
 
-
-
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
@@ -381,4 +378,4 @@ def setup(app):
 
     app.add_transform(AutoStructify)
     app.add_stylesheet('css/custom.css')
-
+    app.add_javascript('js/readthedocs-analytics.js')
