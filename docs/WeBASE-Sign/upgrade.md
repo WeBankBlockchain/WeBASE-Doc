@@ -2,6 +2,11 @@
 
 WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
+#### v1.3.2
+
+##### 移除fastjson
+- 移除Fastjson，替换为Jackson 2.11.0
+
 #### v1.3.1
 
 ##### 支持导入私钥

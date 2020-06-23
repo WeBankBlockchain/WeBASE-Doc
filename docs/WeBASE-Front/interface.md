@@ -428,7 +428,7 @@ HTTP POST
 | 2        | 合约名称 | contractName | String         |              | 否        |   |
 | 3        | 合约状态 | contractStatus | Integer         |       | 否       |1未部署，2已部署  |
 | 4        | 合约地址 | contractAddress | String         |      | 否       |           |
-| 5        | 当前页码 | pageNumber | Integer         |       | 是       | 从0开始 |
+| 5        | 当前页码 | pageNumber | Integer         |       | 是       | 从1开始 |
 | 6        | 每页记录数 | pageSize | Integer         |       | 是       |  |
 
 
@@ -436,7 +436,7 @@ HTTP POST
 ```
 {
     "groupId": "1",
-    "pageNumber": 0,
+    "pageNumber": 1,
     "pageSize": 10,
     "contractName": "",
     "contractAddress": "",
@@ -2470,7 +2470,7 @@ http://localhost:5002/WeBASE-Front/1/web3/refresh
 ```
 
 ### 3.24. 动态生成群组
-
+<span id="dynamic_group_interface"></span>
 
 #### 接口描述
 
