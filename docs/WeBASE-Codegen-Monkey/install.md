@@ -76,7 +76,7 @@ system.groupId=[GROUP_ID]
 system.encryptType=0
 
 # 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
-system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 system.dbUser=[user_name]
 system.dbPassword=[password]
 
