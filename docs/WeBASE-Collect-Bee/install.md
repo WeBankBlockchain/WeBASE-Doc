@@ -163,7 +163,7 @@ spring.shardingsphere.datasource.names=ds
 # 定义数据源ds属性        
 spring.shardingsphere.datasource.ds.type=com.zaxxer.hikari.HikariDataSource
 spring.shardingsphere.datasource.ds.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.ds.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+spring.shardingsphere.datasource.ds.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 spring.shardingsphere.datasource.ds.username=
 spring.shardingsphere.datasource.ds.password=
 
@@ -188,21 +188,21 @@ spring.shardingsphere.sharding.default-datasource-name=ds
 # 定义数据源ds
 spring.shardingsphere.datasource.ds.type=com.zaxxer.hikari.HikariDataSource
 spring.shardingsphere.datasource.ds.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.ds.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+spring.shardingsphere.datasource.ds.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 spring.shardingsphere.datasource.ds.username=
 spring.shardingsphere.datasource.ds.password=
 
 # 定义数据源ds0
 spring.shardingsphere.datasource.ds0.type=com.zaxxer.hikari.HikariDataSource
 spring.shardingsphere.datasource.ds0.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.ds0.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+spring.shardingsphere.datasource.ds0.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 spring.shardingsphere.datasource.ds0.username=
 spring.shardingsphere.datasource.ds0.password=
 
 # 定义数据源ds1
 spring.shardingsphere.datasource.ds1.type=com.zaxxer.hikari.HikariDataSource
 spring.shardingsphere.datasource.ds1.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.ds1.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+spring.shardingsphere.datasource.ds1.jdbc-url=jdbc:mysql://[ip]:3306/[db]?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 spring.shardingsphere.datasource.ds1.username=
 spring.shardingsphere.datasource.ds1.password=
 
@@ -273,13 +273,13 @@ spring.shardingsphere.datasource.names=master,slave0
         
 spring.shardingsphere.datasource.master.type=com.zaxxer.hikari.HikariDataSource
 spring.shardingsphere.datasource.master.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.master.jdbc-url=jdbc:mysql://[ip]:3306/test0?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+spring.shardingsphere.datasource.master.jdbc-url=jdbc:mysql://[ip]:3306/test0?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 spring.shardingsphere.datasource.master.username=
 spring.shardingsphere.datasource.master.password=
 
 spring.shardingsphere.datasource.slave0.type=com.zaxxer.hikari.HikariDataSource
 spring.shardingsphere.datasource.slave0.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.slave0.jdbc-url=jdbc:mysql://[ip]:3306/test1?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+spring.shardingsphere.datasource.slave0.jdbc-url=jdbc:mysql://[ip]:3306/test1?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 spring.shardingsphere.datasource.slave0.username=
 spring.shardingsphere.datasource.slave0.password=
 
