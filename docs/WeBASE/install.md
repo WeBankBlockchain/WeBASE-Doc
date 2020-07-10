@@ -374,15 +374,16 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. 安装MySql python依赖包
+### 4. 安装MySql python依赖包（使用于python2.7+）
 
 #### 查看python版本
 
 ```
 python --version
 ```
+python2.7+版本，需要安装`MySQL-python`，安装方法如下：
 
-python3.4+ 安装Mysql依赖包，可参考 [检查环境-PyMysql](#pymysql-python3-4)
+*注*：同时支持python3.4+，python3.4+时需要安装`Py-MySQL`依赖包，可参考 [检查环境-PyMysql](#pymysql-python3-4) 
 
 #### 4.1 MySQL-python部署（Python2.7）
 
