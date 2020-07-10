@@ -15,7 +15,7 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python3.4+ |
+| Python | 推荐Python3.4+ |
 | PyMySQL | 使用python3时需安装 |
 
 ### 检查环境
@@ -40,7 +40,7 @@ mysql --version
 
 #### 检查Python
 
-Python3.4或以上版本：
+推荐使用Python3.4或以上版本：
 ```
 python --version
 ```
@@ -49,9 +49,11 @@ python --version
 
 #### PyMySQL部署（Python3.4+）
 
-**备注** 使用python2.7+时，需安装MySQL-python，推荐参考[Mysql-python安装示例](#mysql-python)的python2指南进行安装；
+Python3.4及以上版本，需安装`PyMySQL`依赖包
 
-Python3.4及以上版本，需安装PyMysql依赖包：
+**备注** 同时支持python2.7+：使用python2.7+时，需安装`MySQL-python`。推荐参考[Mysql-python安装示例](#mysql-python)文档进行安装；
+
+python3.4+版本安装`PyMysql`依赖包方法：
 
 - CentOS
 
