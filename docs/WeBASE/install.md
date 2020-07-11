@@ -51,7 +51,7 @@ python --version
 
 Python3.4及以上版本，需安装`PyMySQL`依赖包
 
-**备注** 同时支持python2.7+：使用python2.7+时，需安装`MySQL-python`。推荐参考[Mysql-python安装示例](#mysql-python)文档进行安装；
+**备注** 同时支持python2.7+：使用python2.7+时，需安装`MySQL-python`。推荐参考[Mysql-python安装示例](#mysql-python-python2-7)文档进行安装；
 
 python3.4+版本安装`PyMysql`依赖包方法：
 
@@ -383,7 +383,9 @@ python --version
 ```
 python2.7+版本，需要安装`MySQL-python`，安装方法如下：
 
-*注*：同时支持python3.4+，python3.4+时需要安装`Py-MySQL`依赖包，可参考 [检查环境-PyMysql](#pymysql-python3-4) 
+*注*：同时支持python3.4+，python3.4+时需要安装`Py-MySQL`依赖包，可参考 [检查python环境-PyMysql](#pymysql-python3-4) 
+
+python2.7+版本安装`MySQL-python`依赖包方法：
 
 #### 4.1 MySQL-python部署（Python2.7）
 
