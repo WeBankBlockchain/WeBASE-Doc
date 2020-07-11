@@ -4,7 +4,10 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
+*注：目前WeBASE支持FISCO BCOS v2.4.x版本，暂未支持FISCO BCOS 2.5.x*，节点与WeBASE对应版本请查看[WeBASE-ChangeLog](./ChangeLOG.html)
+
 ![[]](../../images/WeBASE/one_click_struct.png)
+
 
 ## 前提条件
 
@@ -12,7 +15,7 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python3.4+ |
+| Python | 推荐Python3.4+ |
 | PyMySQL | 使用python3时需安装 |
 
 ### 检查环境
@@ -37,7 +40,7 @@ mysql --version
 
 #### 检查Python
 
-Python3.4或以上版本：
+推荐使用Python3.4或以上版本：
 ```
 python --version
 ```
@@ -46,9 +49,11 @@ python --version
 
 #### PyMySQL部署（Python3.4+）
 
-**备注** 使用python2.7+时，需安装MySQL-python，推荐参考[Mysql-python安装示例](#mysql-python)的python2指南进行安装；
+Python3.4及以上版本，需安装`PyMySQL`依赖包
 
-Python3.4及以上版本，需安装PyMysql依赖包：
+**备注** 同时支持python2.7+：使用python2.7+时，需安装`MySQL-python`。推荐参考[Mysql-python安装示例](#mysql-python-python2-7)文档进行安装；
+
+python3.4+版本安装`PyMysql`依赖包方法：
 
 - CentOS
 
@@ -369,15 +374,18 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. 安装MySql python依赖包
+### 4. 安装MySql python依赖包（使用于python2.7+）
 
 #### 查看python版本
 
 ```
 python --version
 ```
+python2.7+版本，需要安装`MySQL-python`，安装方法如下：
 
-python3.4+ 安装Mysql依赖包，可参考 [检查环境-PyMysql](#pymysql-python3-4)
+*注*：同时支持python3.4+，python3.4+时需要安装`Py-MySQL`依赖包，可参考 [检查python环境-PyMysql](#pymysql-python3-4) 
+
+python2.7+版本安装`MySQL-python`依赖包方法：
 
 #### 4.1 MySQL-python部署（Python2.7）
 
