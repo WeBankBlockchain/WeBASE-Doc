@@ -4,8 +4,8 @@
 
 1. 部署区块链底层服务；
 2. 新增，删除节点；
-3. 变更节点类型（共识，观察，游离）
-4. 启动，停止节点
+3. 切换节点类型（共识，观察，游离）；
+4. 启动，停止节点；
 5. 群组和节点可视化管理；
 6. 重置区块链服务；
 
@@ -14,14 +14,26 @@
 在进行可视化部署之前，请按照部署要求，准备相应的部署环境。
 
 #### 主机数量
-当前可视化部署对主机数量，搭建一个 4 节点的区块链服务至少需要 5 台主机。
+使用可视化部署搭建一个 4 节点的区块链服务至少需要 5 台主机。
 
-其中一台主机部署签名服务(WeBASE-Sign)，节点管理平台(WeBASE-Web)和节点管理服务(WeBASE-Node-Manager)；
+1 台 主机部署签名服务（WeBASE-Sign），节点管理平台（WeBASE-Web）和节点管理服务（WeBASE-Node-Manager）。
 
-剩余四台主机每台部署一个区块链节点服务。
+剩余 4 台主机每台部署一个区块链节点服务。
+
+#### 主机配置
+推荐 2 核 4G 内存；500G + 硬盘
+
+#### 端口开放
+防火墙和安全组（云服务主机）开放如下端口：
+
+|  端口 | 描述  |
+|---|---|
+| 22  | SSH 登录端口  |
+| 20200  |  节点 P2P 通信端口 |
+| 5000  |  WeBASE-Web 节点管理平台的访问端口 |
 
 #### 操作系统要求
-由于在部署区块链底层节点（FISCO-BCOS）服务时，需要使用 Docker 服务，针对部署节点的主机需要选择合适的操作系统：
+由于在部署区块链底层节点（FISCO-BCOS）服务时，需要使用 Docker 服务，所以需要选择能够安装 Docker 服务的操作系统：
 
 | 操作系统 | 最低要求 |
 | ---- | -------- |
@@ -31,83 +43,87 @@
 
 #### 安装 Docker
 
-如果是云服务器，推荐使用**操作系统镜像模板**的方式创建主机。
+如果使用云服务器，推荐使用**操作系统镜像模板**的方式创建主机：
 
-在一台主机上安装 Docker 后，对这个操作系统做一个镜像模板，然后通过这个模板镜像来初始化创建主机，这样新创建的主机就自带了 Docker 服务。
+> 在一台主机上安装 Docker 后，然后使用安装 Docker 服务后的操作系统做一个镜像模板。通过这个模板镜像来创建主机，这样新创建的主机就自带了 Docker 服务。
 
-安装 Docker 服务，请参考 [常见问题](#) 。
+安装 Docker 服务，请参考：[Docker 安装](#id19) 
 
 #### SSH 免密登录
 
-在部署时，WeBASE-Node-Manager 服务会生成相应的配置文件，然后使用`scp` 命令通过 SSH 免密登录将配置文件发送到对应的主机。
+在部署时，WeBASE-Node-Manager 服务会为每个节点生成相应的配置文件，然后使用 `scp` 命令通过 SSH 免密登录将节点的配置文件发送到对应的主机。
 
-1. 配置 WeBASE-Node-Manager 主机到其它节点主机的 SSH 免密登录；
+>**提示：**
+>
+> * 配置 WeBASE-Node-Manager 主机到其它节点主机的 SSH 免密登录；
+> * 注意免密登录的账号权限，否则会造成创建文件目录，Docker 命令执行失败；
 
-2. 注意免密登录的账号权限，否则会造成创建文件目录，Docker 命令执行失败；
-
-##### SSH 免密登录配置
+**免密登录配置方法**
 
 * 使用 SSH 登录 WeBASE-Node-Manager 主机：`ssh root@[IP]`
 
 * 检查 `~/.ssh/` 目录是否已经存在 `id_rsa.pub` 公钥文件
     * 如果存在，则进行下一步；
-    * 如果不存在，执行命令 `ssh-keygen`，然后直接两次回车即可生成（提示输入密码时，直接回车即可）；
-* 使用 `ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]` 命令，将公钥文件上传到需要免密登录的主机（替换 [IP] 为主机的 IP 地址），然后输入主机密码即可
+    * 如果不存在，执行命令 `ssh-keygen`，然后直接两次回车即可生成（提示输入密码时，直接回车）；
+* 使用 `ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]` 命令，将公钥文件上传到需要免密登录的主机（替换 [IP] 为主机的 IP 地址），然后输入远程主机的登录密码
 
 * 输出结果出现 `Number of key(s) added: 1` 结果，表示免密登录配置成功
 
 * 执行命令 `ssh -o StrictHostKeyChecking=no root@[IP]`，检查是否能成功登录主机
 
 
-#### 手动拉取镜像
-虽然可视化自动部署功能提供了自动从 Docker 仓库拉取镜像的功能，但是由于网络原因，拉取镜像的速度不仅很慢，同时很大概率会拉取失败。
+#### Docker 镜像
+虽然可视化自动部署功能可以自动从 Docker 仓库拉取镜像，但是由于网络原因，拉取镜像的速度不仅很慢，同时只有极小的概率能够拉取成功。
 
-**为了保证部署过程顺利和快速完成，强烈推荐在部署前，手动拉取镜像，然后上传到部署节点服务的主机。**
+为了保证部署过程顺利和快速完成，**强烈推荐在部署或者新增节点前，手动拉取镜像，然后上传到部署节点服务的主机。**
 
-##### 手动拉取 Docker 镜像
-
-手动拉取 Docker 镜像版本的方式有两种，**本地拉取过镜像**和**本地没有拉去过镜像**。
-
+**手动拉取镜像分两种：**
+    
 * 本地没有拉取过镜像
-    * 如果本地没有拉去过镜像，只能通过 `docker pull` 拉取
+
+    ```Bash
+    # 从 CDN 拉取镜像 tar 文件
+    # 替换 {VERSION} 为需要拉取的镜像版本
+    wget https://www.fisco.com.cn/cdn/webase/releases/download/{VERSION}/docker-fisco-webase.tar
     
-```Bash
-# 需要主机已经安装了 Docker 服务
-# 替换 {version} 为需要拉取的镜像版本
-docker pull fiscoorg/fisco-webase:{version}
-```
+    # 登录需要部署的主机，解压镜像 tar 文件
+    docker load -i docker-fisco-webase.tar
+    ```
 
-* 本地已经拉取过镜像
-    * 如果本地某台主机已经存在镜像和对应的版本，可以通过将镜像压缩成一个 tar 文件，然后通过 `scp` 传输到相应主机，再解压 tar 文件即可；
+* 本地已经所需要版本的镜像，或者拉取过镜像的 tar 包
+    * 检查本地是否有镜像版本
     
-```Bash
-# 保存 tar 文件
-# 替换 {version} 为需要拉取的镜像版本
-docker save -o fisco-webase.tar fiscoorg/fisco-webase:{version}
+    ```Bash
+    # 需要主机已经安装了 Docker 服务
+    # 检查本地是否有镜像，如果输出有，检查本是否
+    docker images -a |grep -i "fiscoorg/fisco-webase"
+    ```
+    
+    * 本地有所需要的镜像版本，或者从 cdn 拉取过镜像的 tar 包
 
-# 传输到主机
-scp fisco-webase.tar root@[IP]:/root/
+    ```Bash
+    # 压缩本地镜像到 tar 文件，如果有 tar 文件，跳过
+    # 替换 {VERSION} 为需要拉取的镜像版本
+    docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:{VERSION}
+    
+    # 发送镜像 tar 文件到需要部署的主机
+    scp docker-fisco-webase.tar root@[IP]:/root/
+    
+    # 登录需要部署的主机，解压 tar 文件
+    docker load -i docker-fisco-webase.tar
+    ```
 
-# 解压 tar 文件
-docker lod -i fisco-webase.tar
-
-# 检查是否存在相应版本的镜像
-docker images -a |grep -i "fiscoorg/fisco-webase"
-``` 
-
-关于镜像版本，请参考：[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)
-
-其中以 -gm 结尾的标识国密版本。
+关于镜像版本，请参考：[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)，其中以 -gm 结尾的标识国密版本。
 
 
 ### 可视化部署实现原理
 可视化部署的实现原理如下：
 
-* WeBASE-Node-Manager 根据填写的主机，调用初始化脚本，通过 SSH 远程登录每台主机，初始化主机环境，包括安装 `Docker`，`wget`，`curl` 等服务；
+* WeBASE-Node-Manager 根据填写的主机，调用初始化脚本，通过 SSH 远程登录每台主机，检查主机环境，包括是否安装 `Docker`，`wget`，`curl` 等服务；
 
 * WeBASE-Node-Manager 根据填写的部署信息，调用 `build_chain.sh` 脚本，生成每台主机上各个节点的配置信息，同时还有各个机构的私钥和证书，链私钥和证书等等配置文件；
 
-* WeBASE-Node-Manager 通过使用 `scp（多机部署）` 或 `cp（单机部署）` 命令，将文件从 WeBASE-Node-Manager 主机上拷贝到相应主机；
+* WeBASE-Node-Manager 通过使用 `scp` 命令，将文件从 WeBASE-Node-Manager 主机上拷贝到相应主机；
 
 * WeBASE-Node-Manager 通过 SSH 远程调用 Docker 指令根据每个节点配置使用 `docker run` 启动节点；
 
@@ -130,18 +146,20 @@ WeBASE-Node-Manager 是整个区块链节点的管理服务，同时，节点的
 
 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务。
 
-部署 WeBASE-Node-Manager 时，需要根据自己的场景修改配置文件 `WeBASE-Node-Manager/dis/conf/application.yml` 。配置主要包括：
+部署 WeBASE-Node-Manager 时，需要根据自己的场景修改配置文件 `WeBASE-Node-Manager/dist/conf/application.yml` 。
+
+**配置主要包括：**
 
 * 数据库 IP，端口，数据库名，访问账号和密码
 * 配置签名服务 WeBASE-Sign 的访问地址，默认端口：`5004`
-* 部署区块链服务时，每个节点在主机上存放配置和数据的目录，默认：`/opt/fisco`
+* 部署区块链服务时，部署节点服务的主机存放节点配置和数据的目录，默认：`/opt/fisco`
 * SSH 免密账号和密码，默认：`root` 和 `22`
 * 部署方式
-    * 0 表示兼容以前先部署区块链服务和 WeBASE-Front 前置服务后，手动添加到 WeBASE-Node-Manager 管理服务；
-    * 1 表示使用可视化部署的方式来部署节点服务。
-* 加密版本，在执行 WeBASE-Node-Manager **数据库初始化脚本时**就确定了当前的 WeBASE-Node-Manager 是使用哪种加密方式
-    * 0: 非国密
-    * 1: 国密
+    * 0：兼容以前先部署区块链服务和 WeBASE-Front 前置后，手动添加到 WeBASE-Node-Manager 管理服务；
+    * 1：使用可视化部署的方式来部署节点服务；
+* 加密方式，在执行 WeBASE-Node-Manager **数据库初始化脚本时**就确定了当前的 WeBASE-Node-Manager 是使用哪种加密方式
+    * 0：非国密；
+    * 1：国密；
 
 具体的相关配置，可以参考下面的配置说明，在配置完成后，重启节点管理服务（WeBASE-Node-Manager）。
 
@@ -181,7 +199,7 @@ WeBASE-Web 是节点的管理页面，提供节点管理服务的界面化操作
 * 参考 [节点管理平台 WeBASE-Web 部署文档](../WeBASE-Web/install.html#id1) 部署 WeBASE-Web 服务。
 
 ### 可视化部署
-在部署完成节点管理服务（WeBASE-Node-Manager）和节点管理平台（WeBASE-Web）后，使用浏览器，访问节点管理平台页面：
+在部署完节点管理服务（WeBASE-Node-Manager）和节点管理平台（WeBASE-Web）后，使用浏览器，访问节点管理平台页面：
 
 ```Bash
 http://{deployIP}:{webPort}
@@ -193,9 +211,9 @@ http://{deployIP}:{webPort}
 #### 部署操作
 
 **提示：**
-> 1. 由于网络问题，建议优先参考[常见问题](#)手动进行 Docker 安装以及参考[手动拉取 Docker 镜像](#) 后再进行部署操作，防止由于网络原因导致部署失败；
-> 2. 如果部署**国密**版本，建议参考常见问题，手动下载 TASSL 下载库；
-> 3. 如果 WeBASE-Node-Manager 的 `application.yml` 中的 `deployType` 配置为 0，则会要求添加前置服务。只有当 `deployType` 配置为 1 时，才会进入可视化部署界面；
+>1. 由于网络问题，建议先参考：[Docker 安装](#id19) 进行 Docker 安装以及参考：[手动拉取 Docker 镜像](#id6) 后再进行部署操作，防止由于网络原因导致部署失败；
+>2. 如果部署**国密**版本，建议参考：[手动下载 TASSL](#tassl)，手动下载 TASSL 下载库；
+>3. 如果 WeBASE-Node-Manager 的 `application.yml` 中的 `deployType` 配置为 0，则会要求添加前置服务。只有当 `deployType` 配置为 1 时，才会进入可视化部署界面；
 
 打开节点管理平台页面后，登录后修改密码，默认进入**节点管理页面**：
 
@@ -218,7 +236,7 @@ http://{deployIP}:{webPort}
 
 **提示：**
 1. **机构名**： 必须为英文和数字，不能含有空格和汉字；
-2. **Docker 拉取方式：** 建议参考[手动拉取 Docker 镜像](#) 进行手动拉取镜像的操作；
+2. **Docker 拉取方式：** 建议参考[手动拉取 Docker 镜像](#id6) 进行手动拉取镜像的操作；
 
 #### 新增节点
 节点新增，也称作区块链扩容，指在已有的区块链服务中，增加新的节点。
@@ -227,49 +245,47 @@ http://{deployIP}:{webPort}
 
 **提示：**
 > 1. 新主机也需要配置 SSH 免密登录；
-> 2. 建议参考[手动拉取 Docker 镜像](#) 在新添加主机上进行手动拉取镜像的操作后再执行添加节点的操作；
+> 2. 建议参考[手动拉取 Docker 镜像](#id6) 在新添加主机上进行手动拉取镜像的操作后再执行添加节点的操作；
 
 新增的节点，**默认处于游离状态**，需要手动**变更节点为共识或者观察节点**后，新节点开始从原有节点同步区块数据。
 
 **具体操作：**
 
-1. 点击**新增节点**按钮；
-2. 输入主机 IP 地址和机构名称（可以是已经存在的机构或者新机构）；
-3. 选择群组；
-4. 选择 DOcker 拉取方式；
-5. 点击确认，即可完成增加节点操作；
+* 点击**新增节点**按钮；
+* 输入主机 IP 地址和机构名称（可以是已经存在的机构或者新机构）；
+* 选择群组；
+* 选择 Docker 拉取方式；
+* 点击确认，即可完成增加节点操作；
 
 ![visual-deploy-add-node](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-add-node.png)
 
 #### 节点操作
 节点操作，包括：
 
-1. 节点的启动，停止；
-2. 节点的类型切换：共识，观察和游离；
-3. 删除节点；
-
-![visual-deploy-node-option](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-node-option.png)
+* 节点的启动，停止；
+* 节点的类型切换：共识，观察和游离；
+* 删除节点；
 
 ![visual-deploy-node-change-type](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-node-change-type.png)
 
 点击节点列表的操作项操作即可。但是需要注意：
 
-1. 停止操作时，节点必须处于游离状态；
-2. 变更节点为游离节点时，该群组内，至少有两个共识节点；
-3. 变更节点类型，需要发送交易，请先在**私钥管理添加私钥账号；**
-4. 删除节点时，节点必须处于停止状态；
+* 停止操作时，节点必须处于游离状态；
+* 变更节点为游离节点时，该群组内，至少有两个共识节点；
+* 变更节点类型，需要发送交易，请先在**私钥管理添加私钥账号；**
+* 删除节点时，节点必须处于停止状态；
 
 ![visual-deploy-add-user-key](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-add-user-key.png)
 
 #### 重置区块链
-重置区块链，当部署出现异常，或者不可预期的错误时，可以使用重置功能，重置已经区块链服务，然后进行重新部署。
+如果在部署区块链服务时，出现了部署失败的问题，可以使用重置功能，重置区块链服务，然后进行重新部署。
 
 如果要重置当前区块链，点击**重置**按钮，等待重置完成。
 
 当执行重置操作时，并不会真正物理删除节点的数据，而是使用 `mv` 命令，将区块链的整个数据移动到临时目录。
 
-* WeBASE-Node-Manager 的临时目录
-    * WeBASE-Node-Manager 服务的 `WeBASE-Node-Manager/dist/NODES_ROOT_TMP` 目录中存放了所有重置节点的节点配置文件
+* WeBASE-Node-Manager 服务的临时目录
+    * `WeBASE-Node-Manager/dist/NODES_ROOT_TMP` 目录中存放了所有重置节点的节点配置文件
     * **不包含**具体的节点数据文件
     * 文件名格式 `default_chain-YYYYMMDD_HHmmSS（删除时间）`：default_chain-20200722_102631
     
@@ -280,7 +296,7 @@ http://{deployIP}:{webPort}
 
 
 ### 常见问题
-#### Docker 安装方法
+#### Docker 安装
 在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
 
 ```Bash
@@ -315,7 +331,7 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 
 ```
 
-#### 部署国密版本，手动下载 TASSL 
+#### 手动下载 TASSL 
 
 FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署工具会自动从GitHub 下载，解压后放置于 `~/.fisco/tassl`，如果碰到下载失败，请尝试从[https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz](https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz) 下载并解压后，放置于 `~/.fisco/tassl`
 
