@@ -102,12 +102,14 @@ cd webase-deploy
 
 ④ 服务端口不能小于1024。
 
+⑤ 如果配置可视化部署环境，请注意根据具体环境修改最后的可视化部署配置。
+
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.3.2
-webase.mgr.version=v1.3.2
-webase.sign.version=v1.3.2
-webase.front.version=v1.3.2
+webase.web.version=v1.4.0
+webase.mgr.version=v1.4.0
+webase.sign.version=v1.4.0
+webase.front.version=v1.4.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -134,6 +136,7 @@ mgr.port=5001
 front.port=5002
 # 签名服务子系统端口
 sign.port=5004
+
 
 # 节点监听Ip
 node.listenIp=127.0.0.1
@@ -163,13 +166,34 @@ node.path=/data/app/nodes/127.0.0.1/node0
 fisco.version=2.4.1
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
+
+##### 可视化部署配置
+# 可视化部署：填写签名服务的外网 IP 地址
+# 其它节点主机访问 WeBASE-Sign 服务的 IP 地址
+sign.ip=
+# 可视化部署：SSH 免密登录账号
+mgr.ssh.user=root
+# 可视化部署：SSH 登录端口
+mgr.ssh.port=22
+# 可视化部署：节点主机存放节点文件的目录
+mgr.ssh.rootDirOnHost=/opt/fisco
 ```
 
 ## 部署
-部署所有服务：
-```shell
-python deploy.py installAll
-```
+
+* 部署服务
+    * 部署所有服务：
+    
+    ```shell
+    python deploy.py installAll
+    ```
+
+    * 可视化部署：
+    
+    ```shell
+    python deploy.py visualDeploy
+    ```
+
 停止所有服务：
 ```shell
 python deploy.py stopAll
