@@ -77,7 +77,9 @@
 
 为了保证部署过程顺利和快速完成，**强烈推荐在部署或者新增节点前，手动拉取镜像，然后上传到部署节点服务的主机。**
 
-**手动拉取镜像分两种：**
+>关于镜像版本，请参考：[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)，其中以 `-gm` 结尾表示国密版本。
+
+**手动拉取镜像的两种方式：**
     
 * 本地没有拉取过镜像
 
@@ -113,7 +115,7 @@
     docker load -i docker-fisco-webase.tar
     ```
 
-关于镜像版本，请参考：[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)，其中以 -gm 结尾的标识国密版本。
+
 
 
 ### 可视化部署实现原理
@@ -146,18 +148,17 @@ WeBASE-Node-Manager 是整个区块链节点的管理服务，同时，节点的
 
 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务。
 
-部署 WeBASE-Node-Manager 时，需要根据自己的场景修改配置文件 `WeBASE-Node-Manager/dist/conf/application.yml` 。
 
-**配置主要包括：**
+**修改 WeBASE-Node-Manager/dist/conf/application.yml` 配置文件：**
 
-* 数据库 IP，端口，数据库名，访问账号和密码
+* 数据库 IP，端口，数据库名，数据库账号和密码
 * 配置签名服务 WeBASE-Sign 的访问地址，默认端口：`5004`
 * 部署区块链服务时，部署节点服务的主机存放节点配置和数据的目录，默认：`/opt/fisco`
 * SSH 免密账号和密码，默认：`root` 和 `22`
 * 部署方式
-    * 0：兼容以前先部署区块链服务和 WeBASE-Front 前置后，手动添加到 WeBASE-Node-Manager 管理服务；
+    * 0：兼容以前先部署区块链服务和 WeBASE-Front 前置后，再添加 WeBASE-Front 前置到 WeBASE-Node-Manager 管理服务；
     * 1：使用可视化部署的方式来部署节点服务；
-* 加密方式，在执行 WeBASE-Node-Manager **数据库初始化脚本时**就确定了当前的 WeBASE-Node-Manager 是使用哪种加密方式
+* 加密方式，根据执行 WeBASE-Node-Manager **数据库初始化脚本** 配置当前的 WeBASE-Node-Manager 使用哪种加密方式
     * 0：非国密；
     * 1：国密；
 
@@ -184,7 +185,9 @@ constant:
   sshDefaultUser: root
   # SSH 服务的端口，默认 22
   sshDefaultPort: 22
-  # 部署方式：0, 先使用 build_chain.sh 部署链和 WeBASE-Front 服务，然后手动添加 ; 1, 使用可视化部署
+  # 部署方式：
+  #   0: 先使用 build_chain.sh 部署链和 WeBASE-Front 服务，然后手动添加前置
+  #   1: 使用可视化部署
   deployType: 1
 
 sdk:
