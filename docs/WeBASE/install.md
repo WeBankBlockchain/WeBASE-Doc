@@ -186,7 +186,7 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 **注意：选择其中一种部署方式执行**
     
 ```shell
-# 请选择一种方式部署：
+### 请选择一种方式部署：
 
 # 1. 部署所有服务
 python deploy.py installAll
