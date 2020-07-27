@@ -72,9 +72,8 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 **注意事项：**
 
-* 注意修改 `webase-deploy` 部署工具中的 `common.properties` 文件的 `sign.ip` 为主机的外网 IP 地址（节点需要访问**签名服务**）。
+* 注意修改 `webase-deploy` 部署工具中的 `common.properties` 文件的可视化部署配置参数。
 * 调用 `deploy.sh` 脚本时，需要传递 `visualDeploy` 参数。
-
 
 ## 系统初始化配置
 
