@@ -182,23 +182,26 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 ## 部署
 
 * 部署服务
-    * 部署所有服务：
-    
-    ```shell
-    python deploy.py installAll
-    ```
 
-    * 可视化部署：
+**注意：选择其中一种部署方式执行**
     
-    ```shell
-    python deploy.py visualDeploy
-    ```
+```shell
+# 请选择一种方式部署：
 
-停止所有服务：
+# 1. 部署所有服务
+python deploy.py installAll
+    
+# 2. 可视化部署
+python deploy.py visualDeploy
+```
+
+* 停止所有服务：
+
 ```shell
 python deploy.py stopAll
 ```
-服务部署后，如果需要单独启停，可以使用以下命令：
+* 服务部署后，如果需要单独启停，可以使用以下命令：
+
 ```shell
 启动FISCO-BCOS节点:      python deploy.py startNode
 停止FISCO-BCOS节点:      python deploy.py stopNode
