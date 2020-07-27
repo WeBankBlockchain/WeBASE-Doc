@@ -67,6 +67,15 @@ WeBASE管理平台分为四个部分：节点前置，签名服务，节点管�
 
 WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
 
+#### 3、可视化部署
+用于多主机部署（ 5 台+ ）。其中，WeBASE 管理平台单独一台主机，其余 4 台主机分别部署 1 个节点。具体搭建流程参见[**安装文档**](../WeBASE/install.md)。
+
+**注意事项：**
+
+* 注意修改 `webase-deploy` 部署工具中的 `common.properties` 文件的 `sign.ip` 为主机的外网 IP 地址（节点需要访问**签名服务**）。
+* 调用 `deploy.sh` 脚本时，需要传递 `visualDeploy` 参数。
+
+
 ## 系统初始化配置
 
 服务搭建成功后，可使用网页浏览器访问nginx配置的WeBASE管理台IP和端口(例如XXX.XXX.XXX.XXX:XXXX)，进入到管理平台页面。管理平台默认用户为admin，默认密码为Abcd1234（第一次登陆成功后会要求重置密码，请按照密码标准设置一个更加安全的密码）。
