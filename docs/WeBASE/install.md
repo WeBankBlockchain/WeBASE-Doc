@@ -169,7 +169,7 @@ node.counts=nodeCounts
 
 ##### 可视化部署配置
 # 可视化部署：填写签名服务的外网 IP 地址
-# 其它节点主机访问 WeBASE-Sign 服务的 IP 地址
+# 其它部署节点的主机访问 WeBASE-Sign 服务的 IP 地址
 sign.ip=
 # 可视化部署：SSH 免密登录账号
 mgr.ssh.user=root
