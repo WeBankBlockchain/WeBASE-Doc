@@ -188,7 +188,7 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 | 部署方式  | 参数  | 说明  |
 |---|---|---|
 |  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
-|  可视化部署 |  visualDeploy | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**  |
+|  可视化部署 |  visualDeploy | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参靠文档 [可视化部署](#../WeBASE-Install/visual_deploy.html) |
 
 * 选择其中一种部署方式执行
     
@@ -238,7 +238,8 @@ http://{deployIP}:{webPort}
 示例：http://localhost:5000
 ```
 
-* 如果选择 **可视化部署**，请参见[可视化部署](../WeBASE-Install/visual_deploy.md#id)
+* 选择 **可视化部署**
+    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
 **备注：** 
 
