@@ -102,7 +102,7 @@ cd webase-deploy
 
 ④ 服务端口不能小于1024。
 
-⑤ 如果配置可视化部署环境，请注意根据具体环境修改最后的可视化部署配置。
+⑤ 如果选择**可视化部署**环境，注意根据具体环境修改最后的**可视化部署配置**。
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
@@ -168,7 +168,7 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 
 ##### 可视化部署配置
-# 可视化部署：填写签名服务的外网 IP 地址
+# 可视化部署：填写签名服务的对方访问 IP 地址
 # 其它部署节点的主机访问 WeBASE-Sign 服务的 IP 地址
 sign.ip=
 # 可视化部署：SSH 免密登录账号
@@ -183,7 +183,14 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 
 * 部署服务
 
-**注意：选择其中一种部署方式执行**
+**部署方式：**
+
+| 部署方式  | 参数  | 说明  |
+|---|---|---|
+|  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
+|  可视化部署 |  visualDeploy | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**  |
+
+* 选择其中一种部署方式执行
     
 ```shell
 ### 请选择一种方式部署：
@@ -225,10 +232,13 @@ python deploy.py stopAll
 
 WeBASE管理平台：
 
+* 打开浏览强访问
 ```
 http://{deployIP}:{webPort}
 示例：http://localhost:5000
 ```
+
+* 如果选择 **可视化部署**，请参见[可视化部署](../WeBASE-Install/visual_deploy.md#id)
 
 **备注：** 
 
