@@ -2,9 +2,11 @@
 
 可视化部署是指通过 WeBASE 管理平台，在 **多台** 主机上快速部署 **FISCO-BCOS 底层节点和 WeBASE-Front 前置** 以及 对底层节点的扩容操作。
 
-可视化部署，需要先通过 **一键部署** 工具，部署 WeBASE 的中间件服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。
+可视化部署，需要先部署依赖服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。
 
-然后通过 WeBASE 管理平台（WeBASE-Web）的界面来部署节点（FISCO-BCOS 2.0+）和节点前置子系统（WeBASE-Front）。可视化部署架构如下：
+然后通过 WeBASE 管理平台（WeBASE-Web）的界面来部署节点（FISCO-BCOS 2.0+）和节点前置子系统（WeBASE-Front）。
+
+可视化部署架构如下：
 
 ![visual-deploy-architecture](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-architecture.png)
 
@@ -16,9 +18,12 @@
 #### 主机数量
 使用可视化部署搭建一个 **4 节点** 的区块链服务至少需要 **5 台**主机。
 
-其中 1 台主机使用 **一键部署** 工具，选择 **可视化部署（`visualDeploy`）** 模式，优先部署 WeBASE 中间节服务。
+其中 1 台主机部署 **可视化部署的依赖** 服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。
 
 剩余 4 台主机每台部署一个 FISCO-BCOS 节点和 WeBASE-Front 前置服务。
+
+**注意：**
+- 这里只是为了方便，所以将签名服务（WeBASE-Sign）部署在同一台主机。如果在企业级部署时，为了安全，推荐将签名服务（WeBASE-Sign）放在内网中。
 
 #### 系统环境
 
@@ -54,31 +59,35 @@
 
 如果使用云服务器，推荐使用**操作系统镜像模板**的方式创建主机，即在一台主机上安装 Docker 后，然后使用安装 Docker 服务后的操作系统做一个镜像模板。通过这个模板镜像来创建主机，这样新创建的主机就自带了 Docker 服务。
 
-安装 Docker 服务，请参考下文**常见问题**中：[Docker 安装](#id19) 
+安装 Docker 服务，请参考下文**常见问题**中：[Docker 安装](#id17) 
 
 ##### 拉取 Docker 镜像
 虽然可视化自动部署功能可以自动从 Docker 仓库拉取镜像，但是由于网络原因，拉取镜像的速度不仅很慢，同时极大概率会拉取失败，导致部署失败。
 
 为了保证部署过程顺利和快速完成，**推荐在执行可视化部署前，手动拉取镜像，然后上传到部署节点服务的主机。**
 
-拉取镜像的方法，请参考下文**常见问题**中：[拉取 Docker 镜像](#id19) 
+拉取镜像的方法，请参考下文**常见问题**中：[拉取 Docker 镜像](#id18) 
 
 ##### 配置 SSH 免密登录
 
 在部署时，WeBASE-Node-Manager 服务会为每个节点生成相应的配置文件，然后使用 `scp` 命令通过 SSH 免密登录将节点的配置文件发送到对应的主机，然后远程通过 SSH 免密登录到节点主机，执行系统命令来操作节点。
 
 **提示：**
-1. 配置 WeBASE-Node-Manager 主机到其它节点主机的 SSH 免密登录；
-2. 注意免密登录的账号权限，否则会造成创建文件目录，Docker 命令执行失败；
-3. 如果免密账号为非 `root` 账号，保证账号有 `sudo` 免密权限；
+
+    1. 配置 WeBASE-Node-Manager 主机到其它节点主机的 SSH 免密登录；
+    2. 注意免密登录的账号权限，否则会造成创建文件目录，Docker 命令执行失败；
+    3. 如果免密账号为非 `root` 账号，保证账号有 `sudo` 免密权限；
 
 **免密登录配置方法**
 
 * 使用 SSH 登录 WeBASE-Node-Manager 主机：`ssh root@[IP]`
 
 * 检查 `~/.ssh/` 目录是否已经存在 `id_rsa.pub` 公钥文件
-    * 如果存在，则进行下一步；
-    * 如果不存在，执行命令 `ssh-keygen`，然后直接两次回车即可生成（提示输入密码时，直接回车）；
+
+    * 如果存在，则进行下一步
+    
+    * 如果不存在，执行命令 `ssh-keygen`，然后直接两次回车即可生成（提示输入密码时，直接回车）
+    
 * 使用 `ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]` 命令，将公钥文件上传到需要免密登录的主机（替换 [IP] 为主机的 IP 地址），然后输入远程主机的登录密码
 
 * 输出结果出现 `Number of key(s) added: 1` 结果，表示免密登录配置成功
@@ -88,26 +97,22 @@
 ### 部署依赖服务
 可视化部署需要依赖 WeBASE 的中间件服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。
 
-对于依赖服务的安装，有两种方式，选择合适的部署方式：
-- **一键部署**
-- **手动部署**
-
+对于依赖服务的安装，有两种方式（ **一键部署** 和 **手动部署** ），选择其中一种部署方式即可
 
 #### 1. 一键部署
 
 适合**同机部署**，快速体验的情况使用。
 
-具体搭建流程参见[**安装文档**](../WeBASE/install.md)。
+具体搭建流程参见[**一键部署安装文档**](../WeBASE/install.md)。
 
-**提示：**
+**注意：**
 
-- 在执行 `deploy.py` 脚本时，执行 `python deploy.py visualDeploy
-`，选择 **可视化部署** 模式。
+- 选择部署方式时，选择 **可视化部署** 方式，即执行 `deploy.py` 脚本时，执行 `python deploy.py visualDeploy`
 
 #### 2. 手动部署
 适合**多机部署**，企业级的情况使用。
 
-手动部署可视化的依赖服务，具体操作如下：
+具体步骤如下：
 
 * 签名服务（WeBASE-Sign）
     
@@ -118,6 +123,7 @@
     * 参考 [节点管理平台 WeBASE-Web 部署文档](../WeBASE-Web/install.html#id1) 部署 WeBASE-Web 服务
     
 * 节点管理子系统（WeBASE-Node-Manager）
+
     * 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务
 
     * 修改 `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件 
@@ -129,7 +135,8 @@
       deployType: 1
       
       # WeBASE-Sign 服务的访问地址，前面部署的签名服务的访问地址
-      webaseSignAddress: "127.0.0.1:5004"
+      # 注意 IP 地址，需要其余主机能够使用这个 IP 地址访问到签名服务
+      webaseSignAddress: "xxx.xx.xx.xxx:5004"
       
       # 部署区块链服务的节点主机存放节点配置文件和数据的目录
       rootDirOnHost: "/opt/fisco"
@@ -140,10 +147,11 @@
    ```
 
 **注意：**
-- 修改 WeBASE-Node-Manager 服务的 `dist/conf/application.yml` 文件中的 `deployType` 为 `1`，启用可视化部署功能；
+- 修改 WeBASE-Node-Manager 服务的 `dist/conf/application.yml` 中 `deployType` 为 `1`，启用可视化部署功能
+- 修改 WeBASE-Node-Manager 服务的 `dist/conf/application.yml` 中 `webaseSignAddress` 的 IP 地址，必须要其余主机可以通过改 IP 地址访问签名服务
 
 ### 可视化部署节点
-在部署完节点管理服务（WeBASE-Node-Manager）和节点管理平台（WeBASE-Web）后，使用浏览器，访问节点管理平台页面：
+在部署完依赖服务后，使用浏览器，访问节点管理平台页面：
 
 ```Bash
 # 默认端口 5000
@@ -152,10 +160,10 @@ http://{deployIP}:{webPort}
 #### 部署节点
 
 **提示：**
-- 在部署前，**手动安装 Docker 服务**和 **手动拉取 Docker 镜像**，防止由于网络原因导致部署失败
+- 在执行部署前，请 **手动安装 Docker 服务** 和 **手动拉取 Docker 镜像**，防止由于网络原因导致部署失败
 
-    - 参考下文**常见问题**中的 [安装 Docker](#) 
-    - 参考下文**常见问题**中的 [拉取 Docker 镜像](#)
+    - 参考下文 **常见问题** 中的 [安装 Docker](#id17) 
+    - 参考下文 **常见问题** 中的 [拉取 Docker 镜像](#id18)
     
 - 如果部署 **国密** 版本，**手动下载 TASSL 库**，防止由于 GitHub 不能访问，导致部署失败
     - 参考下文**常见问题**中的 [手动下载 TASSL](#tassl)，手动下载 TASSL 下载库
@@ -189,11 +197,11 @@ http://{deployIP}:{webPort}
 
 **提示：**
 - 新主机配置 SSH 免密登录
-    - 参考上文的 [配置 SSH 免密登录](#)
+    - 参考上文的 [配置 SSH 免密登录](#ssh)
     
 - **手动安装 Docker 服务**和 **手动拉取 Docker 镜像**，防止由于网络原因导致添加失败
-    - 参考下文**常见问题**中的 [安装 Docker](#) 
-    - 参考下文**常见问题**中的 [拉取 Docker 镜像](#)
+    - 参考下文**常见问题**中的 [安装 Docker](#id17) 
+    - 参考下文**常见问题**中的 [拉取 Docker 镜像](#id18)
 
 - 新增的节点，**默认处于游离状态**，需要手动**变更节点为共识或者观察节点**后，新节点开始从原有节点同步区块数据。
 
@@ -266,78 +274,78 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 
 #### 拉取 Docker 镜像
 
-* **镜像版本：**
-    - v2.5.0
-    - v2.5.0-gm
+镜像版本：
+- v2.5.0
+- v2.5.0-gm
 
-* **拉取方式：**
+**提示：**
+- 最近的镜像版本，请参考[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)
 
-    * 检查本地是否已有镜像
+##### 拉取方式
+
+* 这里以 `v2.5.0` 做演示。其它版本，请求版本号替换即可
+
+* 检查本地是否已有镜像
+    
+```Bash
+# 检查本地是否有镜像
+docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i v2.5.0
+    
+# 如果有如下输出，表示本地已有镜像；否则表示本地没有镜像
+fiscoorg/fisco-webase   v2.5.0  bf4a26d5d389  5 days ago   631MB
+```
+    
+* 如果本地没有镜像（如果本地有镜像，跳过）
+    
+    * 从 CDN 拉取镜像压缩包
     
     ```Bash
-    # 检查本地是否有镜像
-    # 替换 {VERSION} 为需要拉取的镜像版本
-    docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i {VERSION}
-        
-    # 如果有如下输出，表示本地已有镜像；否则表示本地没有镜像
-    fiscoorg/fisco-webase   {VERSION}  bf4a26d5d389  5 days ago   631MB
+    # 从 CDN 拉取镜像 tar 文件
+    wget https://www.fisco.com.cn/cdn/webase/releases/download/v2.5.0/docker-fisco-webase.tar
     
-    ```
-    
-    * 如果本地没有镜像（本地有镜像，跳过）
-    
-        * 从 CDN 拉取镜像压缩包
-    
-        ```Bash
-        # 从 CDN 拉取镜像 tar 文件
-        # 替换 {VERSION} 为需要拉取的镜像版本
-        wget https://www.fisco.com.cn/cdn/webase/releases/download/{VERSION}/docker-fisco-webase.tar
-        
-        # 解压镜像 tar 文件
-        docker load -i docker-fisco-webase.tar
-        ```
-    
-        * 从 Docker 官方拉取镜像
-
-       ```Bash
-       # 执行 Docker 拉取命令
-       # 替换 {VERSION} 为需要拉取的镜像版本
-       docker pull fiscoorg/fisco-webase:{VERSION}
-       
-       ```
-       
-    * 压缩镜像到 `tar` 文件
-    
-    ```Bash
-    # 压缩镜像为 tar 文件
-    # 替换 {VERSION} 为需要拉取的镜像版本 
-    docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:{VERSION}
-    ```
-    
-    * 发送镜像 `tar` 文件到部署节点的主机
-
-    ```Bash
-    # 发送镜像 tar 文件到需要部署节点的主机
-    scp docker-fisco-webase.tar root@[IP]:/root/
-    ```
-        
-    * 解压镜像 `tar` 文件
-    
-    ```Bash
-    # 登录需要部署的主机，解压 tar 文件
+    # 解压镜像 tar 文件
     docker load -i docker-fisco-webase.tar
     ```
     
-    * 节点主机检查是否已经成功拉取镜像
+    * 从 Docker 官方拉取镜像
+
+   ```Bash
+   # 执行 Docker 拉取命令
+   docker pull fiscoorg/fisco-webase:v2.5.0
+   ```
+   
+* 压缩镜像到 `tar` 文件
     
-    ```Bash
-    # 检查是否成功拉取镜像
-    docker images -a |grep -i "fiscoorg/fisco-webase"
-        
-    # 如果有如下输出，表示拉取成功
-    fiscoorg/fisco-webase   {VERSION}  bf4a26d5d389  5 days ago   631MB
+```Bash
+# 压缩镜像为 tar 文件
+# 替换 v2.5.0 为需要拉取的镜像版本 
+docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:v2.5.0
+```
     
-    ```
+* 发送镜像 `tar` 文件到部署节点的主机
+
+```Bash
+# 发送镜像 tar 文件到需要部署节点的主机
+scp docker-fisco-webase.tar root@[IP]:/root/
+```
+    
+* 解压镜像 `tar` 文件
+    
+```Bash
+# 登录需要部署的主机，解压 tar 文件
+docker load -i docker-fisco-webase.tar
+```
+    
+* 节点主机检查是否已经成功拉取镜像
+    
+```Bash
+# 检查是否成功拉取镜像
+docker images -a |grep -i "fiscoorg/fisco-webase"
+    
+# 如果有如下输出，表示拉取成功
+fiscoorg/fisco-webase   v2.5.0  bf4a26d5d389  5 days ago   631MB
+    
+```
 
 #### 手动下载 TASSL 
 

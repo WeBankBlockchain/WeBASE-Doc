@@ -72,12 +72,15 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 **可视化部署分为两个步骤：**
 
-- 部署依赖服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）
-    - 使用一键搭建
-    - 手动搭建依赖服务
+- 部署依赖服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。依赖服务可以通过 **一键搭建** 或 **手动搭建** 完成。
+
+    - 使用**一键搭建**部署依赖服务
+    
+    - **手动搭建**部署依赖服务
+    
 - 使用界面部署 **FISCO-BCOS 底层节点** 和 **节点前置服务（WeBASE-Front）**
 
-具体的搭建流程参见[《WeBASE 可视化部署》](../WeBASE-Install/visual_deploy.md)
+具体的搭建流程参见[《WeBASE 可视化部署》](../WeBASE-Install/visual_deploy.md)。
 
 ## 系统初始化配置
 
