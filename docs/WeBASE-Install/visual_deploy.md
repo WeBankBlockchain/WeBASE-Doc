@@ -279,7 +279,7 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 - v2.5.0-gm
 
 **提示：**
-- 最近的镜像版本，请参考[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)
+- 最近的镜像版本，请参考：[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)
 
 ##### 拉取方式
 
@@ -318,7 +318,6 @@ fiscoorg/fisco-webase   v2.5.0  bf4a26d5d389  5 days ago   631MB
     
 ```Bash
 # 压缩镜像为 tar 文件
-# 替换 v2.5.0 为需要拉取的镜像版本 
 docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:v2.5.0
 ```
     
@@ -344,7 +343,6 @@ docker images -a |grep -i "fiscoorg/fisco-webase"
     
 # 如果有如下输出，表示拉取成功
 fiscoorg/fisco-webase   v2.5.0  bf4a26d5d389  5 days ago   631MB
-    
 ```
 
 #### 手动下载 TASSL 
@@ -356,7 +354,7 @@ FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署�
 #### 没有进入可视化部署界面
 在登录区块链管理平台后，没有进入可视化部署页面。此时，修改 WeBASE-Node-Manager 服务中的 `dist/conf/application.yml` 文件中的 `deployType` 的值是否为 `1` 后，重启 WeBASE-Node-Manager 服务即可。
 
-#### 部署失败后重置
+#### 部署失败以及区块链重置
 如果在部署区块链服务时，出现了部署失败的问题，可以使用重置功能，重置区块链服务，然后进行重新部署。
 
 如果要重置当前区块链，点击**重置**按钮，等待重置完成。
