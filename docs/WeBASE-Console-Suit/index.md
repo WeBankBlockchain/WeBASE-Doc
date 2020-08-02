@@ -68,12 +68,16 @@ WeBASE管理平台分为四个部分：节点前置，签名服务，节点管�
 WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
 
 #### 3、可视化部署
-用于多主机部署（ 5 台+ ）。其中，WeBASE 管理平台单独一台主机，其余 4 台主机分别部署 1 个节点。具体搭建流程参见[**安装文档**](../WeBASE/install.md)。
+可视化部署是指通过 WeBASE 管理平台，在 **多台** 主机上快速部署 **FISCO-BCOS 底层节点和 WeBASE-Front 前置** 以及 对底层节点的扩容操作。
 
-**注意事项：**
+**可视化部署分为两个步骤：**
 
-* 注意修改 `webase-deploy` 部署工具中的 `common.properties` 文件的可视化部署配置参数。
-* 调用 `deploy.sh` 脚本时，需要传递 `visualDeploy` 参数。
+- 部署依赖服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）
+    - 使用一键搭建
+    - 手动搭建依赖服务
+- 使用界面部署 **FISCO-BCOS 底层节点** 和 **节点前置服务（WeBASE-Front）**
+
+具体的搭建流程参见[《WeBASE 可视化部署》](../WeBASE-Install/visual_deploy.md)
 
 ## 系统初始化配置
 
