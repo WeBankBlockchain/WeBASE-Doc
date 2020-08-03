@@ -19,7 +19,7 @@
 剩余 4 台主机每台部署一个 FISCO-BCOS 节点和 WeBASE-Front 前置服务。
 
 **注意：**
-- 这里只是为了方便，所以将签名服务（WeBASE-Sign）部署在同一台主机。如果在企业级部署时，为了安全，推荐将签名服务（WeBASE-Sign）放在内网中。
+- 在企业级部署时，为了安全，推荐将签名服务（WeBASE-Sign）放在内网中，与管理平台、管理子系统分开部署。此处为了方便演示，因此将签名服务（WeBASE-Sign）部署在同一台主机。
 
 #### 系统环境
 
@@ -58,15 +58,23 @@
 安装 Docker 服务，请参考下文**常见问题**中：[Docker 安装](#id17) 
 
 ##### 拉取 Docker 镜像
-虽然可视化自动部署功能可以自动从 Docker 仓库拉取镜像，但是由于网络原因，拉取镜像的速度不仅很慢，同时极大概率会拉取失败，导致部署失败。
 
-为了保证部署过程顺利和快速完成，**推荐在执行可视化部署前，手动拉取镜像，然后上传到部署节点服务的主机。**
+可视化部署需要使用`FISCO BCOS + WeBASE-Front`组成的节点与前置Docker镜像，并提供拉取Docker镜像的两种方式（**推荐通过CDN加速服务拉取**）：
+- 通过WeBASE CDN服务下载镜像压缩包后，通过`docker load`命令安装镜像
+- 直接通过`docker pull`命令直接从DockerHub拉取镜像
+
+```eval_rst
+.. important::
+可视化自动部署功能支持自动从 Docker 仓库拉取镜像，仅通过页面点击就可以完成Docker拉取。但是由于DockerHub的网络原因，拉取镜像的速度较慢，耗时过长，容易导致拉取镜像失败，页面的可视化部署操作失败。
+因此，为了保证部署过程顺利和快速完成，推荐在执行可视化部署前，手动拉取镜像，并将镜像上传到每个需要部署节点服务的主机。
+```
 
 拉取镜像的方法，请参考下文**常见问题**中：[拉取 Docker 镜像](#id18) 
 
 ##### 配置 SSH 免密登录
 
-在部署时，WeBASE-Node-Manager 服务会为每个节点生成相应的配置文件，然后使用 `scp` 命令通过 SSH 免密登录将节点的配置文件发送到对应的主机，然后远程通过 SSH 免密登录到节点主机，执行系统命令来操作节点。
+在节点管理台进行可视化部署时，节点管理（WeBASE-Node-Manager）服务会为每个节点生成相应的配置文件，然后通过 SSH 免密登录，使用 `scp` 命令将节点的配置文件发送到对应的主机，然后远程登录到节点主机，执行系统命令来操作节点。下面介绍配置免密登录的各个步骤
+
 
 **提示：**
 
@@ -76,7 +84,7 @@
 
 **免密登录配置方法**
 
-* 使用 SSH 登录 WeBASE-Node-Manager 主机：`ssh root@[IP]`
+* 使用 SSH 登录 WeBASE-Node-Manager 所在主机：`ssh root@[IP]`
 
 * 检查 `~/.ssh/` 目录是否已经存在 `id_rsa.pub` 公钥文件
 
@@ -84,20 +92,24 @@
     
     * 如果不存在，执行命令 `ssh-keygen`，然后直接两次回车即可生成（提示输入密码时，直接回车）
     
-* 使用 `ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]` 命令，将公钥文件上传到需要免密登录的主机（替换 [IP] 为主机的 IP 地址），然后输入远程主机的登录密码
+* 将公钥文件上传到需要免密登录的主机（替换 [IP] 为主机的 IP 地址），然后输入远程主机的登录密码
+
+    ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]
 
 * 输出结果出现 `Number of key(s) added: 1` 结果，表示免密登录配置成功
 
-* 执行命令 `ssh -o StrictHostKeyChecking=no root@[IP]`，检查从部署 WeBASE-Node-Manager 服务的主机是否能成功免密登录部署节点的主机
+* 检查从部署 WeBASE-Node-Manager 服务的主机是否能成功免密登录部署节点的主机（替换 [IP] 为主机的 IP 地址）
+
+    `ssh -o StrictHostKeyChecking=no root@[IP]`
 
 ### 部署依赖服务
-可视化部署需要依赖 WeBASE 的中间件服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。
+可视化部署需要依赖 WeBASE 的中间件服务，包括**管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）**。
 
 对于依赖服务的安装，有两种方式（ **一键部署** 和 **手动部署** ），选择其中一种部署方式即可
 
-#### 1. 一键部署
+#### 1. 一键部署依赖服务
 
-适合**同机部署**，快速体验的情况使用。
+适合**同机部署**，快速体验WeBASE的情况使用
 
 具体搭建流程参见[**一键部署安装文档**](../WeBASE/install.md)。
 
@@ -105,7 +117,7 @@
 
 - 选择部署方式时，选择 **可视化部署** 方式，即执行 `deploy.py` 脚本时，执行 `python deploy.py visualDeploy`
 
-#### 2. 手动部署
+#### 2. 手动部署依赖服务
 适合**多机部署**，企业级的情况使用。
 
 具体步骤如下：
@@ -121,8 +133,9 @@
 * 节点管理子系统（WeBASE-Node-Manager）
 
     * 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务
-
-    * 修改 `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件 
+    * 修改 `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件示例如下：
+        * 配置文件中 `deployType` 为 `1`，启用节点管理服务的可视化部署功能
+        * 配置文件中 `webaseSignAddress` 的 IP 地址，其余主机需要通过此IP访问签名服务
     
     ```yaml
      constant:
@@ -142,9 +155,6 @@
       sshDefaultPort: 22
    ```
 
-**注意：**
-- 修改 WeBASE-Node-Manager 服务的 `dist/conf/application.yml` 中 `deployType` 为 `1`，启用可视化部署功能
-- 修改 WeBASE-Node-Manager 服务的 `dist/conf/application.yml` 中 `webaseSignAddress` 的 IP 地址，必须要其余主机可以通过改 IP 地址访问签名服务
 
 ### 可视化部署节点
 在部署完依赖服务后，使用浏览器，访问节点管理平台页面：
@@ -154,6 +164,10 @@
 http://{deployIP}:{webPort}
 ```
 #### 部署节点
+
+可视化部署节点时，后台服务将通过在各个主机安装`FISCO BCOS + WeBASE-Front`的Docker镜像，结合免密远程操作进行自动化部署节点与节点前置的过程。
+
+因此，正如上文步骤中“拉取Docker镜像”的阐述，此操作依赖Docker服务，并推荐手动拉取节点与前置的Docker镜像（否则将自动从DockerHub拉取）
 
 **提示：**
 - 在执行部署前，请 **手动安装 Docker 服务** 和 **手动拉取 Docker 镜像**，防止由于网络原因导致部署失败
@@ -189,7 +203,7 @@ http://{deployIP}:{webPort}
 
 
 #### 新增节点
-节点新增，也称作区块链扩容，指在已有的区块链服务中，在新的主机上，添加一个新的节点。
+节点新增，也称作节点扩容，指在已有的区块链服务中，在新的主机上，添加一个新的节点。
 
 **提示：**
 - 新主机配置 SSH 免密登录
