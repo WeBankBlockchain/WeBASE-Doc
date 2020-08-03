@@ -6,10 +6,6 @@
 
 然后通过 WeBASE 管理平台（WeBASE-Web）的界面来部署节点（FISCO-BCOS 2.0+）和节点前置子系统（WeBASE-Front）。
 
-可视化部署架构如下：
-
-![visual-deploy-architecture](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-architecture.png)
-
 
 ### 环境准备
 
