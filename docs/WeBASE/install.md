@@ -161,7 +161,7 @@ if.exist.fisco=no
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
 # 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
-node.path=/data/app/nodes/127.0.0.1/node0
+node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
