@@ -51,8 +51,6 @@ cd install_scripts
 
 如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [利用控制台将合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)
 
-请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考[附录1.3](appendix.html#id2) 数据库配置。
-
 
 ##### 2.2.2 配置证书文件
 
@@ -76,7 +74,7 @@ system.groupId=[GROUP_ID]
 system.encryptType=0
 
 # 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
-system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
+system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
 system.dbUser=[user_name]
 system.dbPassword=[password]
 
@@ -93,6 +91,8 @@ system.contractPackName=[编译Solidity合约时指定的包名]
 ```
 chmod +x generate_bee.sh
 bash generate_bee.sh
+## 还可以指定数据导出程序的版本，例如
+## ./generate_bee.sh -v 1.3.0
 ```
 
 当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
@@ -103,7 +103,9 @@ bash generate_bee.sh
 
 ```
 chmod +x generate_bee.sh
-bash generate_bee.sh build
+bash generate_bee.sh -e build
+## 还可以指定数据导出程序的版本，例如
+## ./generate_bee.sh -e build -v 1.3.0
 ```
 
 当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/WeBASE-Collect-Bee-core/dist文件夹复制到其他服务器上，并执行：

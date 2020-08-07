@@ -2,6 +2,132 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
+
+#### v1.4.0
+v1.4.0 主要在兼容原有手动部署底层服务，手动添加 WeBASE-Front 前置服务的基础上，新增了可视化部署底层服务，以及节点的动态管理功能。
+
+**提示**
+- 如果要体验可视化部署，请参考[可视化部署](../WeBASE-Install/visual_deploy.html)部署新环境然后部署新链；
+
+##### 数据库结构变更
+
+- 登录 MySQL 后，选择数据库 `use webasenodemanager;` 后，按顺序执行下面的 SQL 语句进行 DB 升级。
+
+- 字段类型修改，修改 text 类型到 mediumtext
+
+```SQL 
+ALTER TABLE `tb_abi` MODIFY COLUMN `contract_abi` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '合约ABI的内容';
+ALTER TABLE `tb_abi` MODIFY COLUMN `contract_bin` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '合约ABI的runtime-bin';
+
+ALTER TABLE `tb_contract` MODIFY COLUMN `contract_abi` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '编译合约生成的abi文件内容';
+ALTER TABLE `tb_contract` MODIFY COLUMN `contract_bin` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '合约binary';
+ALTER TABLE `tb_contract` MODIFY COLUMN `bytecodeBin` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '合约bin';
+
+ALTER TABLE `tb_front_group_map` MODIFY COLUMN `status` int(11) NOT NULL DEFAULT 1 COMMENT '节点（前置）的群组状态，1-normal，2-invalid';
+ALTER TABLE `tb_group` MODIFY COLUMN `group_status` int(1) NULL DEFAULT 1 COMMENT '状态（1-正常 2-异常 3-脏数据冲突 4-创世块冲突）';
+```
+
+- 新增字段
+
+```SQL
+ALTER TABLE `tb_group` ADD COLUMN `chain_id` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '所属链 ID';
+
+ALTER TABLE `tb_group` ADD COLUMN `chain_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '所属链名称，冗余字段';
+ALTER TABLE `tb_group` ADD UNIQUE INDEX `unique_chain_id_group_id`(`chain_id`, `group_id`) USING BTREE;
+
+ALTER TABLE `tb_front` ADD COLUMN `support_version` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '节点兼容版本';
+ALTER TABLE `tb_front` ADD COLUMN `front_version` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '节点前置版本号';
+ALTER TABLE `tb_front` ADD COLUMN `sign_version` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '节点前置对应签名服务版本号';
+
+ALTER TABLE `tb_front` MODIFY COLUMN `front_port` int(11) NOT NULL COMMENT '前置服务端口';
+ALTER TABLE `tb_front` MODIFY COLUMN `status` int(11) NULL DEFAULT 1 COMMENT '前置服务状态：0，初始化；1，运行；2，停止；3，启动；4，添加中；5，添加失败';
+ALTER TABLE `tb_front` MODIFY COLUMN `create_time` datetime(0) NOT NULL COMMENT '创建时间';
+ALTER TABLE `tb_front` MODIFY COLUMN `modify_time` datetime(0) NOT NULL COMMENT '修改时间';
+ALTER TABLE `tb_front` ADD COLUMN `run_type` tinyint(8) UNSIGNED NULL DEFAULT 0 COMMENT '运行方式：0，命令行；1，Docker';
+ALTER TABLE `tb_front` ADD COLUMN `agency_id` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '所属机构 ID';
+ALTER TABLE `tb_front` ADD COLUMN `agency_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '所属机构名称，冗余字段, 跟 agency 字段相同'
+ALTER TABLE `tb_front` ADD COLUMN `host_id` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '所属主机';
+ALTER TABLE `tb_front` ADD COLUMN `host_index` int(6) NULL DEFAULT 0 COMMENT '一台主机可能有多个节点。表示在主机中的编号，从 0 开始编号';
+ALTER TABLE `tb_front` ADD COLUMN `image_tag` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '运行的镜像版本标签';
+ALTER TABLE `tb_front` ADD COLUMN `container_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Docker 启动的容器名称';
+ALTER TABLE `tb_front` ADD COLUMN `jsonrpc_port` int(6) NULL DEFAULT 8545 COMMENT 'jsonrpc 端口';
+ALTER TABLE `tb_front` ADD COLUMN `p2p_port` int(6) NULL DEFAULT 30303 COMMENT 'p2p 端口';
+ALTER TABLE `tb_front` ADD COLUMN `channel_port` int(6) NULL DEFAULT 20200 COMMENT 'channel 端口';
+ALTER TABLE `tb_front` ADD COLUMN `chain_id` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '所属链 ID';
+ALTER TABLE `tb_front` ADD COLUMN `chain_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '所属链名称，冗余字段';
+
+ALTER TABLE `tb_front` ADD UNIQUE INDEX `unique_agency_id_host_id_front_port`(`agency_id`, `front_ip`, `front_port`) USING BTREE;
+```
+
+
+- 新增表结构
+
+```SQL
+CREATE TABLE `tb_agency`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增长 ID',
+  `agency_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '机构名称',
+  `agency_desc` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '机构描述信息',
+  `chain_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属链 ID',
+  `chain_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '所属链名称，冗余字段',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NOT NULL COMMENT '最近一次更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uniq_chain_id_agency_name`(`chain_id`, `agency_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '机构信息表' ROW_FORMAT = Dynamic;
+
+CREATE TABLE `tb_chain`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增长 ID',
+  `chain_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '链名称',
+  `chain_desc` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '链描述信息',
+  `version` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '创建链时选择的镜像版本',
+  `encrypt_type` tinyint(8) UNSIGNED NOT NULL DEFAULT 1 COMMENT '加密类型：1，标密；2，国密；默认 1 ',
+  `chain_status` tinyint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0: 初始化；1，部署中；2，部署失败；3，运行；4，重启中；5，升级过；6，升级失败',
+  `root_dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '/opt/fisco-bcos' COMMENT '主机存放节点配置文件的根目录，可能存放多个节点配置',
+  `webase_sign_addr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '127.0.0.1:5004' COMMENT 'WeBASE-Sign 的访问地址',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NOT NULL COMMENT '最近一次更新时间',
+  `run_type` tinyint(8) UNSIGNED NULL DEFAULT 0 COMMENT '运行方式：0，命令行；1，Docker',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uniq_chain_name`(`chain_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '链信息表' ROW_FORMAT = Dynamic;
+
+CREATE TABLE `tb_config`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增长 ID',
+  `config_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '配置名称',
+  `config_type` int(10) NOT NULL DEFAULT 0 COMMENT '配置类型',
+  `config_value` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '配置值',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NOT NULL COMMENT '最近一次更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置信息表' ROW_FORMAT = Dynamic;
+
+CREATE TABLE `tb_host`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增长 ID',
+  `agency_id` int(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '所属机构 ID',
+  `agency_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属机构名称，冗余字段',
+  `ip` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主机IP',
+  `ssh_user` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'root' COMMENT 'SSH 登录账号',
+  `ssh_port` int(10) UNSIGNED NOT NULL DEFAULT 22 COMMENT 'SSH 端口',
+  `root_dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '/opt/fisco-bcos' COMMENT '主机存放节点配置文件的根目录，可能存放多个节点配置',
+  `docker_port` int(10) UNSIGNED NOT NULL DEFAULT 2375 COMMENT 'Docker demon 的端口',
+  `status` tinyint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '主机状态：0，新建；1，初始化；2，初始化成功；3，初始化失败',
+  `remark` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT 'remark',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NOT NULL COMMENT '最近一次更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `unq_agency_id,ip`(`agency_id`, `ip`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '物理主机信息' ROW_FORMAT = Dynamic;
+```
+
+- 插入常量数据
+
+```SQL
+INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('docker 镜像版本', 1, 'v2.5.0', '2020-07-22 17:14:23', '2020-07-22 17:14:23');
+INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('docker 镜像版本', 1, 'v2.5.0-gm', '2020-07-22 17:14:23', '2020-07-22 17:14:23');
+
+```
+
+
 #### v1.3.2
 
 ##### 移除fastjson

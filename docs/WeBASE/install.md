@@ -81,7 +81,7 @@ python3.4+版本安装`PyMysql`依赖包方法：
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.3.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -107,12 +107,14 @@ cd webase-deploy
 
 ④ 服务端口不能小于1024。
 
+⑤ 采用一键部署，根据说明修改 `common.properties` 文件中的配置。
+
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.3.2
-webase.mgr.version=v1.3.2
-webase.sign.version=v1.3.2
-webase.front.version=v1.3.2
+webase.web.version=v1.4.0
+webase.mgr.version=v1.4.0
+webase.sign.version=v1.4.0
+webase.front.version=v1.4.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -140,6 +142,7 @@ front.port=5002
 # 签名服务子系统端口
 sign.port=5004
 
+
 # 节点监听Ip
 node.listenIp=127.0.0.1
 # 节点p2p端口
@@ -161,7 +164,7 @@ if.exist.fisco=no
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
 # 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
-node.path=/data/app/nodes/127.0.0.1/node0
+node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
@@ -170,16 +173,89 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 ```
 
-## 部署
-部署所有服务：
-```shell
-python deploy.py installAll
+⑥ 如果使用**可视化部署**， 参考下面的配置修改 `common.properties` 文件。
+```eval_rst
+.. important::
+    注意： `sign.ip` 配置的 IP 是对外提供服务访问的 IP 地址，供其他部署节点主机访问。
 ```
-停止所有服务：
+
+```shell
+# WeBASE子系统的最新版本(v1.1.0或以上版本)
+webase.web.version=v1.4.0
+webase.mgr.version=v1.4.0
+webase.sign.version=v1.4.0
+# Docker 镜像版本，默认不需要修改
+fisco.webase.docker.cdn.version=v1.4.0
+
+# 节点管理子系统mysql数据库配置
+mysql.ip=127.0.0.1
+mysql.port=3306
+mysql.user=dbUsername
+mysql.password=dbPassword
+mysql.database=webasenodemanager
+
+# 签名服务子系统mysql数据库配置
+sign.mysql.ip=localhost
+sign.mysql.port=3306
+sign.mysql.user=dbUsername
+sign.mysql.password=dbPassword
+sign.mysql.database=webasesign
+
+# WeBASE管理平台服务端口
+web.port=5000
+
+# 节点管理子系统服务端口
+mgr.port=5001
+
+# 签名服务子系统端口
+sign.port=5004
+
+# 是否使用国密（0: standard, 1: guomi）
+encrypt.type=0
+
+# WeBASE-Sign 对外提供服务的访问 IP 地址
+# 部署在其它主机的节点，需要使用此 IP 访问 WeBASE-Sign 服务
+# 不能是 127.0.0.1 或者 localhost
+sign.ip=
+
+# SSH 免密登录账号
+mgr.ssh.user=root
+# SSH 访问端口
+mgr.ssh.port=22
+# 部署节点服务的主机，存放链数据的目录
+mgr.ssh.rootDirOnHost=/opt/fisco
+```
+
+## 部署
+
+* 部署服务
+
+**部署方式：**
+
+| 部署方式  | 参数  | 说明  |
+|---|---|---|
+|  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
+|  可视化部署 |  visualDeploy | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参靠文档 [可视化部署](#../WeBASE-Install/visual_deploy.html) |
+
+* 选择其中一种部署方式执行
+    
+```shell
+### 请选择一种方式部署：
+
+# 1. 部署所有服务
+python deploy.py installAll
+    
+# 2. 可视化部署
+python deploy.py visualDeploy
+```
+
+* 停止所有服务：
+
 ```shell
 python deploy.py stopAll
 ```
-服务部署后，如果需要单独启停，可以使用以下命令：
+* 服务部署后，如果需要单独启停，可以使用以下命令：
+
 ```shell
 启动FISCO-BCOS节点:      python deploy.py startNode
 停止FISCO-BCOS节点:      python deploy.py stopNode
@@ -203,10 +279,14 @@ python deploy.py stopAll
 
 WeBASE管理平台：
 
+* 打开浏览强访问
 ```
 http://{deployIP}:{webPort}
 示例：http://localhost:5000
 ```
+
+* 选择 **可视化部署**
+    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
 **备注：** 
 
