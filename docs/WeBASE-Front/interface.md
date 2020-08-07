@@ -3113,10 +3113,10 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | 合约中某一方法的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 8        | 合约版本       | version           | String      |         |   否       |                                            |
+| 8        | 合约版本       | version           | String      |         |   否       | CNS中合约版本，该字段在v1.3.0+版本已弃用                                          |
 | 9        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
 
 **2）数据格式**
@@ -3215,10 +3215,10 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中某一方法的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 8        | 合约版本       | version           | String      |         |   否       |        CNS中的合约版本，不传入contractAbi时可传入合约地址与版本获取CNS上存储的合约ABI                                    |
+| 8        | 合约版本       | version           | String      |         |   否       |  CNS中合约版本，该字段在v1.3.0+版本已弃用                             |
 
 
 **2）数据格式**
