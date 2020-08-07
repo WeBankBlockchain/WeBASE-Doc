@@ -6,7 +6,6 @@
 
 节点搭建的方法建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
 
-*注：目前WeBASE支持FISCO BCOS v2.4.x版本，暂未支持FISCO BCOS 2.5.x*
 
 ### 1.2 节点前置服务(WeBASE-Front)搭建
 **前提条件** 
