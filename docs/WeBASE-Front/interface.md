@@ -3113,7 +3113,7 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | 合约中某一方法的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
+| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
 | 8        | 合约版本       | version           | String      |         |   否       | CNS中合约版本，该字段在v1.3.0+版本已弃用                                          |
@@ -3215,7 +3215,7 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中某一方法的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
+| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
 | 8        | 合约版本       | version           | String      |         |   否       |  CNS中合约版本，该字段在v1.3.0+版本已弃用                             |
@@ -3227,7 +3227,7 @@ HTTP POST
 {
     "groupId" :1,
     "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
-    "contractAbi":[],
+    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
     "funcName":"set",
     "funcParam":["test"]
