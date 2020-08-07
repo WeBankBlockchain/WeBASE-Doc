@@ -321,7 +321,10 @@ fiscoorg/fisco-webase   v2.5.0-gm  bf4a26d5d389  5 days ago   631MB
     
     ```Bash
     # 从 CDN 拉取镜像 tar 文件
+    # 非国密
     wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/docker-fisco-webase.tar
+    # 国密
+    wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/docker-fisco-webase-gm.tar
     
     # 解压镜像 tar 文件
     docker load -i docker-fisco-webase.tar
