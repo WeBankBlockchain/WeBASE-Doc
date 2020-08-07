@@ -2,6 +2,13 @@
 
 WeBASE-Web升级说明，请结合[WeBASE-Web Changelog](https://github.com/WeBankFinTech/WeBASE-Web)和[WeBASE管理平台使用手册](../WeBASE-Console-Suit/index.html)进行阅读。
 
+#### v1.4.0
+v1.4.0 主要在兼容原有手动部署底层服务，手动添加 WeBASE-Front 前置服务的基础上，新增了可视化部署底层服务，以及节点的动态管理功能。
+
+**提示**
+- 如果要体验可视化部署，请参考[可视化部署](../WeBASE-Install/visual_deploy.html)部署新环境然后部署新链；
+
+
 #### v1.3.1
 
 v1.3.1主要新增了动态群组管理、合约ABI导入、合约ABI编码器、支持导入私钥等功能，详情升级说明如下：
