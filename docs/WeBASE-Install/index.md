@@ -16,7 +16,7 @@
 
 企业部署：在生产环境中，建议用户参考详细安装，部署全部功能，保证系统高效和稳定。
 
-
+可视化部署：先部署 WeBASE 服务，然后通过可视化的界面操作来部署区块链底层（FISCO-BCOS 节点），完成区块链的部署操作，适用于本机部署，多主机部署场景。
 
 ```eval_rst
 .. toctree::
@@ -25,4 +25,5 @@
    ../WeBASE-Install/developer.md
    ../WeBASE/install.md
    ../WeBASE-Install/enterprise.md
+   ../WeBASE-Install/visual_deploy.md
 ```
