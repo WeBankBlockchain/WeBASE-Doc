@@ -10,7 +10,8 @@ WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://g
 #### v1.3.2
 
 ##### 移除fastjson
-- 移除Fastjson，替换为Jackson 2.11.0
+- 移除Fastjson，替换为Jackson 2.11.0。
+- 升级web3sdk为2.4.1，并升级springboot等依赖项
 
 #### v1.3.1
 

@@ -18,7 +18,7 @@ WeBASE v1.4.0 版本支持 FISCO-BCOS 2.0.0-rc1，FISCO-BCOS 2.0.0-rc2，FISCO-B
 
 ### WeBASE v1.3.2
 
-WeBASE v1.3.2版本支持FISCO-BCOS 2.0.0-rc1，FISCO-BCOS 2.0.0-rc2，FISCO-BCOS 2.0.0-rc3，FISCO-BCOS 2.0.0及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用[FISCO BCOS 2.4.1+](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.4.1)版本。
+WeBASE v1.3.2版本支持FISCO-BCOS 2.4.x版本，暂未支持2.5.x版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用[FISCO BCOS 2.4.1+](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.4.1)版本。
 
 | WeBASE子系统名称                                             | 配套版本地址                                                 | FISCO-BCOS 2.X.X                                             |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -34,7 +34,7 @@ WeBASE v1.3.2版本支持FISCO-BCOS 2.0.0-rc1，FISCO-BCOS 2.0.0-rc2，FISCO-BCO
 
 ### WeBASE v1.3.1
 
-WeBASE v1.3.1版本支持FISCO-BCOS 2.0.0-rc1，FISCO-BCOS 2.0.0-rc2，FISCO-BCOS 2.0.0-rc3，FISCO-BCOS 2.0.0及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用[FISCO BCOS 2.4.0+](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.4.0)版本。
+WeBASE v1.3.1版本支持FISCO-BCOS 2.4.x版本，暂未支持2.5.x版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用[FISCO BCOS 2.4.0+](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.4.0)版本。
 
 | WeBASE子系统名称                                             | 配套版本地址                                                 | FISCO-BCOS 2.X.X                                             |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -49,7 +49,7 @@ WeBASE v1.3.1版本支持FISCO-BCOS 2.0.0-rc1，FISCO-BCOS 2.0.0-rc2，FISCO-BCO
 
 ### WeBASE v1.3.0
 
-WeBASE v1.3.0版本支持FISCO-BCOS 2.0.0-rc1，FISCO-BCOS 2.0.0-rc2，FISCO-BCOS 2.0.0-rc3，FISCO-BCOS 2.0.0及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用[FISCO BCOS 2.3.0+](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.3.0)版本。
+WeBASE v1.3.0版本支持FISCO-BCOS 2.0.0 - 2.4.x版本，暂未支持2.5.x版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用[FISCO BCOS 2.3.0+](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.3.0)版本。
 
 | WeBASE子系统名称                                             | 配套版本地址                                                 | FISCO-BCOS 2.X.X                                             |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
