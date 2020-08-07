@@ -18,7 +18,7 @@
 
 1. 下载安装包
     ```shell
-    wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.3.2/webase-front.zip
+    wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/webase-front.zip
     ```
 
 
