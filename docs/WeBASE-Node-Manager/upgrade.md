@@ -131,7 +131,8 @@ INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_ti
 #### v1.3.2
 
 ##### 移除fastjson
-- 移除Fastjson，替换为Jackson 2.11.0
+- 移除Fastjson，替换为Jackson 2.11.0。
+- 升级web3sdk为2.4.1，并升级springboot等依赖项
 
 #### v1.3.1
 
