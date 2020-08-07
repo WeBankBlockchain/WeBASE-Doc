@@ -76,7 +76,7 @@ Python3.4及以上版本，需安装PyMysql依赖包：
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.3.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -159,7 +159,7 @@ if.exist.fisco=no
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
 # 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
-node.path=/data/app/nodes/127.0.0.1/node0
+node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
@@ -180,7 +180,7 @@ webase.web.version=v1.4.0
 webase.mgr.version=v1.4.0
 webase.sign.version=v1.4.0
 # Docker 镜像版本，默认不需要修改
-fisco.webase.docker.version=v2.5.0
+fisco.webase.docker.cdn.version=v1.4.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1

@@ -75,23 +75,31 @@
 
 在节点管理台进行可视化部署时，节点管理（WeBASE-Node-Manager）服务会为每个节点生成相应的配置文件，然后通过 SSH 免密登录，使用 `scp` 命令将节点的配置文件发送到对应的主机，然后远程登录到节点主机，执行系统命令来操作节点。下面介绍配置免密登录的各个步骤
 
-
-**提示：**
-
+```eval_rst
+.. important::
     1. 配置 WeBASE-Node-Manager 主机到其它节点主机的 SSH 免密登录；
     2. 注意免密登录的账号权限，否则会造成创建文件目录，Docker 命令执行失败；
-    3. 如果免密账号为非 `root` 账号，保证账号有 `sudo` 免密权限；
+    3. 如果免密账号为非 `root` 账号，保证账号有 `sudo` **免密** 权限，即使用 `sudo` 执行命令时，不需要输入密码；
+```
 
 **免密登录配置方法**
 
+```eval_rst
+.. important::
+    1. 如果 WeBASE-Node-Manager 已经生成过秘钥对，建议使用命令 `ssh-keygen -t rsa -m PEM` 重新生成；
+```
+
 * 使用 SSH 登录 WeBASE-Node-Manager 所在主机：`ssh root@[IP]`
 
-* 检查 `~/.ssh/` 目录是否已经存在 `id_rsa.pub` 公钥文件
+* 检查 `~/.ssh/` 目录是否已经存在 `id_rsa` 私钥文件和对应的 `id_rsa.pub` 公钥文件。如果存在，备份现有私钥对
+    
+    ```Bash
+    mv ~/.ssh/id_rsa ~/.ssh/id_rsa.bak
+    mv ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub.bak 
+    ```
 
-    * 如果存在，则进行下一步
-    
-    * 如果不存在，执行命令 `ssh-keygen`，然后直接两次回车即可生成（提示输入密码时，直接回车）
-    
+* 执行命令 `ssh-keygen -t rsa -m PEM`，然后直接两次回车即可生成（提示输入密码时，直接回车）
+
 * 将公钥文件上传到需要免密登录的主机（替换 [IP] 为主机的 IP 地址），然后输入远程主机的登录密码
 
     ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]
@@ -101,6 +109,8 @@
 * 检查从部署 WeBASE-Node-Manager 服务的主机是否能成功免密登录部署节点的主机（替换 [IP] 为主机的 IP 地址）
 
     `ssh -o StrictHostKeyChecking=no root@[IP]`
+    
+
 
 ### 部署依赖服务
 可视化部署需要依赖 WeBASE 的中间件服务，包括**管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）**。
@@ -293,8 +303,6 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 
 ##### 拉取方式
 
-* 这里以 `v2.5.0` 做演示。其它版本，请求版本号替换即可
-
 * 检查本地是否已有镜像
     
 ```Bash
@@ -302,7 +310,9 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i v2.5.0
     
 # 如果有如下输出，表示本地已有镜像；否则表示本地没有镜像
-fiscoorg/fisco-webase   v2.5.0  bf4a26d5d389  5 days ago   631MB
+fiscoorg/fisco-webase   v2.5.0     bf4a26d5d389  5 days ago   631MB
+# 如果是国密，版本号会带 -gm
+fiscoorg/fisco-webase   v2.5.0-gm  bf4a26d5d389  5 days ago   631MB
 ```
     
 * 如果本地没有镜像（如果本地有镜像，跳过）
@@ -311,7 +321,7 @@ fiscoorg/fisco-webase   v2.5.0  bf4a26d5d389  5 days ago   631MB
     
     ```Bash
     # 从 CDN 拉取镜像 tar 文件
-    wget https://www.fisco.com.cn/cdn/webase/releases/download/v2.5.0/docker-fisco-webase.tar
+    wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/docker-fisco-webase.tar
     
     # 解压镜像 tar 文件
     docker load -i docker-fisco-webase.tar
@@ -353,6 +363,8 @@ docker images -a |grep -i "fiscoorg/fisco-webase"
     
 # 如果有如下输出，表示拉取成功
 fiscoorg/fisco-webase   v2.5.0  bf4a26d5d389  5 days ago   631MB
+# 如果是国密，版本号会带 -gm
+fiscoorg/fisco-webase   v2.5.0-gm  bf4a26d5d389  5 days ago   631MB
 ```
 
 #### 手动下载 TASSL 
