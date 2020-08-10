@@ -4,16 +4,19 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 
 
 #### v1.4.0
-v1.4.0 主要在兼容原有手动部署底层服务，手动添加 WeBASE-Front 前置服务的基础上，新增了可视化部署底层服务，以及节点的动态管理功能。
+v1.4.0 新增了可视化部署区块链的功能，同时支持节点的动态管理（扩容、停止、删除等）功能，同时兼容原有的手动搭链添加WeBASE-Front节点前置的模式
 
-**提示**
-- 如果要体验可视化部署，请参考[可视化部署](../WeBASE-Install/visual_deploy.html)部署新环境然后部署新链；
+**注**：在运行WeBASE-Node-Manager前要选择在下面两种模式中二选一：
+1. 添加前置方式
+2. 可视化部署方式
+
+**提示**：如果要体验完整的可视化部署，可通过[可视化部署](../WeBASE-Install/visual_deploy.html)的安装指引，通过一键部署或手动部署安装子系统进行搭建
 
 ##### 数据库结构变更
 
 - 登录 MySQL 后，选择数据库 `use webasenodemanager;` 后，按顺序执行下面的 SQL 语句进行 DB 升级。
 
-- 字段类型修改，修改 text 类型到 mediumtext
+- 合约abi与bin相关字段的类型修改，修改 `text` 类型到 `mediumtext`
 
 ```SQL 
 ALTER TABLE `tb_abi` MODIFY COLUMN `contract_abi` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '合约ABI的内容';
@@ -60,7 +63,7 @@ ALTER TABLE `tb_front` ADD UNIQUE INDEX `unique_agency_id_host_id_front_port`(`a
 ```
 
 
-- 新增表结构
+- 机构信息表`tb_agency`, 链信息表`tb_chain`, 系统配置信息表`tb_config`, 物理主机信息表`tb_host`
 
 ```SQL
 CREATE TABLE `tb_agency`  (
