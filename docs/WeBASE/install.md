@@ -172,6 +172,8 @@ node.counts=nodeCounts
 ```
 
 ⑥ 如果使用**可视化部署**， 参考下面的配置修改 `visual-deploy.properties` 文件。
+<span id="visual-deploy-config"></span>>
+
 ```eval_rst
 .. important::
     注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。

@@ -4,11 +4,13 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 
 
 #### v1.4.0
-v1.4.0 新增了可视化部署区块链的功能，同时支持节点的动态管理（扩容、停止、删除等）功能，同时兼容原有的手动搭链添加WeBASE-Front节点前置的模式，在运行WeBASE-Node-Manager前要选择在两种模式中二选一：①添加前置方式、②可视化部署方式
+v1.4.0 新增了可视化部署区块链的功能，同时支持节点的动态管理（扩容、停止、删除等）功能，同时兼容原有的手动搭链添加WeBASE-Front节点前置的模式
 
-**提示**：如果要体验可视化部署，可通过一键部署或手动部署安装子系统后，依据[可视化部署安装指引](../WeBASE-Install/visual_deploy.md)：
-- 参考**一键部署**中的[可视化部署](../WeBASE-Install/visual_deploy.html)一键部署子系统依赖后部署新链；
-- 如果手动搭建WeBASE-Node-Manager, WeBASE-Web, WeBASE-Sign的子系统，则按照各个子系统的安装文档进行部署后搭建新链；
+**注**：在运行WeBASE-Node-Manager前要选择在下面两种模式中二选一：
+1. 添加前置方式
+2. 可视化部署方式
+
+**提示**：如果要体验完整的可视化部署，可通过[可视化部署](../WeBASE-Install/visual_deploy.html)的安装指引，通过一键部署或手动部署安装子系统进行搭建
 
 ##### 数据库结构变更
 
