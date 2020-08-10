@@ -43,7 +43,7 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 WeBASE管理平台分为四个部分：节点前置，签名服务，节点管理，WeBASE管理台。
 
-当前版本我们提供了两种搭建方式：[**一键搭建**](../WeBASE/install.md)和手动搭建。
+当前版本我们提供了三种搭建方式：[**一键搭建**](../WeBASE/install.md)、纯手动搭建各子系统、可视化部署。
 
 #### 1、一键搭建
 
@@ -68,19 +68,19 @@ WeBASE管理平台分为四个部分：节点前置，签名服务，节点管�
 WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理平台安装说明》](../WeBASE-Web/install.md)。
 
 #### 3、可视化部署
-可视化部署是指通过 WeBASE 管理平台，在 **多台** 主机上快速部署 **FISCO-BCOS 底层节点和 WeBASE-Front 前置** 以及 对底层节点的扩容操作。
+可视化部署是指通过 WeBASE 管理平台的Web页面上通过可视化的操作，快速完成在**多台**主机上的**FISCO-BCOS 底层节点和 WeBASE-Front 前置**的部署操作。
 
-**可视化部署分为两个步骤：**
+**可视化部署分为部署子系统和搭链两个步骤：**
 
-- 部署依赖服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。依赖服务可以通过 **一键搭建** 或 **手动搭建** 完成。
+- 步骤一：部署子系统依赖服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。依赖服务可以通过 **一键搭建** 或 **手动搭建** 完成。
 
-    - 使用**一键搭建**部署依赖服务
+    - 使用**一键搭建**的`visualDeploy`命令，一键部署依赖服务
     
-    - **手动搭建**部署依赖服务
+    - **手动搭建**部署依赖服务，参考上文的各子系统搭建指引
     
-- 使用界面部署 **FISCO-BCOS 底层节点** 和 **节点前置服务（WeBASE-Front）**
+- 步骤二：使用WeBASE-Web界面搭链，部署 **FISCO-BCOS 底层节点** 和 **节点前置服务（WeBASE-Front）**
 
-具体的搭建流程参见[《WeBASE 可视化部署》](../WeBASE-Install/visual_deploy.md)。
+可视化部署的具体使用方法搭建流程参见[《WeBASE 可视化部署》](../WeBASE-Install/visual_deploy.md)。
 
 ## 系统初始化配置
 

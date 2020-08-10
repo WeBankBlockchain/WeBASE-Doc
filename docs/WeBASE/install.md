@@ -171,10 +171,10 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 ```
 
-⑥ 如果使用**可视化部署**， 参考下面的配置修改 `common.properties` 文件。
+⑥ 如果使用**可视化部署**， 参考下面的配置修改 `visual-deploy.properties` 文件。
 ```eval_rst
 .. important::
-    注意： `sign.ip` 配置的 IP 是对外提供服务访问的 IP 地址，供其他部署节点主机访问。
+    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
 ```
 
 ```shell
