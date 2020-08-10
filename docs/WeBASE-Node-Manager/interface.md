@@ -6742,10 +6742,7 @@ http://localhost:5001/WeBASE-Node-Manager/version
 ***2）出参示例***
 * 成功：
 ```
-{
-    v1.4.0
-}
-
+v1.4.0
 ```
 
 

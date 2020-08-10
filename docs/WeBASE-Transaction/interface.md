@@ -870,9 +870,7 @@ http://localhost:5003/WeBASE-Transaction/version
 a、成功：
 
 ```
-{
-    v1.4.0
-}
+v1.4.0  
 ```
 
 ## 附录 

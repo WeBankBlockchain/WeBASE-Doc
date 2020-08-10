@@ -5166,9 +5166,7 @@ http://localhost:5002/WeBASE-Front/version
 a、成功：
 
 ```
-{
-    v1.4.0
-}
+v1.4.0
 ```
 
 
@@ -5207,9 +5205,7 @@ http://localhost:5002/WeBASE-Front/version/sign
 a、成功：
 
 ```
-{
-    v1.4.0
-}
+v1.4.0
 ```
 
 
