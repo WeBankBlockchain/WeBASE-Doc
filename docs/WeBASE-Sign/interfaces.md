@@ -580,9 +580,7 @@ http://localhost:5004/WeBASE-Sign/version
 a、成功：
 
 ```
-{
-    v1.4.0
-}
+v1.4.0
 ```
 
 
