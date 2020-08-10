@@ -4,8 +4,6 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-*注：目前WeBASE支持FISCO BCOS v2.4.x版本，暂未支持FISCO BCOS 2.5.x*，节点与WeBASE对应版本请查看[WeBASE-ChangeLog](./ChangeLOG.html)
-
 ![[]](../../images/WeBASE/one_click_struct.png)
 
 
@@ -173,10 +171,12 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 ```
 
-⑥ 如果使用**可视化部署**， 参考下面的配置修改 `common.properties` 文件。
+⑥ 如果使用**可视化部署**， 参考下面的配置修改 `visual-deploy.properties` 文件。
+<span id="visual-deploy-config"></span>>
+
 ```eval_rst
 .. important::
-    注意： `sign.ip` 配置的 IP 是对外提供服务访问的 IP 地址，供其他部署节点主机访问。
+    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
 ```
 
 ```shell
