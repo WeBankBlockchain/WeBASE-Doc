@@ -279,19 +279,22 @@ python deploy.py stopAll
 
 WeBASE管理平台：
 
-* 打开浏览强访问
+* 一键部署完成后，打开浏览器访问
 ```
 http://{deployIP}:{webPort}
 示例：http://localhost:5000
 ```
 
-* 选择 **可视化部署**
-    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
-
 **备注：** 
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
+  - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
+  - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
+
+
+* 若选择 **可视化部署**
+    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
 ## 日志路径
 
