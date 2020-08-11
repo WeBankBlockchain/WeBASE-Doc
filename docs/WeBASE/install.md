@@ -4,8 +4,6 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-节点与WeBASE对应版本请查看[WeBASE-ChangeLog](./ChangeLOG.html)
-
 ![[]](../../images/WeBASE/one_click_struct.png)
 
 
@@ -174,9 +172,11 @@ node.counts=nodeCounts
 ```
 
 ⑥ 如果使用**可视化部署**， 参考下面的配置修改 `visual-deploy.properties` 文件。
+<span id="visual-deploy-config"></span>>
+
 ```eval_rst
 .. important::
-    注意： `sign.ip` 配置的 IP 是对外提供服务访问的 IP 地址，供其他部署节点主机访问。
+    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
 ```
 
 ```shell
@@ -261,7 +261,7 @@ python deploy.py visualDeploy
     ```shell
     python deploy.py stopVisual
     ```
-    
+
 * 启动服务：
     - 启动一键部署的所有服务
 
@@ -300,19 +300,22 @@ python deploy.py visualDeploy
 
 WeBASE管理平台：
 
-* 打开浏览强访问
+* 一键部署完成后，打开浏览器访问
 ```
 http://{deployIP}:{webPort}
 示例：http://localhost:5000
 ```
 
-* 选择 **可视化部署**
-    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
-
 **备注：** 
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
+  - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
+  - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
+
+
+* 若选择 **可视化部署**
+    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
 ## 日志路径
 
