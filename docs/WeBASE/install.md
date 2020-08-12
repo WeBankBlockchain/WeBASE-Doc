@@ -18,6 +18,12 @@
 
 ### 检查环境
 
+#### 平台要求
+
+推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git`相关依赖项。
+
+其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git`依赖项后重试
+
 #### 检查Java
 
 JDK8或以上版本：
