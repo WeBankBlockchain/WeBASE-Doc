@@ -84,7 +84,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 ### 1.2 获取所有前置列表 
 
-
 #### 1.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
@@ -124,7 +123,25 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 | 4.1.3 | frontPort     | int           | 否     | 前置端口                   |
 | 4.1.4 | createTime    | LocalDateTime | 否     | 落库时间                   |
 | 4.1.5 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
-| 4.1.6 | agency        | string        | 否     | 所属机构                   |
+| 4.1.6 | agency        | string        | 否     | 备注所属机构                   |
+| 4.1.7 | frontVersion        | string        | 否     | 前置的后台版本，如: v1.4.0                |
+| 4.1.8 | signVersion        | string        | 否     |  前置所连接签名服务的后台版本，如: v1.4.0                  |
+| 4.1.9 | clientVersion        | string        | 否     | 链节点的版本，如: 2.5.0 gm      |
+| 4.1.10| supportVersion        | string        | 否     | 链节点所支持的最高版本, 如: 2.5.0, (此处仅显示支持的最高版本，不显示是否为国密。若从2.4.0升级到2.5.0，此处将返回2.4.0)|
+| 4.1.11 | status        | int        | 否     | 前置服务状态：0，未创建；1，停止；2，启动；                   |
+| 4.1.12 | runType        | int        | 否     | 运行方式：0，命令行；1，Docker                   |
+| 4.1.13 | agencyId        | int        | 否     | 所属机构 ID                   |
+| 4.1.14 | agencyName        | string        | 否     | 所属机构名称                   |
+| 4.1.15 | hostId        | int        | 否     | 所属主机                   |
+| 4.1.16 | hostIndex        | int        | 否     | 一台主机可能有多个节点。表示在主机中的编号，从 0 开始编号                   |
+| 4.1.17 | imageTag        | string        | 否     | 运行的镜像版本标签                   |
+| 4.1.18 | containerName        | string        | 否     | Docker 启动的容器名称                   |
+| 4.1.19 | jsonrpcPort        | int        | 否     | jsonrpc 端口                   |
+| 4.1.20 | p2pPort        | int        | 否     | p2p 端口                   |
+| 4.1.21 | channelPort        | int        | 否     | channel 端口                   |
+| 4.1.22 | chainId        | int        | 否     | 所属链 ID                   |
+| 4.1.23 | chainName        | string        | 否     | 所属链名称                   |
+
 
 ***2）出参示例***
 * 成功：
@@ -138,8 +155,25 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
             "frontIp": "127.0.0.1",
             "frontPort": 5002,
             "agency": "aa",
+            "frontVersion": "v1.4.0",
+            "signVersion": "v1.4.0",
+            "clientVersion": "2.5.0 gm",
+            "supportVersion": "2.5.0",
             "createTime": "2019-06-04 20:49:42",
-            "modifyTime": "2019-06-04 20:49:42"
+            "modifyTime": "2019-06-04 20:49:42",
+            "status": 1,
+            "runType": 1,
+            "agencyId": 1,
+            "agencyName": "AgencyA",
+            "hostId": 1,
+            "hostIndex": 0,
+            "imageTag": "v2.5.0",
+            "containerName": "rootfisconode0",
+            "jsonrpcPort": 8545,
+            "p2pPort": 30300,
+            "channelPort": 20200,
+            "chainId": 1,
+            "chainName": "default_chain"
         }
     ],
     "totalCount": 1
