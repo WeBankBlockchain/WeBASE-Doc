@@ -84,7 +84,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 ### 1.2 获取所有前置列表 
 
-
 #### 1.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
@@ -124,7 +123,25 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 | 4.1.3 | frontPort     | int           | 否     | 前置端口                   |
 | 4.1.4 | createTime    | LocalDateTime | 否     | 落库时间                   |
 | 4.1.5 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
-| 4.1.6 | agency        | string        | 否     | 所属机构                   |
+| 4.1.6 | agency        | string        | 否     | 备注所属机构                   |
+| 4.1.7 | frontVersion        | string        | 否     | 前置的后台版本，如: v1.4.0                |
+| 4.1.8 | signVersion        | string        | 否     |  前置所连接签名服务的后台版本，如: v1.4.0                  |
+| 4.1.9 | clientVersion        | string        | 否     | 链节点的版本，如: 2.5.0 gm      |
+| 4.1.10| supportVersion        | string        | 否     | 链节点所支持的最高版本, 如: 2.5.0, (此处仅显示支持的最高版本，不显示是否为国密。若从2.4.0升级到2.5.0，此处将返回2.4.0)|
+| 4.1.11 | status        | int        | 否     | 前置服务状态：0，未创建；1，停止；2，启动；                   |
+| 4.1.12 | runType        | int        | 否     | 运行方式：0，命令行；1，Docker                   |
+| 4.1.13 | agencyId        | int        | 否     | 所属机构 ID                   |
+| 4.1.14 | agencyName        | string        | 否     | 所属机构名称                   |
+| 4.1.15 | hostId        | int        | 否     | 所属主机                   |
+| 4.1.16 | hostIndex        | int        | 否     | 一台主机可能有多个节点。表示在主机中的编号，从 0 开始编号                   |
+| 4.1.17 | imageTag        | string        | 否     | 运行的镜像版本标签                   |
+| 4.1.18 | containerName        | string        | 否     | Docker 启动的容器名称                   |
+| 4.1.19 | jsonrpcPort        | int        | 否     | jsonrpc 端口                   |
+| 4.1.20 | p2pPort        | int        | 否     | p2p 端口                   |
+| 4.1.21 | channelPort        | int        | 否     | channel 端口                   |
+| 4.1.22 | chainId        | int        | 否     | 所属链 ID                   |
+| 4.1.23 | chainName        | string        | 否     | 所属链名称                   |
+
 
 ***2）出参示例***
 * 成功：
@@ -138,8 +155,25 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
             "frontIp": "127.0.0.1",
             "frontPort": 5002,
             "agency": "aa",
+            "frontVersion": "v1.4.0",
+            "signVersion": "v1.4.0",
+            "clientVersion": "2.5.0 gm",
+            "supportVersion": "2.5.0",
             "createTime": "2019-06-04 20:49:42",
-            "modifyTime": "2019-06-04 20:49:42"
+            "modifyTime": "2019-06-04 20:49:42",
+            "status": 1,
+            "runType": 1,
+            "agencyId": 1,
+            "agencyName": "AgencyA",
+            "hostId": 1,
+            "hostIndex": 0,
+            "imageTag": "v2.5.0",
+            "containerName": "rootfisconode0",
+            "jsonrpcPort": 8545,
+            "p2pPort": 30300,
+            "channelPort": 20200,
+            "chainId": 1,
+            "chainName": "default_chain"
         }
     ],
     "totalCount": 1
@@ -2331,6 +2365,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 
 ***2）出参示例***
 * 成功：
+
 ```
 {
     "code": 0,
@@ -2358,7 +2393,6 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
         "writeTimeout": 5000
     }
 }
-
 ```
 
 
@@ -2379,7 +2413,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| -    | -     | -        | -     | -  
+| -    | -     | -        | -     | -  |
 
          
 
@@ -2425,6 +2459,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 
 ***2）出参示例***
 * 成功：
+
 ```
 {
     "code": 0,
@@ -2454,7 +2489,6 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
         }
     ]
 }
-
 ```
 
 ### 6.5 更新邮件告警配置
@@ -2474,14 +2508,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | serverId     | int        | 否     |  邮件告警配置的编号 
-| 2    | protocol     | String        | 否     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）
-| 3    | host         | String        | 否     |  邮件服务的地址
-| 4    | port         | int        | 否     |  邮件服务使用的端口，默认25
-| 5    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填
-| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，authentication开启时为必填
-| 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启
-| 8    | enable       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启
+| 1    | serverId     | int        | 否     |  邮件告警配置的编号 |
+| 2    | protocol     | String        | 否     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）|
+| 3    | host         | String        | 否     |  邮件服务的地址|
+| 4    | port         | int        | 否     |  邮件服务使用的端口，默认25|
+| 5    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填|
+| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，authentication开启时为必填|
+| 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启|
+| 8    | enable       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启|
 
 ***2）入参示例***
 
@@ -2510,14 +2544,15 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
-| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
-| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          |
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          |
 
 
 
 ***2）出参示例***
 * 成功：
+
 ```
 {
     "code": 0,
@@ -2548,6 +2583,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -2573,24 +2609,24 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                      |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | {toMailAddress} | String        | 否     |  接收测试邮件的邮箱地址 
-| 2    | host         | String        | 否     |  邮件服务的地址
-| 3    | port         | int        | 否     |  邮件服务使用的端口，默认25
-| 4    | protocol     | String        | 是     |  邮件服务的协议类型，默认使用smtp
-| 5    | defaultEncoding  | String        | 是     | 邮件服务的邮件编码格式，默认为UTF-8编码
-| 6    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填
-| 7    | password     | String        | 否     |  邮件服务的用户邮箱授权码，authentication开启时为必填
-| 8    | authentication | int        | 否     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启
-| 9    | starttlsEnable | int        | 是     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启
-| 10   | starttlsRequired | int        | 是     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启
-| 11   | socketFactoryPort | String        | 是     |  TLS/SSL的Socket端口，默认465
-| 12   | socketFactoryClass | String        | 是     |  TLS/SSL的Socket工厂类
-| 13   | socketFactoryFallback | int        | 是     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启
-| 14   | timeout | int        | 是     |  读超时时间值，默认5000ms
-| 15   | connectionTimeout | int        | 是     |  连接超时时间值，默认5000ms
-| 16   | writeTimeout | int        | 是     |  写超时时间值，默认5000ms
+| 1    | {toMailAddress} | String        | 否     |  接收测试邮件的邮箱地址 |
+| 2    | host         | String        | 否     |  邮件服务的地址 |
+| 3    | port         | int        | 否     |  邮件服务使用的端口，默认25|
+| 4    | protocol     | String        | 是     |  邮件服务的协议类型，默认使用smtp|
+| 5    | defaultEncoding  | String        | 是     | 邮件服务的邮件编码格式，默认为UTF-8编码|
+| 6    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填|
+| 7    | password     | String        | 否     |  邮件服务的用户邮箱授权码，authentication开启时为必填|
+| 8    | authentication | int        | 否     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启|
+| 9    | starttlsEnable | int        | 是     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启|
+| 10   | starttlsRequired | int        | 是     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启|
+| 11   | socketFactoryPort | String        | 是     |  TLS/SSL的Socket端口，默认465|
+| 12   | socketFactoryClass | String        | 是     |  TLS/SSL的Socket工厂类|
+| 13   | socketFactoryFallback | int        | 是     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启|
+| 14   | timeout | int        | 是     |  读超时时间值，默认5000ms|
+| 15   | connectionTimeout | int        | 是     |  连接超时时间值，默认5000ms|
+| 16   | writeTimeout | int        | 是     |  写超时时间值，默认5000ms|
 
 ***2）入参示例***
 
@@ -2625,8 +2661,8 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
-| 3    |  data    | Object        | 否     | 错误时返回错误原因                          
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | Object        | 否     | 错误时返回错误原因                          |
 
 
 
@@ -2668,7 +2704,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-|  1   | ruleId     | Int       |   否   | 告警配置的编号
+|  1   | ruleId     | Int       |   否   | 告警配置的编号 |
 
 
 ***2）入参示例***
@@ -2682,14 +2718,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
+| 序号 | 输出参数    | 类型          |        | 备注                         |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
-| 3    |  data    | Object        | 否     | 成功时返回                           
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败             |
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | Object        | 否     | 成功时返回   |                        
 | 3.1       |                   | Object           |        |返回信息实体          |
 | 3.1.1     | ruleId        | Int          | 否     |    告警类型配置的编号      |
-| 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题      |
+| 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题    |
 | 3.1.3     | enable      | Int           | 否     |  是否开启该告警：0-关闭，1-开启     |
 | 3.1.4     | alertType      | Int           | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期      |
 | 3.1.5     | alertLevel      | Int           | 否     |  告警等级：1-高，2-中，3-低      |
@@ -2708,6 +2744,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 ***2）出参示例***
 
 * 成功：
+
 ```
 {
     "code": 0,
@@ -2732,7 +2769,6 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 
 ```
 
-
 ### 6.8 获取全部告警类型配置列表
 
 返回所有的告警类型配置
@@ -2750,7 +2786,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| -    | -     | -        | -     | -  
+| -    | -     | -        | -     | -  |
 
          
 
@@ -2790,6 +2826,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 
 ***2）出参示例***
 * 成功：
+
 ```
 {
     "code": 0,
@@ -2845,7 +2882,6 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
         }
     ]
 }
-
 ```
 
 
@@ -2866,13 +2902,13 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | ruleId     | int        | 否     |  告警类型配置编号 
-| 2    | ruleName     | String        | 是     |  告警邮件的标题
-| 3    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
-| 4    | alertType         | int        | 是     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警
-| 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒），默认3600s
-| 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除
-| 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串
+| 1    | ruleId     | int        | 否     |  告警类型配置编号 |
+| 2    | ruleName     | String        | 是     |  告警邮件的标题|
+| 3    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启|
+| 4    | alertType         | int        | 是     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警|
+| 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒），默认3600s|
+| 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除|
+| 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串|
 | 9    | alertLevel      | Int           | 是     |  告警等级：1-高，2-中，3-低      |
 
 
@@ -2903,9 +2939,9 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
-| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
-| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          |
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          |
 
 
 
@@ -2961,8 +2997,8 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | ruleId     | int        | 否     |  告警类型配置编号 
-| 2    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启
+| 1    | ruleId     | int        | 否     |  告警类型配置编号 |
+| 2    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启|
 
 
 
@@ -2987,9 +3023,9 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
-| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          
-| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | Object        | 否     | 返回邮件服务配置的具体内容                          |
+| 3.1  |      | Object        | 否     |  参数含义参考上文GET接口出参表                          |
 
 
 
@@ -3026,6 +3062,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
     "data": {}
 }
 ```
+
 
 
 ## 7 审计相关模块
@@ -3146,8 +3183,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/userList/300001
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1      | groupId        | int           | 否     | 所属群组编号                                  |
-| 2      | userName         | String        | 是     | 用户名                                        |
+| 1      | groupId        | int           | 否     | 所属群组编号      |
+| 2      | userName         | String        | 是     | 用户名             |
 
 ***2）入参示例***
 
@@ -3281,6 +3318,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d
 
 ***2）出参示例***
 * 成功：
+
 ```
 {
     "code": 0,
@@ -3308,6 +3346,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d
     "data": {}
 }
 ```
+
 
 ### 7.4 获取异常用户信息列表
 
@@ -3381,6 +3420,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualUserList/300001/1/10?us
 ```
 
 
+
 ### 7.5 获取异常合约信息列表
 
 #### 7.5.1 传输协议规范
@@ -3410,7 +3450,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/1
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
+| 序号 | 输出参数    | 类型          |        | 备注             |
 |------|-------------|---------------|--------|-------------------------------|
 | 1     | code            | Int           | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message         | String        | 否     | 描述                       |
@@ -6041,9 +6081,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus/list?groupId=1&p
     ],
     "totalCount": 3
 }
-
 ```
-
 
 ### 13.11 设置节点共识状态接口（节点管理）
 
@@ -6093,12 +6131,13 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
+| 2    | message     | String        | 否     | 描述    ｜
 
 
 
 ***2）出参示例***
 * 成功：
+
 ```
 [
     {
@@ -6107,10 +6146,10 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
      }
 
 ]
-
 ```
 
 * 失败：
+
 ```
 {
     "code": -51000,
@@ -6175,6 +6214,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 
 ***2）出参示例***
 * 成功：
+
 ```
 {
     "code": 0,
@@ -6192,9 +6232,11 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
         }
     }
 }
+```
 
 或者
 
+```
 {
     "code": 0,
     "message": "success",
@@ -6205,6 +6247,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 ```
 
 * 失败：
+
 ```
 {
     "code": 201228,
@@ -6269,6 +6312,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 
 ***2）出参示例***
 * 成功：
+
 ```
 {
     "code": 0,
@@ -6311,7 +6355,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | fingerPrint     | String        | 否     | 证书指纹，证书唯一标识   
+| 1    | fingerPrint     | String        | 否     | 证书指纹，证书唯一标识   |
 
          
 
@@ -6345,7 +6389,8 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 
 
 ***2）出参示例***
-* 成功：
+* 成功：'
+
 ```
 {
     "code": 0,
@@ -6363,7 +6408,6 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
         "createTime": 1569686400000
     }
 }
-
 ```
 
 
@@ -6423,6 +6467,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 ```
 
 * 失败：
+
 ```
 {
     "code": 202060,
@@ -6649,20 +6694,695 @@ http://localhost:5001/WeBASE-Node-Manager/event/contractEvent/list/{groupId}/{pa
 ```
 
 
-## 16 其他接口
+## 16 可视化部署
 
-### 16.1 查询是否使用国密
+### 16.1 获取 Docker 镜像版本
+
+查询部署时可以选择的 Docker 镜像版本
+
+#### 16.1.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.1.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | type     | Integer      | 否     | 获取配置类型，1: Docker 镜像列表   |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=1
+```
+
+
+#### 16.1.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功；其它：失败|
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | List        | 否       | 镜像列表 ｜                       
+| 3.1  | id   | Integer        | 否       | 镜像编号|                
+| 3.1  | configName          | String        | 否       | 配置名称|    
+| 3.1  | configType   | Integer        | 否       | 配置类型，1: Docker 镜像列表     |
+| 3.1  | configValue       | String        | 否       |  镜像版本 |
+| 3.1  | createTime   | Long        | 否       |    创建时间 |         
+| 3.1  | modifyTime  | Long        | 否       |  修改时间 | 
+
+
+***2）出参示例***
+* 成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "configName": "docker 镜像版本",
+      "configType": 1,
+      "configValue": "v2.5.0",
+      "createTime": 1590577419000,
+      "modifyTime": 1590577419000
+    }
+  ]
+}
+```
+
+
+### 16.2 部署区块链底层服务
+
+根据填写主机信息和选择的镜像版本部署区块链底层服务。服务器接收部署请求后，完成参数校验和数据库数据插入后，返回客户端请求结果，再异步完成区块链的部署操作。
+
+#### 16.2.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/init**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.2.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | ipconf     | Integer      | 否   | 主机 IP，数量，机构名称，所属群组 信息        |
+| 2    | tagId  | Integer      | 否     | 镜像编号，16.1.3 返回参数中的 id 值            |
+| 3    | dockerImageType    | Integer      | 否     |     Docker 镜像拉取方式，0: 手动获取；1: 自动从 Docker Hub 拉取 |
+
+**注：ipconf 格式参考**
+
+```
+# 1. 可以添加多行；
+# 2. 页面需要提示，机构名只能包含英文字母，数字和下划线'_'；
+# 3. 群组编号必须是数字；
+# 4. 数量至少为 1，客户端的输入框默认为 1；
+# 5. 同一个 IP 的主机，只属于一个机构；如果在单机部署，只能填写一个机构名
+# 
+# 格式：IP:数量 机构名 群组列表
+    
+# 比如：
+172.0.0.1:2 agencyA 1,2,3
+172.0.0.2:2 agencyB 2
+172.0.0.3:2 agencyC 3
+
+# 上面配置的意思：
+1. 部署三台主机：172.0.0.1，172.0.0.2，172.0.0.3。
+2. 172.0.0.x 的每台机器上创建 2 个节点，一共创建 6 个节点。
+3. 创建 3 个机构：agencyA，agencyB，agencyC。
+4. 创建三个群组：1，2，3。其中，群组 1 包含 172.0.0.1 中的两个节点；群组 2 包括 172.0.0.1 和 172.0.0.2 的 4 个节点；群组 3 包含 172.0.0.1 和 172.0.0.3 的 4 个节点。
+5. 群组后续可以动态添加。
+```
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/init
+```
+
+```
+{
+  "ipconf": [
+    "172.0.0.2:2  A 1,2",
+    "172.0.0.3:3  B 1,2,3,4"
+  ],
+  "tagId": "1",
+  "dockerImageType": "0"
+}
+```
+
+#### 16.2.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 部署请求结果                        |
+| 4    | attachment | List        | 否       | 补充信息，比如：如果连接主机失败，表示连接失败的主机 IP       |     
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": ""
+}
+```
+* 失败：
+```
+{
+    "code": 205015,
+    "message": "Connect to host error",
+    "data": "",
+    "attachment": "172.0.0.2"
+}
+```
+
+### 16.3 查询部署失败的错误信息
+
+如果部署出现失败，调用此接口，返回每台主机部署的错误信息。
+
+#### 16.3.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/host/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.3.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+|     |      |       |   |     |
+
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/host/list
+```
+
+#### 16.3.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 开关状态，0: 不进入可视化部署；1: 进入可视化部署。  |
+| 3.1  | id   | Integer        | 否       | 主机编号|                
+| 3.1  |agencyId          | String        | 否       | 主机所属机构编号|    
+| 3.1  | agencyName   | String        | 否       | 主机所属机构名称   |
+| 3.1  | ip       | String        | 否       |  主机 IP |
+| 3.1  | sshUser       | Integer        | 否       |  主机 SSH 免密登录账号，默认 root |
+| 3.1  | sshPort       | Integer        | 否       |  主机 SSH 登录端口，默认 22 |
+| 3.1  | rootDir       | String        | 否       | 主机存放节点数据的目录，默认：/opt/fisco |
+| 3.1  | dockerPort       | String        | 否       |  主机 Docker daemon 监听端口，默认：3000 |
+| 3.1  | status       | Integer        | 否       |  主机状态，0: 添加中，1: 初始化中，2: 初始化成功，3: 初始化失败 |
+| 3.1  | remark       | Integer        | 否       |  部署失败时，主机的错误日志 |
+| 3.1  | createTime   | Long        | 否       |    创建时间 |         
+| 3.1  | modifyTime  | Long        | 否       |  修改时间 | 
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 19,
+      "agencyId": 19,
+      "agencyName": "AgencyA",
+      "ip": "172.0.0.2",
+      "sshUser": "root",
+      "sshPort": 22,
+      "rootDir": "/root/fisco",
+      "dockerPort": 3000,
+      "status": 2,
+      "remark": "",
+      "createTime": 1596959644000,
+      "modifyTime": 1596959661000
+    },
+    .......
+  ],
+  "attachment": null
+}
+```
+
+
+### 16.4 新增节点
+
+添加一个新的节点到指定群组。服务器接收新增节点请求后，完成参数校验和数据库数据插入后，返回客户端请求结果，再异步完成节点新增操作。
+
+#### 16.4.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/node/add**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.4.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | ip     |String      | 否   | 部署新节点的主机 IP 地址        |
+| 2    | groupId  | Integer      | 否     | 新节点所属的群组编号            |
+| 3    | agencyName    | String      | 否     |  新主机所属的机构名称，可以是已有机构或新机构 |
+| 4    | dockerImageType    | Integer      | 否     |     Docker 镜像拉取方式，0: 手动获取；1: 自动从 Docker Hub 拉取 |
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/node/add
+```
+
+```
+{
+  "ip": "172.0.0.4",
+  "groupId": "1",
+  "dockerImageType": "0",
+  "agencyName": "AgencyNew"
+}
+```
+
+#### 16.4.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 部署请求结果                        |
+| 4    | attachment | List        | 否       | 补充信息，比如：如果连接主机失败，表示连接失败的主机 IP       |     
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": ""
+}
+```
+* 失败：
+```
+{
+    "code": 205015,
+    "message": "Connect to host error",
+    "data": "",
+    "attachment": "172.0.0.2"
+}
+```
+
+
+### 16.5 启动节点
+
+启动指定节点。
+
+#### 16.5.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/node/start**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.5.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | nodeId     | String      | 否   | 启动节点的节点编号        |
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/node/start
+```
+
+```
+{
+  "nodeId": "6aba77a7b81ddf71f5e5988c2ba96f51484b55d637286bf49babe48a34f935ee3866fc1a226b465b6bc9d716bfe8b349d82e80710b162e826c0cf91fb58e5099"
+}
+```
+
+#### 16.5.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 启动命令执行结果                        |
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": ""
+}
+```
+
+### 16.6 停止节点
+
+停止指定节点。
+
+#### 16.6.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/node/stop**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.6.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | nodeId     | String      | 否   | 停止节点的节点编号        |
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/node/stop
+```
+
+```
+{
+  "nodeId": "6aba77a7b81ddf71f5e5988c2ba96f51484b55d637286bf49babe48a34f935ee3866fc1a226b465b6bc9d716bfe8b349d82e80710b162e826c0cf91fb58e5099"
+}
+```
+
+#### 16.6.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 停止命令执行结果                        |
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": ""
+}
+```
+
+
+### 16.7 删除节点
+
+删除指定节点。
+
+#### 16.7.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/node/delete**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.7.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | nodeId     | String      | 否   | 停止节点的节点编号        |
+| 2    | deleteHost     | Boolean      | 是  | 删除节点时，如果被删除节点是主机上最后一个节点，是否删除主机，true: 删除；false: 不删除；默认：false。    |
+| 3    | deleteAgency     | Boolean      | 是   | 如果需要删除主机，在被删除主机机构最后一台主机，是否删除相应机构，true: 删除；false: 不删除； 默认：false。        |
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/node/stop
+```
+
+```
+{
+  "nodeId": "6aba77a7b81ddf71f5e5988c2ba96f51484b55d637286bf49babe48a34f935ee3866fc1a226b465b6bc9d716bfe8b349d82e80710b162e826c0cf91fb58e5099",
+  "deleteHost": "true",
+  "deleteAgency": "false" 
+}
+```
+
+#### 16.7.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 节点删除结果                      |
+
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": ""
+}
+```
+
+* 失败：
+```
+{
+    "code": 205053,
+    "message": "Node is running.",
+    "data": ""
+}
+```
+
+
+### 16.8 获取链信息
+
+查询区块链信息，如果没有部署链，返回空；如果已经部署链，返回部署的链信息。
+
+#### 16.8.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/chain/info**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.8.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+|     |      |       |   |     |
+
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/chain/info
+```
+
+#### 16.8.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 链信息查询结果                      |
+| 3.1  | id   | Integer        | 否       | 链编号|                
+| 3.1  |chainName          | String        | 否       | 链名称|    
+| 3.1  | chainDesc   | String        | 否       | 链描述    |
+| 3.1  | version       | String        | 否       |  底层的镜像版本 |
+| 3.1  | encryptType       | Integer        | 否       |  加密方式，0: 非国密；1: 国密 |
+| 3.1  | chainStatus       | Integer        | 否       |  链状态，具体状态查看备注信息 |
+| 3.1  | rootDir       | String        | 否       | 节点主机存放节点数据的目录，默认：/opt/fisco |
+| 3.1  | webaseSignAddr       | String        | 否       |  WeBASE-Sign 服务的地址 |
+| 3.1  | runType       | Integer        | 否       |  运行方式，1: 使用 Docker 运行 |
+| 3.1  | createTime   | Long        | 否       |    创建时间 |         
+| 3.1  | modifyTime  | Long        | 否       |  修改时间 | 
+
+**注：链状态**
+
+| 链状态编号 | 链状态  |
+|---|---|
+|  0 | 初始化中  |
+|  1 |  部署中 |
+|  2 |  部署失败 |
+|  3 |  运行 |
+|  4 |  重启中 |
+
+***2）出参示例***
+* 没有部署链：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": ""
+}
+```
+
+* 已经部署链：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": 10,
+    "chainName": "default_chain",
+    "chainDesc": "default_chain",
+    "version": "v2.5.0",
+    "encryptType": 0,
+    "chainStatus": 3,
+    "rootDir": "/opt/fisco",
+    "webaseSignAddr": "172.0.0.1:5004",
+    "runType": 1,
+    "createTime": 1596959644000,
+    "modifyTime": 1596959700000
+  },
+  "attachment": null
+}
+```
+
+
+### 16.9 重置链
+
+重置已部署链，同时备份当前链数据。
+
+#### 16.9.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/delete**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.9.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+|     |      |       |   |     |
+
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/delete
+```
+
+#### 16.9.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 重置链结果                      |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": ""
+}
+```
+
+
+### 16.10 查询服务器可视化部署选项配置
+
+查询服务器的可视化部署的选项状态，判断是否进入可视化部署页面。
+
+#### 16.10.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/deploy/type**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 16.10.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+|     |      |       |   |     |
+
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/deploy/type
+```
+
+#### 16.10.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | String        | 否       | 开关状态，0: 不进入可视化部署；1: 进入可视化部署。                  |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": "1"
+}
+```
+
+
+## 17 其他接口
+
+### 17.1 查询是否使用国密
 
 获取WeBASE-Node-Manager是否使用国密版
 
-#### 16.1.1 传输协议规范
+#### 17.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/encrypt**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 16.1.2 请求参数
+#### 17.1.2 请求参数
 
 ***1）入参表***
 
@@ -6679,7 +7399,7 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
 ```
 
 
-#### 16.1.3 返回参数
+#### 17.1.3 返回参数
 
 ***1）出参表***
 
@@ -6702,18 +7422,18 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
 ```
 
 
-### 16.2 查询WeBASE-Node-Manager的版本
+### 17.2 查询WeBASE-Node-Manager的版本
 
 获取WeBASE-Node-Manager服务的版本号
 
-#### 16.2.1 传输协议规范
+#### 17.2.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/version**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 16.2.2 请求参数
+#### 17.2.2 请求参数
 
 ***1）入参表***
 
@@ -6730,7 +7450,7 @@ http://localhost:5001/WeBASE-Node-Manager/version
 ```
 
 
-#### 16.2.3 返回参数
+#### 17.2.3 返回参数
 
 ***1）出参表***
 
