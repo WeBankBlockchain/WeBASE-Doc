@@ -637,7 +637,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 ### 13. WeBASE CDN加速服务
 
-答：WeBASE CDN加速服务提供WeBASE各子系统安装包的下载服务，地址为： `https://www.fisco.com.cn/cdn/webase/releases/download/{release_version}/webase-{subsystem}.zip`，其中`{release_version}`为`v1.x.x`格式，`{system}`则是子系统名字，支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载
+答：WeBASE CDN加速服务提供WeBASE各子系统安装包的下载服务，地址为： `https://www.fisco.com.cn/cdn/webase/releases/download/{release_version}/webase-{subsystem}.zip`，其中`{release_version}`为`v1.x.x`格式，`{subsystem}`则是子系统名字，支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载
 
 可以直接通过`wget`或者`curl -O`命令直接获取安装包；如，获取WeBASE-Node-Manager v1.4.0的安装包`webase-node-mgr.zip`
 
@@ -647,5 +647,8 @@ wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/webase-node-mg
 curl -O https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/webase-node-mgr.zip
 ```
 
+### 14. WeBASE代码仓库国内gitee镜像
+
+答：WeBASE代码仓库在国内的gitee镜像地址为`https://gitee.com/WeBank/WeBASE`，WeBASE其他子系统的仓库则是`https://gitee.com/WeBank/`+ `WeBASE-XXX`，如WeBASE-Front的gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
 
 
