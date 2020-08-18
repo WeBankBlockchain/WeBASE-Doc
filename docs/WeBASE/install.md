@@ -246,14 +246,35 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 python deploy.py installAll
     
 # 2. 可视化部署
-python deploy.py visualDeploy
+python deploy.py installWeBASE
 ```
 
-* 停止所有服务：
+* 停止服务：
+    - 停止一键部署的所有服务
 
-```shell
-python deploy.py stopAll
-```
+    ```shell
+    python deploy.py stopAll
+    ```
+
+    - 停止可视化部署的所有服务
+
+    ```shell
+    python deploy.py stopWeBASE
+    ```
+
+* 启动服务：
+    - 启动一键部署的所有服务
+
+    ```shell
+    python deploy.py startAll
+    ```
+
+    - 启动可视化部署的所有服务
+
+    ```shell
+    python deploy.py startWeBASE
+    ```
+
 * 服务部署后，如果需要单独启停，可以使用以下命令：
 
 ```shell
