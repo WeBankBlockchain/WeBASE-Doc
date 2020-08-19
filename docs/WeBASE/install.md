@@ -651,16 +651,21 @@ https://www.fisco.com.cn/cdn/webase/releases/download/{release_version}/webase-{
 
 其中`{release_version}`为`v1.x.x`格式，`{subsystem}`则是子系统名字，支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载。
 
-可以直接通过`wget`或者`curl -O`命令直接获取安装包；如，获取WeBASE-Node-Manager v1.4.0的安装包`webase-node-mgr.zip`
+可以直接通过`wget`或者`curl -O`命令直接获取安装包。比如：
+
+- 获取WeBASE-Node-Manager v1.4.0的安装包`webase-node-mgr.zip`
 
 ```
 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.0/webase-node-mgr.zip
 // 或
 curl -O https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.0/webase-node-mgr.zip
+```
 
+- 获取WeBASE-Node-Manager v1.3.2 的安装包`webase-node-mgr.zip`
+
+```
 // 对于 v1.3.2 (包括)及以前的版本
 wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.3.2/webase-node-mgr.zip
-
 ```
 
 ### 14. WeBASE代码仓库国内gitee镜像
