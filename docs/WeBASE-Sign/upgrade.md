@@ -2,6 +2,11 @@
 
 WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
+#### v1.4.0
+
+##### 增加版本号接口
+- 增加返回 WeBASE-Sign 版本号接口
+
 #### v1.3.2
 
 ##### 移除fastjson

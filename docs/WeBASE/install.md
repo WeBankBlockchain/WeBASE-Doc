@@ -4,8 +4,6 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-*注：目前WeBASE支持FISCO BCOS v2.4.x版本，暂未支持FISCO BCOS 2.5.x*，节点与WeBASE对应版本请查看[WeBASE-ChangeLog](./ChangeLOG.html)
-
 ![[]](../../images/WeBASE/one_click_struct.png)
 
 
@@ -19,6 +17,12 @@
 | PyMySQL | 使用python3时需安装 |
 
 ### 检查环境
+
+#### 平台要求
+
+推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git`相关依赖项。
+
+其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git`依赖项后重试
 
 #### 检查Java
 
@@ -81,7 +85,7 @@ python3.4+版本安装`PyMysql`依赖包方法：
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.3.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -107,12 +111,14 @@ cd webase-deploy
 
 ④ 服务端口不能小于1024。
 
+⑤ 采用一键部署，根据说明修改 `common.properties` 文件中的配置。
+
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.3.2
-webase.mgr.version=v1.3.2
-webase.sign.version=v1.3.2
-webase.front.version=v1.3.2
+webase.web.version=v1.4.0
+webase.mgr.version=v1.4.0
+webase.sign.version=v1.4.0
+webase.front.version=v1.4.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -139,6 +145,7 @@ mgr.port=5001
 front.port=5002
 # 签名服务子系统端口
 sign.port=5004
+
 
 # 节点监听Ip
 node.listenIp=127.0.0.1
@@ -170,16 +177,112 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 ```
 
+⑥ 如果使用**可视化部署**， 参考下面的配置修改 `visual-deploy.properties` 文件。
+<span id="visual-deploy-config"></span>>
+
+```eval_rst
+.. important::
+    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
+```
+
+```shell
+# WeBASE子系统的最新版本(v1.1.0或以上版本)
+webase.web.version=v1.4.0
+webase.mgr.version=v1.4.0
+webase.sign.version=v1.4.0
+# Docker 镜像版本，默认不需要修改
+fisco.webase.docker.cdn.version=v1.4.0
+
+# 节点管理子系统mysql数据库配置
+mysql.ip=127.0.0.1
+mysql.port=3306
+mysql.user=dbUsername
+mysql.password=dbPassword
+mysql.database=webasenodemanager
+
+# 签名服务子系统mysql数据库配置
+sign.mysql.ip=localhost
+sign.mysql.port=3306
+sign.mysql.user=dbUsername
+sign.mysql.password=dbPassword
+sign.mysql.database=webasesign
+
+# WeBASE管理平台服务端口
+web.port=5000
+
+# 节点管理子系统服务端口
+mgr.port=5001
+
+# 签名服务子系统端口
+sign.port=5004
+
+# 是否使用国密（0: standard, 1: guomi）
+encrypt.type=0
+
+# WeBASE-Sign 对外提供服务的访问 IP 地址
+# 部署在其它主机的节点，需要使用此 IP 访问 WeBASE-Sign 服务
+# 不能是 127.0.0.1 或者 localhost
+sign.ip=
+
+# SSH 免密登录账号
+mgr.ssh.user=root
+# SSH 访问端口
+mgr.ssh.port=22
+# 部署节点服务的主机，存放链数据的目录
+mgr.ssh.rootDirOnHost=/opt/fisco
+```
+
 ## 部署
-部署所有服务：
+
+* 部署服务
+
+**部署方式：**
+
+| 部署方式  | 参数  | 说明  |
+|---|---|---|
+|  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
+|  可视化部署 |  installWeBASE | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参考文档 [可视化部署](#../WeBASE-Install/visual_deploy.html) |
+
+* 选择其中一种部署方式执行
+    
 ```shell
+### 请选择一种方式部署：
+
+# 1. 部署所有服务
 python deploy.py installAll
+    
+# 2. 可视化部署
+python deploy.py installWeBASE
 ```
-停止所有服务：
-```shell
-python deploy.py stopAll
-```
-服务部署后，如果需要单独启停，可以使用以下命令：
+
+* 停止服务：
+    - 停止一键部署的所有服务
+
+    ```shell
+    python deploy.py stopAll
+    ```
+
+    - 停止可视化部署的所有服务
+
+    ```shell
+    python deploy.py stopWeBASE
+    ```
+
+* 启动服务：
+    - 启动一键部署的所有服务
+
+    ```shell
+    python deploy.py startAll
+    ```
+
+    - 启动可视化部署的所有服务
+
+    ```shell
+    python deploy.py startWeBASE
+    ```
+
+* 服务部署后，如果需要单独启停，可以使用以下命令：
+
 ```shell
 启动FISCO-BCOS节点:      python deploy.py startNode
 停止FISCO-BCOS节点:      python deploy.py stopNode
@@ -203,6 +306,7 @@ python deploy.py stopAll
 
 WeBASE管理平台：
 
+* 一键部署完成后，打开浏览器访问
 ```
 http://{deployIP}:{webPort}
 示例：http://localhost:5000
@@ -212,6 +316,12 @@ http://{deployIP}:{webPort}
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
+  - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
+  - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
+
+
+* 若选择 **可视化部署**
+    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
 ## 日志路径
 
@@ -524,4 +634,42 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ### 12. WeBASE-Web登录页面的验证码加载不出来
 
 答：检查WeBASE-Node-Manager后台服务是否已启动成功：在webase-node-mgr目录下，运行`bash status.sh`或者查看目录中`log/WeBASE-Node-Manager.log`日志文件，查看是否启动失败；
+
+### 13. WeBASE CDN加速服务
+
+答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务。为了提供更稳定的下载服务，从 WeBASE v1.4.0 开始使用新的 CDN 下载地址。请注意根据不同版本选择不同的下载地址。
+
+- v1.4.0 版本
+```Bash
+https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/{release_version}/webase-{subsystem}.zip
+```
+    
+- v1.3.2（包括）及以前版本
+```Bash
+https://www.fisco.com.cn/cdn/webase/releases/download/{release_version}/webase-{subsystem}.zip
+```
+
+其中`{release_version}`为`v1.x.x`格式，`{subsystem}`则是子系统名字，支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载。
+
+可以直接通过`wget`或者`curl -O`命令直接获取安装包。比如：
+
+- 获取WeBASE-Node-Manager v1.4.0的安装包`webase-node-mgr.zip`
+
+```
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.0/webase-node-mgr.zip
+// 或
+curl -O https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.0/webase-node-mgr.zip
+```
+
+- 获取WeBASE-Node-Manager v1.3.2 的安装包`webase-node-mgr.zip`
+
+```
+// 对于 v1.3.2 (包括)及以前的版本
+wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.3.2/webase-node-mgr.zip
+```
+
+### 14. WeBASE代码仓库国内gitee镜像
+
+答：WeBASE代码仓库在国内的gitee镜像地址为`https://gitee.com/WeBank/WeBASE`，WeBASE其他子系统的仓库则是`https://gitee.com/WeBank/`+ `WeBASE-XXX`，如WeBASE-Front的gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
+
 
