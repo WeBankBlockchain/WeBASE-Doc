@@ -3113,10 +3113,10 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 8        | 合约版本       | version           | String      |         |   否       |                                            |
+| 8        | 合约版本       | version           | String      |         |   否       | CNS中合约版本，该字段在v1.3.0+版本已弃用                                          |
 | 9        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
 
 **2）数据格式**
@@ -3215,10 +3215,10 @@ HTTP POST
 | 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 否        | JSONArray，如果传入此字段，则使用这个abi。如果没有传入此字段，则从db或cns获取合约abi |
+| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 8        | 合约版本       | version           | String      |         |   否       |        CNS中的合约版本，不传入contractAbi时可传入合约地址与版本获取CNS上存储的合约ABI                                    |
+| 8        | 合约版本       | version           | String      |         |   否       |  CNS中合约版本，该字段在v1.3.0+版本已弃用                             |
 
 
 **2）数据格式**
@@ -3227,7 +3227,7 @@ HTTP POST
 {
     "groupId" :1,
     "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
-    "contractAbi":[],
+    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
     "funcName":"set",
     "funcParam":["test"]
@@ -5128,6 +5128,84 @@ a、成功：
 {
     1 // 1: 国密版，0: 非国密
 }
+```
+
+
+### 10.2. 查询WeBASE-Front版本
+
+#### 接口描述
+
+获取WeBASE-Front的版本号
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/version**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/version
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+v1.4.0
+```
+
+
+### 10.3. 查询前置连接的WeBASE-Sign版本
+
+#### 接口描述
+
+获取WeBASE-Front的所连接的WeBASE-Sign的版本号
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/version/sign**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/version/sign
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+v1.4.0
 ```
 
 
