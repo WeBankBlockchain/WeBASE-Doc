@@ -276,6 +276,7 @@ http://{deployIP}:{webPort}
 ### 常见问题
 
 <span id="install_docker" />
+
 #### 安装 Docker
 在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
 
@@ -311,6 +312,7 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 
 ```
 <span id="pull_image" />
+
 #### 拉取 Docker 镜像
 
 镜像版本：
