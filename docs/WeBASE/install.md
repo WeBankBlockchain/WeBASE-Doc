@@ -13,7 +13,7 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | 推荐Python3.5+ |
+| Python | Python3.5+ |
 | PyMySQL | 使用python3时需安装 |
 
 ### 检查环境
@@ -44,7 +44,7 @@ mysql --version
 
 #### 检查Python
 
-推荐使用Python3.5或以上版本：
+使用Python3.5或以上版本：
 ```
 python --version
 ```
