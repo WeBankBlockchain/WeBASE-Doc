@@ -11,7 +11,11 @@
 
 在进行可视化部署之前，请按照部署要求，准备相应的部署环境。
 
-#### 主机数量
+
+
+#### 系统环境
+
+##### 硬件配置
 使用可视化部署搭建一个 **4 节点** 的区块链服务至少需要 **5 台**主机。
 
 其中 1 台主机部署 **可视化部署的依赖** 服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。
@@ -21,15 +25,14 @@
 **注意：**
 - 在企业级部署时，为了安全，推荐将签名服务（WeBASE-Sign）放在内网中，与管理平台、管理子系统分开部署。此处为了方便演示，因此将签名服务（WeBASE-Sign）部署在同一台主机。
 
-#### 系统环境
 
-##### 硬件配置
+**具体配置**
 
-| 名称 | 配置  |
-|---|---|
-| CPU  | 2 核  |
-| 内存 |  4 G |
-| 磁盘 |  500G + |
+| 名称 | 最低配置  |推荐配置  |
+|---|---|---|
+| CPU  | 1 核  | 2 核 |
+| 内存 |  2 G | 4 G |
+| 磁盘 |  100G + | 500G + |
 
 ##### 操作系统
 部署节点的主机操作系统需要满足安装 Docker 服务的最低版本要求；
@@ -55,7 +58,7 @@
 
 如果使用云服务器，推荐使用**操作系统镜像模板**的方式创建主机，即在一台主机上安装 Docker 后，然后使用安装 Docker 服务后的操作系统做一个镜像模板。通过这个模板镜像来创建主机，这样新创建的主机就自带了 Docker 服务。
 
-安装 Docker 服务，请参考下文**常见问题**中：[Docker 安装](#id17) 
+安装 Docker 服务，请参考下文**常见问题**中：[Docker 安装](#install_docker)
 
 ##### 拉取 Docker 镜像
 
@@ -69,7 +72,7 @@
 因此，为了保证部署过程顺利和快速完成，推荐在执行可视化部署前，手动拉取镜像，并将镜像上传到每个需要部署节点服务的主机。
 ```
 
-拉取镜像的方法，请参考下文**常见问题**中：[拉取 Docker 镜像](#id18) 
+拉取镜像的方法，请参考下文**常见问题**中：[拉取 Docker 镜像](#pull_image)
 
 ##### 配置 SSH 免密登录
 
@@ -111,6 +114,16 @@
     `ssh -o StrictHostKeyChecking=no root@[IP]`
     
 
+**节点主机 sudo 账号免密配置方法**
+
+```Bash
+# 切换到 root 或者有权限账户
+vi /etc/sudoers
+
+# 添加下面一行并保存
+# 替换 user 为 SSH 免密登录账号
+user   ALL=(ALL) NOPASSWD : ALL
+```
 
 ### 部署依赖服务
 可视化部署需要依赖 WeBASE 的中间件服务，包括**管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）**。
@@ -147,6 +160,11 @@
         * 配置文件中 `deployType` 为 `1`，启用节点管理服务的可视化部署功能
         * 配置文件中 `webaseSignAddress` 的 IP 地址，其余主机需要通过此IP访问签名服务
     
+```eval_rst
+.. important::
+    1. 注意 WeBASE-Node-Manager 服务的 `webaseSignAddress` 配置，不能配置成 **`127.0.0.1`**，需要填写对外服务的 IP 地址。
+```
+
     ```yaml
      constant:
       # 1.4.0 visual deploy
@@ -182,8 +200,8 @@ http://{deployIP}:{webPort}
 **提示：**
 - 在执行部署前，请 **手动安装 Docker 服务** 和 **手动拉取 Docker 镜像**，防止由于网络原因导致部署失败
 
-    - 参考下文 **常见问题** 中的 [安装 Docker](#id17) 
-    - 参考下文 **常见问题** 中的 [拉取 Docker 镜像](#id18)
+    - 参考下文 **常见问题** 中的 [安装 Docker](#install_docker)
+    - 参考下文 **常见问题** 中的 [拉取 Docker 镜像](#pull_image)
     
 - 如果部署 **国密** 版本，**手动下载 TASSL 库**，防止由于 GitHub 不能访问，导致部署失败
     - 参考下文**常见问题**中的 [手动下载 TASSL](#tassl)，手动下载 TASSL 下载库
@@ -220,8 +238,8 @@ http://{deployIP}:{webPort}
     - 参考上文的 [配置 SSH 免密登录](#ssh)
     
 - **手动安装 Docker 服务**和 **手动拉取 Docker 镜像**，防止由于网络原因导致添加失败
-    - 参考下文**常见问题**中的 [安装 Docker](#id17) 
-    - 参考下文**常见问题**中的 [拉取 Docker 镜像](#id18)
+    - 参考下文**常见问题**中的 [安装 Docker](#install_docker)
+    - 参考下文**常见问题**中的 [拉取 Docker 镜像](#pull_image)
 
 - 新增的节点，**默认处于游离状态**，需要手动**变更节点为共识或者观察节点**后，新节点开始从原有节点同步区块数据。
 
@@ -257,7 +275,8 @@ http://{deployIP}:{webPort}
 
 
 ### 常见问题
-#### 安装 Docker 
+<span id="install_docker" />
+#### 安装 Docker
 在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
 
 ```Bash
@@ -291,7 +310,7 @@ wget https://download.docker.com/linux/centos/8/x86_64/stable/Packages/container
 yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm 
 
 ```
-
+<span id="pull_image" />
 #### 拉取 Docker 镜像
 
 镜像版本：
@@ -378,6 +397,15 @@ FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署�
     
 #### 没有进入可视化部署界面
 在登录区块链管理平台后，没有进入可视化部署页面。此时，修改 WeBASE-Node-Manager 服务中的 `dist/conf/application.yml` 文件中的 `deployType` 的值是否为 `1` 后，重启 WeBASE-Node-Manager 服务即可。
+
+#### 新增节点时，提示请手动拉取 Docker 镜像错误
+
+SSH 登录新主机，使用 `docker images -a |grep -i "fiscoorg/fisco-webase"` 命令检查是否有镜像。
+
+* 如果存在，请参考上文： **常见问题** 中的 [拉取 Docker 镜像](#pull_image)
+
+* 如果**不**存在，请检查新主机中 SSH 账号的 `sudo` 免密配置。
+
 
 #### 部署失败以及区块链重置
 如果在部署区块链服务时，出现了部署失败的问题，可以使用重置功能，重置区块链服务，然后进行重新部署。
