@@ -154,7 +154,6 @@ user   ALL=(ALL) NOPASSWD : ALL
     * 参考 [节点管理平台 WeBASE-Web 部署文档](../WeBASE-Web/install.html#id1) 部署 WeBASE-Web 服务
     
 * 节点管理子系统（WeBASE-Node-Manager）
-
     * 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务
     * 修改 `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件示例如下：
         * 配置文件中 `deployType` 为 `1`，启用节点管理服务的可视化部署功能
@@ -181,7 +180,7 @@ user   ALL=(ALL) NOPASSWD : ALL
       # SSH 免密登录的账号 和 端口，默认为 root 和 22
       sshDefaultUser: root
       sshDefaultPort: 22
-   ```
+    ```
 
 
 ### 可视化部署节点
