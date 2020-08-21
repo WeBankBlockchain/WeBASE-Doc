@@ -164,23 +164,23 @@ user   ALL=(ALL) NOPASSWD : ALL
     1. 注意 WeBASE-Node-Manager 服务的 `webaseSignAddress` 配置，不能配置成 **`127.0.0.1`**，需要填写对外服务的 IP 地址。
 ```
 
-    ```yaml
-     constant:
-      # 1.4.0 visual deploy
-      # 部署方式修改为 1，启用可视化部署
-      deployType: 1
-      
-      # WeBASE-Sign 服务的访问地址，前面部署的签名服务的访问地址
-      # 注意 IP 地址，需要其余主机能够使用这个 IP 地址访问到签名服务
-      webaseSignAddress: "xxx.xx.xx.xxx:5004"
-      
-      # 部署区块链服务的节点主机存放节点配置文件和数据的目录
-      rootDirOnHost: "/opt/fisco"
-      
-      # SSH 免密登录的账号 和 端口，默认为 root 和 22
-      sshDefaultUser: root
-      sshDefaultPort: 22
-    ```
+```yaml
+ constant:
+  # 1.4.0 visual deploy
+  # 部署方式修改为 1，启用可视化部署
+  deployType: 1
+  
+  # WeBASE-Sign 服务的访问地址，前面部署的签名服务的访问地址
+  # 注意 IP 地址，需要其余主机能够使用这个 IP 地址访问到签名服务
+  webaseSignAddress: "xxx.xx.xx.xxx:5004"
+  
+  # 部署区块链服务的节点主机存放节点配置文件和数据的目录
+  rootDirOnHost: "/opt/fisco"
+  
+  # SSH 免密登录的账号 和 端口，默认为 root 和 22
+  sshDefaultUser: root
+  sshDefaultPort: 22
+```
 
 
 ### 可视化部署节点
@@ -274,6 +274,7 @@ http://{deployIP}:{webPort}
 
 
 ### 常见问题
+
 <span id="install_docker" />
 #### 安装 Docker
 在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
