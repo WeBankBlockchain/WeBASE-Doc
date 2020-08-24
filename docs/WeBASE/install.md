@@ -117,7 +117,7 @@ cd webase-deploy
 1. 采用一键部署，根据说明修改 `common.properties` 文件中的配置；
 2. 采用可视化部署，根据说明修改 `visual-deploy.properties` 文件中的配置
 
-- 一键部署方式时，修改 `common.properties` 配置文件
+- **一键部署**方式时，修改 `common.properties` 配置文件
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.4.0
@@ -182,8 +182,8 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 ```
 
-- 可视化方式时，修改 `visual-deploy.properties` 文件。
-<span id="visual-deploy-config"></span>>
+- **可视化方式**时，修改 `visual-deploy.properties` 文件。
+<span id="visual-deploy-config"></span>
 
 ```eval_rst
 .. important::
