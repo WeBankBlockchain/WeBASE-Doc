@@ -172,6 +172,7 @@ user   ALL=(ALL) NOPASSWD : ALL
   
   # WeBASE-Sign 服务的访问地址，前面部署的签名服务的访问地址
   # 注意 IP 地址，WeBASE-Front 会使用此 IP 地址访问签名服务
+  # 不能使用 127.0.0.1 
   webaseSignAddress: "xxx.xx.xx.xxx:5004"
   
   # 部署区块链服务的节点主机存放节点配置文件和数据的目录
