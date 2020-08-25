@@ -252,14 +252,35 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 python deploy.py installAll
     
 # 2. 可视化部署
-python deploy.py visualDeploy
+python deploy.py installWeBASE
 ```
 
-* 停止所有服务：
+* 停止服务：
+    - 停止一键部署的所有服务
 
-```shell
-python deploy.py stopAll
-```
+    ```shell
+    python deploy.py stopAll
+    ```
+
+    - 停止可视化部署的所有服务
+
+    ```shell
+    python deploy.py stopWeBASE
+    ```
+
+* 启动服务：
+    - 启动一键部署的所有服务
+
+    ```shell
+    python deploy.py startAll
+    ```
+
+    - 启动可视化部署的所有服务
+
+    ```shell
+    python deploy.py startWeBASE
+    ```
+
 * 服务部署后，如果需要单独启停，可以使用以下命令：
 
 ```shell
@@ -613,4 +634,21 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ### 12. WeBASE-Web登录页面的验证码加载不出来
 
 答：检查WeBASE-Node-Manager后台服务是否已启动成功：在webase-node-mgr目录下，运行`bash status.sh`或者查看目录中`log/WeBASE-Node-Manager.log`日志文件，查看是否启动失败；
+
+### 13. WeBASE CDN加速服务
+
+答：WeBASE CDN加速服务提供WeBASE各子系统安装包的下载服务，地址为： `https://www.fisco.com.cn/cdn/webase/releases/download/{release_version}/webase-{subsystem}.zip`，其中`{release_version}`为`v1.x.x`格式，`{subsystem}`则是子系统名字，支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载
+
+可以直接通过`wget`或者`curl -O`命令直接获取安装包；如，获取WeBASE-Node-Manager v1.4.0的安装包`webase-node-mgr.zip`
+
+```
+wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/webase-node-mgr.zip
+// 或
+curl -O https://www.fisco.com.cn/cdn/webase/releases/download/v1.4.0/webase-node-mgr.zip
+```
+
+### 14. WeBASE代码仓库国内gitee镜像
+
+答：WeBASE代码仓库在国内的gitee镜像地址为`https://gitee.com/WeBank/WeBASE`，WeBASE其他子系统的仓库则是`https://gitee.com/WeBank/`+ `WeBASE-XXX`，如WeBASE-Front的gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
+
 
