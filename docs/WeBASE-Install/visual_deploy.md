@@ -125,7 +125,7 @@
 
 **注意：**
 - 配置[可视化部署配置文件](../WeBASE/install.html#visual-deploy-config)时，选择`visual-deploy.properties`进行配置
-- 选择部署方式时，选择 **可视化部署** 方式，即执行 `deploy.py` 脚本时，执行 `python deploy.py visualDeploy`
+- 选择部署方式时，选择 **可视化部署** 方式，即执行 `deploy.py` 脚本时，执行 `python deploy.py installWeBASE`
 
 #### 2. 手动部署依赖服务
 适合**多机部署**，企业级的情况使用。
