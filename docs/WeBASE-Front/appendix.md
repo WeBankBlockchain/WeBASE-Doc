@@ -240,6 +240,7 @@ public void loadPrivateKeyTest() {
 
 ```
 
+<span id="event_subscribe"></span>
 ## 4. 支持链上事件订阅和通知
 
 在某些业务场景中，应用层需要实时获取链上的事件，如出块事件、合约Event事件等。应用层通过WeBASE连接节点后，**由于无法和节点直接建立长连接**，难以实时获取链上的消息。
