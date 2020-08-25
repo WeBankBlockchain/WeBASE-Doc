@@ -111,8 +111,13 @@ cd webase-deploy
 
 ④ 服务端口不能小于1024。
 
-⑤ 采用一键部署，根据说明修改 `common.properties` 文件中的配置。
+⑤ 部署时，支持**一键部署**或者**可视化部署**两种方式，**二者选择其一即可**
 
+下面分别介绍**一键部署和可视化部署**的两种配置示例：
+1. 采用一键部署，则根据说明修改 `common.properties` 文件中的配置；
+2. 采用可视化部署，则根据说明修改 `visual-deploy.properties` 文件中的配置；
+
+- **一键部署**方式时，修改 `common.properties` 配置文件
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.4.0
@@ -177,8 +182,8 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 ```
 
-⑥ 如果使用**可视化部署**， 参考下面的配置修改 `visual-deploy.properties` 文件。
-<span id="visual-deploy-config"></span>>
+- **可视化方式**时，修改 `visual-deploy.properties` 文件。
+<span id="visual-deploy-config"></span>
 
 ```eval_rst
 .. important::
@@ -243,43 +248,35 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 |  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
 |  可视化部署 |  installWeBASE | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参考文档 [可视化部署](#../WeBASE-Install/visual_deploy.html) |
 
-* 选择其中一种部署方式执行
-    
-```shell
-### 请选择一种方式部署：
+根据上文已选择的部署方式完成配置文件的修改后，执行下面对应的部署、停止、启动命令即可
 
-# 1. 部署所有服务
+* **一键部署**方式，则执行：
+```shell
+
+# 1. 部署并启动所有服务
 python deploy.py installAll
-    
-# 2. 可视化部署
-python deploy.py installWeBASE
+
+# 2. 停止一键部署的所有服务
+python deploy.py stopAll
+
+# 3. 启动一键部署的所有服务
+python deploy.py startAll
+
 ```
 
-* 停止服务：
-    - 停止一键部署的所有服务
+* **可视化部署**方式，则执行：
+```shell
 
-    ```shell
-    python deploy.py stopAll
-    ```
+# 1. 部署并启动可视化部署的所有服务
+python deploy.py installWeBASE
 
-    - 停止可视化部署的所有服务
+# 2. 停止可视化部署的所有服务
+python deploy.py stopWeBASE
 
-    ```shell
-    python deploy.py stopWeBASE
-    ```
+# 3. 启动可视化部署的所有服务
+python deploy.py startWeBASE
 
-* 启动服务：
-    - 启动一键部署的所有服务
-
-    ```shell
-    python deploy.py startAll
-    ```
-
-    - 启动可视化部署的所有服务
-
-    ```shell
-    python deploy.py startWeBASE
-    ```
+```
 
 * 服务部署后，如果需要单独启停，可以使用以下命令：
 
