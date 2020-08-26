@@ -634,7 +634,9 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 ### 13. WeBASE CDN加速服务
 
-答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务。为了提供更稳定的下载服务，从 WeBASE v1.4.0 开始使用新的 CDN 下载地址，具体使用方法如下：
+答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务。
+
+为了提供更稳定的下载服务，从 WeBASE v1.4.0 开始使用新的 CDN 下载地址。具体使用方法如下：
 
 CDN 下载地址：
 ```Bash
