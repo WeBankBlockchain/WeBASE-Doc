@@ -13,7 +13,7 @@
 | ------ | ---------------------- |
 | Java   | JDK8或以上版本 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | 推荐Python3.4+ |
+| Python | Python3.5+ |
 | PyMySQL | 使用python3时需安装 |
 
 ### 检查环境
@@ -44,20 +44,18 @@ mysql --version
 
 #### 检查Python
 
-推荐使用Python3.4或以上版本：
+使用Python3.5或以上版本：
 ```
 python --version
 ```
 
 - Python安装部署可参考[Python部署](#id17)
 
-#### PyMySQL部署（Python3.4+）
+#### PyMySQL部署（Python3.5+）
 
-Python3.4及以上版本，需安装`PyMySQL`依赖包
+Python3.5及以上版本，需安装`PyMySQL`依赖包
 
-**备注** 同时支持python2.7+：使用python2.7+时，需安装`MySQL-python`。推荐参考[Mysql-python安装示例](#mysql-python-python2-7)文档进行安装；
-
-python3.4+版本安装`PyMysql`依赖包方法：
+python3.5+版本安装`PyMysql`依赖包方法：
 
 - CentOS
 
@@ -118,6 +116,7 @@ cd webase-deploy
 2. 采用可视化部署，则根据说明修改 `visual-deploy.properties` 文件中的配置；
 
 - **一键部署**方式时，修改 `common.properties` 配置文件
+
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.4.0
@@ -182,8 +181,10 @@ fisco.version=2.4.1
 node.counts=nodeCounts
 ```
 
+
 - **可视化方式**时，修改 `visual-deploy.properties` 文件。
 <span id="visual-deploy-config"></span>
+
 
 ```eval_rst
 .. important::
@@ -246,7 +247,7 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 | 部署方式  | 参数  | 说明  |
 |---|---|---|
 |  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
-|  可视化部署 |  installWeBASE | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参考文档 [可视化部署](#../WeBASE-Install/visual_deploy.html) |
+|  可视化部署 |  installWeBASE | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参考文档 [可视化部署](../WeBASE-Install/visual_deploy.html) |
 
 根据上文已选择的部署方式完成配置文件的修改后，执行下面对应的部署、停止、启动命令即可
 
@@ -490,7 +491,7 @@ python --version
 ```
 python2.7+版本，需要安装`MySQL-python`，安装方法如下：
 
-*注*：同时支持python3.4+，python3.4+时需要安装`Py-MySQL`依赖包，可参考 [检查python环境-PyMysql](#pymysql-python3-4) 
+*注*：同时支持python3.5+，python3.5+时需要安装`Py-MySQL`依赖包，可参考 [检查python环境-PyMysql](#pymysql-python3-5) 
 
 python2.7+版本安装`MySQL-python`依赖包方法：
 
@@ -542,7 +543,7 @@ Traceback (most recent call last):
 ImportError: No module named 'pymysql'
 ```
 
-答：需要安装PyMySQL，安装请参看 [pymysql](#pymysql-python3-4)
+答：需要安装PyMySQL，安装请参看 [pymysql](#pymysql-python3-5)
 
 ### 4. 安装MySQL-python遇到问题
 
