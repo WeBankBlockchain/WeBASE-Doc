@@ -635,16 +635,13 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 ### 13. WeBASE CDN加速服务
 
-答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务。为了提供更稳定的下载服务，从 WeBASE v1.4.0 开始使用新的 CDN 下载地址。请注意根据不同版本选择不同的下载地址。
+答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务。
 
-- v1.4.0 版本
+为了提供更稳定的下载服务，从 WeBASE v1.4.0 开始使用新的 CDN 下载地址。具体使用方法如下：
+
+CDN 下载地址：
 ```Bash
 https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/{release_version}/webase-{subsystem}.zip
-```
-    
-- v1.3.2（包括）及以前版本
-```Bash
-https://www.fisco.com.cn/cdn/webase/releases/download/{release_version}/webase-{subsystem}.zip
 ```
 
 其中`{release_version}`为`v1.x.x`格式，`{subsystem}`则是子系统名字，支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载。
@@ -659,12 +656,6 @@ wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/downlo
 curl -O https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.0/webase-node-mgr.zip
 ```
 
-- 获取WeBASE-Node-Manager v1.3.2 的安装包`webase-node-mgr.zip`
-
-```
-// 对于 v1.3.2 (包括)及以前的版本
-wget https://www.fisco.com.cn/cdn/webase/releases/download/v1.3.2/webase-node-mgr.zip
-```
 
 ### 14. WeBASE代码仓库国内gitee镜像
 
