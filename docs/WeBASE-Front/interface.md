@@ -2,6 +2,7 @@
 # 接口说明
 
 ## 1. 合约接口
+
 ### 1.1. 发送abi接口
 
 #### 接口描述
@@ -52,73 +53,8 @@ HTTP POST
 
 无
 
-### 1.2. 合约部署接口
-
-#### 接口描述
-
-> 将合约部署到当前节点。
->
-> 构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
->
-> ```
-> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
-> constructor(uint n,bool b) -> [1,true]
-> constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-> ```
-
-构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
-
-```
-constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
-constructor(uint n,bool b) -> [1,true]
-constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-```
-
-#### 接口URL
-
-**http://localhost:5002/WeBASE-Front/contract/deploy**
-
-#### 调用方法
-
-HTTP POST
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
-| -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
-| 1        | 所属群组     | groupId      | int      |              | 是       |                      |
-| 2        | 用户地址     | user         | String   |              | 是       | 用户地址，可通过`/privateKey`接口创建 |
-| 3        | 合约名称     | contractName | String   |              | 是       |                      |
-| 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
-| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
-| 6        | 构造函数参数 | funcParam    | List     |              | 否       | 合约构造函数所需参数，JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
-| 7        | 合约版本     | version     | String    |             |   否       |  用于指定合约在CNS中的版本    |
-
-**2）数据格式**
-
-```
-{
-    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
-    "contractName":"HelloWorld",
-    "abiInfo": [],
-    "bytecodeBin":"",
-    "funcParam":[]
-}
-```
-
-#### 响应参数
-
-**1）数据格式**
-
-```
-{
-    "0x60aac015d5d41adc74217419ea77815ecb9a2192"
-}
-```
-
-### 1.3. 合约部署接口（结合WeBASE-Sign）
+<span id="deployWithSign"></span>
+### 1.2. 合约部署接口（结合WeBASE-Sign）
 
 #### 接口描述
 
@@ -141,6 +77,7 @@ constructor(uint n,bool b) -> [1,true]
 constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
 
+*查看WeBASE-Front通过本地私钥（测试用户）部署合约的接口（非WeBASE-Sign签名交易），可查看[其他接口-合约部署接口（本地签名）](#deployNoSign)*
 
 #### 接口URL
 
@@ -192,7 +129,7 @@ curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign" -H "ac
 }
 ```
 
-### 1.4. cns接口 
+### 1.3. cns接口 
 
 
 #### 接口描述
@@ -231,7 +168,7 @@ http://localhost:5002/WeBASE-Front/contract/cns?groupId=1&name=HelloWorld&versio
     "0x31b26e43651e9371c88af3d36c14cfd938baf4fd"
 }
 ```
-### 1.5. java转译接口
+### 1.4. java转译接口
 
 
 #### 接口描述
@@ -273,7 +210,7 @@ HTTP POST
 **1）数据格式**
 java文件
 
-### 1.6. 保存合约接口
+### 1.5. 保存合约接口
 
 #### 接口描述
 
@@ -356,7 +293,7 @@ HTTP POST
 }
 ```
 
-### 1.7. 删除合约接口
+### 1.6. 删除合约接口
 
 #### 接口描述
 
@@ -404,7 +341,7 @@ http://localhost:5002/WeBASE-Front/contract/1/1
 ```
 
 
-### 1.8. 分页查询合约列表
+### 1.7. 分页查询合约列表
 
 #### 接口描述
 
@@ -495,7 +432,7 @@ HTTP POST
 }
 ```
 
-### 1.9. 合约是否被修改接口
+### 1.8. 合约是否被修改接口
 
 #### 接口描述
 
@@ -532,7 +469,7 @@ http://localhost:5002/WeBASE-Front/contract/ifChanged/1/10
 true
 ```
 
-### 1.10. 后台编译合约
+### 1.9. 后台编译合约
 
 #### 接口描述
 
@@ -582,7 +519,7 @@ HTTP POST
 }
 ```
 
-### 1.11. 多合约编译
+### 1.10. 多合约编译
 
 #### 接口描述
 
@@ -636,7 +573,7 @@ HTTP POST
   ]
 ```
 
-### 1.12. 已签名交易发送
+### 1.11. 已签名交易发送
 
 #### 接口描述
 
@@ -716,7 +653,7 @@ HTTP POST
 ```
 
 
-### 1.13. 已编码查询交易发送
+### 1.12. 已编码查询交易发送
 
 #### 接口描述
 
@@ -3077,103 +3014,10 @@ HTTP GET
 ]
 ```
 
-### 
-
 ## 5. 交易接口
 
-### 5.1. 交易处理接口
-
-#### 接口描述
-
-通过合约信息进行调用，前置根据调用的合约方法是否是“constant”方法区分返回信息，“constant”方法为查询，返回要查询的信息。非“constant”方法为发送数据上链，返回块hash、块高、交易hash等信息。
-
-方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
-
-```
-function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
-function set(uint n,bool b) -> [1,true]
-function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-```
-
-#### 接口URL
-
-**http://localhost:5002/WeBASE-Front/trans/handle**
-
-#### 调用方法
-
-HTTP POST
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
-| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-| 1        | 用户地址       | user            | String   |              | 是       | 用户地址，可通过`/privateKey`接口创建           |
-| 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
-| 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
-| 4        | 方法名         | funcName        | String   |              | 是       |                                                |
-| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
-| 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
-| 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 8        | 合约版本       | version           | String      |         |   否       | CNS中合约版本，该字段在v1.3.0+版本已弃用                                          |
-| 9        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
-
-**2）数据格式**
-
-示例：
-
-```
-curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}], funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
-```
-
-传入合约abi:
-```
-{
-    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
-    "contractName":"HelloWorld",
-    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
-    "funcName":"set",
-    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
-    "funcParam":["Hi,Welcome!"],
-    "groupId" :"1"
-}
-```
-
-#### 响应参数
-
-a、正确查询交易返回值信息
-
-```
-{"Hi,Welcome!"}
-```
-
-b、正确发送数据上链返回值信息（交易收据）
-
-```
-{
-    "code": 0,
-    "message": "success",
-    "data": {
-        "blockHash":
-        "0x1d8d8275aa116d65893291c140849be272dac1d4ca0a0a722f44404b2f2356c3",
-        "gasUsed": 32798,
-        "transactionIndexRaw": "0",
-        "blockNumberRaw": "33",
-        "blockNumber": 33,
-        "contractAddress": "0x0000000000000000000000000000000000000000",
-        "cumulativeGasUsed": 32798,
-        "transactionIndex": 0,
-        "gasUsedRaw": "0x801e",
-        "logs": [],
-        "cumulativeGasUsedRaw": "0x801e",
-        "transactionHash":"0x0653a8e959771955330461456dd094a96d9071bfa31e6f43b68b30f10a85689c"
-    }
-}
-```
-
-### 5.2. 交易处理接口（结合WeBASE-Sign）
+<span id="transWithSign"></span>
+### 5.1. 交易处理接口（结合WeBASE-Sign）
 
 #### 接口描述
 
@@ -3196,6 +3040,8 @@ function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
 function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
+
+*查看WeBASE-Front通过本地私钥（测试用户）交易处理接口（非WeBASE-Sign签名交易），可查看[其他接口-交易处理接口（本地签名）](#transNoSign)*
 
 #### 接口URL
 
@@ -5207,6 +5053,177 @@ a、成功：
 ```
 v1.4.0
 ```
+
+<span id="deployNoSign"></span>
+### 10.4. 合约部署接口(本地签名)
+
+#### 接口描述
+
+此接口为WeBASE-Front使用**本地私钥（页面中的测试用户）进行签名**
+
+> 将合约部署到当前节点。
+>
+> 构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+>
+> ```
+> constructor(string s) -> ["aa,bb\"cc"]    // 双引号要转义
+> constructor(uint n,bool b) -> [1,true]
+> constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+> ```
+
+构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
+constructor(uint n,bool b) -> [1,true]
+constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+*查看WeBASE-Front通过WeBASE-Sign部署合约的接口（非本地私钥签名交易），可查看[合约接口-合约部署接口（结合WeBASE-Sign）](#deployWithSign)*
+
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/deploy**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明**             |
+| -------- | ------------ | ------------ | -------- | ------------ | -------- | -------------------- |
+| 1        | 所属群组     | groupId      | int      |              | 是       |                      |
+| 2        | 用户地址     | user         | String   |              | 是       | 用户地址，可通过`/privateKey`接口创建 |
+| 3        | 合约名称     | contractName | String   |              | 是       |                      |
+| 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi文件内容  |
+| 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
+| 6        | 构造函数参数 | funcParam    | List     |              | 否       | 合约构造函数所需参数，JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
+| 7        | 合约版本     | version     | String    |             |   否       |  用于指定合约在CNS中的版本    |
+
+**2）数据格式**
+
+```
+{
+    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
+    "contractName":"HelloWorld",
+    "abiInfo": [],
+    "bytecodeBin":"",
+    "funcParam":[]
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+    "0x60aac015d5d41adc74217419ea77815ecb9a2192"
+}
+```
+
+<span id="transNoSign"></span>
+### 10.5. 交易处理接口（本地签名）
+
+#### 接口描述
+
+此接口为WeBASE-Front使用**本地私钥（页面中的测试用户）进行签名**
+
+通过合约信息进行调用，前置根据调用的合约方法是否是“constant”方法区分返回信息，“constant”方法为查询，返回要查询的信息。非“constant”方法为发送数据上链，返回块hash、块高、交易hash等信息。
+
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(uint n,bool b) -> [1,true]
+function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+```
+
+*查看WeBASE-Front通过WeBASE-Sign交易处理的接口（非本地私钥签名交易），可查看[合约接口-交易处理接口（结合WeBASE-Sign）](#transWithSign)*
+
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/trans/handle**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 用户地址       | user            | String   |              | 是       | 用户地址，可通过`/privateKey`接口创建           |
+| 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
+| 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
+| 4        | 方法名         | funcName        | String   |              | 是       |                                                |
+| 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
+| 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
+| 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
+| 8        | 合约版本       | version           | String      |         |   否       | CNS中合约版本，该字段在v1.3.0+版本已弃用                                          |
+| 9        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
+
+**2）数据格式**
+
+示例：
+
+```
+curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
+"HelloWorld", "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}], funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+```
+
+传入合约abi:
+```
+{
+    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
+    "contractName":"HelloWorld",
+    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
+    "funcName":"set",
+    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
+    "funcParam":["Hi,Welcome!"],
+    "groupId" :"1"
+}
+```
+
+#### 响应参数
+
+a、正确查询交易返回值信息
+
+```
+{"Hi,Welcome!"}
+```
+
+b、正确发送数据上链返回值信息（交易收据）
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "blockHash":
+        "0x1d8d8275aa116d65893291c140849be272dac1d4ca0a0a722f44404b2f2356c3",
+        "gasUsed": 32798,
+        "transactionIndexRaw": "0",
+        "blockNumberRaw": "33",
+        "blockNumber": 33,
+        "contractAddress": "0x0000000000000000000000000000000000000000",
+        "cumulativeGasUsed": 32798,
+        "transactionIndex": 0,
+        "gasUsedRaw": "0x801e",
+        "logs": [],
+        "cumulativeGasUsedRaw": "0x801e",
+        "transactionHash":"0x0653a8e959771955330461456dd094a96d9071bfa31e6f43b68b30f10a85689c"
+    }
+}
+```
+
 
 
 ## 11. 附录
