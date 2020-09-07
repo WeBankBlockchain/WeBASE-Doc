@@ -7,6 +7,10 @@ WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://g
 ##### 增加版本号接口
 - 增加返回 WeBASE-Sign 版本号接口
 
+##### 修改AES加密默认Pattern
+- 默认Aes加密模式由`ECB`改为更安全的`CBC`，同时支持在yml配置中选择CBC与ECB
+
+
 #### v1.3.2
 
 ##### 移除fastjson
