@@ -571,7 +571,7 @@ Traceback (most recent call last):
 Exception: execute cmd  error ,cmd : sudo /usr/local/nginx/sbin/nginx -c /data/app/webase-deploy/comm/nginx.conf, status is 256 ,output is nginx: [emerg] open() "/etc/nginx/mime.types" failed (2: No such file or directory) in /data/app/webase-deploy/comm/nginx.conf:13
 ```
 
-答：检查服务器是否安装了nginx，如果未安装，则通过"which nginx"查询nginx文件路径并删除。
+答：缺少/etc/nginx/mime.types文件，建议重装nginx。
 
 ### 7. 部署时数据库访问报错
 
