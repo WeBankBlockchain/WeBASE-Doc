@@ -51,9 +51,35 @@ ps -ef | grep nginx                              # 查看nginx进程
  2. WeBASE-Node-Manager的数据库是否正常，
  3. nginx代理是否存在错误。
     
+    
 #### 2.2 登录页面的验证码加载不出来
-检查WeBASE-Node-Manager后台是否已启动：
-在webase-node-mgr目录下，运行`bash status.sh`或者查看`log/WeBASE-Node-Manager.log`日志文件，查看是否启动失败
+* 进入 `webase-node-mgr` 目录下，执行 `bash status.sh` 检查服务是否启动，如果服务没有启动，运行 `bash start.sh` 启动服务；
+
+* 如果服务已经启动，按照如下修改日志级别
+    * `webase-node-mgr/conf/application.yml`
+    
+    ```
+    #log config
+    logging:
+      level:
+        com.webank.webase.node.mgr: debug
+    ```
+    
+    * `webase-node-mgr/conf/log/log4j2.xml`
+
+    ```
+    <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="asyncInfo"/>
+      <AppenderRef ref="asyncErrorLog"/>
+    </Root>
+  </Loggers>
+    ```
+
+* 重启服务 `bash stop.sh && bash start.sh`
+
+* 重启服务后，检查日志文件 `log/WeBASE-Node-Manager.log`。
+    * 检查是否有异常信息。如果有异常信息，根据具体的异常信息检查环境配置，或者通过搜索引擎进行排查。
 
 #### 2.3 为什么输入正确的验证码显示验证码错误
 登录验证码有效时间为五分钟，五分钟后验证码失效，登录会出现“验证码错误” 。
