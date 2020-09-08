@@ -5355,7 +5355,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 ## 13 系统管理模块
 
 系统管理中的权限管理接口
-- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.x)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.26)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
 - 使用低于FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1版本，则使用接口13.1至13.4接口
 
 ### 13.1 查看权限管理
@@ -6264,7 +6264,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 ### 13.14 获取链治理委员列表
 <span id="governance"></span>
 
-使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.x)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.26)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
 
 委员的权限包括治理投票、增删节点、冻结解冻合约、冻结解冻账号、修改链配置和增删运维账号。
 
@@ -6394,7 +6394,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee
 ```
 
 
-### 13.16 去除管理权限接口
+### 13.16 去除链管理委员接口
 
 增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
 - 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
@@ -6415,7 +6415,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | int        | 否     | 群组id      
 | 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 3    | address   | String           | 否     | 新的链治理委员地址         
+| 3    | address   | String           | 否     | 待取消的链治理委员地址         
           
 
 ***2）入参示例***
@@ -6754,7 +6754,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator/list?groupId=1&pag
 
 ### 13.21 增加运维接口
 
-由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+由链治理委员添加/去除运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
 
 #### 13.21.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -6819,7 +6819,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 
 ### 13.22 去除运维接口
 
-由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+由链治理委员添加/去除运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
 
 #### 13.22.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -6999,8 +6999,6 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account/status/list
 ```
 
 
-
-
 ### 13.25 冻结外部账户地址接口
 
 未开启权限时采用白名单机制，任何用户都可以冻结外部账户地址。启用权限后（设置第一个链治理委员），由链治理委员进行账户冻结/解冻操作
@@ -7129,6 +7127,73 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account
     "message": "permission denied"
 }
 ```
+
+### 13.27 合约状态管理
+
+由**合约部署者**（一般由运维所部属）与链治理委员共同管理合约的状态，包含冻结/解冻合约、查询合约状态功能
+
+#### 13.27.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/contract/status**
+* 请求方式： POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.27.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String   | 否     | 合约管理者地址                                     |
+| 3    | contractAddress | String | 否     | 已部署的合约地址                                             |
+| 4    | handleType      | String | 否     | 操作类型：freeze-冻结；unfreeze-解冻；getStatus-查询合约状态； |
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "contractAddress": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e",
+    "handleType": "freeze"
+}
+```
+
+
+#### 13.27.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
 
 ## 14 证书管理模块
 
