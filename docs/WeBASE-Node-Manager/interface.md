@@ -2064,6 +2064,122 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 
 
 
+### 5.11 获取合约状态修改记录列表  
+
+当冻结合约或解冻合约时会产生一条记录，此接口返回某群组下的修改记录列表
+
+#### 5.11.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/status/record/list**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 5.11.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/status/record/list?groupId=1&pageNumber=1&pageSize=10
+```
+
+
+#### 5.11.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | id        | int           | 否     | 合约记录编号                                        |
+| 3.2  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.3  | contractAddress    | String        | 否     | 合约地址                                        |
+| 3.4  | modifyAddress  | String        | 否     | 合约管理员用户地址                                        |
+| 3.5  | status     | Int        | 否     |          合约修改状态，0-正常（未冻结），1-已冻结                              |
+| 3.6 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.7 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 4    |  totalCount    | Int         |        | 总数                                    |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "groupId": 1,
+      "modifyAddress": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
+      "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "status": 0,
+      "createTime": "2020-05-18 10:59:02",
+      "modifyTime": "2020-05-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+
+### 5.12 删除合约状态修改记录  
+
+删除合约状态修改记录
+
+#### 5.12.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/status/record/{statusId}**
+* 请求方式：DELETE
+* 返回格式：JSON
+
+#### 5.12.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | statusId         | int           | 否     | 合约状态记录编号                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/status/record/{statusId}
+```
+
+
+#### 5.12.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+
+
 ## 6 服务器监控相关
 
 ### 6.1 获取节点监控信息  
@@ -5355,7 +5471,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 ## 13 系统管理模块
 
 系统管理中的权限管理接口
-- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.26)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.28)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
 - 使用低于FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1版本，则使用接口13.1至13.4接口
 
 ### 13.1 查看权限管理
@@ -7191,6 +7307,187 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
 {
     "code": -50000,
     "message": "permission denied"
+}
+```
+
+
+### 13.28 批量查看合约冻结状态
+
+传入多个合约地址的List，查看该合约地址的冻结状态
+
+#### 13.28.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/precompiled/contract/status/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.28.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | addressList   | List<String>           | 否     | 多个合约地址的列表
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status/list
+```
+
+```
+{
+    "groupId": 1,
+    "addressList": ["0x009fb217b6d7f010f12e7876d31a738389fecd51", "0x6b9fb217b6d7f010f12e7876d31a738389feef62"]
+}
+```
+
+#### 13.28.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Map        |      | 直接返回Map, 0-正常，1-冻结 如：["0x009fb217b6d7f010f12e7876d31a738389fecd51": 0, "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1]                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        "0x009fb217b6d7f010f12e7876d31a738389fecd51": 0,
+        "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1
+    ],
+    "totalCount": 1
+}
+```
+
+
+
+### 13.29 获取链委员会投票记录列表  
+
+当链委员会发起一笔交易时会产生一条投票记录，此接口返回某群组下的修改记录列表
+
+#### 13.29.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/vote/record/list**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 13.29.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/list?groupId=1&pageNumber=1&pageSize=10
+```
+
+
+#### 13.29.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | id        | int           | 否     | 合约记录编号                                        |
+| 3.2  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.3  | timeLimit    | Long        | 否     | 投票块高限制范围                                        |
+| 3.4  | fromAddress  | String        | 否     | 链委员的地址                                        |
+| 3.5  | type     | Int        | 否     |          投票类型，1-增加委员，2-去除委员，3-更新委员权重，4-更新阈值  |
+| 3.6  | toAddress  | String        | 否     | 被修改的外部账户地址，当类型为1,2,3时为非空                                        |
+| 3.7  | detail     | String        | 否     |         投票内容详情，当类型为3,4时为非空；3-`{weight: 2}`，4-`{threshold: 2}`   |
+| 3.8 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.9 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 4    |  totalCount    | Int         |        | 总数                                    |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "groupId": 1,
+      "timeLimit": 200,      
+      "fromAddress": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
+      "type": 3,
+      "toAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "detail": "{weight: 2}",
+      "createTime": "2020-09-18 10:59:02",
+      "modifyTime": "2020-09-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+
+### 13.30 删除链委员会投票记录  
+
+删除投票记录
+
+#### 13.30.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/vote/record/{voteId}**
+* 请求方式：DELETE
+* 返回格式：JSON
+
+#### 13.30.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | voteId         | int           | 否     | 投票记录编号                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/{voteId}
+```
+
+
+#### 13.30.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success"
 }
 ```
 
