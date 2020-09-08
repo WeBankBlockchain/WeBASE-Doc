@@ -5354,6 +5354,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 
 ## 13 系统管理模块
 
+系统管理中的权限管理接口
+- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.x)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+- 使用低于FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1版本，则使用接口13.1至13.4接口
 
 ### 13.1 查看权限管理
 
@@ -6253,6 +6256,877 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
     "code": 201228,
     "message": "table not exists",
     "data": "Table not exists "
+}
+```
+
+
+
+### 13.14 获取链治理委员列表
+<span id="governance"></span>
+
+使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.x)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+
+委员的权限包括治理投票、增删节点、冻结解冻合约、冻结解冻账号、修改链配置和增删运维账号。
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
+
+
+#### 13.14.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.14.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | pageSize   | int           | 否     |
+| 3    | pageNumber   | int           | 否     |
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee/list?groupId=1&pageSize=5&pageNumber=1
+```
+
+#### 13.14.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | List数组        |      | 直接返回数组                     
+| 4   | totalCount     | int        |      | 总数目                          
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 13.15 增加链治理委员
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
+
+#### 13.15.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.15.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | address   | String           | 否     | 新的链治理委员地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.15.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+### 13.16 去除管理权限接口
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
+
+#### 13.16.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.16.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | address   | String           | 否     | 新的链治理委员地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.16.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+### 13.17 获取链治理委员投票权重
+
+委员默认的投票权重为1
+
+#### 13.17.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/weight**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.17.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | address   | String           | 否     |
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight?groupId=1&address=0x009fb217b6d7f010f12e7876d31a738389fecd51
+```
+
+#### 13.17.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Object        |      | 权重值                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+
+    ],
+    "totalCount": 1
+}
+```
+
+### 13.18 更新链治理委员投票权重值
+
+委员默认的投票权重为1
+
+#### 13.18.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/weight**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.18.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | address   | String           | 否     | 新的链治理委员地址         
+| 4    | weight     | int        | 否     | 投票权重值      
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e",
+    "weight": 2
+}
+```
+
+
+#### 13.18.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+### 13.19 获取链治理投票阈值
+
+默认投票阈值为50，即超过(不包括)50%的票数权重即可通过
+
+#### 13.19.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/threshold**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.19.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/threshold?groupId=1
+```
+
+#### 13.19.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Object        |      | 权重值                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 50,
+    "totalCount": 1
+}
+```
+
+### 13.19 更新链治理投票阈值
+
+委员默认的投票权重为1
+
+#### 13.19.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/threshold**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.19.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | threshold     | int        | 否     | 投票阈值      
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/threshold
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "threshold": 60
+}
+```
+
+
+#### 13.19.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+### 13.20 查看运维列表
+<span id="operator"></span>
+由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 13.20.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/operator/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.20.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | pageSize   | int           | 否     |
+| 3    | pageNumber   | int           | 否     |
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/operator/list?groupId=1&pageSize=5&pageNumber=1
+```
+
+#### 13.20.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | List数组        |      | 直接返回数组                     
+| 4   | totalCount     | int        |      | 总数目                          
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 13.21 增加运维接口
+
+由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 13.21.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/operator**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.21.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 4    | address   | String           | 否     | 运维地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/operator
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.21.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+### 13.22 去除运维接口
+
+由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 13.22.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/operator**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.22.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 4    | address   | String           | 否     | 运维地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/operator
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.22.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+
+### 13.23 查看外部账户冻结状态
+<span id="accountStatus"></span>
+
+获取单个外部账户（地址）的冻结状态，默认为非冻结
+
+#### 13.23.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/account/status**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.23.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | address   | String           | 否     | 外部账户地址
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/account/status?groupId=1&address=0x009fb217b6d7f010f12e7876d31a738389fecd51
+```
+
+#### 13.23.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Object        |      | 账户状态                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+       
+    ],
+}
+```
+
+### 13.24 批量查看外部账户冻结状态
+
+传入多个外部账户地址的List，查看该地址的账户状态
+
+#### 13.24.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/account/status/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.24.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | addressList   | List<String>           | 否     | 多个地址的列表，如["0x009fb217b6d7f010f12e7876d31a738389fecd51", "0x6b9fb217b6d7f010f12e7876d31a738389feef62"]
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/account/status/list
+```
+
+
+```
+{
+    "groupId": 1,
+    "addressList": ["0x009fb217b6d7f010f12e7876d31a738389fecd51", "0x6b9fb217b6d7f010f12e7876d31a738389feef62"]
+}
+```
+
+#### 13.24.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Map        |      | 直接返回Map, 如：["0x009fb217b6d7f010f12e7876d31a738389fecd51": 0, "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1]                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+
+
+### 13.25 冻结外部账户地址接口
+
+未开启权限时采用白名单机制，任何用户都可以冻结外部账户地址。启用权限后（设置第一个链治理委员），由链治理委员进行账户冻结/解冻操作
+
+#### 13.25.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/account**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.25.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 4    | address   | String           | 否     | 待冻结的外部账户地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/account
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.25.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
+}
+```
+
+
+### 13.26 取消冻结外部账户接口
+
+未开启权限时采用白名单机制，任何用户都可以冻结外部账户地址。启用权限后（设置第一个链治理委员），由链治理委员进行账户冻结/解冻操作
+
+#### 13.26.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/account**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.26.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 4    | address   | String           | 否     | 待取消冻结的外部账户地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/account
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.26.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -50000,
+    "message": "permission denied"
 }
 ```
 
