@@ -3960,7 +3960,7 @@ b、失败：
 
 #### 接口URL
 
-**http://localhost:5002/WeBASE-Front/precompiled/contract/status**
+**http://localhost:5002/WeBASE-Front/precompiled/contractStatusManage**
 
 #### 调用方法
 
@@ -3973,7 +3973,7 @@ HTTP POST
 | 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
 | ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
 | 1    | groupId         | Int    | 否     | 群组编号                                                     |
-| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号，当`handleType`为`getStatus`或`listManager`时，可不传 |
 | 3    | contractAddress | String | 否     | 已部署的合约地址                                             |
 | 4    | handleType      | String | 否     | 操作类型：freeze-冻结；unfreeze-解冻；grantManager-授权；getStatus-查询合约状态；listManager-查询合约权限列表 |
 | 5    | grantAddress    | String | 是     | 授权用户地址，操作类型为grantManager时需传入                 |
