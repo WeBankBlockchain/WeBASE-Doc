@@ -7003,260 +7003,18 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 ```
 
 
-
-### 13.23 查看外部账户冻结状态
-<span id="accountStatus"></span>
-
-获取单个外部账户（地址）的冻结状态，默认为非冻结
-
-#### 13.23.1 传输协议规范
-* 网络传输协议：使用HTTP协议
-* 请求地址： **/governance/account/status**
-* 请求方式：GET
-* 请求头：Content-type: application/json
-* 返回格式：JSON
-
-#### 13.23.2 请求参数
-
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2   | address   | String           | 否     | 外部账户地址
-                         
-
-***2）入参示例***
-
-```
-http://localhost:5001/WeBASE-Node-Manager/governance/account/status?groupId=1&address=0x009fb217b6d7f010f12e7876d31a738389fecd51
-```
-
-#### 13.23.3 返回参数
-
-***1）出参表***
-
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        |      | 描述    
-| 3   | data     | Integer        |      | 账户状态, 0-normal, 1-frozen                
-      
-
-
-***2）出参示例***
-* 成功：
-```
-{
-    "code": 0,
-    "message": "success",
-    "data": 0
-}
-```
-
-### 13.24 批量查看外部账户冻结状态
-
-传入多个外部账户地址的List，查看该地址的账户状态
-
-#### 13.24.1 传输协议规范
-* 网络传输协议：使用HTTP协议
-* 请求地址： **/governance/account/status/list**
-* 请求方式：POST
-* 请求头：Content-type: application/json
-* 返回格式：JSON
-
-#### 13.24.2 请求参数
-
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2   | addressList   | List<String>           | 否     | 多个地址的列表，如["0x009fb217b6d7f010f12e7876d31a738389fecd51", "0x6b9fb217b6d7f010f12e7876d31a738389feef62"]
-                         
-
-***2）入参示例***
-
-```
-http://localhost:5001/WeBASE-Node-Manager/governance/account/status/list
-```
-
-
-```
-{
-    "groupId": 1,
-    "addressList": ["0x009fb217b6d7f010f12e7876d31a738389fecd51", "0x6b9fb217b6d7f010f12e7876d31a738389feef62"]
-}
-```
-
-#### 13.24.3 返回参数
-
-***1）出参表***
-
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        |      | 描述    
-| 3   | data     | Map        |      | 直接返回地址与状态的map, 0-normal, 1-frozen         
-      
-
-
-***2）出参示例***
-* 成功：
-```
-{
-    "code": 0,
-    "message": "success",
-    "data": {
-        "0x009fb217b6d7f010f12e7876d31a738389fecd51": 0,
-        "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1
-    },
-    "totalCount": 1
-}
-```
-
-
-### 13.25 冻结外部账户地址接口
-
-未开启权限时采用白名单机制，任何用户都可以冻结外部账户地址。启用权限后（设置第一个链治理委员），由链治理委员进行账户冻结/解冻操作
-
-#### 13.25.1 传输协议规范
-* 网络传输协议：使用HTTP协议
-* 请求地址： **/governance/account**
-* 请求方式：POST
-* 请求头：Content-type: application/json
-* 返回格式：JSON
-
-#### 13.25.2 请求参数
-
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 4    | address   | String           | 否     | 待冻结的外部账户地址         
-          
-
-***2）入参示例***
-
-```
-http://localhost:5001/WeBASE-Node-Manager/governance/account
-```
-
-```
-{
-    "groupId": 1,
-    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
-    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
-}
-```
-
-
-#### 13.25.3 返回参数
-
-***1）出参表***
-
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述                           
-
-
-***2）出参示例***
-* 成功：
-```
-{
-    "code": 0,
-    "message": "success"
-}
-```
-
-* 失败：
-```
-{
-    "code": -52001,
-    "message": "committee member not exist"
-}
-```
-
-
-### 13.26 取消冻结外部账户接口
-
-未开启权限时采用白名单机制，任何用户都可以冻结外部账户地址。启用权限后（设置第一个链治理委员），由链治理委员进行账户冻结/解冻操作
-
-#### 13.26.1 传输协议规范
-* 网络传输协议：使用HTTP协议
-* 请求地址： **/governance/account**
-* 请求方式：DELETE
-* 请求头：Content-type: application/json
-* 返回格式：JSON
-
-#### 13.26.2 请求参数
-
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 4    | address   | String           | 否     | 待取消冻结的外部账户地址         
-          
-
-***2）入参示例***
-
-```
-http://localhost:5001/WeBASE-Node-Manager/governance/account
-```
-
-```
-{
-    "groupId": 1,
-    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
-    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
-}
-```
-
-
-#### 13.26.3 返回参数
-
-***1）出参表***
-
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述                           
-
-
-***2）出参示例***
-* 成功：
-```
-{
-    "code": 0,
-    "message": "success"
-}
-```
-
-* 失败：
-```
-{
-    "code": -52001,
-    "message": "committee member not exist"
-}
-```
-
-### 13.27 合约状态管理
+### 13.23 合约状态管理
 
 由**合约部署者**（一般由运维所部属）与链治理委员共同管理合约的状态，包含冻结/解冻合约、查询合约状态功能
 
-#### 13.27.1 传输协议规范
+#### 13.23.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/governance/contract/status**
 * 请求方式： POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 13.27.2 请求参数
+#### 13.23.2 请求参数
 
 ***1）入参表***
 
@@ -7284,7 +7042,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
 ```
 
 
-#### 13.27.3 返回参数
+#### 13.23.3 返回参数
 
 ***1）出参表***
 
@@ -7312,18 +7070,18 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
 ```
 
 
-### 13.28 批量查看合约冻结状态
+### 13.24 批量查看合约冻结状态
 
 传入多个合约地址的List，查看该合约地址的冻结状态
 
-#### 13.28.1 传输协议规范
+#### 13.24.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/contract/status/list**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 13.28.2 请求参数
+#### 13.24.2 请求参数
 
 ***1）入参表***
 
@@ -7346,7 +7104,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status/list
 }
 ```
 
-#### 13.28.3 返回参数
+#### 13.24.3 返回参数
 
 ***1）出参表***
 
@@ -7374,17 +7132,17 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status/list
 
 
 
-### 13.29 获取链委员会投票记录列表  
+### 13.25 获取链委员会投票记录列表  
 
 当链委员会发起一笔交易时会产生一条投票记录，此接口返回某群组下的修改记录列表
 
-#### 13.29.1 传输协议规范
+#### 13.25.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/vote/record/list**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 13.29.2 请求参数
+#### 13.25.2 请求参数
 
 ***1）入参表***
 
@@ -7402,7 +7160,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/list?groupId=1&pageNumber=
 ```
 
 
-#### 13.29.3 返回参数 
+#### 13.25.3 返回参数 
 
 ***1）出参表***
 
@@ -7447,17 +7205,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/list?groupId=1&pageNumber=
 ```
 
 
-### 13.30 删除链委员会投票记录  
+### 13.26 删除链委员会投票记录  
 
 删除投票记录
 
-#### 13.30.1 传输协议规范
+#### 13.26.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/vote/record/{voteId}**
 * 请求方式：DELETE
 * 返回格式：JSON
 
-#### 13.30.2 请求参数
+#### 13.26.2 请求参数
 
 ***1）入参表***
 
@@ -7473,7 +7231,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/{voteId}
 ```
 
 
-#### 13.30.3 返回参数 
+#### 13.26.3 返回参数 
 
 ***1）出参表***
 
@@ -7494,17 +7252,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/{voteId}
 
 
 
-### 13.31 获取链治理委员列表(包含权重)  
+### 13.27 获取链治理委员列表(包含权重)  
 
 获取链治理委员列表，同时返回委员投票的权重值
 
-#### 13.31.1 传输协议规范
+#### 13.27.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/governance/committee/list/sorted**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 13.31.2 请求参数
+#### 13.27.2 请求参数
 
 ***1）入参表***
 
@@ -7522,7 +7280,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?group
 ```
 
 
-#### 13.31.3 返回参数 
+#### 13.27.3 返回参数 
 
 ***1）出参表***
 
