@@ -3747,7 +3747,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
 ```
 
 ```
@@ -3841,7 +3841,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b9
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate
 ```
 
 ```
@@ -3924,7 +3924,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
 ```
 
 ```
@@ -3988,7 +3988,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b95
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/batchStart
 ```
 
 ```
@@ -4067,7 +4067,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/group/queryGroupStatus/list
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/queryGroupStatus/list
 ```
 
 ```
@@ -4622,7 +4622,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumbe
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 ```
 
 ```
@@ -5036,7 +5036,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 ```
 
 ```
@@ -5103,7 +5103,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 ```
 
 ```
@@ -5171,7 +5171,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001//WeBASE-Node-Manager/user/importP12
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/importP12
 ```
 
 > 使用form-data传参
