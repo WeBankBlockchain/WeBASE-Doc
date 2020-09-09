@@ -5471,7 +5471,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 ## 13 系统管理模块
 
 系统管理中的权限管理接口
-- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.28)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(本章节[接口13.14](#governance)开始)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
 - 使用低于FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1版本，则使用接口13.1至13.4接口
 
 ### 13.1 查看权限管理
@@ -6380,14 +6380,14 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 ### 13.14 获取链治理委员列表
 <span id="governance"></span>
 
-使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口13.4](#governance)至13.28)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(本章节[接口13.14](#governance)开始)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
 
 委员的权限包括治理投票、增删节点、冻结解冻合约、冻结解冻账号、修改链配置和增删运维账号。
 
 增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
 - 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
 - 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
-
+- 一个用户不能同时作为委员和运维
 
 #### 13.14.1 传输协议规范
 * 网络传输协议：使用HTTP协议
@@ -6504,8 +6504,8 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52000,
+    "message": "committee member already exist"
 }
 ```
 
@@ -6571,8 +6571,8 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52001,
+    "message": "committee member not exist"
 }
 ```
 
@@ -6612,7 +6612,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight?groupId=1&
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        |      | 描述    
-| 3   | data     | Object        |      | 权重值                     
+| 3   | data     | Integer        |      | 权重值                     
       
 
 
@@ -6622,10 +6622,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight?groupId=1&
 {
     "code": 0,
     "message": "success",
-    "data": [
-
-    ],
-    "totalCount": 1
+    "data": 2
 }
 ```
 
@@ -6690,8 +6687,8 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52001,
+    "message": "committee member not exist"
 }
 ```
 
@@ -6730,7 +6727,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/threshold?groupId=1
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        |      | 描述    
-| 3   | data     | Object        |      | 权重值                     
+| 3   | data     | Integer        |      | 阈值                     
       
 
 
@@ -6740,8 +6737,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/threshold?groupId=1
 {
     "code": 0,
     "message": "success",
-    "data": 50,
-    "totalCount": 1
+    "data": 50
 }
 ```
 
@@ -6801,11 +6797,11 @@ http://localhost:5001/WeBASE-Node-Manager/governance/threshold
 }
 ```
 
-* 失败：
+* 失败，如非委员更新阈值：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52001,
+    "message": "committee member not exist"
 }
 ```
 
@@ -6860,7 +6856,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator/list?groupId=1&pag
     "data": [
         {
             "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
-            "enable_num": "84"
+            "enable_num": "4"
         }
     ],
     "totalCount": 1
@@ -6927,8 +6923,17 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52001,
+    "message": "committee member not exist"
+}
+```
+
+或
+
+```
+{
+    "code": -52005,
+    "message": "committee member cannot be operator"
 }
 ```
 
@@ -6992,8 +6997,8 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52001,
+    "message": "committee member not exist"
 }
 ```
 
@@ -7035,7 +7040,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account/status?groupId=1&ad
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        |      | 描述    
-| 3   | data     | Object        |      | 账户状态                     
+| 3   | data     | Integer        |      | 账户状态, 0-normal, 1-frozen                
       
 
 
@@ -7045,9 +7050,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account/status?groupId=1&ad
 {
     "code": 0,
     "message": "success",
-    "data": [
-       
-    ],
+    "data": 0
 }
 ```
 
@@ -7094,7 +7097,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account/status/list
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        |      | 描述    
-| 3   | data     | Map        |      | 直接返回Map, 如：["0x009fb217b6d7f010f12e7876d31a738389fecd51": 0, "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1]                     
+| 3   | data     | Map        |      | 直接返回地址与状态的map, 0-normal, 1-frozen         
       
 
 
@@ -7104,12 +7107,10 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account/status/list
 {
     "code": 0,
     "message": "success",
-    "data": [
-        {
-            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
-            "enable_num": "84"
-        }
-    ],
+    "data": {
+        "0x009fb217b6d7f010f12e7876d31a738389fecd51": 0,
+        "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1
+    },
     "totalCount": 1
 }
 ```
@@ -7174,8 +7175,8 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52001,
+    "message": "committee member not exist"
 }
 ```
 
@@ -7239,8 +7240,8 @@ http://localhost:5001/WeBASE-Node-Manager/governance/account
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52001,
+    "message": "committee member not exist"
 }
 ```
 
@@ -7305,8 +7306,8 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
 * 失败：
 ```
 {
-    "code": -50000,
-    "message": "permission denied"
+    "code": -52007,
+    "message": "operator member not exist"
 }
 ```
 
@@ -7490,6 +7491,69 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/{voteId}
   "message": "success"
 }
 ```
+
+
+
+### 13.31 获取链治理委员列表(包含权重)  
+
+获取链治理委员列表，同时返回委员投票的权重值
+
+#### 13.31.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/list/sorted**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 13.31.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?groupId=1&pageNumber=1&pageSize=10
+```
+
+
+#### 13.31.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | weight        | Int           | 否     | 委员投票权重值                                        |
+| 3.2  | address       | String           | 否     | 委员的用户地址                                      |
+| 3.3  | enable_num    | Int           | 否     | 委员生效块高                                      |
+| 4    |  totalCount    | Int         |        | 总数                                    |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "weight": 1,
+      "address": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
+      "enable_num": 3
+    }
+  ],
+  "totalCount": 1
+}
+```
+
 
 
 ## 14 证书管理模块
