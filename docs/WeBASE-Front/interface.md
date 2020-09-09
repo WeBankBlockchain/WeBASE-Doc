@@ -3139,7 +3139,7 @@ b、正确发送数据上链返回值信息（交易收据）
 
 ## 6. 系统管理接口
 
-使用FISCO BCOS v2.5.0 与 WeBASE-Front v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口6.13](#governance))，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+使用FISCO BCOS v2.5.0 与 WeBASE-Front v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口6.13](#governance)开始)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
 
 
 ### 6.1. 查询权限接口
@@ -4048,7 +4048,10 @@ http://localhost:5002/WeBASE-Front/governance/committee/list?groupId=1
 
 ```
 [
-    
+  {
+    "address": "0xd031e61f6dc4dedd7d77f90128ed33caafbed0af",
+    "enable_num": "2"
+  }
 ]
 ```
 
@@ -4095,8 +4098,12 @@ HTTP POST
 
 **1）数据格式**
 
+透传链上返回结果
 ```
-
+{
+    "code":0,
+    "msg":"success"
+}
 ```
 
 
@@ -4142,8 +4149,12 @@ HTTP DELETE
 
 **1）数据格式**
 
+透传链上返回结果
 ```
-
+{
+    "code":0,
+    "msg":"success"
+}
 ```
 
 
@@ -4180,12 +4191,19 @@ http://localhost:5002/WeBASE-Front/governance/committee/weight?groupId=1&address
 
 **1）数据格式**
 
+成功时：直接返回权重值
+```
+2
+```
+
+失败时，如查询非委员用户的权重值：
+
 ```
 {
-
+    "code": -52001,
+    "msg": "address not committee"
 }
 ```
-
 
 ### 6.13.5. 更新链治理委员投票权重
 
@@ -4226,8 +4244,12 @@ HTTP PUT
 
 **1）数据格式**
 
+透传链上返回结果
 ```
-
+{
+    "code":0,
+    "msg":"success"
+}
 ```
 
 
@@ -4264,8 +4286,9 @@ http://localhost:5002/WeBASE-Front/governance/threshold?groupId=1
 
 **1）数据格式**
 
+直接返回threshold值
 ```
-
+50
 ```
 
 
@@ -4308,8 +4331,12 @@ HTTP PUT
 
 **1）数据格式**
 
+透传链上返回结果
 ```
-
+{
+    "code":0,
+    "msg":"success"
+}
 ```
 
 
@@ -4347,7 +4374,10 @@ http://localhost:5002/WeBASE-Front/governance/operator/list?groupId=1
 
 ```
 [
-    
+  {
+    "address": "0x304852a7cc6511e62c37b6e189850861e41282b0",
+    "enable_num": "3"
+  }
 ]
 ```
 
@@ -4390,10 +4420,13 @@ HTTP POST
 
 **1）数据格式**
 
+透传链上返回结果
 ```
-
+{
+    "code":0,
+    "msg":"success"
+}
 ```
-
 
 ### 6.13.3. 取消运维接口
 
@@ -4434,8 +4467,12 @@ HTTP DELETE
 
 **1）数据格式**
 
+透传链上返回结果
 ```
-
+{
+    "code":0,
+    "msg":"success"
+}
 ```
 
 
