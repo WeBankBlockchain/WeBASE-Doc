@@ -7290,8 +7290,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?group
 | 2    | message         | String        | 否     | 描述                                            |
 | 3    |                 | Object         |        | 返回信息实体                                    |
 | 3.1  | weight        | Int           | 否     | 委员投票权重值                                        |
-| 3.2  | address       | String           | 否     | 委员的用户地址                                      |
-| 3.3  | enable_num    | Int           | 否     | 委员生效块高                                      |
+| 3.2  | weightRate    | BigDecimal           | 否     | 权重比                                      |
+| 3.3  | address       | String           | 否     | 委员的用户地址                                      |
+| 3.4  | enable_num    | Int           | 否     | 委员生效块高                                      |
 | 4    |  totalCount    | Int         |        | 总数                                    |
 
 
@@ -7304,6 +7305,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?group
   "data": [
     {
       "weight": 1,
+      "weightRate": 33.3
       "address": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
       "enable_num": 3
     }
