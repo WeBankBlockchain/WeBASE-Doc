@@ -26,7 +26,7 @@
 
 #### 检查Java
 
-JDK1.8或以上版本，推荐使用[OracleJDK](#jdk)：
+JDK1.8或以上版本，推荐使用OracleJDK[安装指引](#jdk)：
 ```
 java -version
 ```
@@ -40,22 +40,22 @@ MySQL-5.6或以上版本：
 mysql --version
 ```
 
-- Mysql安装部署可参考[数据库部署](#id14)
+- Mysql安装部署可参考[数据库部署](#mysql)
 
 #### 检查Python
-
+<span id="checkpy"></span>
 使用Python3.5或以上版本：
 ```
 python --version
 ```
 
-- Python安装部署可参考[Python部署](#id17)
+如已安装python3，也可通过`python3 --version`查看，在运行脚本时，使用`python3`命令即可
+
+- Python3安装部署可参考[Python部署](#python3)
 
 #### PyMySQL部署（Python3.5+）
 
 Python3.5及以上版本，需安装`PyMySQL`依赖包
-
-python3.5+版本安装`PyMysql`依赖包方法：
 
 - CentOS
 
@@ -96,7 +96,7 @@ cd webase-deploy
 
 ## 修改配置
 
-① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#id14)；
+① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#mysql)；
 
 ② 修改配置文件（vi common.properties），没有变化的可以不修改；
 
@@ -386,6 +386,7 @@ java -version
 ```
 
 ### 2. 数据库部署
+<span id="mysql"></span>
 
 此处以Centos安装*MariaDB*为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
 
@@ -468,6 +469,9 @@ mysql > create database webasenodemanager;
 ```
 
 ### 3. Python部署
+<span id="python3"></span>
+
+python版本要求使用python3.x, 推荐使用python3.5及以上版本
 
 - CentOS
 
@@ -481,40 +485,11 @@ mysql > create database webasenodemanager;
   sudo apt-get install -y python-requests
   ```
 
-### 4. 安装MySql python依赖包（使用于python2.7+）
-
-#### 查看python版本
-
-```
-python --version
-```
-python2.7+版本，需要安装`MySQL-python`，安装方法如下：
-
-*注*：同时支持python3.5+，python3.5+时需要安装`Py-MySQL`依赖包，可参考 [检查python环境-PyMysql](#pymysql-python3-5) 
-
-python2.7+版本安装`MySQL-python`依赖包方法：
-
-#### 4.1 MySQL-python部署（Python2.7）
-
-- CentOS
-
-  ```
-  sudo yum install -y MySQL-python
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt-get install -y python-pip
-  sudo pip install MySQL-python
-  ```
-
-
-
 ## 常见问题
 
 ### 1. Python命令出错
 
+- SyntaxError报错
 ```
   File "deploy.py", line 62
     print helpMsg
@@ -522,19 +497,17 @@ python2.7+版本安装`MySQL-python`依赖包方法：
 SyntaxError: Missing parentheses in call to "print". Did you mean print(helpMsg)?
 ```
 
-答：检查Python版本
-
-### 2. 使用Python2时找不到MySQLdb
-
+- 找不到fallback关键字
 ```
-Traceback (most recent call last):
-...
-ImportError: No module named MySQLdb
+File "/home/ubuntu/webase-deploy/comm/utils.py", line 127, in getCommProperties
+    value = cf.get('common', paramsKey,fallback=None)
+TypeError: get() got an unexpected keyword argument 'fallback'
 ```
 
-答：需要安装MySQL-python，安装请参看 [附录](#mysql-python)
+答：检查[Python版本](#checkpy)，推荐使用python3.5及以上版本
 
-### 3. 使用Python3时找不到pymysql
+
+### 2. 使用Python3时找不到pymysql
 
 ```
 Traceback (most recent call last):
@@ -544,7 +517,7 @@ ImportError: No module named 'pymysql'
 
 答：需要安装PyMySQL，安装请参看 [pymysql](#pymysql-python3-5)
 
-### 4. 安装MySQL-python遇到问题
+### 3. 安装MySQL-python遇到问题
 
 ```
 Command "python setup.py egg_info" failed with error code 1
@@ -556,11 +529,11 @@ pip install --upgrade setuptools
 python -m pip install --upgrade pip
 ```
 
-### 5. 部署时某个组件失败，重新部署提示端口被占用问题
+### 4. 部署时某个组件失败，重新部署提示端口被占用问题
 
 答：因为有个别组件是启动成功的，需先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py installAll”部署全部。
 
-### 6. 管理平台启动时Nginx报错
+### 5. 管理平台启动时Nginx报错
 
 ```
 ...
@@ -572,7 +545,7 @@ Exception: execute cmd  error ,cmd : sudo /usr/local/nginx/sbin/nginx -c /data/a
 
 答：缺少/etc/nginx/mime.types文件，建议重装nginx。
 
-### 7. 部署时数据库访问报错
+### 6. 部署时数据库访问报错
 
 ```
 ...
@@ -589,7 +562,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认数据库用户名和密码
 
-### 8. 节点sdk目录不存在
+### 7. 节点sdk目录不存在
 
 ```
 ...
@@ -598,7 +571,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
 
-### 9. 前置启动报错“nested exception is javax.net.ssl.SSLException”
+### 8. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
 ```
 ...
@@ -608,7 +581,7 @@ nested exception is javax.net.ssl.SSLException: Failed to initialize the client-
 答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
 
 
-### 10.前置启动报错“Processing bcos message timeout”
+### 9.前置启动报错“Processing bcos message timeout”
 
 ```
 ...
@@ -619,7 +592,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
 
-### 11. 服务进程起来了，服务不正常
+### 10. 服务进程起来了，服务不正常
 
 ```
 ...
@@ -628,11 +601,39 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。
 
-### 12. WeBASE-Web登录页面的验证码加载不出来
+### 11. WeBASE-Web登录页面的验证码加载不出来
 
-答：检查WeBASE-Node-Manager后台服务是否已启动成功：在webase-node-mgr目录下，运行`bash status.sh`或者查看目录中`log/WeBASE-Node-Manager.log`日志文件，查看是否启动失败；
+答：检查WeBASE-Node-Manager后台服务是否已启动成功。若启动成功，检查后台日志：
 
-### 13. WeBASE CDN加速服务
+* 进入 `webase-node-mgr` 目录下，执行 `bash status.sh` 检查服务是否启动，如果服务没有启动，运行 `bash start.sh` 启动服务；
+
+* 如果服务已经启动，按照如下修改日志级别
+    * 方法一：`webase-node-mgr/conf/application.yml`
+    
+    ```
+    #log config
+    logging:
+      level:
+        com.webank.webase.node.mgr: debug
+    ```
+    
+    * 方法二：`webase-node-mgr/conf/log/log4j2.xml`
+
+    ```
+    <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="asyncInfo"/>
+      <AppenderRef ref="asyncErrorLog"/>
+    </Root>
+  </Loggers>
+    ```
+
+* 修改日志level后，重启服务 `bash stop.sh && bash start.sh`
+
+* 重启服务后，检查日志文件 `log/WeBASE-Node-Manager.log`。
+    * 检查是否有异常信息。如果有异常信息，根据具体的异常信息检查环境配置，或者通过搜索引擎进行排查。
+
+### 12. WeBASE CDN加速服务
 
 答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务。
 
@@ -656,7 +657,7 @@ curl -O https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/dow
 ```
 
 
-### 14. WeBASE代码仓库国内gitee镜像
+### 13. WeBASE代码仓库国内gitee镜像
 
 答：WeBASE代码仓库在国内的gitee镜像地址为`https://gitee.com/WeBank/WeBASE`，WeBASE其他子系统的仓库则是`https://gitee.com/WeBank/`+ `WeBASE-XXX`，如WeBASE-Front的gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
 
