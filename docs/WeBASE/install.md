@@ -20,18 +20,18 @@
 
 #### 平台要求
 
-推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git`相关依赖项。
+推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git, nginx`相关依赖项。
 
-其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git`依赖项后重试
+其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, nginx`依赖项后重试
 
 #### 检查Java
 
-JDK8或以上版本：
+JDK1.8或以上版本，推荐使用[OracleJDK](#jdk)：
 ```
 java -version
 ```
 
-- Java推荐使用[OpenJDK](#id10 ) ，建议从[OpenJDK网站](https://jdk.java.net/java-se-ri/11) 自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
+注意：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，会导致JavaSDK无法正常连接区块链节点。
 
 #### 检查mysql
 
@@ -344,46 +344,45 @@ http://{deployIP}:{webPort}
 
 ## 附录
 
+<span id="jdk"></span>
 ### 1. Java环境部署
 
-此处给出OpenJDK安装简单步骤，供快速查阅。更详细的步骤，请参考[官网](https://openjdk.java.net/install/index.html)。
+#### CentOS环境安装Java
+<span id="centosjava"></span>
 
-#### ① 安装包下载
-
-从[官网](https://jdk.java.net/java-se-ri/11)下载对应版本的java安装包，并解压到服务器相关目录
-
-```shell
-mkdir /software
-tar -zxvf openjdkXXX.tar.gz /software/
-```
-
-#### ② 配置环境变量
-
-- 修改/etc/profile
+**注意：CentOS下OpenJDK无法正常工作，需要安装OracleJDK[下载链接](https://www.oracle.com/technetwork/java/javase/downloads/index.html)。**
 
 ```
-sudo vi /etc/profile
-```
+# 创建新的文件夹，安装Java 8或以上的版本，将下载的jdk放在software目录
+# 从Oracle官网(https://www.oracle.com/technetwork/java/javase/downloads/index.html)选择Java 8或以上的版本下载，例如下载jdk-8u201-linux-x64.tar.gz
+$ mkdir /software
 
-- 在/etc/profile末尾添加以下信息
+# 解压jdk
+$ tar -zxvf jdk-8u201-linux-x64.tar.gz
 
-```shell
-JAVA_HOME=/software/jdk-11
-PATH=$PATH:$JAVA_HOME/bin
-CLASSPATH==.:$JAVA_HOME/lib
-export JAVA_HOME CLASSPATH PATH
-```
+# 配置Java环境，编辑/etc/profile文件
+$ vim /etc/profile
 
-- 重载/etc/profile
+# 打开以后将下面三句输入到文件里面并保存退出
+export JAVA_HOME=/software/jdk-8u201  #这是一个文件目录，非文件
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
-```
-source /etc/profile
-```
+# 生效profile
+$ source /etc/profile
 
-#### ③ 查看版本
-
-```
+# 查询Java版本，出现的版本是自己下载的版本，则安装成功。
 java -version
+```
+
+#### Ubuntu环境安装Java
+<span id="ubuntujava"></span>
+
+```
+  # 安装默认Java版本(Java 8或以上)
+  sudo apt install -y default-jdk
+  # 查询Java版本
+  java -version
 ```
 
 ### 2. 数据库部署
