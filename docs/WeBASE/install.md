@@ -26,7 +26,7 @@
 
 #### 检查Java
 
-JDK1.8或以上版本，推荐使用OracleJDK[安装指引](#jdk)：
+推荐JDK8-JDK13版本，使用OracleJDK[安装指引](#jdk)：
 ```
 java -version
 ```
@@ -353,7 +353,7 @@ http://{deployIP}:{webPort}
 **注意：CentOS下OpenJDK无法正常工作，需要安装OracleJDK[下载链接](https://www.oracle.com/technetwork/java/javase/downloads/index.html)。**
 
 ```
-# 创建新的文件夹，安装Java 8或以上的版本，将下载的jdk放在software目录
+# 创建新的文件夹，安装Java 8或以上的版本，推荐JDK8-JDK13版本，将下载的jdk放在software目录
 # 从Oracle官网(https://www.oracle.com/technetwork/java/javase/downloads/index.html)选择Java 8或以上的版本下载，例如下载jdk-8u201-linux-x64.tar.gz
 $ mkdir /software
 
@@ -578,7 +578,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
 ```
 
-答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
 
 
 ### 9.前置启动报错“Processing bcos message timeout”
@@ -590,7 +590,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ...
 ```
 
-答：一些Oracle JDK版本缺少相关包，导致节点连接异常。推荐使用OpenJDK，从[OpenJDK网站](https://jdk.java.net/java-se-ri/11)自行下载。
+答：一些OpenJDK版本缺少相关包，导致节点连接异常。推荐使用[OracleJDK](#jdk)。
 
 ### 10. 服务进程起来了，服务不正常
 
@@ -608,7 +608,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 * 进入 `webase-node-mgr` 目录下，执行 `bash status.sh` 检查服务是否启动，如果服务没有启动，运行 `bash start.sh` 启动服务；
 
 * 如果服务已经启动，按照如下修改日志级别
-    * 方法一：`webase-node-mgr/conf/application.yml`
+    * `webase-node-mgr/conf/application.yml`
     
     ```
     #log config
@@ -617,7 +617,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
         com.webank.webase.node.mgr: debug
     ```
     
-    * 方法二：`webase-node-mgr/conf/log/log4j2.xml`
+    * `webase-node-mgr/conf/log/log4j2.xml`
 
     ```
     <Loggers>
