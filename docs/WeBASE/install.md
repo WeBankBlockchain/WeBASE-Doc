@@ -119,10 +119,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.0
-webase.mgr.version=v1.4.0
-webase.sign.version=v1.4.0
-webase.front.version=v1.4.0
+webase.web.version=v1.4.1
+webase.mgr.version=v1.4.1
+webase.sign.version=v1.4.1
+webase.front.version=v1.4.1
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -176,7 +176,7 @@ node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.4.1
+fisco.version=2.6.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
