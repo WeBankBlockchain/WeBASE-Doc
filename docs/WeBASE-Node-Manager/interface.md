@@ -7009,7 +7009,7 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 
 #### 13.23.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/governance/contract/status**
+* 请求地址： **/precompiled/contract/status**
 * 请求方式： POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
