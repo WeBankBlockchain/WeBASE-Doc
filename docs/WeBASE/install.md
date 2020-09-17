@@ -633,32 +633,8 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 * 重启服务后，检查日志文件 `log/WeBASE-Node-Manager.log`。
     * 检查是否有异常信息。如果有异常信息，根据具体的异常信息检查环境配置，或者通过搜索引擎进行排查。
 
-### 12. WeBASE CDN加速服务
+### 12. WeBASE 国内镜像与CDN加速服务
 
-答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务。
-
-为了提供更稳定的下载服务，从 WeBASE v1.4.0 开始使用新的 CDN 下载地址。具体使用方法如下：
-
-CDN 下载地址：
-```Bash
-https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/{release_version}/webase-{subsystem}.zip
-```
-
-其中`{release_version}`为`v1.x.x`格式，`{subsystem}`则是子系统名字，支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载。
-
-可以直接通过`wget`或者`curl -O`命令直接获取安装包。比如：
-
-- 获取WeBASE-Node-Manager v1.4.0的安装包`webase-node-mgr.zip`
-
-```
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.0/webase-node-mgr.zip
-// 或
-curl -O https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.0/webase-node-mgr.zip
-```
-
-
-### 13. WeBASE代码仓库国内gitee镜像
-
-答：WeBASE代码仓库在国内的gitee镜像地址为`https://gitee.com/WeBank/WeBASE`，WeBASE其他子系统的仓库则是`https://gitee.com/WeBank/`+ `WeBASE-XXX`，如WeBASE-Front的gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
+答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
 
 
