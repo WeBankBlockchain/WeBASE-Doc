@@ -3139,6 +3139,9 @@ b、正确发送数据上链返回值信息（交易收据）
 
 ## 6. 系统管理接口
 
+使用FISCO BCOS v2.5.0 与 WeBASE-Front v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(从本章节[接口6.13](#governance)开始)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+
+
 ### 6.1. 查询权限接口
 
 #### 6.1.1 查询权限接口
@@ -3970,7 +3973,7 @@ HTTP POST
 | 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
 | ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
 | 1    | groupId         | Int    | 否     | 群组编号                                                     |
-| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号，当`handleType`为`getStatus`或`listManager`时，可不传 |
 | 3    | contractAddress | String | 否     | 已部署的合约地址                                             |
 | 4    | handleType      | String | 否     | 操作类型：freeze-冻结；unfreeze-解冻；grantManager-授权；getStatus-查询合约状态；listManager-查询合约权限列表 |
 | 5    | grantAddress    | String | 是     | 授权用户地址，操作类型为grantManager时需传入                 |
@@ -3996,6 +3999,481 @@ HTTP POST
   "code": 0,
   "message": "success",
   "data": null
+}
+```
+
+
+### 6.13. 基于角色的权限管理
+<span id="governance"></span>
+
+使用FISCO BCOS v2.5.0 与 WeBASE-Front v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(本章节[接口6.13](#governance))，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+
+包含链治理委员管理、链运维管理等功能
+
+### 6.13.1. 查看链治理委员列表
+
+#### 接口描述
+
+委员的权限包括治理投票、增删节点、冻结解冻合约、冻结解冻账号、修改链配置和增删运维账号。
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。‘
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/committee/list**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+
+***2）入参示例***
+
+```
+http://localhost:5002/WeBASE-Front/governance/committee/list?groupId=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+[
+  {
+    "address": "0xd031e61f6dc4dedd7d77f90128ed33caafbed0af",
+    "enable_num": "2"
+  }
+]
+```
+
+
+### 6.13.2. 增加链治理委员
+
+#### 接口描述
+
+委员的权限包括治理投票、增删节点、冻结解冻合约、冻结解冻账号、修改链配置和增删运维账号。
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。‘
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/committee**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 3    | address   | String           | 否     | 新的链治理委员地址         
+          
+***2）入参示例***
+
+```
+{
+  "groupId": 1,
+  "signUserId": "user1001",
+  "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+透传链上返回结果
+```
+{
+    "code":0,
+    "msg":"success"
+}
+```
+
+
+### 6.13.3. 取消链治理委员
+
+#### 接口描述
+
+委员的权限包括治理投票、增删节点、冻结解冻合约、冻结解冻账号、修改链配置和增删运维账号。
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。‘
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/committee**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 3    | address   | String           | 否     | 待取消的链治理委员地址         
+          
+***2）入参示例***
+
+```
+{
+  "groupId": 1,
+  "signUserId": "user1001",
+  "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+透传链上返回结果
+```
+{
+    "code":0,
+    "msg":"success"
+}
+```
+
+
+### 6.13.4. 查看链治理委员投票权重
+
+#### 接口描述
+
+委员默认的投票权重为1
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/committee/weight**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+| 2    | address   | String           | 否     | 链治理委员地址         
+
+***2）入参示例***
+
+```
+http://localhost:5002/WeBASE-Front/governance/committee/weight?groupId=1&address=0x009fb217b6d7f010f12e7876d31a738389fecd51
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+成功时：直接返回权重值
+```
+2
+```
+
+失败时，如查询非委员用户的权重值：
+
+```
+{
+    "code": -52001,
+    "msg": "address not committee"
+}
+```
+
+### 6.13.5. 更新链治理委员投票权重
+
+#### 接口描述
+
+委员默认的投票权重为1
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/committee/weight**
+
+#### 调用方法
+
+HTTP PUT
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 3    | address   | String           | 否     | 链治理委员地址         
+| 4    | weight         | Int    | 否     | 权重值                                                     |
+
+***2）入参示例***
+
+```
+{
+  "groupId": 1,
+  "signUserId": "user1001",
+  "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e",
+  "weight": 2
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+透传链上返回结果
+```
+{
+    "code":0,
+    "msg":"success"
+}
+```
+
+
+
+### 6.13.6. 查看链投票阈值
+
+#### 接口描述
+
+阈值默认为50，即票数>50%
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/threshold**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+
+***2）入参示例***
+
+```
+http://localhost:5002/WeBASE-Front/governance/threshold?groupId=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+直接返回threshold值
+```
+50
+```
+
+
+### 6.13.7. 更新链投票阈值
+
+#### 接口描述
+
+阈值默认为50，即票数>50%
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/threshold**
+
+#### 调用方法
+
+HTTP PUT
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 3    | address   | String           | 否     | 新的链治理委员地址         
+| 4    | threshold         | Int    | 否     | 群组投票阈值                                                     |
+          
+***2）入参示例***
+
+```
+{
+  "groupId": 1,
+  "signUserId": "user1001",
+  "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e",
+  "threshold": 60
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+透传链上返回结果
+```
+{
+    "code":0,
+    "msg":"success"
+}
+```
+
+
+### 6.13.8. 查看运维列表
+
+#### 接口描述
+
+由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/operator/list**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+
+***2）入参示例***
+
+```
+http://localhost:5002/WeBASE-Front/governance/operator/list?groupId=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+[
+  {
+    "address": "0x304852a7cc6511e62c37b6e189850861e41282b0",
+    "enable_num": "3"
+  }
+]
+```
+
+
+### 6.13.9. 增加运维接口
+
+#### 接口描述
+
+由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/operator**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 3    | address   | String           | 否     | 新的运维地址         
+          
+***2）入参示例***
+
+```
+{
+  "groupId": 1,
+  "signUserId": "user1001",
+  "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+透传链上返回结果
+```
+{
+    "code":0,
+    "msg":"success"
+}
+```
+
+### 6.13.10. 取消运维接口
+
+#### 接口描述
+
+由链治理委员添加/取消运维账号；运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/governance/operator**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                                         |
+| ---- | --------------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | groupId         | Int    | 否     | 群组编号                                                     |
+| 2    | signUserId      | String | 否     | WeBASE-Sign签名用户编号                                      |
+| 3    | address   | String           | 否     | 待取消的运维地址         
+          
+***2）入参示例***
+
+```
+{
+  "groupId": 1,
+  "signUserId": "user1001",
+  "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+透传链上返回结果
+```
+{
+    "code":0,
+    "msg":"success"
 }
 ```
 
@@ -5229,7 +5707,7 @@ b、正确发送数据上链返回值信息（交易收据）
 ## 11. 附录
 
 ### 1. 返回码信息列表 
-
+<span id="code"></span>
 
 | code   | message                                      | 描述                       |
 | ------ | -------------------------------------------- | -------------------------- |
@@ -5282,6 +5760,10 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201042 | There is no sol files in source              | solidity文件不存在                 |
 | 201043 | invalid group operate type                   | 群组操作类型不正确                 |
 | 201044 | invalid data type                            | 不正确的数据类型                 |
+| 201045 | encode string can not be empty               | 已签名的参数内容不能为空                 |
+| 201046 | transaction failed                           | 交易上链失败                 |
+| 201050 | Fail to parse json                           | 链上返回值反序列化失败                 |
+| 201051 | get consensus status fail                    | 交易上链失败                 |
 | 201101  | groupId cannot be empty                   |    群组编号不能为空      |
 | 201102  | tableName cannot be empty         |    表名不能为空      |
 | 201103  | permissionType cannot be empty             |    权限类型不能为空      |
@@ -5316,11 +5798,9 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201151  | Unsupported contract param type to encoded           |   不支持编码的合约参数类型 |
 | 201152  | Unsupported contract param type to decoded           |   不支持解码的合约参数类型 |
 | 201153  | unable to create instance of type, check input params           |  无法创建该合约参数类型的实例，请检查入参 |
-
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
 | 201202  | permission denied, please check chain administrator permission           |    权限不足，请检查用户 |
-
 | 201208  | unsupported for this system config key     |    不支持设置该系统配置      |
 | 201209  | provide value by positive integer mode, from 100000 to 2147483647              |    请输入正值或[100000, 2147483647]范围的值      |
 | 201210  | set system config value fail for params error or permission denied               |    设置系统配置失败，请检查权限      |
@@ -5349,7 +5829,25 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201248  | Contract abi invalid, please check abi          |     合约ABI格式错误，请检查入参     |
 | 201255  | contract address already exists          |     合约地址已存在 |
 | 201256  | abi info of this id not exists          |     abi不存在     |
-| 201257  | Abi Id cannot be empty          |   abi编号不能为空       |
+| 201301  | threshold must be greater than zero        |   链阈值必须大于0       |
+| 201302  | committee weight must be greater than zero  |   链委员权重必须大于0       |
+| 201303  | chain governance address cannot be blank      |   链管理委员/运维地址不能为空       |
+| 201501  | web3sdk create key pair fail and return null    |   sdk创建私钥对失败并返回Null       |
+| 201502  | pem/p12 manager get key pair error for input params    |   pem/p12证书获取私钥对失败，检查入参       |
+| 201503  | pem/p12 manager get key pair error for bc dependency error    |    pem/p12证书获取私钥对失败，检查bc依赖包版本       |
+| 201504  | sign service return error    |   签名服务并返回异常       |
+| 201510  | transaction receipt status return error    |   交易回执状态码非0x0，交易执行失败       |
+| 201511  | contract abi parse json error    |   合约ABI转JSON失败       |
+| 201512  | call contract error for io exception    |   调用合约的交易上链失败       |
+| 201513  | get transaction receipt fail for exec    |   获取交易回执失败，返回执行错误       |
+| 201514  | get transaction receipt fail for time out    |   获取交易回执失败，链上链下请求超时      |
+| 201515  | transaction receipt fail and parse output fail    |   转化交易回执中output输出值失败       |
+| 201516  | transaction receipt fail and output is null    |   交易回执output为空       |
+| 201517  | call contract constant method fail    |   合约状态异常，调用合约constant方法失败       |
+| 201521  | get list of manager on chain fail    |   获取链上管理员列表失败       |
+| 201522  | table key length error    |   用户表的键值长度大于最大值255       |
+| 201523  | crud's param parse json error    |   CRUD方法的入参转Entry/Condition失败，请检查入参       |
+| 201524  | precompiled common transfer to json fail    |   预编译错误码转JSON失败       |
 
 
 ### 2. Precompiled Service说明
@@ -5402,4 +5900,25 @@ contract TableFactory {
 | -51500  | contract name and version already exist         |          |
 | -51501  | condition parse error                           |          |
 | -51502  | condition operation undefined                   |          |
-
+| -51600  | invalid ciphers                                 |          |
+| -51700  | group sig failed                                |          |
+| -51800  | ring sig failed                                 |          |
+| -51900  | contract frozen                              |          |
+| -51901  | contract available                              |          |
+| -51902  | contract repeat authorization                    |          |
+| -51903  | invalid contract address                    |          |
+| -51904  | table not exist                    |          |
+| -51905  | no authorized                  |          |
+| -52000  | committee member exist                    |          |
+| -52001  | committee member not exist                |          |
+| -52002  | invalid request permission denied         |          |
+| -52003  | invalid threshold                    |          |
+| -52004  | operator can't be committee member                    |          |
+| -52005  | committee member can't be operator                    |          |
+| -52006  | operator exist                    |          |
+| -52007  | operator not exist                    |          |
+| -52008  | account not exist                    |          |
+| -52009  | invalid account address                    |          |
+| -52010  | account already available                   |          |
+| -52011  | account frozen                    |          |
+| -52012  | current value is expected value              |          |
