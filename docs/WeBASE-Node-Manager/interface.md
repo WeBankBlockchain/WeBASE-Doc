@@ -8550,26 +8550,20 @@ v1.4.0
 | 202007 | checkCode is null     | 校验码为空           |
 | 202008 | invalid checkCode     | 无效的校验码           |
 | 202009 | save front fail     | 保存前置失败           |
-
-
 | 202010 | request front fail      | 请求前置失败           |
 | 202011 | abiInfo cannot be empty      | abi信息不能为空           |
 | 202012 | user id cannot be empty      | 用户编号不能为空           |
 | 202013 | invalid user      | 无效的用户编号           |
 | 202014 | user already exists      | 用户信息已经存在           |
 | 202015 | contract already exists      | 合约信息已经存在           |
-
 | 202017 | invalid contract id      | 无效的合约编号           |
 | 202018 | invalid param info      | 无效的入参信息           |
 | 202019 | contract name cannot be repeated     | 合约名称不能重复           |
-
-
 | 202023 | contract has not deploy      | 合约尚未部署           |
 | 202026 | account info already exists      | 该帐号已经存在           |
 | 202027 | account info not exists      | 该帐号不存在           |
 | 202028 | account name empty      | 帐号名称不能为空           |
 | 202029 | invalid account name      | 无效的账号名称           |
-
 | 202030 | password error      | 密码错误           |
 | 202031 | role id cannot be empty      | 角色编号不能为空           |
 | 202032 | invalid role id      | 无效的角色编号           |
@@ -8578,59 +8572,45 @@ v1.4.0
 | 202035 | contract has been deployed      | 该合约已经部署           |
 | 202036 | publicKey cannot be empty      | 公钥不能为空           |
 | 202037 | associated account cannot be empty    | 用户信息不存在           |
-
 | 202040 | contract deploy not success      | 合约部署失败           |
 | 202045 | the new password cannot be same as old      | 新旧密码不能一致           |
-
 | 202050 | publicKey's length is 130,address's length is 42    | 公钥长度为130，公钥地址长度为42           |
 | 202051 | wrong host or port    |  错误的主机或端口          |
 | 202052 | invalid token   |  无效的token          |
 | 202053 | token expire    |  token过期          |
 | 202054 | Available front url is empty, check front status     |  合约尚未部署          |
-
 | 202060 | cert handle error    |  证书句柄错误          |
 | 202061 | store cert error    |  存储证书错误          |
 | 202062 | cert format error, must start with -----BEGIN CERTIFICATE-----\\n, end with end    |  证书格式错误，必须由 --BEGIN CERTIFICATE-- 包          |
 | 202063 | saving front's cert error    |  保存前置证书错误          |
-
 | 202070 | Mail server config error    |  邮件服务器配置错误。          |
 | 202071 | Mail server config param empty/not match    |  邮件服务器配置参数为空/不匹配          |
 | 202072 | Mail server config error, db's server config is empty    |  邮件服务器配置错误，数据库的服务器配置为空          |
-
 | 202076 | Alert rule error    |  警报规则错误。          |
 | 202077 | Alert rule param not match    |  警报规则参数不匹配。          |
-
 | 202080 | Send mail error, please check mail server configuration    |  发送邮件错误，请检查邮件服务器配置。          |
 | 202081 | Send mail error, please enable mail server before send    |  发送邮件错误，请在发送前启用邮件服务器。          |
-
 | 202086 | Alert log error    |  警报日志错误。          |
 | 202087 | Alert log param: status/logId is empty    |  警报日志参数：status/logId为空。          |
-
 | 202090 | Update guomi methodId error    |  更新国密methodId错误          |
 | 202091 | Front's encrypt type not matches with nodemgr    |  Front的加密类型与nodemgr不匹配          |
-
 | 202096 | contract address already exists    |  合约地址已存在          |
 | 202097 | abi info of this id not exists    |  此ID的ABI信息不存在          |
 | 202098 | Contract abi invalid, please check abi    |  合约ABI无效，请检查ABI          |
 | 202099 | Abi Id cannot be empty    |  此ID的ABI信息为空          |
 | 202100 | contractAddress is null    |  合约地址为空          |
-
 | 202110 | User's signUserId not exist    |  用户的signUserId不存在          |
 | 202111 | Fail to parse json    |  解析json错误          |
-
 | 202121 | Cert file not found, please check cert path in config    |  找不到证书文件，请检查配置中的证书路径          |
 | 202122 | Pem file format error, must surrounded by -----XXXXX PRIVATE KEY-----    |  Pem文件格式错误，必须包含-----XXXXX PRIVATE KEY-----          |
 | 202123 | Pem file content error    |  Pem文件内容错误          |
 | 202124 | p12's password cannot be chinese    |  P12的密码不能为中文          |
 | 202125 | p12's password not match    |  P12的密码错误          |
 | 202126 | P12 file content error    |  P12文件内容错误          |
-
 | 202300 | Group id already exists    |  群组id已存在          |
 | 202301 | Node's front not exists    |  节点前置不存在          |
-
 | 202310 | govern vote record not exist    |  投票记录不存在          |
 | 202311 | permission denied on chain    |  链上权限被禁止          |
-
 | 202401 | No configured of docker registry url.    |  没有配置 Docker 镜像更新 URL 地址          |
 | 202402 | Fetch image tag from docker registry error.    |  从 Docker 源更新镜像版本失败          |
 | 202403 | Fetch Docker image tag list error, unknown config type.    |  查询 Docker 镜像版本失败（未知类型）          |
@@ -8699,10 +8679,8 @@ v1.4.0
 | 202466 | Please pull the Docker image manually in host /ip/    |  主机/ip/请手动拉取 Docker 镜像          |
 | 202467 | Max 4 nodes on a single host    |  单个主机最多部署 4 个节点          |
 | 202468 | Cannot install node on WeBASE-Node-Manager host.    |  无法在WeBASE-Node-Manager主机上安装节点。          |
-
 | 302000 | user not logged in    |  未登录的用户          |
 | 302001 | Access denied    |  没有权限          |
-
 | 402000 | param exception    |  参数错误          |
 
 ### 2. Precompiled Service说明
