@@ -2064,6 +2064,122 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 
 
 
+### 5.11 获取合约状态修改记录列表  
+
+当冻结合约或解冻合约时会产生一条记录，此接口返回某群组下的修改记录列表
+
+#### 5.11.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/status/record/list**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 5.11.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/status/record/list?groupId=1&pageNumber=1&pageSize=10
+```
+
+
+#### 5.11.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | id        | int           | 否     | 合约记录编号                                        |
+| 3.2  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.3  | contractAddress    | String        | 否     | 合约地址                                        |
+| 3.4  | modifyAddress  | String        | 否     | 合约管理员用户地址                                        |
+| 3.5  | status     | Int        | 否     |          合约修改状态，0-正常（未冻结），1-已冻结                              |
+| 3.6 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.7 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 4    |  totalCount    | Int         |        | 总数                                    |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "groupId": 1,
+      "modifyAddress": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
+      "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "status": 0,
+      "createTime": "2020-05-18 10:59:02",
+      "modifyTime": "2020-05-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+
+### 5.12 删除合约状态修改记录  
+
+删除合约状态修改记录
+
+#### 5.12.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/status/record/{statusId}**
+* 请求方式：DELETE
+* 返回格式：JSON
+
+#### 5.12.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | statusId         | int           | 否     | 合约状态记录编号                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/status/record/{statusId}
+```
+
+
+#### 5.12.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+
+
 ## 6 服务器监控相关
 
 ### 6.1 获取节点监控信息  
@@ -5354,6 +5470,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 
 ## 13 系统管理模块
 
+系统管理中的权限管理接口
+- 使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(本章节[接口13.14](#governance)开始)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+- 使用低于FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1版本，则使用接口13.1至13.4接口
 
 ### 13.1 查看权限管理
 
@@ -6255,6 +6374,947 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
     "data": "Table not exists "
 }
 ```
+
+
+
+### 13.14 获取链治理委员列表
+<span id="governance"></span>
+
+使用FISCO BCOS v2.5.0 与 WeBASE-Node-Manager v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(本章节[接口13.14](#governance)开始)，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
+
+委员的权限包括治理投票、增删节点、冻结解冻合约、冻结解冻账号、修改链配置和增删运维账号。
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
+- 一个用户不能同时作为委员和运维
+
+#### 13.14.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.14.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | pageSize   | int           | 否     |
+| 3    | pageNumber   | int           | 否     |
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee/list?groupId=1&pageSize=5&pageNumber=1
+```
+
+#### 13.14.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | List数组        |      | 直接返回数组                     
+| 4   | totalCount     | int        |      | 总数目                          
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "enable_num": "84"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 13.15 增加链治理委员
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
+
+#### 13.15.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.15.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | address   | String           | 否     | 新的链治理委员地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.15.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -52000,
+    "message": "committee member already exist"
+}
+```
+
+
+### 13.16 去除链管理委员接口
+
+增加委员需要链治理委员会投票，有效票大于阈值才可以生效，且不重复计票
+- 委员默认的投票权重为1，默认投票生效阈值50%，若有两个委员，则需要两个委员都投票增加/撤销的委员权限，`有效票/总票数=2/2=1>0.5`才满足条件。
+- 投票有过期时间，根据块高，过期时间为块高超过blockLimit的10倍时过期；过期时间固定不可改。
+
+#### 13.16.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.16.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | address   | String           | 否     | 待取消的链治理委员地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.16.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -52001,
+    "message": "committee member not exist"
+}
+```
+
+
+### 13.17 获取链治理委员投票权重
+
+委员默认的投票权重为1
+
+#### 13.17.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/weight**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.17.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | address   | String           | 否     |
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight?groupId=1&address=0x009fb217b6d7f010f12e7876d31a738389fecd51
+```
+
+#### 13.17.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Integer        |      | 权重值                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 2
+}
+```
+
+### 13.18 更新链治理委员投票权重值
+
+委员默认的投票权重为1
+
+#### 13.18.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/weight**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.18.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | address   | String           | 否     | 新的链治理委员地址         
+| 4    | weight     | int        | 否     | 投票权重值      
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e",
+    "weight": 2
+}
+```
+
+
+#### 13.18.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -52001,
+    "message": "committee member not exist"
+}
+```
+
+
+### 13.19 获取链治理投票阈值
+
+默认投票阈值为50，即超过(不包括)50%的票数权重即可通过
+
+#### 13.19.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/threshold**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.19.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/threshold?groupId=1
+```
+
+#### 13.19.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Integer        |      | 阈值                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 50
+}
+```
+
+### 13.19 更新链治理投票阈值
+
+委员默认的投票权重为1
+
+#### 13.19.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/threshold**
+* 请求方式：PUT
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.19.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 3    | threshold     | int        | 否     | 投票阈值      
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/threshold
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "threshold": 60
+}
+```
+
+
+#### 13.19.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败，如非委员更新阈值：
+```
+{
+    "code": -52001,
+    "message": "committee member not exist"
+}
+```
+
+
+### 13.20 查看运维列表
+<span id="operator"></span>
+由链治理委员添加运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 13.20.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/operator/list**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.20.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | pageSize   | int           | 否     |
+| 3    | pageNumber   | int           | 否     |
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/operator/list?groupId=1&pageSize=5&pageNumber=1
+```
+
+#### 13.20.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | List数组        |      | 直接返回数组                     
+| 4   | totalCount     | int        |      | 总数目                          
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "address": "0x009fb217b6d7f010f12e7876d31a738389fecd51",
+            "enable_num": "4"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 13.21 增加运维接口
+
+由链治理委员添加/去除运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 13.21.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/operator**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.21.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 4    | address   | String           | 否     | 运维地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/operator
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.21.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -52001,
+    "message": "committee member not exist"
+}
+```
+
+或
+
+```
+{
+    "code": -52005,
+    "message": "committee member cannot be operator"
+}
+```
+
+
+### 13.22 去除运维接口
+
+由链治理委员添加/去除运维账号，运维账号可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约。
+
+#### 13.22.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/operator**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.22.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
+| 4    | address   | String           | 否     | 运维地址         
+          
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/governance/operator
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "address": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e"
+}
+```
+
+
+#### 13.22.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -52001,
+    "message": "committee member not exist"
+}
+```
+
+
+### 13.23 合约状态管理
+
+由**合约部署者**（一般由运维所部属）与链治理委员共同管理合约的状态，包含冻结/解冻合约、查询合约状态功能
+
+#### 13.23.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/precompiled/contract/status**
+* 请求方式： POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.23.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id      
+| 2    | fromAddress     | String   | 否     | 合约管理者地址                                     |
+| 3    | contractAddress | String | 否     | 已部署的合约地址                                             |
+| 4    | handleType      | String | 否     | 操作类型：freeze-冻结；unfreeze-解冻；getStatus-查询合约状态； |
+
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
+```
+
+```
+{
+    "groupId": 1,
+    "fromAddress": "0xd5bba8fe456fce310f529edecef902e4b63129b1",
+    "contractAddress": "0x2357ad9d97027cd71eea1d639f1e5750fbdfd38e",
+    "handleType": "freeze"
+}
+```
+
+
+#### 13.23.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        | 否     | 描述                           
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+```
+{
+    "code": -52007,
+    "message": "operator member not exist"
+}
+```
+
+
+### 13.24 批量查看合约冻结状态
+
+传入多个合约地址的List，查看该合约地址的冻结状态
+
+#### 13.24.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/precompiled/contract/status/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 13.24.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | int        | 否     | 群组id                                     
+| 2   | addressList   | List<String>           | 否     | 多个合约地址的列表
+                         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status/list
+```
+
+```
+{
+    "groupId": 1,
+    "addressList": ["0x009fb217b6d7f010f12e7876d31a738389fecd51", "0x6b9fb217b6d7f010f12e7876d31a738389feef62"]
+}
+```
+
+#### 13.24.3 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Int           |      | 返回码，0：成功 其它：失败                 |
+| 2    | message     | String        |      | 描述    
+| 3   | data     | Map        |      | 直接返回Map, 0-正常，1-冻结 如：["0x009fb217b6d7f010f12e7876d31a738389fecd51": 0, "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1]                     
+      
+
+
+***2）出参示例***
+* 成功：
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        "0x009fb217b6d7f010f12e7876d31a738389fecd51": 0,
+        "0x6b9fb217b6d7f010f12e7876d31a738389feef62": 1
+    ],
+    "totalCount": 1
+}
+```
+
+
+
+### 13.25 获取链委员会投票记录列表  
+
+当链委员会发起一笔交易时会产生一条投票记录，此接口返回某群组下的修改记录列表
+
+#### 13.25.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/vote/record/list**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 13.25.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/list?groupId=1&pageNumber=1&pageSize=10
+```
+
+
+#### 13.25.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | id        | int           | 否     | 合约记录编号                                        |
+| 3.2  | groupId       | Int           | 否     | 所属群组编号                                      |
+| 3.3  | timeLimit    | Long        | 否     | 投票块高限制范围                                        |
+| 3.4  | fromAddress  | String        | 否     | 链委员的地址                                        |
+| 3.5  | type     | Int        | 否     |          投票类型，1-增加委员，2-去除委员，3-更新委员权重，4-更新阈值  |
+| 3.6  | toAddress  | String        | 否     | 被修改的外部账户地址，当类型为1,2,3时为非空                                        |
+| 3.7  | detail     | String        | 否     |         投票内容详情，当类型为3,4时为非空；3-`{weight: 2}`，4-`{threshold: 2}`   |
+| 3.8 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 3.9 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 4    |  totalCount    | Int         |        | 总数                                    |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "groupId": 1,
+      "timeLimit": 200,      
+      "fromAddress": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
+      "type": 3,
+      "toAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
+      "detail": "{weight: 2}",
+      "createTime": "2020-09-18 10:59:02",
+      "modifyTime": "2020-09-18 10:59:02"
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+
+### 13.26 删除链委员会投票记录  
+
+删除投票记录
+
+#### 13.26.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/vote/record/{voteId}**
+* 请求方式：DELETE
+* 返回格式：JSON
+
+#### 13.26.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | voteId         | int           | 否     | 投票记录编号                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/{voteId}
+```
+
+
+#### 13.26.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+
+
+### 13.27 获取链治理委员列表(包含权重)  
+
+获取链治理委员列表，同时返回委员投票的权重值
+
+#### 13.27.1 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/governance/committee/list/sorted**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 13.27.2 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId         | int           | 否     | 群组编号                                        |
+| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 否     | 页大小                                        |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?groupId=1&pageNumber=1&pageSize=10
+```
+
+
+#### 13.27.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
+| 2    | message         | String        | 否     | 描述                                            |
+| 3    |                 | Object         |        | 返回信息实体                                    |
+| 3.1  | weight        | Int           | 否     | 委员投票权重值                                        |
+| 3.2  | weightRate    | BigDecimal           | 否     | 权重比                                      |
+| 3.3  | address       | String           | 否     | 委员的用户地址                                      |
+| 3.4  | enable_num    | Int           | 否     | 委员生效块高                                      |
+| 4    |  totalCount    | Int         |        | 总数                                    |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "weight": 1,
+      "weightRate": 33.3
+      "address": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
+      "enable_num": 3
+    }
+  ],
+  "totalCount": 1
+}
+```
+
+
 
 ## 14 证书管理模块
 
@@ -7468,6 +8528,161 @@ v1.4.0
 
 ## 附录
 
+### 1. 返回码信息列表 
+<span id="code"></span>
+
+`X01XXX`为WeBASE-Front[节点前置错误码](../WeBASE-Front/interface.html#code)，`X02XXX`为WeBASE-Node-Manager节点管理服务错误码，`X03XXX`为WeBASE-Sign[签名服务错误码](../WeBASE-Sign/interfaces.html#code)。
+
+
+| code   | message                                      | 描述                       |
+| ------ | -------------------------------------------- | -------------------------- |
+| 0      | success                                      | 成功                       |
+| 102001 | system error                                 | 系统异常                   |
+| 102002 | system exception: please check front         | 系统异常，请检查前置状态               |
+| 102003 | No group belongs to this groupId(node not belongs to this group)  | 当前节点不属于当前群组               |
+| 202000 | invalid front id                    | 不正确的前置ID（添加节点前置失败）            |
+| 202001 | database exception                  | 数据库异常           |
+| 202002 | not found any front for this group      | 找不到此群组的任何前置           |
+| 202003 | not support this ip     | 不支持该ip           |
+| 202004 | front already exists     | 前置已经存在           |
+| 202005 | group id cannot be empty     | 群组不能为空           |
+| 202006 | invalid group id     | 无效的网络编号           |
+| 202007 | checkCode is null     | 校验码为空           |
+| 202008 | invalid checkCode     | 无效的校验码           |
+| 202009 | save front fail     | 保存前置失败           |
+| 202010 | request front fail      | 请求前置失败           |
+| 202011 | abiInfo cannot be empty      | abi信息不能为空           |
+| 202012 | user id cannot be empty      | 用户编号不能为空           |
+| 202013 | invalid user      | 无效的用户编号           |
+| 202014 | user already exists      | 用户信息已经存在           |
+| 202015 | contract already exists      | 合约信息已经存在           |
+| 202017 | invalid contract id      | 无效的合约编号           |
+| 202018 | invalid param info      | 无效的入参信息           |
+| 202019 | contract name cannot be repeated     | 合约名称不能重复           |
+| 202023 | contract has not deploy      | 合约尚未部署           |
+| 202026 | account info already exists      | 该帐号已经存在           |
+| 202027 | account info not exists      | 该帐号不存在           |
+| 202028 | account name empty      | 帐号名称不能为空           |
+| 202029 | invalid account name      | 无效的账号名称           |
+| 202030 | password error      | 密码错误           |
+| 202031 | role id cannot be empty      | 角色编号不能为空           |
+| 202032 | invalid role id      | 无效的角色编号           |
+| 202033 | invalid contract address      | 无效的合约地址           |
+| 202034 | login fail      | 登录失败           |
+| 202035 | contract has been deployed      | 该合约已经部署           |
+| 202036 | publicKey cannot be empty      | 公钥不能为空           |
+| 202037 | associated account cannot be empty    | 用户信息不存在           |
+| 202040 | contract deploy not success      | 合约部署失败           |
+| 202045 | the new password cannot be same as old      | 新旧密码不能一致           |
+| 202050 | publicKey's length is 130,address's length is 42    | 公钥长度为130，公钥地址长度为42           |
+| 202051 | wrong host or port    |  错误的主机或端口          |
+| 202052 | invalid token   |  无效的token          |
+| 202053 | token expire    |  token过期          |
+| 202054 | Available front url is empty, check front status     |  合约尚未部署          |
+| 202060 | cert handle error    |  证书句柄错误          |
+| 202061 | store cert error    |  存储证书错误          |
+| 202062 | cert format error, must start with -----BEGIN CERTIFICATE-----\\n, end with end    |  证书格式错误，必须由 --BEGIN CERTIFICATE-- 包          |
+| 202063 | saving front's cert error    |  保存前置证书错误          |
+| 202070 | Mail server config error    |  邮件服务器配置错误。          |
+| 202071 | Mail server config param empty/not match    |  邮件服务器配置参数为空/不匹配          |
+| 202072 | Mail server config error, db's server config is empty    |  邮件服务器配置错误，数据库的服务器配置为空          |
+| 202076 | Alert rule error    |  警报规则错误。          |
+| 202077 | Alert rule param not match    |  警报规则参数不匹配。          |
+| 202080 | Send mail error, please check mail server configuration    |  发送邮件错误，请检查邮件服务器配置。          |
+| 202081 | Send mail error, please enable mail server before send    |  发送邮件错误，请在发送前启用邮件服务器。          |
+| 202086 | Alert log error    |  警报日志错误。          |
+| 202087 | Alert log param: status/logId is empty    |  警报日志参数：status/logId为空。          |
+| 202090 | Update guomi methodId error    |  更新国密methodId错误          |
+| 202091 | Front's encrypt type not matches with nodemgr    |  Front的加密类型与nodemgr不匹配          |
+| 202096 | contract address already exists    |  合约地址已存在          |
+| 202097 | abi info of this id not exists    |  此ID的ABI信息不存在          |
+| 202098 | Contract abi invalid, please check abi    |  合约ABI无效，请检查ABI          |
+| 202099 | Abi Id cannot be empty    |  此ID的ABI信息为空          |
+| 202100 | contractAddress is null    |  合约地址为空          |
+| 202110 | User's signUserId not exist    |  用户的signUserId不存在          |
+| 202111 | Fail to parse json    |  解析json错误          |
+| 202121 | Cert file not found, please check cert path in config    |  找不到证书文件，请检查配置中的证书路径          |
+| 202122 | Pem file format error, must surrounded by -----XXXXX PRIVATE KEY-----    |  Pem文件格式错误，必须包含-----XXXXX PRIVATE KEY-----          |
+| 202123 | Pem file content error    |  Pem文件内容错误          |
+| 202124 | p12's password cannot be chinese    |  P12的密码不能为中文          |
+| 202125 | p12's password not match    |  P12的密码错误          |
+| 202126 | P12 file content error    |  P12文件内容错误          |
+| 202300 | Group id already exists    |  群组id已存在          |
+| 202301 | Node's front not exists    |  节点前置不存在          |
+| 202310 | govern vote record not exist    |  投票记录不存在          |
+| 202311 | permission denied on chain    |  链上权限被禁止          |
+| 202401 | No configured of docker registry url.    |  没有配置 Docker 镜像更新 URL 地址          |
+| 202402 | Fetch image tag from docker registry error.    |  从 Docker 源更新镜像版本失败          |
+| 202403 | Fetch Docker image tag list error, unknown config type.    |  查询 Docker 镜像版本失败（未知类型）          |
+| 202404 | Save chain's configuration to file error.    |  保存链配置信息文件失败          |
+| 202405 | Docker image tag invalid.    |  错误的镜像版本          |
+| 202406 | Configuration of host is empty.    |  主机配置参数为空          |
+| 202407 | Chain exists, deploy failed.    |  链已存在，部署失败          |
+| 202408 | Save chain data to DB error.    |  插入链信息到数据库失败          |
+| 202409 | Generate host, agency, group configuration error.    |  生成主机，机构，群组配置信息文件失败          |
+| 202410 | Execute build_chain.sh script error.    |  执行 build_chain.sh 链生成脚本失败          |
+| 202411 | Host, agency, group configuration error.    |  主机，机构，群组配置信息错误          |
+| 202412 | Host ip and num error.    |  主机 IP，节点数量配置错误          |
+| 202413 | Agency name invalid, only [a-zA-Z0-9_] is valid.    |  机构名称格式错误，只能包含大小写字母，数字，下划线          |
+| 202414 | Group id error, only positive integer is valid.    |  群组编号格式错误，必须为正整数          |
+| 202415 | Login to host /ip/ through SSH error. Please check SSH configuration.    |  SSH登录主机/ip/失败，请检查 SSH 配置          |
+| 202416 | Save agency data into DB error.    |  插入新机构信息到数据库失败          |
+| 202417 | Save group data into DB error.    |  插入新群组信息到数据库失败          |
+| 202418 | Save host data into DB error.    |  插入主机信息到数据库失败          |
+| 202419 | Save front data into DB error.    |  插入前置信息到数据库失败          |
+| 202420 | Save node data into DB error.    |  插入节点信息到数据库失败          |
+| 202421 | Save node and front mapping data into DB error.    |  插入前置和群组映射关系到数据库失败          |
+| 202422 | Parse node index from directory error.    |  从目录获取节点序号失败          |
+| 202423 | A single host IP only belongs to one agency.    |  一个 IP 主机，只能属于一个机构          |
+| 202424 | Unknown error during deploying.    |  部署时发生未知错误          |
+| 202425 | SSH login through username and password is unsupported yet.    |  不支持使用 SSH 密码登录主机          |
+| 202426 | Chain has no agency.    |  当前链没有所属机构          |
+| 202427 | No deployed chain    |  链不存在          |
+| 202428 | IP format error.    |  IP 格式错误          |
+| 202429 | Agency name cannot be blank when IP is new.    |  主机 IP 是新 IP 时，机构名称不能为空          |
+| 202430 | Agency name already exists.    |  存在同名机构          |
+| 202431 | Add new node error.    |  新增节点错误          |
+| 202432 | No valid chain certification.    |  链证书无效          |
+| 202433 | Generate agency private key and crt file error.    |  生成机构私钥和证书失败          |
+| 202434 | Host without agency error."    |  主机所属机构为空          |
+| 202435 | Node num should be positive integer, and less then 10.    |  主机数量格式错误，正整数，并且小于 10          |
+| 202436 | Generate sdk    |  生成主机 SDK 私钥和证书失败          |
+| 202437 | Generate node private key and crt files error.    |  生成新节点私钥和证书失败          |
+| 202438 | Copy SDK files error.    |  拷贝 SDK 证书和私钥失败          |
+| 202439 | Upload SDK files error.    |  上传 SDK 证书和私钥失败          |
+| 202440 | Upload node config files error.    |  上传节点证书和私钥失败          |
+| 202441 | Copy group config files from original node error.    |  从旧节点复制群组配置文件失败          |
+| 202442 | Delete tmp directory of agency error.    |  删除机构临时目录失败          |
+| 202443 | Delete tmp directory of SDK error.    |  删除 SDK 临时目录失败          |
+| 202444 | Delete tmp directory of node error.    |  删除节点临时目录失败          |
+| 202445 | Unknown nodeid.    |  未知节点编号（nodeid）          |
+| 202446 | Stop node error.    |  停止节点失败（停止容器）          |
+| 202447 | Start node error.    |  启动节点失败（启动容器）          |
+| 202448 | Both new image tag and old are the same.    |  链升级的新版本和链的现有版本相同          |
+| 202449 | Upgrade chain to new image tag error.    |  链升级失败          |
+| 202450 | Delete node failed, node is still in group.    |  节点仍属于群组，删除失败          |
+| 202451 | Parse node's config files error.    |  读取节点配置文件失败          |
+| 202452 | Delete node's config error.    |  删除节点配置文件失败          |
+| 202453 | Stop node before deleting.    |  节点正在运行，删除失败，请先停止节点          |
+| 202454 | Update p2p part of related nodes error.    |  更新关联节点 P2P 配置失败          |
+| 202455 | Delete chain error.    |  删除链失败          |
+| 202456 | Node is still a sealer or observer, delete failed.    |  节点处于观察或共识状态，删除失败          |
+| 202457 | Fetch node list from host's configuration files    |  从主机配置文件获取节点列表失败          |
+| 202458 | Generate application.yml for front error    |  生成前置 application.yml 配置文件失败          |
+| 202459 | Init host with shell script error.    |  通过脚本初始化主机失败          |
+| 202460 | Sync files error.    |  传输文件失败          |
+| 202461 | Control container through Docker api error.    |  Docker 容器操作失败          |
+| 202462 | Two nodes at least.    |  至少两个节点。          |
+| 202463 | Group need two sealers at least.    |  群组至少需要两个共识节点。          |
+| 202464 | WebaseSignAddess configuration error in Application.yml    |  application.yml中的webaseSignAddess配置错误          |
+| 202465 | Error getting docker image mode    |  获取镜像方式错误          |
+| 202466 | Please pull the Docker image manually in host /ip/    |  主机/ip/请手动拉取 Docker 镜像          |
+| 202467 | Max 4 nodes on a single host    |  单个主机最多部署 4 个节点          |
+| 202468 | Cannot install node on WeBASE-Node-Manager host.    |  无法在WeBASE-Node-Manager主机上安装节点。          |
+| 302000 | user not logged in    |  未登录的用户          |
+| 302001 | Access denied    |  没有权限          |
+| 402000 | param exception    |  参数错误          |
+
 ### 2. Precompiled Service说明
 
 对预编译合约接口的使用有疑惑，可以查看FISCO BCOS的[PreCompiledService API说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk.html#precompiled-service-api)
@@ -7493,4 +8708,51 @@ contract TableFactory {
 | 0x1004 | CNS功能  | CNSPrecompiled.cpp |
 | 0x1005 | 存储表权限管理 | AuthorityPrecompiled.cpp |
 | 0x1006 | 并行合约配置 | ParallelConfigPrecompiled.cpp |
+
+
+**Precompiled Service API 错误码**
+
+| 错误码 | 消息内容                                          | 备注      |
+| :----- | :----------------------------------------------  | :-----   |
+| 0      | success                                          |          |
+| -50000  | permission denied                               |          |
+| -50001  | table name already exist                        |          |
+| -50100  | unknow function call                            |          |
+| -50101  | table does not exist                            |          |
+| -51000  | table name and address already exist            |          |
+| -51001  | table name and address does not exist           |          |
+| -51100  | invalid node ID                                 | SDK错误码 |
+| -51101  | the last sealer cannot be removed               |           |
+| -51102  | the node is not reachable                       | SDK错误码 |
+| -51103  | the node is not a group peer                    | SDK错误码 |
+| -51104  | the node is already in the sealer list          | SDK错误码 |
+| -51105  | the node is already in the observer list        | SDK错误码 |
+| -51200  | contract name and version already exist         | SDK错误码 |
+| -51201  | version string length exceeds the maximum limit | SDK错误码 |
+| -51300  | invalid configuration entry                     |          |
+| -51500  | contract name and version already exist         |          |
+| -51501  | condition parse error                           |          |
+| -51502  | condition operation undefined                   |          |
+| -51600  | invalid ciphers                                 |          |
+| -51700  | group sig failed                                |          |
+| -51800  | ring sig failed                                 |          |
+| -51900  | contract frozen                              |          |
+| -51901  | contract available                              |          |
+| -51902  | contract repeat authorization                    |          |
+| -51903  | invalid contract address                    |          |
+| -51904  | table not exist                    |          |
+| -51905  | no authorized                  |          |
+| -52000  | committee member exist                    |          |
+| -52001  | committee member not exist                |          |
+| -52002  | invalid request permission denied         |          |
+| -52003  | invalid threshold                    |          |
+| -52004  | operator can't be committee member                    |          |
+| -52005  | committee member can't be operator                    |          |
+| -52006  | operator exist                    |          |
+| -52007  | operator not exist                    |          |
+| -52008  | account not exist                    |          |
+| -52009  | invalid account address                    |          |
+| -52010  | account already available                   |          |
+| -52011  | account frozen                    |          |
+| -52012  | current value is expected value              |          |
 
