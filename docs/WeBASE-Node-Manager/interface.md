@@ -8528,6 +8528,183 @@ v1.4.0
 
 ## 附录
 
+### 1. 返回码信息列表 
+<span id="code"></span>
+
+`X01XXX`为WeBASE-Front[节点前置错误码](../WeBASE-Front/interface.html#code)，`X02XXX`为WeBASE-Node-Manager节点管理服务错误码，`X03XXX`为WeBASE-Sign[签名服务错误码](../WeBASE-Sign/interfaces.html#code)。
+
+
+| code   | message                                      | 描述                       |
+| ------ | -------------------------------------------- | -------------------------- |
+| 0      | success                                      | 成功                       |
+| 102001 | system error                                 | 系统异常                   |
+| 102002 | system exception: please check front         | 系统异常，请检查前置状态               |
+| 102003 | No group belongs to this groupId(node not belongs to this group)  | 当前节点不属于当前群组               |
+| 202000 | invalid front id                    | 不正确的前置ID（添加节点前置失败）            |
+| 202001 | database exception                  | 群组编号不能为空           |
+| 202002 | not found any front for this group      | 群组编号不能为空           |
+| 202003 | not support this ip     | 群组编号不能为空           |
+| 202004 | front already exists     | 群组编号不能为空           |
+| 202005 | group id cannot be empty     | 群组编号不能为空           |
+| 202006 | invalid group id     | 群组编号不能为空           |
+| 202007 | checkCode is null     | 群组编号不能为空           |
+| 202008 | invalid checkCode     | 群组编号不能为空           |
+| 202009 | save front fail     | 群组编号不能为空           |
+
+
+| 202010 | request front fail      | 群组编号不能为空           |
+| 202011 | abiInfo cannot be empty      | 群组编号不能为空           |
+| 202012 | user id cannot be empty      | 群组编号不能为空           |
+| 202013 | invalid user      | 群组编号不能为空           |
+| 202014 | user already exists      | 群组编号不能为空           |
+| 202015 | contract already exists      | 群组编号不能为空           |
+
+| 202017 | invalid contract id      | 群组编号不能为空           |
+| 202018 | invalid param info      | 群组编号不能为空           |
+| 202019 | contract name cannot be repeated     | 群组编号不能为空           |
+
+
+| 202023 | contract has not deploy      | 群组编号不能为空           |
+| 202026 | account info already exists      | 群组编号不能为空           |
+| 202027 | account info not exists      | 群组编号不能为空           |
+| 202028 | account name empty      | 群组编号不能为空           |
+| 202029 | invalid account name      | 群组编号不能为空           |
+
+| 202030 | password error      | 群组编号不能为空           |
+| 202031 | role id cannot be empty      | 群组编号不能为空           |
+| 202032 | invalid role id      | 群组编号不能为空           |
+| 202033 | invalid contract address      | 群组编号不能为空           |
+| 202034 | login fail      | 群组编号不能为空           |
+| 202035 | contract has been deployed      | 群组编号不能为空           |
+| 202036 | publicKey cannot be empty      | 群组编号不能为空           |
+| 202037 | associated account cannot be empty    | 群组编号不能为空           |
+
+| 202040 | contract deploy not success      | 群组编号不能为空           |
+| 202045 | the new password cannot be same as old      | 群组编号不能为空           |
+
+| 202050 | publicKey's length is 130,address's length is 42    |            |
+| 202051 | wrong host or port    |            |
+| 202052 | invalid token   |            |
+| 202053 | token expire    |  群组编号不能为空          |
+| 202054 | Available front url is empty, check front status     |            |
+
+| 202060 | cert handle error    |  群组编号不能为空          |
+| 202061 | store cert error    |  群组编号不能为空          |
+| 202062 | cert format error, must start with -----BEGIN CERTIFICATE-----\\n, end with end    |  群组编号不能为空          |
+| 202063 | saving front's cert error    |  群组编号不能为空          |
+
+| 202070 | Mail server config error    |  群组编号不能为空          |
+| 202071 | Mail server config param empty/not match    |  群组编号不能为空          |
+| 202072 | Mail server config error, db's server config is empty    |  群组编号不能为空          |
+
+| 202076 | Alert rule error    |  群组编号不能为空          |
+| 202077 | Alert rule param not match    |  群组编号不能为空          |
+
+| 202080 | Send mail error, please check mail server configuration    |  群组编号不能为空          |
+| 202081 | Send mail error, please enable mail server before send    |  群组编号不能为空          |
+
+| 202086 | Alert log error    |  群组编号不能为空          |
+| 202087 | Alert log param: status/logId is empty    |  群组编号不能为空          |
+
+| 202090 | Update guomi methodId error    |  群组编号不能为空          |
+| 202091 | Front's encrypt type not matches with nodemgr    |  群组编号不能为空          |
+
+| 202096 | contract address already exists    |  群组编号不能为空          |
+| 202097 | abi info of this id not exists    |  群组编号不能为空          |
+| 202098 | Contract abi invalid, please check abi    |  群组编号不能为空          |
+| 202099 | Abi Id cannot be empty    |  群组编号不能为空          |
+| 202100 | contractAddress is null    |  群组编号不能为空          |
+
+| 202110 | User's signUserId not exist    |  群组编号不能为空          |
+| 202111 | Fail to parse json    |  群组编号不能为空          |
+
+| 202121 | Cert file not found, please check cert path in config    |  群组编号不能为空          |
+| 202122 | Pem file format error, must surrounded by -----XXXXX PRIVATE KEY-----    |  群组编号不能为空          |
+| 202123 | Pem file content error    |  群组编号不能为空          |
+| 202124 | p12's password cannot be chinese    |  群组编号不能为空          |
+| 202125 | p12's password not match    |  群组编号不能为空          |
+| 202126 | P12 file content error    |  群组编号不能为空          |
+
+| 202300 | token    |  群组编号不能为空          |
+| 202301 | token    |  群组编号不能为空          |
+
+| 202310 | token    |  群组编号不能为空          |
+| 202311 | token    |  群组编号不能为空          |
+
+| 202401 | token    |  群组编号不能为空          |
+| 202402 | token    |  群组编号不能为空          |
+| 202403 | token    |  群组编号不能为空          |
+| 202404 | token    |  群组编号不能为空          |
+| 202405 | token    |  群组编号不能为空          |
+| 202406 | token    |  群组编号不能为空          |
+| 202407 | token    |  群组编号不能为空          |
+| 202408 | token    |  群组编号不能为空          |
+| 202409 | token    |  群组编号不能为空          |
+| 202410 | token    |  群组编号不能为空          |
+| 202411 | token    |  群组编号不能为空          |
+| 202412 | token    |  群组编号不能为空          |
+| 202413 | token    |  群组编号不能为空          |
+| 202414 | token    |  群组编号不能为空          |
+| 202415 | token    |  群组编号不能为空          |
+| 202416 | token    |  群组编号不能为空          |
+| 202417 | token    |  群组编号不能为空          |
+| 202418 | token    |  群组编号不能为空          |
+| 202419 | token    |  群组编号不能为空          |
+| 202420 | token    |  群组编号不能为空          |
+| 202421 | token    |  群组编号不能为空          |
+| 202422 | token    |  群组编号不能为空          |
+| 202423 | token    |  群组编号不能为空          |
+| 202424 | token    |  群组编号不能为空          |
+| 202425 | token    |  群组编号不能为空          |
+| 202426 | token    |  群组编号不能为空          |
+| 202427 | token    |  群组编号不能为空          |
+| 202428 | token    |  群组编号不能为空          |
+| 202429 | token    |  群组编号不能为空          |
+| 202430 | token    |  群组编号不能为空          |
+| 202431 | token    |  群组编号不能为空          |
+| 202432 | token    |  群组编号不能为空          |
+| 202433 | token    |  群组编号不能为空          |
+| 202434 | token    |  群组编号不能为空          |
+| 202435 | token    |  群组编号不能为空          |
+| 202436 | token    |  群组编号不能为空          |
+| 202437 | token    |  群组编号不能为空          |
+| 202438 | token    |  群组编号不能为空          |
+| 202439 | token    |  群组编号不能为空          |
+| 202440 | token    |  群组编号不能为空          |
+| 202441 | token    |  群组编号不能为空          |
+| 202442 | token    |  群组编号不能为空          |
+| 202443 | token    |  群组编号不能为空          |
+| 202444 | token    |  群组编号不能为空          |
+| 202445 | token    |  群组编号不能为空          |
+| 202446 | token    |  群组编号不能为空          |
+| 202447 | token    |  群组编号不能为空          |
+| 202448 | token    |  群组编号不能为空          |
+| 202449 | token    |  群组编号不能为空          |
+| 202450 | token    |  群组编号不能为空          |
+| 202451 | token    |  群组编号不能为空          |
+| 202452 | token    |  群组编号不能为空          |
+| 202453 | token    |  群组编号不能为空          |
+| 202454 | token    |  群组编号不能为空          |
+| 202455 | token    |  群组编号不能为空          |
+| 202456 | token    |  群组编号不能为空          |
+| 202457 | token    |  群组编号不能为空          |
+| 202458 | token    |  群组编号不能为空          |
+| 202459 | token    |  群组编号不能为空          |
+| 202460 | token    |  群组编号不能为空          |
+| 202461 | token    |  群组编号不能为空          |
+| 202462 | token    |  群组编号不能为空          |
+| 202463 | token    |  群组编号不能为空          |
+| 202464 | token    |  群组编号不能为空          |
+| 202465 | token    |  群组编号不能为空          |
+| 202466 | token    |  群组编号不能为空          |
+| 202467 | token    |  群组编号不能为空          |
+| 202468 | token    |  群组编号不能为空          |
+
+| 302000 | token    |  群组编号不能为空          |
+| 302001 | token    |  群组编号不能为空          |
+
+| 402000 | token    |  群组编号不能为空          |
+
 ### 2. Precompiled Service说明
 
 对预编译合约接口的使用有疑惑，可以查看FISCO BCOS的[PreCompiledService API说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk.html#precompiled-service-api)
@@ -8553,4 +8730,51 @@ contract TableFactory {
 | 0x1004 | CNS功能  | CNSPrecompiled.cpp |
 | 0x1005 | 存储表权限管理 | AuthorityPrecompiled.cpp |
 | 0x1006 | 并行合约配置 | ParallelConfigPrecompiled.cpp |
+
+
+**Precompiled Service API 错误码**
+
+| 错误码 | 消息内容                                          | 备注      |
+| :----- | :----------------------------------------------  | :-----   |
+| 0      | success                                          |          |
+| -50000  | permission denied                               |          |
+| -50001  | table name already exist                        |          |
+| -50100  | unknow function call                            |          |
+| -50101  | table does not exist                            |          |
+| -51000  | table name and address already exist            |          |
+| -51001  | table name and address does not exist           |          |
+| -51100  | invalid node ID                                 | SDK错误码 |
+| -51101  | the last sealer cannot be removed               |           |
+| -51102  | the node is not reachable                       | SDK错误码 |
+| -51103  | the node is not a group peer                    | SDK错误码 |
+| -51104  | the node is already in the sealer list          | SDK错误码 |
+| -51105  | the node is already in the observer list        | SDK错误码 |
+| -51200  | contract name and version already exist         | SDK错误码 |
+| -51201  | version string length exceeds the maximum limit | SDK错误码 |
+| -51300  | invalid configuration entry                     |          |
+| -51500  | contract name and version already exist         |          |
+| -51501  | condition parse error                           |          |
+| -51502  | condition operation undefined                   |          |
+| -51600  | invalid ciphers                                 |          |
+| -51700  | group sig failed                                |          |
+| -51800  | ring sig failed                                 |          |
+| -51900  | contract frozen                              |          |
+| -51901  | contract available                              |          |
+| -51902  | contract repeat authorization                    |          |
+| -51903  | invalid contract address                    |          |
+| -51904  | table not exist                    |          |
+| -51905  | no authorized                  |          |
+| -52000  | committee member exist                    |          |
+| -52001  | committee member not exist                |          |
+| -52002  | invalid request permission denied         |          |
+| -52003  | invalid threshold                    |          |
+| -52004  | operator can't be committee member                    |          |
+| -52005  | committee member can't be operator                    |          |
+| -52006  | operator exist                    |          |
+| -52007  | operator not exist                    |          |
+| -52008  | account not exist                    |          |
+| -52009  | invalid account address                    |          |
+| -52010  | account already available                   |          |
+| -52011  | account frozen                    |          |
+| -52012  | current value is expected value              |          |
 
