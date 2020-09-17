@@ -8541,169 +8541,169 @@ v1.4.0
 | 102002 | system exception: please check front         | 系统异常，请检查前置状态               |
 | 102003 | No group belongs to this groupId(node not belongs to this group)  | 当前节点不属于当前群组               |
 | 202000 | invalid front id                    | 不正确的前置ID（添加节点前置失败）            |
-| 202001 | database exception                  | 群组编号不能为空           |
-| 202002 | not found any front for this group      | 群组编号不能为空           |
-| 202003 | not support this ip     | 群组编号不能为空           |
-| 202004 | front already exists     | 群组编号不能为空           |
-| 202005 | group id cannot be empty     | 群组编号不能为空           |
-| 202006 | invalid group id     | 群组编号不能为空           |
-| 202007 | checkCode is null     | 群组编号不能为空           |
-| 202008 | invalid checkCode     | 群组编号不能为空           |
-| 202009 | save front fail     | 群组编号不能为空           |
+| 202001 | database exception                  | 数据库异常           |
+| 202002 | not found any front for this group      | 找不到此群组的任何前置           |
+| 202003 | not support this ip     | 不支持该ip           |
+| 202004 | front already exists     | 前置已经存在           |
+| 202005 | group id cannot be empty     | 群组不能为空           |
+| 202006 | invalid group id     | 无效的网络编号           |
+| 202007 | checkCode is null     | 校验码为空           |
+| 202008 | invalid checkCode     | 无效的校验码           |
+| 202009 | save front fail     | 保存前置失败           |
 
 
-| 202010 | request front fail      | 群组编号不能为空           |
-| 202011 | abiInfo cannot be empty      | 群组编号不能为空           |
-| 202012 | user id cannot be empty      | 群组编号不能为空           |
-| 202013 | invalid user      | 群组编号不能为空           |
-| 202014 | user already exists      | 群组编号不能为空           |
-| 202015 | contract already exists      | 群组编号不能为空           |
+| 202010 | request front fail      | 请求前置失败           |
+| 202011 | abiInfo cannot be empty      | abi信息不能为空           |
+| 202012 | user id cannot be empty      | 用户编号不能为空           |
+| 202013 | invalid user      | 无效的用户编号           |
+| 202014 | user already exists      | 用户信息已经存在           |
+| 202015 | contract already exists      | 合约信息已经存在           |
 
-| 202017 | invalid contract id      | 群组编号不能为空           |
-| 202018 | invalid param info      | 群组编号不能为空           |
-| 202019 | contract name cannot be repeated     | 群组编号不能为空           |
+| 202017 | invalid contract id      | 无效的合约编号           |
+| 202018 | invalid param info      | 无效的入参信息           |
+| 202019 | contract name cannot be repeated     | 合约名称不能重复           |
 
 
-| 202023 | contract has not deploy      | 群组编号不能为空           |
-| 202026 | account info already exists      | 群组编号不能为空           |
-| 202027 | account info not exists      | 群组编号不能为空           |
-| 202028 | account name empty      | 群组编号不能为空           |
-| 202029 | invalid account name      | 群组编号不能为空           |
+| 202023 | contract has not deploy      | 合约尚未部署           |
+| 202026 | account info already exists      | 该帐号已经存在           |
+| 202027 | account info not exists      | 该帐号不存在           |
+| 202028 | account name empty      | 帐号名称不能为空           |
+| 202029 | invalid account name      | 无效的账号名称           |
 
-| 202030 | password error      | 群组编号不能为空           |
-| 202031 | role id cannot be empty      | 群组编号不能为空           |
-| 202032 | invalid role id      | 群组编号不能为空           |
-| 202033 | invalid contract address      | 群组编号不能为空           |
-| 202034 | login fail      | 群组编号不能为空           |
-| 202035 | contract has been deployed      | 群组编号不能为空           |
-| 202036 | publicKey cannot be empty      | 群组编号不能为空           |
-| 202037 | associated account cannot be empty    | 群组编号不能为空           |
+| 202030 | password error      | 密码错误           |
+| 202031 | role id cannot be empty      | 角色编号不能为空           |
+| 202032 | invalid role id      | 无效的角色编号           |
+| 202033 | invalid contract address      | 无效的合约地址           |
+| 202034 | login fail      | 登录失败           |
+| 202035 | contract has been deployed      | 该合约已经部署           |
+| 202036 | publicKey cannot be empty      | 公钥不能为空           |
+| 202037 | associated account cannot be empty    | 用户信息不存在           |
 
-| 202040 | contract deploy not success      | 群组编号不能为空           |
-| 202045 | the new password cannot be same as old      | 群组编号不能为空           |
+| 202040 | contract deploy not success      | 合约部署失败           |
+| 202045 | the new password cannot be same as old      | 新旧密码不能一致           |
 
-| 202050 | publicKey's length is 130,address's length is 42    |            |
-| 202051 | wrong host or port    |            |
-| 202052 | invalid token   |            |
-| 202053 | token expire    |  群组编号不能为空          |
-| 202054 | Available front url is empty, check front status     |            |
+| 202050 | publicKey's length is 130,address's length is 42    | 公钥长度为130，公钥地址长度为42           |
+| 202051 | wrong host or port    |  错误的主机或端口          |
+| 202052 | invalid token   |  无效的token          |
+| 202053 | token expire    |  token过期          |
+| 202054 | Available front url is empty, check front status     |  合约尚未部署          |
 
-| 202060 | cert handle error    |  群组编号不能为空          |
-| 202061 | store cert error    |  群组编号不能为空          |
-| 202062 | cert format error, must start with -----BEGIN CERTIFICATE-----\\n, end with end    |  群组编号不能为空          |
-| 202063 | saving front's cert error    |  群组编号不能为空          |
+| 202060 | cert handle error    |  证书句柄错误          |
+| 202061 | store cert error    |  存储证书错误          |
+| 202062 | cert format error, must start with -----BEGIN CERTIFICATE-----\\n, end with end    |  证书格式错误，必须由 --BEGIN CERTIFICATE-- 包          |
+| 202063 | saving front's cert error    |  保存前置证书错误          |
 
-| 202070 | Mail server config error    |  群组编号不能为空          |
-| 202071 | Mail server config param empty/not match    |  群组编号不能为空          |
-| 202072 | Mail server config error, db's server config is empty    |  群组编号不能为空          |
+| 202070 | Mail server config error    |  邮件服务器配置错误。          |
+| 202071 | Mail server config param empty/not match    |  邮件服务器配置参数为空/不匹配          |
+| 202072 | Mail server config error, db's server config is empty    |  邮件服务器配置错误，数据库的服务器配置为空          |
 
-| 202076 | Alert rule error    |  群组编号不能为空          |
-| 202077 | Alert rule param not match    |  群组编号不能为空          |
+| 202076 | Alert rule error    |  警报规则错误。          |
+| 202077 | Alert rule param not match    |  警报规则参数不匹配。          |
 
-| 202080 | Send mail error, please check mail server configuration    |  群组编号不能为空          |
-| 202081 | Send mail error, please enable mail server before send    |  群组编号不能为空          |
+| 202080 | Send mail error, please check mail server configuration    |  发送邮件错误，请检查邮件服务器配置。          |
+| 202081 | Send mail error, please enable mail server before send    |  发送邮件错误，请在发送前启用邮件服务器。          |
 
-| 202086 | Alert log error    |  群组编号不能为空          |
-| 202087 | Alert log param: status/logId is empty    |  群组编号不能为空          |
+| 202086 | Alert log error    |  警报日志错误。          |
+| 202087 | Alert log param: status/logId is empty    |  警报日志参数：status/logId为空。          |
 
-| 202090 | Update guomi methodId error    |  群组编号不能为空          |
-| 202091 | Front's encrypt type not matches with nodemgr    |  群组编号不能为空          |
+| 202090 | Update guomi methodId error    |  更新国密methodId错误          |
+| 202091 | Front's encrypt type not matches with nodemgr    |  Front的加密类型与nodemgr不匹配          |
 
-| 202096 | contract address already exists    |  群组编号不能为空          |
-| 202097 | abi info of this id not exists    |  群组编号不能为空          |
-| 202098 | Contract abi invalid, please check abi    |  群组编号不能为空          |
-| 202099 | Abi Id cannot be empty    |  群组编号不能为空          |
-| 202100 | contractAddress is null    |  群组编号不能为空          |
+| 202096 | contract address already exists    |  合约地址已存在          |
+| 202097 | abi info of this id not exists    |  此ID的ABI信息不存在          |
+| 202098 | Contract abi invalid, please check abi    |  合约ABI无效，请检查ABI          |
+| 202099 | Abi Id cannot be empty    |  此ID的ABI信息为空          |
+| 202100 | contractAddress is null    |  合约地址为空          |
 
-| 202110 | User's signUserId not exist    |  群组编号不能为空          |
-| 202111 | Fail to parse json    |  群组编号不能为空          |
+| 202110 | User's signUserId not exist    |  用户的signUserId不存在          |
+| 202111 | Fail to parse json    |  解析json错误          |
 
-| 202121 | Cert file not found, please check cert path in config    |  群组编号不能为空          |
-| 202122 | Pem file format error, must surrounded by -----XXXXX PRIVATE KEY-----    |  群组编号不能为空          |
-| 202123 | Pem file content error    |  群组编号不能为空          |
-| 202124 | p12's password cannot be chinese    |  群组编号不能为空          |
-| 202125 | p12's password not match    |  群组编号不能为空          |
-| 202126 | P12 file content error    |  群组编号不能为空          |
+| 202121 | Cert file not found, please check cert path in config    |  找不到证书文件，请检查配置中的证书路径          |
+| 202122 | Pem file format error, must surrounded by -----XXXXX PRIVATE KEY-----    |  Pem文件格式错误，必须包含-----XXXXX PRIVATE KEY-----          |
+| 202123 | Pem file content error    |  Pem文件内容错误          |
+| 202124 | p12's password cannot be chinese    |  P12的密码不能为中文          |
+| 202125 | p12's password not match    |  P12的密码错误          |
+| 202126 | P12 file content error    |  P12文件内容错误          |
 
-| 202300 | token    |  群组编号不能为空          |
-| 202301 | token    |  群组编号不能为空          |
+| 202300 | Group id already exists    |  群组id已存在          |
+| 202301 | Node's front not exists    |  节点前置不存在          |
 
-| 202310 | token    |  群组编号不能为空          |
-| 202311 | token    |  群组编号不能为空          |
+| 202310 | govern vote record not exist    |  投票记录不存在          |
+| 202311 | permission denied on chain    |  链上权限被禁止          |
 
-| 202401 | token    |  群组编号不能为空          |
-| 202402 | token    |  群组编号不能为空          |
-| 202403 | token    |  群组编号不能为空          |
-| 202404 | token    |  群组编号不能为空          |
-| 202405 | token    |  群组编号不能为空          |
-| 202406 | token    |  群组编号不能为空          |
-| 202407 | token    |  群组编号不能为空          |
-| 202408 | token    |  群组编号不能为空          |
-| 202409 | token    |  群组编号不能为空          |
-| 202410 | token    |  群组编号不能为空          |
-| 202411 | token    |  群组编号不能为空          |
-| 202412 | token    |  群组编号不能为空          |
-| 202413 | token    |  群组编号不能为空          |
-| 202414 | token    |  群组编号不能为空          |
-| 202415 | token    |  群组编号不能为空          |
-| 202416 | token    |  群组编号不能为空          |
-| 202417 | token    |  群组编号不能为空          |
-| 202418 | token    |  群组编号不能为空          |
-| 202419 | token    |  群组编号不能为空          |
-| 202420 | token    |  群组编号不能为空          |
-| 202421 | token    |  群组编号不能为空          |
-| 202422 | token    |  群组编号不能为空          |
-| 202423 | token    |  群组编号不能为空          |
-| 202424 | token    |  群组编号不能为空          |
-| 202425 | token    |  群组编号不能为空          |
-| 202426 | token    |  群组编号不能为空          |
-| 202427 | token    |  群组编号不能为空          |
-| 202428 | token    |  群组编号不能为空          |
-| 202429 | token    |  群组编号不能为空          |
-| 202430 | token    |  群组编号不能为空          |
-| 202431 | token    |  群组编号不能为空          |
-| 202432 | token    |  群组编号不能为空          |
-| 202433 | token    |  群组编号不能为空          |
-| 202434 | token    |  群组编号不能为空          |
-| 202435 | token    |  群组编号不能为空          |
-| 202436 | token    |  群组编号不能为空          |
-| 202437 | token    |  群组编号不能为空          |
-| 202438 | token    |  群组编号不能为空          |
-| 202439 | token    |  群组编号不能为空          |
-| 202440 | token    |  群组编号不能为空          |
-| 202441 | token    |  群组编号不能为空          |
-| 202442 | token    |  群组编号不能为空          |
-| 202443 | token    |  群组编号不能为空          |
-| 202444 | token    |  群组编号不能为空          |
-| 202445 | token    |  群组编号不能为空          |
-| 202446 | token    |  群组编号不能为空          |
-| 202447 | token    |  群组编号不能为空          |
-| 202448 | token    |  群组编号不能为空          |
-| 202449 | token    |  群组编号不能为空          |
-| 202450 | token    |  群组编号不能为空          |
-| 202451 | token    |  群组编号不能为空          |
-| 202452 | token    |  群组编号不能为空          |
-| 202453 | token    |  群组编号不能为空          |
-| 202454 | token    |  群组编号不能为空          |
-| 202455 | token    |  群组编号不能为空          |
-| 202456 | token    |  群组编号不能为空          |
-| 202457 | token    |  群组编号不能为空          |
-| 202458 | token    |  群组编号不能为空          |
-| 202459 | token    |  群组编号不能为空          |
-| 202460 | token    |  群组编号不能为空          |
-| 202461 | token    |  群组编号不能为空          |
-| 202462 | token    |  群组编号不能为空          |
-| 202463 | token    |  群组编号不能为空          |
-| 202464 | token    |  群组编号不能为空          |
-| 202465 | token    |  群组编号不能为空          |
-| 202466 | token    |  群组编号不能为空          |
-| 202467 | token    |  群组编号不能为空          |
-| 202468 | token    |  群组编号不能为空          |
+| 202401 | No configured of docker registry url.    |  没有配置 Docker 镜像更新 URL 地址          |
+| 202402 | Fetch image tag from docker registry error.    |  从 Docker 源更新镜像版本失败          |
+| 202403 | Fetch Docker image tag list error, unknown config type.    |  查询 Docker 镜像版本失败（未知类型）          |
+| 202404 | Save chain's configuration to file error.    |  保存链配置信息文件失败          |
+| 202405 | Docker image tag invalid.    |  错误的镜像版本          |
+| 202406 | Configuration of host is empty.    |  主机配置参数为空          |
+| 202407 | Chain exists, deploy failed.    |  链已存在，部署失败          |
+| 202408 | Save chain data to DB error.    |  插入链信息到数据库失败          |
+| 202409 | Generate host, agency, group configuration error.    |  生成主机，机构，群组配置信息文件失败          |
+| 202410 | Execute build_chain.sh script error.    |  执行 build_chain.sh 链生成脚本失败          |
+| 202411 | Host, agency, group configuration error.    |  主机，机构，群组配置信息错误          |
+| 202412 | Host ip and num error.    |  主机 IP，节点数量配置错误          |
+| 202413 | Agency name invalid, only [a-zA-Z0-9_] is valid.    |  机构名称格式错误，只能包含大小写字母，数字，下划线          |
+| 202414 | Group id error, only positive integer is valid.    |  群组编号格式错误，必须为正整数          |
+| 202415 | Login to host /ip/ through SSH error. Please check SSH configuration.    |  SSH登录主机/ip/失败，请检查 SSH 配置          |
+| 202416 | Save agency data into DB error.    |  插入新机构信息到数据库失败          |
+| 202417 | Save group data into DB error.    |  插入新群组信息到数据库失败          |
+| 202418 | Save host data into DB error.    |  插入主机信息到数据库失败          |
+| 202419 | Save front data into DB error.    |  插入前置信息到数据库失败          |
+| 202420 | Save node data into DB error.    |  插入节点信息到数据库失败          |
+| 202421 | Save node and front mapping data into DB error.    |  插入前置和群组映射关系到数据库失败          |
+| 202422 | Parse node index from directory error.    |  从目录获取节点序号失败          |
+| 202423 | A single host IP only belongs to one agency.    |  一个 IP 主机，只能属于一个机构          |
+| 202424 | Unknown error during deploying.    |  部署时发生未知错误          |
+| 202425 | SSH login through username and password is unsupported yet.    |  不支持使用 SSH 密码登录主机          |
+| 202426 | Chain has no agency.    |  当前链没有所属机构          |
+| 202427 | No deployed chain    |  链不存在          |
+| 202428 | IP format error.    |  IP 格式错误          |
+| 202429 | Agency name cannot be blank when IP is new.    |  主机 IP 是新 IP 时，机构名称不能为空          |
+| 202430 | Agency name already exists.    |  存在同名机构          |
+| 202431 | Add new node error.    |  新增节点错误          |
+| 202432 | No valid chain certification.    |  链证书无效          |
+| 202433 | Generate agency private key and crt file error.    |  生成机构私钥和证书失败          |
+| 202434 | Host without agency error."    |  主机所属机构为空          |
+| 202435 | Node num should be positive integer, and less then 10.    |  主机数量格式错误，正整数，并且小于 10          |
+| 202436 | Generate sdk    |  生成主机 SDK 私钥和证书失败          |
+| 202437 | Generate node private key and crt files error.    |  生成新节点私钥和证书失败          |
+| 202438 | Copy SDK files error.    |  拷贝 SDK 证书和私钥失败          |
+| 202439 | Upload SDK files error.    |  上传 SDK 证书和私钥失败          |
+| 202440 | Upload node config files error.    |  上传节点证书和私钥失败          |
+| 202441 | Copy group config files from original node error.    |  从旧节点复制群组配置文件失败          |
+| 202442 | Delete tmp directory of agency error.    |  删除机构临时目录失败          |
+| 202443 | Delete tmp directory of SDK error.    |  删除 SDK 临时目录失败          |
+| 202444 | Delete tmp directory of node error.    |  删除节点临时目录失败          |
+| 202445 | Unknown nodeid.    |  未知节点编号（nodeid）          |
+| 202446 | Stop node error.    |  停止节点失败（停止容器）          |
+| 202447 | Start node error.    |  启动节点失败（启动容器）          |
+| 202448 | Both new image tag and old are the same.    |  链升级的新版本和链的现有版本相同          |
+| 202449 | Upgrade chain to new image tag error.    |  链升级失败          |
+| 202450 | Delete node failed, node is still in group.    |  节点仍属于群组，删除失败          |
+| 202451 | Parse node's config files error.    |  读取节点配置文件失败          |
+| 202452 | Delete node's config error.    |  删除节点配置文件失败          |
+| 202453 | Stop node before deleting.    |  节点正在运行，删除失败，请先停止节点          |
+| 202454 | Update p2p part of related nodes error.    |  更新关联节点 P2P 配置失败          |
+| 202455 | Delete chain error.    |  删除链失败          |
+| 202456 | Node is still a sealer or observer, delete failed.    |  节点处于观察或共识状态，删除失败          |
+| 202457 | Fetch node list from host's configuration files    |  从主机配置文件获取节点列表失败          |
+| 202458 | Generate application.yml for front error    |  生成前置 application.yml 配置文件失败          |
+| 202459 | Init host with shell script error.    |  通过脚本初始化主机失败          |
+| 202460 | Sync files error.    |  传输文件失败          |
+| 202461 | Control container through Docker api error.    |  Docker 容器操作失败          |
+| 202462 | Two nodes at least.    |  至少两个节点。          |
+| 202463 | Group need two sealers at least.    |  群组至少需要两个共识节点。          |
+| 202464 | WebaseSignAddess configuration error in Application.yml    |  application.yml中的webaseSignAddess配置错误          |
+| 202465 | Error getting docker image mode    |  获取镜像方式错误          |
+| 202466 | Please pull the Docker image manually in host /ip/    |  主机/ip/请手动拉取 Docker 镜像          |
+| 202467 | Max 4 nodes on a single host    |  单个主机最多部署 4 个节点          |
+| 202468 | Cannot install node on WeBASE-Node-Manager host.    |  无法在WeBASE-Node-Manager主机上安装节点。          |
 
-| 302000 | token    |  群组编号不能为空          |
-| 302001 | token    |  群组编号不能为空          |
+| 302000 | user not logged in    |  未登录的用户          |
+| 302001 | Access denied    |  没有权限          |
 
-| 402000 | token    |  群组编号不能为空          |
+| 402000 | param exception    |  参数错误          |
 
 ### 2. Precompiled Service说明
 
