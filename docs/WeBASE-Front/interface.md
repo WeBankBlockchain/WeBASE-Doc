@@ -5760,6 +5760,10 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201042 | There is no sol files in source              | solidity文件不存在                 |
 | 201043 | invalid group operate type                   | 群组操作类型不正确                 |
 | 201044 | invalid data type                            | 不正确的数据类型                 |
+| 201045 | encode string can not be empty               | 已签名的参数内容不能为空                 |
+| 201046 | transaction failed                           | 交易上链失败                 |
+| 201050 | Fail to parse json                           | 链上返回值反序列化失败                 |
+| 201051 | get consensus status fail                    | 交易上链失败                 |
 | 201101  | groupId cannot be empty                   |    群组编号不能为空      |
 | 201102  | tableName cannot be empty         |    表名不能为空      |
 | 201103  | permissionType cannot be empty             |    权限类型不能为空      |
@@ -5794,7 +5798,6 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201151  | Unsupported contract param type to encoded           |   不支持编码的合约参数类型 |
 | 201152  | Unsupported contract param type to decoded           |   不支持解码的合约参数类型 |
 | 201153  | unable to create instance of type, check input params           |  无法创建该合约参数类型的实例，请检查入参 |
-
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
 | 201202  | permission denied, please check chain administrator permission           |    权限不足，请检查用户 |
@@ -5827,7 +5830,25 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201248  | Contract abi invalid, please check abi          |     合约ABI格式错误，请检查入参     |
 | 201255  | contract address already exists          |     合约地址已存在 |
 | 201256  | abi info of this id not exists          |     abi不存在     |
-| 201257  | Abi Id cannot be empty          |   abi编号不能为空       |
+| 201301  | threshold must be greater than zero        |   链阈值必须大于0       |
+| 201302  | committee weight must be greater than zero  |   链委员权重必须大于0       |
+| 201303  | chain governance address cannot be blank      |   链管理委员/运维地址不能为空       |
+| 201501  | web3sdk create key pair fail and return null    |   sdk创建私钥对失败并返回Null       |
+| 201502  | pem/p12 manager get key pair error for input params    |   pem/p12证书获取私钥对失败，检查入参       |
+| 201503  | pem/p12 manager get key pair error for bc dependency error    |    pem/p12证书获取私钥对失败，检查bc依赖包版本       |
+| 201504  | sign service return error    |   签名服务并返回异常       |
+| 201510  | transaction receipt status return error    |   交易回执状态码非0x0，交易执行失败       |
+| 201511  | contract abi parse json error    |   合约ABI转JSON失败       |
+| 201512  | call contract error for io exception    |   调用合约的交易上链失败       |
+| 201513  | get transaction receipt fail for exec    |   获取交易回执失败，返回执行错误       |
+| 201514  | get transaction receipt fail for time out    |   获取交易回执失败，链上链下请求超时      |
+| 201515  | transaction receipt fail and parse output fail    |   转化交易回执中output输出值失败       |
+| 201516  | transaction receipt fail and output is null    |   交易回执output为空       |
+| 201517  | call contract constant method fail    |   合约状态异常，调用合约constant方法失败       |
+| 201521  | get list of manager on chain fail    |   获取链上管理员列表失败       |
+| 201522  | table key length error    |   用户表的键值长度大于最大值255       |
+| 201523  | crud's param parse json error    |   CRUD方法的入参转Entry/Condition失败，请检查入参       |
+| 201524  | precompiled common transfer to json fail    |   预编译错误码转JSON失败       |
 
 
 ### 2. Precompiled Service说明
@@ -5880,4 +5901,25 @@ contract TableFactory {
 | -51500  | contract name and version already exist         |          |
 | -51501  | condition parse error                           |          |
 | -51502  | condition operation undefined                   |          |
-
+| -51600  | invalid ciphers                                 |          |
+| -51700  | group sig failed                                |          |
+| -51800  | ring sig failed                                 |          |
+| -51900  | contract frozen                              |          |
+| -51901  | contract available                              |          |
+| -51902  | contract repeat authorization                    |          |
+| -51903  | invalid contract address                    |          |
+| -51904  | table not exist                    |          |
+| -51905  | no authorized                  |          |
+| -52000  | committee member exist                    |          |
+| -52001  | committee member not exist                |          |
+| -52002  | invalid request permission denied         |          |
+| -52003  | invalid threshold                    |          |
+| -52004  | operator can't be committee member                    |          |
+| -52005  | committee member can't be operator                    |          |
+| -52006  | operator exist                    |          |
+| -52007  | operator not exist                    |          |
+| -52008  | account not exist                    |          |
+| -52009  | invalid account address                    |          |
+| -52010  | account already available                   |          |
+| -52011  | account frozen                    |          |
+| -52012  | current value is expected value              |          |
