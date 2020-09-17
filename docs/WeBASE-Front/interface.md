@@ -5801,7 +5801,6 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
 | 201202  | permission denied, please check chain administrator permission           |    权限不足，请检查用户 |
-
 | 201208  | unsupported for this system config key     |    不支持设置该系统配置      |
 | 201209  | provide value by positive integer mode, from 100000 to 2147483647              |    请输入正值或[100000, 2147483647]范围的值      |
 | 201210  | set system config value fail for params error or permission denied               |    设置系统配置失败，请检查权限      |
