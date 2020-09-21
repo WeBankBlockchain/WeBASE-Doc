@@ -2,11 +2,11 @@
 
 ## 1. 前提条件
 
-| 环境      | 版本                |
-| --------- | ------------------- |
-| Java      | JDK8或以上版本      |
-| 数据库    | MySQL-5.6或以上版本 |
-| ZooKeeper | ZooKeeper-3.4.10    |
+| 环境      | 版本                      |
+| --------- | ------------------------- |
+| Java      | JDK8或以上版本            |
+| 数据库    | MySQL-5.6或以上版本       |
+| ZooKeeper | ZooKeeper-3.6.0或以上版本 |
 
 **备注：**
 
@@ -153,7 +153,7 @@ job.dataflow.shardingTotalCount=3
 # * 说明：本工程使用Sharding-JDBC分库分表，支持单一数据源，也支持多库多表。
 # *      单库单表：配置单个数据源，将分库策略和分表策略注释或删除
 # *      多库多表：配置多数据源，以群组分库，以年份分表，用户自定义每年分成几个表（注：分表策略的路由字段不可修改[id,gmt_create]）
-# * 样例：以两个数据源为例（数据库需事先创建），每张表根据年分表，每年再分成两个子表，以2019和2020年的表为例
+# * 样例：以两个数据源为例（数据库需事先创建），每张表根据年分表，每年再分成两个子表，以2020和2021年的表为例
 
 # 配置所有的数据源，如此处定义了ds0,ds1两个数据源，对应两个库
 sharding.jdbc.datasource.names=ds0,ds1
@@ -177,13 +177,13 @@ sharding.jdbc.config.sharding.default-database-strategy.inline.sharding-column=g
 sharding.jdbc.config.sharding.default-database-strategy.inline.algorithm-expression=ds$->{group_id % 2}
 
 # 定义tb_deploy_transaction的分表策略，如此处以创建时间的年份和自增id取模2来路由到子表
-sharding.jdbc.config.sharding.tables.tb_deploy_transaction.actual-data-nodes=ds$->{0..1}.tb_deploy_transaction_$->{2019..2020}_$->{0..1}
+sharding.jdbc.config.sharding.tables.tb_deploy_transaction.actual-data-nodes=ds$->{0..1}.tb_deploy_transaction_$->{2020..2021}_$->{0..1}
 sharding.jdbc.config.sharding.tables.tb_deploy_transaction.table-strategy.complex.sharding-columns=id,gmt_create
 sharding.jdbc.config.sharding.tables.tb_deploy_transaction.table-strategy.complex.algorithm-class-name=com.webank.webase.transaction.config.MyComplexShardingAlgorithm
 sharding.jdbc.config.sharding.tables.tb_deploy_transaction.key-generator-column-name=id
 
 # 定义tb_stateless_transaction的分表策略，如此处以创建时间的年份和自增id取模2来路由到子表
-sharding.jdbc.config.sharding.tables.tb_stateless_transaction.actual-data-nodes=ds$->{0..1}.tb_stateless_transaction_$->{2019..2020}_$->{0..1}
+sharding.jdbc.config.sharding.tables.tb_stateless_transaction.actual-data-nodes=ds$->{0..1}.tb_stateless_transaction_$->{2020..2021}_$->{0..1}
 sharding.jdbc.config.sharding.tables.tb_stateless_transaction.table-strategy.complex.sharding-columns=id,gmt_create
 sharding.jdbc.config.sharding.tables.tb_stateless_transaction.table-strategy.complex.algorithm-class-name=com.webank.webase.transaction.config.MyComplexShardingAlgorithm
 sharding.jdbc.config.sharding.tables.tb_stateless_transaction.key-generator-column-name=id

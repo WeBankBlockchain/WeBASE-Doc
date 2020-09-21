@@ -138,8 +138,9 @@ sign.mysql.user=dbUsername
 sign.mysql.password=dbPassword
 sign.mysql.database=webasesign
 
-# 节点前置子系统h2数据库名
+# 节点前置子系统h2数据库名和所属机构
 front.h2.name=webasefront
+front.org=fisco
 
 # WeBASE管理平台服务端口
 web.port=5000
@@ -626,11 +627,12 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
       <AppenderRef ref="asyncErrorLog"/>
     </Root>
   </Loggers>
-    ```
+  ```
 
 * 修改日志level后，重启服务 `bash stop.sh && bash start.sh`
 
 * 重启服务后，检查日志文件 `log/WeBASE-Node-Manager.log`。
+    
     * 检查是否有异常信息。如果有异常信息，根据具体的异常信息检查环境配置，或者通过搜索引擎进行排查。
 
 ### 12. WeBASE 国内镜像与CDN加速服务
