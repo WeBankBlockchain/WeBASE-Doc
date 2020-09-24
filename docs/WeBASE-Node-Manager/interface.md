@@ -1947,8 +1947,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 | 3.4  | contractAddress | String        | 否   | 合约地址                          |
 | 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
 | 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
-| 3.7  | createTime      | LocalDateTime | 否   | 创建时间                          |
-| 3.8  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
 
 
 ***2）出参示例***
@@ -1966,6 +1967,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
     "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
     "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
     "contractBin": "608060405260043610610057576000357...",
+    "account": "admin",
     "createTime": "2020-05-18 10:59:02",
     "modifyTime": "2020-05-18 10:59:02"
   }
@@ -1979,7 +1981,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 #### 5.8.1 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/abi/list/{groupId}/{pageNumber}/{pageSize}**
+* 请求地址： **/abi/list/{groupId}/{pageNumber}/{pageSize}?account={account}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1987,17 +1989,18 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 
 ***1）入参表***
 
-| 序号 | 输入参数   | 类型 | 可为空 | 备注          |
-| ---- | ---------- | ---- | ------ | ------------- |
-| 1    | groupId    | int  | 否     | 群组编号      |
-| 2    | pageNumber | int  | 否     | 页码，从1开始 |
-| 3    | pageSize   | int  | 否     | 页大小        |
+| 序号 | 输入参数   | 类型   | 可为空 | 备注          |
+| ---- | ---------- | ------ | ------ | ------------- |
+| 1    | groupId    | int    | 否     | 群组编号      |
+| 2    | pageNumber | int    | 否     | 页码，从1开始 |
+| 3    | pageSize   | int    | 否     | 页大小        |
+| 4    | account    | String | 是     | 所属账号      |
 
 
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 ```
 
 
@@ -2016,8 +2019,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 | 3.4  | contractAddress | String        | 否   | 合约地址                          |
 | 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
 | 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
-| 3.7  | createTime      | LocalDateTime | 否   | 创建时间                          |
-| 3.8  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
 
 
 ***2）出参示例***
@@ -2032,6 +2036,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
     {
       "abiId": 1,
       "groupId": 1,
+      "account": "admin",
       "contractName": "TTT",
       "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
       "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
@@ -2068,8 +2073,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 | 2    | contractAddress | String | 否     | 合约地址                    |
 | 3    | contractName    | String | 否     | 合约名称                    |
 | 4    | contractAbi     | String | 否     | 合约编译后生成的abi文件内容 |
-
-
+| 5    | account         | String | 否     | 所属账号                    |
 
 
 ***2）入参示例***
@@ -2077,6 +2081,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 ```
 {
     "groupId": 1,
+    "account": "admin",
     "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
     "contractName": "HelloWorld",
     "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
@@ -2106,7 +2111,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 ```
 
 
-### 5.10. 导入已部署合约的abi
+### 5.10. 修改已部署合约的abi
 
 > 将其他平台已部署的合约导入到本平台进行管理
 
@@ -2130,8 +2135,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 | 3    | contractAddress | String | 否     | 合约地址                    |
 | 4    | contractName    | String | 否     | 合约名称                    |
 | 5    | contractAbi     | String | 否     | 合约编译后生成的abi文件内容 |
-
-
 
 
 ***2）入参示例***
