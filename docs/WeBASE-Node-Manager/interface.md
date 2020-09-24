@@ -2020,8 +2020,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 | 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
 | 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
 | 3.7  | account         | String        | 否   | 所属账号                          |
-| 3.7  | createTime      | LocalDateTime | 否   | 创建时间                          |
-| 3.8  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
 
 
 ***2）出参示例***
