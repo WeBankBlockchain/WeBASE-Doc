@@ -189,10 +189,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 }
 ```
 
-
 ### 1.3 删除前置信息
 
 #### 1.3.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/{frontId}**
 * 请求方式：DELETE
@@ -203,9 +203,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | frontId    | int    | 否     | 前置编号                   |
+| 序号 | 输入参数 | 类型 | 可为空 | 备注     |
+| ---- | -------- | ---- | ------ | -------- |
+| 1    | frontId  | int  | 否     | 前置编号 |
 
 
 ***2）入参示例***
@@ -219,15 +219,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code       | Int    | 否     | 返回码，0：成功 其它：失败 |
-| 2    | message    | String | 否     | 描述                       |
-| 3    | data       | object | 是     | 返回信息实体（空）         |
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -237,6 +239,64 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 ```
 
 * 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+### 1.4 刷新前置信息
+
+#### 1.3.1 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/front/refresh**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 1.3.2 请求参数
+
+***1）入参表***
+
+无
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
+```
+
+
+#### 1.3.3 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "data": {},
+    "message": "Success"
+}
+```
+
+* 失败：
+
 ```
 {
     "code": 102000,
@@ -1258,11 +1318,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockByNumber/1/11
 
 ## 5 合约管理模块  
 
-
 ### 5.1 查询合约列表 
 
 
 #### 5.1.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/contractList/{groupId}/{pageNumber}/{pageSize}**
 * 请求方式：POST
@@ -1273,14 +1333,15 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockByNumber/1/11
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1      | groupId       | int           | 否     | 群组id                                          |
-| 2      | contractName       | String           | 否     | 合约名                             |
-| 3      | contractAddress    | String           | 否     | 合约地址                               |
-| 4      | pageSize        | int           | 否     | 每页记录数                                      |
-| 5      | pageNumber      | int           | 否     | 当前页码                                        |
-| 6      | contractStatus      | int           | 否     | 1未部署，2已部署                        |
+| 序号 | 输入参数        | 类型   | 可为空 | 备注             |
+| ---- | --------------- | ------ | ------ | ---------------- |
+| 1    | groupId         | int    | 否     | 群组id           |
+| 2    | contractName    | String | 是     | 合约名           |
+| 3    | contractAddress | String | 是     | 合约地址         |
+| 4    | pageSize        | int    | 否     | 每页记录数       |
+| 5    | pageNumber      | int    | 否     | 当前页码         |
+| 6    | contractStatus  | int    | 是     | 1未部署，2已部署 |
+| 7    | account         | String | 是     | 关联账户         |
 
 ***2）入参示例***
 
@@ -1288,36 +1349,43 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockByNumber/1/11
 http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 ```
 
+```
+{"groupId":"1","pageNumber":1,"pageSize":500}
+```
+
 #### 5.1.3 返回参数 
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1      | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2      | message         | String        | 否     | 描述                                            |
-| 3      | totalCount      | Int           | 否     | 总记录数                                        |
-| 4      | data            | List          | 是     | 列表                                            |
-| 5.1    |                 | Object         |        | 返回信息实体                                    |
-| 5.1.1  | contractId      | int           | 否     | 合约编号                                        |
-| 5.1.2  | contractPath    | String        | 否     | 合约所在目录                              |
-| 5.1.3  | contractName    | String        | 否     | 合约名称                                        |
-| 5.1.4  | groupId       | Int           | 否     | 所属群组编号                                    |
-| 5.1.5  | contractStatus      | int           | 否     | 1未部署，2已部署                        |
-| 5.1.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
-| 5.1.7  | contractSource  | String        | 否     | 合约源码base64                                        |
-| 5.1.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
-| 5.1.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                             |
-| 5.1.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                         |
-| 5.1.11 | contractAddress | String        | 是     | 合约地址                                        |
-| 5.1.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
-| 5.1.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
-| 5.1.14 | description     | String        | 是     | 备注                                            |
-| 5.1.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 5.1.16 | modifyTime | LocalDateTime | 是 | 修改时间 |
+| 序号   | 输出参数        | 类型          |      | 备注                                        |
+| ------ | --------------- | ------------- | ---- | ------------------------------------------- |
+| 1      | code            | Int           | 否   | 返回码，0：成功 其它：失败                  |
+| 2      | message         | String        | 否   | 描述                                        |
+| 3      | totalCount      | Int           | 否   | 总记录数                                    |
+| 4      | data            | List          | 是   | 列表                                        |
+| 5.1    |                 | Object        |      | 返回信息实体                                |
+| 5.1.1  | contractId      | int           | 否   | 合约编号                                    |
+| 5.1.2  | contractPath    | String        | 否   | 合约所在目录                                |
+| 5.1.3  | contractName    | String        | 否   | 合约名称                                    |
+| 5.1.4  | groupId         | Int           | 否   | 所属群组编号                                |
+| 5.1.5  | contractStatus  | int           | 否   | 1未部署，2已部署                            |
+| 5.1.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)            |
+| 5.1.7  | contractSource  | String        | 否   | 合约源码base64                              |
+| 5.1.8  | contractAbi     | String        | 是   | 合约编译后生成的abi文件内容                 |
+| 5.1.9  | contractBin     | String        | 是   | 合约编译后生成的bin,可用于交易解析          |
+| 5.1.10 | bytecodeBin     | String        | 是   | 合约编译后生成的bytecodeBin，可用于合约部署 |
+| 5.1.11 | contractAddress | String        | 是   | 合约地址                                    |
+| 5.1.12 | deployTime      | LocalDateTime | 是   | 部署时间                                    |
+| 5.1.13 | contractVersion | String        | 否   | 合约版本（会去除该字段）                    |
+| 5.1.14 | description     | String        | 是   | 备注                                        |
+| 5.1.15 | account         | String        | 是   | 关联账户                                    |
+| 5.1.16 | createTime      | LocalDateTime | 否   | 创建时间                                    |
+| 5.1.17 | modifyTime      | LocalDateTime | 是   | 修改时间                                    |
+
 ***2）出参示例***
 
 * 成功：
+
 ```
 {
     "code": 0,
@@ -1337,6 +1405,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
             "bytecodeBin": "60806040526004361061004c576000398de7e4ddf5fdc9ccbcfd44565fed695cd960b0029",
             "deployTime": "2019-06-11 18:11:33",
             "description": null,
+            "account": "admin",
             "createTime": "2019-06-05 16:40:40",
             "modifyTime": "2019-06-11 18:11:33"
         }
@@ -1346,6 +1415,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -1359,6 +1429,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 
 
 #### 5.2.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/{contractId}**
 * 请求方式：GET
@@ -1368,10 +1439,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId       | int           | 否     | 群组id                                          |
-| 2    | contractId      | int           | 否     | 合约编号                                        |
+| 序号 | 输入参数   | 类型 | 可为空 | 备注     |
+| ---- | ---------- | ---- | ------ | -------- |
+| 1    | groupId    | int  | 否     | 群组id   |
+| 2    | contractId | int  | 否     | 合约编号 |
 
 
 ***2）入参示例***
@@ -1384,31 +1455,34 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Object         |        | 返回信息实体                                    |
-| 3.1  | contractId      | int           | 否     | 合约编号                                        |
-| 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
-| 3.3  | contractName    | String        | 否     | 合约名称                                        |
-| 3.4  | groupId         | Int           | 否     | 所属群组编号                                    |
-| 3.5  | contractStatus  | int           | 否     | 1未部署，2已部署                        |
-| 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
-| 3.7  | contractSource  | String        | 否     | 合约源码                                        |
-| 3.8  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析|
-| 3.10 | bytecodeBin     | String        | 是     | 合约编译的bytecode(bin)，用于部署合约            |
-| 3.11 | contractAddress | String        | 是     | 合约地址                                        |
-| 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
-| 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
-| 3.14 | description     | String        | 是     | 备注                                            |
-| 3.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 序号 | 输出参数        | 类型          |      | 备注                                                  |
+| ---- | --------------- | ------------- | ---- | ----------------------------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败                            |
+| 2    | message         | String        | 否   | 描述                                                  |
+| 3    |                 | Object        |      | 返回信息实体                                          |
+| 3.1  | contractId      | int           | 否   | 合约编号                                              |
+| 3.2  | contractPath    | String        | 否   | 合约所在目录                                          |
+| 3.3  | contractName    | String        | 否   | 合约名称                                              |
+| 3.4  | groupId         | Int           | 否   | 所属群组编号                                          |
+| 3.5  | contractStatus  | int           | 否   | 1未部署，2已部署                                      |
+| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)                      |
+| 3.7  | contractSource  | String        | 否   | 合约源码                                              |
+| 3.8  | contractAbi     | String        | 是   | 编译合约生成的abi文件内容                             |
+| 3.9  | contractBin     | String        | 是   | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
+| 3.10 | bytecodeBin     | String        | 是   | 合约编译的bytecode(bin)，用于部署合约                 |
+| 3.11 | contractAddress | String        | 是   | 合约地址                                              |
+| 3.12 | deployTime      | LocalDateTime | 是   | 部署时间                                              |
+| 3.13 | contractVersion | String        | 否   | 合约版本（会去除该字段）                              |
+| 3.14 | description     | String        | 是   | 备注                                                  |
+| 3.15 | account         | String        | 是   | 关联账户                                              |
+| 3.16 | createTime      | LocalDateTime | 否   | 创建时间                                              |
+| 3.17 | modifyTime      | LocalDateTime | 是   | 修改时间                                              |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -1427,6 +1501,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
         "contractBin": "608060405234801561001057600080004d4c",
         "deployTime": "2019-06-11 18:11:33",
         "description": null,
+        "account": "admin",
         "createTime": "2019-06-05 16:40:40",
         "modifyTime": "2019-06-11 18:11:33"
     }
@@ -1434,6 +1509,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -1455,6 +1531,7 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 
 
 #### 5.3.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/deploy**
 * 请求方式：POST
@@ -1465,18 +1542,19 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId           | Int            | 否     | 所属群组编号               |
-| 2    | contractName      | String         | 否     | 合约名称               |
-| 3    | contractSource    | String         | 否     | 合约源码                   |
-| 4    | contractAbi       | String         | 否     | 编译合约生成的abi文件内容  |
-| 5    | contractBin       | String         | 否     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析                 |
-| 6    | bytecodeBin       | String         | 否     | 合约编译的bytecode(bin)，用于部署合约                    |
-| 7    | contractId      | String         | 否     | 合约名称               |
-| 8    | contractPath      | String         | 否     | 合约所在目录               |
-| 9    | user              | String         | 否     | 私钥用户的地址               |
-| 10    | constructorParams | List | 是     | 构造函数入参               |
+| 序号 | 输入参数          | 类型   | 可为空 | 备注                                                  |
+| ---- | ----------------- | ------ | ------ | ----------------------------------------------------- |
+| 1    | groupId           | Int    | 否     | 所属群组编号                                          |
+| 2    | contractName      | String | 否     | 合约名称                                              |
+| 3    | contractSource    | String | 否     | 合约源码                                              |
+| 4    | contractAbi       | String | 否     | 编译合约生成的abi文件内容                             |
+| 5    | contractBin       | String | 否     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
+| 6    | bytecodeBin       | String | 否     | 合约编译的bytecode(bin)，用于部署合约                 |
+| 7    | contractId        | String | 否     | 合约名称                                              |
+| 8    | contractPath      | String | 否     | 合约所在目录                                          |
+| 9    | user              | String | 否     | 私钥用户的地址                                        |
+| 10   | account           | String | 是     | 关联账户                                              |
+| 11   | constructorParams | List   | 是     | 构造函数入参                                          |
 
 
 ***2）入参示例***
@@ -1493,6 +1571,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
     "contractAbi": "[]",
     "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLICAJbmFtZSA9IG47CiAgICB9Cn0=",
     "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
+    "account": "admin",    
     "contractName": "HeHe",
     "contractId": 200008,
     "contractPath": "Hi",
@@ -1504,31 +1583,34 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Object         |        | 返回信息实体                                    |
-| 3.1  | contractId      | int           | 否     | 合约编号                                        |
-| 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
-| 3.3  | contractName    | String        | 否     | 合约名称                                        |
-| 3.4  | groupId         | Int           | 否     | 所属群组编号                                    |
-| 3.5  | contractStatus  | int           | 否     | 1未部署，2已部署                        |
-| 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
-| 3.7  | contractSource  | String        | 否     | 合约源码                                        |
-| 3.8  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析|
-| 3.10 | bytecodeBin     | String        | 是     | 合约编译的bytecode(bin)，用于部署合约            |
-| 3.11 | contractAddress | String        | 是     | 合约地址                                        |
-| 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
-| 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
-| 3.14 | description     | String        | 是     | 备注                                            |
-| 3.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 序号 | 输出参数        | 类型          |      | 备注                                                  |
+| ---- | --------------- | ------------- | ---- | ----------------------------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败                            |
+| 2    | message         | String        | 否   | 描述                                                  |
+| 3    |                 | Object        |      | 返回信息实体                                          |
+| 3.1  | contractId      | int           | 否   | 合约编号                                              |
+| 3.2  | contractPath    | String        | 否   | 合约所在目录                                          |
+| 3.3  | contractName    | String        | 否   | 合约名称                                              |
+| 3.4  | groupId         | Int           | 否   | 所属群组编号                                          |
+| 3.5  | contractStatus  | int           | 否   | 1未部署，2已部署                                      |
+| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)                      |
+| 3.7  | contractSource  | String        | 否   | 合约源码                                              |
+| 3.8  | contractAbi     | String        | 是   | 编译合约生成的abi文件内容                             |
+| 3.9  | contractBin     | String        | 是   | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
+| 3.10 | bytecodeBin     | String        | 是   | 合约编译的bytecode(bin)，用于部署合约                 |
+| 3.11 | contractAddress | String        | 是   | 合约地址                                              |
+| 3.12 | deployTime      | LocalDateTime | 是   | 部署时间                                              |
+| 3.13 | contractVersion | String        | 否   | 合约版本（会去除该字段）                              |
+| 3.14 | description     | String        | 是   | 备注                                                  |
+| 3.15 | account         | String        | 是   | 关联账户                                              |
+| 3.16 | createTime      | LocalDateTime | 否   | 创建时间                                              |
+| 3.17 | modifyTime      | LocalDateTime | 是   | 修改时间                                              |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -1548,6 +1630,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
         "contractAddress": "0xa2ea2280b3a08a3ae2e1785dff09561e13915fb2",
         "deployTime": "2019-06-11 18:58:33",
         "description": null,
+        "account": "admin",
         "createTime": null,
         "modifyTime": null
     }
@@ -1555,6 +1638,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -1568,6 +1652,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 
 
 方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
 ```
 function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
 function set(uint n,bool b) -> [1,true]
@@ -1576,6 +1661,7 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 
 
 #### 5.4.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/transaction**
 * 请求方式：POST
@@ -1587,16 +1673,16 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId      | Int            | 否     | 所属群组编号               |
-| 2    | user       | String  | 否     | 私钥用户的地址             |
-| 3    | contractName | String         | 否     | 合约名称                   |
-| 4    | contractId      | Int      | 否     | 合约编号               |
-| 5    | funcName     | String         | 否     | 合约方法名                 |
-| 6    | contractAddress     | String         | 是     | 合约地址   |
-| 7   | funcParam    | List | 是     | 合约方法入参               |
-| 8   | contractAbi    | List | 否     | 合约abi/合约单个函数的abi               |
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                      |
+| ---- | --------------- | ------ | ------ | ------------------------- |
+| 1    | groupId         | Int    | 否     | 所属群组编号              |
+| 2    | user            | String | 否     | 私钥用户的地址            |
+| 3    | contractName    | String | 否     | 合约名称                  |
+| 4    | contractId      | Int    | 否     | 合约编号                  |
+| 5    | funcName        | String | 否     | 合约方法名                |
+| 6    | contractAddress | String | 是     | 合约地址                  |
+| 7    | funcParam       | List   | 是     | 合约方法入参              |
+| 8    | contractAbi     | List   | 否     | 合约abi/合约单个函数的abi |
 
 ***2）入参示例***
 
@@ -1622,15 +1708,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
-| 2    | message      | String         | 否     | 描述                       |
-| 3    | data         | object         | 是     | 返回信息实体（空）         |
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -1640,6 +1728,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -1653,6 +1742,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 
 
 #### 5.5.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/contract/findByPartOfBytecodeBin**
 * 请求方式：GET
@@ -1662,10 +1752,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId         | int           | 否     | 所属群组编号                                        |
-| 2    | partOfBytecodeBin      | String           | 否     | 包含合约bytecodeBin的的字符串         |
+| 序号 | 输入参数          | 类型   | 可为空 | 备注                          |
+| ---- | ----------------- | ------ | ------ | ----------------------------- |
+| 1    | groupId           | int    | 否     | 所属群组编号                  |
+| 2    | partOfBytecodeBin | String | 否     | 包含合约bytecodeBin的的字符串 |
 
 ***2）入参示例***
 
@@ -1685,29 +1775,32 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Object         |        | 返回信息实体                                    |
-| 3.1  | contractId      | int           | 否     | 合约编号                                        |
-| 3.2  | contractName    | String        | 否     | 合约名称                                        |
-| 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
-| 3.4  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
-| 3.5  | contractSource  | String        | 否     | 合约源码                                        |
-| 3.6  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 3.7  | contractBin     | String        | 是     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析|
-| 3.8 | bytecodeBin     | String        | 是     | 合约编译的bytecode(bin)，用于部署合约             |
-| 3.9 | contractAddress | String        | 是     | 合约地址                                        |
-| 3.10 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
-| 3.11 | contractVersion | String        | 否     | 合约版本                                        |
-| 3.12 | description     | String        | 是     | 备注                                            |
-| 3.13 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 3.14 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 序号 | 输出参数        | 类型          |      | 备注                                                  |
+| ---- | --------------- | ------------- | ---- | ----------------------------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败                            |
+| 2    | message         | String        | 否   | 描述                                                  |
+| 3    |                 | Object        |      | 返回信息实体                                          |
+| 3.1  | contractId      | int           | 否   | 合约编号                                              |
+| 3.2  | contractName    | String        | 否   | 合约名称                                              |
+| 3.3  | groupId         | Int           | 否   | 所属群组编号                                          |
+| 3.4  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)                      |
+| 3.5  | contractSource  | String        | 否   | 合约源码                                              |
+| 3.6  | contractAbi     | String        | 是   | 编译合约生成的abi文件内容                             |
+| 3.7  | contractBin     | String        | 是   | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
+| 3.8  | bytecodeBin     | String        | 是   | 合约编译的bytecode(bin)，用于部署合约                 |
+| 3.9  | contractAddress | String        | 是   | 合约地址                                              |
+| 3.10 | deployTime      | LocalDateTime | 是   | 部署时间                                              |
+| 3.11 | contractVersion | String        | 否   | 合约版本                                              |
+| 3.12 | description     | String        | 是   | 备注                                                  |
+| 3.13 | account         | String        | 是   | 关联账户                                              |
+| 3.14 | createTime      | LocalDateTime | 否   | 创建时间                                              |
+| 3.15 | modifyTime      | LocalDateTime | 是   | 修改时间                                              |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -1726,6 +1819,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
         "deployTime": null,
         "contractVersion": "v6.0",
         "description": null,
+        "account": "admin",
         "createTime": "2019-04-15 21:14:40",
         "modifyTime": "2019-04-15 21:14:40"
     }
@@ -1733,6 +1827,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -1744,31 +1839,29 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 ### 5.6. 保存合约接口
 
 #### 5.6.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/save**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-
-
 #### 5.6.2 请求参数
 
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId         | int           | 否     | 所属群组编号                                        |
-| 2    | contractId      | int           | 是     | 合约编号，传入contractId表示更新，否则新增  |
-| 3    | contractName      | String           | 否     | 合约名称         |
-| 4    | contractPath      | String           | 否     | 合约所在目录         |
-| 5    | contractSource      | String           | 是     | 合约源码的base64         |
-| 6    | contractAbi      | String           | 是     | 合约编译后生成的abi文件内容         |
-| 7    | contractBin      | String           | 是     | 合约编译后生成的bin,可用于交易解析           |
-| 8    | bytecodeBin      | String           | 是     | 合约编译后生成的bytecodeBin，可用于合约部署         |
-
-
+| 序号 | 输入参数       | 类型   | 可为空 | 备注                                        |
+| ---- | -------------- | ------ | ------ | ------------------------------------------- |
+| 1    | groupId        | int    | 否     | 所属群组编号                                |
+| 2    | contractId     | int    | 是     | 合约编号，传入contractId表示更新，否则新增  |
+| 3    | contractName   | String | 否     | 合约名称                                    |
+| 4    | contractPath   | String | 否     | 合约所在目录                                |
+| 5    | contractSource | String | 是     | 合约源码的base64                            |
+| 6    | contractAbi    | String | 是     | 合约编译后生成的abi文件内容                 |
+| 7    | contractBin    | String | 是     | 合约编译后生成的bin,可用于交易解析          |
+| 8    | bytecodeBin    | String | 是     | 合约编译后生成的bytecodeBin，可用于合约部署 |
+| 9    | account        | String | 是     | 关联账户，新建时不能为空                    |
 
 
 ***2）入参示例***
@@ -1782,7 +1875,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
     "contractAbi": “[]”
     "contractBin": "60806040526004361061004c576000357c0100000000000000000000000029",
     "bytecodeBin": "6080604052348015610010572269b80029",
-    "contractId": 1
+    "contractId": 1,
+    "account": "admin"
 }
 ```
 
@@ -1790,33 +1884,34 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Object         |        | 返回信息实体                                    |
-| 3.1  | contractId      | int           | 否     | 合约编号                                        |
-| 3.2  | contractPath    | String        | 否     | 合约所在目录                              |
-| 3.3  | contractName    | String        | 否     | 合约名称                                        |
-| 3.4  | groupId         | Int           | 否     | 所属群组编号                                    |
-| 3.5  | contractStatus  | int           | 否     | 1未部署，2已部署                        |
-| 3.6  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
-| 3.7  | contractSource  | String        | 否     | 合约源码base64                                        |
-| 3.8  | contractAbi     | String        | 是     | 合约编译后生成的abi文件内容                       |
-| 3.9  | contractBin     | String        | 是     | 合约编译后生成的bin,可用于交易解析                                      |
-| 3.10 | bytecodeBin     | String        | 是     | 合约编译后生成的bytecodeBin，可用于合约部署                                          |
-| 3.11 | contractAddress | String        | 是     | 合约地址                                        |
-| 3.12 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
-| 3.13 | contractVersion | String        | 否     | 合约版本（会去除该字段）               |
-| 3.14 | description     | String        | 是     | 备注                                            |
-| 3.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 3.16 | modifyTime      | LocalDateTime | 是     | 修改时间  
-
+| 序号 | 输出参数        | 类型          |      | 备注                                        |
+| ---- | --------------- | ------------- | ---- | ------------------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败                  |
+| 2    | message         | String        | 否   | 描述                                        |
+| 3    |                 | Object        |      | 返回信息实体                                |
+| 3.1  | contractId      | int           | 否   | 合约编号                                    |
+| 3.2  | contractPath    | String        | 否   | 合约所在目录                                |
+| 3.3  | contractName    | String        | 否   | 合约名称                                    |
+| 3.4  | groupId         | Int           | 否   | 所属群组编号                                |
+| 3.5  | contractStatus  | int           | 否   | 1未部署，2已部署                            |
+| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)            |
+| 3.7  | contractSource  | String        | 否   | 合约源码base64                              |
+| 3.8  | contractAbi     | String        | 是   | 合约编译后生成的abi文件内容                 |
+| 3.9  | contractBin     | String        | 是   | 合约编译后生成的bin,可用于交易解析          |
+| 3.10 | bytecodeBin     | String        | 是   | 合约编译后生成的bytecodeBin，可用于合约部署 |
+| 3.11 | contractAddress | String        | 是   | 合约地址                                    |
+| 3.12 | deployTime      | LocalDateTime | 是   | 部署时间                                    |
+| 3.13 | contractVersion | String        | 否   | 合约版本（会去除该字段）                    |
+| 3.14 | description     | String        | 是   | 备注                                        |
+| 3.15 | account         | String        | 是   | 关联账户                                    |
+| 3.16 | createTime      | LocalDateTime | 否   | 创建时间                                    |
+| 3.17 | modifyTime      | LocalDateTime | 是   | 修改时间                                    |
 
 ### 5.7 获取Abi信息  
 
 
 #### 5.7.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/abi/{abiId}**
 * 请求方式：GET
@@ -1826,9 +1921,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | abiId         | Long           | 否     | abi编号                                        |
+| 序号 | 输入参数 | 类型 | 可为空 | 备注    |
+| ---- | -------- | ---- | ------ | ------- |
+| 1    | abiId    | Long | 否     | abi编号 |
 
 ***2）入参示例***
 
@@ -1841,23 +1936,26 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Object         |        | 返回信息实体                                    |
-| 3.1  | abiId        | int           | 否     | 合约编号                                        |
-| 3.2  | contractName    | String        | 否     | 合约名称                                        |
-| 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
-| 3.4  | contractAddress  | String        | 否     | 合约地址                                        |
-| 3.5  | contractAbi     | String        | 是     | 导入的abi文件内容                       |
-| 3.6  | contractBin     | String        | 是     | 合约runtime-bytecode(runtime-bin)|
-| 3.7 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 3.8 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 序号 | 输出参数        | 类型          |      | 备注                              |
+| ---- | --------------- | ------------- | ---- | --------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败        |
+| 2    | message         | String        | 否   | 描述                              |
+| 3    |                 | Object        |      | 返回信息实体                      |
+| 3.1  | abiId           | int           | 否   | 合约编号                          |
+| 3.2  | contractName    | String        | 否   | 合约名称                          |
+| 3.3  | groupId         | Int           | 否   | 所属群组编号                      |
+| 3.4  | contractAddress | String        | 否   | 合约地址                          |
+| 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
+| 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
   "code": 0,
@@ -1869,6 +1967,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
     "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
     "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
     "contractBin": "608060405260043610610057576000357...",
+    "account": "admin",
     "createTime": "2020-05-18 10:59:02",
     "modifyTime": "2020-05-18 10:59:02"
   }
@@ -1880,8 +1979,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 
 
 #### 5.8.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/abi/list/{groupId}/{pageNumber}/{pageSize}**
+* 请求地址： **/abi/list/{groupId}/{pageNumber}/{pageSize}?account={account}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -1889,17 +1989,18 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId         | int           | 否     | 群组编号                                        |
-| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
-| 3    | pageSize         | int           | 否     | 页大小                                        |
+| 序号 | 输入参数   | 类型   | 可为空 | 备注          |
+| ---- | ---------- | ------ | ------ | ------------- |
+| 1    | groupId    | int    | 否     | 群组编号      |
+| 2    | pageNumber | int    | 否     | 页码，从1开始 |
+| 3    | pageSize   | int    | 否     | 页大小        |
+| 4    | account    | String | 是     | 所属账号      |
 
 
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 ```
 
 
@@ -1907,23 +2008,26 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Object         |        | 返回信息实体                                    |
-| 3.1  | abiId        | int           | 否     | 合约编号                                        |
-| 3.2  | contractName    | String        | 否     | 合约名称                                        |
-| 3.3  | groupId       | Int           | 否     | 所属群组编号                                      |
-| 3.4  | contractAddress  | String        | 否     | 合约地址                                        |
-| 3.5  | contractAbi     | String        | 是     | 导入的abi文件内容                       |
-| 3.6  | contractBin     | String        | 是     | 合约runtime-bytecode(runtime-bin)|
-| 3.7 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 3.8 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
+| 序号 | 输出参数        | 类型          |      | 备注                              |
+| ---- | --------------- | ------------- | ---- | --------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败        |
+| 2    | message         | String        | 否   | 描述                              |
+| 3    |                 | Object        |      | 返回信息实体                      |
+| 3.1  | abiId           | int           | 否   | 合约编号                          |
+| 3.2  | contractName    | String        | 否   | 合约名称                          |
+| 3.3  | groupId         | Int           | 否   | 所属群组编号                      |
+| 3.4  | contractAddress | String        | 否   | 合约地址                          |
+| 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
+| 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
   "code": 0,
@@ -1932,6 +2036,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
     {
       "abiId": 1,
       "groupId": 1,
+      "account": "admin",
       "contractName": "TTT",
       "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
       "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"setSender\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"}],\"name\":\"SetName\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"uint256[2]\"}],\"name\":\"EventList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"SetSender\",\"type\":\"event\"}]",
@@ -1950,6 +2055,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 > 将其他平台已部署的合约导入到本平台进行管理
 
 #### 5.9.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/abi**
 * 请求方式：POST
@@ -1961,14 +2067,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId         | int           | 否     | 所属群组编号                                        |
-| 2    | contractAddress      | String           | 否     | 合约地址  |
-| 3    | contractName      | String           | 否     | 合约名称         |
-| 4    | contractAbi      | String           | 否     | 合约编译后生成的abi文件内容         |
-
-
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                        |
+| ---- | --------------- | ------ | ------ | --------------------------- |
+| 1    | groupId         | int    | 否     | 所属群组编号                |
+| 2    | contractAddress | String | 否     | 合约地址                    |
+| 3    | contractName    | String | 否     | 合约名称                    |
+| 4    | contractAbi     | String | 否     | 合约编译后生成的abi文件内容 |
+| 5    | account         | String | 否     | 所属账号                    |
 
 
 ***2）入参示例***
@@ -1976,6 +2081,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 ```
 {
     "groupId": 1,
+    "account": "admin",
     "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
     "contractName": "HelloWorld",
     "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
@@ -1986,15 +2092,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
-| 2    | message      | String         | 否     | 描述                       |
-| 3    | data         | object         | 是     | 返回信息实体（空）         |
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -2003,11 +2111,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 ```
 
 
-### 5.10. 导入已部署合约的abi
+### 5.10. 修改已部署合约的abi
 
 > 将其他平台已部署的合约导入到本平台进行管理
 
 #### 5.10.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/abi**
 * 请求方式：PUT
@@ -2019,15 +2128,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | abiId         | long           | 否     | abi编号                                        |
-| 2    | groupId         | int           | 否     | 所属群组编号                                        |
-| 3    | contractAddress      | String           | 否     | 合约地址  |
-| 4    | contractName      | String           | 否     | 合约名称         |
-| 5    | contractAbi      | String           | 否     | 合约编译后生成的abi文件内容         |
-
-
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                        |
+| ---- | --------------- | ------ | ------ | --------------------------- |
+| 1    | abiId           | long   | 否     | abi编号                     |
+| 2    | groupId         | int    | 否     | 所属群组编号                |
+| 3    | contractAddress | String | 否     | 合约地址                    |
+| 4    | contractName    | String | 否     | 合约名称                    |
+| 5    | contractAbi     | String | 否     | 合约编译后生成的abi文件内容 |
 
 
 ***2）入参示例***
@@ -2046,135 +2153,21 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code         | Int            | 否     | 返回码，0：成功 其它：失败 |
-| 2    | message      | String         | 否     | 描述                       |
-| 3    | data         | object         | 是     | 返回信息实体（空）         |
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
     "message": "success"
-}
-```
-
-
-
-### 5.11 获取合约状态修改记录列表  
-
-当冻结合约或解冻合约时会产生一条记录，此接口返回某群组下的修改记录列表
-
-#### 5.11.1 传输协议规范
-* 网络传输协议：使用HTTP协议
-* 请求地址： **/status/record/list**
-* 请求方式：GET
-* 返回格式：JSON
-
-#### 5.11.2 请求参数
-
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId         | int           | 否     | 群组编号                                        |
-| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
-| 3    | pageSize         | int           | 否     | 页大小                                        |
-
-
-***2）入参示例***
-
-```
-http://127.0.0.1:5001/WeBASE-Node-Manager/status/record/list?groupId=1&pageNumber=1&pageSize=10
-```
-
-
-#### 5.11.3 返回参数 
-
-***1）出参表***
-
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-| 3    |                 | Object         |        | 返回信息实体                                    |
-| 3.1  | id        | int           | 否     | 合约记录编号                                        |
-| 3.2  | groupId       | Int           | 否     | 所属群组编号                                      |
-| 3.3  | contractAddress    | String        | 否     | 合约地址                                        |
-| 3.4  | modifyAddress  | String        | 否     | 合约管理员用户地址                                        |
-| 3.5  | status     | Int        | 否     |          合约修改状态，0-正常（未冻结），1-已冻结                              |
-| 3.6 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 3.7 | modifyTime      | LocalDateTime | 是     | 修改时间                                        |
-| 4    |  totalCount    | Int         |        | 总数                                    |
-
-
-***2）出参示例***
-* 成功：
-```
-{
-  "code": 0,
-  "message": "success",
-  "data": [
-    {
-      "id": 1,
-      "groupId": 1,
-      "modifyAddress": "0x2ac4227e87bccca63893317febadd0b51ad33e1",
-      "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
-      "status": 0,
-      "createTime": "2020-05-18 10:59:02",
-      "modifyTime": "2020-05-18 10:59:02"
-    }
-  ],
-  "totalCount": 1
-}
-```
-
-
-### 5.12 删除合约状态修改记录  
-
-删除合约状态修改记录
-
-#### 5.12.1 传输协议规范
-* 网络传输协议：使用HTTP协议
-* 请求地址： **/status/record/{statusId}**
-* 请求方式：DELETE
-* 返回格式：JSON
-
-#### 5.12.2 请求参数
-
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | statusId         | int           | 否     | 合约状态记录编号                                        |
-
-
-***2）入参示例***
-
-```
-http://127.0.0.1:5001/WeBASE-Node-Manager/status/record/{statusId}
-```
-
-
-#### 5.12.3 返回参数 
-
-***1）出参表***
-
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code            | Int           | 否     | 返回码，0：成功 其它：失败                      |
-| 2    | message         | String        | 否     | 描述                                            |
-
-
-***2）出参示例***
-* 成功：
-```
-{
-  "code": 0,
-  "message": "success"
 }
 ```
 
@@ -2531,7 +2524,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 |------|-------------|---------------|--------|-------------------------------|
 | -    | -     | -        | -     | -  |
 
-         
+​         
 
 ***2）入参示例***
 
@@ -2838,7 +2831,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败             |
 | 2    | message     | String        | 否     | 描述    |
-| 3    |  data    | Object        | 否     | 成功时返回   |                        
+| 3    |  data    | Object        | 否     | 成功时返回   |
 | 3.1       |                   | Object           |        |返回信息实体          |
 | 3.1.1     | ruleId        | Int          | 否     |    告警类型配置的编号      |
 | 3.1.2     | ruleName      | String           | 否     |  告警类型的名字/告警邮件标题    |
@@ -2904,7 +2897,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 |------|-------------|---------------|--------|-------------------------------|
 | -    | -     | -        | -     | -  |
 
-         
+​         
 
 ***2）入参示例***
 
@@ -3929,7 +3922,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b9
 
 ### 8.5 向多个节点生成新群组
 
-​向`nodeList`中所有节点的前置发起请求，以当前时间生成`timestamp`时间戳，以`nodeList`为创世块的**共识节点列表**，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
+向`nodeList`中所有节点的前置发起请求，以当前时间生成`timestamp`时间戳，以`nodeList`为创世块的**共识节点列表**，生成新群组配置信息；节点和前置一一对应，节点编号可以从前置列表获取。   
 
 **群组生成后，需对应调用新群组启动的接口，并确保新节点加入新群组的共识节点/观察节点**
 
@@ -4014,9 +4007,9 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/generate
 
 ### 8.6 动态操作群组
 
-​​可以对已存在的群组或新生成的群组进行动态操作，包括启动、停止、删除、恢复、状态查询。
+可以对已存在的群组或新生成的群组进行动态操作，包括启动、停止、删除、恢复、状态查询。
 
-​**说明：** 生成新群组后，需要向每个前置调用启动群组的操作，并确保新节点是新群组中的共识节点/观察节点
+**说明：** 生成新群组后，需要向每个前置调用启动群组的操作，并确保新节点是新群组中的共识节点/观察节点
 
 节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
@@ -4082,7 +4075,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b95
 
 ### 8.7 批量启动群组
 
-​批量启动多个节点的群组，向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
+批量启动多个节点的群组，向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
 
 
 #### 8.7.1 传输协议规范
@@ -4160,7 +4153,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/group/batchStart
 
 ### 8.8 多个节点获取该节点的多个群组状态
 
-​向多个节点获取该**节点视角下**`groupIdList`中所有群组的状态；nodeId可以从前置列表获取。
+向多个节点获取该**节点视角下**`groupIdList`中所有群组的状态；nodeId可以从前置列表获取。
 
 群组状态包含：群组不存在"INEXISTENT"、群组正在停止"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
 
@@ -4714,11 +4707,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumbe
 
 ## 11 用户管理模块 
 
-
 ### 11.1 新增私钥用户
 
 
 #### 11.1.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/userInfo**
 * 请求方式：POST
@@ -4729,11 +4722,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumbe
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | userName    | string        | 否     | 用户名称                           |
-| 2    | description | string        | 是     | 备注                               |
-| 3    | groupId     | Int           | 否     | 所属群组                           |
+| 序号 | 输入参数    | 类型   | 可为空 | 备注     |
+| ---- | ----------- | ------ | ------ | -------- |
+| 1    | userName    | string | 否     | 用户名称 |
+| 2    | description | string | 是     | 备注     |
+| 3    | groupId     | Int    | 否     | 所属群组 |
+| 4    | account     | string | 否     | 关联账户 |
 
 ***2）入参示例***
 
@@ -4745,7 +4739,8 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
 {
     "groupId": "300001",
     "description": "密钥拥有者",
-    "userName": "user1"
+    "userName": "user1",
+    "account": "admin"
 }
 ```
 
@@ -4754,25 +4749,28 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2    | message     | String        | 否     | 描述                               |
-| 3    | data        | object        | 是     | 返回信息实体（成功时不为空）       |
-| 3.1  | userId      | int           | 否     | 用户编号                           |
-| 3.2  | userName    | string        | 否     | 用户名称                           |
-| 3.3  | groupId     | int           | 否     | 所属群组编号                       |
-| 3.4  | description | String        | 是     | 备注                               |
-| 3.5  | userStatus  | int           | 否     | 状态（1-正常 2-停用） 默认1        |
-| 3.6  | publicKey   | String        | 否     | 公钥信息                           |
-| 3.7  | address     | String        | 是     | 在链上位置的hash                   |
-| 3.8  | hasPk       | Int           | 否     | 是否拥有私钥信息(1-拥有，2-不拥有) |
-| 3.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
-| 3.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
+| 序号 | 输出参数    | 类型          |      | 备注                               |
+| ---- | ----------- | ------------- | ---- | ---------------------------------- |
+| 1    | code        | Int           | 否   | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否   | 描述                               |
+| 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
+| 3.1  | userId      | int           | 否   | 用户编号                           |
+| 3.2  | userName    | string        | 否   | 用户名称                           |
+| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.4  | description | String        | 是   | 备注                               |
+| 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 3.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 3.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 3.9  | account     | string        | 否   | 关联账户                           |
+| 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -4787,6 +4785,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
         "address": "0x40ec3c20b5178401ae14ad8ce9c9f94fa5ebb86a",
         "hasPk": 1,
         "description": "sda",
+        "account": "admin",
         "createTime": "2019-03-15 18:00:27",
         "modifyTime": "2019-03-15 18:00:27"
     }
@@ -4794,6 +4793,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -4807,6 +4807,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
 
 
 #### 11.2.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/bind**
 * 请求方式：POST
@@ -4817,11 +4818,12 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/userInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | userName    | string        | 否     | 用户名称                           |
-| 2    | description | string        | 是     | 备注                               |
-| 3    | groupId   | Int           | 否     | 所属群组                           |
+| 序号 | 输入参数    | 类型   | 可为空 | 备注     |
+| ---- | ----------- | ------ | ------ | -------- |
+| 1    | userName    | string | 否     | 用户名称 |
+| 2    | description | string | 是     | 备注     |
+| 3    | groupId     | Int    | 否     | 所属群组 |
+| 4    | account     | string | 否     | 关联账户 |
 
 
 ***2）入参示例***
@@ -4835,7 +4837,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
     "userName": "sdfasd",
     "publicKey": "0x4189fdacff55fb99172e015e1adb96dc77b0cae1619b1a41cc360777bee6682fcc9752d8aabf144fbf610a3057fd4b5",
     "groupId": "300001",
-    "description": "sdfa"
+    "description": "sdfa",
+    "account": "admin"
 }
 ```
 
@@ -4844,25 +4847,28 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2    | message     | String        | 否     | 描述                               |
-| 3    | data        | object        | 是     | 返回信息实体（成功时不为空）       |
-| 3.1  | userId      | int           | 否     | 用户编号                           |
-| 3.2  | userName    | string        | 否     | 用户名称                           |
-| 3.3  | groupId     | int           | 否     | 所属群组编号                       |
-| 3.4  | description | String        | 是     | 备注                               |
-| 3.5  | userStatus  | int           | 否     | 状态（1-正常 2-停用） 默认1        |
-| 3.6  | publicKey   | String        | 否     | 公钥信息                           |
-| 3.7  | address     | String        | 是     | 在链上位置的hash                   |
-| 3.8  | hasPk       | Int           | 否     | 是否拥有私钥信息(1-拥有，2-不拥有) |
-| 3.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
-| 3.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
+| 序号 | 输出参数    | 类型          |      | 备注                               |
+| ---- | ----------- | ------------- | ---- | ---------------------------------- |
+| 1    | code        | Int           | 否   | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否   | 描述                               |
+| 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
+| 3.1  | userId      | int           | 否   | 用户编号                           |
+| 3.2  | userName    | string        | 否   | 用户名称                           |
+| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.4  | description | String        | 是   | 备注                               |
+| 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 3.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 3.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 3.9  | account     | string        | 否   | 关联账户                           |
+| 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -4877,6 +4883,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
         "address": "0x40ec3c20b5178401ae14ad8ce9c9f94fa5ebb86a",
         "hasPk": 1,
         "description": "sda",
+        "account": "admin",
         "createTime": "2019-03-15 18:00:27",
         "modifyTime": "2019-03-15 18:00:27"
     }
@@ -4884,6 +4891,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -4897,6 +4905,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 
 #### 11.3.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/userInfo**
 * 请求方式：PUT
@@ -4908,10 +4917,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | userId      | int           | 否     | 用户编号                           |
-| 2    | description | String        | 是     | 备注                               |
+| 序号 | 输入参数    | 类型   | 可为空 | 备注     |
+| ---- | ----------- | ------ | ------ | -------- |
+| 1    | userId      | int    | 否     | 用户编号 |
+| 2    | description | String | 是     | 备注     |
 
 ***2）入参示例***
 
@@ -4931,25 +4940,28 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2    | message     | String        | 否     | 描述                               |
-| 3    | data        | object        | 是     | 返回信息实体（成功时不为空）       |
-| 3.1  | userId      | int           | 否     | 用户编号                           |
-| 3.2  | userName    | string        | 否     | 用户名称                           |
-| 3.3  | groupId     | int           | 否     | 所属群组编号                       |
-| 3.4  | description | String        | 是     | 备注                               |
-| 3.5  | userStatus  | int           | 否     | 状态（1-正常 2-停用） 默认1        |
-| 3.6  | publicKey   | String        | 否     | 公钥信息                           |
-| 3.7  | address     | String        | 是     | 在链上位置的hash                   |
-| 3.8  | hasPk       | Int           | 否     | 是否拥有私钥信息(1-拥有，2-不拥有) |
-| 3.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
-| 3.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
+| 序号 | 输出参数    | 类型          |      | 备注                               |
+| ---- | ----------- | ------------- | ---- | ---------------------------------- |
+| 1    | code        | Int           | 否   | 返回码，0：成功 其它：失败         |
+| 2    | message     | String        | 否   | 描述                               |
+| 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
+| 3.1  | userId      | int           | 否   | 用户编号                           |
+| 3.2  | userName    | string        | 否   | 用户名称                           |
+| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.4  | description | String        | 是   | 备注                               |
+| 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 3.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 3.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 3.9  | account     | string        | 否   | 关联账户                           |
+| 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -4964,6 +4976,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
         "address": "0x40ec3c20b5178401ae14ad8ce9c9f94fa5ebb86a",
         "hasPk": 1,
         "description": "newDescription",
+        "account": "admin",
         "createTime": "2019-03-15 18:00:27",
         "modifyTime": "2019-03-15 18:00:27"
     }
@@ -4971,6 +4984,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -4983,6 +4997,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 
 #### 11.4.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/privateKey/{userId}**
 * 请求方式：GET
@@ -4992,9 +5007,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | userId     | int    | 否     | 用户编号                   |
+| 序号 | 输入参数 | 类型 | 可为空 | 备注     |
+| ---- | -------- | ---- | ------ | -------- |
+| 1    | userId   | int  | 否     | 用户编号 |
 
 
 ***2）入参示例***
@@ -5008,17 +5023,19 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code       | Int    | 否     | 返回码，0：成功 其它：失败 |
-| 2    | message    | String | 否     | 描述                       |
-| 3    | data       | Object | 否     | 返回私钥信息实体           |
-| 3.1  | privateKey | String | 否     | 私钥                       |
-| 3.2  | address    | String | 否     | 用户链上地址               |
+| 序号 | 输出参数   | 类型   |      | 备注                       |
+| ---- | ---------- | ------ | ---- | -------------------------- |
+| 1    | code       | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message    | String | 否   | 描述                       |
+| 3    | data       | Object | 否   | 返回私钥信息实体           |
+| 3.1  | privateKey | String | 否   | 私钥                       |
+| 3.2  | address    | String | 否   | 用户链上地址               |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -5031,6 +5048,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -5043,6 +5061,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 
 
 #### 11.5.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/userList/{groupId}/{pageNumber}/{pageSize}?userParam={userName}**
 * 请求方式：GET
@@ -5052,12 +5071,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1      | groupId   | int           | 否     | 所属群组id                           |
-| 2      | pageSize    | Int           | 否     | 每页记录数                         |
-| 3      | pageNumber  | Int           | 否     | 当前页码                           |
-| 4      | userParam   | String        | 是     | 查询参数（用户名或公钥地址）       |
+| 序号 | 输入参数   | 类型   | 可为空 | 备注                         |
+| ---- | ---------- | ------ | ------ | ---------------------------- |
+| 1    | groupId    | int    | 否     | 所属群组id                   |
+| 2    | pageSize   | Int    | 否     | 每页记录数                   |
+| 3    | pageNumber | Int    | 否     | 当前页码                     |
+| 4    | userParam  | String | 是     | 查询参数（用户名或公钥地址） |
+| 5    | account    | string | 是     | 关联账户                     |
 
 
 ***2）入参示例***
@@ -5071,27 +5091,30 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2      | message     | String        | 否     | 描述                               |
-| 3      | totalCount  | Int           | 否     | 总记录数                           |
-| 4      | data        | List          | 是     | 用户列表                           |
-| 4.1    |             | Object        |        | 用户信息对象                       |
-| 4.1.1  | userId      | int           | 否     | 用户编号                           |
-| 4.1.2  | userName    | string        | 否     | 用户名称                           |
-| 4.1.3  | groupId     | int           | 否     | 所属群组编号                       |
-| 4.1.4  | description | String        | 是     | 备注                               |
-| 4.1.5  | userStatus  | int           | 否     | 状态（1-正常 2-停用） 默认1        |
-| 4.1.6  | publicKey   | String        | 否     | 公钥信息                           |
-| 4.1.7  | address     | String        | 是     | 在链上位置的hash                   |
-| 4.1.8  | hasPk       | Int           | 否     | 是否拥有私钥信息(1-拥有，2-不拥有) |
-| 4.1.9  | createTime  | LocalDateTime | 否     | 创建时间                           |
-| 4.1.10 | modifyTime  | LocalDateTime | 否     | 修改时间                           |
+| 序号   | 输出参数    | 类型          |      | 备注                               |
+| ------ | ----------- | ------------- | ---- | ---------------------------------- |
+| 1      | code        | Int           | 否   | 返回码，0：成功 其它：失败         |
+| 2      | message     | String        | 否   | 描述                               |
+| 3      | totalCount  | Int           | 否   | 总记录数                           |
+| 4      | data        | List          | 是   | 用户列表                           |
+| 4.1    |             | Object        |      | 用户信息对象                       |
+| 4.1.1  | userId      | int           | 否   | 用户编号                           |
+| 4.1.2  | userName    | string        | 否   | 用户名称                           |
+| 4.1.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 4.1.4  | description | String        | 是   | 备注                               |
+| 4.1.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 4.1.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 4.1.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 4.1.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 4.1.9  | account     | string        | 否   | 关联账户                           |
+| 4.1.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 4.1.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -5108,6 +5131,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
             "address": "0x40ec3c20b5178401ae14ad8ce9c9f94fa5ebb86a",
             "hasPk": 1,
             "description": "sda",
+            "account": "admin",
             "createTime": "2019-03-15 18:00:27",
             "modifyTime": "2019-03-15 18:00:28"
         }
@@ -5116,6 +5140,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 ```
 
 * 失败：
+
 ```
 {
     "code": 102000,
@@ -5132,6 +5157,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 其中私钥字段用Base64加密
 
 #### 11.6.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/import**
 * 请求方式：POST
@@ -5142,12 +5168,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | privateKey  | string        | 否     | Base64加密后的私钥内容                           |
-| 2    | userName    | string        | 否     | 用户名称                           |
-| 3    | description | string        | 是     | 备注                               |
-| 4    | groupId     | Int           | 否     | 所属群组                           |
+| 序号 | 输入参数    | 类型   | 可为空 | 备注                   |
+| ---- | ----------- | ------ | ------ | ---------------------- |
+| 1    | privateKey  | string | 否     | Base64加密后的私钥内容 |
+| 2    | userName    | string | 否     | 用户名称               |
+| 3    | description | string | 是     | 备注                   |
+| 4    | groupId     | Int    | 否     | 所属群组               |
+| 5    | account     | string | 否     | 关联账户               |
 
 ***2）入参示例***
 
@@ -5160,7 +5187,8 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
     "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
     "groupId": "300001",
     "description": "密钥拥有者",
-    "userName": "user1"
+    "userName": "user1",
+    "account": "admin"
 }
 ```
 
@@ -5169,14 +5197,16 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2    | message     | String        | 否     | 描述                               |
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -5185,6 +5215,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
 ```
 
 * 失败：
+
 ```
 {
     "code": 201031,
@@ -5199,6 +5230,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
 可导入控制台所生成的私钥.pem文件
 
 #### 11.7.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/importPem**
 * 请求方式：POST
@@ -5209,12 +5241,13 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/import
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | pemContent  | string        | 否     | pem文件的内容，必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式                           |
-| 2    | userName    | string        | 否     | 用户名称                           |
-| 3    | description | string        | 是     | 备注                               |
-| 4    | groupId     | Int           | 否     | 所属群组                           |
+| 序号 | 输入参数    | 类型   | 可为空 | 备注                                                         |
+| ---- | ----------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | pemContent  | string | 否     | pem文件的内容，必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式 |
+| 2    | userName    | string | 否     | 用户名称                                                     |
+| 3    | description | string | 是     | 备注                                                         |
+| 4    | groupId     | Int    | 否     | 所属群组                                                     |
+| 5    | account     | string | 否     | 关联账户                                                     |
 
 ***2）入参示例***
 
@@ -5227,7 +5260,8 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
     "pemContent":"-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/\nXmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP+H7iljbTIqXOFM6qm5aVs\nfM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK\n-----END PRIVATE KEY-----\n",
     "groupId": "1",
     "description": "密钥拥有者",
-    "userName": "user2"
+    "userName": "user2",
+    "account": "admin"
 }
 ```
 
@@ -5236,14 +5270,16 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2    | message     | String        | 否     | 描述                               |
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -5252,6 +5288,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
 ```
 
 * 失败：
+
 ```
 {
     "code": 201232,
@@ -5266,6 +5303,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
 可导入控制台生成的私钥.p12文件
 
 #### 11.8.1 传输协议规范
+
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/importP12**
 * 请求方式：POST
@@ -5276,13 +5314,14 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importPem
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | p12File     | MultipartFile        | 否     | .p12文件                           |
-| 2    | p12Password  | string        | 是     | .p12文件的密码，缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文                       |
-| 3    | userName    | string        | 否     | 用户名称                           |
-| 4    | description | string        | 是     | 备注                               |
-| 5    | groupId     | Int           | 否     | 所属群组                           |
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
+| 1    | p12File     | MultipartFile | 否     | .p12文件                                                     |
+| 2    | p12Password | string        | 是     | .p12文件的密码，缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文 |
+| 3    | userName    | string        | 否     | 用户名称                                                     |
+| 4    | description | string        | 是     | 备注                                                         |
+| 5    | groupId     | Int           | 否     | 所属群组                                                     |
+| 6    | account     | string        | 否     | 关联账户                                                     |
 
 ***2）入参示例***
 
@@ -5296,14 +5335,16 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importP12
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败         |
-| 2    | message     | String        | 否     | 描述                               |
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
 
 
 ***2）出参示例***
+
 * 成功：
+
 ```
 {
     "code": 0,
@@ -5312,6 +5353,7 @@ http://127.0.0.1:5001//WeBASE-Node-Manager/user/importP12
 ```
 
 * 失败：（p12文件的密码错误）
+
 ```
 {
     "code": 201236,
@@ -6085,7 +6127,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config/list?groupId=1&pageSize=10&
  | 4    | configValue     | String        | 否     |  
 | 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
 
-                          
+​                          
 
 ***2）入参示例***
 
@@ -6157,7 +6199,7 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config
 | 2   | pageSize   | int           | 否     |
 | 3    | pageNumber   | int           | 否     |
 
-         
+​         
 
 ***2）入参示例***
 
@@ -7337,9 +7379,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?group
 
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-|     | -     | -        |      |     
+|     | -     | -        |      |
 
-         
+​         
 
 ***2）入参示例***
 
@@ -7417,7 +7459,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | fingerPrint     | String        | 否     | 证书指纹，证书唯一标识   |
 
-         
+​         
 
 ***2）入参示例***
 
@@ -7616,7 +7658,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 | 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
 | 3    | pageSize    | Integer      | 否     | 页容量                       |
 
-         
+​         
 
 ***2）入参示例***
 
@@ -7690,7 +7732,7 @@ http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pa
 | 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
 | 3    | pageSize    | Integer      | 否     | 页容量                       |
 
-         
+​         
 
 ***2）入参示例***
 
@@ -8450,7 +8492,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/type
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | --     | -        | 否     | -   
 
-         
+​         
 
 ***2）入参示例***
 
@@ -8501,7 +8543,7 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | --     | -        | 否     | -   
 
-         
+​         
 
 ***2）入参示例***
 
@@ -8516,7 +8558,7 @@ http://localhost:5001/WeBASE-Node-Manager/version
 
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | -        | String           | 否     | 版本号                |                         
+| 1    | -        | String           | 否     | 版本号                |
 
 
 ***2）出参示例***
@@ -8571,7 +8613,7 @@ v1.4.0
 | 202034 | login fail      | 登录失败           |
 | 202035 | contract has been deployed      | 该合约已经部署           |
 | 202036 | publicKey cannot be empty      | 公钥不能为空           |
-| 202037 | associated account cannot be empty    | 用户信息不存在           |
+| 202037 | associated account cannot be empty    | 关联账号不能为空   |
 | 202040 | contract deploy not success      | 合约部署失败           |
 | 202045 | the new password cannot be same as old      | 新旧密码不能一致           |
 | 202050 | publicKey's length is 130,address's length is 42    | 公钥长度为130，公钥地址长度为42           |
