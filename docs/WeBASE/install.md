@@ -518,23 +518,11 @@ ImportError: No module named 'pymysql'
 
 答：需要安装PyMySQL，安装请参看 [pymysql](#pymysql-python3-5)
 
-### 3. 安装MySQL-python遇到问题
-
-```
-Command "python setup.py egg_info" failed with error code 1
-```
-
-答：运行下面两个命令
-```
-pip install --upgrade setuptools
-python -m pip install --upgrade pip
-```
-
-### 4. 部署时某个组件失败，重新部署提示端口被占用问题
+### 3. 部署时某个组件失败，重新部署提示端口被占用问题
 
 答：因为有个别组件是启动成功的，需先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py installAll”部署全部。
 
-### 5. 管理平台启动时Nginx报错
+### 4. 管理平台启动时Nginx报错
 
 ```
 ...
@@ -546,7 +534,7 @@ Exception: execute cmd  error ,cmd : sudo /usr/local/nginx/sbin/nginx -c /data/a
 
 答：缺少/etc/nginx/mime.types文件，建议重装nginx。
 
-### 6. 部署时数据库访问报错
+### 5. 部署时数据库访问报错
 
 ```
 ...
@@ -563,7 +551,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认数据库用户名和密码
 
-### 7. 节点sdk目录不存在
+### 6. 节点sdk目录不存在
 
 ```
 ...
@@ -572,7 +560,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
 
-### 8. 前置启动报错“nested exception is javax.net.ssl.SSLException”
+### 7. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
 ```
 ...
@@ -582,7 +570,7 @@ nested exception is javax.net.ssl.SSLException: Failed to initialize the client-
 答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
 
 
-### 9.前置启动报错“Processing bcos message timeout”
+### 8.前置启动报错“Processing bcos message timeout”
 
 ```
 ...
@@ -593,7 +581,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：一些OpenJDK版本缺少相关包，导致节点连接异常。推荐使用[OracleJDK](#jdk)。
 
-### 10. 服务进程起来了，服务不正常
+### 9. 服务进程起来了，服务不正常
 
 ```
 ...
@@ -602,7 +590,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。
 
-### 11. WeBASE-Web登录页面的验证码加载不出来
+### 10. WeBASE-Web登录页面的验证码加载不出来
 
 答：检查WeBASE-Node-Manager后台服务是否已启动成功。若启动成功，检查后台日志：
 
@@ -632,10 +620,10 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 * 修改日志level后，重启服务 `bash stop.sh && bash start.sh`
 
 * 重启服务后，检查日志文件 `log/WeBASE-Node-Manager.log`。
-    
+  
     * 检查是否有异常信息。如果有异常信息，根据具体的异常信息检查环境配置，或者通过搜索引擎进行排查。
 
-### 12. WeBASE 国内镜像与CDN加速服务
+### 11. WeBASE 国内镜像与CDN加速服务
 
 答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
 
