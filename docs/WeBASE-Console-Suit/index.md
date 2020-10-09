@@ -246,11 +246,11 @@ FISCO-BCOS基于角色的权限管理机制详情可以参考文档[使用手册
 
 链委员会管理：
 
-![](../../images/WeBASE-Console-Suit/permission_admin.png)
+![](../../images/WeBASE-Console-Suit/governance_committee.png)
 
 运维管理员管理：
 
-![](../../images/WeBASE-Console-Suit/permission_normal_admin.png)
+![](../../images/WeBASE-Console-Suit/governance_operator.png)
 
 
 **基于FISCO BCOS 2.0.0 - 2.4.x版本的基于表的权限管理**：支持链权限管理和普通权限（四种）管理：
