@@ -2,6 +2,53 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
+#### v1.4.1
+新增FISCO BCOS v2.5.0及以上版本的基于角色的权限管理功能，新增了开发者模式
+- 新的权限管理基于角色，可参考FISCO BCOS[权限控制文档](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html)
+- 开发者模式：新增了用户角色developer，可进行查询交易，合约部署调用等功能，无法使用管理员的系统管理与监控等功能。
+
+##### 数据表更新
+
+登录 MySQL 后，选择数据库 `use webasenodemanager;` 后，按顺序执行下面的 SQL 语句进行 DB 升级。
+
+**数据表字段新增**
+- 新增了`tb_user`, `tb_contract`中的`account`字段，并更新了唯一约束。
+- 用户角色表`tb_role`中新增了默认值`developer`
+- 合约表`tb_contract`中新增了`deploy_address`和`deploy_user_name`字段，记录部署的私钥用户信息
+
+```SQL
+-- tb_user修改
+alter table tb_user add column account varchar(50) binary NOT NULL COMMENT '关联账号';
+alter table tb_user drop index `unique_name`
+alter table tb_user add UNIQUE KEY `unique_name` (group_id,user_name,account);
+
+-- tb_contract修改
+alter table tb_contract add column account varchar(50) binary NOT NULL COMMENT '关联账号';
+alter table tb_contract drop index `uk_group_path_name`
+alter table tb_contract add UNIQUE KEY uk_group_path_name (group_id,contract_path,contract_name,account);
+alter table tb_contract add column deploy_address varchar(64) DEFAULT NULL COMMENT '合约部署者地址';
+alter table tb_contract add column deploy_user_name varchar(64) DEFAULT NULL COMMENT '合约部署者用戶名';
+-- tb_role修改
+INSERT INTO `tb_role` (role_name,role_name_zh,create_time,modify_time)VALUES ('developer', '开发者', now(), now());
+```
+
+**数据表结构更改**
+- 新增了链委员管理投票信息表`tb_govern_vote`
+```SQL
+CREATE TABLE IF NOT EXISTS tb_govern_vote (
+  id int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '链治理委员投票记录ID',
+  group_id int(11) NOT NULL COMMENT '群组ID',
+  time_limit bigint DEFAULT NULL COMMENT '投票截止块高',
+  from_address varchar(64) NOT NULL COMMENT '管理员地址',
+  type tinyint(8) NOT NULL COMMENT '投票类型，1-选举，2-去除，3-修改委员权重，4,-修改阈值',
+  to_address varchar(64) DEFAULT NULL COMMENT '选举/去除的地址',
+  detail varchar(64) DEFAULT NULL COMMENT '3-修改权重，4-修改阈值时存储具体信息',
+  create_time datetime NOT NULL COMMENT '创建时间',
+  modify_time datetime NOT NULL COMMENT '最近一次更新时间',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='链治理委员投票信息';
+```
+
 
 #### v1.4.0
 v1.4.0 新增了可视化部署区块链的功能，同时支持节点的动态管理（扩容、停止、删除等）功能，同时兼容原有的手动搭链添加WeBASE-Front节点前置的模式
