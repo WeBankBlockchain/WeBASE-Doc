@@ -14,6 +14,7 @@ WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Chan
 **数据表字段新增**
 - 新增了`tb_user`, `tb_contract`中的`account`字段，并更新了唯一约束。
 - 用户角色表`tb_role`中新增了默认值`developer`
+- 合约表`tb_contract`中新增了`deploy_address`和`deploy_user_name`字段，记录部署的私钥用户信息
 
 ```SQL
 -- tb_user修改
@@ -25,7 +26,8 @@ alter table tb_user add UNIQUE KEY `unique_name` (group_id,user_name,account);
 alter table tb_contract add column account varchar(50) binary NOT NULL COMMENT '关联账号';
 alter table tb_contract drop index `uk_group_path_name`
 alter table tb_contract add UNIQUE KEY uk_group_path_name (group_id,contract_path,contract_name,account);
-
+alter table tb_contract add column deploy_address varchar(64) DEFAULT NULL COMMENT '合约部署者地址';
+alter table tb_contract add column deploy_user_name varchar(64) DEFAULT NULL COMMENT '合约部署者用戶名';
 -- tb_role修改
 INSERT INTO `tb_role` (role_name,role_name_zh,create_time,modify_time)VALUES ('developer', '开发者', now(), now());
 ```
