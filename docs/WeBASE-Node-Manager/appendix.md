@@ -1,12 +1,12 @@
 ## 附录
 
 
-## 1. 安装问题
+### 1. 安装问题
 
-### 1.1 Java部署
+#### 1.1 Java部署
 
 <span id="jdk"></span>
-#### CentOS环境安装Java
+##### CentOS环境安装Java
 <span id="centosjava"></span>
 
 **注意：CentOS下OpenJDK无法正常工作，需要安装OracleJDK[下载链接](https://www.oracle.com/technetwork/java/javase/downloads/index.html)。**
@@ -34,7 +34,7 @@ $ source /etc/profile
 java -version
 ```
 
-#### Ubuntu环境安装Java
+##### Ubuntu环境安装Java
 <span id="ubuntujava"></span>
 
 ```
@@ -44,7 +44,7 @@ java -version
   java -version
 ```
 
-### 1.2 Gradle部署
+#### 1.2 Gradle部署
 
 此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.gradle.org/downloads)。
 
@@ -69,8 +69,8 @@ gradle -version
 ```
 
 
-## 2. 常见问题及方案
-#### 一般问题
+### 2. 常见问题及方案
+##### 一般问题
 * 问：执行shell脚本报下面错误：
 ```
 [app@VM_96_107_centos deployInputParam]$ bash start.sh
@@ -85,7 +85,7 @@ dos2unix *.sh
 ```
 
 
-#### 数据库问题
+##### 数据库问题
 * 问：服务访问数据库抛出异常：
 ```
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
@@ -107,7 +107,7 @@ ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (110)
 GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
 ```
 
-#### WeBASE-Node-Manager服务搭建问题
+##### WeBASE-Node-Manager服务搭建问题
 * 问：执行构建命令`gradle build -x test`抛出异常：
 ```
 A problem occurred evaluating root project 'WeBASE-Node-Manager'.
@@ -117,7 +117,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`，如果提示gradlew为非可执行文件，执行`chmod +x ./gradlew`再次执行build操作即可。
 
-#### 启动问题
+##### 启动问题
 
 * 问：启动Node-Manager进程后，后台日志显示`not found any front`：
 
@@ -183,7 +183,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | scheduler.awaitTerminationSeconds | 600  |  定时任务的线程等待超时时长（秒）  |
 | scheduler.waitForTasksToCompleteOnShutdown | true  |  定时任务完成后再停止线程  |
 
-### 3. 升级兼容性
+#### 3. 升级兼容性
 
 请查看[升级说明](upgrade.md)
 

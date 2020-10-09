@@ -226,7 +226,34 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 系统管理目前支持权限管理、系统配置管理、证书管理的功能。
 
-**权限管理**：支持链权限管理和普通权限（四种）管理：（基于FISCO BCOS 2.0.0 - 2.4.x的权限管理）
+**权限管理**
+
+**基于FISCO BCOS 2.5.0及以上版本的基于角色的权限管理**：支持链委员会管理和运维管理员管理：
+- **链委员会管理**：链委员会的修改操作均需要通过多个委员投票完成，链委员拥有投票权，可以增删节点、修改链配置、添加撤销运维、冻结解冻合约、对用户表的写权限控制；
+	- 修改委员会成员（新增/撤销委员）、修改委员投票阈值、修改委员投票权重值等操作均需要通过投票进行修改；
+	- 投票阈值为投票生效的阈值，**有效投票权重数/委员总权重数>生效阈值**投票才能生效，阈值为开区间，即：投票权重比例必须大于阈值（不包含等于）；
+	- 每次投票操作，如果是委员投票，则记录操作内容和投票委员，不重复计票；
+	- 投票设置过期时间，根据块高，blockLimit的10倍(即10000)，固定不可改；
+	- 用户不能同时成为链委员和运维管理员；
+- **运维管理**： 运维由链委员直接赋予（无需通过投票赋予），运维可以部署合约、创建表、管理合约版本、冻结解冻本账号部署的合约；
+
+> **注：**链委员会为空时，不作链委员会权限限制，所有用户拥有委员权限，可以自由给自身或其他用户添加链委员权限；设置了第一个链委员后，非链委员用户无权限；请妥善保管链委员的私钥！
+> 
+> 运维管理员为空时，所有用户拥有运维权限；同理，设置了第一个运维管理员后，非运维用户无权限；
+
+FISCO-BCOS基于角色的权限管理机制详情可以参考文档[使用手册-基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)，具体的设计原理可以参考文档
+[系统设计-基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/security_control/chain_governance.html)
+
+链委员会管理：
+
+![](../../images/WeBASE-Console-Suit/governance_committee.png)
+
+运维管理员管理：
+
+![](../../images/WeBASE-Console-Suit/governance_operator.png)
+
+
+**基于FISCO BCOS 2.0.0 - 2.4.x版本的基于表的权限管理**：支持链权限管理和普通权限（四种）管理：
 - 链权限管理为分配权限的链管理员，可以使用权限分配功能，非链管理员账户无权限分配功能；
 - 普通权限管理包含四种权限： 部署合约和创建用户表权限, 节点管理权限, CNS管理权限, 系统参数管理权限；
 
@@ -234,7 +261,7 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 > 
 > 普通权限管理员为空时，所有用户拥有特定功能，如：节点管理员为空时，所有用户可以管理节点状态，设置了第一个节点管理员后，非节点管理员不可管理节点状态;
 
-FISCO-BCOS权限管理机制详情可以参考文档[FISCO-BCOS权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html)
+FISCO-BCOS基于表的权限管理机制详情可以参考文档[FISCO-BCOS基于表的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html)
 
 链权限管理：
 
