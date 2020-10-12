@@ -1,7 +1,76 @@
 ## 附录
 
-### 1. 问题及方案
-#### 一般问题
+
+### 1. 安装问题
+
+#### 1.1 Java部署
+
+<span id="jdk"></span>
+##### CentOS环境安装Java
+<span id="centosjava"></span>
+
+**注意：CentOS下OpenJDK无法正常工作，需要安装OracleJDK[下载链接](https://www.oracle.com/technetwork/java/javase/downloads/index.html)。**
+
+```
+# 创建新的文件夹，安装Java 8或以上的版本，将下载的jdk放在software目录
+# 从Oracle官网(https://www.oracle.com/technetwork/java/javase/downloads/index.html)选择Java 8或以上的版本下载，例如下载jdk-8u201-linux-x64.tar.gz
+$ mkdir /software
+
+# 解压jdk
+$ tar -zxvf jdk-8u201-linux-x64.tar.gz
+
+# 配置Java环境，编辑/etc/profile文件
+$ vim /etc/profile
+
+# 打开以后将下面三句输入到文件里面并保存退出
+export JAVA_HOME=/software/jdk-8u201  #这是一个文件目录，非文件
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+# 生效profile
+$ source /etc/profile
+
+# 查询Java版本，出现的版本是自己下载的版本，则安装成功。
+java -version
+```
+
+##### Ubuntu环境安装Java
+<span id="ubuntujava"></span>
+
+```
+  # 安装默认Java版本(Java 8或以上)
+  sudo apt install -y default-jdk
+  # 查询Java版本
+  java -version
+```
+
+#### 1.2 Gradle部署
+
+此处给出简单步骤，供快速查阅。更详细的步骤，请参考[官网](http://www.gradle.org/downloads)。
+
+（1）从[官网](http://www.gradle.org/downloads)下载对应版本的Gradle安装包，并解压到相应目录
+
+```shell
+mkdir /software/
+unzip -d /software/ gradleXXX.zip
+```
+
+（2）配置环境变量
+
+```shell
+export GRADLE_HOME=/software/gradle-4.9
+export PATH=$GRADLE_HOME/bin:$PATH
+```
+
+（3）查看版本
+
+```
+gradle -version
+```
+
+
+### 2. 常见问题及方案
+##### 一般问题
 * 问：执行shell脚本报下面错误：
 ```
 [app@VM_96_107_centos deployInputParam]$ bash start.sh
@@ -16,7 +85,7 @@ dos2unix *.sh
 ```
 
 
-#### 数据库问题
+##### 数据库问题
 * 问：服务访问数据库抛出异常：
 ```
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
@@ -38,7 +107,7 @@ ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (110)
 GRANT ALL PRIVILEGES ON *.* TO 'TestUser'@'%' IDENTIFIED BY '此处为TestUser的密码’' WITH GRANT OPTION;
 ```
 
-#### WeBASE-Node-Manager服务搭建问题
+##### WeBASE-Node-Manager服务搭建问题
 * 问：执行构建命令`gradle build -x test`抛出异常：
 ```
 A problem occurred evaluating root project 'WeBASE-Node-Manager'.
@@ -48,7 +117,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`，如果提示gradlew为非可执行文件，执行`chmod +x ./gradlew`再次执行build操作即可。
 
-#### 启动问题
+##### 启动问题
 
 * 问：启动Node-Manager进程后，后台日志显示`not found any front`：
 
@@ -114,7 +183,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | scheduler.awaitTerminationSeconds | 600  |  定时任务的线程等待超时时长（秒）  |
 | scheduler.waitForTasksToCompleteOnShutdown | true  |  定时任务完成后再停止线程  |
 
-### 3. 升级兼容性
+#### 3. 升级兼容性
 
 请查看[升级说明](upgrade.md)
 
