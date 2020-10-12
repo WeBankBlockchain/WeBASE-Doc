@@ -27,6 +27,13 @@ https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/{r
 
 支持下载`sign, front, node-mgr, web`子系统的zip安装包（全小写），暂不支持webase-transaction的安装包下载。
 
+*注：可视化部署中通过国内镜像手动下载docker镜像的路径如下*
+```Bash
+# release_version为FISCO BCOS版本号（非WeBASE版本号），如FISCO BCOS的v2.6.0
+# 国密的镜像包则是docker-fisco-webase-gm.tar
+https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/docker/image/{release_version}/docker-fisco-webase.tar
+```
+
 ## WeBASE文档
 
 WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthedocs.io/zh_CN/latest/index.html](https://webasedoc.readthedocs.io/zh_CN/latest/index.html)，同样提供国内镜像文档[https://fintech.webank.com/developer/docs/webase/index.html](https://fintech.webank.com/developer/docs/webase/index.html)，*由于网站资源更新周期安排，国内镜像文档更新会比readthedocs有所延迟*。
