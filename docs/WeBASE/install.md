@@ -197,8 +197,7 @@ node.counts=nodeCounts
 webase.web.version=v1.4.1
 webase.mgr.version=v1.4.1
 webase.sign.version=v1.4.1
-# Docker 镜像版本，默认不需要修改
-fisco.webase.docker.cdn.version=v2.6.0
+fisco.webase.docker.cdn.version=v1.4.1
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
