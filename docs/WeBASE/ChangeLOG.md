@@ -1,6 +1,23 @@
 # 版本及兼容
 
 ## 支持FISCO-BCOS 2.X.X系列版本
+
+
+### WeBASE v1.4.1
+
+WeBASE v1.4.1 版本支持 FISCO-BCOS 2.5.x及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0)版本。
+
+| WeBASE子系统名称                                             | 配套版本地址                                                 | FISCO-BCOS 2.X.X                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [节点前置服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/index.html) | [WeBASE-Front Release v1.4.1](https://github.com/WeBankFinTech/WeBASE-Front/releases/tag/v1.4.1) | [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0) |
+| [节点管理服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/index.html) | [WeBASE-Node-Manager Release v1.4.1](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.4.1) | [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0) |
+| [WeBASE管理平台](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Web/index.html) | [WeBASE-Web Release v1.4.1](https://github.com/WeBankFinTech/WeBASE-Web/releases/tag/v1.4.1) | [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0) |
+| [数据导出代码生成子系统](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Codegen-Monkey/index.html) | [WeBASE-Codegen-Monkey v1.2.0](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/releases/tag/v1.2.0) | [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0) |
+| [数据导出子系统](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Collect-Bee/index.html) | [WeBASE-Collect-Bee v1.2.0](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/releases/tag/v1.2.0) | [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0) |
+| [签名服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/index.html) | [WeBASE-Sign Release v1.4.0](https://github.com/WeBankFinTech/WeBASE-Sign/releases/tag/v1.4.0) | [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0) |
+| [交易服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Transaction/index.html) | [WeBASE-Transaction Release v1.4.0](https://github.com/WeBankFinTech/WeBASE-Transaction/releases/tag/v1.4.0) | [FISCO BCOS 2.6.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.6.0) |
+
+
 ### WeBASE v1.4.0
 
 WeBASE v1.4.0 版本支持 FISCO-BCOS 2.4.x, 2.5.x版本，推荐使用2.4.x版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 2.4.1+](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.4.1)版本。

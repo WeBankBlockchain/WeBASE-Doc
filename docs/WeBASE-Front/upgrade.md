@@ -2,6 +2,12 @@
 
 WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
+#### v1.4.1
+
+##### 新增链权限接口与web3接口
+- 新增ChainGovernance接口
+- 新增getBlockHeaderByHash与getBlockHeaderByNumber接口
+
 #### v1.4.0
 
 ##### 增加版本号接口
