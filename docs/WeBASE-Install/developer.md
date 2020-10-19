@@ -32,6 +32,7 @@
     将节点所在目录nodes/${ip}/sdk下的ca.crt、node.crt和node.key文件拷贝到conf下
 
 4. 服务起停
+
     **国密版**则通过vi修改`application.yml`中将`sdk-encryptType`设置为`1`后，也可以直接通过以下命令进行快速修改，修改后即可执行启停命令进行服务启停。
     ```shell
     sed -i "s%encryptType: 0%encryptType: 1%g" ./conf/application.yml
