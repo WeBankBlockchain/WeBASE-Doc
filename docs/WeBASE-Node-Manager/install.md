@@ -138,7 +138,7 @@ bash webase.sh 127.0.0.1 3306
 	Application() - main run success...
 ```
 
-## 6.3 查看日志
+### 6.3 查看日志
 
 在dist目录查看：
 ```shell
