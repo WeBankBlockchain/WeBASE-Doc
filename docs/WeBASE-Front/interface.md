@@ -367,6 +367,7 @@ HTTP POST
 | 4        | 合约地址 | contractAddress | String         |      | 否       |           |
 | 5        | 当前页码 | pageNumber | Integer         |       | 是       | 从1开始 |
 | 6        | 每页记录数 | pageSize | Integer         |       | 是       |  |
+| 7        | 合约路径 | contractPath | String         |      | 否       |           |
 
 
 **2）数据格式**
@@ -697,6 +698,360 @@ HTTP POST
 ```
 {"Hi,Welcome!"}
 ```
+
+### 1.13. 获取全量合约列表（不包含abi/bin）
+
+#### 接口描述
+
+> 根据群组编号和合约状态获取全量合约
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/contractList/all/light?groupId={groupId}&contractStatus={contractStatus}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/contractList/all/light?groupId=1&contractStatus=2
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   |  否        |                       |
+| 3.1        | 合约编号 | id            | Integer                      | 是        |           |
+| 3.2        | 所在目录  | contractPath | String             | 是       | |
+| 3.3        | 合约名称 | contractName | String                    | 是        |   |
+| 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
+| 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
+| 3.6        | 合约地址 | contractAddress | String           | 否       |           |
+| 3.7        | 部署时间 | deployTime | String            | 否       |           |
+| 3.8        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.9        | 创建时间 | createTime | String             | 是       |           |
+| 3.10        | 备注 | description | String           | 否       |           |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 2,
+            "contractPath": "/",
+            "contractName": "HeHe",
+            "contractStatus": 1,
+            "groupId": 1,
+            "contractSource": "cHJhZ21hIHNvbGlkaXR5IICB9Cn0=",
+            "contractAddress": null,
+            "deployTime": null,
+            "description": null,
+            "createTime": "2019-06-10 16:42:50",
+            "modifyTime": "2019-06-10 16:42:52"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 1.13. 根据id获取单个合约
+
+#### 接口描述
+
+> 根据合约id获取单个合约
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/findOne/{contractId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 合约编号 | contractId | Integer         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/findOne/1
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   |  否        |                       |
+| 3.1        | 合约编号 | id            | Integer                      | 是        |           |
+| 3.2        | 所在目录  | contractPath | String             | 是       | |
+| 3.3        | 合约名称 | contractName | String                    | 是        |   |
+| 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
+| 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
+| 3.6        | 合约源码 | contractSource | String            | 否       |           |
+| 3.7        | 合约abi | contractAbi | String          | 否       |   合约编译后生成的abi文件内容  |
+| 3.8        | 合约bin | contractBin | String            | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
+| 3.9        | bytecodeBin | bytecodeBin | String           | 否       |  合约编译的bytecode(bin)，用于部署合约     |
+| 3.10        | 合约地址 | contractAddress | String           | 否       |           |
+| 3.11        | 部署时间 | deployTime | String            | 否       |           |
+| 3.12        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.13        | 创建时间 | createTime | String             | 是       |           |
+| 3.14        | 备注 | description | String           | 否       |           |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 1,
+            "contractPath": "/",
+            "contractName": "HeHe",
+            "contractStatus": 1,
+            "groupId": 1,
+            "contractSource": "cHJhZ21hIHNvbGlkaXR5IICB9Cn0=",
+            "contractAbi": "",
+            "contractBin": "",
+            "bytecodeBin": null,
+            "contractAddress": null,
+            "deployTime": null,
+            "description": null,
+            "createTime": "2019-06-10 16:42:50",
+            "modifyTime": "2019-06-10 16:42:52"
+        }
+    ]
+}
+```
+
+
+### 1.14. 获取合约路径列表
+
+#### 接口描述
+
+获取合约路径列表
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/findPathList/{groupId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/findPathList/1
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1       | 返回数据 | data       | List   |  否        |                       |
+| 1.1        | 群组编号 | groupId            | Integer                      | 是        |           |
+| 1.2        | 所在目录  | contractPath | String             | 是       | |
+| 1.3        | 修改时间 | modifyTime | String            | 是       |           |
+| 1.4        | 创建时间 | createTime | String             | 是       |           |
+
+
+**2）数据格式**
+```
+[
+    {
+        "groupId": 1,
+        "contractPath": "/",
+        "createTime": "2019-06-10 16:42:50",
+        "modifyTime": "2019-06-10 16:42:52"
+    }
+]
+
+```
+
+
+### 1.15. 保存合约路径
+
+#### 接口描述
+
+> 保存合约路径
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/addContractPath**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/addContractPath
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 群组编号 | groupId            | Integer                      | 是        |           |
+| 2        | 所在目录  | contractPath | String             | 是       | |
+| 3        | 修改时间 | modifyTime | String            | 是       |           |
+| 4        | 创建时间 | createTime | String             | 是       |           |
+
+
+**2）数据格式**
+```
+{
+    "groupId": 1,
+    "contractPath": "/",
+    "createTime": "2019-06-10 16:42:50",
+    "modifyTime": "2019-06-10 16:42:52"
+}
+```
+
+
+### 1.16. 删除合约路径
+
+#### 接口描述
+
+> 删除合约路径
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/deletePath/{groupId}/{contractPath}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/deletePath/1/test
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+### 1.17. 根据合约路径批量删除合约
+
+#### 接口描述
+
+> 根据合约路径批量删除合约
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/batch/{groupId}/{contractPath}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/batch/1/test
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+
 
 ## 2. 密钥接口
 
