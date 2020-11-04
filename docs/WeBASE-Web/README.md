@@ -33,3 +33,7 @@
 WeBASE-Web v1.2.2+已支持国密功能，使用[WeBASE-Node-Manager v1.2.2](../WeBASE-Node-Manager/index.html)，使用[WeBASE-Front v1.2.2](../WeBASE-Front/index.html)及以上版本
 
 WeBASE-Web将根据WeBASE-Node-Manager的版本，自动在国密与非国密之间切换，合约编译、合约部署、调用合约、发送交易等功能均已支持国密。
+
+### solidity v0.5.1和v0.6.10支持
+
+WeBASE-Web v1.4.2+已支持solidity `v0.5.1`和`v0.6.10`，可在合约IDE中的左上角进行版本切换
