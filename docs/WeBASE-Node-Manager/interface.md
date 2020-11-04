@@ -2622,7 +2622,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 | 3    | host         | String        | 否     |  邮件服务的地址|
 | 4    | port         | int        | 否     |  邮件服务使用的端口，默认25|
 | 5    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填|
-| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，authentication开启时为必填|
+| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，**使用base64编码**，authentication开启时为必填|
 | 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启|
 | 8    | enable       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启|
 
@@ -2638,7 +2638,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
     "host": "smtp.qq.com",
     "port": 25,
     "username": "yourmail@qq.com",
-    "password": "yourpassword",
+    "password": "eW91cnBhc3N3b3Jk", // 原文：yourpassword
     "protocol": "smtp",
     "authentication": 1,
     "enable": 1
