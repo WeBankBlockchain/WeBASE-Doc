@@ -1052,7 +1052,6 @@ http://localhost:5002/WeBASE-Front/contract/batch/1/test
 
 
 
-
 ## 2. 密钥接口
 
 ### 2.1. 获取公私钥接口
@@ -5310,6 +5309,211 @@ HTTP DELETE
     "data": []
 }
 ```
+
+
+### 7.9. 获取历史区块EventLog
+
+#### 接口描述
+
+同步获取历史区块中的EventLog
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/eventLogs/list**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约地址 | contractAddress      | String         |              | 是       |     已部署合约                   |
+| 3        | 合约ABI | contractAbi      | List<Object>         |              | 是       |                        |
+| 2        | Topic参数 | topics      | EventTopicParam         |              | 是       |  EventTopicParam包含`{String eventName,IndexedParamType indexed1,IndexedParamType indexed2,IndexedParamType indexed3}`,其中IndexedParamType包含`{String type,String value}`。eventName为包含参数类型的event名，如`SetEvent(uint256,string)`，IndexedParamType中type为indexed参数的类型，value为eventlog需要过滤的参数值 |
+| 2        | 开始区块 | fromBlock      | Integer         |              | 是       |     始块高                   |
+| 2        | 末区块 | toBlock      | Integer         |              | 是       |     末块高                   |
+
+
+**2）数据格式**
+
+
+```
+{
+    "groupId": "1",
+    "contractAbi": [{
+        "constant": true,
+        "inputs": [],
+        "name": "get",
+        "outputs": [{
+            "name": "",
+            "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{
+            "name": "n1",
+            "type": "uint256"
+        }, {
+            "name": "n2",
+            "type": "uint256"
+        }, {
+            "name": "n3",
+            "type": "bool"
+        }, {
+            "name": "n4",
+            "type": "string"
+        }, {
+            "name": "n5",
+            "type": "bytes1"
+        }, {
+            "name": "n6",
+            "type": "bytes"
+        }, {
+            "name": "n7",
+            "type": "address"
+        }, {
+            "name": "n8",
+            "type": "address"
+        }],
+        "name": "set",
+        "outputs": [{
+            "name": "",
+            "type": "uint256"
+        }, {
+            "name": "",
+            "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "name": "name1",
+            "type": "uint256"
+        }, {
+            "indexed": false,
+            "name": "name2",
+            "type": "uint256"
+        }, {
+            "indexed": true,
+            "name": "name3",
+            "type": "bool"
+        }, {
+            "indexed": true,
+            "name": "name4",
+            "type": "string"
+        }],
+        "name": "SetEvent",
+        "type": "event"
+    }],
+    "contractAddress": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+    "fromBlock": 1,
+    "toBlock": 1,
+    "topics": {
+        "eventName": "SetName",
+        "indexed1": {
+            "type": "bool",
+            "value": true
+        },
+        "indexed2": {
+            "type": "string",
+            "value": null
+        }
+    }
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "logParams": [{
+            "name": "name3",
+            "type": "bool",
+            "data": true,
+            "indexed": true
+        }, {
+            "name": "name4",
+            "type": "string",
+            "data": " x   zu \u0014n\r'8   z1S   Y S\u0019ܸGg K",
+            "indexed": true
+        }, {
+            "name": "name1",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }, {
+            "name": "name2",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }],
+        "log": {
+            "logIndex": 0,
+            "transactionIndex": 0,
+            "transactionHash": "0x5c7aac536ed70aaad659096b05bd06c1fbbc51604ceb79c3d8cea0f450f3b391",
+            "blockHash": "0x552524b1f6667d1fbb5d0ac72a12d59ecf982b5abc6a5cbe1c8d62ead7138e88",
+            "blockNumber": 137,
+            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
+            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
+        }
+    }, {
+        "logParams": [{
+            "name": "name3",
+            "type": "bool",
+            "data": true,
+            "indexed": true
+        }, {
+            "name": "name4",
+            "type": "string",
+            "data": "` ; \u0012\u001A  kR߲    v \u0000e  \u0007 + ( g M ",
+            "indexed": true
+        }, {
+            "name": "name1",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }, {
+            "name": "name2",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }],
+        "log": {
+            "logIndex": 0,
+            "transactionIndex": 0,
+            "transactionHash": "0x86f5903700f0f3ab161a28444c113191013374d0691c31732abc38d32bfed850",
+            "blockHash": "0x3b57e008553d4104bbbea2e081d43c7b5324fd98ca7a7fd9cb3cb15c602ea9e3",
+            "blockNumber": 145,
+            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
+            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0x60a73bfb121a98fb6b52dfb29eb0defd76b60065b8cf07902baf28c167d24daf"]
+        }
+    },
+}
+```
+
+
+
 
 ## 8. Abi管理接口
 
