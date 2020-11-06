@@ -5345,77 +5345,7 @@ HTTP POST
 ```
 {
     "groupId": "1",
-    "contractAbi": [{
-        "constant": true,
-        "inputs": [],
-        "name": "get",
-        "outputs": [{
-            "name": "",
-            "type": "uint256"
-        }],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    }, {
-        "constant": false,
-        "inputs": [{
-            "name": "n1",
-            "type": "uint256"
-        }, {
-            "name": "n2",
-            "type": "uint256"
-        }, {
-            "name": "n3",
-            "type": "bool"
-        }, {
-            "name": "n4",
-            "type": "string"
-        }, {
-            "name": "n5",
-            "type": "bytes1"
-        }, {
-            "name": "n6",
-            "type": "bytes"
-        }, {
-            "name": "n7",
-            "type": "address"
-        }, {
-            "name": "n8",
-            "type": "address"
-        }],
-        "name": "set",
-        "outputs": [{
-            "name": "",
-            "type": "uint256"
-        }, {
-            "name": "",
-            "type": "uint256"
-        }],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    }, {
-        "anonymous": false,
-        "inputs": [{
-            "indexed": false,
-            "name": "name1",
-            "type": "uint256"
-        }, {
-            "indexed": false,
-            "name": "name2",
-            "type": "uint256"
-        }, {
-            "indexed": true,
-            "name": "name3",
-            "type": "bool"
-        }, {
-            "indexed": true,
-            "name": "name4",
-            "type": "string"
-        }],
-        "name": "SetEvent",
-        "type": "event"
-    }],
+    "contractAbi": [],
     "contractAddress": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
     "fromBlock": 1,
     "toBlock": 1,
@@ -5476,39 +5406,117 @@ data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
             "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
             "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
         }
+    }
+}
+```
+
+
+
+### 7.10. 获取ABI与合约所有合约信息
+
+#### 接口描述
+
+获取导入的ABI与IDE中已部署合约所有合约的地址、合约名字信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/listAddress/{groupId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/listAddress/{groupId}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "type": "contract",
+        "contractAddress": "0x88156d500422a542435616e5a1e9d2df44c7fc70",
+        "contractName": "Hello3"
     }, {
-        "logParams": [{
-            "name": "name3",
-            "type": "bool",
-            "data": true,
-            "indexed": true
-        }, {
-            "name": "name4",
-            "type": "string",
-            "data": "` ; \u0012\u001A  kR߲    v \u0000e  \u0007 + ( g M ",
-            "indexed": true
-        }, {
-            "name": "name1",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }, {
-            "name": "name2",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }],
-        "log": {
-            "logIndex": 0,
-            "transactionIndex": 0,
-            "transactionHash": "0x86f5903700f0f3ab161a28444c113191013374d0691c31732abc38d32bfed850",
-            "blockHash": "0x3b57e008553d4104bbbea2e081d43c7b5324fd98ca7a7fd9cb3cb15c602ea9e3",
-            "blockNumber": 145,
-            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
-            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
-            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0x60a73bfb121a98fb6b52dfb29eb0defd76b60065b8cf07902baf28c167d24daf"]
-        }
-    },
+        "type": "contract",
+        "contractAddress": "0xc2b3b552258b6016f80a070c1aa91bf9e3c48c53",
+        "contractName": "Hello3"
+    }, {
+        "type": "abi",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractName": "Hello3"
+    }]
+}
+```
+
+
+### 7.11. 根据地址获取ABI与合约的合约信息
+
+#### 接口描述
+
+根据合约地址、合约类型（`abi`或`contract`）获取导入的ABI与IDE中已部署合约的合约地址、合约名字信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractInfo/{groupId}/{type}/{contractAddress}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约类型 | type | String         |              | 是        |    包含`contract`（IDE部署）和`abi`（ABI管理导入）两种类型                  |
+| 3        | 合约地址 | contractAddress | String         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/contractInfo/{groupId}/{type}/{contractAddress}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "abiId": 1,
+        "groupId": 1,
+        "contractName": "Hello3",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractAbi": "",
+        "contractBin": "",
+        "createTime": "2020-11-06 15:12:51",
+        "modifyTime": "2020-11-06 15:12:51"
+    }
 }
 ```
 
@@ -6262,7 +6270,7 @@ b、正确发送数据上链返回值信息（交易收据）
 ```
 
 
-### 10.6. 查询前置包含的solidity 0.6.10文件
+### 10.6. 查询前置包含的solidity v0.6.10文件
 
 #### 接口描述
 
@@ -6308,8 +6316,13 @@ a、成功：
 }
 ```
 
+## 11. 工具类接口
 
-## 11. 附录
+
+
+
+
+## 12. 附录
 
 ### 1. 返回码信息列表 
 <span id="code"></span>
