@@ -773,7 +773,7 @@ http://localhost:5002/WeBASE-Front/contract/contractList/all/light?groupId=1&con
 ```
 
 
-### 1.13. 根据id获取单个合约
+### 1.14. 根据id获取单个合约
 
 #### 接口描述
 
@@ -852,7 +852,7 @@ http://localhost:5002/WeBASE-Front/contract/findOne/1
 ```
 
 
-### 1.14. 获取合约路径列表
+### 1.15. 获取合约路径列表
 
 #### 接口描述
 
@@ -906,7 +906,7 @@ http://localhost:5002/WeBASE-Front/contract/findPathList/1
 ```
 
 
-### 1.15. 保存合约路径
+### 1.16. 保存合约路径
 
 #### 接口描述
 
@@ -957,7 +957,7 @@ http://localhost:5002/WeBASE-Front/contract/addContractPath
 ```
 
 
-### 1.16. 删除合约路径
+### 1.17. 删除合约路径
 
 #### 接口描述
 
@@ -1004,7 +1004,7 @@ http://localhost:5002/WeBASE-Front/contract/deletePath/1/test
 ```
 
 
-### 1.17. 根据合约路径批量删除合约
+### 1.18. 根据合约路径批量删除合约
 
 #### 接口描述
 
