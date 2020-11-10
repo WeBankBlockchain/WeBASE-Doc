@@ -588,6 +588,7 @@ v1.4.0
 
 ### 1. 返回码信息列表
 <span id="code"></span>
+
 | Code    | message                               | 描述                       |
 |---------|---------------------------------------|----------------------------|
 | 0       | success                               | 正常                       |
@@ -604,4 +605,4 @@ v1.4.0
 | 303002  | user does not exist                   | 用户不存在          |
 | 303003  | privateKey is null                    | 用户私钥为空          |
 | 303004  | privateKey decode fail                | 私钥解码失败          |
-| 303005  | privateKey format error | 私钥格式错误 |
+| 303005  | privateKey format error | 私钥格式错误 |                               |
