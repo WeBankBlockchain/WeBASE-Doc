@@ -7878,14 +7878,14 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 获取所有前置中已订阅的节点出块事件列表
 
-#### 15.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/event/newBlockEvent/list/{groupId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 15.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7904,7 +7904,7 @@ http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pa
 ```
 
 
-#### 15.1.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7952,14 +7952,14 @@ http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pa
 
 获取所有前置中已订阅的合约Event事件列表
 
-#### 15.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/event/contractEvent/list/{groupId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 15.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7978,7 +7978,7 @@ http://localhost:5001/WeBASE-Node-Manager/event/contractEvent/list/{groupId}/{pa
 ```
 
 
-#### 15.2.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -8029,6 +8029,219 @@ http://localhost:5001/WeBASE-Node-Manager/event/contractEvent/list/{groupId}/{pa
         }
     ],
     "totalCount": 1
+}
+```
+
+
+
+### 15.3. 获取历史区块EventLog
+
+#### 接口描述
+
+同步获取历史区块中的EventLog
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/event/eventLogs/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约地址 | contractAddress      | String         |              | 是       |     已部署合约                   |
+| 3        | 合约ABI | contractAbi      | List<Object>         |              | 是       |                        |
+| 2        | Topic参数 | topics      | EventTopicParam         |              | 是       |  EventTopicParam包含`{String eventName,IndexedParamType indexed1,IndexedParamType indexed2,IndexedParamType indexed3}`,其中IndexedParamType包含`{String type,String value}`。eventName为包含参数类型的event名，如`SetEvent(uint256,string)`，IndexedParamType中type为indexed参数的类型，value为eventlog需要过滤的参数值 |
+| 2        | 开始区块 | fromBlock      | Integer         |              | 是       |     始块高                   |
+| 2        | 末区块 | toBlock      | Integer         |              | 是       |     末块高                   |
+
+
+**2）数据格式**
+
+```
+http://localhost:5001/WeBASE-Node-Manager/event/eventLogs/list
+```
+
+
+```
+{
+    "groupId": "1",
+    "contractAbi": [],
+    "contractAddress": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+    "fromBlock": 1,
+    "toBlock": 1,
+    "topics": {
+        "eventName": "SetName",
+        "indexed1": {
+            "type": "bool",
+            "value": true
+        },
+        "indexed2": {
+            "type": "string",
+            "value": null
+        }
+    }
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "logParams": [{
+            "name": "name3",
+            "type": "bool",
+            "data": true,
+            "indexed": true
+        }, {
+            "name": "name4",
+            "type": "string",
+            "data": " x   zu \u0014n\r'8   z1S   Y S\u0019ܸGg K",
+            "indexed": true
+        }, {
+            "name": "name1",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }, {
+            "name": "name2",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }],
+        "log": {
+            "logIndex": 0,
+            "transactionIndex": 0,
+            "transactionHash": "0x5c7aac536ed70aaad659096b05bd06c1fbbc51604ceb79c3d8cea0f450f3b391",
+            "blockHash": "0x552524b1f6667d1fbb5d0ac72a12d59ecf982b5abc6a5cbe1c8d62ead7138e88",
+            "blockNumber": 137,
+            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
+            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
+        }
+    }
+}
+```
+
+
+### 15.4. 获取ABI与合约所有合约信息
+
+#### 接口描述
+
+获取导入的ABI与IDE中已部署合约所有合约的地址、合约名字信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/event/listAddress/{groupId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/event/listAddress/{groupId}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "type": "contract",
+        "contractAddress": "0x88156d500422a542435616e5a1e9d2df44c7fc70",
+        "contractName": "Hello3"
+    }, {
+        "type": "contract",
+        "contractAddress": "0xc2b3b552258b6016f80a070c1aa91bf9e3c48c53",
+        "contractName": "Hello3"
+    }, {
+        "type": "abi",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractName": "Hello3"
+    }]
+}
+```
+
+
+### 15.5. 根据地址获取ABI与合约的合约信息
+
+#### 接口描述
+
+根据合约地址、合约类型（`abi`或`contract`）获取导入的ABI与IDE中已部署合约的合约地址、合约名字信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/event/contractInfo/{groupId}/{type}/{contractAddress}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约类型 | type | String         |              | 是        |    包含`contract`（IDE部署）和`abi`（ABI管理导入）两种类型                  |
+| 3        | 合约地址 | contractAddress | String         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/event/contractInfo/{groupId}/{type}/{contractAddress}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "abiId": 1,
+        "groupId": 1,
+        "contractName": "Hello3",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractAbi": "",
+        "contractBin": "",
+        "createTime": "2020-11-06 15:12:51",
+        "modifyTime": "2020-11-06 15:12:51"
+    }
 }
 ```
 
