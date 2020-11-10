@@ -9103,6 +9103,10 @@ v1.4.0
 | 202301 | Node's front not exists    |  节点前置不存在          |
 | 202310 | govern vote record not exist    |  投票记录不存在          |
 | 202311 | permission denied on chain    |  链上权限被禁止          |
+| 202321 | path contains deployed contract, please delete one by one    |  路径中包含已部署的合约，请逐个删除未部署的合约          |
+| 202322 | contract path cannot be blank(use "/" instead)    |  合约地址不能为空（默认请使用"/"）          |
+| 202323 | privateKey decode fail    |  私钥解码失败          |
+| 202324 | password decode fail  |  密码/授权码解码失败         |
 | 202401 | No configured of docker registry url.    |  没有配置 Docker 镜像更新 URL 地址          |
 | 202402 | Fetch image tag from docker registry error.    |  从 Docker 源更新镜像版本失败          |
 | 202403 | Fetch Docker image tag list error, unknown config type.    |  查询 Docker 镜像版本失败（未知类型）          |

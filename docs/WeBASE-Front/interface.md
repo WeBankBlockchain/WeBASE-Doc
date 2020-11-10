@@ -6935,6 +6935,8 @@ a、成功：
 | 201301  | threshold must be greater than zero        |   链阈值必须大于0       |
 | 201302  | committee weight must be greater than zero  |   链委员权重必须大于0       |
 | 201303  | chain governance address cannot be blank      |   链管理委员/运维地址不能为空       |
+| 201311  | get event callback fail for time out     |   获取event回调超时      |
+| 201312  | get event callback error    |   获取event回调失败       |
 | 201501  | web3sdk create key pair fail and return null    |   sdk创建私钥对失败并返回Null       |
 | 201502  | pem/p12 manager get key pair error for input params    |   pem/p12证书获取私钥对失败，检查入参       |
 | 201503  | pem/p12 manager get key pair error for bc dependency error    |    pem/p12证书获取私钥对失败，检查bc依赖包版本       |
