@@ -58,6 +58,10 @@ cp -rf docs/nginx.conf /usr/local/nginx/conf
                 index  index.html index.htm;
                 try_files $uri $uri/ /index.html =404;
         }
+        location /static {    
+            root   /data/WeBASE-Web/dist;   # 前端文件路径(文件需要有权限访问)
+            autoindex on;
+        }
 
         include /etc/nginx/default.d/*.conf;
 
