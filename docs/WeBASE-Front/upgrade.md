@@ -2,6 +2,10 @@
 
 WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
+
+#### v1.4.2
+- 新增了合约EventLog查询功能
+
 #### v1.4.1
 
 ##### 新增链权限接口与web3接口
