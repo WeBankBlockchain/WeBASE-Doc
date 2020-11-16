@@ -28,7 +28,9 @@ WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documenta
 
 WeBASE-Front v1.4.2已支持solidity `v0.5.1`和`v0.6.10`:
 
-若需要使用solidity v0.6.10，则需要手动下载CDN中solidity的v0.6.10.js（国密v0.6.10-gm.js），并在WeBASE-Front编译后得到的conf文件夹(conf_template复制得到conf)中创建`solcjs`文件夹，并将js文件复制到该文件夹。
+若需要使用solidity v0.6.10，则需要手动下载CDN中solidity的v0.6.10.js（国密v0.6.10-gm.js），并在WeBASE-Front编译后得到的conf文件夹(conf_template复制得到conf)中创建`solcjs`文件夹，并将js文件复制到该文件夹。（v0.4.25及v0.5.1已自动配置）
+
+*注：使用webase-front.zip安装包直接部署或使用WeBASE一键部署则不需要手动放置solidity的js文件；*
 
 ```
 // ecdsa
@@ -37,7 +39,6 @@ wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidi
 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10-gm.js
 ```
 
-*注：使用webase-front.zip安装包直接部署或WeBASE一键部署则不需要手动放置solidity的js文件；v0.4.25及v0.5.1也无需手动配置*
 
 
 ## 2. 拉取代码
