@@ -125,7 +125,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 
 
 
-- 2. 配置文件解析
+### 3. 配置文件解析
 
 | 参数 | 默认值    | 描述          |
 |------|-------------|-----------|
@@ -171,6 +171,13 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | constant.auditMonitorTaskFixedDelay | 300000 | 监控审计数据任务的运行间隔时间，异常时将发送告警邮件（毫秒）（注：此处为检查频率，告警配置中是告警频率）  |
 | constant.nodeStatusMonitorTaskFixedDelay | 60000 | 监控节点状态任务的运行间隔时间，异常时将发送告警邮件（毫秒）（注：此处为检查频率，告警配置中是告警频率）  |
 | constant.certMonitorTaskFixedDelay | 300000 | 监控证书任务的运行间隔时间，有效期结束7天前时将发送告警邮件（毫秒） （注：此处为检查频率，告警配置中是告警频率） |
+| constant.deployType | 0 |  部署方式选择：0-手动添加前置，1-可视化部署 |
+| constant.dockerRepository | fiscoorg/fisco-webase |  镜像名 |
+| constant.webaseSignAddress | 127.0.0.1:5004 |  WeBASE-Sign 访问地址(不能是localhost) |
+| constant.rootDirOnHost | /opt/fisco |  部署区块链服务的节点主机存放节点配置文件和数据的目录 |
+| constant.sshDefaultUser | root |  SSH 免密登录的账号 |
+| constant.sshDefaultPort | 22 |  SSH 服务的端口，默认 22 |
+
 | sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 | executor |   |  异步拉取区块、刷新群组状态、监控群组数据的线程池配置  |
 | executor.corePoolSize | 3 |  异步任务的核心线程数  |
@@ -183,9 +190,6 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | scheduler.awaitTerminationSeconds | 600  |  定时任务的线程等待超时时长（秒）  |
 | scheduler.waitForTasksToCompleteOnShutdown | true  |  定时任务完成后再停止线程  |
 
-#### 3. 升级兼容性
-
-请查看[升级说明](upgrade.md)
 
 
 
