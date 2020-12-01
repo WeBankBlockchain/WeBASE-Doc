@@ -11,7 +11,7 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | JDK8或以上版本 |
+| Java   | JDK1.8 至JDK 14 |
 | MySQL | MySQL-5.6或以上版本 |
 | Python | Python3.5+ |
 | PyMySQL | 使用python3时需安装 |
@@ -32,6 +32,7 @@ java -version
 ```
 
 注意：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，会导致JavaSDK无法正常连接区块链节点。
+**注意：需要配置root用户的java_home**
 
 #### 检查mysql
 
