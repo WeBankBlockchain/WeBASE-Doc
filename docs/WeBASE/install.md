@@ -60,16 +60,10 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
 - CentOS
 
   ```
+  sudo yum -y install python36-pip
   sudo pip3 install PyMySQL
   ```
 
-  不支持pip命令的话，可以使用以下方式：
-
-  ```
-  git clone https://github.com/PyMySQL/PyMySQL
-  cd PyMySQL/
-  python3 setup.py install
-  ```
 
 - Ubuntu
 
@@ -78,6 +72,13 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
   sudo pip3 install PyMySQL
   ```
 
+ CentOS或Ubuntu不支持pip命令的话，可以使用以下方式：
+
+  ```
+  git clone https://github.com/PyMySQL/PyMySQL
+  cd PyMySQL/
+  python3 setup.py install
+  ```
 
 ## 拉取部署脚本
 
@@ -476,13 +477,20 @@ python版本要求使用python3.x, 推荐使用python3.5及以上版本
 - CentOS
 
   ```
-  sudo yum install -y python-requests
+  sudo yum -y install python36
+  sudo yum -y install python36-pip
   ```
 
 - Ubuntu
 
   ```
-  sudo apt-get install -y python-requests
+  // 添加仓库，回车继续
+  sudo add-apt-repository ppa:deadsnakes/ppa
+  // 更新仓库
+  sudo apt-get update
+  // 安装python 3.6
+  sudo apt-get install -y python3.6
+  sudo apt-get install -y python3-pip
   ```
 
 ## 常见问题
