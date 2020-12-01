@@ -477,8 +477,8 @@ python版本要求使用python3.x, 推荐使用python3.5及以上版本
 - CentOS
 
   ```
-  sudo yum -y install python36
-  sudo yum -y install python36-pip
+  sudo yum install -y python36
+  sudo yum install -y python36-pip
   ```
 
 - Ubuntu
@@ -486,8 +486,6 @@ python版本要求使用python3.x, 推荐使用python3.5及以上版本
   ```
   // 添加仓库，回车继续
   sudo add-apt-repository ppa:deadsnakes/ppa
-  // 更新仓库
-  sudo apt-get update
   // 安装python 3.6
   sudo apt-get install -y python3.6
   sudo apt-get install -y python3-pip
