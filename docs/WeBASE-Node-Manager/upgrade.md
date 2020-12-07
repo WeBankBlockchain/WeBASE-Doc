@@ -2,6 +2,30 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
+#### v1.4.2
+- 新增了合约EventLog查询功能
+
+##### 数据表更新
+
+字段更新：
+- `tb_contract`表中`bytecodeBin`的列名修改为`bytecode_bin`，并对应更新了`conf/mapper/ContractMapper.xml`文件
+
+
+数据表新增：
+- 新增合约路径信息表`tb_contract_path`
+
+```SQL
+CREATE TABLE IF NOT EXISTS tb_contract_path (
+  id int(11) NOT NULL AUTO_INCREMENT COMMENT '合约路径编号',
+  contract_path varchar(24) binary NOT NULL COMMENT '合约所在目录',
+  group_id int(11) NOT NULL COMMENT '所属群组编号',
+  create_time datetime DEFAULT NULL COMMENT '创建时间',
+  modify_time datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_group_path_name (group_id,contract_path)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合约路径表';
+```
+
 #### v1.4.1
 新增FISCO BCOS v2.5.0及以上版本的基于角色的权限管理功能，新增了开发者模式
 - 新的权限管理基于角色，可参考FISCO BCOS[权限控制文档](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html)

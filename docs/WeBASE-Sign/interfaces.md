@@ -116,7 +116,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**          |
 |----------|----------|------------|----------|--------------|----------|-------------------|
-| 1        | 私钥  | privateKey | String     |             | 是       | 通过Base64加密后的私钥内容  |
+| 1        | 私钥  | privateKey | String     |             | 是       | 通过Base64加密后的私钥内容（编码前私钥为BigInteger的HexString十六进制字符串）  |
 | 2        | 用户编号  | signUserId | String |  64           | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
 | 3        | 应用编号 | appId   | String |      64       | 是       | 用于标志用户的应用编号,仅支持数字字母下划线 |
 | 4        | 加密类型  | encryptType  | Integer |              | 否       | 默认为0，0: ECDSA, 1: 国密  |
@@ -129,7 +129,8 @@ http://localhost:5004/WeBASE-Sign/user/newUser
 
 ```
 {
-  "privateKey": "MIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/XmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP"
+    //privateKey编码前原文为: 3d1a470b2e7ae9d536c69af1cc5edf7830ece5b6a97df0e9441bab9f7a77b131
+  "privateKey": "M2QxYTQ3MGIyZTdhZTlkNTM2YzY5YWYxY2M1ZWRmNzgzMGVjZTViNmE5N2RmMGU5NDQxYmFiOWY3YTc3YjEzMQ==",
   "signUserId": "user_222",
   "appId": "app_222",
   "encryptType": 0
@@ -588,6 +589,7 @@ v1.4.0
 
 ### 1. 返回码信息列表
 <span id="code"></span>
+
 | Code    | message                               | 描述                       |
 |---------|---------------------------------------|----------------------------|
 | 0       | success                               | 正常                       |
@@ -604,4 +606,4 @@ v1.4.0
 | 303002  | user does not exist                   | 用户不存在          |
 | 303003  | privateKey is null                    | 用户私钥为空          |
 | 303004  | privateKey decode fail                | 私钥解码失败          |
-| 303005  | privateKey format error | 私钥格式错误 |
+| 303005  | privateKey format error | 私钥格式错误 |                               |
