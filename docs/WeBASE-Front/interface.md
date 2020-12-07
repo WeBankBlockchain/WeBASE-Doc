@@ -367,6 +367,7 @@ HTTP POST
 | 4        | 合约地址 | contractAddress | String         |      | 否       |           |
 | 5        | 当前页码 | pageNumber | Integer         |       | 是       | 从1开始 |
 | 6        | 每页记录数 | pageSize | Integer         |       | 是       |  |
+| 7        | 合约路径 | contractPath | String         |      | 否       |           |
 
 
 **2）数据格式**
@@ -698,6 +699,359 @@ HTTP POST
 {"Hi,Welcome!"}
 ```
 
+### 1.13. 获取全量合约列表（不包含abi/bin）
+
+#### 接口描述
+
+> 根据群组编号和合约状态获取全量合约
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/contractList/all/light?groupId={groupId}&contractStatus={contractStatus}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/contractList/all/light?groupId=1&contractStatus=2
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   |  否        |                       |
+| 3.1        | 合约编号 | id            | Integer                      | 是        |           |
+| 3.2        | 所在目录  | contractPath | String             | 是       | |
+| 3.3        | 合约名称 | contractName | String                    | 是        |   |
+| 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
+| 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
+| 3.6        | 合约地址 | contractAddress | String           | 否       |           |
+| 3.7        | 部署时间 | deployTime | String            | 否       |           |
+| 3.8        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.9        | 创建时间 | createTime | String             | 是       |           |
+| 3.10        | 备注 | description | String           | 否       |           |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 2,
+            "contractPath": "/",
+            "contractName": "HeHe",
+            "contractStatus": 1,
+            "groupId": 1,
+            "contractSource": "cHJhZ21hIHNvbGlkaXR5IICB9Cn0=",
+            "contractAddress": null,
+            "deployTime": null,
+            "description": null,
+            "createTime": "2019-06-10 16:42:50",
+            "modifyTime": "2019-06-10 16:42:52"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 1.14. 根据id获取单个合约
+
+#### 接口描述
+
+> 根据合约id获取单个合约
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/findOne/{contractId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 合约编号 | contractId | Integer         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/findOne/1
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   |  否        |                       |
+| 3.1        | 合约编号 | id            | Integer                      | 是        |           |
+| 3.2        | 所在目录  | contractPath | String             | 是       | |
+| 3.3        | 合约名称 | contractName | String                    | 是        |   |
+| 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
+| 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
+| 3.6        | 合约源码 | contractSource | String            | 否       |           |
+| 3.7        | 合约abi | contractAbi | String          | 否       |   合约编译后生成的abi文件内容  |
+| 3.8        | 合约bin | contractBin | String            | 否       |  合约编译的runtime-bytecode(runtime-bin)，用于交易解析         |
+| 3.9        | bytecodeBin | bytecodeBin | String           | 否       |  合约编译的bytecode(bin)，用于部署合约     |
+| 3.10        | 合约地址 | contractAddress | String           | 否       |           |
+| 3.11        | 部署时间 | deployTime | String            | 否       |           |
+| 3.12        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.13        | 创建时间 | createTime | String             | 是       |           |
+| 3.14        | 备注 | description | String           | 否       |           |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 1,
+            "contractPath": "/",
+            "contractName": "HeHe",
+            "contractStatus": 1,
+            "groupId": 1,
+            "contractSource": "cHJhZ21hIHNvbGlkaXR5IICB9Cn0=",
+            "contractAbi": "",
+            "contractBin": "",
+            "bytecodeBin": null,
+            "contractAddress": null,
+            "deployTime": null,
+            "description": null,
+            "createTime": "2019-06-10 16:42:50",
+            "modifyTime": "2019-06-10 16:42:52"
+        }
+    ]
+}
+```
+
+
+### 1.15. 获取合约路径列表
+
+#### 接口描述
+
+获取合约路径列表
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/findPathList/{groupId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/findPathList/1
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1       | 返回数据 | data       | List   |  否        |                       |
+| 1.1        | 群组编号 | groupId            | Integer                      | 是        |           |
+| 1.2        | 所在目录  | contractPath | String             | 是       | |
+| 1.3        | 修改时间 | modifyTime | String            | 是       |           |
+| 1.4        | 创建时间 | createTime | String             | 是       |           |
+
+
+**2）数据格式**
+```
+[
+    {
+        "groupId": 1,
+        "contractPath": "/",
+        "createTime": "2019-06-10 16:42:50",
+        "modifyTime": "2019-06-10 16:42:52"
+    }
+]
+
+```
+
+
+### 1.16. 保存合约路径
+
+#### 接口描述
+
+> 保存合约路径
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/addContractPath**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/addContractPath
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 群组编号 | groupId            | Integer                      | 是        |           |
+| 2        | 所在目录  | contractPath | String             | 是       | |
+| 3        | 修改时间 | modifyTime | String            | 是       |           |
+| 4        | 创建时间 | createTime | String             | 是       |           |
+
+
+**2）数据格式**
+```
+{
+    "groupId": 1,
+    "contractPath": "/",
+    "createTime": "2019-06-10 16:42:50",
+    "modifyTime": "2019-06-10 16:42:52"
+}
+```
+
+
+### 1.17. 删除合约路径
+
+#### 接口描述
+
+> 删除合约路径
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/deletePath/{groupId}/{contractPath}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/deletePath/1/test
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+### 1.18. 根据合约路径批量删除合约
+
+#### 接口描述
+
+> 根据合约路径批量删除合约
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/batch/{groupId}/{contractPath}**
+
+#### 调用方法
+
+HTTP DELETE
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/batch/1/test
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+
 ## 2. 密钥接口
 
 ### 2.1. 获取公私钥接口
@@ -976,7 +1330,7 @@ HTTP POST | Content-type: form-data
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
 | 1        | p12文件 | p12File    | MultipartFile   |              | 是       |          |
-| 2        | p12文件密码 | p12Password    | String   |              | 否       | 缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文          |
+| 2        | p12文件密码 | p12Password    | String   |              | 否       | 使用base64编码的密码；缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文          |
 | 2        | 用户名 | userName    | String   |              | 是       |          |
 
 **2）数据格式**
@@ -4956,6 +5310,219 @@ HTTP DELETE
 }
 ```
 
+
+### 7.9. 获取历史区块EventLog
+
+#### 接口描述
+
+同步获取历史区块中的EventLog
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/eventLogs/list**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约地址 | contractAddress      | String         |              | 是       |     已部署合约                   |
+| 3        | 合约ABI | contractAbi      | List<Object>         |              | 是       |                        |
+| 2        | Topic参数 | topics      | EventTopicParam         |              | 是       |  EventTopicParam包含`{String eventName,IndexedParamType indexed1,IndexedParamType indexed2,IndexedParamType indexed3}`,其中IndexedParamType包含`{String type,String value}`。eventName为包含参数类型的event名，如`SetEvent(uint256,string)`，IndexedParamType中type为indexed参数的类型，value为eventlog需要过滤的参数值 |
+| 2        | 开始区块 | fromBlock      | Integer         |              | 是       |     始块高                   |
+| 2        | 末区块 | toBlock      | Integer         |              | 是       |     末块高                   |
+
+
+**2）数据格式**
+
+
+```
+{
+    "groupId": "1",
+    "contractAbi": [],
+    "contractAddress": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+    "fromBlock": 1,
+    "toBlock": 1,
+    "topics": {
+        "eventName": "SetName",
+        "indexed1": {
+            "type": "bool",
+            "value": true
+        },
+        "indexed2": {
+            "type": "string",
+            "value": null
+        }
+    }
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "logParams": [{
+            "name": "name3",
+            "type": "bool",
+            "data": true,
+            "indexed": true
+        }, {
+            "name": "name4",
+            "type": "string",
+            "data": " x   zu \u0014n\r'8   z1S   Y S\u0019ܸGg K",
+            "indexed": true
+        }, {
+            "name": "name1",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }, {
+            "name": "name2",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }],
+        "log": {
+            "logIndex": 0,
+            "transactionIndex": 0,
+            "transactionHash": "0x5c7aac536ed70aaad659096b05bd06c1fbbc51604ceb79c3d8cea0f450f3b391",
+            "blockHash": "0x552524b1f6667d1fbb5d0ac72a12d59ecf982b5abc6a5cbe1c8d62ead7138e88",
+            "blockNumber": 137,
+            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
+            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
+        }
+    }
+}
+```
+
+
+
+### 7.10. 获取ABI与合约所有合约信息
+
+#### 接口描述
+
+获取导入的ABI与IDE中已部署合约所有合约的地址、合约名字信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/listAddress/{groupId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/listAddress/{groupId}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "type": "contract",
+        "contractAddress": "0x88156d500422a542435616e5a1e9d2df44c7fc70",
+        "contractName": "Hello3"
+    }, {
+        "type": "contract",
+        "contractAddress": "0xc2b3b552258b6016f80a070c1aa91bf9e3c48c53",
+        "contractName": "Hello3"
+    }, {
+        "type": "abi",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractName": "Hello3"
+    }]
+}
+```
+
+
+### 7.11. 根据地址获取ABI与合约的合约信息
+
+#### 接口描述
+
+根据合约地址、合约类型（`abi`或`contract`）获取导入的ABI与IDE中已部署合约的合约地址、合约名字信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/event/contractInfo/{groupId}/{type}/{contractAddress}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约类型 | type | String         |              | 是        |    包含`contract`（IDE部署）和`abi`（ABI管理导入）两种类型                  |
+| 3        | 合约地址 | contractAddress | String         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/event/contractInfo/{groupId}/{type}/{contractAddress}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "abiId": 1,
+        "groupId": 1,
+        "contractName": "Hello3",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractAbi": "",
+        "contractBin": "",
+        "createTime": "2020-11-06 15:12:51",
+        "modifyTime": "2020-11-06 15:12:51"
+    }
+}
+```
+
+
+
+
 ## 8. Abi管理接口
 
 ### 8.1. 获取Abi信息
@@ -5703,8 +6270,544 @@ b、正确发送数据上链返回值信息（交易收据）
 ```
 
 
+### 10.6. 查询前置包含的solidity v0.6.10文件
 
-## 11. 附录
+#### 接口描述
+
+获取WeBASE-Front的本地`conf/solcjs`中包含的solidity 0.6.10的js文件列表
+
+*如需要使用solidity 0.6.10，则需要手动下载CDN中solidity的v0.6.10.js（国密v0.6.10-gm.js），并在WeBASE-Front的conf文件夹中创建solcjs文件夹，并将js文件复制到该文件夹。*
+
+*注：使用webase-front.zip安装包直接部署则不需要手动放置js文件*
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/solc/list**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/solc/list
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+    "code":0,
+    "message":"success",
+    "data":["v0.6.10.js","v0.6.10-gm.js"]
+}
+```
+
+## 11. 工具类接口
+
+
+### 11.1. 解析Input/Output工具接口
+
+#### 接口描述
+
+根据合约ABI，解析交易回执中返回的input/output值
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/decode**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | 解析类型    | decodeType        | int      |              | 是       |   1-解析input，2-解析output                        |
+|  2        | 返回类型    | returnType        | int      |              | 否       |   默认是1，1-实体类类型(`InputAndOutputResult.java`)，2-Json格式                        |
+|  3        | 交易输入    | input        | String      |              | 否       |   交易输入值                        |
+|  4        | 交易输出    | output        | String      |              | 否       |   交易输出值                        |
+|  5        | 合约ABI    | abiList        | List<Object>|              | 是      |   合约ABI列表                        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/decode
+```
+
+解析output
+```
+{
+    "abiList": [],
+    "decodeType": 2,
+    "input": "0x5d0d1f0a00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000c0010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000001770000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000",
+    "output": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
+    "returnType": 2
+}
+```
+
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+解析output，返回json
+```
+{
+    "function": "set(uint256,uint256,bool,string,bytes1,bytes)",
+    "methodID": "0x5d0d1f0a",
+    "result": [{
+        "name": "",
+        "type": "uint256",
+        "data": 1
+    }, {
+        "name": "",
+        "type": "uint256",
+        "data": 1
+    }]
+}
+```
+
+解析input，返回实体
+```
+
+{
+  "function": "set(uint256,uint256,bool,string,bytes1,bytes)",
+  "methodID": "0x5d0d1f0a",
+  "result": [
+    {
+      "name": "n1",
+      "type": "uint256",
+      "data": 1
+    },
+    {
+      "name": "n6",
+      "type": "bytes",
+      "data": ""
+    }
+  ]
+}
+
+```
+
+
+### 11.2. 获取公私钥对
+
+#### 接口描述
+
+传入私钥时，返回对应的公私钥对；不传入私钥时，返回随机私钥对
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/keypair**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | 私钥值    | privateKey        | String      |              | 否       |   为空时，返回随机私钥对，BigInteger的HexString格式（十六进制）                        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/keypair
+```
+
+```
+{
+  "privateKey": "a81dfd0d3b1004d6635e099aeddd0e939481081372d791b0c477bb21c663105d"
+}
+```
+
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "privateKey": "a81dfd0d3b1004d6635e099aeddd0e939481081372d791b0c477bb21c663105d",
+  "publicKey": "0xaa95cfddb68f6e583a204e479536ac2d6f8fba254ef08cfad82aa48b1d9eadd58314d7cbd3c0a8461b68219577ee511e84c630a0df252afa35bd86aa12f1ebff",
+  "address": "988f01939de8797789ea4889e39a7039af9f4c11",
+  "encryptType": 0 // 0-ecdsa, 1-sm2
+}
+```
+
+
+
+### 11.3. 根据公钥获取地址
+
+#### 接口描述
+
+根据公钥获取地址
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/address?publicKey={publicKey}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | 公钥值    | publicKey        | String      |              | 是       |   BigInteger的HexString格式（十六进制）                        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/address?publicKey=0xaa95cfddb68f6e583a204e479536ac2d6f8fba254ef08cfad82aa48b1d9eadd58314d7cbd3c0a8461b68219577ee511e84c630a0df252afa35bd86aa12f1ebff
+```
+
+
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "publicKey": "0xaa95cfddb68f6e583a204e479536ac2d6f8fba254ef08cfad82aa48b1d9eadd58314d7cbd3c0a8461b68219577ee511e84c630a0df252afa35bd86aa12f1ebff",
+  "address": "988f01939de8797789ea4889e39a7039af9f4c11",
+  "encryptType": 0 // 0-ecdsa, 1-sm2
+}
+```
+
+
+
+### 11.4. 获取哈希值
+
+#### 接口描述
+
+获取哈希值
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/hash?input={123}&type={type}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | 输入值    | input        | String      |              | 是       |   待哈希的输入值                        |
+|  2        | 入参类型    | type        | int      |              | 否      |   默认为1，1-hexString十六进制字符串，2-UTF8字符串                        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/hash??input=123&type=1
+```
+
+
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+type=1，入参为Hex String时：
+```
+{
+  "hashValue": "0x667d3611273365cfb6e64399d5af0bf332ec3e5d6986f76bc7d10839b680eb58",
+  "encryptType": 0
+}
+```
+
+type=2，入参为UTF8类型时：
+```
+{
+  "hashValue": "0x64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107",
+  "encryptType": 0
+}
+```
+
+
+
+### 11.5. String转bytes32类型
+
+#### 接口描述
+
+UTF8字符串或HexString字符串转为solidity中的bytes32类型
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/convert2Bytes32?input={input}&type={type}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | 输入值    | input        | String      |              | 是       |   待转换的输入值                        |
+|  2        | 入参类型    | type        | int      |              | 否      |   默认为1，1-hexString十六进制字符串，2-UTF8字符串                        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/utf8ToHexString??input=123&type=1
+```
+
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+type=1，入参为Hex String时：
+```
+0x0123000000000000000000000000000000000000000000000000000000000000
+```
+
+type=2，入参为UTF8类型时：
+```
+0x3132330000000000000000000000000000000000000000000000000000000000
+```
+
+
+### 11.6. UTF8字符串转十六进制
+
+#### 接口描述
+
+UTF8字符串转为HexString十六进制（无0x开头）
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/utf8ToHexString?input={input}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | 输入值    | input        | String      |              | 是       |   待转换的输入值                        |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/utf8ToHexString??input=123
+```
+
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+``` 
+313233
+```
+
+
+### 11.7. 获取指定私钥签名后的内容
+
+#### 接口描述
+
+UTF8字符串转为HexString十六进制（无0x开头）
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/signMsg**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | 私钥值   | privateKey        | String      |              | 是       |                           |
+|  2        | 待签名的值    | rawData        | String      |              | 是       |                           |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/signMsg
+```
+
+```
+{ 
+    "privateKey ": "1", 
+    "rawData ": "123"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+``` 
+{
+  "signatureData": {
+    "v": 28,
+    "r": "igg6XONxOgnO5DBlbyZo2E12T13ZSMxdoiZBF06N6Vs=",
+    "s": "G0mFLQfCH+5yKEEROkGLRH8FROTnSbYEYmpkEqsasxU=",
+    "pub": null
+  },
+  "encryptType": 0
+}
+```
+
+
+### 11.8. 获取.pem私钥的内容
+
+#### 接口描述
+
+传入.pem私钥，获取其值
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/decodePem**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | .pem私钥文件   | pemFile        | MultipartFile      |              | 是       |                           |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/decodePem
+```
+
+form-data入参
+```
+{ 
+    "pemFile ": 
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+``` 
+{
+  "privateKey": "9b71fd37075dc2bb5d6c24145bfcbc12ae44df544cf67f067f3230ca22ccbd",
+  "publicKey": "0x7bc349e6d8be4df636f09ece0290eb18fa3bc5fb37a79846894dcb414b5714eb50f522a6d7e9d762ad49d0718dbaca462bb4f44c81b27598b3ea6df1ef9b6fa0",
+  "address": "4d400652406daabb315cece1e5f8b48020679aa2",
+  "encryptType": 0
+}
+```
+
+
+### 11.9. 获取.p12私钥的内容
+
+#### 接口描述
+
+传入.p12私钥，获取其值
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/tool/decodeP12**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|  1        | .p12私钥文件   | p12File        | MultipartFile      |              | 是       |                           |
+|  2        | .p12私钥密码   | p12Password        | String      |              | 是       | .p12私钥的密码默认""空字符串                           |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/tool/decodeP12
+```
+
+form-data入参
+```
+{ 
+    "p12File ": ,
+    "p12Password": ""
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+``` 
+{
+  "privateKey": "9b71fd37075dc2bb5d6c24145bfcbc12ae44df544cf67f067f3230ca22ccbd",
+  "publicKey": "0x7bc349e6d8be4df636f09ece0290eb18fa3bc5fb37a79846894dcb414b5714eb50f522a6d7e9d762ad49d0718dbaca462bb4f44c81b27598b3ea6df1ef9b6fa0",
+  "address": "4d400652406daabb315cece1e5f8b48020679aa2",
+  "encryptType": 0
+}
+```
+
+## 12. 附录
 
 ### 1. 返回码信息列表 
 <span id="code"></span>
@@ -5832,6 +6935,8 @@ b、正确发送数据上链返回值信息（交易收据）
 | 201301  | threshold must be greater than zero        |   链阈值必须大于0       |
 | 201302  | committee weight must be greater than zero  |   链委员权重必须大于0       |
 | 201303  | chain governance address cannot be blank      |   链管理委员/运维地址不能为空       |
+| 201311  | get event callback fail for time out     |   获取event回调超时      |
+| 201312  | get event callback error    |   获取event回调失败       |
 | 201501  | web3sdk create key pair fail and return null    |   sdk创建私钥对失败并返回Null       |
 | 201502  | pem/p12 manager get key pair error for input params    |   pem/p12证书获取私钥对失败，检查入参       |
 | 201503  | pem/p12 manager get key pair error for bc dependency error    |    pem/p12证书获取私钥对失败，检查bc依赖包版本       |
