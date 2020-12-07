@@ -11,7 +11,7 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | JDK8 至JDK 14 |
+| Java   | JDK 8 至JDK 14 |
 | MySQL | MySQL-5.6或以上版本 |
 | Python | Python3.5+ |
 | PyMySQL | 使用python3时需安装 |
@@ -325,7 +325,7 @@ http://{deployIP}:{webPort}
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
   - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
-- 检查节点前置是否启动可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)进行访问；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（**强烈不建议5002端口对公网开放访问权限，应对部分机器IP按需开放**）
+- 检查节点前置是否启动，可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（**强烈不建议节点前置的5002端口对公网开放访问权限，应对部分机器IP按需开放**）
 
 * 若选择 **可视化部署**
     - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
@@ -334,7 +334,7 @@ http://{deployIP}:{webPort}
 
 ### 状态检查
 
-成功执行installAll并启动所有服务后，如果在浏览器中访问webase的`http://{deployIP}:{webPort}`无法访问时，可以根据以下步骤进行排查：
+成功执行installAll后，如果在浏览器中访问webase的`http://{deployIP}:{webPort}`无法访问时，可以根据以下步骤进行排查：
 - **检查网络策略**：检查webase的`webPort`端口(默认为5000)是否在服务器的网络安全组中设置为**开放**，如开放webase的5000端口
 - **检查进程是否存在**：执行`ps -ef | grep webase`，确认webase的各个进程已启动
     - 包含：`webase.sign, webase.front, webase.node.mgr`以及webase-web的`nginx`进程
