@@ -164,8 +164,11 @@ node.channelPort=20200
 # 节点rpc端口
 node.rpcPort=8545
 
-# 是否使用国密（0: standard, 1: guomi）
+# Encrypt type (0: standard, 1: guomi)
 encrypt.type=0
+# ssl encrypt type (0: standard ssl, 1: guomi ssl)
+# only guomi type support guomi ssl
+encrypt.sslType=0
 
 # 是否使用已有的链（yes/no）
 if.exist.fisco=no
@@ -180,7 +183,7 @@ node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.6.0
+fisco.version=2.7.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
@@ -268,6 +271,8 @@ python deploy.py startAll
 
 ```
 
+执行过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
+
 * **可视化部署**方式，则执行：
 ```shell
 
@@ -307,7 +312,7 @@ python deploy.py startWeBASE
 
 WeBASE管理平台：
 
-* 一键部署完成后，打开浏览器访问
+* 一键部署完成后，**打开浏览器访问**
 ```
 http://{deployIP}:{webPort}
 示例：http://localhost:5000
@@ -316,15 +321,35 @@ http://{deployIP}:{webPort}
 **备注：** 
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
+  - 使用云服务厂商的服务器时，需要开通网络安全组的对应端口。如开放webase使用的5000端口
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
   - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
-
+- 检查节点前置是否启动可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)进行访问；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（强烈不建议5002端口对公网开放）
 
 * 若选择 **可视化部署**
     - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
-## 日志路径
+## 状态检查与日志路径
+
+### 状态检查
+
+成功执行installAll并启动所有服务后，如果在浏览器中访问webase的`http://{deployIP}:{webPort}`无法访问时，可以根据以下步骤进行排查：
+- **检查网络策略**：检查webase的`webPort`端口(默认为5000)是否在服务器的网络安全组中设置为**开放**，如开放webase的5000端口
+- **检查进程是否存在**：执行`ps -ef | grep webase`，确认webase的各个进程已启动
+    - 包含：`webase.sign, webase.front, webase.node.mgr`以及webase-web的`nginx`进程
+- **检查服务日志**：如果上述webase的某个子系统的进程未启动，则到需要按下一小节的[日志路径](#logpath)检查该服务的日志。如果各个进程都已启动，仍然无法访问，可以到按顺序逐步检查日志：
+  - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误；
+  - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功。
+  - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
+- 报错问题的解决方案可以参考本文档中的[常见问题QA](#q&a)。
+
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区进行探讨。
+- 提交Issue时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户与WeBASE快速定位问题。
+
+
+<span id="logpath"></span>
+### 日志路径
 
 ```
 |-- webase-deploy # 一键部署目录
@@ -493,6 +518,7 @@ python版本要求使用python3.x, 推荐使用python3.5及以上版本
   sudo apt-get install -y python3-pip
   ```
 
+<span id="q&a"></span>
 ## 常见问题
 
 ### 1. Python命令出错
