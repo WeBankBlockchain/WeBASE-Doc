@@ -11,7 +11,7 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Java | [JDK8或以上版本](../WeBASE-Front/appendix.html#java) |
+| Java | [JDK 8 至JDK 14](../WeBASE-Front/appendix.html#java) |
 
 备注：部署出现问题请查看[问题记录](../WeBASE-Front/appendix.html#id6)。
 
