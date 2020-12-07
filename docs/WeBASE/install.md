@@ -325,7 +325,7 @@ http://{deployIP}:{webPort}
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
   - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
-- 检查节点前置是否启动可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)进行访问；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（强烈不建议5002端口对公网开放）
+- 检查节点前置是否启动可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)进行访问；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（**强烈不建议5002端口对公网开放访问权限，应对部分机器IP按需开放**）
 
 * 若选择 **可视化部署**
     - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
@@ -344,8 +344,8 @@ http://{deployIP}:{webPort}
   - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
 - 报错问题的解决方案可以参考本文档中的[常见问题QA](#q&a)。
 
-启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区进行探讨。
-- 提交Issue时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户与WeBASE快速定位问题。
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
+- 提交Issue时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
 
 
 <span id="logpath"></span>
