@@ -35,9 +35,11 @@ java -version
 
 **注意：需要配置root用户的java_home**
 ```
+修改root用户环境变量需要：
+```
 vi /root/.bashrc
 ```
-
+编辑后，还需要source一下
 ```
 source /root/.bashrc
 ```
