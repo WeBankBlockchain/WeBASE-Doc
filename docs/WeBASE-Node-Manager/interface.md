@@ -1321,14 +1321,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockByNumber/1/11
 ### 5.1 查询合约列表 
 
 
-#### 5.1.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/contractList/{groupId}/{pageNumber}/{pageSize}**
 * 请求方式：POST
 * 返回格式：JSON
 
-#### 5.1.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -1353,7 +1353,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 {"groupId":"1","pageNumber":1,"pageSize":500}
 ```
 
-#### 5.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1428,14 +1428,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 ### 5.2 查询合约信息
 
 
-#### 5.2.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/{contractId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 5.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -1451,7 +1451,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 ```
 
-#### 5.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1530,7 +1530,7 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 ```
 
 
-#### 5.3.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/deploy**
@@ -1538,7 +1538,7 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -1579,7 +1579,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 }
 ```
 
-#### 5.3.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1660,7 +1660,7 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 ```
 
 
-#### 5.4.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/transaction**
@@ -1668,7 +1668,7 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.4.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -1703,8 +1703,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 }
 ```
 
-
-#### 5.4.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1741,14 +1740,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 ### 5.5 根据包含bytecodeBin的字符串查询合约  
 
 
-#### 5.5.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/contract/findByPartOfBytecodeBin**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 5.5.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -1771,7 +1770,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 ```
 
 
-#### 5.5.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1838,7 +1837,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 
 ### 5.6. 保存合约接口
 
-#### 5.6.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/save**
@@ -1846,7 +1845,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.6.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -1880,7 +1879,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 }
 ```
 
-#### 5.6.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1910,14 +1909,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 ### 5.7 获取Abi信息  
 
 
-#### 5.7.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/abi/{abiId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 5.7.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -1931,8 +1930,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 ```
 
-
-#### 5.7.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1978,14 +1976,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 ### 5.8 获取Abi信息分页列表  
 
 
-#### 5.8.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/abi/list/{groupId}/{pageNumber}/{pageSize}?account={account}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 5.8.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -2004,7 +2002,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 ```
 
 
-#### 5.8.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2054,7 +2052,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 
 > 将其他平台已部署的合约导入到本平台进行管理
 
-#### 5.9.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/abi**
@@ -2062,7 +2060,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.9.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -2088,7 +2086,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 }
 ```
 
-#### 5.9.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2115,7 +2113,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 
 > 将其他平台已部署的合约导入到本平台进行管理
 
-#### 5.10.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/abi**
@@ -2123,7 +2121,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 5.10.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -2149,7 +2147,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 }
 ```
 
-#### 5.10.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2164,6 +2162,245 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 
 * 成功：
 
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+
+
+### 5.11. 获取全量合约列表（不包含abi/bin）
+
+#### 接口描述
+
+> 根据群组编号和合约状态获取全量合约
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/contractList/all/light?groupId={groupId}&contractStatus={contractStatus}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约状态 | contractStatus | Integer         |       | 是       |1未部署，2已部署  |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList/all/light?groupId=1&contractStatus=2
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   |  否        |                       |
+| 3.1        | 合约编号 | id            | Integer                      | 是        |           |
+| 3.2        | 所在目录  | contractPath | String             | 是       | |
+| 3.3        | 合约名称 | contractName | String                    | 是        |   |
+| 3.4        | 合约状态 | contractStatus | Integer             | 是       |1未部署，2已部署  |
+| 3.5        | 所属群组 | groupId | Integer                  | 是        |                      |
+| 3.6        | 合约地址 | contractAddress | String           | 否       |           |
+| 3.7        | 部署时间 | deployTime | String            | 否       |           |
+| 3.8        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.9        | 创建时间 | createTime | String             | 是       |           |
+| 3.10        | 备注 | description | String           | 否       |           |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 2,
+            "contractPath": "/",
+            "contractName": "HeHe",
+            "contractStatus": 1,
+            "groupId": 1,
+            "contractSource": "cHJhZ21hIHNvbGlkaXR5IICB9Cn0=",
+            "contractAddress": null,
+            "deployTime": null,
+            "description": null,
+            "createTime": "2019-06-10 16:42:50",
+            "modifyTime": "2019-06-10 16:42:52"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+
+### 5.12. 获取合约路径列表
+
+#### 接口描述
+
+获取合约路径列表
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/findPathList/{groupId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findPathList/1
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | Object   |  否        |                       |                       |
+| 3.1        | 路径id | id            | Integer                      | 是        |           |
+| 3.2        | 群组编号 | groupId            | Integer                      | 是        |           |
+| 3.3        | 所在目录  | contractPath | String             | 是       | |
+| 3.4        | 修改时间 | modifyTime | String            | 是       |           |
+| 3.5        | 创建时间 | createTime | String             | 是       |           |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 1,
+            "groupId": 1,
+            "contractPath": "/",
+            "createTime": "2019-06-10 16:42:50",
+            "modifyTime": "2019-06-10 16:42:52"
+        }
+    ]
+}
+```
+
+
+### 5.13. 保存合约路径
+
+#### 接口描述
+
+> 保存合约路径
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/contractPath**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractPath
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+| 3        | 返回数据 | data       | int   |  否        |    增加数                   |
+
+
+**2）数据格式**
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 1 
+}
+```
+
+
+### 5.14. 删除合约路径并批量删除合约
+
+#### 接口描述
+
+> 删除合约路径并批量删除合约
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/batch/path**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 合约路径 | contractPath | String         |              | 是        |                      |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/batch/path
+```
+
+```
+{
+    "groupId": 1,
+    "contractPath": test
+}
+```
+
+#### 响应参数
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+
+
+**2）数据格式**
 ```
 {
     "code": 0,
@@ -2622,7 +2859,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 | 3    | host         | String        | 否     |  邮件服务的地址|
 | 4    | port         | int        | 否     |  邮件服务使用的端口，默认25|
 | 5    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填|
-| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，authentication开启时为必填|
+| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，**使用base64编码**，authentication开启时为必填|
 | 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启|
 | 8    | enable       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启|
 
@@ -2638,7 +2875,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
     "host": "smtp.qq.com",
     "port": 25,
     "username": "yourmail@qq.com",
-    "password": "yourpassword",
+    "password": "eW91cnBhc3N3b3Jk", // 原文：yourpassword
     "protocol": "smtp",
     "authentication": 1,
     "enable": 1
@@ -5317,7 +5554,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
 | ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
 | 1    | p12File     | MultipartFile | 否     | .p12文件                                                     |
-| 2    | p12Password | string        | 是     | .p12文件的密码，缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文 |
+| 2    | p12Password | string        | 是     | 使用base64编码的密码；.p12文件的密码，缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文 |
 | 3    | userName    | string        | 否     | 用户名称                                                     |
 | 4    | description | string        | 是     | 备注                                                         |
 | 5    | groupId     | Int           | 否     | 所属群组                                                     |
@@ -7641,14 +7878,14 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 获取所有前置中已订阅的节点出块事件列表
 
-#### 15.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/event/newBlockEvent/list/{groupId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 15.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7667,7 +7904,7 @@ http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pa
 ```
 
 
-#### 15.1.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7715,14 +7952,14 @@ http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pa
 
 获取所有前置中已订阅的合约Event事件列表
 
-#### 15.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/event/contractEvent/list/{groupId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 15.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7741,7 +7978,7 @@ http://localhost:5001/WeBASE-Node-Manager/event/contractEvent/list/{groupId}/{pa
 ```
 
 
-#### 15.2.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7792,6 +8029,219 @@ http://localhost:5001/WeBASE-Node-Manager/event/contractEvent/list/{groupId}/{pa
         }
     ],
     "totalCount": 1
+}
+```
+
+
+
+### 15.3. 获取历史区块EventLog
+
+#### 接口描述
+
+同步获取历史区块中的EventLog
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/event/eventLogs/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约地址 | contractAddress      | String         |              | 是       |     已部署合约                   |
+| 3        | 合约ABI | contractAbi      | List<Object>         |              | 是       |                        |
+| 2        | Topic参数 | topics      | EventTopicParam         |              | 是       |  EventTopicParam包含`{String eventName,IndexedParamType indexed1,IndexedParamType indexed2,IndexedParamType indexed3}`,其中IndexedParamType包含`{String type,String value}`。eventName为包含参数类型的event名，如`SetEvent(uint256,string)`，IndexedParamType中type为indexed参数的类型，value为eventlog需要过滤的参数值 |
+| 2        | 开始区块 | fromBlock      | Integer         |              | 是       |     始块高                   |
+| 2        | 末区块 | toBlock      | Integer         |              | 是       |     末块高                   |
+
+
+**2）数据格式**
+
+```
+http://localhost:5001/WeBASE-Node-Manager/event/eventLogs/list
+```
+
+
+```
+{
+    "groupId": "1",
+    "contractAbi": [],
+    "contractAddress": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+    "fromBlock": 1,
+    "toBlock": 1,
+    "topics": {
+        "eventName": "SetName",
+        "indexed1": {
+            "type": "bool",
+            "value": true
+        },
+        "indexed2": {
+            "type": "string",
+            "value": null
+        }
+    }
+}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "logParams": [{
+            "name": "name3",
+            "type": "bool",
+            "data": true,
+            "indexed": true
+        }, {
+            "name": "name4",
+            "type": "string",
+            "data": " x   zu \u0014n\r'8   z1S   Y S\u0019ܸGg K",
+            "indexed": true
+        }, {
+            "name": "name1",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }, {
+            "name": "name2",
+            "type": "uint256",
+            "data": 1,
+            "indexed": false
+        }],
+        "log": {
+            "logIndex": 0,
+            "transactionIndex": 0,
+            "transactionHash": "0x5c7aac536ed70aaad659096b05bd06c1fbbc51604ceb79c3d8cea0f450f3b391",
+            "blockHash": "0x552524b1f6667d1fbb5d0ac72a12d59ecf982b5abc6a5cbe1c8d62ead7138e88",
+            "blockNumber": 137,
+            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
+            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
+            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
+        }
+    }
+}
+```
+
+
+### 15.4. 获取ABI与合约所有合约信息
+
+#### 接口描述
+
+获取导入的ABI与IDE中已部署合约所有合约的地址、合约名字信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/event/listAddress/{groupId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/event/listAddress/{groupId}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [{
+        "type": "contract",
+        "contractAddress": "0x88156d500422a542435616e5a1e9d2df44c7fc70",
+        "contractName": "Hello3"
+    }, {
+        "type": "contract",
+        "contractAddress": "0xc2b3b552258b6016f80a070c1aa91bf9e3c48c53",
+        "contractName": "Hello3"
+    }, {
+        "type": "abi",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractName": "Hello3"
+    }]
+}
+```
+
+
+### 15.5. 根据地址获取ABI与合约的合约信息
+
+#### 接口描述
+
+根据合约地址、合约类型（`abi`或`contract`）获取导入的ABI与IDE中已部署合约的合约地址、合约名字信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/event/contractInfo/{groupId}/{type}/{contractAddress}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型**       | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | ------------ | -------------- | ------------ | -------- | -------------- |
+| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 2        | 合约类型 | type | String         |              | 是        |    包含`contract`（IDE部署）和`abi`（ABI管理导入）两种类型                  |
+| 3        | 合约地址 | contractAddress | String         |              | 是        |                      |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/event/contractInfo/{groupId}/{type}/{contractAddress}
+```
+
+#### 响应参数
+
+**1）数据格式** 
+
+成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "abiId": 1,
+        "groupId": 1,
+        "contractName": "Hello3",
+        "contractAddress": "0x7a754bb46418c93b4cec7dcc6fef0676ae6a1e32",
+        "contractAbi": "",
+        "contractBin": "",
+        "createTime": "2020-11-06 15:12:51",
+        "modifyTime": "2020-11-06 15:12:51"
+    }
 }
 ```
 
@@ -8653,6 +9103,10 @@ v1.4.0
 | 202301 | Node's front not exists    |  节点前置不存在          |
 | 202310 | govern vote record not exist    |  投票记录不存在          |
 | 202311 | permission denied on chain    |  链上权限被禁止          |
+| 202321 | path contains deployed contract, please delete one by one    |  路径中包含已部署的合约，请逐个删除未部署的合约          |
+| 202322 | contract path cannot be blank(use "/" instead)    |  合约地址不能为空（默认请使用"/"）          |
+| 202323 | privateKey decode fail    |  私钥解码失败          |
+| 202324 | password decode fail  |  密码/授权码解码失败         |
 | 202401 | No configured of docker registry url.    |  没有配置 Docker 镜像更新 URL 地址          |
 | 202402 | Fetch image tag from docker registry error.    |  从 Docker 源更新镜像版本失败          |
 | 202403 | Fetch Docker image tag list error, unknown config type.    |  查询 Docker 镜像版本失败（未知类型）          |

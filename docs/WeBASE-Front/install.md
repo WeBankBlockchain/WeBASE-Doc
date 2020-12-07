@@ -21,7 +21,24 @@ WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documenta
 开启web3sdk的国密开关:
 
 - 开启web3sdk的国密开关：将配置文件`application.yml`中`sdk`的`encryptType`从`0`修改为`1`；
-- 编译国密版智能合约在v1.3.1版本后，通过引入solcJ:0.4.25-rc1.jar，自动切换支持国密版智能合约的编译/部署/调用；（可自行切换solcJ-0.5.2）
+- 编译国密版智能合约在v1.3.1版本后，通过引入solcJ:0.4.25-rc1.jar，自动切换支持国密版智能合约的编译/部署/调用；（可自行切换jar包版本为solcJ-0.5.2）
+
+<span id="solc6"></span>
+### solidity v0.6.10支持
+
+WeBASE-Front v1.4.2已支持solidity `v0.5.1`和`v0.6.10`:
+
+若需要使用**solidity v0.6.10**，则需要手动下载CDN中solidity的v0.6.10.js（国密v0.6.10-gm.js），并在WeBASE-Front编译后得到的conf文件夹(conf_template复制得到conf)中创建`solcjs`文件夹，并将js文件复制到该文件夹，无需重启后台服务，刷新合约IDE页面即可加载。（v0.4.25及v0.5.1已自动配置）
+
+*注：使用webase-front.zip安装包直接部署或使用WeBASE一键部署则不需要手动放置solidity的js文件；*
+
+```
+// 可直接在conf目录中创建solcjs目录，并进入solcjs目录直接下载下面其中一个.js文件。
+// ecdsa
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10.js
+// 国密
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10-gm.js
+```
 
 
 ## 2. 拉取代码
@@ -79,6 +96,8 @@ cd conf
 
 *如果使用了国密版SSL* `nodes/${ip}/sdk/gm/`下的**所有证书**拷贝到conf目录下。
 - 注，国密版**默认使用非国密SSL**，只有在建链时手动指定了`-G`(大写)时才会使用国密SSL
+
+*如果需要使用solidity v0.6.10，可参考[v0.6.10配置](#solc6)*
 
 （3）修改配置（根据实际情况修改）：
 

@@ -2,6 +2,10 @@
 
 WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
+
+#### v1.4.2
+- 使用新版java-sdk替换web3sdk
+
 #### v1.4.0
 
 ##### 增加版本号接口
