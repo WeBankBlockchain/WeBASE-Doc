@@ -49,6 +49,31 @@
     检查： bash status.sh 
     ```
 
+启动成功将出现如下日志：
+```
+...
+	Application() - main run success...
+```
+
+* 状态检查：
+
+成功部署后，可以根据以下步骤**确认服务是否启动成功**：
+- **检查进程端口已启用**：使用`netstat`检查webase-front端口(默认为5002)是否已启用，若已启用，控制台输出如下：
+```shell
+$ netstat -anlp | grep 5002
+netstat -anlp | grep 5002
+tcp6       0      0 :::5002                 :::*                    LISTEN      31805/java  
+```
+- **网络策略**：检查webase-front的端口(默认为5002)是否在服务器的网络安全组中设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-front开放5002端口。**若端口未开放，将导致浏览器无法访问webase-front页面**
+- **检查进程是否存在**：执行`ps -ef | grep webase.front`，确认webase-front进程已启动
+```shell
+$ ps -ef | grep webase.front
+root     31805     1  0 17:24 pts/2    00:01:33 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 -Dfile.encoding=UTF-8 -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-front/log/heap_error.log -Djava.library.path=/root/fisco/webase/webase-deploy/webase-front/conf -cp conf/:apps/*:lib/* com.webank.webase.front.Application
+```
+- **检查服务日志**：
+  - 如果上述webase-front的**进程未启动**，则到需要进入`webase-front/log`日志目录，检查front的日志是否有报错信息。
+  - 可根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查。
+
 5. 访问 http://{deployIP}:{frontPort}/WeBASE-Front，示例：  
 
     ```
