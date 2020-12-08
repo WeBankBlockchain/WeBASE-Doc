@@ -13,7 +13,7 @@
 | ------ | ---------------------- |
 | Java   | JDK 8 至JDK 14 |
 | MySQL | MySQL-5.6或以上版本 |
-| python | Python3.5+ |
+| Python | Python3.5+ |
 | PyMySQL | |
 
 ### 检查环境
