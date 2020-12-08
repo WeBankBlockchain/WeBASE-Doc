@@ -13,7 +13,7 @@
 | ------ | ---------------------- |
 | Java   | JDK 8 至JDK 14 |
 | MySQL | MySQL-5.6或以上版本 |
-| Python | Python3.5+ |
+| python | Python3.5+ |
 | PyMySQL | |
 
 ### 检查环境
@@ -47,8 +47,10 @@ mysql --version
 #### 检查Python
 <span id="checkpy"></span>
 使用Python3.5或以上版本：
-```
+```shell
 python --version
+# python3时
+python3 --version
 ```
 
 如已安装python3，也可通过`python3 --version`查看，在运行脚本时，使用`python3`命令即可
@@ -246,7 +248,7 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 
 ## 部署
 
-* 部署服务
+* 部署服务包含**一键部署**和**可视化部署**两种方式可选
 
 **部署方式：**
 
@@ -255,59 +257,120 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 |  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
 |  可视化部署 |  installWeBASE | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参考文档 [可视化部署](../WeBASE-Install/visual_deploy.html) |
 
-根据上文已选择的部署方式完成配置文件的修改后，执行下面对应的部署、停止、启动命令即可
+根据上文已选择的部署方式完成配置文件的修改后，执行下面对应的部署命令即可
 
-* **一键部署**方式，则执行：
-```shell
-注意：不要用sudo执行脚本，例如 sudo python3 deploy.py installAll
-# 1. 部署并启动所有服务
-python3 deploy.py installAll
-
-# 2. 停止一键部署的所有服务
-python3 deploy.py stopAll
-
-# 3. 启动一键部署的所有服务
-python3 deploy.py startAll
-
-```
-
-执行过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
-
-* **可视化部署**方式，则执行：
-```shell
-
-# 1. 部署并启动可视化部署的所有服务
-python3 deploy.py installWeBASE
-
-# 2. 停止可视化部署的所有服务
-python3 deploy.py stopWeBASE
-
-# 3. 启动可视化部署的所有服务
-python3 deploy.py startWeBASE
-
-```
-
-* 服务部署后，如果需要单独启停，可以使用以下命令：
-
-```shell
-启动FISCO-BCOS节点:      python deploy.py startNode
-停止FISCO-BCOS节点:      python deploy.py stopNode
-启动WeBASE-Web:          python deploy.py startWeb
-停止WeBASE-Web:          python deploy.py stopWeb
-启动WeBASE-Node-Manager: python deploy.py startManager
-停止WeBASE-Node-Manager: python deploy.py stopManager
-启动WeBASE-Sign:        python deploy.py startSign
-停止WeBASE-Sign:        python deploy.py stopSign
-启动WeBASE-Front:        python deploy.py startFront
-停止WeBASE-Front:        python deploy.py stopFront
-```
 
 **备注：** 
 
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
-- 部署过程出现问题可以查看[常见问题解答](#id19)
+- 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
+- 不要用sudo执行脚本，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
 
+
+* **一键部署**方式，则执行：
+```shell
+# 部署并启动所有服务
+python3 deploy.py installAll
+```
+
+
+部署完成后可以看到`deploy  has completed`的日志：
+
+```shell
+$ python3 deploy.py installAll
+...
+============================================================
+
+              _    _     ______  ___  _____ _____ 
+             | |  | |    | ___ \/ _ \/  ___|  ___|
+             | |  | | ___| |_/ / /_\ \ `--.| |__  
+             | |/\| |/ _ | ___ |  _  |`--. |  __| 
+             \  /\  |  __| |_/ | | | /\__/ | |___ 
+              \/  \/ \___\____/\_| |_\____/\____/  
+    
+============================================================
+==============      checking envrionment      ==============
+...
+...
+============================================================
+==============      deploy  has completed     ==============
+============================================================
+==============    webase-web version  v1.4.2        ========
+==============    webase-node-mgr version  v1.4.2   ========
+==============    webase-sign version  v1.4.2       ========
+==============    webase-front version  v1.4.2      ========
+============================================================
+```
+
+* **状态检查**
+
+成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**：
+- **检查进程端口已启用**：使用`netstat`检查webase-web端口`webPort`(默认为5000)是否已启用，若已启用，控制台输出如下：
+```shell
+$ netstat -anlp | grep 5000
+tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      3498/nginx: master  
+```
+- **网络策略**：检查webase-web的端口`webPort`(默认为5000)是否在服务器的网络安全组中设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
+- **检查进程是否存在**：执行`ps -ef | grep webase`，确认webase的各个进程已启动
+    - 包含：节点进程`nodeXX`，`webase.sign, webase.front, webase.node.mgr`以及webase-web的`nginx`进程，若已启动控制台输出如下：
+```shell
+$ ps -ef  | grep webase
+# 根据行末，分别是node.mgr, nginx.conf(webase-web), config.ini(node), sign, front
+root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-node-mgr/log/heap_error.log -cp conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
+root      5141     1  0 17:26 ?        00:00:00 nginx: master process /usr/sbin/nginx -c /root/fisco/webase/webase-deploy/comm/nginx.conf
+root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node1/../fisco-bcos -c config.ini
+root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
+root     30718     1  0 17:24 pts/2    00:00:19 /usr/local/jdk/bin/java -Dfile.encoding=UTF-8 -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-sign/log/heap_error.log -cp conf/:apps/*:lib/* com.webank.webase.sign.Application
+root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 -Dfile.encoding=UTF-8 -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-front/log/heap_error.log -Djava.library.path=/root/fisco/webase/webase-deploy/webase-front/conf -cp conf/:apps/*:lib/* com.webank.webase.front.Application
+```
+- **检查服务日志**：
+  - **如果各个子服务的进程已启用**，可根据下一章节[访问WeBASE](#access)。
+  - 如果上述webase的**某个子系统的进程未启动**，则到需要按[日志路径](#logpath)进入**未启动子服务**的日志目录，检查该服务的日志。
+  - 如果各个进程都已启动，仍然无法访问，可以到按`deployLog, frontLog, nodeMgrLog`的顺序逐步检查日志：
+    - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误；
+    - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功。
+    - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
+- 根据日志中的错误信息，可以参考本文档中的[常见问题QA](#q&a)寻找解决方案。
+
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
+- 提交Issue时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
+
+* **可视化部署**方式，则执行：
+```shell
+# 不要用sudo执行脚本，例如`sudo python3 deploy.py installAll`
+# 部署并启动可视化部署的所有服务
+python3 deploy.py installWeBASE
+```
+
+如果遇到docker必须使用sudo运行，可以参考[创建docker用户组](#docker_sudo)
+
+
+* 服务部署后，需要对各服务进行启停操作，可以使用以下命令：
+
+```shell
+# 一键部署
+部署并启动所有服务        python3 deploy.py installAll
+停止一键部署的所有服务    python3 deploy.py stopAll
+启动一键部署的所有服务    python3 deploy.py startAll
+# 可视化部署
+部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE
+停止可视化部署的所有服务  python3 deploy.py stopWeBASE
+启动可视化部署的所有服务  python3 deploy.py startWeBASE
+# 各子服务启停
+启动FISCO-BCOS节点:      python3 deploy.py startNode
+停止FISCO-BCOS节点:      python3 deploy.py stopNode
+启动WeBASE-Web:          python3 deploy.py startWeb
+停止WeBASE-Web:          python3 deploy.py stopWeb
+启动WeBASE-Node-Manager: python3 deploy.py startManager
+停止WeBASE-Node-Manager: python3 deploy.py stopManager
+启动WeBASE-Sign:        python3 deploy.py startSign
+停止WeBASE-Sign:        python3 deploy.py stopSign
+启动WeBASE-Front:        python3 deploy.py startFront
+停止WeBASE-Front:        python3 deploy.py stopFront
+```
+
+<span id="access"></span>
 ## 访问
 
 WeBASE管理平台：
@@ -330,23 +393,7 @@ http://{deployIP}:{webPort}
 * 若选择 **可视化部署**
     - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
-## 状态检查与日志路径
-
-### 状态检查
-
-成功执行installAll后，如果在浏览器中访问webase的`http://{deployIP}:{webPort}`无法访问时，可以根据以下步骤进行排查：
-- **检查网络策略**：检查webase的`webPort`端口(默认为5000)是否在服务器的网络安全组中设置为**开放**，如开放webase的5000端口
-- **检查进程是否存在**：执行`ps -ef | grep webase`，确认webase的各个进程已启动
-    - 包含：`webase.sign, webase.front, webase.node.mgr`以及webase-web的`nginx`进程
-- **检查服务日志**：如果上述webase的某个子系统的进程未启动，则到需要按下一小节的[日志路径](#logpath)检查该服务的日志。如果各个进程都已启动，仍然无法访问，可以到按顺序逐步检查日志：
-  - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误；
-  - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功。
-  - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
-- 报错问题的解决方案可以参考本文档中的[常见问题QA](#q&a)。
-
-启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
-- 提交Issue时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
-
+## 日志路径
 
 <span id="logpath"></span>
 ### 日志路径
@@ -660,4 +707,19 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
 
+<span id="docker_sudo"></span>
+### 12. docker必须使用sudo才能运行，但是sudo下系统环境变量失效
+
+答：可以在root用户下配置环境变量如JAVA_HOME等，或者尝试创建docker用户组
+
+```
+# 创建docker用户组
+sudo groupadd docker
+# 将当前用户添加到docker用户组
+sudo usermod -aG docker $USER
+# 重启docker服务
+sudo systemctl restart docker
+# 切换或者退出当前账户，重新登入
+exit
+```
 
