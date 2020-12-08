@@ -393,10 +393,8 @@ http://{deployIP}:{webPort}
 * 若选择 **可视化部署**
     - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
 
-## 日志路径
-
 <span id="logpath"></span>
-### 日志路径
+## 日志路径
 
 ```
 |-- webase-deploy # 一键部署目录
