@@ -14,7 +14,7 @@
 | Java   | JDK 8 至JDK 14 |
 | MySQL | MySQL-5.6或以上版本 |
 | Python | Python3.5+ |
-| PyMySQL | 使用python3时需安装 |
+| PyMySQL | |
 
 ### 检查环境
 
@@ -259,15 +259,15 @@ mgr.ssh.rootDirOnHost=/opt/fisco
 
 * **一键部署**方式，则执行：
 ```shell
-
+注意：不要用sudo执行脚本，例如 sudo python3 deploy.py installAll
 # 1. 部署并启动所有服务
-python deploy.py installAll
+python3 deploy.py installAll
 
 # 2. 停止一键部署的所有服务
-python deploy.py stopAll
+python3 deploy.py stopAll
 
 # 3. 启动一键部署的所有服务
-python deploy.py startAll
+python3 deploy.py startAll
 
 ```
 
@@ -277,13 +277,13 @@ python deploy.py startAll
 ```shell
 
 # 1. 部署并启动可视化部署的所有服务
-python deploy.py installWeBASE
+python3 deploy.py installWeBASE
 
 # 2. 停止可视化部署的所有服务
-python deploy.py stopWeBASE
+python3 deploy.py stopWeBASE
 
 # 3. 启动可视化部署的所有服务
-python deploy.py startWeBASE
+python3 deploy.py startWeBASE
 
 ```
 
