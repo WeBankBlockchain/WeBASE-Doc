@@ -55,24 +55,51 @@
 	Application() - main run success...
 ```
 
-* 状态检查：
+* **状态检查**：成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**
 
-成功部署后，可以根据以下步骤**确认服务是否启动成功**：
-- **检查进程端口已启用**：使用`netstat`检查webase-front端口(默认为5002)是否已启用，若已启用，控制台输出如下：
+- 检查各子系统进程
+
+通过`ps`命令，检查节点与节点前置的进程是否存在
+- 包含：节点进程`nodeXX`，节点前置进程`webase.front`
+
+检查方法如下，若无输出，则代表进程未启动，需要到`webase-front/log`中查看日志的错误信息，并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查。
 ```shell
+# 检查节点进程，此处部署了两个节点node0, node1
+$ ps -ef | grep node
+root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node1/../fisco-bcos -c config.ini
+root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
+# 检查节点前置webase-front的进程
+$ ps -ef | grep webase.front 
+root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.front.Application
+```
+
+- 检查进程端口
+
+通过`netstat`命令，检查节点与节点前置的端口监听情况。
+
+检查方法如下，若无输出，则代表进程端口监听异常，需要到`webase-front/log`中查看日志的错误信息，并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查。
+
+```shell
+# 检查节点channel端口(默认为20200)是否已监听
+$ netstat -anlp | grep 20200
+tcp        0      0 0.0.0.0:20200           0.0.0.0:*               LISTEN      29069/fisco-bcos
+# 检查webase-front端口(默认为5002)是否已监听
 $ netstat -anlp | grep 5002
-netstat -anlp | grep 5002
-tcp6       0      0 :::5002                 :::*                    LISTEN      31805/java  
+tcp6       0      0 :::5002                 :::*                    LISTEN      2909/java 
 ```
-- **网络策略**：检查webase-front的端口(默认为5002)是否在服务器的网络安全组中设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-front开放5002端口。**若端口未开放，将导致浏览器无法访问webase-front页面**
-- **检查进程是否存在**：执行`ps -ef | grep webase.front`，确认webase-front进程已启动
-```shell
-$ ps -ef | grep webase.front
-root     31805     1  0 17:24 pts/2    00:01:33 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 -Dfile.encoding=UTF-8 -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-front/log/heap_error.log -Djava.library.path=/root/fisco/webase/webase-deploy/webase-front/conf -cp conf/:apps/*:lib/* com.webank.webase.front.Application
-```
-- **检查服务日志**：
-  - 如果上述webase-front的**进程未启动**，则到需要进入`webase-front/log`日志目录，检查front的日志是否有报错信息。
-  - 可根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查。
+
+- 检查服务日志 
+日志中若出现报错信息，可根据信息提示判断服务是否异常，也可以参考并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查。
+
+- 如果节点进程**已启用**且端口**已监听**，可调过本章节
+- 如果节点前置异常，如检查不到进程或端口监听，则需要`webase-front/log`中查看日志的错误信息
+- 如果检查步骤出现检查不到进程或端口监听等异常，或者前置服务无法访问，可以按以下顺序逐步检查日志：
+  - 检查`webase-front/log`中查看节点前置日志的错误信息，如果无错误，且日志最后出现`application run success`字样则代表运行成功。
+  - 检查`nodes/127.0.0.1/nodeXXX/log`中的节点日志
+
+启动失败或无法使用时，欢迎到WeBASE-Front[提交Issue](https://github.com/WeBankFinTech/WeBASE-Front/issues)或到技术社区共同探讨。
+- 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
+
 
 5. 访问 http://{deployIP}:{frontPort}/WeBASE-Front，示例：  
 
@@ -82,4 +109,5 @@ root     31805     1  0 17:24 pts/2    00:01:33 /usr/local/jdk/bin/java -Djdk.tl
 
     ![](../../images/WeBASE/front-overview.png)
 
-    
+**注**：若服务启动后无异常，但仍然无法访问，可以检查服务器的网络安全策略：
+- **开放节点前置端口**：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
