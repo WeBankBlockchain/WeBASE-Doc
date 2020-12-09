@@ -84,7 +84,7 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
   python3 setup.py install
   ```
 
-#### 检查服务器网络策略
+### 检查服务器网络策略
 
 网络策略检查：
 - **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
@@ -118,7 +118,7 @@ cd webase-deploy
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
 
-④ 服务端口不能小于1024。
+④ 服务端口不能小于1024
 
 ⑤ 部署时，修改 `common.properties` 配置文件
 
@@ -196,8 +196,7 @@ node.counts=nodeCounts
 * 执行installAll命令，部署服务将自动部署FISCO BCOS节点，并部署 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
 **备注：** 
-- 检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的**网络安全组中是否设置为开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
-- 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
+- 部署脚本会拉取相关安装包进行部署，需保持网络畅通
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
 - 不要用sudo执行脚本，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
@@ -265,46 +264,105 @@ $ python3 deploy.py installAll
 通过`ps`命令，检查各子系统的进程是否存在
 - 包含：节点进程`nodeXX`，节点前置进程`webase.front`，节点管理服务进程`webase.node.mgr`，节点管理平台`webase-web`的`nginx`进程，以及签名服务进程`webase.sign`
 
-检查方法如下，若无输出，则代表进程未启动，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查：
-```shell
-# 检查节点进程，此处部署了两个节点node0, node1
+检查方法如下，若无输出，则代表进程未启动，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
+
+检查节点进程，此处部署了两个节点node0, node1
+```
 $ ps -ef | grep node
+```
+
+输出如下
+```
 root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node1/../fisco-bcos -c config.ini
 root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
-# 检查节点前置webase-front的进程
+
+检查节点前置webase-front的进程
+```
 $ ps -ef | grep webase.front 
+```
+
+输出如下
+```
 root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.front.Application
-# 检查节点管理服务webase-node-manager的进程
+```
+
+检查节点管理服务webase-node-manager的进程
+```
 $ ps -ef  | grep webase.node.mgr
+```
+
+输出如下
+```
 root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
-# 检查webase-web的nginx进程
+```
+
+检查webase-web的nginx进程
+```
 $ ps -ef | grep webase |grep nginx       
+```
+
+输出如下
+```
 root      5141     1  0 Dec08 ?        00:00:00 nginx: master process /usr/sbin/nginx -c /root/fisco/webase/webase-deploy/comm/nginx.conf
-# 检查签名服务webase-sign的进程
+```
+
+检查签名服务webase-sign的进程
+```
 $ ps -ef  | grep webase.sign 
+```
+
+输出如下
+```
 root     30718     1  0 17:24 pts/2    00:00:19 /usr/local/jdk/bin/java ... conf/:apps/*:lib/* com.webank.webase.sign.Application
 ```
 
 #### 检查进程端口
 通过`netstat`命令，检查各子系统进程的端口监听情况。
 
-检查方法如下，若无输出，则代表进程端口监听异常，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查：
+检查方法如下，若无输出，则代表进程端口监听异常，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
 
-```shell
-# 检查节点channel端口(默认为20200)是否已监听
+检查节点channel端口(默认为20200)是否已监听
+```
 $ netstat -anlp | grep 20200
+```
+输出如下
+```
 tcp        0      0 0.0.0.0:20200           0.0.0.0:*               LISTEN      29069/fisco-bcos
-# 检查webase-front端口(默认为5002)是否已监听
+```
+
+检查webase-front端口(默认为5002)是否已监听
+```
 $ netstat -anlp | grep 5002
+```
+输出如下
+```
 tcp6       0      0 :::5002                 :::*                    LISTEN      2909/java 
-# 检查webase-node-mgr端口(默认为5001)是否已监听
+```
+
+检查webase-node-mgr端口(默认为5001)是否已监听
+```
 $ netstat -anlp | grep 5001    
-tcp6       0      0 :::5001                 :::*                    LISTEN      14049/java 
-# 检查webase-web端口(默认为5000)在nginx是否已监听
+```
+输出如下
+```tcp6       0      0 :::5001                 :::*                    LISTEN      14049/java 
+```
+
+检查webase-web端口(默认为5000)在nginx是否已监听
+```
 $ netstat -anlp | grep 5000
+```
+输出如下
+```
 tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      3498/nginx: master  
-# 检查webase-sign端口(默认为5004)是否已监听
+```
+
+检查webase-sign端口(默认为5004)是否已监听
+```
 $ netstat -anlp | grep 5004
+```
+
+输出如下
+```
 tcp6       0      0 :::5004                 :::*                    LISTEN      25271/java 
 ```
 
@@ -316,18 +374,19 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 - 如果上述检查步骤出现异常，如检查不到进程或端口监听，则需要按[日志路径](#logpath)进入**异常子服务**的日志目录，检查该服务的日志
 
 - 如果检查步骤均无异常，但服务仍无法访问，可以到按部署日志`deployLog`，节点前置日志`frontLog`, 节点管理服务日志`nodeMgrLog`的顺序逐步检查日志：
-  - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误；
-  - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功。
+  - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误
+  - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功
   - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
   - 检查webase-deploy/nodes/127.0.0.1/nodeXXX/log中的节点日志
 
 日志中若出现报错信息，可根据信息提示判断服务是否异常，也可以参考本文档中的[常见问题QA](#q&a)进行排查
 
 启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
-- 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
+- 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 
 <span id="access"></span>
+
 ## 访问
 
 WeBASE管理平台：
@@ -345,10 +404,7 @@ http://{deployIP}:{webPort}
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
   - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
-- 检查节点前置是否启动，可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（**强烈不建议节点前置的5002端口对公网开放访问权限，应对部分机器IP按需开放**）
-
-* 若选择 **可视化部署**
-    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
+- 检查节点前置是否启动，可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（不建议节点前置的端口对公网开放访问权限，应对部分机器IP按需开放）
 
 <span id="logpath"></span>
 ## 日志路径
