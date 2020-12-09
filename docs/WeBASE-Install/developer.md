@@ -2,11 +2,11 @@
 
 我们推荐的快速入门，只需要搭建节点和节点前置服务(WeBASE-Front)，就可通过WeBASE-Front的合约编辑器进行合约的编辑，编译，部署，调试。
 
-### 1.1 节点搭建
+### 节点搭建
 
 节点搭建的方法建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
 
-### 1.2 节点前置服务(WeBASE-Front)搭建
+### 节点前置服务(WeBASE-Front)搭建
 **前提条件** 
 
 | 依赖软件 | 支持版本 |
@@ -55,14 +55,17 @@
 	Application() - main run success...
 ```
 
-* **状态检查**：成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**
+### 状态检查
 
-- 检查各子系统进程
+成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**
+
+##### 1. 检查各子系统进程
 
 通过`ps`命令，检查节点与节点前置的进程是否存在
 - 包含：节点进程`nodeXX`，节点前置进程`webase.front`
 
 检查方法如下，若无输出，则代表进程未启动，需要到`webase-front/log`中查看日志的错误信息，并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查。
+
 ```shell
 # 检查节点进程，此处部署了两个节点node0, node1
 $ ps -ef | grep node
@@ -73,7 +76,7 @@ $ ps -ef | grep webase.front
 root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.front.Application
 ```
 
-- 检查进程端口
+##### 2. 检查进程端口
 
 通过`netstat`命令，检查节点与节点前置的端口监听情况。
 
@@ -88,7 +91,8 @@ $ netstat -anlp | grep 5002
 tcp6       0      0 :::5002                 :::*                    LISTEN      2909/java 
 ```
 
-- 检查服务日志 
+##### 3. 检查服务日志 
+
 日志中若出现报错信息，可根据信息提示判断服务是否异常，也可以参考并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查。
 
 - 如果节点进程**已启用**且端口**已监听**，可调过本章节
@@ -101,7 +105,9 @@ tcp6       0      0 :::5002                 :::*                    LISTEN      
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
 
 
-5. 访问 http://{deployIP}:{frontPort}/WeBASE-Front，示例：  
+### 访问
+
+访问 http://{deployIP}:{frontPort}/WeBASE-Front，示例：  
 
     ```
     http://localhost:5002/WeBASE-Front 
