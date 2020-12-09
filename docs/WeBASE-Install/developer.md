@@ -6,7 +6,8 @@
 
 节点搭建的方法建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
 
-### 节点前置服务(WeBASE-Front)搭建
+### 节点前置服务搭建
+
 **前提条件** 
 
 | 依赖软件 | 支持版本 |
@@ -131,7 +132,6 @@ tcp6       0      0 :::5002                 :::*                    LISTEN      
     http://localhost:5002/WeBASE-Front 
     ```
 
-    ![](../../images/WeBASE/front-overview.png)
 
 **注**：若服务启动后无异常，但仍然无法访问，可以检查服务器的网络安全策略：
 - **开放节点前置端口**：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
