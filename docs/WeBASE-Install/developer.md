@@ -120,6 +120,22 @@ tcp6       0      0 :::5002                 :::*                    LISTEN      
   - 检查`webase-front/log`中查看节点前置日志的错误信息，如果无错误，且日志最后出现`application run success`字样则代表运行成功
   - 检查`nodes/127.0.0.1/nodeXXX/log`中的节点日志
 
+
+**查看运行成功日志**：webase-front运行成功后会打印日志`main run success`，可以通过搜索此关键字来确认服务正常运行。
+
+如，检查webase-front日志，其他webase服务可进行类似操作
+```
+$ cd webase-front
+$ grep -B 3 "main run success" log/WeBASE-Front.log
+```
+输出如下：
+```
+2020-12-09 15:47:25.355 [main] INFO  ScheduledAnnotationBeanPostProcessor() - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2020-12-09 15:47:25.378 [main] INFO  TomcatEmbeddedServletContainer() - Tomcat started on port(s): 5002 (http)
+2020-12-09 15:47:25.383 [main] INFO  Application() - Started Application in 6.983 seconds (JVM running for 7.768)
+2020-12-09 15:47:25.383 [main] INFO  Application() - main run success...
+```
+
 启动失败或无法使用时，欢迎到WeBASE-Front[提交Issue](https://github.com/WeBankFinTech/WeBASE-Front/issues)或到技术社区共同探讨
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
