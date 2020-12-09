@@ -84,7 +84,7 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
   python3 setup.py install
   ```
 
-#### 检查服务器网络策略
+### 检查服务器网络策略
 
 网络策略检查：
 - **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
@@ -196,7 +196,6 @@ node.counts=nodeCounts
 * 执行installAll命令，部署服务将自动部署FISCO BCOS节点，并部署 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
 **备注：** 
-- 检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的**网络安全组中是否设置为开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
@@ -328,6 +327,7 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 
 
 <span id="access"></span>
+
 ## 访问
 
 WeBASE管理平台：
@@ -345,10 +345,7 @@ http://{deployIP}:{webPort}
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
   - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
-- 检查节点前置是否启动，可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（**强烈不建议节点前置的5002端口对公网开放访问权限，应对部分机器IP按需开放**）
-
-* 若选择 **可视化部署**
-    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
+- 检查节点前置是否启动，可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（不建议节点前置的端口对公网开放访问权限，应对部分机器IP按需开放）
 
 <span id="logpath"></span>
 ## 日志路径
