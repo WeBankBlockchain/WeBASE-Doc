@@ -84,6 +84,12 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
   python3 setup.py install
   ```
 
+#### 检查服务器网络策略
+
+网络策略检查：
+- **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
+- 开放节点前置端口：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）；由于节点前置直连节点，**不建议对公网开放节点前置端口**，建议按需开放
+
 ## 拉取部署脚本
 
 获取部署安装包：
@@ -103,7 +109,7 @@ cd webase-deploy
 
 ① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#mysql)；
 
-② 修改配置文件（vi common.properties），没有变化的可以不修改；
+② 修改配置文件（`vi common.properties`），没有变化的可以不修改；
 
 ③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
 
@@ -114,13 +120,7 @@ cd webase-deploy
 
 ④ 服务端口不能小于1024。
 
-⑤ 部署时，支持**一键部署**或者**可视化部署**两种方式，**二者选择其一即可**
-
-下面分别介绍**一键部署和可视化部署**的两种配置示例：
-1. 采用一键部署，则根据说明修改 `common.properties` 文件中的配置；
-2. 采用可视化部署，则根据说明修改 `visual-deploy.properties` 文件中的配置；
-
-- **一键部署**方式时，修改 `common.properties` 配置文件
+⑤ 部署时，修改 `common.properties` 配置文件
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
@@ -191,89 +191,21 @@ node.counts=nodeCounts
 ```
 
 
-- **可视化方式**时，修改 `visual-deploy.properties` 文件。
-<span id="visual-deploy-config"></span>
-
-
-```eval_rst
-.. important::
-    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
-```
-
-```shell
-# WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.2
-webase.mgr.version=v1.4.2
-webase.sign.version=v1.4.2
-fisco.webase.docker.cdn.version=v1.4.2
-
-# 节点管理子系统mysql数据库配置
-mysql.ip=127.0.0.1
-mysql.port=3306
-mysql.user=dbUsername
-mysql.password=dbPassword
-mysql.database=webasenodemanager
-
-# 签名服务子系统mysql数据库配置
-sign.mysql.ip=localhost
-sign.mysql.port=3306
-sign.mysql.user=dbUsername
-sign.mysql.password=dbPassword
-sign.mysql.database=webasesign
-
-# WeBASE管理平台服务端口
-web.port=5000
-
-# 节点管理子系统服务端口
-mgr.port=5001
-
-# 签名服务子系统端口
-sign.port=5004
-
-# 是否使用国密（0: standard, 1: guomi）
-encrypt.type=0
-
-# WeBASE-Sign 对外提供服务的访问 IP 地址
-# 部署在其它主机的节点，需要使用此 IP 访问 WeBASE-Sign 服务
-# 不能是 127.0.0.1 或者 localhost
-sign.ip=
-
-# SSH 免密登录账号
-mgr.ssh.user=root
-# SSH 访问端口
-mgr.ssh.port=22
-# 部署节点服务的主机，存放链数据的目录
-mgr.ssh.rootDirOnHost=/opt/fisco
-```
-
 ## 部署
 
-* 部署服务包含**一键部署**和**可视化部署**两种方式可选
-
-**部署方式：**
-
-| 部署方式  | 参数  | 说明  |
-|---|---|---|
-|  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
-|  可视化部署 |  installWeBASE | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参考文档 [可视化部署](../WeBASE-Install/visual_deploy.html) |
-
-根据上文已选择的部署方式完成配置文件的修改后，执行下面对应的部署命令即可
-
+* 执行installAll命令，部署服务将自动部署FISCO BCOS节点，并部署 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
 **备注：** 
-
+- 检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的**网络安全组中是否设置为开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
 - 不要用sudo执行脚本，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
 
-
-* **一键部署**方式，则执行：
 ```shell
 # 部署并启动所有服务
 python3 deploy.py installAll
 ```
-
 
 部署完成后可以看到`deploy  has completed`的日志：
 
@@ -281,16 +213,12 @@ python3 deploy.py installAll
 $ python3 deploy.py installAll
 ...
 ============================================================
-
               _    _     ______  ___  _____ _____ 
              | |  | |    | ___ \/ _ \/  ___|  ___|
              | |  | | ___| |_/ / /_\ \ `--.| |__  
              | |/\| |/ _ | ___ |  _  |`--. |  __| 
              \  /\  |  __| |_/ | | | /\__/ | |___ 
               \/  \/ \___\____/\_| |_\____/\____/  
-    
-============================================================
-==============      checking envrionment      ==============
 ...
 ...
 ============================================================
@@ -303,49 +231,6 @@ $ python3 deploy.py installAll
 ============================================================
 ```
 
-* **状态检查**
-
-成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**：
-- **检查进程端口已启用**：使用`netstat`检查webase-web端口`webPort`(默认为5000)是否已启用，若已启用，控制台输出如下：
-```shell
-$ netstat -anlp | grep 5000
-tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      3498/nginx: master  
-```
-- **网络策略**：检查webase-web的端口`webPort`(默认为5000)是否在服务器的网络安全组中设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
-- **检查进程是否存在**：执行`ps -ef | grep webase`，确认webase的各个进程已启动
-    - 包含：节点进程`nodeXX`，`webase.sign, webase.front, webase.node.mgr`以及webase-web的`nginx`进程，若已启动控制台输出如下：
-```shell
-$ ps -ef  | grep webase
-# 根据行末，分别是node.mgr, nginx.conf(webase-web), config.ini(node), sign, front
-root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-node-mgr/log/heap_error.log -cp conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
-root      5141     1  0 17:26 ?        00:00:00 nginx: master process /usr/sbin/nginx -c /root/fisco/webase/webase-deploy/comm/nginx.conf
-root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node1/../fisco-bcos -c config.ini
-root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
-root     30718     1  0 17:24 pts/2    00:00:19 /usr/local/jdk/bin/java -Dfile.encoding=UTF-8 -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-sign/log/heap_error.log -cp conf/:apps/*:lib/* com.webank.webase.sign.Application
-root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 -Dfile.encoding=UTF-8 -Xmx256m -Xms256m -Xmn128m -Xss512k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root/fisco/webase/webase-deploy/webase-front/log/heap_error.log -Djava.library.path=/root/fisco/webase/webase-deploy/webase-front/conf -cp conf/:apps/*:lib/* com.webank.webase.front.Application
-```
-- **检查服务日志**：
-  - **如果各个子服务的进程已启用**，可根据下一章节[访问WeBASE](#access)。
-  - 如果上述webase的**某个子系统的进程未启动**，则到需要按[日志路径](#logpath)进入**未启动子服务**的日志目录，检查该服务的日志。
-  - 如果各个进程都已启动，仍然无法访问，可以到按`deployLog, frontLog, nodeMgrLog`的顺序逐步检查日志：
-    - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误；
-    - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功。
-    - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
-- 根据日志中的错误信息，可以参考本文档中的[常见问题QA](#q&a)寻找解决方案。
-
-启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
-- 提交Issue时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
-
-* **可视化部署**方式，则执行：
-```shell
-# 不要用sudo执行脚本，例如`sudo python3 deploy.py installAll`
-# 部署并启动可视化部署的所有服务
-python3 deploy.py installWeBASE
-```
-
-如果遇到docker必须使用sudo运行，可以参考[创建docker用户组](#docker_sudo)
-
-
 * 服务部署后，需要对各服务进行启停操作，可以使用以下命令：
 
 ```shell
@@ -353,10 +238,6 @@ python3 deploy.py installWeBASE
 部署并启动所有服务        python3 deploy.py installAll
 停止一键部署的所有服务    python3 deploy.py stopAll
 启动一键部署的所有服务    python3 deploy.py startAll
-# 可视化部署
-部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE
-停止可视化部署的所有服务  python3 deploy.py stopWeBASE
-启动可视化部署的所有服务  python3 deploy.py startWeBASE
 # 各子服务启停
 启动FISCO-BCOS节点:      python3 deploy.py startNode
 停止FISCO-BCOS节点:      python3 deploy.py stopNode
@@ -368,7 +249,83 @@ python3 deploy.py installWeBASE
 停止WeBASE-Sign:        python3 deploy.py stopSign
 启动WeBASE-Front:        python3 deploy.py startFront
 停止WeBASE-Front:        python3 deploy.py stopFront
+# 可视化部署
+部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE
+停止可视化部署的所有服务  python3 deploy.py stopWeBASE
+启动可视化部署的所有服务  python3 deploy.py startWeBASE
 ```
+
+
+## 状态检查
+
+成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**
+
+#### 检查各子系统进程
+
+通过`ps`命令，检查各子系统的进程是否存在
+- 包含：节点进程`nodeXX`，节点前置进程`webase.front`，节点管理服务进程`webase.node.mgr`，节点管理平台`webase-web`的`nginx`进程，以及签名服务进程`webase.sign`
+
+检查方法如下，若无输出，则代表进程未启动，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查：
+```shell
+# 检查节点进程，此处部署了两个节点node0, node1
+$ ps -ef | grep node
+root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node1/../fisco-bcos -c config.ini
+root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
+# 检查节点前置webase-front的进程
+$ ps -ef | grep webase.front 
+root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.front.Application
+# 检查节点管理服务webase-node-manager的进程
+$ ps -ef  | grep webase.node.mgr
+root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
+# 检查webase-web的nginx进程
+$ ps -ef | grep webase |grep nginx       
+root      5141     1  0 Dec08 ?        00:00:00 nginx: master process /usr/sbin/nginx -c /root/fisco/webase/webase-deploy/comm/nginx.conf
+# 检查签名服务webase-sign的进程
+$ ps -ef  | grep webase.sign 
+root     30718     1  0 17:24 pts/2    00:00:19 /usr/local/jdk/bin/java ... conf/:apps/*:lib/* com.webank.webase.sign.Application
+```
+
+#### 检查进程端口
+通过`netstat`命令，检查各子系统进程的端口监听情况。
+
+检查方法如下，若无输出，则代表进程端口监听异常，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查：
+
+```shell
+# 检查节点channel端口(默认为20200)是否已监听
+$ netstat -anlp | grep 20200
+tcp        0      0 0.0.0.0:20200           0.0.0.0:*               LISTEN      29069/fisco-bcos
+# 检查webase-front端口(默认为5002)是否已监听
+$ netstat -anlp | grep 5002
+tcp6       0      0 :::5002                 :::*                    LISTEN      2909/java 
+# 检查webase-node-mgr端口(默认为5001)是否已监听
+$ netstat -anlp | grep 5001    
+tcp6       0      0 :::5001                 :::*                    LISTEN      14049/java 
+# 检查webase-web端口(默认为5000)在nginx是否已监听
+$ netstat -anlp | grep 5000
+tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      3498/nginx: master  
+# 检查webase-sign端口(默认为5004)是否已监听
+$ netstat -anlp | grep 5004
+tcp6       0      0 :::5004                 :::*                    LISTEN      25271/java 
+```
+
+#### 检查服务日志 
+检查服务日志有无错误信息
+
+- 如果各个子服务的进程**已启用**且端口**已监听**，可直接访问下一章节[访问WeBASE](#access)
+
+- 如果上述检查步骤出现异常，如检查不到进程或端口监听，则需要按[日志路径](#logpath)进入**异常子服务**的日志目录，检查该服务的日志
+
+- 如果检查步骤均无异常，但服务仍无法访问，可以到按部署日志`deployLog`，节点前置日志`frontLog`, 节点管理服务日志`nodeMgrLog`的顺序逐步检查日志：
+  - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误；
+  - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功。
+  - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
+  - 检查webase-deploy/nodes/127.0.0.1/nodeXXX/log中的节点日志
+
+日志中若出现报错信息，可根据信息提示判断服务是否异常，也可以参考本文档中的[常见问题QA](#q&a)进行排查
+
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
+- 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题。
+
 
 <span id="access"></span>
 ## 访问
@@ -414,6 +371,16 @@ http://{deployIP}:{webPort}
 ```
 
 **备注：** 当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志。
+
+例如，查看节点前置服务的日志，可参考：
+```shell
+# 假设当前目录为webase-deploy
+cd webase-front/log
+# vi打开日志查看，快捷键shift+G可跳转到文件末尾
+vi WeBASE-Front.log
+```
+
+如果出现错误日志，根据错误提示或本文档的[常见问题](#q&a)进行排查
 
 ## 附录
 
@@ -705,19 +672,4 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
 
-<span id="docker_sudo"></span>
-### 12. docker必须使用sudo才能运行，但是sudo下系统环境变量失效
-
-答：可以在root用户下配置环境变量如JAVA_HOME等，或者尝试创建docker用户组
-
-```
-# 创建docker用户组
-sudo groupadd docker
-# 将当前用户添加到docker用户组
-sudo usermod -aG docker $USER
-# 重启docker服务
-sudo systemctl restart docker
-# 切换或者退出当前账户，重新登入
-exit
-```
 
