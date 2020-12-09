@@ -264,9 +264,9 @@ $ python3 deploy.py installAll
 通过`ps`命令，检查各子系统的进程是否存在
 - 包含：节点进程`nodeXX`，节点前置进程`webase.front`，节点管理服务进程`webase.node.mgr`，节点管理平台`webase-web`的`nginx`进程，以及签名服务进程`webase.sign`
 
-检查方法如下，若无输出，则代表进程未启动，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
+检查方法如下，若无输出，则代表进程未启动，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
 
-检查节点进程，此处部署了两个节点node0, node1
+- 检查节点进程，此处部署了两个节点node0, node1
 ```
 $ ps -ef | grep node
 ```
@@ -277,7 +277,7 @@ root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy
 root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
 ```
 
-检查节点前置webase-front的进程
+- 检查节点前置webase-front的进程
 ```
 $ ps -ef | grep webase.front 
 ```
@@ -287,7 +287,7 @@ $ ps -ef | grep webase.front
 root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.front.Application
 ```
 
-检查节点管理服务webase-node-manager的进程
+- 检查节点管理服务webase-node-manager的进程
 ```
 $ ps -ef  | grep webase.node.mgr
 ```
@@ -297,7 +297,7 @@ $ ps -ef  | grep webase.node.mgr
 root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
 ```
 
-检查webase-web的nginx进程
+- 检查webase-web的nginx进程
 ```
 $ ps -ef | grep webase |grep nginx       
 ```
@@ -307,7 +307,7 @@ $ ps -ef | grep webase |grep nginx
 root      5141     1  0 Dec08 ?        00:00:00 nginx: master process /usr/sbin/nginx -c /root/fisco/webase/webase-deploy/comm/nginx.conf
 ```
 
-检查签名服务webase-sign的进程
+- 检查签名服务webase-sign的进程
 ```
 $ ps -ef  | grep webase.sign 
 ```
@@ -320,9 +320,9 @@ root     30718     1  0 17:24 pts/2    00:00:19 /usr/local/jdk/bin/java ... conf
 #### 检查进程端口
 通过`netstat`命令，检查各子系统进程的端口监听情况。
 
-检查方法如下，若无输出，则代表进程端口监听异常，需要到该子系统的日志中[查看日志错误信息](#logpath)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
+检查方法如下，若无输出，则代表进程端口监听异常，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
 
-检查节点channel端口(默认为20200)是否已监听
+- 检查节点channel端口(默认为20200)是否已监听
 ```
 $ netstat -anlp | grep 20200
 ```
@@ -331,7 +331,7 @@ $ netstat -anlp | grep 20200
 tcp        0      0 0.0.0.0:20200           0.0.0.0:*               LISTEN      29069/fisco-bcos
 ```
 
-检查webase-front端口(默认为5002)是否已监听
+- 检查webase-front端口(默认为5002)是否已监听
 ```
 $ netstat -anlp | grep 5002
 ```
@@ -340,7 +340,7 @@ $ netstat -anlp | grep 5002
 tcp6       0      0 :::5002                 :::*                    LISTEN      2909/java 
 ```
 
-检查webase-node-mgr端口(默认为5001)是否已监听
+- 检查webase-node-mgr端口(默认为5001)是否已监听
 ```
 $ netstat -anlp | grep 5001    
 ```
@@ -348,7 +348,7 @@ $ netstat -anlp | grep 5001
 ```tcp6       0      0 :::5001                 :::*                    LISTEN      14049/java 
 ```
 
-检查webase-web端口(默认为5000)在nginx是否已监听
+- 检查webase-web端口(默认为5000)在nginx是否已监听
 ```
 $ netstat -anlp | grep 5000
 ```
@@ -357,7 +357,7 @@ $ netstat -anlp | grep 5000
 tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      3498/nginx: master  
 ```
 
-检查webase-sign端口(默认为5004)是否已监听
+- 检查webase-sign端口(默认为5004)是否已监听
 ```
 $ netstat -anlp | grep 5004
 ```
@@ -367,6 +367,7 @@ $ netstat -anlp | grep 5004
 tcp6       0      0 :::5004                 :::*                    LISTEN      25271/java 
 ```
 
+<span id="checklog"></span>
 #### 检查服务日志 
 检查服务日志有无错误信息
 
@@ -382,12 +383,74 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 
 日志中若出现报错信息，可根据信息提示判断服务是否异常，也可以参考本文档中的[常见问题QA](#q&a)进行排查
 
+例如，查看节点前置服务的日志，可参考：
+```shell
+# 假设当前目录为webase-deploy
+$ cd webase-front/log
+# vi打开日志查看，快捷键 shift+G 可跳转到文件末尾
+$ vi WeBASE-Front.log
+```
+
+<span id="logpath"></span>
+#### 日志路径
+
+除了像上文那样通过`vi`命令打开日志文件进行检查，我们也可以进入各子服务的日志路径，通过`grep`检查日志文件，以此判断服务是否正常运行
+
+- **查看运行成功日志**：WeBASE子服务运行成功后均会打印日志`main run success`，可以通过搜索此关键字来确认服务正常运行。
+
+如，检查webase-front日志，其他webase服务可进行类似操作
+```
+$ cd webase-front
+$ grep -B 3 "main run success" log/WeBASE-Front.log
+```
+输出如下：
+```
+2020-12-09 15:47:25.355 [main] INFO  ScheduledAnnotationBeanPostProcessor() - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2020-12-09 15:47:25.378 [main] INFO  TomcatEmbeddedServletContainer() - Tomcat started on port(s): 5002 (http)
+2020-12-09 15:47:25.383 [main] INFO  Application() - Started Application in 6.983 seconds (JVM running for 7.768)
+2020-12-09 15:47:25.383 [main] INFO  Application() - main run success...
+```
+
+- **查看报错日志**：出现异常时，可以搜索关键字`ERROR`进行检查
+
+如，检查webase-front错误日志，其他webase服务可进行类似操作
+```
+$ cd webase-front
+$ grep "ERROR" log/WeBASE-Front.log
+```
+输出如下
+```
+2020-12-09 09:10:42.138 [http-nio-5002-exec-1] ERROR ExceptionsHandler() - catch frontException:  no active connection available network exception requset send failed! please check the log file content for reasons.
+2020-12-09 09:10:42.145 [http-nio-5002-exec-4] ERROR Web3ApiService() - getBlockNumber fail.
+```
+
+如果出现错误日志，根据错误提示或本文档的[常见问题](#q&a)进行排查
+
 启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 
-<span id="access"></span>
 
+- 各子服务的**日志路径**如下所示
+```
+|-- webase-deploy # 一键部署目录
+|--|-- log # 部署日志目录
+|--|-- webase-web # 管理平台目录
+|--|--|-- log # 管理平台日志目录
+|--|-- webase-node-mgr # 节点管理服务目录
+|--|--|-- log # 节点管理服务日志目录
+|--|-- webase-sign # 签名服务目录
+|--|--|-- log # 签名服务日志目录
+|--|-- webase-front # 节点前置服务目录
+|--|--|-- log # 节点前置服务日志目录
+|--|-- nodes # 一件部署搭链节点目录
+|--|--|-- 127.0.0.1
+|--|--|--|-- node0 # 具体节点目录
+|--|--|--|--|-- log # 节点日志目录
+```
+*备注：当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志*
+
+<span id="access"></span>
 ## 访问
 
 WeBASE管理平台：
@@ -407,37 +470,6 @@ http://{deployIP}:{webPort}
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
 - 检查节点前置是否启动，可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（不建议节点前置的端口对公网开放访问权限，应对部分机器IP按需开放）
 
-<span id="logpath"></span>
-## 日志路径
-
-```
-|-- webase-deploy # 一键部署目录
-|--|-- log # 部署日志目录
-|--|-- webase-web # 管理平台目录
-|--|--|-- log # 管理平台日志目录
-|--|-- webase-node-mgr # 节点管理服务目录
-|--|--|-- log # 节点管理服务日志目录
-|--|-- webase-sign # 签名服务目录
-|--|--|-- log # 签名服务日志目录
-|--|-- webase-front # 节点前置服务目录
-|--|--|-- log # 节点前置服务日志目录
-|--|-- nodes # 一件部署搭链节点目录
-|--|--|-- 127.0.0.1
-|--|--|--|-- node0 # 具体节点目录
-|--|--|--|--|-- log # 节点日志目录
-```
-
-**备注：** 当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志。
-
-例如，查看节点前置服务的日志，可参考：
-```shell
-# 假设当前目录为webase-deploy
-cd webase-front/log
-# vi打开日志查看，快捷键shift+G可跳转到文件末尾
-vi WeBASE-Front.log
-```
-
-如果出现错误日志，根据错误提示或本文档的[常见问题](#q&a)进行排查
 
 ## 附录
 
