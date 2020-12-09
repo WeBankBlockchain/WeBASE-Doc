@@ -345,7 +345,8 @@ tcp6       0      0 :::5002                 :::*                    LISTEN      
 $ netstat -anlp | grep 5001    
 ```
 输出如下
-```tcp6       0      0 :::5001                 :::*                    LISTEN      14049/java 
+```
+tcp6       0      0 :::5001                 :::*                    LISTEN      14049/java 
 ```
 
 - 检查webase-web端口(默认为5000)在nginx是否已监听
