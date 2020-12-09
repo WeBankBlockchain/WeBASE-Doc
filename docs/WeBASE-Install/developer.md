@@ -131,7 +131,7 @@ tcp6       0      0 :::5002                 :::*                    LISTEN      
     http://localhost:5002/WeBASE-Front 
     ```
 
-    ![](../../images/WeBASE/front-overview.png)
+![Front页面](../../images/WeBASE/front-overview.png)
 
 **注**：若服务启动后无异常，但仍然无法访问，可以检查服务器的网络安全策略：
 - **开放节点前置端口**：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
