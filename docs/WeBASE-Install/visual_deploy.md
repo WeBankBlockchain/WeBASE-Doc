@@ -135,8 +135,120 @@ user   ALL=(ALL) NOPASSWD : ALL
 具体搭建流程参见[**一键部署安装文档**](../WeBASE/install.html)。
 
 **注意：**
-- 配置[可视化部署配置文件](../WeBASE/install.html#visual-deploy-config)时，选择`visual-deploy.properties`进行配置
-- 选择部署方式时，选择 **可视化部署** 方式，即执行 `deploy.py` 脚本时，执行 `python deploy.py installWeBASE`
+- 配置可视化部署配置文件时，选择`visual-deploy.properties`进行配置
+- 选择部署方式时，选择 **可视化部署** 方式，即执行 `deploy.py` 脚本时，执行 `python3 deploy.py installWeBASE`
+
+修改 `visual-deploy.properties` 文件。
+<span id="visual-deploy-config"></span>
+
+
+```eval_rst
+.. important::
+    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
+```
+
+```shell
+# WeBASE子系统的最新版本(v1.1.0或以上版本)
+webase.web.version=v1.4.2
+webase.mgr.version=v1.4.2
+webase.sign.version=v1.4.2
+fisco.webase.docker.cdn.version=v1.4.2
+
+# 节点管理子系统mysql数据库配置
+mysql.ip=127.0.0.1
+mysql.port=3306
+mysql.user=dbUsername
+mysql.password=dbPassword
+mysql.database=webasenodemanager
+
+# 签名服务子系统mysql数据库配置
+sign.mysql.ip=localhost
+sign.mysql.port=3306
+sign.mysql.user=dbUsername
+sign.mysql.password=dbPassword
+sign.mysql.database=webasesign
+
+# WeBASE管理平台服务端口
+web.port=5000
+
+# 节点管理子系统服务端口
+mgr.port=5001
+
+# 签名服务子系统端口
+sign.port=5004
+
+# 是否使用国密（0: standard, 1: guomi）
+encrypt.type=0
+
+# WeBASE-Sign 对外提供服务的访问 IP 地址
+# 部署在其它主机的节点，需要使用此 IP 访问 WeBASE-Sign 服务
+# 不能是 127.0.0.1 或者 localhost
+sign.ip=
+
+# SSH 免密登录账号
+mgr.ssh.user=root
+# SSH 访问端口
+mgr.ssh.port=22
+# 部署节点服务的主机，存放链数据的目录
+mgr.ssh.rootDirOnHost=/opt/fisco
+```
+
+完成配置文件修改后，则执行部署：
+
+**备注：** 
+
+- 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
+- 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
+- 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
+- 不建议使用sudo执行脚本，例如`sudo python3 deploy.py installWeBASE`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
+
+
+```shell
+# 部署并启动可视化部署的所有服务
+python3 deploy.py installWeBASE
+```
+
+如果遇到docker必须使用sudo运行，报错`Docker....Permission Denied`，可以参考[常见问题-创建docker用户组](#docker_sudo)
+
+部署完成后可以看到`deploy has completed `的日志：
+
+```shell
+$ python3 deploy.py installAll
+...
+============================================================
+              _    _     ______  ___  _____ _____ 
+             | |  | |    | ___ \/ _ \/  ___|  ___|
+             | |  | | ___| |_/ / /_\ \ `--.| |__  
+             | |/\| |/ _ | ___ |  _  |`--. |  __| 
+             \  /\  |  __| |_/ | | | /\__/ | |___ 
+              \/  \/ \___\____/\_| |_\____/\____/  
+...
+...
+============================================================
+==============      deploy has completed     ==============
+============================================================
+==============    webase-web version  v1.4.2        ========
+==============    webase-node-mgr version  v1.4.2   ========
+==============    webase-sign version  v1.4.2       ========
+============================================================
+```
+
+
+* 服务部署后，需要对各服务进行启停操作，可以使用以下命令：
+
+```shell
+# 可视化部署
+部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE
+停止可视化部署的所有服务  python3 deploy.py stopWeBASE
+启动可视化部署的所有服务  python3 deploy.py startWeBASE
+# 各子服务启停
+启动WeBASE-Node-Manager: python3 deploy.py startManager
+停止WeBASE-Node-Manager: python3 deploy.py stopManager
+启动WeBASE-Web:          python3 deploy.py startWeb
+停止WeBASE-Web:          python3 deploy.py stopWeb
+启动WeBASE-Sign:        python3 deploy.py startSign
+停止WeBASE-Sign:        python3 deploy.py stopSign
+```
 
 #### 2. 手动部署依赖服务
 适合**多机部署**，企业级的情况使用。
@@ -270,7 +382,7 @@ http://{deployIP}:{webPort}
 - 变更节点类型，需要发送交易，请先在**私钥管理 中 添加私钥账号；**
 - 删除节点时，节点必须处于停止状态；
 
-
+<span id="q&a"></span>
 ### 常见问题
 
 <span id="install_docker" />
@@ -425,4 +537,22 @@ SSH 登录新主机，使用 `docker images -a |grep -i "fiscoorg/fisco-webase"`
     * `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件中 `rootDirOnHost` 配置目录下的 `deleted-tmp` 目录
     * 包含了**节点的所有文件**配置文件和节点数据文件
     * 文件名格式 `default_chain-YYYYMMDD_HHmmSS（删除时间）`：default_chain-20200722_102631
+
+
+<span id="docker_sudo"></span>
+
+#### docker必须使用sudo才能运行，但是sudo下系统环境变量失效
+
+答：可以在root用户下配置环境变量如JAVA_HOME等，或者通过下面操作，尝试创建docker用户组
+
+```
+# 创建docker用户组
+sudo groupadd docker
+# 将当前用户添加到docker用户组
+sudo usermod -aG docker $USER
+# 重启docker服务
+sudo systemctl restart docker
+# 切换或者退出当前账户，重新登入
+exit
+```
 
