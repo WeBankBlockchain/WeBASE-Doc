@@ -1448,7 +1448,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/1/web3/blockNumbe
+http://localhost:5002/WeBASE-Front/1/web3/blockNumber
 ```
 
 #### 响应参数
