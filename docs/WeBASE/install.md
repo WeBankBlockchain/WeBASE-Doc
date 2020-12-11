@@ -449,7 +449,7 @@ $ grep "ERROR" log/WeBASE-Front.log
 
 WeBASE管理平台：
 
-* 一键部署完成后，**打开浏览器访问**
+* 一键部署完成后，**打开浏览器（Chrome Safari或Firefox）访问**
 ```
 http://{deployIP}:{webPort}
 示例：http://localhost:5000
