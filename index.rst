@@ -19,6 +19,7 @@ WeBASE 技术文档
 .. toctree::
    :maxdepth: 3
    
+   docs/WeBASE/introduction.md
    docs/WeBASE/ChangeLOG.md
    docs/WeBASE-Install/index.md
    docs/WeBASE-Console-Suit/index.md
@@ -26,7 +27,6 @@ WeBASE 技术文档
    docs/WeBASE/quick-start.md
    docs/WeBASE/mirror.md
    docs/WeBASE/CONTRIBUTING.md
-   docs/WeBASE/introduction.md
 .. 
 
 
