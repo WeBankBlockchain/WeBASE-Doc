@@ -232,6 +232,8 @@ $ python3 deploy.py installAll
 
 * 服务部署后，需要对各服务进行启停操作，可以使用以下命令：
 
+*启动失败时，需要先停止服务`stopAll`才能重启，否则会报错端口已占用*
+
 ```shell
 # 一键部署
 部署并启动所有服务        python3 deploy.py installAll
