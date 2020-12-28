@@ -28,11 +28,11 @@
 
 推荐JDK8-JDK13版本，使用OracleJDK[安装指引](#jdk)：
 
+```
 java -version
 ```
-注意：不要用sudo执行脚本
 
-```
+*注意：不要用`sudo`执行安装脚本*
 
 
 #### 检查mysql
@@ -199,7 +199,7 @@ node.counts=nodeCounts
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
-- 不要用sudo执行脚本，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
+- **不要用sudo执行脚本**，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
 
 ```shell
 # 部署并启动所有服务
