@@ -89,8 +89,10 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 管理平台默认用户为`admin`，默认密码为`Abcd1234`（第一次登陆成功后会要求重置密码，请按照密码标准设置一个更加安全的密码）。
 
-**注：管理员密码丢失可以按照下面方式恢复：登录db插入一个新的管理员账号。具体SQL语句可以参考下面的示例（账号为test，密码为默认密码）：INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
-
+**注：管理员密码丢失可以按照下面方式恢复：登录db插入一个新的管理员账号。具体SQL语句可以参考下面的示例（账号为test，密码为默认密码）：
+  ```
+INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
+  ```
 
 ### 添加节点前置
 
