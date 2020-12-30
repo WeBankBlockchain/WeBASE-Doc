@@ -28,11 +28,11 @@
 
 推荐JDK8-JDK13版本，使用OracleJDK[安装指引](#jdk)：
 
+```
 java -version
 ```
-注意：不要用sudo执行脚本
 
-```
+*注意：不要用`sudo`执行安装脚本*
 
 
 #### 检查mysql
@@ -203,7 +203,7 @@ node.counts=nodeCounts
 - 部署脚本会拉取相关安装包进行部署，需保持网络畅通
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
-- 不要用sudo执行脚本，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
+- **不要用sudo执行脚本**，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
 
 ```shell
 # 部署并启动所有服务
@@ -396,6 +396,8 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 ```
 *备注：当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志*
 
+日志目录中包含`{XXX}.log`全量日志文件和`{XXX}-error.log`错误日志文件
+ - *通过日志定位错误问题时，可以结合`.log`全量日志和`-error.log`错误日志两种日志信息进行排查。*，如查询WeBASE-Front日志，则打开`WeBASE-Front-error.log`可以快速找到错误信息，根据错误查看`WeBASE-Front.log`的相关内容，可以看到错误日志前后的普通日志信息
 
 ##### 检查服务日志有无错误信息
 
