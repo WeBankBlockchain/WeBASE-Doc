@@ -113,10 +113,12 @@ cd webase-deploy
 
 ③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
 
-- 当配置"yes"时，需配置已有链的路径
+- 当配置"yes"时，需配置已有链的路径`fisco.dir`。路径下要存在sdk目录，当使用非国密链，或者使用国密链，但是sdk和节点使用非国密ssl连接时，sdk目录里存放非国密sdk证书（ca.crt、node.crt和node.key）；当使用国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 - 当配置"no"时，需配置节点fisco版本和节点安装个数，搭建的新链默认两个群组
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
+
+​    **注：使用国密版需要修改设置配置项`encrypt.type=1`。前置SDK与节点默认使用非国密SSL，如果需要使用国密SSL，需要修改设置配置项`encrypt.sslType=1`。**
 
 ④ 服务端口不能小于1024
 
@@ -177,7 +179,9 @@ if.exist.fisco=no
 
 # 使用已有链时需配置
 # 已有链的路径，start_all.sh脚本所在路径
-# 路径下要存在sdk目录，sdk里存放sdk证书（ca.crt、node.crt和node.key）
+# 路径下要存在sdk目录
+# 当使用非国密链，或者使用国密链，但是sdk和节点使用非国密ssl连接时，sdk目录里存放非国密sdk证书（ca.crt、node.crt和node.key）
+# 当使用国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
 # 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
@@ -688,7 +692,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 ======= FISCO-BCOS sdk dir:/data/app/nodes/127.0.0.1/sdk is not exist. please check! =======
 ```
 
-答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
+答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。如果是国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）。
 
 ### 7. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
