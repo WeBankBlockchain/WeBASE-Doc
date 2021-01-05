@@ -132,7 +132,22 @@ user   ALL=(ALL) NOPASSWD : ALL
 
 适合**同机部署**，快速体验WeBASE的情况使用
 
-具体搭建流程参见[**一键部署安装文档**](../WeBASE/install.html)。
+具体环境依赖参考[**一键部署-前提条件**](../WeBASE/install.html#id2)。
+
+**拉取部署脚本**
+
+获取部署安装包：
+```shell
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.2/webase-deploy.zip
+```
+解压安装包：
+```shell
+unzip webase-deploy.zip
+```
+进入目录：
+```shell
+cd webase-deploy
+```
 
 **注意：**
 - 配置可视化部署配置文件时，选择`visual-deploy.properties`进行配置
@@ -213,7 +228,7 @@ python3 deploy.py installWeBASE
 部署完成后可以看到`deploy has completed `的日志：
 
 ```shell
-$ python3 deploy.py installAll
+$ python3 deploy.py installWeBASE
 ...
 ============================================================
               _    _     ______  ___  _____ _____ 
