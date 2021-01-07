@@ -94,7 +94,7 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.3/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -124,10 +124,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.2
-webase.mgr.version=v1.4.2
-webase.sign.version=v1.4.2
-webase.front.version=v1.4.2
+webase.web.version=v1.4.3
+webase.mgr.version=v1.4.3
+webase.sign.version=v1.4.3
+webase.front.version=v1.4.3
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -223,10 +223,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.4.2        ========
-==============    webase-node-mgr version  v1.4.2   ========
-==============    webase-sign version  v1.4.2       ========
-==============    webase-front version  v1.4.2      ========
+==============    webase-web version  v1.4.3        ========
+==============    webase-node-mgr version  v1.4.3   ========
+==============    webase-sign version  v1.4.3       ========
+==============    webase-front version  v1.4.3      ========
 ============================================================
 ```
 

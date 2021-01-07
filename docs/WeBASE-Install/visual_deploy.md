@@ -149,10 +149,10 @@ user   ALL=(ALL) NOPASSWD : ALL
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.2
-webase.mgr.version=v1.4.2
-webase.sign.version=v1.4.2
-fisco.webase.docker.cdn.version=v1.4.2
+webase.web.version=v1.4.3
+webase.mgr.version=v1.4.3
+webase.sign.version=v1.4.3
+fisco.webase.docker.cdn.version=v1.4.3
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -189,8 +189,6 @@ sign.ip=
 mgr.ssh.user=root
 # SSH 访问端口
 mgr.ssh.port=22
-# 部署节点服务的主机，存放链数据的目录
-mgr.ssh.rootDirOnHost=/opt/fisco
 ```
 
 完成配置文件修改后，则执行部署：
@@ -227,9 +225,9 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy has completed     ==============
 ============================================================
-==============    webase-web version  v1.4.2        ========
-==============    webase-node-mgr version  v1.4.2   ========
-==============    webase-sign version  v1.4.2       ========
+==============    webase-web version  v1.4.3        ========
+==============    webase-node-mgr version  v1.4.3   ========
+==============    webase-sign version  v1.4.3       ========
 ============================================================
 ```
 
@@ -453,9 +451,9 @@ fiscoorg/fisco-webase   v2.7.0-gm  bf4a26d5d389  5 days ago   631MB
     ```Bash
     # 从 CDN 拉取镜像 tar 文件
     # 非国密
-    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.2/docker-fisco-webase.tar
+    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.3/docker-fisco-webase.tar
     # 国密
-    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.2/docker-fisco-webase-gm.tar
+    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.3/docker-fisco-webase-gm.tar
     
     # 解压镜像 tar 文件
     docker load -i docker-fisco-webase.tar
