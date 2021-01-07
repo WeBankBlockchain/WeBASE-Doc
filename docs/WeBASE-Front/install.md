@@ -101,6 +101,8 @@ cd conf
 
 （3）修改配置（根据实际情况修改）：
 
+*如果在企业部署中使用WeBASE-Front，必须配置下文中的`keyServer`*
+
 ```
 vi application.yml
 ```
