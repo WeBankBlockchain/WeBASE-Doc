@@ -1050,9 +1050,150 @@ http://localhost:5002/WeBASE-Front/contract/batch/1/test
 }
 ```
 
+### 1.19. 注册cns接口
 
+#### 接口描述
 
-## 2. 密钥接口
+> 注册cns
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/registerCns**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                |
+| -------- | ------------ | --------------- | -------- | ------------ | -------- | --------------------------------------- |
+| 1        | 所属群组     | groupId         | Integer  |              | 是       |                                         |
+| 2        | 合约名称     | contractName    | String   |              | 是       |                                         |
+| 3        | cns名称      | cnsName         | String   |              | 是       |                                         |
+| 4        | 合约地址     | contractAddress | String   |              | 是       |                                         |
+| 5        | 合约abi      | abiInfo         | List     |              | 是       | abi文件里面的内容，是一个JSONArray      |
+| 6        | cns版本      | version         | String   |              | 是       |                                         |
+| 7        | 是否保存     | saveEnabled     | bool     |              | 是       | 前置控制台调用时传true，其他调用传false |
+| 8        | 用户地址     | userAddress     | String   |              | 否       | saveEnabled为true时必填                 |
+| 9        | 合约路径     | contractPath    | String   |              | 否       | saveEnabled为true时必填                 |
+| 10       | 签名用户编号 | signUserId      | String   |              | 否       | saveEnabled为false时必填                |
+
+**2）数据格式**
+
+```
+{
+  "groupId": 1,
+  "contractName": "Hello",
+  "cnsName": "Hello",
+  "contractPath": "/",
+  "version": "v0.4",
+  "contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e",
+  "abiInfo": [{"cons tant":false,"inputs":[{"name":"n","type":"string","type0":null,"indexed":false}],"name":"set","outputs":[{"name":"","type":"string","type0":null,"indexed":false}],"type":"function","payable":false,"stateMutability":"nonpayable"},{"co nstant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string","type0":null,"indexed":false}],"type":"function","payable":false,"stateMutability":"view"},{"constant":false,"inputs":[{"name":"name","type":"string","type0":null,"indexed":false}],"name":"SetName","outputs":null,"type":"event","payable":false,"stateMutability":null}],
+  "signUserId": null,
+  "userAddress": "0x8c808ff5beee7b4cfb17f141f6237db93a668e46",
+  "saveEnabled": true
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+### 1.20. 获取cns信息
+
+#### 接口描述
+
+获取cns信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/findCns**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | --------------- | -------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId         | Integer  |              | 是       |          |
+| 2        | 合约路径 | contractPath    | String   |              | 是       |          |
+| 3        | 合约名称 | contractName    | String   |              | 是       |          |
+| 4        | 合约地址 | contractAddress | String   |              | 是       |          |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/findCns
+```
+
+```
+{
+  "groupId": 1,
+  "contractPath": "/",
+  "contractName": "Hello",
+  "contractAddress": "0xe46c1a681811ee78079b48a956ead6d9dd10bf6a"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+| 3        | 返回数据 | data            | List     | 否       |                       |
+| 3.1      | 群组编号 | groupId         | Integer  | 是       |                       |
+| 3.2      | 合约路径 | contractPath    | String   | 是       |                       |
+| 3.3      | 合约名   | contractName    | String   | 是       |                       |
+| 3.4      | cns名    | cnsName         | String   | 是       |                       |
+| 3.5      | cns版本  | version         | String   | 是       |                       |
+| 3.6      | 合约地址 | contractAddress | String   | 是       |                       |
+| 3.7      | 修改时间 | modifyTime      | String   | 是       |                       |
+| 3.8      | 创建时间 | createTime      | String   | 是       |                       |
+
+**2）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": 1,
+    "contractPath": "/",
+    "contractName": "Hello",
+    "cnsName": "Hello",
+    "version": "v0.4",
+    "contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e",
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
+### 2. 密钥接口
 
 ### 2.1. 获取公私钥接口
 
@@ -1448,7 +1589,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/1/web3/blockNumbe
+http://localhost:5002/WeBASE-Front/1/web3/blockNumber
 ```
 
 #### 响应参数
@@ -3387,14 +3528,6 @@ function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
 
-
-方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
-```
-function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
-function set(uint n,bool b) -> [1,true]
-function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-```
-
 *查看WeBASE-Front通过本地私钥（测试用户）交易处理接口（非WeBASE-Sign签名交易），可查看[其他接口-交易处理接口（本地签名）](#transNoSign)*
 
 #### 接口URL
@@ -3418,7 +3551,9 @@ HTTP POST
 | 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 8        | 合约版本       | version           | String      |         |   否       |  CNS中合约版本，该字段在v1.3.0+版本已弃用                             |
+| 8 | 是否使用cns调用 | useCns | bool | | 是 |  |
+| 9 | cns名称 | cnsName | String | | 否 | CNS名称，useCns为true时不能为空 |
+| 10 | cns版本 | version | String | | 否 | CNS版本，useCns为true时不能为空 |
 
 
 **2）数据格式**
@@ -3430,7 +3565,8 @@ HTTP POST
     "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
     "funcName":"set",
-    "funcParam":["test"]
+    "funcParam":["test"],
+    "useCns":false
 }
 ```
 
@@ -6212,8 +6348,10 @@ HTTP POST
 | 5        | 合约编译后生成的abi文件内容        | contractAbi     | List     |              | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
-| 8        | 合约版本       | version           | String      |         |   否       | CNS中合约版本，该字段在v1.3.0+版本已弃用                                          |
-| 9        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
+| 8        | 合约路径       | contractPath         | int      |         |   否       |                                                 |
+| 9 | 是否使用cns调用 | useCns | bool | | 是 |  |
+| 10 | cns名称 | cnsName | String | | 否 | CNS名称，useCns为true时不能为空 |
+| 11 | cns版本 | version | String | | 否 | CNS版本，useCns为true时不能为空 |
 
 **2）数据格式**
 
@@ -6221,7 +6359,7 @@ HTTP POST
 
 ```
 curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}], funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+"HelloWorld", "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}], funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1,"useCns": false}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
 ```
 
 传入合约abi:
@@ -6233,7 +6371,8 @@ curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
     "funcName":"set",
     "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "funcParam":["Hi,Welcome!"],
-    "groupId" :"1"
+    "groupId" :"1",
+    "useCns": false
 }
 ```
 
@@ -6901,6 +7040,8 @@ a、成功：
 | 201151  | Unsupported contract param type to encoded           |   不支持编码的合约参数类型 |
 | 201152  | Unsupported contract param type to decoded           |   不支持解码的合约参数类型 |
 | 201153  | unable to create instance of type, check input params           |  无法创建该合约参数类型的实例，请检查入参 |
+| 201154 | contract path is exists. | 合约路径已存在 |
+| 201155 | contract path cannot be empty | 合约路径不能为空 |
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
 | 201202  | permission denied, please check chain administrator permission           |    权限不足，请检查用户 |
@@ -6913,6 +7054,9 @@ a、成功：
 | 201218  | set node consensus type fail, check permission or node's group config file  |  节点类型（共识状态）修改失败，请检查权限或节点群组配置文件  |
 | 201221  | Contract version should only contains 'A-Z' or 'a-z' or '0-9' or dot mark  |    CNS合约版本号应只包含大小写字母、数字和"."      |
 | 201222  | version of contract is out of length |    合约版本号过长      |
+| 201223 | cns register fail | cns注册失败 |
+| 201224 | version not exists | 版本不存在 |
+| 201225 | cns name cannot be empty | cns名不能为空 |
 | 201226  | sql syntax error              |    sql语句错误      |
 | 201227  | crud sql fail              |    执行sql语句失败      |
 | 201228  | table not exists              |    操作的表格不存在      |
