@@ -692,3 +692,7 @@ vi /etc/sudoers
 # 替换 user 为 SSH 免密登录账号
 user   ALL=(ALL) NOPASSWD : ALL
 ```
+
+#### 页面中只能部署或添加“国密”节点或“非国密”节点
+
+答：需要修改Node-Manager的yml中`encryptType`配置项，0为非国密，1为国密
