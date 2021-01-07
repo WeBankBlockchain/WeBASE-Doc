@@ -47,6 +47,7 @@
 | 20200  |  节点 P2P 通信端口 |
 | 5000  |  WeBASE-Web 节点管理平台的访问端口 |
 
+<span id="visual_dependency"></span>
 ### 系统依赖
 
 配置系统依赖分成**宿主机**（Node-Manager所在主机）与**节点主机**（节点所在主机）两种：（宿主机与节点主机均为统一主机时，则需要两种配置）
@@ -58,6 +59,8 @@
 在宿主机安装Ansible、配置Ansible host列表，配置Ansible免密登录到节点主机的私钥与登录用户
 
 ##### 安装Ansible
+
+Ansible只需要安装在宿主机上，节点机无需安装
 
 CentOS
 ```
@@ -247,7 +250,7 @@ exit
 
 对于依赖服务的安装，有两种方式（ **一键部署** 和 **手动部署** ），选择其中一种部署方式即可
 
-### 1. 一键部署依赖服务
+#### 1. 一键部署依赖服务
 
 适合**同机部署**，快速体验WeBASE的情况使用
 
@@ -257,7 +260,7 @@ exit
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.3/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -278,11 +281,11 @@ cd webase-deploy
 
 ```eval_rst
 .. important::
-    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址（外网ip），供其他部署节点主机访问。
+    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
 ```
 
 ```shell
-# WeBASE子系统的最新版本(v1.4.0或以上版本)
+# WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.4.3
 webase.mgr.version=v1.4.3
 webase.sign.version=v1.4.3
@@ -312,7 +315,7 @@ mgr.port=5001
 sign.port=5004
 
 # 是否使用国密（0: standard, 1: guomi）
-# 此配置决定可视化部署部署国密链或非国密链
+# 此配置决定可视化部署搭建国密或非国密的链
 encrypt.type=0
 
 # WeBASE-Sign 对外提供服务的访问 IP 地址
@@ -320,10 +323,6 @@ encrypt.type=0
 # 不能是 127.0.0.1 或者 localhost
 sign.ip=
 
-# SSH 免密登录账号
-mgr.ssh.user=root
-# SSH 访问端口
-mgr.ssh.port=22
 ```
 
 完成配置文件修改后，则执行部署：
@@ -346,5 +345,343 @@ python3 deploy.py installWeBASE
 部署完成后可以看到`deploy has completed `的日志：
 
 ```shell
-$ python3 deploy.py installAll
+$ python3 deploy.py installWeBASE
 ...
+============================================================
+              _    _     ______  ___  _____ _____ 
+             | |  | |    | ___ \/ _ \/  ___|  ___|
+             | |  | | ___| |_/ / /_\ \ `--.| |__  
+             | |/\| |/ _ | ___ |  _  |`--. |  __| 
+             \  /\  |  __| |_/ | | | /\__/ | |___ 
+              \/  \/ \___\____/\_| |_\____/\____/  
+...
+...
+============================================================
+==============      deploy has completed     ==============
+============================================================
+==============    webase-web version  v1.4.3        ========
+==============    webase-node-mgr version  v1.4.3   ========
+==============    webase-sign version  v1.4.3       ========
+============================================================
+```
+
+
+* 服务部署后，需要对各服务进行启停操作，可以使用以下命令：
+
+```shell
+# 可视化部署
+部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE
+停止可视化部署的所有服务  python3 deploy.py stopWeBASE
+启动可视化部署的所有服务  python3 deploy.py startWeBASE
+# 各子服务启停
+启动WeBASE-Node-Manager: python3 deploy.py startManager
+停止WeBASE-Node-Manager: python3 deploy.py stopManager
+启动WeBASE-Web:          python3 deploy.py startWeb
+停止WeBASE-Web:          python3 deploy.py stopWeb
+启动WeBASE-Sign:        python3 deploy.py startSign
+停止WeBASE-Sign:        python3 deploy.py stopSign
+```
+
+#### 2. 手动部署依赖服务
+适合**多机部署**，企业级的情况使用。
+
+具体步骤如下：
+
+* 签名服务（WeBASE-Sign）
+    
+    * 参考 [签名服务 WeBASE-Sign 部署文档](../WeBASE-Sign/install.html#id1) 部署 WeBASE-Sign 服务。安装后需要将Sign的外网IP Port配置到下文的WeBASE-Node-Manager中
+
+* 管理平台（WeBASE-Web）
+
+    * 参考 [节点管理平台 WeBASE-Web 部署文档](../WeBASE-Web/install.html#id1) 部署 WeBASE-Web 服务
+    
+* 节点管理子系统（WeBASE-Node-Manager）
+    * 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务
+    * 修改 `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件示例如下：
+        * 配置文件中 `deployType` 为 `1`，启用节点管理服务的可视化部署功能
+        * 配置文件中 `webaseSignAddress` 的 IP 地址，其余主机需要通过此IP访问签名服务
+    
+```eval_rst
+.. important::
+    1. 注意 WeBASE-Node-Manager 服务的 `webaseSignAddress` 配置。WeBASE-Front 节点会使用此地址访问 WeBASE-Sign。所以不能使用 **`127.0.0.1`**，需要填写对外服务的 IP 地址。
+```
+
+```yaml
+ constant:
+  # 1.4.0 visual deploy
+  # 部署方式修改为 1，启用可视化部署
+  deployType: 1
+  
+  # WeBASE-Sign 服务的访问地址，前面部署的签名服务的访问地址
+  # 注意 IP 地址，WeBASE-Front 会使用此 IP 地址访问签名服务
+  # 不能使用 127.0.0.1 
+  webaseSignAddress: "xxx.xx.xx.xxx:5004"
+  
+```
+
+
+### 可视化部署节点
+在部署完依赖服务后，使用浏览器，访问节点管理平台页面：
+
+```Bash
+# 默认端口 5000
+http://{deployIP}:{webPort}
+```
+#### 部署节点
+
+可视化部署节点时，后台服务将通过在各个主机安装`FISCO BCOS + WeBASE-Front`的Docker镜像，结合免密远程操作进行自动化部署节点与节点前置的过程。
+
+因此，正如上文步骤中“拉取Docker镜像”的阐述，此操作依赖Docker服务，并默认从CDN拉取Docker镜像
+
+**提示：**
+- 在执行部署前，请在节点机中 **手动安装 Docker 服务** 防止由于Docker或网络原因导致部署失败
+
+    - 参考下文 **常见问题** 中的 [安装 Docker](#install_docker)
+    
+- 如果部署 **国密** 版本，**手动下载 TASSL 库**，防止由于 GitHub 不能访问，导致部署失败
+    - 参考下文**常见问题**中的 [手动下载 TASSL](#tassl)，手动下载 TASSL 下载库
+
+- 部署时，默认的链名为`default_chain`
+
+
+打开节点管理平台页面后，登录后修改密码，默认进入**节点管理页面**：
+
+todo 修改图片
+
+![visual-deploy-index](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+
+* 点击部署，打开部署界面：
+
+具体的配置说明，可以将鼠标移动到配置的**感叹号**上，展示相应的提示信息。
+![visual-deploy-ui](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-ui.png)
+
+**示例：**
+
+![visual-deploy-demo](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-demo.png)
+    
+* 点击开始部署后，在上面的链信息列，可以查看到当前链的状态已经部署链的进度；
+
+* 部署成功后，如图：
+    
+![visual-deploy-finish](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-finish.png)
+
+
+<span id="add_node"></span>
+#### 新增节点
+节点新增，也称作节点扩容，指在已有的区块链服务中，在新的主机上，添加一个新的节点。
+
+**提示：**
+- 新主机需要按照[系统依赖](#visual_dependency)中的**节点机**进行配置
+    - 参考上文的[ansible账号sudo配置](#ansible_sudo)
+    - 参考上文的[ansible host更新](#ansible_host)
+    - 参考上文的 [配置 SSH 免密登录](#ssh) 
+    - 参考下文**常见问题**中的 [安装 Docker](#install_docker)
+
+- 新增的节点，**默认处于游离状态**，需要手动**变更节点为共识或者观察节点**后，新节点开始从原有节点同步区块数据。
+
+**具体操作：**
+
+* 点击**新增节点**按钮；
+* 输入主机 IP 地址和节点相关端口；
+* 选择 Docker 拉取方式；
+* 点击确认，即可完成增加节点操作；
+
+![visual-deploy-add-node](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-add-node.png)
+
+#### 节点操作
+节点操作，包括：
+
+* 节点的启动，停止；
+* 节点的类型切换：共识，观察和游离；
+* 删除节点；
+
+![visual-deploy-node-change-type](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-node-change-type.png)
+
+点击节点列表的操作项操作即可。
+
+![visual-deploy-add-user-key](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-add-user-key.png)
+
+**提示**
+- 停止操作时，节点必须处于游离状态；
+- 变更节点为游离节点时，该群组内，至少有两个共识节点；
+- 变更节点类型，需要发送交易，请先在**私钥管理 中 添加私钥账号；**
+- 删除节点时，节点必须处于停止状态；
+
+<span id="q&a"></span>
+### 常见问题
+
+<span id="install_docker" />
+
+#### 安装 Docker
+在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
+
+```Bash
+# 该脚本是 Docker 官方提供的 Linux 自动安装脚本
+bash <(curl -s -L get.docker.com)
+```
+
+在 CentOS/RHEL 8.x 中，使用上面的自动脚本安装时，会出现下面的错误：
+
+```Bash
+Last metadata expiration check: 0:37:43 ago on Sat 22 Feb 2020 07:40:15 PM CST.
+Error: 
+ Problem: package docker-ce-3:19.03.6-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
+  - cannot install the best candidate for the job
+  - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.el7.x86_64 is excluded
+  - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages) 
+```
+
+要解决这个问题，需要手动安装 `containerd.io`后，在执行自动安装脚本
+
+```Bash
+# 下载最新的 containerd.io 安装包
+wget https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+
+# 手动安装 containerd.io 
+yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+
+```
+<span id="pull_image" />
+
+#### 拉取 Docker 镜像
+
+镜像版本：
+- v2.7.1
+
+**提示：**
+- 最近的镜像版本，请参考：[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)
+
+##### 拉取方式
+
+* 检查本地是否已有镜像
+    
+```Bash
+# 检查本地是否有镜像
+docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i v2.7.1
+    
+# 如果有如下输出，表示本地已有镜像；否则表示本地没有镜像
+fiscoorg/fisco-webase   v2.7.1     bf4a26d5d389  5 days ago   631MB
+```
+    
+* 如果本地没有镜像（如果本地有镜像，跳过）
+    
+    * 从 CDN 拉取镜像压缩包
+    
+    ```Bash
+    # 从 CDN 拉取镜像 tar 文件
+    # 非国密
+    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.3/docker-fisco-webase.tar
+    
+    # 解压镜像 tar 文件
+    docker load -i docker-fisco-webase.tar
+    ```
+    
+    * 从 Docker 官方拉取镜像
+
+   ```Bash
+   # 执行 Docker 拉取命令
+   docker pull fiscoorg/fisco-webase:v2.7.1 
+   ```
+   
+* 压缩镜像到 `tar` 文件
+    
+```Bash
+# 压缩镜像为 tar 文件
+docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:v2.7.1
+```
+    
+* 发送镜像 `tar` 文件到部署节点的主机
+
+```Bash
+# 发送镜像 tar 文件到需要部署节点的主机
+scp docker-fisco-webase.tar root@[IP]:/root/
+```
+    
+* 解压镜像 `tar` 文件
+    
+```Bash
+# 登录需要部署的主机，解压 tar 文件
+docker load -i docker-fisco-webase.tar
+```
+    
+* 节点主机检查是否已经成功拉取镜像
+    
+```Bash
+# 检查是否成功拉取镜像
+docker images -a |grep -i "fiscoorg/fisco-webase"
+    
+# 如果有如下输出，表示拉取成功
+fiscoorg/fisco-webase   v2.7.1  bf4a26d5d389  5 days ago   631MB
+```
+
+#### 手动下载 TASSL 
+
+FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署工具会自动从GitHub 下载，解压后放置于 `~/.fisco/tassl`，如果碰到下载失败，请尝试从[https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz](https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz) 下载并解压后，放置于 `~/.fisco/tassl`
+
+
+    
+#### 没有进入可视化部署界面
+在登录区块链管理平台后，没有进入可视化部署页面。此时，修改 WeBASE-Node-Manager 服务中的 `dist/conf/application.yml` 文件中的 `deployType` 的值是否为 `1` 后，重启 WeBASE-Node-Manager 服务即可。
+
+#### 新增节点时，提示请手动拉取 Docker 镜像错误
+
+SSH 登录新主机，使用 `docker images -a |grep -i "fiscoorg/fisco-webase"` 命令检查是否有镜像。
+
+* 如果存在，请参考上文： **常见问题** 中的 [拉取 Docker 镜像](#pull_image)
+
+* 如果**不**存在，请检查新主机中 SSH 账号的 `sudo` 免密配置。
+
+
+#### 部署失败以及区块链重置
+如果在部署区块链服务时，出现了部署失败的问题，可以使用重置功能，重置区块链服务，然后进行重新部署。
+
+如果要重置当前区块链，点击**重置**按钮，等待重置完成。
+
+执行重置操作，并 **不会真正物理删除节点的数据**，而是使用 `mv` 命令，将区块链的整个数据移动到临时目录。
+
+- WeBASE-Node-Manager 服务的临时目录
+    * `WeBASE-Node-Manager/dist/NODES_ROOT_TMP` 目录中存放了所有重置节点的节点配置文件
+    * **不包含**具体的节点数据文件
+    * 文件名格式 `default_chain-YYYYMMDD_HHmmSS（删除时间）`：default_chain-20200722_102631
+    
+- 节点主机中的临时目录
+    * `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件中 `rootDirOnHost` 配置目录下的 `deleted-tmp` 目录
+    * 包含了**节点的所有文件**配置文件和节点数据文件
+    * 文件名格式 `default_chain-YYYYMMDD_HHmmSS（删除时间）`：default_chain-20200722_102631
+
+
+<span id="docker_sudo"></span>
+
+#### docker必须使用sudo才能运行，但是sudo下系统环境变量失效
+
+答：可以在root用户下配置环境变量如JAVA_HOME等，或者通过下面操作，尝试创建docker用户组
+
+```
+# 创建docker用户组
+sudo groupadd docker
+# 将当前用户添加到docker用户组
+sudo usermod -aG docker $USER
+# 重启docker服务
+sudo systemctl restart docker
+# 切换或者退出当前账户，重新登入
+exit
+```
+
+<span id="sudo_config"></span>
+
+#### sudo账号免密配置
+**节点主机 sudo 账号免密配置方法**
+
+```Bash
+# 切换到 root 或者有权限账户
+vi /etc/sudoers
+
+# 添加下面一行并保存
+# 替换 user 为 SSH 免密登录账号
+user   ALL=(ALL) NOPASSWD : ALL
+```
