@@ -695,4 +695,6 @@ user   ALL=(ALL) NOPASSWD : ALL
 
 #### 页面中只能部署或添加“国密”节点或“非国密”节点
 
-答：需要修改Node-Manager的yml中`encryptType`配置项，0为非国密，1为国密
+答：需要修改Node-Manager的yml中`encryptType`配置项后重启即可（0为非国密，1为国密）。
+
+注：不支持修改已搭建链的类型，若需要修改，则需要重置链后重新进行可视化搭建。
