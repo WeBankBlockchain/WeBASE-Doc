@@ -1673,16 +1673,19 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 
 ***1）入参表***
 
-| 序号 | 输入参数        | 类型   | 可为空 | 备注                      |
-| ---- | --------------- | ------ | ------ | ------------------------- |
-| 1    | groupId         | Int    | 否     | 所属群组编号              |
-| 2    | user            | String | 否     | 私钥用户的地址            |
-| 3    | contractName    | String | 否     | 合约名称                  |
-| 4    | contractId      | Int    | 否     | 合约编号                  |
-| 5    | funcName        | String | 否     | 合约方法名                |
-| 6    | contractAddress | String | 是     | 合约地址                  |
-| 7    | funcParam       | List   | 是     | 合约方法入参              |
-| 8    | contractAbi     | List   | 否     | 合约abi/合约单个函数的abi |
+| 序号 | 输入参数        | 类型   | 可为空 | 备注                                |
+| ---- | --------------- | ------ | ------ | ----------------------------------- |
+| 1    | groupId         | Int    | 否     | 所属群组编号                        |
+| 2    | user            | String | 否     | 私钥用户的地址                      |
+| 3    | contractName    | String | 否     | 合约名称                            |
+| 4    | contractId      | Int    | 否     | 合约编号                            |
+| 5    | funcName        | String | 否     | 合约方法名                          |
+| 6    | contractAddress | String | 是     | 合约地址                            |
+| 7    | funcParam       | List   | 是     | 合约方法入参                        |
+| 8    | contractAbi     | List   | 否     | 合约abi/合约单个函数的abi           |
+| 9    | useCns          | bool   | 否     | 是否使用cns调用                     |
+| 10   | cnsName         | String | 是     | CNS名称，useCns为true时不能为空     |
+| 11   | version         | String | 是     | CNS合约版本，useCns为true时不能为空 |
 
 ***2）入参示例***
 
@@ -1699,7 +1702,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
     "funcParam":["gwes"],
     "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],
     "contractId":200002,
-    "contractAddress":"0x7bd586b045e3684dbcd5506cb175c5d771f38d13"
+    "contractAddress":"0x7bd586b045e3684dbcd5506cb175c5d771f38d13",
+    "useCns":false
 }
 ```
 
@@ -2408,7 +2412,138 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/batch/path
 }
 ```
 
+### 5.15. 注册cns接口
 
+#### 接口描述
+
+> 注册cns
+
+#### 传输协议规范
+
+- 网络传输协议：使用HTTP协议
+- 请求地址：**/contract/registerCns**
+- 请求方式：POST
+- 请求头：Content-type: application/json
+- 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                           |
+| -------- | -------- | --------------- | -------- | ------------ | -------- | ---------------------------------- |
+| 1        | 所属群组 | groupId         | Integer  |              | 是       |                                    |
+| 2        | 合约路径 | contractPath    | String   |              | 是       |                                    |
+| 3        | 合约名称 | contractName    | String   |              | 是       |                                    |
+| 4        | cns名称  | cnsName         | String   |              | 是       |                                    |
+| 5        | 合约地址 | contractAddress | String   |              | 是       |                                    |
+| 6        | 合约abi  | contractAbi     | List     |              | 是       | abi文件里面的内容，是一个JSONArray |
+| 7        | cns版本  | version         | String   |              | 是       |                                    |
+| 8        | 用户地址 | userAddress     | String   |              | 是       |                                    |
+
+**2）数据格式**
+
+```
+{
+  "groupId": 1,
+  "contractPath": "/",
+  "contractName": "Hello",
+  "cnsName": "Hello",
+  "version": "v0.4",
+  "contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e",
+  "contractAbi": [{"cons tant":false,"inputs":[{"name":"n","type":"string","type0":null,"indexed":false}],"name":"set","outputs":[{"name":"","type":"string","type0":null,"indexed":false}],"type":"function","payable":false,"stateMutability":"nonpayable"},{"co nstant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string","type0":null,"indexed":false}],"type":"function","payable":false,"stateMutability":"view"},{"constant":false,"inputs":[{"name":"name","type":"string","type0":null,"indexed":false}],"name":"SetName","outputs":null,"type":"event","payable":false,"stateMutability":null}],
+  "userAddress": "0x8c808ff5beee7b4cfb17f141f6237db93a668e46"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code       | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message    | String   | 是       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+### 5.16. 获取cns信息
+
+#### 接口描述
+
+> 获取cns信息
+
+#### 传输协议规范
+
+- 网络传输协议：使用HTTP协议
+- 请求地址：**/contract/findCns**
+- 请求方式：POST
+- 请求头：Content-type: application/json
+- 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId      | Integer  |              | 是       |          |
+| 2        | 合约路径 | contractPath | String   |              | 是       |          |
+| 3        | 合约名称 | contractName | String   |              | 是       |          |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCns
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+| 3        | 返回数据 | data            | Object   | 否       |                       |
+| 3.1      | 编号     | id              | Integer  | 是       |                       |
+| 3.2      | 群组编号 | groupId         | Integer  | 是       |                       |
+| 3.3      | 合约路径 | contractPath    | String   | 是       |                       |
+| 3.4      | 合约名称 | contractName    | String   | 是       |                       |
+| 3.5      | cns名称  | cnsName         | String   | 是       |                       |
+| 3.6      | cns版本  | version         | String   | 是       |                       |
+| 3.7      | 合约地址 | contractAddress | String   | 是       |                       |
+| 3.8      | 修改时间 | modifyTime      | String   | 是       |                       |
+| 3.9      | 创建时间 | createTime      | String   | 是       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+	  {
+		"id": 1,
+		"groupId": 1,
+        "contractPath": "/",
+		"contractName": "Hello",
+		"cnsName": "Hello",
+		"version": "v0.4",
+		"contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e",
+		"createTime": "2020-12-30 16:32:28",
+		"modifyTime": "2020-12-30 16:32:28"
+	  }
+	]
+}
+```
 
 ## 6 服务器监控相关
 
@@ -9175,6 +9310,9 @@ v1.4.0
 | 202466 | Please pull the Docker image manually in host /ip/    |  主机/ip/请手动拉取 Docker 镜像          |
 | 202467 | Max 4 nodes on a single host    |  单个主机最多部署 4 个节点          |
 | 202468 | Cannot install node on WeBASE-Node-Manager host.    |  无法在WeBASE-Node-Manager主机上安装节点。          |
+| 202501 | contract path is exists. | 合约路径已存在 |
+| 202502 | version cannot be empty. | 版本不能为空 |
+| 202503 | cns name cannot be empty. | cns名不能为空 |
 | 302000 | user not logged in    |  未登录的用户          |
 | 302001 | Access denied    |  没有权限          |
 | 402000 | param exception    |  参数错误          |
