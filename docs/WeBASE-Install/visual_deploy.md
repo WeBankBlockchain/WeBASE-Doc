@@ -36,6 +36,7 @@
 | CentOS / RHEL | CentOS 7.3 |
 | Ubuntu | Xenial 16.04 |
 
+<span id="port_open"></span>
 
 #### 端口开放
 
@@ -43,11 +44,15 @@
 
 |  端口 | 描述  |
 |------|------|
-| 22  | SSH 登录端口  |
-| 20200  |  节点 P2P 通信端口 |
+| 22  | 默认SSH登录端口  |
 | 5000  |  WeBASE-Web 节点管理平台的访问端口 |
 
+默认使用22作为SSH登录端口，若需要修改，在[Ansible hosts配置](#ansible_host)中可指定SSH端口
+
+**注**，需要确保**链节点所在主机**之间用到的端口对彼此开放，如**P2P端口**(默认30300)、**节点前置的端口**(默认5002)。
+
 <span id="visual_dependency"></span>
+
 ### 系统依赖
 
 配置系统依赖分成**宿主机**（Node-Manager所在主机）与**节点主机**（节点所在主机）两种：（宿主机与节点主机均为统一主机时，则需要两种配置）
@@ -87,7 +92,7 @@ ansible 2.9.15
   python version = 2.7.17 (default, Sep 30 2020, 13:38:04) [GCC 7.5.0]
 ```
 
-<span id="ansible_host"></span>
+<span id="ansible_sudo"></span>
 
 ##### 配置Ansible sudo账号
 
@@ -101,6 +106,8 @@ vi /etc/ansible/ansible.cfg
 ···
 sudo_user=root
 ``` 
+
+*注，可视化部署中需要使用sudo权限执行`script/deploy`目录中的host_init_shell进行依赖安装，host_docker_check在docker未启动情况下启动docker服务*
 
 <span id="ssh"></span>
 
@@ -164,8 +171,8 @@ vi /etc/ansible/hosts
 
 ···
 [webase]
-127.0.0.1 ansible_ssh_private_key_file=/root/.ssh/id_rsa  ansible_ssh_user=root
-{your_host_ip} ansible_ssh_private_key_file={id_rsa_path}  ansible_ssh_user={ssh_user}
+127.0.0.1 ansible_ssh_private_key_file=/root/.ssh/id_rsa  ansible_ssh_user=root  ansible_ssh_port=22
+{your_host_ip} ansible_ssh_private_key_file={ssh_private_key}  ansible_ssh_user={ssh_user}  ansible_ssh_port={ssh_port}
 ```
 
 ##### 测试Ansible
@@ -209,7 +216,7 @@ ansible webase -m ping
 
 #### 配置docker用户组
 
-若执行Docker命令，如`docker ps`必须使用sudo才能运行
+若执行Docker命令，如`docker ps`必须使用sudo才能运行，则需要按如下修改：
 
 ```
 # 创建docker用户组
@@ -449,7 +456,7 @@ http://{deployIP}:{webPort}
 todo 修改图片
 - 添加主机，选中免密登录的ssh账号拥有权限的目录
 - 在节点管理中，选择镜像版本、选择镜像拉取模式（推荐CDN拉取）
-- 节点管理中添加节点信息，选中节点部署的节点主机。添加节点信息时，将检测节点端口是否被占用，所选主机内存与CPU是否满足当前的节点数目。如果检测通过，则出现“检查通过”，否则出现“检测失败”，根据下方状态信息检查主机状态
+- 节点管理中添加节点信息，选中节点部署的节点主机。添加节点信息时，将检测节点端口是否被占用（**需要确保节点主机之间的P2P端口与前置端口互通**），所选主机内存与CPU是否满足当前的节点数目。如果检测通过，则出现“检查通过”，否则出现“检测失败”，根据下方状态信息检查主机状态
 - 点击**初始化**按钮，进行节点Docker镜像的初始化，直到节点列表中出现“初始化成功”或“初始化失败”（该步骤预计一分钟内完成，若网速过慢，导致初始化超过一分钟后将提示“请求超时”，刷新等待直到初始化状态更新即可），根据下方状态信息检查主机状态
 - 如初始化完成，则出现部署按钮，点击**部署**将节点配置发送到各个节点机，并自动启动节点。
 - 若提示部署失败，可以点击“重置”按钮，重置当前链，稍后再试。
@@ -698,3 +705,8 @@ user   ALL=(ALL) NOPASSWD : ALL
 答：需要修改Node-Manager的yml中`encryptType`配置项后重启即可（0为非国密，1为国密）。
 
 注：不支持修改已搭建链的类型，若需要修改，则需要重置链后重新进行可视化搭建。
+
+
+#### 可视化部署如何升级节点版本
+
+答：可视化部署暂未支持节点升级。
