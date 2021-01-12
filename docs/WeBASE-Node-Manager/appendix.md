@@ -124,6 +124,14 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 答：此处为正常提示，表示后台没有可访问的节点前置。通过WeBASE-Web连接Node-Manager后台服务后，添加节点前置即可。
 
 
+##### 节点管理服务忘记密码
+
+登录到WeBASE-Node-Manager中配置的Mysql数据库（默认为webasenodemanager）后，在`tb_account_info`中插入一个的管理员账号`test`，密码`Abcd1234`
+
+```
+INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
+```
+
 
 ### 3. 配置文件解析
 
@@ -177,7 +185,6 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | constant.rootDirOnHost | /opt/fisco |  部署区块链服务的节点主机存放节点配置文件和数据的目录 |
 | constant.sshDefaultUser | root |  SSH 免密登录的账号 |
 | constant.sshDefaultPort | 22 |  SSH 服务的端口，默认 22 |
-
 | sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 | executor |   |  异步拉取区块、刷新群组状态、监控群组数据的线程池配置  |
 | executor.corePoolSize | 3 |  异步任务的核心线程数  |
