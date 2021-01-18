@@ -111,6 +111,8 @@ cd webase-deploy
 
 ② 修改配置文件（`vi common.properties`），没有变化的可以不修改；
 
+- *若使用可视化部署，则忽略下文，将修改`visual-deploy.properties`，并进行可视化部署依赖服务的一键安装，具体请参考[可视化部署-一键安装依赖服务](../WeBASE-Install/visual_deploy.html#visual-deploy-oneclick)*
+
 ③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
 
 - 当配置"yes"时，需配置已有链的路径`fisco.dir`。路径下要存在sdk目录，当使用非国密链，或者使用国密链，但是sdk和节点使用非国密ssl连接时，sdk目录里存放非国密sdk证书（ca.crt、node.crt和node.key）；当使用国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
