@@ -7,13 +7,9 @@
 然后通过 WeBASE 管理平台（WeBASE-Web）的界面在填入的主机中部署节点（FISCO-BCOS 2.5.0+）和节点前置子系统（WeBASE-Front 1.4.0+）。
 
 
-## 环境准备
+## 系统环境
 
-在进行可视化部署之前，请按照部署要求，准备相应的部署环境。
-
-### 系统环境
-
-#### 硬件配置
+### 硬件配置
 使用可视化部署搭建一个 **至少2 节点** 的区块链服务，WeBASE(WeBASE-Node-Manager + WeBASE-Sign)至少配置 **1G** 空闲内存（用于节点管理服务与签名服务）、每个节点+前置的镜像配置至少2G空闲内存（CPU内核数与节点数正相关，如4核可配置4节点），在进行可视化部署时会进行主机的可用内存检测。
 
 **注意：**
@@ -28,7 +24,7 @@
 | 内存 |  4 G | 8 G |
 | 磁盘 |  100G + | 500G + |
 
-#### 操作系统
+### 操作系统
 部署节点的主机操作系统需要满足安装 Docker 服务的最低版本要求；
 
 | 操作系统 | 最低要求 |
@@ -38,7 +34,7 @@
 
 <span id="port_open"></span>
 
-#### 端口开放
+### 端口开放
 
 主机防火墙需要开放以下端口。如果是云服务器，需要配置**云服务器安全组策略**中的端口开放规则。
 
@@ -53,7 +49,7 @@
 
 <span id="visual_dependency"></span>
 
-### 系统依赖
+## 系统依赖
 
 配置系统依赖分成**宿主机**（Node-Manager所在主机）与**节点主机**（节点所在主机）两种：
 - 宿主机：安装WeBASE-Node-Manager的主机，配置Ansible、配置Ansible免密登录节点机
@@ -61,14 +57,14 @@
 
 *注：宿主机也需要安装节点时，则需要同时配置*
 
-#### 配置Ansible
+### 配置Ansible
 
 Ansible配置包括以下三步：
 - 宿主机安装Ansible
 - 配置Ansible host列表
 - 配置Ansible免密登录到节点主机
 
-##### 安装Ansible
+#### 安装Ansible
 
 注：Ansible只需要安装在宿主机上，节点主机无需安装Ansible，只需配置宿主机到节点主机的免密登录
 
@@ -99,7 +95,7 @@ ansible 2.9.15
 
 <span id="ansible_key_check"></span>
 
-##### 配置Ansible host_key_checking
+#### 配置Ansible host_key_checking
 
 配置Ansible的Host key checking，将自动确认连接到远程主机
 ```
@@ -112,7 +108,7 @@ host_key_checking = False
 
 <span id="ssh"></span>
 
-##### 免密登录配置
+#### 免密登录配置
 
 在节点管理台进行可视化部署时，节点管理（WeBASE-Node-Manager）服务会为每个节点生成相应的配置文件，然后通过Ansible的免密登录远程操作，在远程的节点主机中执行系统命令来操作节点。
 
@@ -122,7 +118,7 @@ host_key_checking = False
 .. important::
     1. 配置 WeBASE-Node-Manager 主机到其它节点主机的 SSH 免密登录；
     2. 配置Ansible的hosts列表并配置免密登录私钥路径
-    3. 注意免密登录的账号sudo权限，否则会造成创建文件目录，Docker 命令执行失败；
+    3. 注意免密登录的账号sudo权限，否则会造成Docker服务启动、检测端口占用失败；
     4. 如果免密账号为非 `root` 账号，保证账号有 `sudo` **免密** 权限，即使用 `sudo` 执行命令时，不需要输入密码；参考[sudo账号配置](#sudo_config)
 ```
 
@@ -130,10 +126,13 @@ host_key_checking = False
 
 ```eval_rst
 .. important::
-    1. 如果 WeBASE-Node-Manager 已经生成过秘钥对，建议使用命令 `ssh-keygen -t rsa -m PEM` 重新生成；
+    1. 如果 WeBASE-Node-Manager 所在主机已经生成过秘钥对，建议使用命令 `ssh-keygen -t rsa -m PEM` 重新生成；
 ```
 
-* 使用 SSH 登录 WeBASE-Node-Manager 所在主机：`ssh root@[IP]`
+* 登录 WeBASE-Node-Manager 所在主机：
+	```Bash
+	ssh root@[IP]
+	```
 
 * 检查 `~/.ssh/` 目录是否已经存在 `id_rsa` 私钥文件和对应的 `id_rsa.pub` 公钥文件。如果存在，备份现有私钥对
     
@@ -143,10 +142,14 @@ host_key_checking = False
     ```
 
 * 执行命令 `ssh-keygen -t rsa -m PEM`，然后直接两次回车即可生成（提示输入密码时，直接回车）
+	```
+	ssh-keygen -t rsa -m PEM
+	```
 
 * 将公钥文件上传到需要免密登录的主机（替换 [IP] 为节点主机的 IP 地址），然后输入远程主机的登录密码
-
-    ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]
+	```
+	ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub root@[IP]
+	```
 
 * 输出结果出现 `Number of key(s) added: 1` 结果，表示免密登录配置成功
 
@@ -155,20 +158,21 @@ host_key_checking = False
     ```
     ssh -o StrictHostKeyChecking=no root@[IP]
     ```
+
+*切记妥善保管免密登录的私钥，否则当前主机与ssh免密登录的主机均会被控制*
     
 此处配置宿主机免密登录到节点主机完成后，记住宿主机中`id_rsa`私钥的路径，下一步进行Ansible中hosts的免密配置
 
-*切记妥善保管免密登录的私钥，否则当前主机与ssh免密登录的主机均会被控制*
 
 <span id="ansible_host"></span>
 
 **配置Ansible Hosts与免密登录**
 
-在`/etc/ansible/hosts`文件中添加IP组webase，并添加节点机的IP、免密登录账号和私钥路径、SSH端口。
+在`/etc/ansible/hosts`文件中添加IP组`webase`，并配置节点主机的IP、免密登录账号和私钥路径、SSH端口。
 
-若后续需要添加新的主机，需要将新主机的IP添加到此处
+**注**：若后续需要添加新的主机，需要将新主机的IP添加到此处
 
-添加以下内容，此处假设远端IP为127.0.0.1，免密登录账户为root，且`id_rsa`免密私钥的路径为`/root/.ssh/id_rsa`，ssh端口使用22端口
+添加以下内容：此处假设节点机IP为127.0.0.1，免密登录账户为root，且`id_rsa`免密私钥的路径为`/root/.ssh/id_rsa`，ssh端口使用22端口
 ```
 vi /etc/ansible/hosts
 
@@ -178,7 +182,7 @@ vi /etc/ansible/hosts
 {your_host_ip} ansible_ssh_private_key_file={ssh_private_key}  ansible_ssh_user={ssh_user}  ansible_ssh_port={ssh_port}
 ```
 
-##### 测试Ansible
+#### 测试Ansible
 
 执行ansible的ping命令，检测添加到hosts中各个节点主机IP能否被访问。
 - 若出现`IP | SUCCESS`的则代表该IP可连通
@@ -205,12 +209,13 @@ xxx.xxx.xxx.xxx | SUCCESS => {
 
 ```
 
-#### 配置Docker
+### 配置Docker
 
 配置Docker需要**在每个安装节点的主机上都要执行**，否则将导致节点远程安装失败。包括以下几个步骤
 - 安装Docker并启动Docker
 - 配置Docker用户组
 
+#### 安装Docker
 安装 Docker 服务，请参考下文**常见问题**中：[Docker 安装](#install_docker)
 
 如果使用云服务器，推荐使用**操作系统镜像模板**的方式创建主机，即在一台主机上安装 Docker 后，然后使用安装 Docker 服务后的操作系统做一个镜像模板。通过这个模板镜像来创建主机，这样新创建的主机就自带了 Docker 服务。
@@ -221,6 +226,12 @@ xxx.xxx.xxx.xxx | SUCCESS => {
 
 若执行Docker命令，如`docker ps`必须使用sudo才能运行，则需要按如下修改：
 
+检测`docker ps`命令
+```
+docker ps
+```
+
+若`docker ps`命令报错Permission Denied则需要配置docker用户组：
 ```
 # 创建docker用户组
 sudo groupadd docker
@@ -236,9 +247,9 @@ exit
 
 <span id="pull_image"></span>
 
-##### 拉取 Docker 镜像
+#### 拉取 Docker 镜像
 
-**在v1.4.3版本后，可视化部署支持自动从CDN拉取镜像，无需手动拉取**
+在v1.4.3版本后，可视化部署支持**自动从CDN拉取镜像，无需手动拉取**
 
 若需要手动配置镜像，可以通过以下方法配置
 
@@ -247,10 +258,11 @@ exit
 - 通过WeBASE CDN服务下载镜像压缩包后，通过`docker load`命令安装镜像
 - 直接通过`docker pull`命令直接从DockerHub拉取镜像
 
+
 ```eval_rst
 .. important::
-可视化自动部署功能支持自动从 Docker 仓库拉取镜像，仅通过页面点击就可以完成Docker拉取。但是由于DockerHub的网络原因，拉取镜像的速度较慢，耗时过长，容易导致拉取镜像失败，页面的可视化部署操作失败。
-因此，为了保证部署过程顺利和快速完成，可在执行可视化部署前，手动拉取镜像，并将镜像上传到每个需要部署节点服务的主机。
+	可视化自动部署功能支持自动从 Docker 仓库拉取镜像，仅通过页面点击就可以完成Docker拉取。但是由于DockerHub的网络原因，拉取镜像的速度较慢，耗时过长，容易导致拉取镜像失败，页面的可视化部署操作失败。
+	因此，为了保证部署过程顺利和快速完成，可在执行可视化部署前，手动拉取镜像，并将镜像上传到每个需要部署节点服务的主机。
 ```
 
 拉取镜像的方法，请参考下文**常见问题**中：[拉取 Docker 镜像](#pull_image)
@@ -404,7 +416,8 @@ $ python3 deploy.py installWeBASE
 
 * 签名服务（WeBASE-Sign）
     
-    * 参考 [签名服务 WeBASE-Sign 部署文档](../WeBASE-Sign/install.html#id1) 部署 WeBASE-Sign 服务。安装后需要将Sign的外网IP Port配置到下文的WeBASE-Node-Manager中
+    * 参考 [签名服务 WeBASE-Sign 部署文档](../WeBASE-Sign/install.html#id1) 部署 WeBASE-Sign 服务。
+	* 安装后需要将Sign的外网IP Port配置到下文的WeBASE-Node-Manager中
 
 * 管理平台（WeBASE-Web）
 
@@ -443,23 +456,24 @@ $ python3 deploy.py installWeBASE
 http://{deployIP}:{webPort}
 ```
 
+具体部署步骤，请参考下文进行自检与部署操作
 <span id="deploy_chain"></span>
 
 #### 部署节点
 
 可视化部署节点时，后台服务将通过在各个主机安装`FISCO BCOS + WeBASE-Front`的Docker镜像，结合免密远程操作进行自动化部署节点与节点前置的过程。
 
-因此，正如上文步骤中“拉取Docker镜像”的阐述，此操作依赖Docker服务，并默认从CDN拉取Docker镜像
+因此，正如上文步骤中“拉取Docker镜像”的阐述，此操作依赖Docker服务，并默认从CDN自动加载节点与前置的Docker镜像
 
 **提示：**
-- 在执行部署前，请在节点机中 **手动安装 Docker 服务** 防止由于Docker或网络原因导致节点部署失败
+- 在执行部署前，请提前在节点机中 **手动安装 Docker 服务** 
 
     - 参考下文 **常见问题** 中的 [安装 Docker](#install_docker)
     
 - 如果部署 **国密** 版本，**手动下载 TASSL 库**，防止由于 GitHub 不能访问，导致部署失败
     - 参考下文**常见问题**中的 [手动下载 TASSL](#tassl)，手动下载 TASSL 下载库
     - 国密链需要将WeBASE-Node-Manager yml中的`encryptType`配置修改为1
-- 部署时，默认的链名为`default_chain`
+- 部署时，默认的链名为`default_chain`，默认机构名为`agency1`
 - 部署节点的所有操作将使用[Ansible免密](#ansible_host)的免密SSH账号进行操作，请确保Ansible自检通过
 
 
@@ -471,38 +485,57 @@ http://{deployIP}:{webPort}
 
 **（一）添加主机**：
 
-添加主机时，需要填入主机的IP与部署节点的文件目录。（添加主机时，将检查该IP是否可以连通，并检查该主机的路径是否可访问，并自动创建该目录）
+添加主机时，需要填入主机的**IP**与部署节点的**目录**
+- 添加主机时，将检查该IP是否可以连通，同时将检查该主机的路径是否可访问，并自动创建该目录
+
 ![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
 
 **（二）添加节点信息**：
-节点管理，先点击“新增节点”添加节点信息，可以在一台主机中指定节点数量。添加多个主机的节点，需要确保各个主机间的P2P端口和前置端口互通
+节点管理，先点击“新增节点”添加节点信息
+- 可以在一台主机中指定**节点数量**
+- 添加多个主机的节点，需要确保填入的各个主机间的**P2P端口和前置端口互通**，否则将影响节点正常运行
+
 ![visual-deploy-node-add](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
 
-添加节点信息后，将自动检查主机的可用内存是否支持当前的节点数、检测机器的端口是否已被占用、检测Docker服务是否已启用，并通过hello-world的镜像进行测试
-- 检测端口将自动通过`telnet`命令检查，若telnet未连接则视为端口未占用。**注**，若telnet由于节点主机防火墙导致无法连上，则无法准确获取端口是否被占用。
+**（三）检查主机**：
+
+添加节点信息后，将自动检查一下依赖
+- 检查主机的**可用内存**是否支持当前的节点数
+- 检测机器的**端口**是否已被占用
+- 检测**Docker服务**是否已启用，并通过hello-world的镜像进行测试
+
 ![visual-deploy-node-info](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
 
 检测失败的信息将在**操作日志**中显示，只有添加的节点信息全部通过才可以开始下一步“初始化”
-- 如果提示内存不足(Free memory too low)，则可以释放主机内存，一节点至少 1G 可用内存
-- 如果提示端口被占用，可根据提示的端口号，在主机释放端口或删除填入的节点信息，修改后重新填入
+- 如果提示内存不足(Free memory too low)，则可以释放主机内存，一节点至少 **1G** 可用内存(Free memory)
+- 如果提示端口被占用，可根据提示的端口号，在主机**释放端口**或删除填入的节点信息，修改后重新填入
 - 如果提示Docker相关错误，需要到主机确认已[安装Docker并已启用](#install_docker)，是否已[配置Docker组](#docker_sudo)，确保能拉取并运行hello-world镜像
 
 ![visual-deploy-node-check-fail](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
 
-**（三）初始化主机**：
+**（四）初始化主机**：
 
-点击“初始化”按钮后，将自动检测并安装相关依赖、并根据选中的镜像加载方式进行加载（若手动加载则检测镜像已存在于节点主机）。初始化成功后才能进行下一步的部署操作，“初始化”按钮将变成“部署”按钮
-- 该步骤预计在一到两分钟内完成，若网速过慢建议通过手动加载方式加载镜像
-- 若初始化失败，则需要结合**操作日志**排查上述步骤的错误原因，排除主机中存在的问题后，重新执行检测，初始化操作
+点击“初始化”按钮后，将自动完成以下操作，初始化成功后才能进行下一步的部署操作，“初始化”按钮将变成“部署”按钮
+- 检测并安装相关系统依赖，如`netstat`, `wget`等
+- 加载节点镜像：根据选中的镜像加载方式进行加载（若手动加载则检测镜像已存在于节点主机）
+
 ![visual-deploy-host-init](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
 
-**（四）部署**：
+- 初始化操作预计在**两到三分钟**内完成，若网速过慢建议通过手动加载方式加载镜像
+若初始化失败，则需要结合**操作日志**排查上述步骤的错误原因，排除主机中存在的问题后，**重新执行检测，初始化**操作
 
-点击“部署”按钮后，将检查添加的主机状态都为“初始化成功”，并根据填入的节点信息自动生成链配置与证书，通过SCP传输到各个主机的指定目录下
-- 生成配置与传输配置完成后，将进入链初始化目录，届时将自动启动各个主机的节点，此过程预计需要几分钟时间，知道链状态为“运行”
-- 若出现启动失败，需要结合报错提示，检查节点主机状态正常，各个节点主机间端口互通等等，排查后，点击“删除链”重置当前的链后，重新尝试建链
+**（五）部署**：
+
+添加的主机状态都为“初始化成功”后，点击“**部署**”按钮后，将自动完成以下操作
+- 根据填入的节点信息自动生成链配置与证书
+- 通过SCP将节点与前置的配置文件、证书传输到各个主机的指定目录下
+- 生成配置与传输配置完成后，将进入链初始化目录，届时将自动启动各个主机的节点，此过程**预计需要几分钟时间**，直到链状态为“**运行*”
 - 如始终无法部署，可以结合Node-Manager日志排查错误原因，并在github上提交配上日志的issue
+
 ![visual-deploy-config](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+
+若出现启动失败，需要结合报错提示，检查节点主机状态正常，各个节点主机间端口互通等等，排查后，点击“删除链”重置当前的链后，重新尝试建链
+
 
 <span id="add_node"></span>
 
@@ -724,7 +757,7 @@ vi /etc/sudoers
 user   ALL=(ALL) NOPASSWD : ALL
 ```
 
-*注，可视化部署中需要使用sudo权限执行`script/deploy`目录中的host_init_shell进行依赖安装，host_docker_check在docker未启动情况下启动docker服务*
+*注，可视化部署中需要使用sudo权限执行`script/deploy`目录中的host_init_shell进行依赖安装，host_docker_check在docker未启动情况下启动docker服务，host_check_port通过sudo netstat检查端口占用情况*
 
 #### 页面中只能部署或添加“国密”节点或“非国密”节点
 
