@@ -449,7 +449,7 @@ $ python3 deploy.py installWeBASE
 ```
 
 
-### 可视化部署节点
+## 可视化部署节点
 在部署完依赖服务后，使用浏览器，访问节点管理平台页面：
 
 ```Bash
@@ -618,7 +618,7 @@ http://{deployIP}:{webPort}
 **提示**
 
 <span id="q&a"></span>
-### 常见问题
+## 常见问题
 
 <span id="install_docker" />
 
