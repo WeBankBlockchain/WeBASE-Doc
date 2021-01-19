@@ -6,6 +6,7 @@
 
 然后通过 WeBASE 管理平台（WeBASE-Web）的界面在填入的主机中部署节点（FISCO-BCOS 2.5.0+）和节点前置子系统（WeBASE-Front 1.4.0+）。
 
+<span id="system_require"></span>
 
 ## 系统环境
 
@@ -442,7 +443,7 @@ $ python3 deploy.py installWeBASE
   
   # WeBASE-Sign 服务的访问地址，前面部署的签名服务的访问地址
   # 注意 IP 地址，WeBASE-Front 会使用此 IP 地址访问签名服务
-  # 不能使用 127.0.0.1 
+  # 因此，在可视化部署中，此处不能使用 127.0.0.1或localhost
   webaseSignAddress: "xxx.xx.xx.xxx:5004"
   
 ```
@@ -485,41 +486,50 @@ http://{deployIP}:{webPort}
 
 **（一）添加主机**：
 
+![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/add_host_index.png)
+
 添加主机时，需要填入主机的**IP**与部署节点的**目录**
 - 添加主机时，将检查该IP是否可以连通，同时将检查该主机的路径是否可访问，并自动创建该目录
 
-![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/add_host.png)
 
 **（二）添加节点信息**：
+
+![visual-deploy-node-add](../../images/WeBASE-Console-Suit/visual-deploy/add_deploy_node.png)
+
 节点管理，先点击“新增节点”添加节点信息
 - 可以在一台主机中指定**节点数量**
 - 添加多个主机的节点，需要确保填入的各个主机间的**P2P端口和前置端口互通**，否则将影响节点正常运行
 
-![visual-deploy-node-add](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+![visual-deploy-node-info](../../images/WeBASE-Console-Suit/visual-deploy/deploy_node_info.png)
 
 **（三）检查主机**：
+
+![visual-deploy-start-check](../../images/WeBASE-Console-Suit/visual-deploy/host_check_start.png)
 
 添加节点信息后，将自动检查一下依赖
 - 检查主机的**可用内存**是否支持当前的节点数
 - 检测机器的**端口**是否已被占用
 - 检测**Docker服务**是否已启用，并通过hello-world的镜像进行测试
 
-![visual-deploy-node-info](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+![visual-deploy-host-check](../../images/WeBASE-Console-Suit/visual-deploy/host_check_suc.png)
 
 检测失败的信息将在**操作日志**中显示，只有添加的节点信息全部通过才可以开始下一步“初始化”
 - 如果提示内存不足(Free memory too low)，则可以释放主机内存，一节点至少 **1G** 可用内存(Free memory)
 - 如果提示端口被占用，可根据提示的端口号，在主机**释放端口**或删除填入的节点信息，修改后重新填入
 - 如果提示Docker相关错误，需要到主机确认已[安装Docker并已启用](#install_docker)，是否已[配置Docker组](#docker_sudo)，确保能拉取并运行hello-world镜像
 
-![visual-deploy-node-check-fail](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+![visual-deploy-host-check-fail](../../images/WeBASE-Console-Suit/visual-deploy/node_check_fail.png)
+
+排除错误原因后，可以点击“检测”按钮，再次检测
 
 **（四）初始化主机**：
 
-点击“初始化”按钮后，将自动完成以下操作，初始化成功后才能进行下一步的部署操作，“初始化”按钮将变成“部署”按钮
+点击“初始化”按钮进行主机初始化，将自动完成以下操作，初始化成功后才能进行下一步的部署操作，“初始化”按钮将变成“部署”按钮
 - 检测并安装相关系统依赖，如`netstat`, `wget`等
 - 加载节点镜像：根据选中的镜像加载方式进行加载（若手动加载则检测镜像已存在于节点主机）
 
-![visual-deploy-host-init](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+![visual-deploy-host-init](../../images/WeBASE-Console-Suit/visual-deploy/host_init.png)
 
 - 初始化操作预计在**两到三分钟**内完成，若网速过慢建议通过手动加载方式加载镜像
 若初始化失败，则需要结合**操作日志**排查上述步骤的错误原因，排除主机中存在的问题后，**重新执行检测，初始化**操作
@@ -529,13 +539,17 @@ http://{deployIP}:{webPort}
 添加的主机状态都为“初始化成功”后，点击“**部署**”按钮后，将自动完成以下操作
 - 根据填入的节点信息自动生成链配置与证书
 - 通过SCP将节点与前置的配置文件、证书传输到各个主机的指定目录下
-- 生成配置与传输配置完成后，将进入链初始化目录，届时将自动启动各个主机的节点，此过程**预计需要几分钟时间**，直到链状态为“**运行*”
-- 如始终无法部署，可以结合Node-Manager日志排查错误原因，并在github上提交配上日志的issue
 
-![visual-deploy-config](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-index.png)
+![visual-deploy-config-start](../../images/WeBASE-Console-Suit/visual-deploy/host_start_deploy.png)
+
+- 生成配置与传输配置完成后，将自动进入链初始化页面，届时将自动启动各个主机的节点，此过程**预计需要几分钟时间**，直到链状态为“**运行*”
+
+![visual-deploy-config-ing](../../images/WeBASE-Console-Suit/visual-deploy/chain_deploying.png)
 
 若出现启动失败，需要结合报错提示，检查节点主机状态正常，各个节点主机间端口互通等等，排查后，点击“删除链”重置当前的链后，重新尝试建链
+- 如始终无法部署，可以结合Node-Manager日志排查错误原因，并在github上提交配上日志的issue
 
+![visual-deploy-delete-chain](../../images/WeBASE-Console-Suit/visual-deploy/chain_delete.png)
 
 <span id="add_node"></span>
 
@@ -552,31 +566,56 @@ http://{deployIP}:{webPort}
 
 **具体操作：**
 
-* 点击**新增节点**按钮；
-* 选择 Docker 拉取方式；
-* 输入主机 IP 地址和节点相关端口；
-* 依次执行同[部署链](#deploy_chain)相同的检测、初始化、部署三个步骤
+* 点击**新增节点**按钮
+* 选择 Docker 拉取方式
 
-![visual-deploy-add-node](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-add-node.png)
+![visual-deploy-add-node-index](../../images/WeBASE-Console-Suit/visual-deploy/add_node_index.png)
+
+点击“新建节点”添加主机信息后，与部署链时相似的操作
+- 选择“新增节点”，选择主机与节点的端口、节点数量等；
+- **注**，若需要添加新的主机，则按文档的[环境要求](#system_require)准备新的主机，并到“主机管理”添加主机
+- 依次执行同[部署链](#deploy_chain)相同的检测、初始化、部署三个步骤即可
+
+![visual-deploy-add-node](../../images/WeBASE-Console-Suit/visual-deploy/add_node.png)
+
+点击“部署”后将生成并传输新的节点的配置文件到目标主机，同时新增节点比部署链会多出以下操作
+- 自动在链的其他节点中**添加新节点的P2P连接配置**
+- 配置完成后，将自动启动新节点并自动重启链的其他节点，此过程大概需要几分钟
+- 若新节点启动失败，将新节点删除并重新尝试添加即可
+
+![visual-deploy-add-node-restart](../../images/WeBASE-Console-Suit/visual-deploy/add_node_restart.png)
+
+重启完成后，需要创建私钥或使用已有私钥，将新节点**设为共识节点**或观察节点
+
+![visual-deploy-add-node-removed](../../images/WeBASE-Console-Suit/visual-deploy/add_node_remove_node.png)
 
 #### 节点操作
-节点操作，包括：
+节点操作，包括：节点的启停、节点共识类型切换、删除节点
 
-* 节点的启动，停止；
-* 节点的类型切换：共识，观察和游离；
-* 删除节点；
 
-![visual-deploy-node-change-type](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-node-change-type.png)
+* 节点的类型切换：共识，观察和游离
+    - 在可视化部署中，变更节点为游离节点时，该群组内，至少仍有两个共识节点
+    - 变更节点类型，需要发送交易，请先在**私钥管理 中 添加私钥账号；**
 
-点击节点列表的操作项操作即可。
+修改节点为共识节点
+
+![visual-deploy-add-node-sealer](../../images/WeBASE-Console-Suit/visual-deploy/add_node_set_sealer.png)
+
+添加私钥：
 
 ![visual-deploy-add-user-key](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-add-user-key.png)
 
+* 节点的启动，停止
+    - 若节点的docker容器被意外删除，通过页面点击“启动”即可完成节点重启
+    - 停止操作时，节点必须处于游离状态
+    - 每次操作大约需要30秒
+* 删除节点
+    - 将节点设置为游离节点后，即可删除节点，删除后，链将会移除被删节点的P2P配置，并重启链
+    - 删除节点时，节点必须处于停止状态
+
+![visual-deploy-add-node-stopped](../../images/WeBASE-Console-Suit/visual-deploy/node_stopped.png)
+
 **提示**
-- 停止操作时，节点必须处于游离状态；
-- 变更节点为游离节点时，该群组内，至少有两个共识节点；
-- 变更节点类型，需要发送交易，请先在**私钥管理 中 添加私钥账号；**
-- 删除节点时，节点必须处于停止状态；
 
 <span id="q&a"></span>
 ### 常见问题
@@ -713,7 +752,7 @@ SSH 登录新主机，使用 `docker images -a |grep -i "fiscoorg/fisco-webase"`
 
 如果要重置当前区块链，点击**重置**按钮，等待重置完成。
 
-执行重置操作，并 **不会真正物理删除节点的数据**，而是使用 `mv` 命令，将区块链的整个数据移动到临时目录。
+执行重置操作，并 **不会真正物理删除节点的数据**（但会删除WeBASE数据库中链相关数据），而是使用 `mv` 命令，将区块链的整个数据移动到临时目录。
 
 - WeBASE-Node-Manager 服务的临时目录
     * `WeBASE-Node-Manager/dist/NODES_ROOT_TMP` 目录中存放了所有重置节点的节点配置文件
@@ -773,6 +812,18 @@ user   ALL=(ALL) NOPASSWD : ALL
 #### 节点主机检测报错可用内存不足(free memory)
 
 答：每个“节点+节点前置”至少需要1G的可用内存，建议增大主机的机器内存，或释放更多的可用内存(Free memory)。
+
+**在root用户下**执行以下操作可以释放available内存转为free内存
+```
+sync; echo 1 > /proc/sys/vm/drop_caches
+sync; echo 2 > /proc/sys/vm/drop_caches
+sync; echo 3 > /proc/sys/vm/drop_caches
+```
+> sync 命令运行 sync 子例程。如果必须停止系统，则运行sync 命令以确保文件系统的完整性。sync 命令将所有未写的系统缓冲区写到磁盘中，包含已修改的 i-node、已延迟的块 I/O 和读写映射文件
+> To free pagecache
+> use echo 1 > /proc/sys/vm/drop_caches; to free dentries and inodes
+> use echo 2 > /proc/sys/vm/drop_caches; to free pagecache, dentries and inodes
+> use echo 3 > /proc/sys/vm/drop_caches.
 
 #### 如何进行节点部署的离线安装
 
