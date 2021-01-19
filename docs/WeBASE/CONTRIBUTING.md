@@ -41,7 +41,7 @@ vim XXX
 ## Commit修改
 
 ```
-git commit -m "一个伟大改进"
+git commit -am "一个伟大改进"
 ```
 
 ## 将改动 Push 到 GitHub
