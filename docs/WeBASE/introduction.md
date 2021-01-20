@@ -44,7 +44,10 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 [WeBASE-Sign仓库](https://github.com/WeBankFinTech/WeBASE-Sign) 托管用户私钥，提供云端签名。
 
 - **链管理服务子系统** 
-[WeBASE-Sign仓库](https://github.com/WeBankFinTech/WeBASE-Sign) 托管用户私钥，提供云端签名。
+[WeBASE-Chain-Manager仓库](https://github.com/WeBankFinTech/WeBASE-Chain-Manager) 支持管理多条链和动态群组管理功能，支持国密链、非国密链。
+
+- **数据统计服务子系统** 
+[WeBASE-Stat仓库](https://github.com/WeBankFinTech/WeBASE-Stat) 以前置为基础，拉取CPU、内存、IO、群组大小、群组gas、群组网络流量的数据，记录数据库。
 
 - **数据导出代码生成工具**
 [WeBASE-Codegen-Monkey仓库](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey) 代码生成工具，通过配置可以生成数据导出的核心代码。
