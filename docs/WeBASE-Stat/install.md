@@ -4,9 +4,9 @@
 
 | 序号 | 软件                |
 | ---- | ------------------- |
-| 1    | FISCO-BCOS bsn |
-| 2    | WeBASE-Front bsn |
-| 3    | MySQL5.6或以上版本  |
+| 1    | FISCO-BCOS 2.7+|
+| 2    | WeBASE-Front 1.4.0+|
+| 3    | MySQL5.6或以上版本 1.4.0+|
 | 4    | Java8或以上版本     |
 
 
