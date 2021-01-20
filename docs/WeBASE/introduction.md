@@ -43,6 +43,9 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 - **私钥托管和签名服务** 
 [WeBASE-Sign仓库](https://github.com/WeBankFinTech/WeBASE-Sign) 托管用户私钥，提供云端签名。
 
+- **链管理服务子系统** 
+[WeBASE-Sign仓库](https://github.com/WeBankFinTech/WeBASE-Sign) 托管用户私钥，提供云端签名。
+
 - **数据导出代码生成工具**
 [WeBASE-Codegen-Monkey仓库](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey) 代码生成工具，通过配置可以生成数据导出的核心代码。
 
