@@ -4,9 +4,9 @@
 
 | 序号 | 软件                |
 | ---- | ------------------- |
-| 1    | FISCO-BCOS |
-| 2    | WeBASE-Front |
-| 3 | WeBASE-Sign bsn |
+| 1    | FISCO-BCOS 2.7+|
+| 2    | WeBASE-Front 1.4.0+|
+| 3 | WeBASE-Sign 1.4.0+|
 | 4    | MySQL5.6或以上版本  |
 | 5    | Java8或以上版本     |
 
