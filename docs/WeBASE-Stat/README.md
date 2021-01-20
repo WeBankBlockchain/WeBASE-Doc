@@ -21,5 +21,3 @@
 
 希望在您的参与下，WeBASE会越来越好！
 
-## 社区
-联系我们：webase@webank.com
