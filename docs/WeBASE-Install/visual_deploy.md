@@ -252,12 +252,12 @@ exit
 
 在v1.4.3版本后，可视化部署支持**自动从CDN拉取镜像，无需手动拉取**
 
-若需要手动配置镜像，可以通过以下方法配置
+若需要**手动配置镜像**，可以通过以下方法配置
 
 可视化部署需要使用`FISCO BCOS + WeBASE-Front`组成的节点与前置Docker镜像，并提供拉取Docker镜像的三种方式（**推荐通过CDN加速服务拉取**）：
-- 通过可视化部署自动从CDN拉取镜像压缩包并加载镜像（**推荐**），需要确保wget命令能正常使用
-- 通过WeBASE CDN服务下载镜像压缩包后，通过`docker load`命令安装镜像
-- 直接通过`docker pull`命令直接从DockerHub拉取镜像
+- 通过可视化部署页面，自动从CDN拉取镜像压缩包并加载镜像（**推荐**），需要确保wget命令能正常使用
+- 在节点主机上手动通过WeBASE CDN服务下载镜像压缩包后，通过`docker load`命令安装镜像
+- 在节点主机上手动通过`docker pull`命令直接从DockerHub拉取镜像
 
 
 ```eval_rst
@@ -450,6 +450,7 @@ $ python3 deploy.py installWeBASE
 
 
 ## 可视化部署节点
+
 在部署完依赖服务后，使用浏览器，访问节点管理平台页面：
 
 ```Bash
@@ -601,7 +602,7 @@ http://{deployIP}:{webPort}
 
 ![visual-deploy-add-node-sealer](../../images/WeBASE-Console-Suit/visual-deploy/add_node_set_sealer.png)
 
-添加私钥：
+若需要添加私钥：
 
 ![visual-deploy-add-user-key](../../images/WeBASE-Console-Suit/visual-deploy/visual-deploy-add-user-key.png)
 
@@ -614,8 +615,6 @@ http://{deployIP}:{webPort}
     - 删除节点时，节点必须处于停止状态
 
 ![visual-deploy-add-node-stopped](../../images/WeBASE-Console-Suit/visual-deploy/node_stopped.png)
-
-**提示**
 
 <span id="q&a"></span>
 ## 常见问题
@@ -827,5 +826,5 @@ sync; echo 3 > /proc/sys/vm/drop_caches
 
 #### 如何进行节点部署的离线安装
 
-答：相关依赖都安装好之后，需要手动load节点的Docker镜像，并手动安装`docker run hello-world`所需的hello-world的docker镜像。
+答：参考环境依赖，将相关依赖都安装好之后，部署时选择手动拉取节点的Docker镜像，并在节点主机手动配置镜像，并安装`docker run hello-world`所需的hello-world的docker镜像用于主机检测。
 

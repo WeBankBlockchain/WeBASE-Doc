@@ -47,7 +47,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述                                       |
-| 3    |             | Object        |        | 节点信息对象                               |
+| 3    | data        | Object        |        | 节点信息对象                               |
 | 3.1  | frontId     | int           | 否     | 前置编号                        |
 | 3.2  | frontIp     | string        | 否     | 前置ip                                    |
 | 3.3  | frontPort   | int           | 否     | 前置端口                                   |
@@ -4942,7 +4942,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述                                       |
-| 3    |             | Object        |        | 节点信息对象                               |
+| 3    | data        | Object        |        | 节点信息对象                               |
 | 3.1  | nodeId      | int           | 否     | 节点编号                                   |
 | 3.2  | nodeName    | string        | 否     | 节点名称                                   |
 | 3.3  | groupId     | int           | 否     | 所属群组编号                               |

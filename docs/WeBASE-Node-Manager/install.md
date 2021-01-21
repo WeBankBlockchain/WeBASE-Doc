@@ -81,7 +81,7 @@ cd  dist/script
 
 ```eval_rst
 .. important::
-	如果使用国密版，应进入dist/script/gm目录，对/gm目录下的webase-gm.sh进行下文的操作，并在最后运行webase-gm.sh
+	如果使用国密版，应进入dist/script/gm目录，对/gm目录下的webase-gm.sh进行下文的操作（即`sed`操作`/gm/webase-gm.sh`），并在最后运行webase-gm.sh
 ```
 
 修改数据库连接信息：
