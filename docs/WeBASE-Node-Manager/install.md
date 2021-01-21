@@ -122,7 +122,10 @@ bash webase.sh 127.0.0.1 3306
 修改数据库密码：sed -i "s/defaultPassword/${your_db_password}/g" conf/application.yml
 ```
 
-**备注**：如果使用国密版本，则将application.yml中`sdk-encryptType`由`0`改为`1`
+**备注**：
+- 如果使用国密版本，则将application.yml中`sdk-encryptType`由`0`改为`1`
+- 如果使用可视化部署，则将application.yml中`constant-deployType`由`0`改为`1`，并设置`constant-webaseSignAddress`为当前的webase-sign路径。具体使用方法可以参考[可视化部署-手动部署](../WeBASE-Install/visual_deploy.html#visual-deploy-manual)
+
 
 ### 6.2 服务启停
 在dist目录下执行：
