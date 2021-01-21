@@ -12,9 +12,9 @@
 
 
 ## 2. 注意事项
-*  Java推荐使用[OpenJDK](https://openjdk.java.net/ )，建议从OpenJDK网站自行下载（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）[下载地址](https://jdk.java.net/java-se-ri/11) [安装指南](https://openjdk.java.net/install/index.html)
-*  安装说明可以参考 [安装示例](./appendix.md#1-安装示例)
-*  在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./appendix.md#2-常见问题)
+*  Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，[JDK配置指引](./appendix.html#jdk)
+*  安装mysql可以参考 [mysql安装示例](./appendix.md#mysql)
+*  在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./appendix.md#q&a)
 *  安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
 
 
@@ -90,7 +90,7 @@ bash webase.sh 127.0.0.1 3306
 例如：cp conf_template conf -r
 ```
 
-（2）修改服务配置，完整配置项说明请查看 [配置说明](./appendix.md#3-applicationyml配置项说明)
+（2）修改服务配置，完整配置项说明请查看 [配置说明](./appendix.md#application-yml)
 ```shell
 修改服务端口：sed -i "s/5005/${your_server_port}/g" conf/application.yml
 修改数据库IP：sed -i "s/127.0.0.1/${your_db_ip}/g" conf/application.yml
