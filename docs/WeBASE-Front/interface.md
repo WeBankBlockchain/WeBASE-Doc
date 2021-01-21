@@ -2135,7 +2135,7 @@ http://localhost:5002/WeBASE-Front/1/web3/transaction-total
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
 | 1        | 总交易数 | txSum | int      |             | 是        |                      |
-| 2        | 快高 | blockNumber  | int   |              | 是       |          |
+| 2        | 块高 | blockNumber  | int   |              | 是       |          |
 | 3        |  | blockNumberRaw  | String   |              | 是       |          |
 | 4        |  | txSumRaw  | String   |              | 是       |          |
 
@@ -2357,7 +2357,7 @@ http://localhost:5002/WeBASE-Front/1/web3/consensusStatus
 
 #### 接口描述
 
-> 返回节点的快高、pbftview及状态。（查看nodeHeartBeat
+> 返回节点的块高、pbftview及状态。（查看nodeHeartBeat）
 
 #### 接口URL
 
@@ -2972,7 +2972,7 @@ b、失败：
 
 启动群组、停止群组、移除群组、恢复群组、查询群组状态等操作
 
-创建群组后，需要对群组内每个节点分别调用`start`来启动群组，群组才是完全创建
+创建群组后，需要对群组内每个节点分别调用`start`来启动群组，群组才算完全创建
 
 #### 接口URL
 
@@ -3356,11 +3356,11 @@ localhost:5002/WeBASE-Front/chain?beginDate=2019-03-13T00:00:00&endDate=2019-03-
 | 1.1.1     | metricType       | String          | 否   | 测量类型：blockHeight（块高）、pbftView（pbft视图）、pendingCount（待处理交易数量） |
 | 1.1.2     | data             | Object          | 否   |                                                              |
 | 1.1.2.1   | lineDataList     | Object          | 否   | 指定时间的数据                                               |
-| 1.1.2.1.1 | timestampList    | List\<String\>  | 否   | 时间戳列表                                                   |
-| 1.1.2.1.2 | valueList        | List\<Integer\> | 否   | 值列表                                                       |
+| 1.1.2.1.1 | timestampList    | List<String>  | 否   | 时间戳列表                                                   |
+| 1.1.2.1.2 | valueList        | List<Integer> | 否   | 值列表                                                       |
 | 1.1.2.2   | contrastDataList | Object          | 否   | 比对时间的数据                                               |
-| 1.1.2.2.1 | timestampList    | List\<String\>  | 否   | 时间戳列表                                                   |
-| 1.1.2.2.2 | valueList        | List\<Integer\> | 否   | 值列表                                                       |
+| 1.1.2.2.1 | timestampList    | List<String>  | 否   | 时间戳列表                                                   |
+| 1.1.2.2.2 | valueList        | List<Integer> | 否   | 值列表                                                       |
 
 ***2）出参示例***
 
