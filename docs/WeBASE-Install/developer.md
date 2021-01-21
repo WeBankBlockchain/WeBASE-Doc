@@ -114,7 +114,7 @@ tcp6       0      0 :::5002                 :::*                    LISTEN      
 
 日志中若出现报错信息，可根据信息提示判断服务是否异常，也可以参考并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查
 
-- 如果节点进程**已启用**且端口**已监听**，可调过本章节
+- 如果节点进程**已启用**且端口**已监听**，可跳过本章节
 - 如果节点前置异常，如检查不到进程或端口监听，则需要`webase-front/log`中查看日志的错误信息
 - 如果检查步骤出现检查不到进程或端口监听等异常，或者前置服务无法访问，可以按以下顺序逐步检查日志：
   - 检查`webase-front/log`中查看节点前置日志的错误信息，如果无错误，且日志最后出现`application run success`字样则代表运行成功
@@ -136,7 +136,7 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 2020-12-09 15:47:25.383 [main] INFO  Application() - main run success...
 ```
 
-启动失败或无法使用时，欢迎到WeBASE-Front[提交Issue](https://github.com/WeBankFinTech/WeBASE-Front/issues)或到技术社区共同探讨
+启动失败或无法使用时，欢迎到WeBASE-Front提交[Issue](https://github.com/WeBankFinTech/WeBASE-Front/issues)或到技术社区共同探讨
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 
