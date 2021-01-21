@@ -2474,34 +2474,44 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/batch/path
 }
 ```
 
-### 5.16. 获取cns信息
+### 5.16. 根据合约地址获取cns信息
 
 #### 接口描述
 
-> 获取cns信息
+> 根据合约地址获取该合约地址最新的cns信息
 
 #### 传输协议规范
 
 - 网络传输协议：使用HTTP协议
+
 - 请求地址：**/contract/findCns**
+
 - 请求方式：POST
-- 请求头：Content-type: application/json
+
+  请求头：Content-type: application/json
+
 - 返回格式：JSON
 
 #### 请求参数
 
 **1）参数表**
 
-| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
-| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
-| 1        | 所属群组 | groupId      | Integer  |              | 是       |          |
-| 2        | 合约路径 | contractPath | String   |              | 是       |          |
-| 3        | 合约名称 | contractName | String   |              | 是       |          |
+| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | --------------- | -------- | ------------ | -------- | -------- |
+| 1        | 所属群组 | groupId         | Integer  |              | 是       |          |
+| 2        | 合约地址 | contractAddress | String   |              | 是       |          |
 
 **2）数据格式** 
 
 ```
 http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCns
+```
+
+```
+{
+    "groupId": 1,
+    "contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e"
+}
 ```
 
 #### 响应参数
@@ -2529,8 +2539,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCns
 {
     "code": 0,
     "message": "success",
-    "data": [
-	  {
+    "data": {
 		"id": 1,
 		"groupId": 1,
         "contractPath": "/",
@@ -2541,7 +2550,97 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCns
 		"createTime": "2020-12-30 16:32:28",
 		"modifyTime": "2020-12-30 16:32:28"
 	  }
-	]
+}
+```
+
+### 5.17. 获取本地cns信息列表
+
+#### 接口描述
+
+> 获取本地cns信息列表
+
+#### 传输协议规范
+
+- 网络传输协议：使用HTTP协议
+
+- 请求地址：**/contract/findCnsList**
+
+- 请求方式：POST
+
+  请求头：Content-type: application/json
+
+- 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ---------- | --------------- | -------- | ------------ | -------- | -------- |
+| 1        | 所属群组   | groupId         | Integer  |              | 是       |          |
+| 2        | 每页记录数 | pageSize        | Integer  |              | 是       |          |
+| 3        | 当前页码   | pageNumber      | Integer  |              | 是       |          |
+| 4        | cns名称    | cnsName         | String   |              | 否       |          |
+| 5        | cns版本    | version         | String   |              | 否       |          |
+| 6        | 合约地址   | contractAddress | String   |              | 否       |          |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCnsList
+```
+
+```
+{
+    "groupId": 1,
+    "pageSize": 1,
+    "pageNumber": 1
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | ------------ | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码       | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息     | message         | String   | 是       |                       |
+| 3        | 记录数       | totalCount      | Int      | 否       | 总记录数              |
+| 4        | 返回数据     | data            | List     | 否       |                       |
+| 4.1      | 返回信息实体 |                 | Object   | 否       |                       |
+| 4.1.1    | 编号         | id              | Integer  | 是       |                       |
+| 4.1.2    | 群组编号     | groupId         | Integer  | 是       |                       |
+| 4.1.3    | 合约路径     | contractPath    | String   | 是       |                       |
+| 4.1.4    | 合约名称     | contractName    | String   | 是       |                       |
+| 4.1.5    | cns名称      | cnsName         | String   | 是       |                       |
+| 4.1.6    | cns版本      | version         | String   | 是       |                       |
+| 4.1.7    | 合约地址     | contractAddress | String   | 是       |                       |
+| 4.1.8    | 合约Abi      | contractAbi     | String   | 是       |                       |
+| 4.1.9    | 修改时间     | modifyTime      | String   | 是       |                       |
+| 4.1.10   | 创建时间     | createTime      | String   | 是       |                       |
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+	  {
+		"id": 1,
+		"groupId": 1,
+        "contractPath": "/",
+		"contractName": "Hello",
+		"cnsName": "Hello",
+		"version": "v0.4",
+		"contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e",
+        "contractAbi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
+		"createTime": "2020-12-30 16:32:28",
+		"modifyTime": "2020-12-30 16:32:28"
+	  }
+	],
+    "totalCount": 1
 }
 ```
 
@@ -9313,6 +9412,7 @@ v1.4.0
 | 202501 | contract path is exists. | 合约路径已存在 |
 | 202502 | version cannot be empty. | 版本不能为空 |
 | 202503 | cns name cannot be empty. | cns名不能为空 |
+| 202504 | version already exists | 版本已存在 |
 | 302000 | user not logged in    |  未登录的用户          |
 | 302001 | Access denied    |  没有权限          |
 | 402000 | param exception    |  参数错误          |
