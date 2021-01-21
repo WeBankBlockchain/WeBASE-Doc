@@ -1116,11 +1116,11 @@ HTTP POST
 }
 ```
 
-### 1.20. 获取cns信息
+### 1.20. 根据合约地址获取cns信息
 
 #### 接口描述
 
-获取cns信息
+根据合约地址获取cns信息，返回改合约地址最新的cns信息
 
 #### 接口URL
 
@@ -1137,9 +1137,7 @@ HTTP POST
 | **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | --------------- | -------- | ------------ | -------- | -------- |
 | 1        | 所属群组 | groupId         | Integer  |              | 是       |          |
-| 2        | 合约路径 | contractPath    | String   |              | 是       |          |
-| 3        | 合约名称 | contractName    | String   |              | 是       |          |
-| 4        | 合约地址 | contractAddress | String   |              | 是       |          |
+| 2        | 合约地址 | contractAddress | String   |              | 是       |          |
 
 **2）数据格式** 
 
@@ -1150,8 +1148,6 @@ http://localhost:5002/WeBASE-Front/contract/findCns
 ```
 {
   "groupId": 1,
-  "contractPath": "/",
-  "contractName": "Hello",
   "contractAddress": "0xe46c1a681811ee78079b48a956ead6d9dd10bf6a"
 }
 ```
@@ -1171,8 +1167,9 @@ http://localhost:5002/WeBASE-Front/contract/findCns
 | 3.4      | cns名    | cnsName         | String   | 是       |                       |
 | 3.5      | cns版本  | version         | String   | 是       |                       |
 | 3.6      | 合约地址 | contractAddress | String   | 是       |                       |
-| 3.7      | 修改时间 | modifyTime      | String   | 是       |                       |
-| 3.8      | 创建时间 | createTime      | String   | 是       |                       |
+| 3.7      | 合约Abi  | contractAbi     | String   | 是       |                       |
+| 3.8      | 修改时间 | modifyTime      | String   | 是       |                       |
+| 3.9      | 创建时间 | createTime      | String   | 是       |                       |
 
 **2）数据格式**
 
@@ -1187,6 +1184,7 @@ http://localhost:5002/WeBASE-Front/contract/findCns
     "cnsName": "Hello",
     "version": "v0.4",
     "contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e",
+    "contractAbi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
     "createTime": "2020-12-30 16:32:28",
     "modifyTime": "2020-12-30 16:32:28"
   }
