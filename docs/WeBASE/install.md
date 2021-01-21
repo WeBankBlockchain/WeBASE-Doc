@@ -87,7 +87,7 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
 ### 检查服务器网络策略
 
 网络策略检查：
-- **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
+- **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问WeBASE服务页面**
 - 开放节点前置端口：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）；由于节点前置直连节点，**不建议对公网开放节点前置端口**，建议按需开放
 
 ## 拉取部署脚本
@@ -420,7 +420,7 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 
 - **查看运行成功日志**：WeBASE子服务运行成功后均会打印日志`main run success`，可以通过搜索此关键字来确认服务正常运行。
 
-如，检查webase-front日志，其他webase服务可进行类似操作
+如，检查webase-front日志，其他WeBASE服务可进行类似操作
 ```
 $ cd webase-front
 $ grep -B 3 "main run success" log/WeBASE-Front.log
@@ -435,7 +435,7 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 
 - **查看报错日志**：出现异常时，可以搜索关键字`ERROR`进行检查
 
-如，检查webase-front错误日志，其他webase服务可进行类似操作
+如，检查webase-front错误日志，其他WeBASE服务可进行类似操作
 ```
 $ cd webase-front
 $ grep "ERROR" log/WeBASE-Front.log
