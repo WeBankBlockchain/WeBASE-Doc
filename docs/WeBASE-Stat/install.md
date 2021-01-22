@@ -44,8 +44,18 @@ chmod +x ./gradlew && ./gradlew build -x test
 
 构建完成后，会在根目录WeBASE-Stat下生成已编译的代码目录dist。
 
-## 5. 服务配置及启停
-### 5.1 服务配置修改
+## 5. 数据库初始化
+### 5.1 新建数据库
+```
+#登录MySQL: 例如：mysql -u root -p123456
+mysql -u ${your_db_account} -p${your_db_password}  
+#新建数据库：默认数据库名为webasestat
+CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+```
+
+## 6. 服务配置及启停
+
+### 6.1 服务配置修改
 （1）回到dist目录，dist目录提供了一份配置模板conf_template：
 
 ```
@@ -63,7 +73,7 @@ chmod +x ./gradlew && ./gradlew build -x test
 修改数据库密码：sed -i "s/defaultPassword/${your_db_password}/g" conf/application.yml
 ```
 
-### 5.2 服务启停
+### 6.2 服务启停
 在dist目录下执行：
 ```shell
 启动：bash start.sh
@@ -77,7 +87,7 @@ chmod +x ./gradlew && ./gradlew build -x test
 	Application() - main run success...
 ```
 
-## 6. 访问
+## 7. 访问
 
 可以通过swagger查看调用接口：
 
@@ -90,7 +100,7 @@ http://{deployIP}:{deployPort}/WeBASE-Stat/swagger-ui.html
 
 - 部署服务器IP和服务端口需对应修改，网络策略需开通
 
-## 7. 查看日志
+## 8. 查看日志
 
 在dist目录查看：
 ```shell
