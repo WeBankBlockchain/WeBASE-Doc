@@ -12,8 +12,8 @@
 | 环境   | 版本                   |
 | ------ | ---------------------- |
 | Java   | JDK 8 至JDK 14 |
-| MySQL | MySQL-5.6或以上版本 |
-| Python | Python3.5+ |
+| MySQL | MySQL-5.6及以上 |
+| Python | Python3.6及以上 |
 | PyMySQL | |
 
 ### 检查环境
@@ -46,7 +46,7 @@ mysql --version
 
 #### 检查Python
 <span id="checkpy"></span>
-使用Python3.5或以上版本：
+使用Python3.6或以上版本：
 ```shell
 python --version
 # python3时
@@ -57,9 +57,9 @@ python3 --version
 
 - Python3安装部署可参考[Python部署](#python3)
 
-#### PyMySQL部署（Python3.5+）
+#### PyMySQL部署（Python3.6+）
 
-Python3.5及以上版本，需安装`PyMySQL`依赖包
+Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 - CentOS
 
@@ -602,7 +602,7 @@ mysql > create database webasenodemanager;
 ### 3. Python部署
 <span id="python3"></span>
 
-python版本要求使用python3.x, 推荐使用python3.5及以上版本
+python版本要求使用python3.x, 推荐使用python3.6及以上版本
 
 - CentOS
 
@@ -641,7 +641,7 @@ File "/home/ubuntu/webase-deploy/comm/utils.py", line 127, in getCommProperties
 TypeError: get() got an unexpected keyword argument 'fallback'
 ```
 
-答：检查[Python版本](#checkpy)，推荐使用python3.5及以上版本
+答：检查[Python版本](#checkpy)，推荐使用python3.6及以上版本
 
 
 ### 2. 使用Python3时找不到pymysql
