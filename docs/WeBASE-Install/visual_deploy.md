@@ -56,18 +56,19 @@
 - 宿主机：安装WeBASE-Node-Manager的主机，配置Ansible、配置Ansible免密登录节点机
 - 节点主机：用于安装节点的主机，配置docker及docker用户组、配置Ansible用户的sudo权限、安装FISCO BOCS节点依赖
 
-*注：宿主机也需要安装节点时，则需要同时配置*
+**注：宿主机也需要安装节点时，则需要同时配置**
 
 ### 配置Ansible
 
 Ansible配置包括以下三步：
 - 宿主机安装Ansible
+    - **仅在宿主机安装节点**时，则仅需安装Ansible，无需完成下面两步host与免密配置
 - 配置Ansible host列表
 - 配置Ansible免密登录到节点主机
 
 #### 安装Ansible
 
-注：Ansible只需要安装在宿主机上，节点主机无需安装Ansible，只需配置宿主机到节点主机的免密登录
+**注**：Ansible只需要安装在宿主机上，节点主机无需安装Ansible，只需配置宿主机到节点主机的免密登录
 
 CentOS
 ```
@@ -93,6 +94,8 @@ ansible 2.9.15
   executable location = /usr/bin/ansible
   python version = 2.7.17 (default, Sep 30 2020, 13:38:04) [GCC 7.5.0]
 ```
+
+**仅在宿主机安装节点时**，无需操作下文的Ansible host配置和免密配置，直接进入(配置Docker)[#docker]章节，并在部署节点时，添加主机的IP为**127.0.0.1**
 
 <span id="ansible_key_check"></span>
 
@@ -173,7 +176,7 @@ host_key_checking = False
 
 **注**：若后续需要添加新的主机，需要将新主机的IP添加到此处
 
-添加以下内容：此处假设节点机IP为127.0.0.1，免密登录账户为root，且`id_rsa`免密私钥的路径为`/root/.ssh/id_rsa`，ssh端口使用22端口
+添加以下内容：此处假设节点机IP为127.0.0.1，免密登录账户为root，且`id_rsa`免密私钥的路径为`/root/.ssh/id_rsa`，ssh端口使用22端口，添加名为`webase`的IP组
 ```
 vi /etc/ansible/hosts
 
@@ -185,7 +188,15 @@ vi /etc/ansible/hosts
 
 #### 测试Ansible
 
-执行ansible的ping命令，检测添加到hosts中各个节点主机IP能否被访问。
+执行Ansible的`--list-hosts`命令查看是否已添加成功
+```
+ansible webase --list-hosts
+  hosts (2):
+    XXX.XXX.XXX.1
+    XXX.XXX.XXX.2
+```
+
+执行Ansible的`ping`命令，检测添加到hosts中各个节点主机IP能否被访问，免密配置是否已生效
 - 若出现`IP | SUCCESS`的则代表该IP可连通
 - 如果出现`FAILED`代表该IP无法连接，需要根据上文的免密登录配置进行`ssh -o StrictHostKeyChecking=no root@[IP]`检测
 
@@ -193,14 +204,14 @@ vi /etc/ansible/hosts
 ```
 ansible webase -m ping
 
-xxx.xxx.xxx.xxx | SUCCESS => {
+xxx.xxx.xxx.1 | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python"
     }, 
     "changed": false, 
     "ping": "pong"
 }
-xxx.xxx.xxx.xxx | SUCCESS => {
+xxx.xxx.xxx.2 | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python"
     }, 
@@ -250,7 +261,7 @@ exit
 
 #### 拉取 Docker 镜像
 
-在v1.4.3版本后，可视化部署支持**自动从CDN拉取镜像，无需手动拉取**
+在WeBASE v1.4.3版本后，可视化部署支持**自动从CDN拉取镜像，无需手动拉取**
 
 若需要**手动配置镜像**，可以通过以下方法配置
 
@@ -458,7 +469,7 @@ $ python3 deploy.py installWeBASE
 http://{deployIP}:{webPort}
 ```
 
-具体部署步骤，请参考下文进行自检与部署操作
+具体部署步骤，请参考下文进行部署操作
 <span id="deploy_chain"></span>
 
 #### 部署节点
@@ -490,6 +501,7 @@ http://{deployIP}:{webPort}
 ![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/add_host_index.png)
 
 添加主机时，需要填入主机的**IP**与部署节点的**目录**
+- 仅在宿主机（即节点管理服务所在主机）部署节点时，则添加主机必须为**127.0.0.1**，否则填写公网IP或内网IP需要(配置Ansible host)[#ansible_host]
 - 添加主机时，将检查该IP是否可以连通，同时将检查该主机的路径是否可访问，并自动创建该目录
 
 ![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/add_host.png)
@@ -559,23 +571,33 @@ http://{deployIP}:{webPort}
 
 **提示：**
 - 新主机需要按照[系统依赖](#visual_dependency)中的**节点机**进行配置
-    - 参考上文的[ansible host更新](#ansible_host)
-    - 参考上文的 [配置 SSH 免密登录](#ssh) 
+    - 参考上文的 [配置 SSH 免密登录](#ssh)，配置宿主机到新主机的免密登录
+    - 参考上文的[Ansible host更新](#ansible_host)，把新主机的IP加到Ansible的hosts配置中
     - 参考下文**常见问题**中的 [安装 Docker](#install_docker)
 
 - 新增的节点，**默认处于游离状态**，需要手动**变更节点为共识或者观察节点**后，新节点开始从原有节点同步区块数据。
 
+
 **具体操作：**
 
+新增节点与部署时是同样的三个步骤：添加并检测节点主机、初始化主机（检查Docker与安装依赖）、启动节点并重启链
+
+**添加主机**：
+
+若需要添加新的主机时，填入主机的**IP**与部署节点的**目录**
+
+![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/add_host.png)
+
 * 点击**新增节点**按钮
-* 选择 Docker 拉取方式
 
 ![visual-deploy-add-node-index](../../images/WeBASE-Console-Suit/visual-deploy/add_node_index.png)
 
-点击“新建节点”添加主机信息后，与部署链时相似的操作
-- 选择“新增节点”，选择主机与节点的端口、节点数量等；
+添加主机信息，与部署链时相似的操作
+- 选择 Docker 拉取方式，推荐使用CDN拉取，离线环境或网络不好的情况下，推荐使用[手动加载](#pull_image)方式，提前在各个节点主机下载并加载镜像
+- 选择“新增节点”添加信息，选择主机与节点的端口、节点数量等；
 - **注**，若需要添加新的主机，则按文档的[环境要求](#system_require)准备新的主机，并到“主机管理”添加主机
-- 依次执行同[部署链](#deploy_chain)相同的检测、初始化、部署三个步骤即可
+
+依次执行同[部署链](#deploy_chain)相同的检测、初始化、部署即可
 
 ![visual-deploy-add-node](../../images/WeBASE-Console-Suit/visual-deploy/add_node.png)
 
