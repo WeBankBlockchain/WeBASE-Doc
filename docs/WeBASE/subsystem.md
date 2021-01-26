@@ -5,6 +5,7 @@
    :maxdepth: 1
 
    ../WeBASE-Front/index.md
+   ../WeBASE-Contract-Warehouse/index.md
    ../WeBASE-Node-Manager/index.md
    ../WeBASE-Web/index.md
    ../WeBASE-Transaction/index.md
