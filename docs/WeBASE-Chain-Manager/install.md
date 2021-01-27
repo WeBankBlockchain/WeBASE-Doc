@@ -13,8 +13,8 @@
 
 ## 2. 注意事项
 *  Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，[JDK配置指引](./appendix.html#jdk)
-*  安装mysql可以参考 [mysql安装示例](./appendix.md#mysql)
-*  在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./appendix.md#q&a)
+*  安装mysql可以参考 [mysql安装示例](./appendix.html#mysql)
+*  在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./appendix.html#q&a)
 *  安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
 
 
@@ -32,6 +32,8 @@ cd WeBASE-Chain-Manager
 ## 4. 编译代码
 
 方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+
+- 安装gradle可以参考 [gradle安装示例](./appendix.html#gradle)
 
 ```shell
 gradle build -x test
@@ -90,7 +92,7 @@ bash webase.sh 127.0.0.1 3306
 例如：cp conf_template conf -r
 ```
 
-（2）修改服务配置，完整配置项说明请查看 [配置说明](./appendix.md#application-yml)
+（2）修改服务配置，完整配置项说明请查看 [配置说明](./appendix.html#application-yml)
 ```shell
 修改服务端口：sed -i "s/5005/${your_server_port}/g" conf/application.yml
 修改数据库IP：sed -i "s/127.0.0.1/${your_db_ip}/g" conf/application.yml
