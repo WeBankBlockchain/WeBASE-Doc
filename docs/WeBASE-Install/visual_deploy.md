@@ -442,7 +442,7 @@ $ python3 deploy.py installWeBASE
     * 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务
     * 修改 `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件示例如下：
         * 配置文件中 `deployType` 为 `1`，启用节点管理服务的可视化部署功能
-        * 配置文件中 `webaseSignAddress` 的 IP 地址，其余节点主机需要通过此IP访问签名服务
+        * 配置文件中 `webaseSignAddress` 的 IP 地址，其余节点主机需要通过此IP访问签名服务；注，此处IP不能使用127.0.0.1
     
 ```eval_rst
 .. important::
@@ -541,8 +541,9 @@ http://{deployIP}:{webPort}
 **（四）初始化主机**：
 
 点击“初始化”按钮进行主机初始化，将自动完成以下操作，初始化成功后才能进行下一步的部署操作，“初始化”按钮将变成“部署”按钮
-- 检测并安装相关系统依赖，如`netstat`, `wget`等
+- 自动检测并安装相关系统依赖，如`netstat`, `wget`等
 - 加载节点镜像：根据选中的镜像加载方式进行加载（若手动加载则检测镜像已存在于节点主机）
+- 自动加载镜像时，会在节点主机指定目录中创建`download`目录，并下载镜像的tar包保存于此；若已存在同名tar包将不重复下载，直接使用已有tar包(docker-fisco-webase.tar)
 
 ![visual-deploy-host-init](../../images/WeBASE-Console-Suit/visual-deploy/host_init.png)
 
