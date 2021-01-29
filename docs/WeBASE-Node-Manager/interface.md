@@ -9964,7 +9964,7 @@ v1.4.0
 | 202406 | Configuration of host is empty.    |  主机配置参数为空          |
 | 202407 | Chain exists, deploy failed.    |  链已存在，部署失败          |
 | 202408 | Save chain data to DB error.    |  插入链信息到数据库失败          |
-| 202409 | Generate host, agency, group configuration error.    |  生成主机，机构，群组配置信息文件失败          |
+| 202409 | Chain root dir exist, please move it manually.    |  主机节点的链安装目录(default_chains)已存在，请手动移除          |
 | 202410 | Execute build_chain.sh script error.    |  执行 build_chain.sh 链生成脚本失败          |
 | 202411 | Host, agency, group configuration error.    |  主机，机构，群组配置信息错误          |
 | 202412 | Host ip and num error.    |  主机 IP，节点数量配置错误          |
@@ -10023,7 +10023,34 @@ v1.4.0
 | 202465 | Error getting docker image mode    |  获取镜像方式错误          |
 | 202466 | Please pull the Docker image manually in host /ip/    |  主机/ip/请手动拉取 Docker 镜像          |
 | 202467 | Max 4 nodes on a single host    |  单个主机最多部署 4 个节点          |
-| 202468 | Cannot install node on WeBASE-Node-Manager host.    |  无法在WeBASE-Node-Manager主机上安装节点。          |
+| 202468 | Host of WeBASE-Node-Manager's ip is already existed.    |  WeBASE-Node-Manager所在主机的IP已存在          |
+| 202469 | Check docker installed and running of host    |  检测主机Docker已安装且已启动未通过          |
+| 202470 | Check host memory not enough for nodes(s)    |  检测主机安装节点所需空余内存未通过          |
+| 202471 | Check host cpu core count not enough for node(s)    |  检测主机安装节点所需CPU核核心数未通过          |
+| 202472 | Host check had been interrupt    |  主机检测过程被中断          |
+| 202473 | Host check fail for inpurt param    |  主机检测入参错误          |
+| 202475 | Fail to generate chain and front config locally    |  本地生成链与前置配置失败          |
+| 202476 | Not all host init success    |  部分主机在检测时未通过          |
+| 202477 | Ipconf's node port config error    |  Ipconf入参格式中节点端口格式错误          |
+| 202478 | Ipconf not match with deploy info list    |  Ipconf与主机节点信息不匹配          |
+| 202479 | Delete host fail for host contains node(front)    |  无法删除主机，主机中仍包含节点          |
+| 202480 | Ansible not installed!    |  Node-Manager所在主机未安装Ansible          |
+| 202481 | Ansible fetch not support fetch directory    |  Ansible不支持Fetch目录          |
+| 202482 | Ansible ping cannot reach target ip    |  Ansible无法ping连通目标IP         |
+| 202483 | Ansible init host of image and scp config not all success    |  主机初始化镜像与传输配置未全部成功          |
+| 202484 | Ansible pull docker hub fail    |  Ansible拉取Docker hub镜像失败          |
+| 202485 | Ansible pull docker cdn fail    |  Ansible拉取CDN镜像失败          |
+| 202486 | Ansible run docker command fail    |  Ansible执行Docker命令失败          |
+| 202487 | Ansible exec command error    |  Ansible执行命令失败          |
+| 202488 | Ansible exec scp(copy) error    |  Ansible执行scp复制到远端失败          |
+| 202489 | Ansible exec scp(fetch) error    |  Ansible执行scp拉取文件失败          |
+| 202491 | Ansible check image exist error for param    |  Ansible检测Docker镜像存在的入参错误          |
+| 202492 | Ansible check docker container exist error for param    |  Ansible检测Docker容器存在的入参错误          |
+| 202493 | Check host not pass, please check host remark    |  检测主机未通过，请通过主机的remark查看错误信息          |
+| 202494 | Check host port is in use, please check host remark    |  主机的端口已被占用，请通过主机的remark查看错误信息             |
+| 202495 | Host already exist    |  主机已存在          |
+| 202496 | Host root dir access denied    |  主机的安装目录无权限访问          |
+| 202497 | Host not exist or already been deleted    |  主机不存在或已被删除          |
 | 202501 | contract path is exists. | 合约路径已存在 |
 | 202502 | version cannot be empty. | 版本不能为空 |
 | 202503 | cns name cannot be empty. | cns名不能为空 |
