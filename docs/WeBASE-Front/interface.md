@@ -7091,6 +7091,7 @@ a、成功：
 | 201515  | transaction receipt fail and parse output fail    |   转化交易回执中output输出值失败       |
 | 201516  | transaction receipt fail and output is null    |   交易回执output为空       |
 | 201517  | call contract constant method fail    |   合约状态异常，调用合约constant方法失败       |
+| 201518  | get message's hash fail   |   获取哈希失败       |
 | 201521  | get list of manager on chain fail    |   获取链上管理员列表失败       |
 | 201522  | table key length error    |   用户表的键值长度大于最大值255       |
 | 201523  | crud's param parse json error    |   CRUD方法的入参转Entry/Condition失败，请检查入参       |
