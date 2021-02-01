@@ -12,8 +12,8 @@
 | 环境   | 版本                   |
 | ------ | ---------------------- |
 | Java   | JDK 8 至JDK 14 |
-| MySQL | MySQL-5.6或以上版本 |
-| Python | Python3.5+ |
+| MySQL | MySQL-5.6及以上 |
+| Python | Python3.6及以上 |
 | PyMySQL | |
 
 ### 检查环境
@@ -46,7 +46,7 @@ mysql --version
 
 #### 检查Python
 <span id="checkpy"></span>
-使用Python3.5或以上版本：
+使用Python3.6或以上版本：
 ```shell
 python --version
 # python3时
@@ -57,9 +57,9 @@ python3 --version
 
 - Python3安装部署可参考[Python部署](#python3)
 
-#### PyMySQL部署（Python3.5+）
+#### PyMySQL部署（Python3.6+）
 
-Python3.5及以上版本，需安装`PyMySQL`依赖包
+Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 - CentOS
 
@@ -87,14 +87,14 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
 ### 检查服务器网络策略
 
 网络策略检查：
-- **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问webase服务页面**
+- **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问WeBASE服务页面**
 - 开放节点前置端口：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）；由于节点前置直连节点，**不建议对公网开放节点前置端口**，建议按需开放
 
 ## 拉取部署脚本
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.2/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.3/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -111,12 +111,16 @@ cd webase-deploy
 
 ② 修改配置文件（`vi common.properties`），没有变化的可以不修改；
 
+- *若使用可视化部署，则忽略下文，将修改`visual-deploy.properties`，并进行可视化部署依赖服务的一键安装，具体请参考[可视化部署-一键安装依赖服务](../WeBASE-Install/visual_deploy.html#visual-deploy-oneclick)*
+
 ③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
 
-- 当配置"yes"时，需配置已有链的路径
+- 当配置"yes"时，需配置已有链的路径`fisco.dir`。路径下要存在sdk目录，当使用非国密链，或者使用国密链，但是sdk和节点使用非国密ssl连接时，sdk目录里存放非国密sdk证书（ca.crt、node.crt和node.key）；当使用国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 - 当配置"no"时，需配置节点fisco版本和节点安装个数，搭建的新链默认两个群组
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
+
+​    **注：使用国密版需要修改设置配置项`encrypt.type=1`。前置SDK与节点默认使用非国密SSL，如果需要使用国密SSL，需要修改设置配置项`encrypt.sslType=1`。**
 
 ④ 服务端口不能小于1024
 
@@ -124,10 +128,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.2
-webase.mgr.version=v1.4.2
-webase.sign.version=v1.4.2
-webase.front.version=v1.4.2
+webase.web.version=v1.4.3
+webase.mgr.version=v1.4.3
+webase.sign.version=v1.4.3
+webase.front.version=v1.4.3
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -177,7 +181,9 @@ if.exist.fisco=no
 
 # 使用已有链时需配置
 # 已有链的路径，start_all.sh脚本所在路径
-# 路径下要存在sdk目录，sdk里存放sdk证书（ca.crt、node.crt和node.key）
+# 路径下要存在sdk目录
+# 当使用非国密链，或者使用国密链，但是sdk和节点使用非国密ssl连接时，sdk目录里存放非国密sdk证书（ca.crt、node.crt和node.key）
+# 当使用国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
 # 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
@@ -223,10 +229,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.4.2        ========
-==============    webase-node-mgr version  v1.4.2   ========
-==============    webase-sign version  v1.4.2       ========
-==============    webase-front version  v1.4.2      ========
+==============    webase-web version  v1.4.3        ========
+==============    webase-node-mgr version  v1.4.3   ========
+==============    webase-sign version  v1.4.3       ========
+==============    webase-front version  v1.4.3      ========
 ============================================================
 ```
 
@@ -392,6 +398,8 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 ```
 *备注：当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志*
 
+日志目录中包含`{XXX}.log`全量日志文件和`{XXX}-error.log`错误日志文件
+ - *通过日志定位错误问题时，可以结合`.log`全量日志和`-error.log`错误日志两种日志信息进行排查。*，如查询WeBASE-Front日志，则打开`WeBASE-Front-error.log`可以快速找到错误信息，根据错误查看`WeBASE-Front.log`的相关内容，可以看到错误日志前后的普通日志信息
 
 ##### 检查服务日志有无错误信息
 
@@ -412,7 +420,7 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 
 - **查看运行成功日志**：WeBASE子服务运行成功后均会打印日志`main run success`，可以通过搜索此关键字来确认服务正常运行。
 
-如，检查webase-front日志，其他webase服务可进行类似操作
+如，检查webase-front日志，其他WeBASE服务可进行类似操作
 ```
 $ cd webase-front
 $ grep -B 3 "main run success" log/WeBASE-Front.log
@@ -427,7 +435,7 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 
 - **查看报错日志**：出现异常时，可以搜索关键字`ERROR`进行检查
 
-如，检查webase-front错误日志，其他webase服务可进行类似操作
+如，检查webase-front错误日志，其他WeBASE服务可进行类似操作
 ```
 $ cd webase-front
 $ grep "ERROR" log/WeBASE-Front.log
@@ -594,7 +602,7 @@ mysql > create database webasenodemanager;
 ### 3. Python部署
 <span id="python3"></span>
 
-python版本要求使用python3.x, 推荐使用python3.5及以上版本
+python版本要求使用python3.x, 推荐使用python3.6及以上版本
 
 - CentOS
 
@@ -633,7 +641,7 @@ File "/home/ubuntu/webase-deploy/comm/utils.py", line 127, in getCommProperties
 TypeError: get() got an unexpected keyword argument 'fallback'
 ```
 
-答：检查[Python版本](#checkpy)，推荐使用python3.5及以上版本
+答：检查[Python版本](#checkpy)，推荐使用python3.6及以上版本
 
 
 ### 2. 使用Python3时找不到pymysql
@@ -686,7 +694,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 ======= FISCO-BCOS sdk dir:/data/app/nodes/127.0.0.1/sdk is not exist. please check! =======
 ```
 
-答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
+答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。如果是国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）。
 
 ### 7. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
