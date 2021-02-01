@@ -95,7 +95,7 @@ ansible 2.9.15
   python version = 2.7.17 (default, Sep 30 2020, 13:38:04) [GCC 7.5.0]
 ```
 
-**仅在宿主机安装节点时**，无需操作下文的Ansible host配置和免密配置，直接进入(配置Docker)[#docker]章节，并在部署节点时，添加主机的IP为**127.0.0.1**
+**仅在宿主机安装节点时**，无需操作下文的Ansible host配置和免密配置，直接进入[配置Docker](#docker)章节，并在部署节点时，添加主机的IP为**127.0.0.1**
 
 <span id="ansible_key_check"></span>
 
@@ -123,7 +123,7 @@ host_key_checking = False
     1. 配置 WeBASE-Node-Manager 主机到其它节点主机的 SSH 免密登录；
     2. 配置Ansible的hosts列表并配置免密登录私钥路径
     3. 注意免密登录的账号sudo权限，否则会造成Docker服务启动、检测端口占用失败；
-    4. 如果免密账号为非 `root` 账号，保证账号有 `sudo` **免密** 权限，即使用 `sudo` 执行命令时，不需要输入密码；参考[sudo账号配置](#sudo_config)
+    4. 如果免密账号为非 `root` 账号，保证账号有 `sudo` **免密** 权限，即使用 `sudo` 执行命令时，不需要输入密码；参考本章节的[sudo账号配置]
 ```
 
 **免密登录配置方法**
@@ -257,7 +257,7 @@ exit
 
 重新登入后，执行`docker ps`如有输出，未报错Permission Denied则代表配置成功
 
-<span id="pull_image"></span>
+<span id="image_info"></span>
 
 #### 拉取 Docker 镜像
 
@@ -503,7 +503,7 @@ http://{deployIP}:{webPort}
 ![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/add_host_index.png)
 
 添加主机时，需要填入主机的**IP**与部署节点的**目录**
-- 仅在宿主机（即节点管理服务所在主机）部署节点时，则添加主机必须为**127.0.0.1**，否则填写公网IP或内网IP需要(配置Ansible host)[#ansible_host]
+- 仅在宿主机（即节点管理服务所在主机）部署节点时，则添加主机必须为**127.0.0.1**，否则填写公网IP或内网IP需要[配置Ansible host](#ansible_host)
 - 添加主机时，将检查该IP是否可以连通，同时将检查该主机的路径是否可访问，并自动创建该目录
 
 ![visual-deploy-host-add](../../images/WeBASE-Console-Suit/visual-deploy/add_host.png)
@@ -532,7 +532,7 @@ http://{deployIP}:{webPort}
 检测失败的信息将在**操作日志**中显示，只有添加的节点信息全部通过才可以开始下一步“初始化”
 - 如果提示内存不足(Free memory too low)，则可以释放主机内存，一节点至少 **1G** 可用内存(Free memory)
 - 如果提示端口被占用，可根据提示的端口号，在主机**释放端口**或删除填入的节点信息，修改后重新填入
-- 如果提示Docker相关错误，需要到主机确认已[安装Docker并已启用](#install_docker)，是否已[配置Docker组](#docker_sudo)，确保能拉取并运行hello-world镜像
+- 如果提示Docker相关错误，需要到主机确认已[安装Docker](#install_docker)并已启用，是否已[配置Docker组](#docker_sudo)，确保能拉取并运行hello-world镜像
 
 ![visual-deploy-host-check-fail](../../images/WeBASE-Console-Suit/visual-deploy/node_check_fail.png)
 
@@ -558,14 +558,16 @@ http://{deployIP}:{webPort}
 
 ![visual-deploy-config-start](../../images/WeBASE-Console-Suit/visual-deploy/host_start_deploy.png)
 
-- 生成配置与传输配置完成后，将自动进入链初始化页面，届时将自动启动各个主机的节点，此过程**预计需要几分钟时间**，直到链状态为“**运行*”
+- 生成配置与传输配置完成后，将自动进入链初始化页面，届时将自动启动各个主机的节点，此过程**预计需要几分钟时间**，直到链状态为“运行”
 
 ![visual-deploy-config-ing](../../images/WeBASE-Console-Suit/visual-deploy/chain_deploying.png)
 
 若出现启动失败，需要结合报错提示，检查节点主机状态正常，各个节点主机间端口互通，网速过慢或网络丢包严重等等，排查后，点击“删除链”重置当前的链后，重新尝试建链
-- 如始终无法部署，可以结合Node-Manager日志排查错误原因，并在github上提交配上日志的issue
 
 ![visual-deploy-delete-chain](../../images/WeBASE-Console-Suit/visual-deploy/chain_delete.png)
+
+*如始终无法部署，可以结合Node-Manager日志排查错误原因，并在github上提交配上日志和环境信息的issue*
+
 
 <span id="add_node"></span>
 
@@ -574,7 +576,7 @@ http://{deployIP}:{webPort}
 
 **提示：**
 - 新主机需要按照[系统依赖](#visual_dependency)中的**节点机**进行配置
-    - 参考上文的 [配置 SSH 免密登录](#ssh)，配置宿主机到新主机的免密登录
+    - 参考上文的[配置 SSH 免密登录](#ssh)，配置宿主机到新主机的免密登录
     - 参考上文的[Ansible host更新](#ansible_host)，把新主机的IP加到Ansible的hosts配置中
     - 参考下文**常见问题**中的 [安装 Docker](#install_docker)
 
@@ -606,7 +608,7 @@ http://{deployIP}:{webPort}
 
 点击“部署”后将生成并传输新的节点的配置文件到目标主机，同时新增节点比部署链会多出以下操作
 - 自动在链的其他节点中**添加新节点的P2P连接配置**，并在新节点的P2P配置中添加本次新增节点的IP与已有的非游离节点的IP
-- [可选]配置完成后，需要“重启”已有节点才能使新的P2P配置在已有节点中生效，即双向互联；此操作可视具体情况自行操作
+- [可选]配置完成后，需要手动“重启”已有节点才能使新的P2P配置在已有节点中生效，即双向互联；新节点会默认连接已有的所有节点，此操作可视具体情况自行操作
 - 若新节点启动失败，将新节点删除并重新尝试添加即可
 
 ![visual-deploy-add-node-restart](../../images/WeBASE-Console-Suit/visual-deploy/add_node_restart.png)
@@ -703,6 +705,7 @@ fiscoorg/fisco-webase   v2.7.1     bf4a26d5d389  5 days ago   631MB
 ```
     
 * 如果本地没有镜像（如果本地有镜像，跳过）
+* 如果需要替换镜像，执行`docker rmi [ImageId]`删除镜像即可
     
     * 从 CDN 拉取镜像压缩包
     
@@ -757,7 +760,7 @@ fiscoorg/fisco-webase   v2.7.1  bf4a26d5d389  5 days ago   631MB
 
 #### 手动下载 TASSL 
 
-FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署工具会自动从GitHub 下载，解压后放置于 `~/.fisco/tassl`(文件名为tassl)，如果碰到下载失败，请尝试从[https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz](https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz) 下载并解压后，放置于 `~/.fisco/tassl`
+FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署工具会自动从GitHub或CDN下载，解压后放置于 `~/.fisco/tassl`(文件名为tassl)，如果碰到下载失败，请尝试从[https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz](https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz) 下载并解压后，放置于 `~/.fisco/tassl`
 
     
 #### 没有进入可视化部署界面
@@ -767,9 +770,9 @@ FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署�
 
 SSH 登录新主机，使用 `docker images -a |grep -i "fiscoorg/fisco-webase"` 命令检查是否有镜像。
 
-* 如果存在，请参考上文： **常见问题** 中的 [拉取 Docker 镜像](#pull_image)
+* 如果**不存在**，请参考上文： **常见问题** 中的 [拉取 Docker 镜像](#pull_image)
 
-* 如果**不**存在，请检查新主机中 SSH 账号的 `sudo` 免密配置。
+* 如果存在，请检查新主机中 SSH 账号的是否已经[添加Docker用户组](#docker_sudo)。
 
 
 #### 部署失败以及区块链重置
@@ -844,6 +847,8 @@ sync; echo 1 > /proc/sys/vm/drop_caches
 sync; echo 2 > /proc/sys/vm/drop_caches
 sync; echo 3 > /proc/sys/vm/drop_caches
 ```
+
+参考：
 > sync 命令运行 sync 子例程。如果必须停止系统，则运行sync 命令以确保文件系统的完整性。sync 命令将所有未写的系统缓冲区写到磁盘中，包含已修改的 i-node、已延迟的块 I/O 和读写映射文件
 > To free pagecache
 > use echo 1 > /proc/sys/vm/drop_caches; to free dentries and inodes
@@ -856,6 +861,7 @@ sync; echo 3 > /proc/sys/vm/drop_caches
 - 部署时选择手动拉取节点的Docker镜像，并在节点主机手动配置镜像，
 - 安装`docker run hello-world`所需的hello-world的docker镜像用于主机检测
 - 下载TASSL包解压后放到`~/.fisco/`目录中(文件名为tassl)，可以参考[手动配置TASSL](#tassl)
+
 
 #### 链部署失败或节点添加失败排查
 
