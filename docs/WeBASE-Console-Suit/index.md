@@ -198,13 +198,18 @@ ABI编码：支持对ABI的方法与入参进行编码
 
 CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns)
 
-CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
+注册CNS后，CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
+- 需要在合约管理页面部署合约时**勾选CNS**，或合约列表页面中点击**CNS注册**，即可完成注册
 
-![](../../images/WeBASE-Console-Suit/contract_cns.png)
+![](../../images/WeBASE-Console-Suit/new_cns_index.png)
 
 CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。CRUD可以在FISCO-BCOS链上创建数据表，并对表进行增删改查操作，具体CRUD操作教程查看[FISCO-BCOS控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/console/console.html#create-sql)
 
 ![](../../images/WeBASE-Console-Suit/contract_crud.png)
+
+EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即可查询并同步返回
+
+![EventLog](../../images/WeBASE-Console-Suit/event_sync_query.png)
 
 ### 私钥管理
 
@@ -218,7 +223,7 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 ![](../../images/WeBASE-Console-Suit/key_manager_add_user_2.png)
 
-导入私钥：支持导入.txt/.pem/.p12格式的私钥，其中.txt私钥可由WeBASE-Front导出，.pem/.p12私钥可由console控制台导出。如果需要导入自定义私钥，可根据节点前置导出的.txt私钥，编辑其中的privateKey字段内容。
+导入私钥：支持导入.txt/.pem/.p12格式及明文的私钥，其中.txt私钥可由WeBASE-Front导出，.pem/.p12私钥可由console控制台导出。如果需要导入自定义私钥，可根据节点前置导出的.txt私钥，编辑其中的privateKey字段内容。
 
 ![](../../images/WeBASE-Console-Suit/import_private.png)
 
