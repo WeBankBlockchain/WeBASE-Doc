@@ -181,6 +181,21 @@ INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time
 | constant.deployType | 0 |  部署方式选择：0-手动添加前置，1-可视化部署 |
 | constant.dockerRepository | fiscoorg/fisco-webase |  镜像名 |
 | constant.webaseSignAddress | 127.0.0.1:5004 |  WeBASE-Sign 访问地址(不能是localhost) |
+| constant.dockerRestartPeriodTime | 30000 |  单位ms，节点Docker容器重启的超时时间，默认30秒  |
+| constant.execScpTimeout | 10000 |  单位ms，主机间SCP的超时时间（网络差时需要适当调大） |
+| constant.execAddNodeTimeout | 40000 | 单位ms，添加节点的超时时间  |
+| constant.execDockerCheckTimeout | 55000 | 单位ms，执行docker检测的超时时间  |
+| constant.execHostCheckTimeout | 55000 | 单位ms，执行主机检测的超时时间  |
+| constant.execHostCheckPortTimeout | 50000 | 单位ms，执行主机端口检测的超时时间  |
+| constant.execHostInitTimeout | 300000 |  单位ms，执行主机初始化的超时时间，默认5min（需要下载镜像包，网速慢需要适当调大） |
+| constant.execHostConfigTimeout | 40000 | 单位ms，配置主机的链节点超时时间  |
+| constant.execBuildChainTimeout | 40000 | 单位ms，执行建链脚本/生成节点证书脚本的超时时间  |
+| constant.execShellTimeout | 600000 | 单位ms，执行脚本的超时实际，默认10min  |
+| constant.developerModeEnable | false |  是否启用开发者模式（管理员、用户并增加开发者角色） |
+| constant.enableVerificationCode | true |  验证码是否启用随机 |
+| constant.verificationCodeValue | false |  当不启用验证码的随机时，设置固定验证码（方便联调） |
+| constant.ignoreCheckFront | /account/login,/account/pictureCheckCode,/login,/user/privateKey,/front/new,/front/find,,/group/generate,/group/start |  直接访问前置的URI |
+| constant.resetGroupListInterval | 15000 |  异步刷新所有群组连接的间隔，默认15s |
 | sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 | executor |   |  异步拉取区块、刷新群组状态、监控群组数据的线程池配置  |
 | executor.corePoolSize | 3 |  异步任务的核心线程数  |
