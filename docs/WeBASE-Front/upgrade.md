@@ -3,6 +3,9 @@
 WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
 
+#### v1.4.3
+- 新增了合约仓库、在线工具、支持CNS
+
 #### v1.4.2
 - 新增了合约EventLog查询功能
 
