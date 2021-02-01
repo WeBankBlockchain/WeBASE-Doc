@@ -34,8 +34,8 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 区块链浏览器展示的数据是从区块链上同步下来的。为了同步数据需要初始化配置（添加群组信息和节点信息），故在同步数据展示前需要用户先搭建好区块链群组。[FISCO-BCOS 2.0](https://github.com/FISCO-BCOS/FISCO-BCOS.git)提供了多种便捷的群组搭建方式。
 
-1. 如果是开发者进行开发调试，建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/release-2.0/docs/installation.html)。
-2. 如果是开发企业级应用，建议使用企业部署工具[FISCO-BCOS generator](https://fisco-bcos-documentation.readthedocs.io/zh_CN/release-2.0/docs/tutorial/enterprise_quick_start.html)。
+1. 如果是开发者进行开发调试，建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/build_chain.html)。
+2. 如果是开发企业级应用，建议使用企业部署工具[FISCO-BCOS generator](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/enterprise_tools/index.html)。
 
 两者的主要区别在于build_chain为了使体验更好，搭建速度更快，辅助生成了群组内各个节点的私钥；但企业部署工具出于安全的考虑不辅助生成私钥，需要用户自己生成并设置。
 
@@ -88,11 +88,6 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 服务搭建成功后，可使用网页浏览器访问nginx配置的WeBASE管理台IP和端口(例如`127.0.0.1:5000`)，进入到管理平台页面。
 
 管理平台默认用户为`admin`，默认密码为`Abcd1234`（第一次登陆成功后会要求重置密码，请按照密码标准设置一个更加安全的密码）。
-
-**注：管理员密码丢失可以按照下面方式恢复（密码丢失，密码遗忘，密码忘记）**：登录db插入一个新的管理员账号。具体SQL语句可以参考下面的示例（账号为test，密码为默认密码）：
-  ```
-INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
-  ```
 
 ### 添加节点前置
 
@@ -203,13 +198,18 @@ ABI编码：支持对ABI的方法与入参进行编码
 
 CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns)
 
-CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
+注册CNS后，CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
+- 需要在合约管理页面部署合约时**勾选CNS**，或合约列表页面中点击**CNS注册**，即可完成注册
 
-![](../../images/WeBASE-Console-Suit/contract_cns.png)
+![](../../images/WeBASE-Console-Suit/new_cns_index.png)
 
-CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。CRUD可以在FISCO-BCOS链上创建数据表，并对表进行增删改查操作，具体CRUD操作教程查看[FISCO-BCOS控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html#create-sql)
+CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可以实现将Solidity合约中数据存储在FISCO BCOS平台AMDB的表结构中，实现合约逻辑与数据存储的分离。CRUD可以在FISCO-BCOS链上创建数据表，并对表进行增删改查操作，具体CRUD操作教程查看[FISCO-BCOS控制台CRUD命令](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/console/console.html#create-sql)
 
 ![](../../images/WeBASE-Console-Suit/contract_crud.png)
+
+EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即可查询并同步返回
+
+![EventLog](../../images/WeBASE-Console-Suit/event_sync_query.png)
 
 ### 私钥管理
 
@@ -223,7 +223,7 @@ CRUD：CRUD通过在Solidity合约中支持分布式存储预编译合约，可�
 
 ![](../../images/WeBASE-Console-Suit/key_manager_add_user_2.png)
 
-导入私钥：支持导入.txt/.pem/.p12格式的私钥，其中.txt私钥可由eBASE-Front导出，.pem/.p12私钥可由console控制台导出。如果需要导入自定义私钥，可根据节点前置导出的.txt私钥，编辑其中的privateKey字段内容。
+导入私钥：支持导入.txt/.pem/.p12格式及明文的私钥，其中.txt私钥可由WeBASE-Front导出，.pem/.p12私钥可由console控制台导出。如果需要导入自定义私钥，可根据节点前置导出的.txt私钥，编辑其中的privateKey字段内容。
 
 ![](../../images/WeBASE-Console-Suit/import_private.png)
 
