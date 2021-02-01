@@ -23,6 +23,7 @@ WeBASE 技术文档
    docs/WeBASE/ChangeLOG.md
    docs/WeBASE-Install/index.md
    docs/WeBASE-Console-Suit/index.md
+   docs/WeBASE-Contract-Warehouse/index.md
    docs/WeBASE/subsystem.md
    docs/WeBASE/quick-start.md
    docs/WeBASE/mirror.md
