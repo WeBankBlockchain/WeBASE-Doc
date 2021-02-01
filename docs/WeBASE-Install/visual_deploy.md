@@ -442,7 +442,7 @@ $ python3 deploy.py installWeBASE
     * 参考 [节点管理服务 WeBASE-Node-Manager 部署文档](../WeBASE-Node-Manager/install.html#id1) 部署 WeBASE-Node-Manager 服务
     * 修改 `WeBASE-Node-Manager/dist/conf/application.yml` 配置文件示例如下：
         * 配置文件中 `deployType` 为 `1`，启用节点管理服务的可视化部署功能
-        * 配置文件中 `webaseSignAddress` 的 IP 地址，其余节点主机需要通过此IP访问签名服务
+        * 配置文件中 `webaseSignAddress` 的 IP 地址，其余节点主机需要通过此IP访问签名服务；注，此处IP不能使用127.0.0.1
     
 ```eval_rst
 .. important::
@@ -486,8 +486,7 @@ http://{deployIP}:{webPort}
 
     - 参考下文 **常见问题** 中的 [安装 Docker](#install_docker)
     
-- 如果部署 **国密** 版本，**手动下载 TASSL 库**，防止由于 GitHub 不能访问，导致部署失败
-    - 参考下文**常见问题**中的 [手动下载 TASSL](#tassl)，手动下载 TASSL 下载库
+- 如果部署 **国密** 版本
     - 国密链需要将WeBASE-Node-Manager yml中的`encryptType`配置修改为1
 - 部署时，默认的链名为`default_chain`，默认机构名为`agency1`
 - 部署节点的所有操作将使用[Ansible免密](#ansible_host)的免密SSH账号进行操作，请确保Ansible自检通过
@@ -497,7 +496,7 @@ http://{deployIP}:{webPort}
 
 部署节点主要包含三步：添加并检测节点主机、初始化主机（检查Docker与安装依赖）
 
-首先需要选中镜像拉取方式，推荐使用自动从CDN拉取并加载方式。离线环境或网络不好的情况下，推荐使用[手动加载](#pull_image)方式，提前在各个节点主机下载并加载镜像
+首先需要选中镜像拉取方式，推荐使用自动从CDN拉取并加载方式。**离线环境或网络不好**的情况下，推荐使用[手动加载](#pull_image)方式，提前在各个节点主机下载并加载镜像
 
 **（一）添加主机**：
 
@@ -542,12 +541,13 @@ http://{deployIP}:{webPort}
 **（四）初始化主机**：
 
 点击“初始化”按钮进行主机初始化，将自动完成以下操作，初始化成功后才能进行下一步的部署操作，“初始化”按钮将变成“部署”按钮
-- 检测并安装相关系统依赖，如`netstat`, `wget`等
+- 自动检测并安装相关系统依赖，如`netstat`, `wget`等
 - 加载节点镜像：根据选中的镜像加载方式进行加载（若手动加载则检测镜像已存在于节点主机）
+- 自动加载镜像时，会在节点主机指定目录中创建`download`目录，并下载镜像的tar包保存于此；若已存在同名tar包将不重复下载，直接使用已有tar包(docker-fisco-webase.tar)
 
 ![visual-deploy-host-init](../../images/WeBASE-Console-Suit/visual-deploy/host_init.png)
 
-- 初始化操作预计在**两到三分钟**内完成，若网速过慢建议通过手动加载方式加载镜像
+- 初始化操作预计在**两到三分钟**内完成，若**网速过慢或不稳定**建议通过[手动加载镜像](#pull_image)方式拉取
 若初始化失败，则需要结合**操作日志**排查上述步骤的错误原因，排除主机中存在的问题后，**重新执行检测，初始化**操作
 
 **（五）部署**：
@@ -562,7 +562,7 @@ http://{deployIP}:{webPort}
 
 ![visual-deploy-config-ing](../../images/WeBASE-Console-Suit/visual-deploy/chain_deploying.png)
 
-若出现启动失败，需要结合报错提示，检查节点主机状态正常，各个节点主机间端口互通等等，排查后，点击“删除链”重置当前的链后，重新尝试建链
+若出现启动失败，需要结合报错提示，检查节点主机状态正常，各个节点主机间端口互通，网速过慢或网络丢包严重等等，排查后，点击“删除链”重置当前的链后，重新尝试建链
 - 如始终无法部署，可以结合Node-Manager日志排查错误原因，并在github上提交配上日志的issue
 
 ![visual-deploy-delete-chain](../../images/WeBASE-Console-Suit/visual-deploy/chain_delete.png)
@@ -596,7 +596,7 @@ http://{deployIP}:{webPort}
 ![visual-deploy-add-node-index](../../images/WeBASE-Console-Suit/visual-deploy/add_node_index.png)
 
 添加主机信息，与部署链时相似的操作
-- 选择 Docker 拉取方式，推荐使用CDN拉取，离线环境或网络不好的情况下，推荐使用[手动加载](#pull_image)方式，提前在各个节点主机下载并加载镜像
+- 选择 Docker 拉取方式，推荐使用CDN拉取，**离线环境或网络不好**的情况下，推荐使用[手动加载](#pull_image)方式，提前在各个节点主机下载并加载镜像
 - 选择“新增节点”添加信息，选择主机与节点的端口、节点数量等；
 - **注**，若需要添加新的主机，则按文档的[环境要求](#system_require)准备新的主机，并到“主机管理”添加主机
 
@@ -605,8 +605,8 @@ http://{deployIP}:{webPort}
 ![visual-deploy-add-node](../../images/WeBASE-Console-Suit/visual-deploy/add_node.png)
 
 点击“部署”后将生成并传输新的节点的配置文件到目标主机，同时新增节点比部署链会多出以下操作
-- 自动在链的其他节点中**添加新节点的P2P连接配置**
-- 配置完成后，将自动启动新节点并自动重启链的其他节点，此过程大概需要几分钟
+- 自动在链的其他节点中**添加新节点的P2P连接配置**，并在新节点的P2P配置中添加本次新增节点的IP与已有的非游离节点的IP
+- [可选]配置完成后，需要“重启”已有节点才能使新的P2P配置在已有节点中生效，即双向互联；此操作可视具体情况自行操作
 - 若新节点启动失败，将新节点删除并重新尝试添加即可
 
 ![visual-deploy-add-node-restart](../../images/WeBASE-Console-Suit/visual-deploy/add_node_restart.png)
@@ -633,10 +633,10 @@ http://{deployIP}:{webPort}
 
 * 节点的启动，停止
     - 若节点的docker容器被意外删除，通过页面点击“启动”即可完成节点重启
-    - 停止操作时，节点必须处于游离状态
-    - 每次操作大约需要30秒
+    - 停止或重启操作时，请确保满足链的共识容错要求。设为观察节点可避免影响共识状态
+    - 每次启停操作大约需要30秒
 * 删除节点
-    - 将节点设置为游离节点后，即可删除节点，删除后，链将会移除被删节点的P2P配置，并重启链
+    - 将节点设置为游离节点后，即可安全删除节点，删除后，链将会移除被删节点的P2P配置，并重启链
     - 删除节点时，节点必须处于停止状态
 
 ![visual-deploy-add-node-stopped](../../images/WeBASE-Console-Suit/visual-deploy/node_stopped.png)
@@ -753,10 +753,11 @@ docker images -a |grep -i "fiscoorg/fisco-webase"
 fiscoorg/fisco-webase   v2.7.1  bf4a26d5d389  5 days ago   631MB
 ```
 
+<span id="tassl"></span>
+
 #### 手动下载 TASSL 
 
-FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署工具会自动从GitHub 下载，解压后放置于 `~/.fisco/tassl`，如果碰到下载失败，请尝试从[https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz](https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz) 下载并解压后，放置于 `~/.fisco/tassl`
-
+FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署工具会自动从GitHub 下载，解压后放置于 `~/.fisco/tassl`(文件名为tassl)，如果碰到下载失败，请尝试从[https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz](https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz) 下载并解压后，放置于 `~/.fisco/tassl`
 
     
 #### 没有进入可视化部署界面
@@ -851,5 +852,39 @@ sync; echo 3 > /proc/sys/vm/drop_caches
 
 #### 如何进行节点部署的离线安装
 
-答：参考环境依赖，将相关依赖都安装好之后，部署时选择手动拉取节点的Docker镜像，并在节点主机手动配置镜像，并安装`docker run hello-world`所需的hello-world的docker镜像用于主机检测。
+答：参考环境依赖，将相关依赖都安装好之后
+- 部署时选择手动拉取节点的Docker镜像，并在节点主机手动配置镜像，
+- 安装`docker run hello-world`所需的hello-world的docker镜像用于主机检测
+- 下载TASSL包解压后放到`~/.fisco/`目录中(文件名为tassl)，可以参考[手动配置TASSL](#tassl)
+
+#### 链部署失败或节点添加失败排查
+
+页面提示**请求超时**，如添加主机、初始化主机等
+- 登录主机检查主机是否卡顿或存在异常
+
+若点击**初始化**按钮后，显示“加载Docker镜像”时，初始化主机失败或提示超时
+- 检查主机网速，默认的超时时间为60s，如果网速过慢或丢包严重，可以尝试手动下载cdn镜像包查看网速，并建议通过**手动加载镜像**方式，提前下载镜像并加载到节点主机
+
+若出现**部署链或节点**时，需要结合报错提示，通过以下步骤排查：
+- 检查节点主机状态正常，如top命令检查CPU或内存使用率正常
+- 若在部署或检查过程均频现失败，通过ping命令检查宿主机到节点主机的延迟，延迟过高需要排除问题后再次尝试
+- 检查主机硬盘余量是否充足
+- 链显示运行中，但是节点异常时，需要确保各个节点主机间端口互通，如节点主机之间的P2P端口互通（保证共识），宿主机到节点主机的Front端口互通（保证WeBASE服务）等
+
+**通过日志排查**：无法根据提示排查错误，可以在webase-node-mgr(即节点管理服务构建生成的的dist)目录中搜索一下日志
+- 部署链失败时
+```
+# 进度显示生成链配置时错误，则搜索此关键字
+grep "configChainAndScp" log/WeBASE-Node-Manager.log 
+# 进度条显示传输链配置时错误，则搜索此关键字
+grep "scpConfigHostList" log/WeBASE-Node-Manager.log 
+```
+- 新增节点失败时
+```
+grep "batchAddNode" log/WeBASE-Node-Manager.log
+```
+
+
+
+
 
