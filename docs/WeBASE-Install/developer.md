@@ -1,6 +1,6 @@
 # 快速入门搭建
 
-我们推荐的快速入门，只需要搭建节点和节点前置服务(WeBASE-Front)，就可通过WeBASE-Front的合约编辑器进行合约的编辑，编译，部署，调试。
+在区块链应用开发阶段建议用户使用快速入门搭建。在快速入门搭建模式，开发者只需要搭建节点和节点前置服务(WeBASE-Front)，就可通过WeBASE-Front的合约编辑器进行合约的编辑，编译，部署，调试。
 
 ### 节点搭建
 
@@ -148,7 +148,7 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
     http://localhost:5002/WeBASE-Front 
     ```
 
-**注**：若服务启动后无异常，但仍然无法访问，可以检查服务器的网络安全策略：
-- **开放节点前置端口**：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
+**注**：若服务启动后无异常，但仍然无法访问，可以检查服务器的网络安全策略： 
+- **开放节点前置端口**：如果希望通过浏览器(Chrome Safari或Firefox)直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
 
 ![Front页面](../../images/WeBASE/front-overview.png)
