@@ -116,7 +116,7 @@ bash webase.sh 127.0.0.1 3306
 	Application() - main run success...
 ```
 
-## 6.3 访问
+## 7 访问
 
 WeBASE链管理平台示例页面：
 
@@ -136,7 +136,7 @@ http://{deployIP}:{deployPort}/WeBASE-Chain-Manager/swagger-ui.html
 
 - 部署服务器IP和服务端口需对应修改，网络策略需开通
 
-## 6.4 查看日志
+## 8 查看日志
 
 在dist目录查看：
 ```shell
