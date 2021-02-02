@@ -2721,12 +2721,12 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/save
 | 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1 | chainId | Int | 否 | 链编号 |
-| 1      | groupId       | Int           | 否     | 群组id                                          |
-| 2      | contractName       | String           | 是    | 合约名                             |
-| 3      | contractAddress    | String           | 是    | 合约地址                               |
-| 4      | pageSize        | Int           | 是    | 每页记录数                                      |
-| 5      | pageNumber      | Int           | 是    | 当前页码                                        |
-| 6      | contractStatus      | Int           | 是    | 1未部署，2已部署                        |
+| 2      | groupId       | Int           | 否     | 群组id                                          |
+| 3      | contractName       | String           | 是    | 合约名                             |
+| 4      | contractAddress    | String           | 是    | 合约地址                               |
+| 5      | pageSize        | Int           | 是    | 每页记录数                                      |
+| 6     | pageNumber      | Int           | 是    | 当前页码                                        |
+| 7      | contractStatus      | Int           | 是    | 1未部署，2已部署                        |
 
 ***2）入参示例***
 
@@ -2751,23 +2751,23 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/contractList
 | 2      | message         | String        | 否     | 描述                                            |
 | 3      | totalCount      | Int           | 否     | 总记录数                                        |
 | 4      | data            | List          | 是     | 列表                                            |
-| 5.1    |                 | Object         |        | 返回信息实体                                    |
-| 5.1.1  | contractId      | int           | 否     | 合约编号                                        |
-| 5.1.2  | contractPath    | String        | 否     | 合约所在目录                              |
-| 5.1.3  | contractName    | String        | 否     | 合约名称                                        |
-| 5.1.4 | chainId | int | 否 | 链编号 |
-| 5.1.5  | groupId       | Int           | 否     | 所属群组编号                                    |
-| 5.1.6  | contractStatus      | int           | 否     | 1未部署，2已部署                        |
-| 5.1.7  | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
-| 5.1.8  | contractSource  | String        | 否     | 合约源码                                        |
-| 5.1.9  | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
-| 5.1.10 | contractBin     | String        | 是     | 合约运行时binary，用于合约解析               |
-| 5.1.11 | bytecodeBin     | String        | 是     | 合约bytecode binary，用于部署合约                 |
-| 5.1.12 | contractAddress | String        | 是     | 合约地址                                        |
-| 5.1.13 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
-| 5.1.14 | description     | String        | 是     | 备注                                            |
-| 5.1.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
-| 5.1.16 | modifyTime | LocalDateTime | 是 | 修改时间 |
+| 4   |                 | Object         |        | 返回信息实体                                    |
+| 4.1.1 | contractId      | int           | 否     | 合约编号                                        |
+| 4.1.2 | contractPath    | String        | 否     | 合约所在目录                              |
+| 4.1.3 | contractName    | String        | 否     | 合约名称                                        |
+| 4.1.4 | chainId | int | 否 | 链编号 |
+| 4.1.5 | groupId       | Int           | 否     | 所属群组编号                                    |
+| 4.1.6 | contractStatus      | int           | 否     | 1未部署，2已部署                        |
+| 4.1.7 | contractType    | Int           | 否     | 合约类型(0-普通合约，1-系统合约)                |
+| 4.1.8 | contractSource  | String        | 否     | 合约源码                                        |
+| 4.1.9 | contractAbi     | String        | 是     | 编译合约生成的abi文件内容                       |
+| 4.1.10 | contractBin     | String        | 是     | 合约运行时binary，用于合约解析               |
+| 4.1.11 | bytecodeBin     | String        | 是     | 合约bytecode binary，用于部署合约                 |
+| 4.1.12 | contractAddress | String        | 是     | 合约地址                                        |
+| 4.1.13 | deployTime      | LocalDateTime | 是     | 部署时间                                        |
+| 4.1.14 | description     | String        | 是     | 备注                                            |
+| 4.1.15 | createTime      | LocalDateTime | 否     | 创建时间                                        |
+| 4.1.16 | modifyTime | LocalDateTime | 是 | 修改时间 |
 ***2）出参示例***
 
 * 成功：
