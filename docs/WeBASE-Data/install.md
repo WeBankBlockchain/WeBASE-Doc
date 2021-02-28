@@ -23,11 +23,11 @@
 git clone https://github.com/WeBankFinTech/WeBASE-Data.git
 ```
 
-## 2 WeBASE-Data-Collect搭建
+## 3 WeBASE-Data-Collect搭建
 
 ​	WeBASE-Data-Collect为监管数据导出和分析服务，自带配置页面，支持配置多个链，并通过添加区块链前置来获取区块链数据。同时可以配置应用相关信息，合约和用户信息。
 
-### 2.1 编译代码
+### 3.1 编译代码
 
 进入目录：
 
@@ -49,7 +49,7 @@ chmod +x ./gradlew && ./gradlew build -x test
 
 构建完成后，会在目录WeBASE-Data-Collect下生成已编译的代码目录dist。
 
-### 2.2 数据库初始化
+### 3.2 数据库初始化
 
 （1）新建数据库
 
@@ -91,7 +91,7 @@ bash  webase.sh ${dbIP} ${dbPort}
 例如：bash webase.sh 127.0.0.1 3306
 ```
 
-### 2.3 配置修改
+### 3.3 配置修改
 
 （1）回到dist目录，dist目录提供了一份配置模板conf_template：
 
@@ -132,7 +132,7 @@ constant:
 ...
 ```
 
-### 2.4 服务启停
+### 3.4 服务启停
 
 ```shell
 启动：bash start.sh
@@ -147,7 +147,7 @@ constant:
 	Application() - main run success...
 ```
 
-### 2.5 访问
+### 3.5 访问
 
 配置页面访问：
 
@@ -158,18 +158,18 @@ http://{deployIP}:{deployPort}/WeBASE-Data-Collect
 
 - 部署服务器IP和服务端口需对应修改，网络策略需开通
 
-### 2.6 查看日志
+### 3.6 查看日志
 
 ```shell
 全量日志：tail -f log/WeBASE-Data-Collect.log
 错误日志：tail -f log/WeBASE-Data-Collect-error.log
 ```
 
-## 3 WeBASE-Data-Fetcher搭建
+## 4 WeBASE-Data-Fetcher搭建
 
 ​	WeBASE-Data-Fetcher为监管数据查询服务，向WeBASE-Data-Web服务提供数据查询接口。
 
-### 3.1 编译代码
+### 4.1 编译代码
 
 返回WeBASE-Data目录并进入WeBASE-Data-Fetcher目录。
 
@@ -187,7 +187,7 @@ chmod +x ./gradlew && ./gradlew build -x test
 
 构建完成后，会在目录WeBASE-Data-Fetcher下生成已编译的代码目录dist。
 
-### 3.2 配置修改
+### 4.2 配置修改
 
 （1）dist目录，dist目录提供了一份配置模板conf_template：
 
@@ -228,7 +228,7 @@ constant:
 ...
 ```
 
-### 3.3 服务启停
+### 4.3 服务启停
 
 ```shell
 启动：bash start.sh
@@ -243,7 +243,7 @@ constant:
 	Application() - main run success...
 ```
 
-### 3.4 访问
+### 4.4 访问
 
 没有单独页面，可以通过swagger查看调用接口：
 
@@ -254,18 +254,18 @@ http://{deployIP}:{deployPort}/WeBASE-Data-Fetcher/swagger-ui.html
 
 - 部署服务器IP和服务端口需对应修改，网络策略需开通
 
-### 3.5 查看日志
+### 4.5 查看日志
 
 ```shell
 全量日志：tail -f log/WeBASE-Data-Fetcher.log
 错误日志：tail -f log/WeBASE-Data-Fetcher-error.log
 ```
 
-## 4 WeBASE-Data-Web搭建
+## 5 WeBASE-Data-Web搭建
 
 ​	WeBASE-Data-Web为数据监管平台，提供数据浏览页面。
 
-### 4.1 进入目录
+### 5.1 进入目录
 
 返回WeBASE-Data目录并进入WeBASE-Data-Web目录。
 
@@ -273,7 +273,7 @@ http://{deployIP}:{deployPort}/WeBASE-Data-Fetcher/swagger-ui.html
 cd WeBASE-Data-Web
 ```
 
-### 4.2 配置修改
+### 5.2 配置修改
 
 ​	在docs目录下有配置文件nginx.conf，修改完后替换安装的nginx的配置文件nginx.conf（这里nginx安装配置文件在/usr/local/nginx/conf下面，如果这里没找到，可以到/etc下寻找，如有权限问题，请加上sudo）。
 
@@ -309,7 +309,7 @@ cp -rf docs/nginx.conf /usr/local/nginx/conf
         listen       5200 default_server; # 前端端口（端口需要开通策略且不能被占用）
         server_name  127.0.0.1;           # 服务器ip，也可配置为域名
         location / {
-                root   /data/WeBASE-Data-Web/dist;   # 前端文件路径(文件需要有权限访问)
+                root   /WeBASE-Data/WeBASE-Data-Web/dist;   # 前端文件路径(对应修改文件需要有权限访问)
                 index  index.html index.htm;
                 try_files $uri $uri/ /index.html =404;
         }
@@ -325,7 +325,7 @@ cp -rf docs/nginx.conf /usr/local/nginx/conf
     }
 ```
 
-### 4.3 启动nginx
+### 5.3 启动nginx
 
 启动命令：
 
@@ -339,7 +339,7 @@ cp -rf docs/nginx.conf /usr/local/nginx/conf
 ps -ef | grep nginx
 ```
 
-### 4.4 访问
+### 5.4 访问
 
 ```
 http://{deployIP}:{webPort}
@@ -348,7 +348,7 @@ http://{deployIP}:{webPort}
 
 - 部署服务器IP和服务端口需对应修改，网络策略需开通
 
-### 4.5 查看日志
+### 5.5 查看日志
 
 ```shell
 进程日志：tail -f logs/access.log
