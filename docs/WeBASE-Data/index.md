@@ -7,5 +7,6 @@
    README.md
    install.md
    interface-index.md
+   instruction.md
    appendix.md
 ```
