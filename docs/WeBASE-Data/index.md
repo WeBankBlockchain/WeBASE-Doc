@@ -6,7 +6,7 @@
 
    README.md
    install.md
-   interface-index.md
    instruction.md
+   interface-index.md
    appendix.md
 ```
