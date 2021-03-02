@@ -49,6 +49,9 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 - **数据统计服务子系统** 
 [WeBASE-Stat仓库](https://github.com/WeBankFinTech/WeBASE-Stat) 以前置为基础，拉取CPU、内存、IO、群组大小、群组gas、群组网络流量的数据，记录数据库。
 
+- **数据监管服务** 
+[WeBASE-Data仓库](https://github.com/WeBankFinTech/WeBASE-Data) 以前置为基础，导出区块链数据并解析，提供一个可视化的监管视图。可以查询交易属于哪条链，哪个用户，哪个合约，保证链上数据可查可管。
+
 - **数据导出代码生成工具**
 [WeBASE-Codegen-Monkey仓库](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey) 代码生成工具，通过配置可以生成数据导出的核心代码。
 
