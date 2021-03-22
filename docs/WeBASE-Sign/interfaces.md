@@ -25,6 +25,7 @@ HTTP GET
 | 1        | 用户编号  | signUserId | String |  64           | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
 | 2        | 应用编号 | appId   | String |      64       | 是       | 用于标志用户的应用编号,仅支持数字字母下划线 |
 | 3        | 加密类型  | encryptType  | Integer |              | 否       | 默认为0，0: ECDSA, 1: 国密  |
+| 4 | 是否返回私钥 | returnPrivateKey | boolean | | 否 | 默认false，true时返回aes加密的私钥 |
 
 **2）数据格式**
 
@@ -208,6 +209,7 @@ HTTP GET
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
 | 1        | 用户编号  | signUserId | String |        64       | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
+| 2 | 是否返回私钥 | returnPrivateKey | boolean |  | 否 | 默认false，true时返回aes加密的私钥 |
 
 **2）数据格式**
 
@@ -408,7 +410,7 @@ HTTP GET
 | 1        | 应用编号 | appId     | String    |               | 是       | 用于标志用户的应用编号 |
 | 2        | 页码     | pageNumber | Integer |              | 是       | 页码，同时为空则返回全部 |
 | 3        | 页大小    | pageSize | Integer |              | 是       | 页大小，同时为空则返回全部 |
-
+| 4 | 是否返回私钥 | returnPrivateKey | boolean | | 否 | 默认false，true时返回aes加密的私钥 |
 
 **2）数据格式**
 
@@ -606,4 +608,5 @@ v1.4.0
 | 303002  | user does not exist                   | 用户不存在          |
 | 303003  | privateKey is null                    | 用户私钥为空          |
 | 303004  | privateKey decode fail                | 私钥解码失败          |
-| 303005  | privateKey format error | 私钥格式错误 |                               |
+| 303005  | privateKey format error | 私钥格式错误 |
+| 303006 | privateKey not support transfer | 私钥不支持传输 |
