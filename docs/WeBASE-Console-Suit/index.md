@@ -13,11 +13,12 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 3. 合约管理
 4. 私钥管理
 5. 系统管理
-6. 系统监控
-7. 交易审计
-8. 订阅事件
-9. 账号管理
-10. 群组管理
+6. 应用管理
+7. 系统监控
+8. 交易审计
+9. 订阅事件
+10. 账号管理
+11. 群组管理
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -303,6 +304,43 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
 
+### 应用管理
+
+<span id="app_manage"></span>
+
+应用管理是WeBASE管理台提供的一种第三方应用接入功能。展示新增应用按钮和应用列表。
+
+新增应用，新增可以选择已有应用模板：
+
+![](../../images/WeBASE-Console-Suit/app_new.png)
+
+新增应用后，会生成应用相关的注册信息，为应用分配的`appKey`（应用Key）和`appSecret`（应用密码，应用自己保存，不要暴露）：
+
+![](../../images/WeBASE-Console-Suit/app_register_info.png)
+
+第三方应用未向WeBASE进行注册时，WeBASE管理台不可以通过应用链接跳转到应用服务：
+
+![](../../images/WeBASE-Console-Suit/app_link_unable.png)
+
+第三方应用接入时，使用注册信息向WeBASE进行注册，调用相关OPEN API。第三方应用接入请参考【[应用接入说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/appintegration.html)】。以下以 [WeIdentity](https://weidentity.readthedocs.io/zh_CN/latest/docs/weidentity-installation-by-web.html) 可视化页面接入为例：
+
+选择 WeID + WeBase集成模式，从WeBase复制注册信息：
+
+![](../../images/WeBASE-Console-Suit/app_weid_home.png)
+
+点击下一步时，WeID会向WeBase进行注册并调用相关API，从WeBase获取群组、节点、证书等相关信息：
+
+![](../../images/WeBASE-Console-Suit/app_weid_node.png)
+
+部署WeID之后，WeID会将合约相关信息通过API导入WeBase：
+
+![](../../images/WeBASE-Console-Suit/app_weid_deploy.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_contract.png)
+
+第三方应用向WeBASE进行注册后，在WeBASE管理台可以通过应用链接跳转到应用服务：
+
+![](../../images/WeBASE-Console-Suit/app_link_enable.png)
 
 ### 系统监控
 
