@@ -7,7 +7,7 @@ WeBASE 技术文档
 .. admonition:: Overview
 
     - WEBASE整体架构，请参考 `整体架构文档 <./docs/WeBASE/introduction.html>`_ 
-    - WEBASE搭建，请参考 `安装文档 <./docs/WeBASE/install.html>`_ 或`WeBASE源码仓库 <https://github.com/WebankFinTech/WeBASE>`_
+    - WEBASE搭建，请参考 `安装文档 <./docs/WeBASE/install.html>`_ 、 `Github地址<https://github.com/WebankFinTech/WeBASE>`_ 、 `Gittee地址<https://gitee.com/WeBank/WeBASE`_ 
     - WeBASE-Front详细介绍请参考 `WeBASE-Front文档 <./docs/WeBASE-Front/README.html>`_ 或`WeBASE-Front源码仓库 <https://github.com/WebankFinTech/WeBASE-Front>`_
     - WeBASE-Node-Manager详细介绍请参考 `WeBASE-Node-Manager文档 <./docs/WeBASE-Node-Manager/README.html>`_ 或`WeBASE-Node-Manager源码仓库 <https://github.com/WebankFinTech/WeBASE-Node-Manager>`_
     - WeBASE-Web详细介绍请参考 `WeBASE-Web文档 <./docs/WeBASE-Web/README.html>`_ 或`WeBASE-Web源码仓库 <https://github.com/WebankFinTech/WeBASE-Web>`_

@@ -314,7 +314,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/app_new.png)
 
-新增应用后，会生成应用相关的注册信息，为应用分配的`appKey`（应用Key）和`appSecret`（应用密码，应用自己保存，不要暴露）：
+新增应用后，会生成应用相关的注册信息，为应用分配的`appKey`（应用Key）和`appSecret`（应用密码，应用自己保存，不要暴露），WeBASE的`IP`为内网IP，访问不了的话需对应修改：
 
 ![](../../images/WeBASE-Console-Suit/app_register_info.png)
 
