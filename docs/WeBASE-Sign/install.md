@@ -16,6 +16,8 @@
 执行命令：
 ```
 git clone https://github.com/WeBankFinTech/WeBASE-Sign.git
+或
+git clone https://gitee.com/WeBank/WeBASE-Sign.git
 ```
 
 进入目录：

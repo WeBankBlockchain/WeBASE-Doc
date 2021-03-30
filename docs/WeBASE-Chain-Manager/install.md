@@ -22,6 +22,8 @@
 执行命令：
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Chain-Manager.git
+或
+git clone https://gitee.com/WeBank/WeBASE-Chain-Manager.git
 ```
 进入目录：
 

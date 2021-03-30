@@ -33,7 +33,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Front)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Front)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Front)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/index.html#)
 
@@ -43,7 +43,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Node-Manager)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Node-Manager)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Node-Manager)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/index.html#)
 
@@ -52,7 +52,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Web)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Web)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Web)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Web/index.html#)
 
@@ -62,7 +62,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Transcation)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Transcation)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Transcation)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Transcation/index.html#)
 
@@ -71,7 +71,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Sign)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Sign)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Sign)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/index.html#)
 
@@ -80,7 +80,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Chain-Manager)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Chain-Manager)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Chain-Manager)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Chain-Manager/index.html#)
 
@@ -89,7 +89,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Stat)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Stat)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Stat)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Stat/index.html#)
 
@@ -98,7 +98,7 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [Github地址](https://github.com/WeBankFinTech/WeBASE-Data)
 
-  [Gittee地址]( https://gitee.com/WeBank/WeBASE-Data)
+  [Gittee地址](https://gitee.com/WeBank/WeBASE-Data)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Data/index.html#)
 

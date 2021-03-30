@@ -21,6 +21,8 @@
 
 ```
 git clone https://github.com/WeBankFinTech/WeBASE-Data.git
+或
+git clone https://gitee.com/WeBank/WeBASE-Data.git
 ```
 
 ## 3 WeBASE-Data-Collect搭建
