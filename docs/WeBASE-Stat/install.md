@@ -20,6 +20,8 @@
 执行命令：
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Stat.git
+或
+git clone https://gitee.com/WeBank/WeBASE-Stat.git
 ```
 进入目录：
 

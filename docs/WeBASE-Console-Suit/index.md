@@ -332,9 +332,17 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/app_weid_node.png)
 
+可以选择自动创建公私钥，或选择从WeBase同步公私钥用户：
+
+![](../../images/WeBASE-Console-Suit/app_weid_user.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_userlist.png)
+
 部署WeID之后，WeID会将合约相关信息通过API导入WeBase：
 
 ![](../../images/WeBASE-Console-Suit/app_weid_deploy.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_deployed.png)
 
 ![](../../images/WeBASE-Console-Suit/app_weid_contract.png)
 

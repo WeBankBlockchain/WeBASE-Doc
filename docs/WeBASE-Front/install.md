@@ -45,6 +45,8 @@ wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidi
 执行命令：
 ```
 git clone https://github.com/WeBankFinTech/WeBASE-Front.git
+或
+git clone https://gitee.com/WeBank/WeBASE-Front.git
 ```
 
 进入目录：
