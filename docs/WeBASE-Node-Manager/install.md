@@ -39,6 +39,8 @@ WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-do
 执行命令：
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Node-Manager.git
+或
+git clone https://gitee.com/WeBank/WeBASE-Node-Manager.git
 ```
 进入目录：
 

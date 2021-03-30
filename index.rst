@@ -6,15 +6,16 @@ WeBASE 技术文档
 
 .. admonition:: Overview
 
-    - WEBASE整体架构，请参考 `整体架构文档 <./docs/WeBASE/introduction.html>`_ 
-    - WEBASE搭建，请参考 `安装文档 <./docs/WeBASE/install.html>`_ 、 `Github地址<https://github.com/WebankFinTech/WeBASE>`_ 、 `Gittee地址<https://gitee.com/WeBank/WeBASE`_ 
-    - WeBASE-Front详细介绍请参考 `WeBASE-Front文档 <./docs/WeBASE-Front/README.html>`_ 或`WeBASE-Front源码仓库 <https://github.com/WebankFinTech/WeBASE-Front>`_
-    - WeBASE-Node-Manager详细介绍请参考 `WeBASE-Node-Manager文档 <./docs/WeBASE-Node-Manager/README.html>`_ 或`WeBASE-Node-Manager源码仓库 <https://github.com/WebankFinTech/WeBASE-Node-Manager>`_
-    - WeBASE-Web详细介绍请参考 `WeBASE-Web文档 <./docs/WeBASE-Web/README.html>`_ 或`WeBASE-Web源码仓库 <https://github.com/WebankFinTech/WeBASE-Web>`_
-    - WeBASE-Codegen-Monkey详细介绍请参考 `WeBASE-Codegen-Monkey文档 <./docs/WeBASE-Codegen-Monkey/index.html>`_ 或`WeBASE-Codegen-Monkey源码仓库 <https://github.com/WebankFinTech/WeBASE-Codegen-Monkey>`_
-    - WeBASE-Collect-Bee详细介绍请参考 `WeBASE-Collect-Bee文档 <./docs/WeBASE-Collect-Bee/index.html>`_ 或`WeBASE-Collect-Bee源码仓库 <https://github.com/WebankFinTech/WeBASE-Collect-Bee>`_
-    - WeBASE-Sign详细介绍请参考 `WeBASE-Sign文档 <./docs/WeBASE-Sign/README.html>`_ 或`WeBASE-Sign源码仓库 <https://github.com/WebankFinTech/WeBASE-Sign>`_
-    - WeBASE-Transaction详细介绍请参考 `WeBASE-Transaction文档 <./docs/WeBASE-Transaction/index.html>`_ 或`WeBASE-Transaction源码仓库 <https://github.com/WebankFinTech/WeBASE-Transaction>`_
+    - `WEBASE整体架构 <./docs/WeBASE/introduction.html>`_ 
+    - `WEBASE安装文档 <./docs/WeBASE/install.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE`_ 
+    - `WeBASE-Front文档 <./docs/WeBASE-Front/README.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Front>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Front`_ 
+    - `WeBASE-Node-Manager文档 <./docs/WeBASE-Node-Manager/README.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Node-Manager>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Node-Manager`_ 
+    - `WeBASE-Web文档 <./docs/WeBASE-Web/README.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Web>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Web`_ 
+    - `WeBASE-Sign文档 <./docs/WeBASE-Sign/README.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Sign>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Sign`_ 
+    - `WeBASE-Transaction文档 <./docs/WeBASE-Transaction/index.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Transaction>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Transaction`_ 
+    - `WeBASE-Chain-Manager文档 <./docs/WeBASE-Chain-Manager/index.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Chain-Manager>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Chain-Manager`_ 
+    - `WeBASE-Stat文档 <./docs/WeBASE-Stat/index.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Stat>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Stat`_ 
+    - `WeBASE-Data文档 <./docs/WeBASE-Data/index.html>`_ `Github地址<https://github.com/WebankFinTech/WeBASE-Data>`_ `Gittee地址<https://gitee.com/WeBank/WeBASE-Data`_ 
 
 .. toctree::
    :maxdepth: 3

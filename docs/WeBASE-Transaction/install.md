@@ -36,6 +36,8 @@ WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-doc
 
 ```
 git clone https://github.com/WeBankFinTech/WeBASE-Transaction.git
+或
+git clone https://gitee.com/WeBank/WeBASE-Transaction.git
 ```
 
 进入目录：
