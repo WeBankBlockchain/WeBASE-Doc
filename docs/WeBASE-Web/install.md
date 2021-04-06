@@ -20,6 +20,19 @@
 cd WeBASE-Web
 ```
 
+#### 2.1  下载solc-bin
+首先检查目录dist/static/js  是否存在v0.4.25.js等文件，没有就需要在此目录下载这些文件。
+在WeBASE-Web目录下面执行命令：
+```
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.4.25.js -o ./dist/static/js/v0.4.25.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.4.25-gm.js -o ./dist/static/js/v0.4.25-gm.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.5.1.js -o ./dist/static/js/v0.5.1.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.5.1-gm.js -o ./dist/static/js/v0.5.1-gm.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10.js -o ./dist/static/js/v0.6.10.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10-gm.js -o ./dist/static/js/v0.6.10-gm.js
+```
+执行完后检查dist/static/js是否下载完这些js文件。
+
 ### 3. 修改配置
 
 在docs目录下有配置文件nginx.conf，修改完后替换安装的nginx的配置文件nginx.conf（这里nginx安装配置文件在/usr/local/nginx/conf下面，如果这里没找到，可以到/etc下寻找，如有权限问题，请加上sudo）。
