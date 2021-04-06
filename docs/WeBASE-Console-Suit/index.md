@@ -329,7 +329,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/app_link_unable.png)
 
-第三方应用接入时，使用注册信息向WeBASE进行注册，调用相关OPEN API。第三方应用接入请参考【[应用接入说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/appintegration.html)】。以下以 [WeIdentity](https://weidentity.readthedocs.io/zh_CN/latest/docs/weidentity-installation-by-web.html) 可视化页面接入为例：
+第三方应用接入时，使用注册信息向WeBASE进行注册，调用相关OPEN API。第三方应用接入请参考【[应用接入说明](../WeBASE-Node-Manager/appintegration.html)】。以下以 [WeIdentity](https://weidentity.readthedocs.io/zh_CN/latest/docs/weidentity-installation-by-web.html) 可视化页面接入为例：
 
 选择 WeID + WeBase集成模式，从WeBase复制注册信息：
 
