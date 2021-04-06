@@ -11,6 +11,8 @@
 代码可以放在/data下面，执行命令：
 
     git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+    或
+    git clone https://gitee.com/WeBank/WeBASE-Web.git
 
 进入目录：
 
