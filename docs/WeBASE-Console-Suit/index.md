@@ -308,9 +308,16 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 <span id="app_manage"></span>
 
-应用管理是WeBASE管理台提供的一种第三方应用接入功能。展示新增应用按钮和应用列表。
+应用管理是WeBASE管理台提供的一种第三方应用接入功能。WeBASE作为底层运维平台，已经有了底层运维基础能力。各个应用可以利用这些基础能力来开发自己的运维管理台。这些可以利用的基础能力主要包括四个方面：1、链信息和链运维（权限，配置等）；2、合约；3、链的私钥账号；4、管理账号（登录态）。![](../../images/WeBASE-Console-Suit/app_intergrate.png)
+这样的主要好处是：
 
-新增应用，新增可以选择已有应用模板：
+1. 各应用的进程管理还是自我管理，避免WeBase过于笨重
+2. WeBase提供的是规范，方便其他应用参考打通应用与WeBase的联系
+3. 如果有扩展，WeBase也方便提供API来实现
+4. 不破坏各应用自身的完整性
+
+
+管理台新增了应用管理菜单。新增应用有两种方式，一种是选择已有应用模板——目前仅支持WeID；另外一种是自定应用：
 
 ![](../../images/WeBASE-Console-Suit/app_new.png)
 
@@ -349,6 +356,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 第三方应用向WeBASE进行注册后，在WeBASE管理台可以通过应用链接跳转到应用服务：
 
 ![](../../images/WeBASE-Console-Suit/app_link_enable.png)
+
 
 ### 系统监控
 
