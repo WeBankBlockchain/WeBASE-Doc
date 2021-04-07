@@ -331,11 +331,11 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 第三方应用接入时，使用注册信息向WeBASE进行注册，调用相关OPEN API。第三方应用接入请参考【[应用接入说明](../WeBASE-Node-Manager/appintegration.html)】。以下以 [WeIdentity](https://weidentity.readthedocs.io/zh_CN/latest/docs/weidentity-installation-by-web.html) 可视化页面接入为例：
 
-选择 WeID + WeBase集成模式，从WeBase复制注册信息：
+选择 WeID + WeBASE集成模式，从WeBASE复制注册信息：
 
 ![](../../images/WeBASE-Console-Suit/app_weid_home.png)
 
-点击下一步时，WeID会向WeBase进行注册并调用相关API，从WeBase获取群组、节点、证书等相关信息：
+点击下一步时，WeID会向WeBASE进行注册并调用相关API，从WeBASE获取群组、节点、证书等相关信息：
 
 ![](../../images/WeBASE-Console-Suit/app_weid_node.png)
 
@@ -354,6 +354,8 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 ![](../../images/WeBASE-Console-Suit/app_weid_contract.png)
 
 第三方应用向WeBASE进行注册后，在WeBASE管理台可以通过应用链接跳转到应用服务：
+
+注册后WeBASE将和应用间保持心跳。如果应用状态变成不能访问，则应用链接会置灰，变成不可跳转。
 
 ![](../../images/WeBASE-Console-Suit/app_link_enable.png)
 
