@@ -152,3 +152,17 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 - **开放节点前置端口**：如果希望通过浏览器(Chrome Safari或Firefox)直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
 
 ![Front页面](../../images/WeBASE/front-overview.png)
+
+
+### Docker镜像快速搭建
+<span id="run_docker"></span>
+
+WeBASE提供结合FISCO BCOS节点与WeBASE-Front的Docker镜像，通过镜像快速部署需要的步骤如下：
+- 通过build_chain建链脚本（指定 `-d` docker模式）生成节点所需证书、配置文件等
+    - 如生成4节点`bash build_chain.sh -l 127.0.0.1:4 -p 30300,20200,8545 -o nodes -d`
+- 拉取镜像： `docker pull fiscoorg/fisco-webase:v2.7.2`
+- 启动容器：需要将生成的`nodes`目录的node0的配置、SDK证书挂载到容器中，并将容器内的日志挂载到`/nodes/127.0.0.1/node0/front-log`中
+    - 启动命令：`docker run -d -v /nodes/127.0.0.1/node0:/data -v /nodes/127.0.0.1/sdk:/data/sdk -v /nodes/127.0.0.1/node0/front-log:/front/log --network=host -w=/data fiscoorg/fisco-webase:v2.7.2`
+
+WeBASE的Docker镜像的使用详情可以参考[front镜像模式使用说明](https://github.com/WeBankFinTech/WeBASE-Docker/blob/dev-deploy/docker/front-install.md)
+
