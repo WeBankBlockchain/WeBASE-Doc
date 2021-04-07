@@ -123,9 +123,16 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 
 答：此处为正常提示，表示后台没有可访问的节点前置。通过WeBASE-Web连接Node-Manager后台服务后，添加节点前置即可。
 
+##### 节点管理服务忘记密码
+
+登录到WeBASE-Node-Manager中配置的Mysql数据库（默认为webasenodemanager）后，在`tb_account_info`中插入一条新的管理员账号`test`，密码`Abcd1234`
+
+```
+INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
+```
 
 
-- 2. 配置文件解析
+### 3. 配置文件解析
 
 | 参数 | 默认值    | 描述          |
 |------|-------------|-----------|
@@ -171,6 +178,24 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | constant.auditMonitorTaskFixedDelay | 300000 | 监控审计数据任务的运行间隔时间，异常时将发送告警邮件（毫秒）（注：此处为检查频率，告警配置中是告警频率）  |
 | constant.nodeStatusMonitorTaskFixedDelay | 60000 | 监控节点状态任务的运行间隔时间，异常时将发送告警邮件（毫秒）（注：此处为检查频率，告警配置中是告警频率）  |
 | constant.certMonitorTaskFixedDelay | 300000 | 监控证书任务的运行间隔时间，有效期结束7天前时将发送告警邮件（毫秒） （注：此处为检查频率，告警配置中是告警频率） |
+| constant.deployType | 0 |  部署方式选择：0-手动添加前置，1-可视化部署 |
+| constant.dockerRepository | fiscoorg/fisco-webase |  镜像名 |
+| constant.webaseSignAddress | 127.0.0.1:5004 |  WeBASE-Sign 访问地址(不能是localhost) |
+| constant.dockerRestartPeriodTime | 30000 |  单位ms，节点Docker容器重启的超时时间，默认30秒  |
+| constant.execScpTimeout | 10000 |  单位ms，主机间SCP的超时时间（网络差时需要适当调大） |
+| constant.execAddNodeTimeout | 40000 | 单位ms，添加节点的超时时间  |
+| constant.execDockerCheckTimeout | 55000 | 单位ms，执行docker检测的超时时间  |
+| constant.execHostCheckTimeout | 55000 | 单位ms，执行主机检测的超时时间  |
+| constant.execHostCheckPortTimeout | 50000 | 单位ms，执行主机端口检测的超时时间  |
+| constant.execHostInitTimeout | 300000 |  单位ms，执行主机初始化的超时时间，默认5min（需要下载镜像包，网速慢需要适当调大） |
+| constant.execHostConfigTimeout | 40000 | 单位ms，配置主机的链节点超时时间  |
+| constant.execBuildChainTimeout | 40000 | 单位ms，执行建链脚本/生成节点证书脚本的超时时间  |
+| constant.execShellTimeout | 600000 | 单位ms，执行脚本的超时实际，默认10min  |
+| constant.developerModeEnable | false |  是否启用开发者模式（管理员、用户并增加开发者角色） |
+| constant.enableVerificationCode | true |  验证码是否启用随机 |
+| constant.verificationCodeValue | false |  当不启用验证码的随机时，设置固定验证码（方便联调） |
+| constant.ignoreCheckFront | /account/login,/account/pictureCheckCode,/login,/user/privateKey,/front/new,/front/find,,/group/generate,/group/start |  直接访问前置的URI |
+| constant.resetGroupListInterval | 15000 |  异步刷新所有群组连接的间隔，默认15s |
 | sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 | executor |   |  异步拉取区块、刷新群组状态、监控群组数据的线程池配置  |
 | executor.corePoolSize | 3 |  异步任务的核心线程数  |
@@ -183,9 +208,6 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 | scheduler.awaitTerminationSeconds | 600  |  定时任务的线程等待超时时长（秒）  |
 | scheduler.waitForTasksToCompleteOnShutdown | true  |  定时任务完成后再停止线程  |
 
-#### 3. 升级兼容性
-
-请查看[升级说明](upgrade.md)
 
 
 

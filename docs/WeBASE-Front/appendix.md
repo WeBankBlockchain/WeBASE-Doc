@@ -364,6 +364,45 @@ public void receive(Channel channel, Message message) throws IOException {
 }
 ```
 
+## 5. 配置文件解析
+
+
+
+- 2. 配置文件解析
+
+| 参数 | 默认值    | 描述          |
+|------|-------------|-----------|
+| server.port  | 5002 | 当前服务端口   |
+| server.context-path  | /WeBASE-Front | 当前服务访问目录   |
+| server.connection-timeout  | 30000 | 服务连接超时时间ms   |
+| server.tomcat.max-threads  | 200 | tomcat最大线程数   |
+| server.tomcat.max-connections  | 10000 | tomcat最大连接数   |
+| sdk.orgName  | orgTest | sdk中默认的机构名   |
+| sdk.corePoolSize  | 50 | sdk的core线程池大小   |
+| sdk.maxPoolSize  | 100 | sdk的线程池最大值  |
+| sdk.queueCapacity  | 100 | sdk请求队列最大长度   |
+| sdk.timeout  | 10000 | sdk处理请求的超时时间ms   |
+| sdk.keepAlive  | 60 | sdk最大连接数   |
+| sdk.ip  | 127.0.0.1 | 节点的ip   |
+| sdk.channelPort  | 20200 | 节点的channel端口   |
+| sdk.encryptType  | 0 | 链的加密类型：0-ECDSA，1-国密   |
+| logging.config  | classpath:log4j2.xml | logging配置文件的位置   |
+| constant.keyServer  | 127.0.0.1:5004 | webase-sign服务的IP:Port（单个）   |
+| constant.transMaxWait  | 30 | 交易最大等待时间(s)   |
+| constant.monitorDisk  | / | 节点主机监控的路径 |
+| constant.monitorEnabled  | true | 是否启用节点主机监控服务  |
+| constant.aesKey  | EfdsW23D23d3df43 | webase服务的aes秘钥   |
+| constant.nodePath  |  /fisco/nodes/127.0.0.1/node0 | 节点路径   |
+| constant.http_read_timeOut  | 100000 | 访问服务的读取超时(ms)   |
+| constant.http_connect_timeOut  | 100000 | 访问服务的连接超时(ms)   |
+| constant.eventRegisterTaskFixedDelay  | 5000 | 事件推送注册的频率(ms)   |
+| constant.syncEventMapTaskFixedDelay  | 60000 | 事件推送内存的同步频率(ms)   |
+| constant.syncStatLogTime  | 5000 | 节点日志监控频率(ms)   |
+| constant.syncStatLogCountLimit  | 10000 | 节点日志监控数据最大值   |
+| constant.statLogEnabled  | false | 是否启用节点日志监控   |
+| constant.eventCallbackWait  | 10 | 获取event log的超时时间（秒）   |
+
+
 <!-- ### 配置https
 
 
