@@ -163,9 +163,9 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 用户可以通过新增节点前置，把新的节点前置添加到前置列表。系统会默认拉取这些前置所在的群组和各个群组的节点信息。在节点列表中，用户可以修改节点的共识状态：共识节点、观察节点、游离节点。其中修改为游离节点相当于将节点移出群组，停止节点前务必先将节点设置为游离节点，否则将触发节点异常。
 
-节点管理：
-
-显示所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
+前置列表与节点管理：
+- 前置列表：可以查看节点前置状态，导出前置的SDK证书zip包
+- 节点管理：显示所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
 
 ![](../../images/WeBASE-Console-Suit/node_manager_2.png)
 
@@ -215,7 +215,7 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 
 私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，私钥将托管在签名服务中，然后通过签名服务对合约部署和合约调用进行签名。注：外部账户可通过新建公钥账户导入，主要用于把交易和用户关联起来。
 
-私钥管理：
+私钥管理：包含WeBASE本地已登记的私钥用户与链上全量私钥用户。
 
 ![](../../images/WeBASE-Console-Suit/private_key_manage.png)
 
@@ -226,6 +226,11 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 导入私钥：支持导入.txt/.pem/.p12格式及明文的私钥，其中.txt私钥可由WeBASE-Front导出，.pem/.p12私钥可由console控制台导出。如果需要导入自定义私钥，可根据节点前置导出的.txt私钥，编辑其中的privateKey字段内容。
 
 ![](../../images/WeBASE-Console-Suit/import_private.png)
+
+导出私钥：可以选中导出.txt/.pem/.p12/WeID等格式的私钥，其中WeID格式私钥为十进制明文私钥，txt则是十六进制明文私钥；在代码中加载私钥可以参考[节点前置-私钥加载](../WeBASE-Front/appendix.html#loadKey)
+
+![](../../images/WeBASE-Console-Suit/import_private.png)
+
 
 ### 系统管理
 
@@ -300,6 +305,10 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 ![](../../images/WeBASE-Console-Suit/cert_manage.png)
 
 导入证书：
+
+![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
+
+导出SDK证书：v1.5.0后支持导出节点前置的SDK证书zip包，可用于连接节点
 
 ![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
 
