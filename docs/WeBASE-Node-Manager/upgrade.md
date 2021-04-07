@@ -2,6 +2,44 @@
 
 WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
 
+WeBASE-Node-Manager升级的必须步骤：
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 替换`webase-node-mgr/apps`中的jar包
+2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
+3. 查看[节点管理服务升级文档](../WeBASE-Node-Manager/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
+    3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
+    3.2 按照升级文档指引，操作数据表
+4. `bash stop.sh && bash start.sh`重启
+
+各个版本的具体修改可参考下文
+
+#### v1.5.0
+- 新增应用管理，支持WeIdentity模板和自定义应用接入
+- 新增节点监控的链上TPS、出块周期、块大小的统计
+- 新增合约列表中的已登记合约与链上全量合约视图、新增私钥用户列表中的已登记私钥与链上全量私钥视图
+- 支持导出Txt/Pem/P12/WeID私钥文件
+
+##### 数据表更新
+
+执行webase-node-mgr中`script/upgrade`目录中的`v143_v150.sql`即可更新数据表可通过`mysql -e source v143_v150.sql`命令执行
+- 注：提前备份mysql数据
+
+更新详情如下
+
+**数据表字段修改**
+- `tb_app_info`中插入WeIdentity示例应用信息
+- `tb_contract`表中修改`contract_path`字段长度为`varchar(128)`
+- `tb_cns`表中修改`contract_path`字段长度为`varchar(128)`，`DEFAULT NULL`
+- `tb_contract_path`表中修改`contract_path`字段长度为`varchar(128)`
+- `tb_abi`表中移除唯一约束`unique_name`
+
+**数据表结构更改**
+- 新增了应用信息表`tb_app_info`
+- 新增了合约仓库信息表`tb_contract_store`
+- 新增了区块统计数据表`tb_stat`
+- 新增了外部合约信息表`tb_external_contract`
+- 新增了外部账户信息表`tb_external_account`
+
 #### v1.4.1
 新增FISCO BCOS v2.5.0及以上版本的基于角色的权限管理功能，新增了开发者模式
 - 新的权限管理基于角色，可参考FISCO BCOS[权限控制文档](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html)

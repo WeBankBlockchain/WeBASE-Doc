@@ -1,12 +1,13 @@
 # WeBASE一键部署升级文档
 
 ## 子系统升级
-WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinTech/WeBASE/releases)中WeBASE子系统间的兼容性说明
+WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinTech/WeBASE/releases)中WeBASE子系统间的兼容性说明，若只升级某个子系统，则需要查看子系统的Changelog，检查是否与已有的其他子系统兼容
 
-**切记复制备份已有的子服务项目文件，方便恢复**，下面介绍各个服务的升级步骤
+**切记复制备份已有的子服务项目文件，便于恢复**，下面介绍各个服务的升级步骤
 
 #### WeBASE-Front升级
 
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
 1. 替换`webase-front/apps`中的jar包
 2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
 3. `bash stop.sh && bash start.sh`重启
@@ -14,19 +15,22 @@ WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinT
 
 #### WeBASE-Node-Manager升级
 
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
 1. 替换`webase-node-mgr/apps`中的jar包
 2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
-3. 查看[签名服务升级文档](../WeBASE-Node-Manager/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
+3. 查看[节点管理服务升级文档](../WeBASE-Node-Manager/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
     3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
     3.2 按照升级文档指引，操作数据表
 4. `bash stop.sh && bash start.sh`重启
 
 #### WeBASE-Web升级
 
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
 1. 直接替换`webase-web`整个目录，无需重启Nginx
 
 #### WeBASE-Sign升级
 
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
 1. 替换`webase-sign/apps`中的jar包
 2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
 3. 查看[签名服务升级文档](../WeBASE-Sign/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
@@ -41,6 +45,7 @@ FISCO-BCOS节点的升级的详情需要参考[FISCO-BCOS 版本信息](https://
 - 全面升级 ：参考 [安装FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html) 搭建新链，重新向新节点提交所有历史交易
 
 ## 使用WeBASE升级脚本
+<span id="auto">
 
 在WeBASE v1.5.0后，WeBASE将提供`webase-upgrade.sh`脚本（位于webase-deploy目录中，与`common.properties`文件同级目录）
 
