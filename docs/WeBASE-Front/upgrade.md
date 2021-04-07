@@ -2,35 +2,37 @@
 
 WeBASE-Front升级的兼容性说明，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
-#### v1.4.1
+WeBASE-Front升级的必须步骤：
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 替换`webase-front/apps`中的jar包
+2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
+3. `bash stop.sh && bash start.sh`重启
 
-##### 新增链权限接口与web3接口
-- 新增ChainGovernance接口
+各个版本的具体修改可参考下文
+
+#### v1.5.0
+
+##### 支持导出证书与私钥
+- 支持导出前置的SDK证书与私钥、支持导出Pem/P12/WeID私钥
+
+#### v1.4.1
+- 新增链权限ChainGovernance接口
 - 新增getBlockHeaderByHash与getBlockHeaderByNumber接口
 
 #### v1.4.0
-
-##### 增加版本号接口
 - 增加返回 WeBASE-Front 和 WeBASE-Sign 版本号接口
 
 #### v1.3.2
-
-##### 移除fastjson
 - 移除Fastjson，替换为Jackson 2.11.0。
 - 升级web3sdk为2.4.1，并升级springboot等依赖项
 
 #### v1.3.1
-
-##### 新增动态群组接口
 - 新增动态群组接口，包含生成群组、启动/停止群组、删除/恢复群组、单个/批量查询群组状态等接口
 
 注：动态群组操作指南可参考[动态群组操作指南](../WeBASE-Console-Suit/index.html#dynamic_group_use)，接口详情可参考[接口文档](./interface.html#dynamic_group_interface)
 
-##### 新增导入已部署合约Abi功能、合约Abi解析功能
 - 前置的“合约管理”Tab中，新增导入合约abi功能，可以导入已部署的合约进行管理
 - 前置的“合约管理”Tab中，新增合约ABI编码功能，可用于构造交易input入参
-
-##### 新增导入.p12私钥用户
 - 私钥管理中，支持导入控制台所导出的.p12私钥；
 
 #### v1.3.0

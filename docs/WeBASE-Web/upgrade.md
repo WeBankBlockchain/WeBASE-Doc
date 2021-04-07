@@ -2,6 +2,58 @@
 
 WeBASE-Web升级说明，请结合[WeBASE-Web Changelog](https://github.com/WeBankFinTech/WeBASE-Web)和[WeBASE管理平台使用手册](../WeBASE-Console-Suit/index.html)进行阅读。
 
+WeBASE-Web升级的必须步骤：
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 直接替换`webase-web`整个目录，无需重启nginx
+
+各个版本的具体修改可参考下文
+
+
+#### v1.5.0
+- 新增应用管理，支持WeIdentity模板和自定义应用接入
+- 新增节点监控的链上TPS、出块周期、块大小的统计
+- 新增合约列表中的已登记合约与链上全量合约视图、新增私钥用户列表中的已登记私钥与链上全量私钥视图
+- 支持导出Txt/Pem/P12/WeID私钥文件
+- 新增适配移动端的WeBASE管理台
+
+其中移动端管理台需要启用新的nginx.conf，新增了移动端自动重路由、移除auto-index、增加gzip压缩
+- 需要将已有的webase-node-mgr的ip port及webase-web的port配置到新的nginx.conf文件中，使用nginx重载配置文件
+
+新增内容如下
+- 需要启用移动端时，则需要下载移动端的webase-web-mobile.zip安装包并解压，即`wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-web-mobile.zip`，并解压`unzip webase-web-mobile.zip`
+- 在nginx.conf中的`location /`中的`phone_page_url`替换为`webase-web-mobile`解压后的路径(已有的`root web_page_url`无需修改)
+- 最后使用`nginx -s reload`重载新的nginx配置文件
+```
+location / {    
+    # default pc page url
+    root   web_page_url;
+    # if using phone
+    if ( $http_user_agent ~ "(MIDP)|(WAP)|(UP.Browser)|(Smartphone)|(Obigo)|(Mobile)|(AU.Browser)|(wxd.Mms)|(WxdB.Browser)|(CLDC)|(UP.Link)|(KM.Browser)|(UCWEB)|(SEMC-Browser)|(Mini)|(Symbian)|(Palm)|(Nokia)|(Panasonic)|(MOT-)|(SonyEricsson)|(NEC-)|(Alcatel)|(Ericsson)|(BENQ)|(BenQ)|(Amoisonic)|(Amoi-)|(Capitel)|(PHILIPS)|(SAMSUNG)|(Lenovo)|(Mitsu)|(Motorola)|(SHARP)|(WAPPER)|(LG-)|(LG/)|(EG900)|(CECT)|(Compal)|(kejian)|(Bird)|(BIRD)|(G900/V1.0)|(Arima)|(CTL)|(TDG)|(Daxian)|(DAXIAN)|(DBTEL)|(Eastcom)|(EASTCOM)|(PANTECH)|(Dopod)|(Haier)|(HAIER)|(KONKA)|(KEJIAN)|(LENOVO)|(Soutec)|(SOUTEC)|(SAGEM)|(SEC-)|(SED-)|(EMOL-)|(INNO55)|(ZTE)|(iPhone)|(Android)|(Windows CE)|(Wget)|(Java)|(curl)|(Opera)" )
+    {
+            root   phone_page_url;
+    }
+    index  index.html index.htm;
+    try_files $uri $uri/ /index.html =404;
+}
+```
+- 需要启用gzip时，在nginx.conf中的`server`中添加以下内容
+```
+server {
+    ...
+
+    # zip solidity js file
+    gzip  on;
+    gzip_min_length     10k;
+    gzip_buffers        32 4k;
+    gzip_http_version   1.0;
+    gzip_comp_level     1;
+    gzip_proxied        any;
+    gzip_types          text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png application/vnd.ms-fontobject font/ttf font/opentype font/x-woff image/svg+xml;
+    gzip_vary           on;
+    gzip_disable        "MSIE [1-6]\.";
+}
+```
+
 
 #### v1.4.1
 新增FISCO BCOS v2.5.0及以上版本的基于角色的权限管理功能，新增了开发者模式

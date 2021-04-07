@@ -20,13 +20,13 @@ WeBASE 技术文档
    :maxdepth: 3
    
    docs/WeBASE/introduction.md
+   docs/WeBASE/ChangeLOG.md
    docs/WeBASE-Install/index.md
    docs/WeBASE-Console-Suit/index.md
    docs/WeBASE/subsystem.md
    docs/WeBASE/quick-start.md
    docs/WeBASE/mirror.md
    docs/WeBASE/CONTRIBUTING.md
-   docs/WeBASE/ChangeLOG.md
 .. 
 
 
