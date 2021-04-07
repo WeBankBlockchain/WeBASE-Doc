@@ -42,4 +42,4 @@ WeBASE-Front默认不启用消息推送功能，如需启用请参考[附录-链
 
 WeBASE-Front v1.4.2+已支持solidity `v0.5.1`和`v0.6.10`:
 
-其中v0.5.1可在合约IDE中切换，若需要使用solidity v0.6.10，可参考部署说明的[v0.6.10配置](./install.html#solc6)
+其中v0.5.1可在合约IDE中直接进行切换，若需要使用solidity v0.6.10，可参考部署说明的[v0.6.10配置](./install.html#solc6)
