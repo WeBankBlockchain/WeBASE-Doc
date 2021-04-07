@@ -182,6 +182,11 @@ startWaitTime=600
 ...
 ```
 
+- 9：启动报错SSLContext: null
+
+答：确保`conf/`目录下包含sdk证书；
+若使用的是v1.5.0以前的版本，则需要保证`ca.crt, node.crt, node.key`；其中node.crt, node.key为sdk.crt, sdk.key复制重命名得到
+
 ## 3. 使用说明
 
 ### 测试用户管理
@@ -196,7 +201,7 @@ startWaitTime=600
 {
   "address":"0x06f81c8e1cb59b5df2cdeb87a212d17fba79aad7",
   "publicKey":"0x4b1041710a4427dc1c0d542c8f0fd312d92b0d03a989f512d1f8d3cafb851967f3592df0035e01fa63b2626165d0f5cffab15792161aa0360b8dfba2f3a7cf59",
-  "privateKey":"71f1479d9051e8d6b141a3b3ef9c01a7756da823a0af280c6bf62d18ee0cc978",
+  "privateKey":"71f1479d9051e8d6b141a3b3ef9c01a7756da823a0af280c6bf62d18ee0cc978", // 十六进制
   "userName":"111",
   "type":0  // type为0，不可修改
 }
@@ -215,6 +220,7 @@ fM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK
 其中pem文件开头的`-----BEGIN PRIVATE KEY-----\n`和结尾的`\n-----END PRIVATE KEY-----\n`格式不可更改，否则将读取pem文件失败
 
 #### 3.2. 导出私钥
+<span id="loadKey"></span>
 
 目前仅支持导出测试用户的txt格式私钥
 
@@ -222,9 +228,24 @@ fM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK
 
 以上文中的私钥加载：
 
+基于javasdk的私钥加载：
+```
+@Test
+public void testCrypto() {
+    // 1-国密，0-ECDSA
+    CryptoSuite cryptoSuite = new CryptoSuite(1);
+    CryptoKeyPair keyPair = cryptoSuite.createKeyPair("e843a542a7a8240f9c9e418b9517c2c8f4dc041a11a44e614a3b026c3588c188");
+    System.out.println("privateKey: " + keyPair.getHexPrivateKey());
+    System.out.println("address: " + keyPair.getAddress());
+    System.out.println("publicKey: " + keyPair.getHexPublicKey());
+}
+```
+
+基于web3sdk的私钥加载：
 ```
 @Test
 public void loadPrivateKeyTest() {
+  CryptoSuite
   String privateKey = "71f1479d9051e8d6b141a3b3ef9c01a7756da823a0af280c6bf62d18ee0cc978";
   Credentials credentials = GenCredential.create(privateKey);
   // private key 实例

@@ -192,10 +192,17 @@ INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time
 | constant.execBuildChainTimeout | 40000 | 单位ms，执行建链脚本/生成节点证书脚本的超时时间  |
 | constant.execShellTimeout | 600000 | 单位ms，执行脚本的超时实际，默认10min  |
 | constant.developerModeEnable | false |  是否启用开发者模式（管理员、用户并增加开发者角色） |
+| constant.deployedModifyEnable | true |  是否允许重复部署合约 |
 | constant.enableVerificationCode | true |  验证码是否启用随机 |
-| constant.verificationCodeValue | false |  当不启用验证码的随机时，设置固定验证码（方便联调） |
-| constant.ignoreCheckFront | /account/login,/account/pictureCheckCode,/login,/user/privateKey,/front/new,/front/find,,/group/generate,/group/start |  直接访问前置的URI |
+| constant.verificationCodeValue | "8888" |  当不启用验证码的随机时，设置固定验证码（方便联调） |
+| constant.ignoreCheckFront | /account/login,/account/pictureCheckCode,/login,/user/privateKey/**,/config/encrypt,/config/version,/front/refresh,/api/* |  直接访问前置的URI |
 | constant.resetGroupListInterval | 15000 |  异步刷新所有群组连接的间隔，默认15s |
+| constant.appRequestTimeOut | 300000 | 接入应用的请求间隔（ms）  |
+| constant.appStatusCheckCycle | 3000 | 接入应用的状态检查频率（ms）  |
+| constant.statBlockRetainMax | 100000 | 区块监控数据的最大存储量  |
+| constant.statBlockFixedDelay | 5000 | 区块监控数据的频率（ms）  |
+| constant.statBlockPageSize | 10 | 区块监控数据拉取的单次请求量  |
+| constant.enableExternalFromBlock | true  | 是否启用全量用户与全量合约采集  |
 | sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 | executor |   |  异步拉取区块、刷新群组状态、监控群组数据的线程池配置  |
 | executor.corePoolSize | 3 |  异步任务的核心线程数  |
