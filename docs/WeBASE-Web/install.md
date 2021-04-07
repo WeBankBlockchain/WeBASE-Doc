@@ -11,12 +11,27 @@
 代码可以放在/data下面，执行命令：
 
     git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+    或
+    git clone https://gitee.com/WeBank/WeBASE-Web.git
 
 进入目录：
 
 ```
 cd WeBASE-Web
 ```
+
+#### 2.1  下载solc-bin
+首先检查目录dist/static/js  是否存在v0.4.25.js等文件，没有就需要在此目录下载这些文件。
+在WeBASE-Web目录下面执行命令：
+```
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.4.25.js -o ./dist/static/js/v0.4.25.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.4.25-gm.js -o ./dist/static/js/v0.4.25-gm.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.5.1.js -o ./dist/static/js/v0.5.1.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.5.1-gm.js -o ./dist/static/js/v0.5.1-gm.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10.js -o ./dist/static/js/v0.6.10.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10-gm.js -o ./dist/static/js/v0.6.10-gm.js
+```
+执行完后检查dist/static/js是否下载完这些js文件。
 
 ### 3. 修改配置
 
