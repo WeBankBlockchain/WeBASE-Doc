@@ -94,7 +94,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.3/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -128,10 +128,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.3
-webase.mgr.version=v1.4.3
-webase.sign.version=v1.4.3
-webase.front.version=v1.4.3
+webase.web.version=v1.5.0
+webase.mgr.version=v1.5.0
+webase.sign.version=v1.5.0
+webase.front.version=v1.5.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -153,6 +153,9 @@ front.org=fisco
 
 # WeBASE管理平台服务端口
 web.port=5000
+# 启用移动端管理平台 (0: disable, 1: enable)
+web.h5.enable=1
+
 # 节点管理子系统服务端口
 mgr.port=5001
 # 节点前置子系统端口
@@ -170,10 +173,10 @@ node.channelPort=20200
 # 节点rpc端口
 node.rpcPort=8545
 
-# Encrypt type (0: standard, 1: guomi)
+# 加密类型 (0: ECDSA算法, 1: 国密算法)
 encrypt.type=0
-# ssl encrypt type (0: standard ssl, 1: guomi ssl)
-# only guomi type support guomi ssl
+# SSL连接加密类型 (0: ECDSA SSL, 1: 国密SSL)
+# 只有国密链才能使用国密SSL
 encrypt.sslType=0
 
 # 是否使用已有的链（yes/no）
@@ -191,7 +194,7 @@ node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.7.0
+fisco.version=2.7.2
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
@@ -229,10 +232,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.4.3        ========
-==============    webase-node-mgr version  v1.4.3   ========
-==============    webase-sign version  v1.4.3       ========
-==============    webase-front version  v1.4.3      ========
+==============    webase-web version  v1.5.0        ========
+==============    webase-node-mgr version  v1.5.0   ========
+==============    webase-sign version  v1.5.0       ========
+==============    webase-front version  v1.5.0      ========
 ============================================================
 ```
 

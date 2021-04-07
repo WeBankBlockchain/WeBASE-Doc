@@ -1,4 +1,4 @@
-# WeBASE一键部署升级文档
+# 一键升级
 
 ## 子系统升级
 WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinTech/WeBASE/releases)中WeBASE子系统间的兼容性说明，若只升级某个子系统，则需要查看子系统的Changelog，检查是否与已有的其他子系统兼容
