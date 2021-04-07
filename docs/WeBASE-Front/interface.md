@@ -1467,6 +1467,167 @@ http://localhost:5002/WeBASE-Front/privateKey/importWithSign
 ```
 
 
+### 2.8. 对哈希签名
+
+#### 接口描述
+
+计算HASH和签名值
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/signMessageHash**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**                              |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | ------------------------------------- |
+| 1        | Sign用户Id | signUserId       | String   |              | 是       | 在webase-sign创建的私钥的id |
+| 2        | Hash值   | messageHash       | String   |              | 是       |                                       |
+
+**2）数据格式**
+
+```
+{
+  "messageHash": "0xa271b78b8e869d693f7cdfee7162d7bfb11ae7531fd50f73d86f73a05c84dd7c",
+  "signUserId": "883cfa1d40117dd2d270aa8bb0bb33776409be8b"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "v": 0,
+  "r": "0x2a76a45bcf1113615f796cc01b23c57f81f20ce79500080bb34c7994ed04de06",
+  "s": "0x4f111eb37720e2618d8906368c825fd3cbe89b2781cb678efafb42399594a580",
+  "p": "0x4405f9d5d6ccff709b6543bc8ac24cbb649d3267a66db19ab8f85f3b884a8505f086c581490e7e50558879abde9c4d07fc2daab92f81c0eb4b805af3c8895cfc"
+}
+```
+
+
+
+### 2.9. 导出pem私钥
+
+#### 接口描述
+
+从本地或WeBASE-Sign导出pem私钥文件
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/exportPem**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | Sign用户编号 | signUserId    | String   |              | 否      |  非空时，导出sign的私钥        |
+| 2        | 用户地址 | userAddress    | String   |              | 否     |    若signUserId为空，则地址不能为空，导出本地私钥       |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/exportPem
+```
+
+```
+{
+    "userAddress": "0x883cfa1d40117dd2d270aa8bb0bb33776409be8b"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 文件名  | ResponseEntity.header       | String   | 是       | 文件名在header中 |
+| 2        | 文件流 | body  | InputStream   | 是       |    文件的流在body中，使用pcks12方式接收                   |
+
+**2）数据格式**
+
+```
+headers: content-disposition: attachment;filename*=UTF-8''111_0x0421975cf4a5b27148f65de11cd9d8559a1bbbd9.pem 
+
+{
+-----BEGIN PRIVATE KEY-----
+MIGNAgEAMBAGByqGSM49AgEGBSuBBAAKBHYwdAIBAQQg91Aha3x2UdpN2Sg5C5Wh
+7Y8YwIYC5NTNtfQT1yp7hKWgBwYFK4EEAAqhRANCAAQ9SEdu1kLpLXVmayqax7N+
+Pf/ATWx5jJIJIiQF6/BIiuORZrZb/M04FlxtGyVuQjQjbYVgyjNDUilj14OlZhXo
+-----END PRIVATE KEY-----
+}
+```
+
+
+### 2.10. 导出p12私钥
+
+#### 接口描述
+
+从本地或WeBASE-Sign导出p12私钥文件
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/exportP12**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | Sign用户编号 | signUserId    | String   |              | 否      |  非空时，导出sign的私钥        |
+| 2        | 用户地址 | userAddress    | String   |              | 否     |    若signUserId为空，则地址不能为空，导出本地私钥       |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/exportP12
+```
+
+```
+{
+    "userAddress": "0x883cfa1d40117dd2d270aa8bb0bb33776409be8b"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 文件名  | ResponseEntity.header       | String   | 是       | 文件名在header中 |
+| 2        | 文件流 | body  | InputStream   | 是       |    文件的流在body中，使用pcks12方式接收                   |
+
+**2）数据格式**
+
+
+```
+headers:  content-disposition: attachment;filename*=UTF-8''111_0x0421975cf4a5b27148f65de11cd9d8559a1bbbd9.p12 
+
+{
+// 二进制流
+}
+```
+
 
 ## 3. web3接口
 
@@ -4565,65 +4726,8 @@ b、失败：
 
 
 
-### 6.11. 查询节点证书接口
 
-#### 接口描述
-
-获取Front对应节点的Fisco证书和sdk证书（包含链证书、机构证书和节点证书）的内容；
-
-需要在项目配置文件中`constant-nodePath`配置Front连接节点的绝对路径；
-
-**注：**
-> 接口只返回了证书的文本(Base64编码)，未包含开头与结尾以及换行的格式文本；
-> 如需将文本保存为一个证书文件，需要加上开头“-----BEGIN CERTIFICATE-----\n”和结尾“\n-----END CERTIFICATE-----\n”；
-
-#### 接口URL
-
-
-**http://localhost:5002/WeBASE-Front/cert**
-
-#### 调用方法
-
-HTTP GET
-
-#### 请求参数
-
-**1）参数表**
-
-| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
-| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
-|          | -       | -            | -   |              |        |                            |
-
-**2）数据格式**
-
-```
-http://localhost:5002/WeBASE-Front/cert
-```
-
-#### 响应参数
-
-**1）数据格式**
-
-a、成功：
-
-```
-{
-    "node": "MIICOTCCASGgAwIBAgIJAKHsAYI3TsAOMA0GCSqGSIb3DQEBCwUAMDgxEDAOBgNV\nBAMMB2FnZW5jeUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5j\neTAeFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDIxDDAKBgNVBAMMA3Nk\nazETMBEGA1UECgwKZmlzY28tYmNvczENMAsGA1UECwwEbm9kZTBWMBAGByqGSM49\nAgEGBSuBBAAKA0IABJ79rSKIb97xZwByW58xH6tzoNKNLaKG7J5wxAEgAb03O2h4\nMkEMLtf/LB7tELOiyCiIEhLScprb1LjvDDt2RDGjGjAYMAkGA1UdEwQCMAAwCwYD\nVR0PBAQDAgXgMA0GCSqGSIb3DQEBCwUAA4IBAQC0u2lfclRmCszBTi2rtvMibZec\noalRC0sQPBPRb7UQhGCodxmsAT3dBUf+s4wLLrmN/cnNhq5HVObbWxzfu7gn3+IN\nyQEeqdbGdzlu1EDcaMgAz6p2W3+FG/tmx/yrNza29cYekWRL44OT5LOUPEKrJ4bJ\neOBRY4QlwZPFmM0QgP7DoKxHXldRopkmvqT4pbW51hWvPgj7KrdqwbVWzuWQuI3i\n3j3O96XZJsaDZ0+IGa5093+TsTNPfWUZzp5Kg+EyNR6Ea1evuMDNq9NAqqcd5bX9\nO9kgkb8+llO8I5ZhdnN0BuhGvv9wpsa9hW8BImOLzUBwfSVYouGCkoqlVq9X",
-    "chain": "MIIDPTCCAiWgAwIBAgIJAMfvnu4d5fHdMA0GCSqGSIb3DQEBCwUAMDUxDjAMBgNV\nBAMMBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAe\nFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDUxDjAMBgNVBAMMBWNoYWlu\nMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjCCASIwDQYJKoZI\nhvcNAQEBBQADggEPADCCAQoCggEBAMGsKT/S60cxvFS4tBLyfT0QKPLW1g3ZgMND\n03hrWp1FAnvE9htsDEgqvNLD5hKWaYcUhjQMq0WttiP/vPxkwwJkZhzWhXpdSxMR\nqKVX4BppnkT0ICm84jYSyJdNFjKvfWlBIptIfFuTUDMT+XqF/Ct756JksiUwKZRW\neRAVcYzFM4u4ZuKeaept/8Bv8Z/RlJzGI57qj5BELeA0meUagq2WoCgJrPyvbO0b\nLwogFWS4kEjv20IIdj3fTqeJlooEXtPnuegunSMQB6aIh2im74FfJ3sHuOjQDFuC\nb5ZUiyUHG6IOGCqs+Grk+/VYI16Mx+8OoGBD5koTpK8B+/aedsUCAwEAAaNQME4w\nHQYDVR0OBBYEFLTg2FsUFekx9XjIi01BrDpo0aPIMB8GA1UdIwQYMBaAFLTg2FsU\nFekx9XjIi01BrDpo0aPIMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEB\nAJmuMLhWSld8G6i3Vw21TN/d2rSRg3hNqOyycPYtdVK1YXEj4Xm91qgL8An3Kui8\njSq1S9+PstGvyh14YUw43Y1VtEPGpNVTvDtkxQ/8rs1sGHbqUxshgFMbqruxp7WH\ns0fxgn5COHEnRC4jQn02wZAk8pIjFVZLkhqdIYBtC35buHr17mXNL0S4H5cJxzPN\nk3XtKBqXedkTrEsDhR/bZ6qDDq0BcduhtKiYVPiVw9z3moLuwDb0QDM59zCexpcz\nb/w7K4lIxWqpD5tbpKSmj/3v5TCqez0Mim8/j4q29bP913KQrngnVCdCezOsPWIH\nDDoihgeRQHuz1VuGGZ259Hc=",
-    "agency": "MIIDADCCAeigAwIBAgIJAJUF2Dp1a9U6MA0GCSqGSIb3DQEBCwUAMDUxDjAMBgNV\nBAMMBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAe\nFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDgxEDAOBgNVBAMMB2FnZW5j\neUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTCCASIwDQYJ\nKoZIhvcNAQEBBQADggEPADCCAQoCggEBANBT4CTciIYdSeEabgJzif+CFB0y3GzG\ny+XQYtWK+TtdJWduXqhnnZiYAZs7OPGEu79Yx/bEpjEXsu2cXH0D6BHZk+wvuxG6\nezXWq5MYjCw3fQiSRWkDYoxzWgulkRyYROF1xoZeNGQssReFmCgP+pcQwRxjcq8z\nIA9iT61YxyW5nrS7xnra9uZq/EE3tsJ0ae3ax6zixCT66aV49S27cMcisS+XKP/q\nEVPxhO7SUjnzZY69MgZzNSFxCzIbapnlmYAOS26vIT0taSkoKXmIsYssga45XPwI\n7YBVCc/34kHzW9xrNjyyThMWOgDsuBqZN9xvapGSQ82Lsh7ObN0dZVUCAwEAAaMQ\nMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAu3aHxJnCZnICpHbQ\nv1Lc5tiXtAYE9aEP5cxb/cO14xY8dS+t0wiLIvyrE2aTcgImzr4BYNBm1XDt5suc\nMpzha1oJytGv79M9/WnI/BKmgUqTaaXOV2Ux2yPX9SadNcsD9/IbrV0b/hlsPd6M\nK8w7ndowvBgopei+A1NQY6jTDUKif4RxD4u5HZFWUu7pByNLFaydU4qBKVkucXOq\nxmWoupL5XrDk5o490kiz/Zgufqtb4w6oUr3lrQASAbFB3lID/P1ipi0DwX7kZwVX\nECDLYvr+eX6GbTClzn0JGuzqV4OoRo1rrRv+0tp1aLZKpCYn0Lhf6s1iw/kCeM2O\nnP9l2Q=="
-}
-```
-
-b、失败：
-```
-{
-    "code": 201231,
-    "message": "Cert file not found, please check cert path in config",
-    "data": "FileNotFound, node cert(node.crt) path prefix error"
-}
-```
-
-### 6.12. 合约状态管理
+### 6.11. 合约状态管理
 
 #### 接口描述
 
@@ -4674,14 +4778,14 @@ HTTP POST
 ```
 
 
-### 6.13. 基于角色的权限管理
+### 6.12. 基于角色的权限管理
 <span id="governance"></span>
 
 使用FISCO BCOS v2.5.0 与 WeBASE-Front v1.4.1 (及)以上版本将使用预编译合约中的ChainGovernance接口(本章节[接口6.13](#governance))，详情可参考[FISCO BCOS基于角色的权限控制](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html#id2)
 
 包含链治理委员管理、链运维管理等功能
 
-### 6.13.1. 查看链治理委员列表
+### 6.12.1. 查看链治理委员列表
 
 #### 接口描述
 
@@ -4727,7 +4831,7 @@ http://localhost:5002/WeBASE-Front/governance/committee/list?groupId=1
 ```
 
 
-### 6.13.2. 增加链治理委员
+### 6.12.2. 增加链治理委员
 
 #### 接口描述
 
@@ -4778,7 +4882,7 @@ HTTP POST
 ```
 
 
-### 6.13.3. 取消链治理委员
+### 6.12.3. 取消链治理委员
 
 #### 接口描述
 
@@ -4829,7 +4933,7 @@ HTTP DELETE
 ```
 
 
-### 6.13.4. 查看链治理委员投票权重
+### 6.12.4. 查看链治理委员投票权重
 
 #### 接口描述
 
@@ -4876,7 +4980,7 @@ http://localhost:5002/WeBASE-Front/governance/committee/weight?groupId=1&address
 }
 ```
 
-### 6.13.5. 更新链治理委员投票权重
+### 6.12.5. 更新链治理委员投票权重
 
 #### 接口描述
 
@@ -4926,7 +5030,7 @@ HTTP PUT
 
 
 
-### 6.13.6. 查看链投票阈值
+### 6.12.6. 查看链投票阈值
 
 #### 接口描述
 
@@ -4964,7 +5068,7 @@ http://localhost:5002/WeBASE-Front/governance/threshold?groupId=1
 ```
 
 
-### 6.13.7. 更新链投票阈值
+### 6.12.7. 更新链投票阈值
 
 #### 接口描述
 
@@ -5013,7 +5117,7 @@ HTTP PUT
 ```
 
 
-### 6.13.8. 查看运维列表
+### 6.12.8. 查看运维列表
 
 #### 接口描述
 
@@ -5055,7 +5159,7 @@ http://localhost:5002/WeBASE-Front/governance/operator/list?groupId=1
 ```
 
 
-### 6.13.9. 增加运维接口
+### 6.12.9. 增加运维接口
 
 #### 接口描述
 
@@ -5101,7 +5205,7 @@ HTTP POST
 }
 ```
 
-### 6.13.10. 取消运维接口
+### 6.12.10. 取消运维接口
 
 #### 接口描述
 
@@ -5686,44 +5790,37 @@ HTTP POST
 
 成功：
 
-data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
+
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": [{
-        "logParams": [{
-            "name": "name3",
-            "type": "bool",
-            "data": true,
-            "indexed": true
-        }, {
-            "name": "name4",
-            "type": "string",
-            "data": " x   zu \u0014n\r'8   z1S   Y S\u0019ܸGg K",
-            "indexed": true
-        }, {
-            "name": "name1",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }, {
-            "name": "name2",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }],
-        "log": {
-            "logIndex": 0,
-            "transactionIndex": 0,
-            "transactionHash": "0x5c7aac536ed70aaad659096b05bd06c1fbbc51604ceb79c3d8cea0f450f3b391",
-            "blockHash": "0x552524b1f6667d1fbb5d0ac72a12d59ecf982b5abc6a5cbe1c8d62ead7138e88",
-            "blockNumber": 137,
-            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
-            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
-            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
-        }
-    }
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"log": {
+			"logIndex": 0,
+			"transactionIndex": 0,
+			"transactionHash": "0x67c8d9a1bc62586b9feb0c8b1127bf0030f649771db3e3d0d99cd99209851ed8",
+			"blockHash": "0x0ca880c70a3f24dc5e6052cca4dbb50d9aa0ec973474e07d82e2f5281c54e582",
+			"blockNumber": 71,
+			"address": "0xd5d4fcf2a46831510f095bfb447bc945f99309f7",
+			"data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033132330000000000000000000000000000000000000000000000000000000000",
+			"topics": ["0x4df9dcd34ae35f40f2c756fd8ac83210ed0b76d065543ee73d868aec7c7fcf02"]
+		}, // `org.fisco.bcos.sdk.model.EventLog`，可参考java sdk
+		"data": ["123"]
+	}, {
+		"log": {
+			"logIndex": 0,
+			"transactionIndex": 0,
+			"transactionHash": "0x7c27078b372cee951dd102edcbbeab6b3b799212e4337d6bfac7f723e487a1fb",
+			"blockHash": "0x47f8456a656f226d5a4a7206790ae864ae4fb645bca625b87cf0378ecca7e742",
+			"blockNumber": 72,
+			"address": "0xd5d4fcf2a46831510f095bfb447bc945f99309f7",
+			"data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
+			"topics": ["0x4df9dcd34ae35f40f2c756fd8ac83210ed0b76d065543ee73d868aec7c7fcf02"]
+		},
+		"data": ["333"]
+	}],
+	"totalCount": 1
 }
 ```
 
@@ -7298,7 +7395,123 @@ http://localhost:5002/WeBASE-Front/contractStore/getContractItemById/2
 }
 ```
 
-## 13. 附录
+## 13. 证书管理
+
+
+### 13.1. 查询节点证书接口
+
+#### 接口描述
+
+获取Front对应节点的Fisco证书和sdk证书（包含链证书、机构证书和节点证书）的内容；
+
+需要在项目配置文件中`constant-nodePath`配置Front连接节点的绝对路径；
+
+**注：**
+> 接口只返回了证书的文本(Base64编码)，未包含开头与结尾以及换行的格式文本；
+> 如需将文本保存为一个证书文件，需要加上开头“-----BEGIN CERTIFICATE-----\n”和结尾“\n-----END CERTIFICATE-----\n”；
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/cert**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/cert
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+    "node": "MIICOTCCASGgAwIBAgIJAKHsAYI3TsAOMA0GCSqGSIb3DQEBCwUAMDgxEDAOBgNV\nBAMMB2FnZW5jeUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5j\neTAeFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDIxDDAKBgNVBAMMA3Nk\nazETMBEGA1UECgwKZmlzY28tYmNvczENMAsGA1UECwwEbm9kZTBWMBAGByqGSM49\nAgEGBSuBBAAKA0IABJ79rSKIb97xZwByW58xH6tzoNKNLaKG7J5wxAEgAb03O2h4\nMkEMLtf/LB7tELOiyCiIEhLScprb1LjvDDt2RDGjGjAYMAkGA1UdEwQCMAAwCwYD\nVR0PBAQDAgXgMA0GCSqGSIb3DQEBCwUAA4IBAQC0u2lfclRmCszBTi2rtvMibZec\noalRC0sQPBPRb7UQhGCodxmsAT3dBUf+s4wLLrmN/cnNhq5HVObbWxzfu7gn3+IN\nyQEeqdbGdzlu1EDcaMgAz6p2W3+FG/tmx/yrNza29cYekWRL44OT5LOUPEKrJ4bJ\neOBRY4QlwZPFmM0QgP7DoKxHXldRopkmvqT4pbW51hWvPgj7KrdqwbVWzuWQuI3i\n3j3O96XZJsaDZ0+IGa5093+TsTNPfWUZzp5Kg+EyNR6Ea1evuMDNq9NAqqcd5bX9\nO9kgkb8+llO8I5ZhdnN0BuhGvv9wpsa9hW8BImOLzUBwfSVYouGCkoqlVq9X",
+    "chain": "MIIDPTCCAiWgAwIBAgIJAMfvnu4d5fHdMA0GCSqGSIb3DQEBCwUAMDUxDjAMBgNV\nBAMMBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAe\nFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDUxDjAMBgNVBAMMBWNoYWlu\nMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjCCASIwDQYJKoZI\nhvcNAQEBBQADggEPADCCAQoCggEBAMGsKT/S60cxvFS4tBLyfT0QKPLW1g3ZgMND\n03hrWp1FAnvE9htsDEgqvNLD5hKWaYcUhjQMq0WttiP/vPxkwwJkZhzWhXpdSxMR\nqKVX4BppnkT0ICm84jYSyJdNFjKvfWlBIptIfFuTUDMT+XqF/Ct756JksiUwKZRW\neRAVcYzFM4u4ZuKeaept/8Bv8Z/RlJzGI57qj5BELeA0meUagq2WoCgJrPyvbO0b\nLwogFWS4kEjv20IIdj3fTqeJlooEXtPnuegunSMQB6aIh2im74FfJ3sHuOjQDFuC\nb5ZUiyUHG6IOGCqs+Grk+/VYI16Mx+8OoGBD5koTpK8B+/aedsUCAwEAAaNQME4w\nHQYDVR0OBBYEFLTg2FsUFekx9XjIi01BrDpo0aPIMB8GA1UdIwQYMBaAFLTg2FsU\nFekx9XjIi01BrDpo0aPIMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEB\nAJmuMLhWSld8G6i3Vw21TN/d2rSRg3hNqOyycPYtdVK1YXEj4Xm91qgL8An3Kui8\njSq1S9+PstGvyh14YUw43Y1VtEPGpNVTvDtkxQ/8rs1sGHbqUxshgFMbqruxp7WH\ns0fxgn5COHEnRC4jQn02wZAk8pIjFVZLkhqdIYBtC35buHr17mXNL0S4H5cJxzPN\nk3XtKBqXedkTrEsDhR/bZ6qDDq0BcduhtKiYVPiVw9z3moLuwDb0QDM59zCexpcz\nb/w7K4lIxWqpD5tbpKSmj/3v5TCqez0Mim8/j4q29bP913KQrngnVCdCezOsPWIH\nDDoihgeRQHuz1VuGGZ259Hc=",
+    "agency": "MIIDADCCAeigAwIBAgIJAJUF2Dp1a9U6MA0GCSqGSIb3DQEBCwUAMDUxDjAMBgNV\nBAMMBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAe\nFw0xOTA3MTIwMjA2MTZaFw0yOTA3MDkwMjA2MTZaMDgxEDAOBgNVBAMMB2FnZW5j\neUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTCCASIwDQYJ\nKoZIhvcNAQEBBQADggEPADCCAQoCggEBANBT4CTciIYdSeEabgJzif+CFB0y3GzG\ny+XQYtWK+TtdJWduXqhnnZiYAZs7OPGEu79Yx/bEpjEXsu2cXH0D6BHZk+wvuxG6\nezXWq5MYjCw3fQiSRWkDYoxzWgulkRyYROF1xoZeNGQssReFmCgP+pcQwRxjcq8z\nIA9iT61YxyW5nrS7xnra9uZq/EE3tsJ0ae3ax6zixCT66aV49S27cMcisS+XKP/q\nEVPxhO7SUjnzZY69MgZzNSFxCzIbapnlmYAOS26vIT0taSkoKXmIsYssga45XPwI\n7YBVCc/34kHzW9xrNjyyThMWOgDsuBqZN9xvapGSQ82Lsh7ObN0dZVUCAwEAAaMQ\nMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAu3aHxJnCZnICpHbQ\nv1Lc5tiXtAYE9aEP5cxb/cO14xY8dS+t0wiLIvyrE2aTcgImzr4BYNBm1XDt5suc\nMpzha1oJytGv79M9/WnI/BKmgUqTaaXOV2Ux2yPX9SadNcsD9/IbrV0b/hlsPd6M\nK8w7ndowvBgopei+A1NQY6jTDUKif4RxD4u5HZFWUu7pByNLFaydU4qBKVkucXOq\nxmWoupL5XrDk5o490kiz/Zgufqtb4w6oUr3lrQASAbFB3lID/P1ipi0DwX7kZwVX\nECDLYvr+eX6GbTClzn0JGuzqV4OoRo1rrRv+0tp1aLZKpCYn0Lhf6s1iw/kCeM2O\nnP9l2Q=="
+}
+```
+
+b、失败：
+```
+{
+    "code": 201231,
+    "message": "Cert file not found, please check cert path in config",
+    "data": "FileNotFound, node cert(node.crt) path prefix error"
+}
+```
+
+
+
+### 13.2. 获取明文SDK证书与私钥
+
+#### 接口描述
+
+获取Front使用的sdk证书（包含链证书、sdk证书和sdk私钥）的内容
+
+
+#### 接口URL
+
+
+**http://localhost:5002/WeBASE-Front/cert/sdk**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+|          | -       | -            | -   |              |        |                            |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/cert/sdk
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 文件名  | ResponseEntity.header       | String   | 是       | 文件名在header中 |
+| 2        | 文件流 | body  | InputStream   | 是       |    文件的流在body中，使用pcks12方式接收                   |
+
+
+**1）数据格式**
+
+a、成功：
+
+```
+headers:  content-disposition: attachment;filename*=UTF-8''conf.zip 
+
+{
+    // 二进制流
+}
+```
+
+
+## 14. 附录
 
 ### 1. 返回码信息列表 
 <span id="code"></span>
