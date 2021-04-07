@@ -11,6 +11,5 @@
    ../WeBASE-Sign/index.md
    ../WeBASE-Chain-Manager/index.md
    ../WeBASE-Stat/index.md
-   ../WeBASE-Codegen-Monkey/index.md
-   ../WeBASE-Collect-Bee/index.md
+   ../WeBASE-Data/index.md
 ```
