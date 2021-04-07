@@ -95,7 +95,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 未初始化节点前置的管理平台，会引导去节点管理页面添加节点前置。
 - 节点前置服务需要填写前置的IP与端口（默认为`127.0.0.1`和`5002`），机构名则根据实际自定义填写
 
-![](../../images/WeBASE-Console-Suit/node_manager_add_front_2.png)
+![](../../images/WeBASE-Console-Suit/node_manager_add_front.png)
 
 前置添加完成后，管理平台就会开始拉取群组信息和群组的区块信息。此时数据概览页面应该就有数据了。为了解析和审计区块数据，需要把相关的合约和用户导入到管理平台。具体看下面两个小节。
 
@@ -168,7 +168,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 - 前置列表：可以查看节点前置状态，导出前置的SDK证书zip包
 - 节点管理：显示所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
 
-![](../../images/WeBASE-Console-Suit/node_manager_2.png)
+![](../../images/WeBASE-Console-Suit/front_node_manage.png)
 
 
 修改节点共识状态：
@@ -183,15 +183,18 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 合约IDE：
 
-![](../../images/WeBASE-Console-Suit/contract_2.png)
+![](../../images/WeBASE-Console-Suit/contract_ide.png)
 
-合约列表：
+合约列表：包含WeBASE已登记合约与链上已部署的合约
 
-![](../../images/WeBASE-Console-Suit/contract_list_2.png)
+已登记合约：包含通过IDE部署的合约、导入ABI的合约
 
-ABI列表：支持导入已部署的合约ABI进行合约调用
+![](../../images/WeBASE-Console-Suit/contract_list.png)
 
-![](../../images/WeBASE-Console-Suit/import_abi.png)
+链上全量合约：
+
+![](../../images/WeBASE-Console-Suit/contract_list_all.png)
+
 
 ABI编码：支持对ABI的方法与入参进行编码
 
@@ -218,7 +221,13 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 
 私钥管理：包含WeBASE本地已登记的私钥用户与链上全量私钥用户。
 
-![](../../images/WeBASE-Console-Suit/private_key_manage.png)
+已登记私钥：
+
+![](../../images/WeBASE-Console-Suit/private_key.png)
+
+链上全量私钥：
+
+![](../../images/WeBASE-Console-Suit/private_key_all.png)
 
 添加私钥用户：
 
@@ -302,14 +311,11 @@ FISCO-BCOS基于表的权限管理机制详情可以参考文档[FISCO-BCOS基�
 FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/certificates.html)
 
 证书列表：
+- 支持导出SDK证书：v1.5.0后支持导出节点前置的SDK证书zip包，可用于连接节点
 
 ![](../../images/WeBASE-Console-Suit/cert_manage.png)
 
 导入证书：
-
-![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
-
-导出SDK证书：v1.5.0后支持导出节点前置的SDK证书zip包，可用于连接节点
 
 ![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
 
@@ -381,7 +387,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 节点监控：
 
-![](../../images/WeBASE-Console-Suit/node_monitor_2.png)
+![](../../images/WeBASE-Console-Suit/node_monitor.png)
 
 主机监控：
 
@@ -452,15 +458,15 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 用户交易审计：可以指定用户、时间范围、交易接口进行筛选查看交易
 
-![](../../images/WeBASE-Console-Suit/tx_audit_user_tx_2.png)
+![](../../images/WeBASE-Console-Suit/tx_audit_user_tx.png)
 
 异常用户审计：
 
-![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_user_2.png)
+![](../../images/WeBASE-Console-Suit/abnormal_user.png)
 
 异常合约审计：
 
-![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_contract_2.png)
+![](../../images/WeBASE-Console-Suit/abnormal_contract.png)
 
 ### 订阅事件
 
@@ -564,6 +570,8 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 详情使用说明可以参考本文档[附录-动态群组管理使用指南](#dynamic_group_use)
 
 ## 升级兼容说明
+
+v.1.5.0后，通过一键部署的WeBASE可以使用[一键升级](../WeBASE-Install/upgrade.md)中提供的一键脚本对已有的WeBASE进行升级
 
 WeBASE-Front升级至最新版，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 
