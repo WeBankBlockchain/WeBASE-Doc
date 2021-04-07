@@ -12,12 +12,13 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 2. 节点管理
 3. 合约管理
 4. 私钥管理
-5. 系统管理
-6. 系统监控
-7. 交易审计
-8. 订阅事件
-9. 账号管理
-10. 群组管理
+5. 应用管理
+6. 系统管理
+7. 系统监控
+8. 交易审计
+9. 订阅事件
+10. 账号管理
+11. 群组管理
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -312,6 +313,8 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
 
+
+### 应用管理
 
 ### 系统监控
 
