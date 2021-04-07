@@ -9769,46 +9769,298 @@ http://localhost:5001/WeBASE-Node-Manager/host/check
 }
 ```
 
+## 17 应用管理模块
 
-## 17 其他接口
+### 17.1 保存应用信息
 
-### 17.1 查询是否使用国密
 
-获取WeBASE-Node-Manager是否使用国密版
+#### 传输协议规范
 
-#### 17.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/encrypt**
-* 请求方式：GET
+* 请求地址： **/app/save**
+* 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 17.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | --     | -        | 否     | -   
-
-​         
+| 序号 | 输入参数   | 类型   | 可为空 | 备注                               |
+| ---- | ---------- | ------ | ------ | ---------------------------------- |
+| 1    | appName    | string | 否     | 应用名称                           |
+| 2    | appDocLink | string | 否     | 应用文档链接                       |
+| 3    | appDesc    | string | 否     | 应用描述                           |
+| 4    | appIcon    | string | 是     | 应用图标                           |
+| 5    | appDetail  | string | 是     | 应用详细介绍                       |
+| 6    | id         | int    | 是     | 应用编号，传入时表示更新，否则新增 |
 
 ***2）入参示例***
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/encrypt
+http://127.0.0.1:5001/WeBASE-Node-Manager/app/save
+```
+
+```
+{
+  "appName":"WeID",
+  "appDocLink":"https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html",
+  "appIcon":"test",
+  "appDesc":"WeIdentity是一套分布式多中心的技术解决方案，可承载实体对象（人或者物）的现实身份与链上身份的可信映射、以及实现实体对象之间安全的访问授权与数据交换。WeIdentity由微众银行自主研发并完全开源，秉承公众联盟链整合资源、交换价值、服务公众的理念，致力于成为链接多个垂直行业领域的分布式商业基础设施，促进泛行业、跨机构、跨地域间的身份认证和数据合作。",
+  "appDetail":""
+}
 ```
 
 
-#### 17.1.3 返回参数
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数   | 类型          |      | 备注                       |
+| ---- | ---------- | ------------- | ---- | -------------------------- |
+| 1    | code       | Int           | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message    | String        | 否   | 描述                       |
+| 3    | data       | Object        |      | 信息对象                   |
+| 3.1  | id         | int           | 否   | 自增编号                   |
+| 3.2  | appName    | string        | 否   | 应用名称                   |
+| 3.3  | appKey     | string        | 否   | 应用Key                    |
+| 3.4  | appSecret  | string        | 否   | 应用密码                   |
+| 3.5  | appDocLink | string        | 否   | 应用文档链接               |
+| 3.6  | appIcon    | string        | 否   | 应用图标                   |
+| 3.7  | appDesc    | string        | 否   | 应用描述                   |
+| 3.8  | appDetail  | string        | 是   | 应用详细介绍               |
+| 3.9  | appIp      | string        | 是   | 应用ip                     |
+| 3.10 | frontPort  | int           | 是   | 应用端口                   |
+| 3.11 | appLink    | string        | 是   | 应用服务链接               |
+| 3.12 | appStatus  | int           | 否   | 应用状态(1存活，2不存活)   |
+| 3.13 | createTime | LocalDateTime | 否   | 落库时间                   |
+| 3.14 | modifyTime | LocalDateTime | 否   | 修改时间                   |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "id": 1,
+        "appName": "WeID",
+        "appKey": "z2dJaYXe",
+        "appSecret": "5bTi2zMgdxAbFwgmkZhxNrUXFFvdjmM8",
+        "appStatus": 2,
+        "appDocLink": "https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html",
+        "appLink": null,
+        "appIp": null,
+        "appPort": null,
+        "appIcon": "test",
+        "appDesc": "WeIdentity是一套分布式多中心的技术解决方案，可承载实体对象（人或者物）的现实身份与链上身份的可信映射、以及实现实体对象之间安全的访问授权与数据交换。WeIdentity由微众银行自主研发并完全开源，秉承公众联盟链整合资源、交换价值、服务公众的理念，致力于成为链接多个垂直行业领域的分布式商业基础设施，促进泛行业、跨机构、跨地域间的身份认证和数据合作。",
+        "appDetail": "",
+        "createTime": "2021-03-07 18:15:47",
+        "modifyTime": "2021-03-07 18:15:47"
+    },
+    "attachment": null
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+
+### 17.2 查询应用列表 
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/app/list?appName={appName}&appKey={appKey}&appType={appType}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数 | 类型   | 可为空 | 备注                                                         |
+| ---- | -------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | appName  | string | 是     | 应用名称                                                     |
+| 2    | appKey   | string | 是     | 应用Key                                                      |
+| 3    | appType  | Int    | 是     | 应用类型(1模板，2新建)，传入时查询对应列表，不传入则返回新建的应用列表 |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/app/list?appType=1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号   | 输出参数   | 类型          |      | 备注                       |
+| ------ | ---------- | ------------- | ---- | -------------------------- |
+| 1      | code       | Int           | 否   | 返回码，0：成功 其它：失败 |
+| 2      | message    | String        | 否   | 描述                       |
+| 3      | totalCount | int           | 否   | 总记录数                   |
+| 4      | data       | List          | 是   | 列表                       |
+| 4.1    |            | Object        |      | 信息对象                   |
+| 4.1.1  | id         | int           | 否   | 自增编号                   |
+| 4.1.2  | appName    | string        | 否   | 应用名称                   |
+| 4.1.3  | appKey     | string        | 否   | 应用Key                    |
+| 4.1.4  | appSecret  | string        | 否   | 应用密码                   |
+| 4.1.5  | appDocLink | string        | 否   | 应用文档链接               |
+| 4.1.6  | appIcon    | string        | 否   | 应用图标                   |
+| 4.1.7  | appDesc    | string        | 否   | 应用描述                   |
+| 4.1.8  | appDetail  | string        | 是   | 应用详细介绍               |
+| 4.1.9  | appIp      | string        | 是   | 应用ip                     |
+| 4.1.10 | frontPort  | int           | 是   | 应用端口                   |
+| 4.1.11 | appLink    | string        | 是   | 应用服务链接               |
+| 4.1.12 | appStatus  | int           | 否   | 应用状态(1存活，2不存活)   |
+| 4.1.13 | createTime | LocalDateTime | 否   | 落库时间                   |
+| 4.1.14 | modifyTime | LocalDateTime | 否   | 修改时间                   |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 1,
+            "appName": "WeID",
+            "appKey": "RXiHxhWn",
+            "appSecret": "FA4evmGGAAQTGnpiu6FF4uWzb2RvuiWU",
+            "appStatus": 2,
+            "appDocLink": "https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html",
+            "appLink": null,
+            "appIp": null,
+            "appPort": null,
+            "appIcon": "test",
+            "appDesc": "WeIdentity是一套分布式多中心的技术解决方案，可承载实体对象（人或者物）的现实身份与链上身份的可信映射、以及实现实体对象之间安全的访问授权与数据交换。WeIdentity由微众银行自主研发并完全开源，秉承公众联盟链整合资源、交换价值、服务公众的理念，致力于成为链接多个垂直行业领域的分布式商业基础设施，促进泛行业、跨机构、跨地域间的身份认证和数据合作。",
+            "appDetail": "",
+            "createTime": "2021-03-07 18:15:47",
+            "modifyTime": "2021-03-07 18:15:47"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+* 失败：
+
+```
+{
+   "code": 102000,
+   "message": "system exception",
+   "data": {}
+}
+```
+
+### 17.3 删除应用信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/app/{id}**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数 | 类型 | 可为空 | 备注     |
+| ---- | -------- | ---- | ------ | -------- |
+| 1    | id       | int  | 否     | 应用编号 |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/app/1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "data": {},
+    "message": "Success"
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+## 18 配置接口
+
+### 18.1 查询是否使用国密
+
+获取WeBASE-Node-Manager是否使用国密版
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/encrypt**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/config/encrypt
+```
+
+
+#### 返回参数
 
 ***1）出参表***
 
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
-| 3    |  data    | Int        | 否     | 1: 国密，0：非国密                           
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | Int        | 否     | 1: 国密，0：非国密                           |
 
 
 ***2）出参示例***
@@ -9819,39 +10071,32 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
     "message": "success",
     "data": 1 
 }
-
 ```
 
 
-### 17.2 查询WeBASE-Node-Manager的版本
+### 18.2 查询WeBASE-Node-Manager的版本
 
 获取WeBASE-Node-Manager服务的版本号
 
-#### 17.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/version**
+* 请求地址： **/config/version**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 17.2.2 请求参数
+#### 请求参数
 
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | --     | -        | 否     | -   
-
-​         
+***1）入参表***         
 
 ***2）入参示例***
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/version
+http://localhost:5001/WeBASE-Node-Manager/config/version
 ```
 
 
-#### 17.2.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -9866,8 +10111,114 @@ http://localhost:5001/WeBASE-Node-Manager/version
 v1.4.0
 ```
 
+### 18.3 获取服务ip和端口
 
-## 附录
+返回本服务ip和端口。
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/ipPort**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/config/ipPort
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | Object |      | 信息对象                   |
+| 3.1  | ip       | string | 否   | 服务IP                     |
+| 3.2  | port     | int    | 否   | 服务端口                   |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ip": "127.0.0.1",
+        "port": 5001
+    },
+    "attachment": null
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+### 18.4 查询已部署合约是否支持修改
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/isDeployedModifyEnable**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***   
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/config/isDeployedModifyEnable
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型 |      | 备注                       |
+| ---- | -------- | ---- | ---- | -------------------------- |
+| 1    | code     | Int  | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | boolean | 否     | true: 支持，false：不支持                    |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": true 
+}
+```
+
+
+### 附录
 
 ### 1. 返回码信息列表 
 <span id="code"></span>
@@ -9900,6 +10251,7 @@ v1.4.0
 | 202017 | invalid contract id      | 无效的合约编号           |
 | 202018 | invalid param info      | 无效的入参信息           |
 | 202019 | contract name cannot be repeated     | 合约名称不能重复           |
+| 202020 | deployed contract cannot be modified | 已部署合约不支持修改 |
 | 202023 | contract has not deploy      | 合约尚未部署           |
 | 202026 | account info already exists      | 该帐号已经存在           |
 | 202027 | account info not exists      | 该帐号不存在           |
@@ -10052,9 +10404,15 @@ v1.4.0
 | 202496 | Host root dir access denied    |  主机的安装目录无权限访问          |
 | 202497 | Host not exist or already been deleted    |  主机不存在或已被删除          |
 | 202501 | contract path is exists. | 合约路径已存在 |
-| 202502 | version cannot be empty. | 版本不能为空 |
-| 202503 | cns name cannot be empty. | cns名不能为空 |
+| 202502 | version cannot be empty | 版本不能为空 |
+| 202503 | cns name cannot be empty | cns名不能为空 |
 | 202504 | version already exists | 版本已存在 |
+| 202511 | app key cannot be empty | 应用Key不能为空 |
+| 202514 | app key not exists | 应用Key不存在 |
+| 202516 | app name exists | 应用名称已存在 |
+| 202517 | app name not exists | 应用名称不存在 |
+| 202518 | app id not exists | 应用编号不存在 |
+| 202519 | link format invalid | 链接格式错误 |
 | 302000 | user not logged in    |  未登录的用户          |
 | 302001 | Access denied    |  没有权限          |
 | 402000 | param exception    |  参数错误          |

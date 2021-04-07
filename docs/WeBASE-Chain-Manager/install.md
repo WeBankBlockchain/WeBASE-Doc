@@ -22,6 +22,9 @@
 执行命令：
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Chain-Manager.git
+
+# 若因网络问题导致长时间下载失败，可尝试以下命令
+git clone https://gitee.com/WeBank/WeBASE-Chain-Manager.git
 ```
 进入目录：
 
