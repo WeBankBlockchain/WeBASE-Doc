@@ -11,27 +11,29 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | JDK8或以上版本 |
-| MySQL | MySQL-5.6或以上版本 |
-| Python | Python3.5+ |
-| PyMySQL | 使用python3时需安装 |
+| Java   | JDK 8 至JDK 14 |
+| MySQL | MySQL-5.6及以上 |
+| Python | Python3.6及以上 |
+| PyMySQL | |
 
 ### 检查环境
 
 #### 平台要求
 
-推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git, nginx`相关依赖项。
+推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git, nginx, dos2unix`相关依赖项。
 
-其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, nginx`依赖项后重试
+其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, nginx, dos2unix`依赖项后重试
 
 #### 检查Java
 
 推荐JDK8-JDK13版本，使用OracleJDK[安装指引](#jdk)：
+
 ```
 java -version
 ```
 
-注意：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，会导致JavaSDK无法正常连接区块链节点。
+*注意：不要用`sudo`执行安装脚本*
+
 
 #### 检查mysql
 
@@ -44,32 +46,28 @@ mysql --version
 
 #### 检查Python
 <span id="checkpy"></span>
-使用Python3.5或以上版本：
-```
+使用Python3.6或以上版本：
+```shell
 python --version
+# python3时
+python3 --version
 ```
 
 如已安装python3，也可通过`python3 --version`查看，在运行脚本时，使用`python3`命令即可
 
 - Python3安装部署可参考[Python部署](#python3)
 
-#### PyMySQL部署（Python3.5+）
+#### PyMySQL部署（Python3.6+）
 
-Python3.5及以上版本，需安装`PyMySQL`依赖包
+Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 - CentOS
 
   ```
+  sudo yum -y install python36-pip
   sudo pip3 install PyMySQL
   ```
 
-  不支持pip命令的话，可以使用以下方式：
-
-  ```
-  git clone https://github.com/PyMySQL/PyMySQL
-  cd PyMySQL/
-  python3 setup.py install
-  ```
 
 - Ubuntu
 
@@ -78,12 +76,25 @@ Python3.5及以上版本，需安装`PyMySQL`依赖包
   sudo pip3 install PyMySQL
   ```
 
+ CentOS或Ubuntu不支持pip命令的话，可以使用以下方式：
+
+  ```
+  git clone https://github.com/PyMySQL/PyMySQL
+  cd PyMySQL/
+  python3 setup.py install
+  ```
+
+### 检查服务器网络策略
+
+网络策略检查：
+- **开放WeBASE管理平台端口**：检查webase-web管理平台页面的端口`webPort`(默认为5000)在服务器的网络安全组中是否设置为**开放**。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。**若端口未开放，将导致浏览器无法访问WeBASE服务页面**
+- 开放节点前置端口：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）；由于节点前置直连节点，**不建议对公网开放节点前置端口**，建议按需开放
 
 ## 拉取部署脚本
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.1/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.4.3/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -98,31 +109,29 @@ cd webase-deploy
 
 ① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#mysql)；
 
-② 修改配置文件（vi common.properties），没有变化的可以不修改；
+② 修改配置文件（`vi common.properties`），没有变化的可以不修改；
+
+- *若使用可视化部署，则忽略下文，将修改`visual-deploy.properties`，并进行可视化部署依赖服务的一键安装，具体请参考[可视化部署-一键安装依赖服务](../WeBASE-Install/visual_deploy.html#visual-deploy-oneclick)*
 
 ③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
 
-- 当配置"yes"时，需配置已有链的路径
+- 当配置"yes"时，需配置已有链的路径`fisco.dir`。路径下要存在sdk目录，当使用非国密链，或者使用国密链，但是sdk和节点使用非国密ssl连接时，sdk目录里存放非国密sdk证书（ca.crt、node.crt和node.key）；当使用国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 - 当配置"no"时，需配置节点fisco版本和节点安装个数，搭建的新链默认两个群组
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
 
-④ 服务端口不能小于1024。
+​    **注：使用国密版需要修改设置配置项`encrypt.type=1`。前置SDK与节点默认使用非国密SSL，如果需要使用国密SSL，需要修改设置配置项`encrypt.sslType=1`。**
 
-⑤ 部署时，支持**一键部署**或者**可视化部署**两种方式，**二者选择其一即可**
+④ 服务端口不能小于1024
 
-下面分别介绍**一键部署和可视化部署**的两种配置示例：
-1. 采用一键部署，则根据说明修改 `common.properties` 文件中的配置；
-2. 采用可视化部署，则根据说明修改 `visual-deploy.properties` 文件中的配置；
-
-- **一键部署**方式时，修改 `common.properties` 配置文件
+⑤ 部署时，修改 `common.properties` 配置文件
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.1
-webase.mgr.version=v1.4.1
-webase.sign.version=v1.4.1
-webase.front.version=v1.4.1
+webase.web.version=v1.4.3
+webase.mgr.version=v1.4.3
+webase.sign.version=v1.4.3
+webase.front.version=v1.4.3
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -161,15 +170,20 @@ node.channelPort=20200
 # 节点rpc端口
 node.rpcPort=8545
 
-# 是否使用国密（0: standard, 1: guomi）
+# Encrypt type (0: standard, 1: guomi)
 encrypt.type=0
+# ssl encrypt type (0: standard ssl, 1: guomi ssl)
+# only guomi type support guomi ssl
+encrypt.sslType=0
 
 # 是否使用已有的链（yes/no）
 if.exist.fisco=no
 
 # 使用已有链时需配置
 # 已有链的路径，start_all.sh脚本所在路径
-# 路径下要存在sdk目录，sdk里存放sdk证书（ca.crt、node.crt和node.key）
+# 路径下要存在sdk目录
+# 当使用非国密链，或者使用国密链，但是sdk和节点使用非国密ssl连接时，sdk目录里存放非国密sdk证书（ca.crt、node.crt和node.key）
+# 当使用国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
 # 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
@@ -177,151 +191,194 @@ node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.6.0
+fisco.version=2.7.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
 
 
-- **可视化方式**时，修改 `visual-deploy.properties` 文件。
-<span id="visual-deploy-config"></span>
-
-
-```eval_rst
-.. important::
-    注意： `sign.ip` 配置的 IP 是WeBASE-Sign签名服务对外提供服务访问的 IP 地址，供其他部署节点主机访问。
-```
-
-```shell
-# WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.4.1
-webase.mgr.version=v1.4.1
-webase.sign.version=v1.4.1
-fisco.webase.docker.cdn.version=v1.4.1
-
-# 节点管理子系统mysql数据库配置
-mysql.ip=127.0.0.1
-mysql.port=3306
-mysql.user=dbUsername
-mysql.password=dbPassword
-mysql.database=webasenodemanager
-
-# 签名服务子系统mysql数据库配置
-sign.mysql.ip=localhost
-sign.mysql.port=3306
-sign.mysql.user=dbUsername
-sign.mysql.password=dbPassword
-sign.mysql.database=webasesign
-
-# WeBASE管理平台服务端口
-web.port=5000
-
-# 节点管理子系统服务端口
-mgr.port=5001
-
-# 签名服务子系统端口
-sign.port=5004
-
-# 是否使用国密（0: standard, 1: guomi）
-encrypt.type=0
-
-# WeBASE-Sign 对外提供服务的访问 IP 地址
-# 部署在其它主机的节点，需要使用此 IP 访问 WeBASE-Sign 服务
-# 不能是 127.0.0.1 或者 localhost
-sign.ip=
-
-# SSH 免密登录账号
-mgr.ssh.user=root
-# SSH 访问端口
-mgr.ssh.port=22
-# 部署节点服务的主机，存放链数据的目录
-mgr.ssh.rootDirOnHost=/opt/fisco
-```
-
 ## 部署
 
-* 部署服务
-
-**部署方式：**
-
-| 部署方式  | 参数  | 说明  |
-|---|---|---|
-|  一键部署 |  installAll | 部署 WeBASE 中间件服务，包括底层节点  |
-|  可视化部署 |  installWeBASE | 部署 WeBASE 中间件服务，<br />然后通过**界面操作的方式部署底层节点**，参考文档 [可视化部署](../WeBASE-Install/visual_deploy.html) |
-
-根据上文已选择的部署方式完成配置文件的修改后，执行下面对应的部署、停止、启动命令即可
-
-* **一键部署**方式，则执行：
-```shell
-
-# 1. 部署并启动所有服务
-python deploy.py installAll
-
-# 2. 停止一键部署的所有服务
-python deploy.py stopAll
-
-# 3. 启动一键部署的所有服务
-python deploy.py startAll
-
-```
-
-* **可视化部署**方式，则执行：
-```shell
-
-# 1. 部署并启动可视化部署的所有服务
-python deploy.py installWeBASE
-
-# 2. 停止可视化部署的所有服务
-python deploy.py stopWeBASE
-
-# 3. 启动可视化部署的所有服务
-python deploy.py startWeBASE
-
-```
-
-* 服务部署后，如果需要单独启停，可以使用以下命令：
-
-```shell
-启动FISCO-BCOS节点:      python deploy.py startNode
-停止FISCO-BCOS节点:      python deploy.py stopNode
-启动WeBASE-Web:          python deploy.py startWeb
-停止WeBASE-Web:          python deploy.py stopWeb
-启动WeBASE-Node-Manager: python deploy.py startManager
-停止WeBASE-Node-Manager: python deploy.py stopManager
-启动WeBASE-Sign:        python deploy.py startSign
-停止WeBASE-Sign:        python deploy.py stopSign
-启动WeBASE-Front:        python deploy.py startFront
-停止WeBASE-Front:        python deploy.py stopFront
-```
+* 执行installAll命令，部署服务将自动部署FISCO BCOS节点，并部署 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
 **备注：** 
-
-- 部署脚本会拉取相关安装包进行部署，需保持网络畅通。
+- 部署脚本会拉取相关安装包进行部署，需保持网络畅通
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
-- 部署过程出现问题可以查看[常见问题解答](#id19)
+- 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
+- **不要用sudo执行脚本**，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
 
-## 访问
-
-WeBASE管理平台：
-
-* 一键部署完成后，打开浏览器访问
-```
-http://{deployIP}:{webPort}
-示例：http://localhost:5000
+```shell
+# 部署并启动所有服务
+python3 deploy.py installAll
 ```
 
-**备注：** 
+部署完成后可以看到`deploy  has completed`的日志：
 
-- 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
-- WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
-  - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
-  - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
+```shell
+$ python3 deploy.py installAll
+...
+============================================================
+              _    _     ______  ___  _____ _____ 
+             | |  | |    | ___ \/ _ \/  ___|  ___|
+             | |  | | ___| |_/ / /_\ \ `--.| |__  
+             | |/\| |/ _ | ___ |  _  |`--. |  __| 
+             \  /\  |  __| |_/ | | | /\__/ | |___ 
+              \/  \/ \___\____/\_| |_\____/\____/  
+...
+...
+============================================================
+==============      deploy  has completed     ==============
+============================================================
+==============    webase-web version  v1.4.3        ========
+==============    webase-node-mgr version  v1.4.3   ========
+==============    webase-sign version  v1.4.3       ========
+==============    webase-front version  v1.4.3      ========
+============================================================
+```
+
+* 服务部署后，需要对各服务进行启停操作，可以使用以下命令：
+
+```shell
+# 一键部署
+部署并启动所有服务        python3 deploy.py installAll
+停止一键部署的所有服务    python3 deploy.py stopAll
+启动一键部署的所有服务    python3 deploy.py startAll
+# 各子服务启停
+启动FISCO-BCOS节点:      python3 deploy.py startNode
+停止FISCO-BCOS节点:      python3 deploy.py stopNode
+启动WeBASE-Web:          python3 deploy.py startWeb
+停止WeBASE-Web:          python3 deploy.py stopWeb
+启动WeBASE-Node-Manager: python3 deploy.py startManager
+停止WeBASE-Node-Manager: python3 deploy.py stopManager
+启动WeBASE-Sign:        python3 deploy.py startSign
+停止WeBASE-Sign:        python3 deploy.py stopSign
+启动WeBASE-Front:        python3 deploy.py startFront
+停止WeBASE-Front:        python3 deploy.py stopFront
+# 可视化部署
+部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE
+停止可视化部署的所有服务  python3 deploy.py stopWeBASE
+启动可视化部署的所有服务  python3 deploy.py startWeBASE
+```
 
 
-* 若选择 **可视化部署**
-    - 请参见[可视化部署](../WeBASE-Install/visual_deploy.html#id12) ，部署底层节点
+## 状态检查
 
-## 日志路径
+成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**
+
+#### 检查各子系统进程
+
+通过`ps`命令，检查各子系统的进程是否存在
+- 包含：节点进程`nodeXX`，节点前置进程`webase.front`，节点管理服务进程`webase.node.mgr`，节点管理平台`webase-web`的`nginx`进程，以及签名服务进程`webase.sign`
+
+检查方法如下，若无输出，则代表进程未启动，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
+
+- 检查节点进程，此处部署了两个节点node0, node1
+```
+$ ps -ef | grep node
+```
+
+输出如下
+```
+root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node1/../fisco-bcos -c config.ini
+root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
+```
+
+- 检查节点前置webase-front的进程
+```
+$ ps -ef | grep webase.front 
+```
+
+输出如下
+```
+root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.front.Application
+```
+
+- 检查节点管理服务webase-node-manager的进程
+```
+$ ps -ef  | grep webase.node.mgr
+```
+
+输出如下
+```
+root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
+```
+
+- 检查webase-web的nginx进程
+```
+$ ps -ef | grep webase |grep nginx       
+```
+
+输出如下
+```
+root      5141     1  0 Dec08 ?        00:00:00 nginx: master process /usr/sbin/nginx -c /root/fisco/webase/webase-deploy/comm/nginx.conf
+```
+
+- 检查签名服务webase-sign的进程
+```
+$ ps -ef  | grep webase.sign 
+```
+
+输出如下
+```
+root     30718     1  0 17:24 pts/2    00:00:19 /usr/local/jdk/bin/java ... conf/:apps/*:lib/* com.webank.webase.sign.Application
+```
+
+#### 检查进程端口
+通过`netstat`命令，检查各子系统进程的端口监听情况。
+
+检查方法如下，若无输出，则代表进程端口监听异常，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
+
+- 检查节点channel端口(默认为20200)是否已监听
+```
+$ netstat -anlp | grep 20200
+```
+输出如下
+```
+tcp        0      0 0.0.0.0:20200           0.0.0.0:*               LISTEN      29069/fisco-bcos
+```
+
+- 检查webase-front端口(默认为5002)是否已监听
+```
+$ netstat -anlp | grep 5002
+```
+输出如下
+```
+tcp6       0      0 :::5002                 :::*                    LISTEN      2909/java 
+```
+
+- 检查webase-node-mgr端口(默认为5001)是否已监听
+```
+$ netstat -anlp | grep 5001    
+```
+输出如下
+```
+tcp6       0      0 :::5001                 :::*                    LISTEN      14049/java 
+```
+
+- 检查webase-web端口(默认为5000)在nginx是否已监听
+```
+$ netstat -anlp | grep 5000
+```
+输出如下
+```
+tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      3498/nginx: master  
+```
+
+- 检查webase-sign端口(默认为5004)是否已监听
+```
+$ netstat -anlp | grep 5004
+```
+
+输出如下
+```
+tcp6       0      0 :::5004                 :::*                    LISTEN      25271/java 
+```
+
+<span id="checklog"></span>
+#### 检查服务日志 
+
+<span id="logpath"></span>
+##### 各子服务的日志路径如下：
 
 ```
 |-- webase-deploy # 一键部署目录
@@ -339,8 +396,82 @@ http://{deployIP}:{webPort}
 |--|--|--|-- node0 # 具体节点目录
 |--|--|--|--|-- log # 节点日志目录
 ```
+*备注：当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志*
 
-**备注：** 当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志。
+日志目录中包含`{XXX}.log`全量日志文件和`{XXX}-error.log`错误日志文件
+ - *通过日志定位错误问题时，可以结合`.log`全量日志和`-error.log`错误日志两种日志信息进行排查。*，如查询WeBASE-Front日志，则打开`WeBASE-Front-error.log`可以快速找到错误信息，根据错误查看`WeBASE-Front.log`的相关内容，可以看到错误日志前后的普通日志信息
+
+##### 检查服务日志有无错误信息
+
+- 如果各个子服务的进程**已启用**且端口**已监听**，可直接访问下一章节[访问WeBASE](#access)
+
+- 如果上述检查步骤出现异常，如检查不到进程或端口监听，则需要按[日志路径](#logpath)进入**异常子服务**的日志目录，检查该服务的日志
+
+- 如果检查步骤均无异常，但服务仍无法访问，可以到按部署日志`deployLog`，节点前置日志`frontLog`, 节点管理服务日志`nodeMgrLog`的顺序逐步检查日志：
+  - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误
+  - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功
+  - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志
+  - 检查webase-deploy/nodes/127.0.0.1/nodeXXX/log中的节点日志
+
+
+##### 搜索日志
+
+通过查看日志可以检查服务的运行状态，我们可以进入各子服务的日志路径，通过`grep`检查日志文件，以此判断服务是否正常运行
+
+- **查看运行成功日志**：WeBASE子服务运行成功后均会打印日志`main run success`，可以通过搜索此关键字来确认服务正常运行。
+
+如，检查webase-front日志，其他WeBASE服务可进行类似操作
+```
+$ cd webase-front
+$ grep -B 3 "main run success" log/WeBASE-Front.log
+```
+输出如下：
+```
+2020-12-09 15:47:25.355 [main] INFO  ScheduledAnnotationBeanPostProcessor() - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2020-12-09 15:47:25.378 [main] INFO  TomcatEmbeddedServletContainer() - Tomcat started on port(s): 5002 (http)
+2020-12-09 15:47:25.383 [main] INFO  Application() - Started Application in 6.983 seconds (JVM running for 7.768)
+2020-12-09 15:47:25.383 [main] INFO  Application() - main run success...
+```
+
+- **查看报错日志**：出现异常时，可以搜索关键字`ERROR`进行检查
+
+如，检查webase-front错误日志，其他WeBASE服务可进行类似操作
+```
+$ cd webase-front
+$ grep "ERROR" log/WeBASE-Front.log
+```
+输出如下
+```
+2020-12-09 09:10:42.138 [http-nio-5002-exec-1] ERROR ExceptionsHandler() - catch frontException:  no active connection available network exception requset send failed! please check the log file content for reasons.
+2020-12-09 09:10:42.145 [http-nio-5002-exec-4] ERROR Web3ApiService() - getBlockNumber fail.
+```
+
+如果出现错误日志，根据错误提示或本文档的[常见问题](#q&a)进行排查
+
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
+- 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
+
+
+<span id="access"></span>
+## 访问
+
+WeBASE管理平台：
+
+* 一键部署完成后，**打开浏览器（Chrome Safari或Firefox）访问**
+```
+http://{deployIP}:{webPort}
+示例：http://localhost:5000
+```
+
+**备注：** 
+
+- 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
+  - 使用云服务厂商的服务器时，需要开通网络安全组的对应端口。如开放webase使用的5000端口
+- WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
+  - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
+  - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
+- 检查节点前置是否启动，可以通过访问`http://{frontIp}:{frontPort}/WeBASE-Front`(默认端口5002)；访问前，确保服务端已对本地机器开放端口，如开放front的5002端口。（不建议节点前置的端口对公网开放访问权限，应对部分机器IP按需开放）
+
 
 ## 附录
 
@@ -471,20 +602,26 @@ mysql > create database webasenodemanager;
 ### 3. Python部署
 <span id="python3"></span>
 
-python版本要求使用python3.x, 推荐使用python3.5及以上版本
+python版本要求使用python3.x, 推荐使用python3.6及以上版本
 
 - CentOS
 
   ```
-  sudo yum install -y python-requests
+  sudo yum install -y python36
+  sudo yum install -y python36-pip
   ```
 
 - Ubuntu
 
   ```
-  sudo apt-get install -y python-requests
+  // 添加仓库，回车继续
+  sudo add-apt-repository ppa:deadsnakes/ppa
+  // 安装python 3.6
+  sudo apt-get install -y python3.6
+  sudo apt-get install -y python3-pip
   ```
 
+<span id="q&a"></span>
 ## 常见问题
 
 ### 1. Python命令出错
@@ -504,7 +641,7 @@ File "/home/ubuntu/webase-deploy/comm/utils.py", line 127, in getCommProperties
 TypeError: get() got an unexpected keyword argument 'fallback'
 ```
 
-答：检查[Python版本](#checkpy)，推荐使用python3.5及以上版本
+答：检查[Python版本](#checkpy)，推荐使用python3.6及以上版本
 
 
 ### 2. 使用Python3时找不到pymysql
@@ -557,7 +694,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 ======= FISCO-BCOS sdk dir:/data/app/nodes/127.0.0.1/sdk is not exist. please check! =======
 ```
 
-答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。
+答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、node.crt、node.key）复制到该目录，再重新部署。如果是国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）。
 
 ### 7. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
