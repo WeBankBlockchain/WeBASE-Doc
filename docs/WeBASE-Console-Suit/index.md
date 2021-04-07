@@ -321,7 +321,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/app_new.png)
 
-新增应用后，会生成应用相关的注册信息，为应用分配的`appKey`（应用Key）和`appSecret`（应用密码，应用自己保存，不要暴露）：
+新增应用后，会生成应用相关的注册信息，为应用分配的`appKey`（应用Key）和`appSecret`（应用密码，应用自己保存，不要暴露），WeBASE的`IP`为内网IP，访问不了的话需对应修改：
 
 ![](../../images/WeBASE-Console-Suit/app_register_info.png)
 
@@ -329,7 +329,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/app_link_unable.png)
 
-第三方应用接入时，使用注册信息向WeBASE进行注册，调用相关OPEN API。第三方应用接入请参考【[应用接入说明](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/appintegration.html)】。以下以 [WeIdentity](https://weidentity.readthedocs.io/zh_CN/latest/docs/weidentity-installation-by-web.html) 可视化页面接入为例：
+第三方应用接入时，使用注册信息向WeBASE进行注册，调用相关OPEN API。第三方应用接入请参考【[应用接入说明](../WeBASE-Node-Manager/appintegration.html)】。以下以 [WeIdentity](https://weidentity.readthedocs.io/zh_CN/latest/docs/weidentity-installation-by-web.html) 可视化页面接入为例：
 
 选择 WeID + WeBASE集成模式，从WeBASE复制注册信息：
 
@@ -339,9 +339,17 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/app_weid_node.png)
 
-部署WeID之后，WeID会将合约相关信息通过API导入WeBASE：
+可以选择自动创建公私钥，或选择从WeBase同步公私钥用户：
+
+![](../../images/WeBASE-Console-Suit/app_weid_user.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_userlist.png)
+
+部署WeID之后，WeID会将合约相关信息通过API导入WeBase：
 
 ![](../../images/WeBASE-Console-Suit/app_weid_deploy.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_deployed.png)
 
 ![](../../images/WeBASE-Console-Suit/app_weid_contract.png)
 
