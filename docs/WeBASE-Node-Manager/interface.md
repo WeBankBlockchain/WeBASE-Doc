@@ -1910,8 +1910,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 3.16 | createTime      | LocalDateTime | 否   | 创建时间                                    |
 | 3.17 | modifyTime      | LocalDateTime | 是   | 修改时间                                    |
 
-### 5.7 获取Abi信息  
 
+### 5.7 获取Abi信息  
 
 #### 传输协议规范
 
@@ -2222,6 +2222,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList/all/light?groupI
 | 3.8        | 修改时间 | modifyTime | String            | 是       |           |
 | 3.9        | 创建时间 | createTime | String             | 是       |           |
 | 3.10        | 备注 | description | String           | 否       |           |
+| 3.11        | 部署用户地址 | deployAddress | String           | 否       |           |
+| 3.12       | 部署用户姓名 | deployUserName | String           | 否       |           |
 
 
 **2）数据格式**
@@ -2644,22 +2646,130 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCnsList
 }
 ```
 
+
+
+### 5.18 获取合约与导入ABI列表（分页）  
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/abi/list/all/{groupId}/{pageNumber}/{pageSize}?account={account}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数   | 类型   | 可为空 | 备注          |
+| ---- | ---------- | ------ | ------ | ------------- |
+| 1    | groupId    | int    | 否     | 群组编号      |
+| 2    | pageNumber | int    | 否     | 页码，从1开始 |
+| 3    | pageSize   | int    | 否     | 页大小        |
+| 4    | account    | String | 是     | 所属账号      |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数        | 类型          |      | 备注                              |
+| ---- | --------------- | ------------- | ---- | --------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败        |
+| 2    | message         | String        | 否   | 描述                              |
+| 3  |        | Object        |      | 返回数据                      |
+| 3.0  | contractId      | int        |      | 合约编号（contractId为空时，说明合约为外部导入的）                      |
+| 3.1  | abiId           | int           | 否   | 合约编号                          |
+| 3.2  | contractName    | String        | 否   | 合约名称                          |
+| 3.3  | groupId         | Int           | 否   | 所属群组编号                      |
+| 3.4  | contractAddress | String        | 否   | 合约地址                          |
+| 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
+| 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
+| 3.10  | contractPath    | String | 是   | 合约路径                          |
+| 3.11  | contractStatus   | int | 是   | 合约状态                         |
+| 3.12   | deployAddress | String           | 否       |  部署用户地址       |
+| 3.13  | deployUserName | String           | 否       |    部署用户名      |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"contractId": null,
+		"contractPath": null,
+		"contractVersion": null,
+		"contractName": "c",
+		"account": null,
+		"contractStatus": null,
+		"groupId": 1,
+		"contractType": null,
+		"contractSource": null,
+		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"register\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+		"contractBin": null,
+		"bytecodeBin": null,
+		"contractAddress": "0x4ac92d4d1680f426ac2da943b3ff67e82976d075",
+		"deployTime": null,
+		"description": null,
+		"createTime": "2021-04-07 09:29:54",
+		"modifyTime": "2021-04-07 09:29:54",
+		"deployAddress": null,
+		"deployUserName": null,
+		"abiId": 8
+	}, {
+		"contractId": 200013,
+		"contractPath": "weid_0xcde7c667528b6df1b61fd6483a0925ccc67931a02394acab1835254546e67d80",
+		"contractVersion": null,
+		"contractName": "SpecificIssuerController",
+		"account": "admin",
+		"contractStatus": 2,
+		"groupId": 1,
+		"contractType": 2,
+		"contractSource": null,
+		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isSpecificTypeIssuer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"extraValue\",\"type\":\"bytes32\"}],\"name\":\"addExtraValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"registerIssuerType\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"getExtraValue\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"isIssuerTypeExist\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"startPos\",\"type\":\"uint256\"},{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getSpecificTypeIssuerList\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"specificIssuerDataAddress\",\"type\":\"address\"},{\"name\":\"roleControllerAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"operation\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"retCode\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"typeName\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"SpecificIssuerRetLog\",\"type\":\"event\"}]",
+		"contractBin": "",
+		"bytecodeBin": "",
+		"contractAddress": "0xce1d576181e1d68899a3f2b86c8e274657c07fea",
+		"deployTime": null,
+		"description": null,
+		"createTime": "2021-04-06 21:34:38",
+		"modifyTime": "2021-04-06 21:34:38",
+		"deployAddress": null,
+		"deployUserName": null,
+		"abiId": 6
+	}],
+	"totalCount": 2
+}
+```
+
+
+
 ## 6 服务器监控相关
 
 ### 6.1 获取节点监控信息  
 
 
-#### 6.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：
-```
-/chain/mointorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}
-```
-
+* 请求地址：**/chain/monitorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 6.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -2680,7 +2790,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginD
 ```
 
 
-#### 6.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2767,7 +2877,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginD
 ### 6.2 获取服务器监控信息 
 
 
-#### 6.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：
 ```
@@ -2777,7 +2887,7 @@ performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&con
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 6.2.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -2798,7 +2908,7 @@ performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&con
 http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55
 ```
 
-#### 6.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2889,14 +2999,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
 
 注：邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
 
-#### 6.3.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/mailServer/config/{serverId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -2912,7 +3022,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 ```
 
 
-#### 6.3.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -2980,14 +3090,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 
 返回所有的邮件告警的邮件服务配置
 
-#### 6.4.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/mailServer/config/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3004,7 +3114,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 ```
 
 
-#### 6.4.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3075,14 +3185,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 
 更新邮件告警的配置内容；目前仅支持单个邮件服务器配置，不支持新增配置；
 
-#### 6.5.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/mailServer/config**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.5.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3117,7 +3227,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 ```
 
 
-#### 6.5.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3178,14 +3288,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 注：需要确保配置正确才能使用后续的邮件告警功能；返回成功信息后，需要用户到自己的邮箱查看是否收到邮测试邮件；
 
-#### 6.6.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/mail/test/{toMailAddress}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.6.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3234,7 +3344,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 }
 ```
 
-#### 6.6.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3271,14 +3381,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 获取单个告警配置的内容；告警类型配置是对不同告警类型下的不同内容，包含告警邮件标题`ruleName`，告警邮件内容`alertContent`，告警邮件发送时间间隔`alertIntervalSeconds`，上次告警时间`lastAlertTime`，目标告警邮箱地址列表`userList`，是否启用该类型的邮件告警`enable`，告警等级`alertLevel`等；
 
 
-#### 6.7.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/{ruleId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.7.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3294,7 +3404,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 ```
 
 
-#### 6.7.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3353,14 +3463,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 
 返回所有的告警类型配置
 
-#### 6.8.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.8.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3377,7 +3487,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 ```
 
 
-#### 6.8.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3469,14 +3579,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 
 更新告警类型配置的内容；目前仅支持更新原有的三个邮件告警的配置，不支持新增配置；
 
-#### 6.9.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.9.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3512,7 +3622,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 ```
 
 
-#### 6.9.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3564,14 +3674,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 修改告警类型配置中的`enable`，0-关闭，1-开启；
 
-#### 6.9.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/toggle**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.9.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3596,7 +3706,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
 ```
 
 
-#### 6.9.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3640,6 +3750,105 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+
+### 6.10 获取出块监控信息  
+
+获取出块周期、块大小、平均TPS的监控数据
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/stat?groupId={groupId}&beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1         | nodeId            | int             | 否     | 群组id  |
+| 2         | beginDate         | long   | 是     | 显示时间（开始） 时间戳  |
+| 3         | endDate           | long   | 是     | 显示时间（结束）时间戳 |
+| 4         | contrastBeginDate | long   | 是     | 对比时间（开始）时间戳 |
+| 5         | contrastEndDate   | long   | 是     | 对比时间（结束）时间戳  |
+| 6         | gap               | Int             | 是     | 数据粒度  |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/stat?groupId=1&gap=60eginDate=1617811200000&endDate=1617871955000&contrastBeginDate=&contrastEndDate=
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1         | code              | int             | 否     | 返回码                                                         |
+| 2         | message           | String          | 否     | 描述信息                                                       |
+| 3         | data              | Array           | 否     | 返回信息列表                                                   |
+| 3.1       |                   | Object           |        | 返回信息实体                                                   |
+| 3.1.1     | metricType        | String          | 否     | 测量类型：blockSize, blockCycle, tps                               |
+| 3.1.2     | data              | Object           | 否     |                                                                |
+| 3.1.2.1   | lineDataList      | Object           | 否     |                                                                |
+| 3.1.2.1.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
+| 3.1.2.1.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
+| 3.1.2.2   | contrastDataList  | Object           | 否     |                                                                |
+| 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
+| 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"metricType": "blockSize",
+		"data": {
+			"lineDataList": {
+				"timestampList": [1617866162706, 1617866462706, 1617866762706, 1617867062706, 1617867362706, 1617867662706, 1617867962706, 1617868262706, 1617868562706, 1617868862706, 1617869162706, 1617869462706, 1617869762706, 1617870062706, 1617870362706, 1617870664184, 1617870964184],
+				"valueList": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+			},
+			"contrastDataList": {
+				"timestampList": [],
+				"valueList": []
+			}
+		}
+	}, {
+		"metricType": "blockCycle",
+		"data": {
+			"lineDataList": {
+				"timestampList": null,
+				"valueList": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+			},
+			"contrastDataList": {
+				"timestampList": null,
+				"valueList": []
+			}
+		}
+	}, {
+		"metricType": "tps",
+		"data": {
+			"lineDataList": {
+				"timestampList": null,
+				"valueList": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+			},
+			"contrastDataList": {
+				"timestampList": null,
+				"valueList": []
+			}
+		}
+	}],
+	"attachment": null
 }
 ```
 
@@ -7710,14 +7919,14 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 
 由**合约部署者**（一般由运维所部属）与链治理委员共同管理合约的状态，包含冻结/解冻合约、查询合约状态功能
 
-#### 13.23.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/contract/status**
 * 请求方式： POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 13.23.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7745,7 +7954,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
 ```
 
 
-#### 13.23.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -9500,7 +9709,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/chain/info
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
-| 3    | data        | String        | 否       | 链信息查询结果                      |
+| 3    | data        | String        | 否       | 链信息查询结果    |
 | 3.1  | id   | Integer        | 否       | 链编号|                
 | 3.1  |chainName          | String        | 否       | 链名称|    
 | 3.1  | chainDesc   | String        | 否       | 链描述    |
@@ -10496,6 +10705,218 @@ http://localhost:5001/WeBASE-Node-Manager/config/isDeployedModifyEnable
     "data": true 
 }
 ```
+
+## 19. 链上全量数据接口
+
+
+### 19.1 查询链上全量私钥用户列表
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/external/account/list/all/{groupId}/{pageNumber}/{pageSize}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***   
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | string        | 否     | 群组id                                     |
+| 2    | pageNumber   | int           | 否     | 页码                               |
+| 3    | pageSize      | int           | 否     | 页大小                         |
+| 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
+| 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/external/account/list/all/1/1/10
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型 |      | 备注                       |
+| ---- | -------- | ---- | ---- | -------------------------- |
+| 1    | code     | Int  | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message     | String        | 否     | 描述    |
+| 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
+| 3.1  | userId      | int           | 是   | 用户编号（若仅存于链上则为null)    |
+| 3.2  | userName    | string        | 是   | 用户名称                           |
+| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.4  | description | String        | 是   | 备注                               |
+| 3.5  | userStatus  | int           | 是   | 状态（1-正常 2-停用） 默认1        |
+| 3.6  | publicKey   | String        | 是   | 公钥信息                           |
+| 3.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 3.9  | account     | string        | 是   | 关联账户                           |
+| 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 3.12 | extAccountId  | int | 否   | 链上用户编号                         |
+| 3.13 | transCount  | int   | 否   | 用户交易量                           |
+| 3.14 | hashs  | String | 否   | 用户交易hash（5个）                           |
+| 3.14 | signUserId  | String | 是   | 用户的sign用户编号          |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"userId": null,
+		"userName": null,
+		"account": null,
+		"groupId": 1,
+		"publicKey": null,
+		"privateKey": null,
+		"userStatus": null,
+		"chainIndex": null,
+		"userType": null,
+		"address": "0x11523906f9c6d4bbf2bf7ab2ff1049e7bdf2fbf6",
+		"signUserId": null,
+		"appId": null,
+		"hasPk": null,
+		"description": null,
+		"createTime": "2021-04-07 16:34:42",
+		"modifyTime": "2021-04-07 16:34:42",
+		"extAccountId": 4,
+		"transCount": 1,
+		"hashs": "0x6889e8ea793d6326026b2a32bab023183ccc7846d3bcb9bd1001e1f08fb892c5"
+	},{
+		"userId": 700001,
+		"userName": "2222",
+		"account": "mars",
+		"groupId": 1,
+		"publicKey": "04299feb42f324521464c9503220efaeaae99093d92ef08e6f9c1f76e761c2a57422c5fe4dc721e049dfdc05ff8e9b64f59471235ad5e5f4fc07e653f2cd22314e",
+		"privateKey": null,
+		"userStatus": 1,
+		"chainIndex": null,
+		"userType": 1,
+		"address": "0x6bc1eeb7d1bb3f1d8195336843bd938d51e594ee",
+		"signUserId": "0c01b17d67734e95b1e8d5c55e78b4d8",
+		"appId": "1",
+		"hasPk": 1,
+		"description": "",
+		"createTime": "2021-04-06 21:14:04",
+		"modifyTime": "2021-04-06 21:14:04",
+		"extAccountId": 1,
+		"transCount": null,
+		"hashs": null
+	}],
+	"totalCount": 2
+}
+```
+
+
+### 19.2 查询链上全量合约列表
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/external/contract/list/all/{groupId}/{pageNumber}/{pageSize}&type={type}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***   
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | string        | 否     | 群组id                                     |
+| 2    | pageNumber   | int           | 否     | 页码                               |
+| 3    | pageSize      | int           | 否     | 页大小                         |
+| 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
+| 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/external/contract/list/all/1/1/10?type=1
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+
+| 序号 | 输出参数        | 类型          |      | 备注                              |
+| ---- | --------------- | ------------- | ---- | --------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败        |
+| 2    | message         | String        | 否   | 描述                              |
+| 3    |                 | Object        |      | 返回信息实体                      |
+| 3.1  | abiId           | int           | 是   | 合约编号（若未登记，则为空）                          |
+| 3.2  | contractName    | String        | 否   | 合约名称                          |
+| 3.3  | groupId         | Int           | 否   | 所属群组编号                      |
+| 3.4  | contractAddress | String        | 否   | 合约地址                          |
+| 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
+| 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
+| 3.10 | extContractId  | int | 否   | 链上合约编号                         |
+| 3.11 | transCount  | int   | 否   | 合约交易量                           |
+| 3.12 | hashs  | String | 否   | 合约交易hash（5个）                           |
+| 3.13 | deployTxHash  | String | 是   | 部署合约的交易hash          |
+| 3.14 | deployAddress  | String | 是   | 部署合约的用户地址          |
+| 3.15 | deployTime  | Date | 是   | 合约的部署时间          |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"abiId": 6,
+		"groupId": 1,
+		"account": "admin",
+		"contractName": "SpecificIssuerController",
+		"contractAddress": "0xce1d576181e1d68899a3f2b86c8e274657c07fea",
+		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isSpecificTypeIssuer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"extraValue\",\"type\":\"bytes32\"}],\"name\":\"addExtraValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"registerIssuerType\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"getExtraValue\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"isIssuerTypeExist\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"startPos\",\"type\":\"uint256\"},{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getSpecificTypeIssuerList\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"specificIssuerDataAddress\",\"type\":\"address\"},{\"name\":\"roleControllerAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"operation\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"retCode\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"typeName\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"SpecificIssuerRetLog\",\"type\":\"event\"}]",
+		"contractBin": "",
+		"createTime": "2021-04-06 21:34:38",
+		"modifyTime": "2021-04-06 21:34:38",
+		"extContractId": 800014,
+		"deployAddress": "0x222d68876bed5a33c8efe04c6fc9783031c22cd1",
+		"deployTxHash": "0xd04b35d7741f0568546de4fc29a880fa0f3727beef544497ca5816fa8793fa13",
+		"deployTime": 1617716070000,
+		"transCount": 0,
+		"hashs": null
+	},{
+		"abiId": null,
+		"groupId": 1,
+		"account": null,
+		"contractName": null,
+		"contractAddress": "0x5e103407b2a06b32bad0fc578e1888036a3e26a8",
+		"contractAbi": null,
+		"contractBin": "",
+		"createTime": null,
+		"modifyTime": null,
+		"extContractId": 800007,
+		"deployAddress": "0x222d68876bed5a33c8efe04c6fc9783031c22cd1",
+		"deployTxHash": "0x4c6f026e72b69e9ed1f3685f24bc055f5ef1bdde4778ee684a96d25deba6b34b",
+		"deployTime": 1617716065000,
+		"transCount": 1,
+		"hashs": "0x4c6f026e72b69e9ed1f3685f24bc055f5ef1bdde4778ee684a96d25deba6b34b"
+	}],
+	"totalCount": 2
+}
+```
+
 
 
 ### 附录
