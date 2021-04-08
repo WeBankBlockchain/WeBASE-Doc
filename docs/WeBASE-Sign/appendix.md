@@ -136,3 +136,29 @@ mysql > create database webasesign;
 赋权限：chmod + *.sh
 转格式：dos2unix *.sh
 ```
+
+
+## 3. 配置文件解析
+
+
+
+- 2. 配置文件解析
+
+| 参数 | 默认值    | 描述          |
+|------|-------------|-----------|
+| server.port  | 5004 | 当前服务端口   |
+| server.context-path  | /WeBASE-Sign | 当前服务访问目录   |
+| server.tomcat.max-threads  | 200 | tomcat最大线程数   |
+| server.tomcat.max-connections  | 10000 | tomcat最大连接数   |
+| spring.cache.type | simple | Spring缓存模式   |
+| spring.datasource.driver-class-name | com.mysql.cj.jdbc.Driver | mysql驱动   |
+| spring.datasource.url | jdbc:mysql://127.0.0.1:3306/webasesign | mysql连接地址   |
+| spring.datasource.username | dbUsername |  mysql账号  |
+| spring.datasource.password | dbPassword |  mysql密码  |
+| mybatis.mapperLocations  | classpath:mapper/*.xml | mybatis的xml路径   |
+| logging.config | classpath:log/log4j2.xml | 日志配置文件目录   |
+| constant.aesKey  | EfdsW23D23d3df43 | webase服务的aes秘钥   |
+| constant.aesPattern  |  CBC | AES加密模式   |
+| constant.keepAliveRequests  | 100 | 访问服务的请求存活数   |
+| constant.syncUsrCacheTaskFixedDelay  | 10000 | 同步缓存的私钥间隔时间(ms)   |
+| constant.supportPrivateKeyTransfer  | true | 是否允许导出私钥   |
