@@ -62,10 +62,9 @@ FISCO-BCOS节点的升级的详情需要参考[FISCO-BCOS 版本信息](https://
     python3 deploy.py startAll
     ```
 
-运行脚本，脚本将自动完成升级步骤
-
+检测依赖
 ```bash
-# 脚本依赖python3命令，dos2unix命令，curl命令，unzip命令
+# 脚本依赖python3命令，dos2unix命令，curl命令，unzip命令，mysqldump命令，mysql命令
 # 检查python3
 $ python3 --version
 Python 3.6.8
@@ -75,7 +74,18 @@ dos2unix 6.0.3
 # 检查curl命令
 $ curl -V
 curl 7.29.0
-## 依赖检测完成后，指定-o旧版本，-n新版本后，即可运行
+$ mysql -V
+mysql  Ver 15.1 Distrib 5.5.65-MariaDB, for Linux (x86_64) using readline 5.1
+$ mysqldump -V
+mysqldump  Ver 10.14 Distrib 5.5.65-MariaDB, for Linux (x86_64)
+$ unzip -v
+UnZip 6.00 of 20 April 2009, by Info-ZIP. 
+```
+
+运行脚本，脚本将自动完成升级步骤
+
+```bash
+## 指定-o旧版本，-n新版本后，即可运行
 # bash webase-upgrade.sh -o {old_webase_version} -n {new_webase-version}
 $ bash webase-upgrade.sh -o v1.4.3 -n v1.5.0
 
