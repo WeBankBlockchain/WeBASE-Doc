@@ -21,22 +21,26 @@ cd WeBASE-Web
 ```
 
 #### 2.1  下载solc-bin
-首先检查目录dist/static/js  是否存在v0.4.25.js等文件，没有就需要在此目录下载这些文件。
+执行脚本get_solc_js.sh会自动下载solc-bin，即下面v0.4.25.js等文件
 执行脚本get_solc_js.sh
 ```
-    sh ./get_solc_js.sh
+    bash ./get_solc_js.sh
 ```
 等待脚本执行完成
-如果执行不成功，请使用下面的命令：
+
+
+- 如果执行不成功，请使用下面的命令：
+
 `注意：当且仅当get_solc_js.sh脚本执行失败才需要执行下面的命令`
 ```
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.4.25.js -o ./dist/static/js/v0.4.25.js
-    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.4.25-gm.js -o ./dist/static/js/v0.4.25-gm.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.4.24-gm.js -o ./dist/static/js/v0.4.24-gm.js
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.5.1.js -o ./dist/static/js/v0.5.1.js
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.5.1-gm.js -o ./dist/static/js/v0.5.1-gm.js
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10.js -o ./dist/static/js/v0.6.10.js
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/v0.6.10-gm.js -o ./dist/static/js/v0.6.10-gm.js
 ```
+
 执行完后检查dist/static/js是否下载完这些js文件。
 
 ### 3. 修改配置
