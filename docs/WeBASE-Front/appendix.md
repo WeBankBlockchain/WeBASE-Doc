@@ -385,8 +385,20 @@ public void receive(Channel channel, Message message) throws IOException {
 }
 ```
 
-## 5. 配置文件解析
+### 在IDE中开发WeBASE-Front
 
+
+IDE配置
+- 由于项目依赖了lombok，需要在settings-build-compiler的`Enable Annotation Processing`设置中打钩
+- 本项目使用gradle进行构建，可以在settings-build-build tools-gradle中设置本地的gradle环境
+
+证书与项目配置
+- 需要在资源目录中创建`conf`目录
+- 将sdk中的所有证书文件拷贝到`resources/conf`目录
+- 修改application.yml中的`sdk.ip`和`sdk.channelPort`
+
+
+## 5. 配置文件解析
 
 
 - 2. 配置文件解析
