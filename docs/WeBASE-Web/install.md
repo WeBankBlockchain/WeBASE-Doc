@@ -21,8 +21,9 @@ cd WeBASE-Web
 ```
 
 #### 2.1  下载solc-bin
-执行脚本get_solc_js.sh会自动下载solc-bin，即下面v0.4.25.js等文件
-执行脚本get_solc_js.sh
+执行脚本get_solc_js.sh会自动下载solc-bin，即下面v0.4.25.js等文件。
+在`WeBASE-Web/`目录中直接执行脚本get_solc_js.sh（（脚本与`dist`文件夹同级））
+
 ```
     bash ./get_solc_js.sh
 ```
