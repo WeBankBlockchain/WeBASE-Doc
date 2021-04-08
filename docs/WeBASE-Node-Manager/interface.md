@@ -5467,14 +5467,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 ### 11.4 查询私钥（1.3.0已移除）
 
 
-#### 11.4.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/privateKey/{userId}**
 * 请求方式：GET
 * 返回格式：json
 
-#### 11.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5490,7 +5490,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 ```
 
 
-#### 11.4.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5531,14 +5531,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 ### 11.5 查询用户列表
 
 
-#### 11.5.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/userList/{groupId}/{pageNumber}/{pageSize}?userParam={userName}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 11.5.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5558,7 +5558,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 ```
 
 
-#### 11.5.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5627,7 +5627,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 
 其中私钥字段用Base64加密
 
-#### 11.6.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/import**
@@ -5635,7 +5635,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 11.6.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5664,7 +5664,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 ```
 
 
-#### 11.6.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5700,7 +5700,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 
 可导入控制台所生成的私钥.pem文件
 
-#### 11.7.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/importPem**
@@ -5708,7 +5708,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 11.7.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5737,7 +5737,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 ```
 
 
-#### 11.7.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5773,7 +5773,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 
 可导入控制台生成的私钥.p12文件
 
-#### 11.8.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/importP12**
@@ -5781,7 +5781,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 * 请求头：Content-type: **form-data**
 * 返回格式：JSON
 
-#### 11.8.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5802,7 +5802,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importP12
 
 > 使用form-data传参
 
-#### 11.8.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5832,6 +5832,196 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importP12
     "data": null
 }
 ```
+
+
+### 11.9 导出明文私钥
+
+可在页面导入WeBASE-Front所导出的私钥txt文件
+
+其中私钥字段用Base64加密
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/export/{userId}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型   | 可为空 | 备注                   |
+| ---- | ----------- | ------ | ------ | ---------------------- |
+| 1    | privateKey  | string | 否     | Base64加密后的私钥内容 |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/export/300001
+```
+
+```
+{
+    "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
+    "groupId": "1",
+    "description": "密钥拥有者",
+    "userName": "user1",
+    "account": "admin"
+}
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
+| 3.1  | userId      | int           | 否   | 用户编号                           |
+| 3.2  | userName    | string        | 否   | 用户名称                           |
+| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.4  | description | String        | 是   | 备注                               |
+| 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 3.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 3.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 3.9  | account     | string        | 否   | 关联账户                           |
+| 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 3.12  | privateKey   | String        | 否   | 私钥，用base64编码                           |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": {
+		"userId": 700003,
+		"userName": "vivi_d",
+		"account": "xyzshen",
+		"groupId": 1,
+		"publicKey": "04d01115d548e7561b15c38f004d734633687cf4419620095bc5b0f47070afe85aa9f34ffdc815e0d7a8b64537e17bd81579238c5dd9a86d526b051b13f4062327",
+		"privateKey": "MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwYw==",
+		"userStatus": 1,
+		"chainIndex": null,
+		"userType": 1,
+		"address": "0xdbc23ae43a150ff8884b02cea117b22d1c3b9796",
+		"signUserId": "b751efc5d0cc4e12b90908b1f2670258",
+		"appId": "1",
+		"hasPk": 1,
+		"description": "",
+		"createTime": "2021-04-06 21:24:12",
+		"modifyTime": "2021-04-06 21:24:12"
+	},
+	"attachment": null
+}
+```
+
+
+### 11.10 导出.pem私钥
+
+导出pem格式的私钥文件
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/exportPem**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
+| 1    | groupId     | int | 否     | 群组id                                                     |
+| 2    | signUserId | string        | 否     | 用户的signUserId |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/exportPem
+```
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| -    | -     | InputStream    | 否   | 返回文件的二进制流 |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+-----BEGIN PRIVATE KEY-----
+MIGNAgEAMBAGByqGSM49AgEGBSuBBAAKBHYwdAIBAQQgnAXS1DYA90nML3Kge4Qd
+IgMXiQ9cojmRgyjo1BLYXOqgBwYFK4EEAAqhRANCAATLPOzgUzNbo6UeCAjYv2++
+FwlBmT1Sa7goXELaazyJEJLbAlAFGB6qvjdA9m2nx5+rTmfGoSuQK9T2hC/vWJfq
+-----END PRIVATE KEY-----
+
+
+```
+
+
+### 11.11 导出.p12私钥
+
+导出pem格式的私钥文件
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/exportP12**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
+| 1    | groupId     | int | 否     | 群组id                                                     |
+| 2    | signUserId | string        | 否     | 用户的signUserId |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/exportP12
+```
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| -    | -     | InputStream    | 否   | 返回文件的二进制流 |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+// 二进制流
+
+```
+
 
 ## 12 合约方法管理模块 
 
@@ -7837,14 +8027,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?group
 
 注：首次启动项目会自动拉取每一个Front的证书
 
-#### 14.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 14.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7861,7 +8051,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 ```
 
 
-#### 14.1.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7915,14 +8105,14 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 根据指纹获取单个证书
 
 
-#### 14.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 14.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7939,7 +8129,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 ```
 
 
-#### 14.2.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7988,7 +8178,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 
 导入保存证书文件
 
-#### 14.3.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：POST
@@ -8017,7 +8207,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 ```
 
 
-#### 14.3.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -8055,14 +8245,14 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 根据证书指纹删除一个证书
 
-#### 14.4.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：DELETE
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 14.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -8084,7 +8274,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 ```
 
 
-#### 14.4.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -8105,6 +8295,104 @@ http://localhost:5001/WeBASE-Node-Manager/cert
     "data": 1
 }
 ```
+
+
+
+### 14.5. 获取明文SDK证书与私钥
+
+获取Front使用的sdk证书（包含链证书、sdk证书和sdk私钥）的内容
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert/sdk//{frontId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1     | frontId       | Int           | 是     | 前置编号                  |
+
+**2）数据格式**
+
+```
+http://localhost:5001/WeBASE-Node-Manager/cert/sdk/1
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        |   | Map<String,String>       | Map   | 是       | key为文件名，value为文件内容 |
+
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "sdk.key": "-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgxqr/d/VgQ0fAr/KvyAeW\nJ6bD1tqxZ5gYOdfIJiK7WOmhRANCAAT3g/OsuSAD2I/dKLWnZTbMGQ8l9WnkD/wr\npyoiQkMy1qI5/3Sj4WFKGcVu9vhsd0nLoP+y1QttYKM0m5QGcuhP\n-----END PRIVATE KEY-----\n",
+  "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIBsDCCAVagAwIBAgIJAPwQ7ISyofOIMAoGCCqGSM49BAMCMDUxDjAMBgNVBAMM\nBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAgFw0y\nMTA0MDYxMjMwNDBaGA8yMTIxMDMxMzEyMzA0MFowNTEOMAwGA1UEAwwFY2hhaW4x\nEzARBgNVBAoMCmZpc2NvLWJjb3MxDjAMBgNVBAsMBWNoYWluMFYwEAYHKoZIzj0C\nAQYFK4EEAAoDQgAE6UcrK7ukGBVvBmWYwgIloM38ibqtxF2zBnM9zgU4bujjJU1Y\nCZsHGKVGuNstSOZYfYulnTtFUoHhUEyhddvql6NQME4wHQYDVR0OBBYEFBBSyZi8\nk/Hz/Q2SAin5bMnE1nOFMB8GA1UdIwQYMBaAFBBSyZi8k/Hz/Q2SAin5bMnE1nOF\nMAwGA1UdEwQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgEpuPZypVImOtDty9p50X\njeD4wdgzHXpd3CDPui4CnZYCIQC4n+r97cCB51dPb+WjDNV5C18S2uI8LlNVj+xL\ndSweAg==\n-----END CERTIFICATE-----\n",
+  "sdk.crt": "-----BEGIN CERTIFICATE-----\nMIIBeDCCAR+gAwIBAgIJAJoEtSMUsa8HMAoGCCqGSM49BAMCMDgxEDAOBgNVBAMM\nB2FnZW5jeUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTAg\nFw0yMTA0MDYxMjMwNDBaGA8yMTIxMDMxMzEyMzA0MFowMTEMMAoGA1UEAwwDc2Rr\nMRMwEQYDVQQKDApmaXNjby1iY29zMQwwCgYDVQQLDANzZGswVjAQBgcqhkjOPQIB\nBgUrgQQACgNCAAT3g/OsuSAD2I/dKLWnZTbMGQ8l9WnkD/wrpyoiQkMy1qI5/3Sj\n4WFKGcVu9vhsd0nLoP+y1QttYKM0m5QGcuhPoxowGDAJBgNVHRMEAjAAMAsGA1Ud\nDwQEAwIF4DAKBggqhkjOPQQDAgNHADBEAiANbeRFiiS6mH+vcAOwV3wXd9YW/B2a\n+vrHMm6NwtliRAIgRH4gSF0XLmpVOEO21bJFDGWm9siIX0cnj0R3kNGZcB4=\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIBcTCCARegAwIBAgIJANrOZ+FrVNpIMAoGCCqGSM49BAMCMDUxDjAMBgNVBAMM\nBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAeFw0y\nMTA0MDYxMjMwNDBaFw0zMTA0MDQxMjMwNDBaMDgxEDAOBgNVBAMMB2FnZW5jeUEx\nEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTBWMBAGByqGSM49\nAgEGBSuBBAAKA0IABIqMDvvzvTq8WW1UtJrnnsifw9/OrPsMc9CrrYBsWdwOGhdx\nfNTJA1ss+vngjrhAmWHczvbh+E1WOlDGzpCumeqjEDAOMAwGA1UdEwQFMAMBAf8w\nCgYIKoZIzj0EAwIDSAAwRQIhALsAbAQ9BDeofk4VYzYx2ZAHB1HviDp9ndvXAkLN\nsfHZAiAjViK97dDr3gxP/qHg0e8BG9ptEv7Do8caOPj33F+yOQ==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIBsDCCAVagAwIBAgIJAPwQ7ISyofOIMAoGCCqGSM49BAMCMDUxDjAMBgNVBAMM\nBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAgFw0y\nMTA0MDYxMjMwNDBaGA8yMTIxMDMxMzEyMzA0MFowNTEOMAwGA1UEAwwFY2hhaW4x\nEzARBgNVBAoMCmZpc2NvLWJjb3MxDjAMBgNVBAsMBWNoYWluMFYwEAYHKoZIzj0C\nAQYFK4EEAAoDQgAE6UcrK7ukGBVvBmWYwgIloM38ibqtxF2zBnM9zgU4bujjJU1Y\nCZsHGKVGuNstSOZYfYulnTtFUoHhUEyhddvql6NQME4wHQYDVR0OBBYEFBBSyZi8\nk/Hz/Q2SAin5bMnE1nOFMB8GA1UdIwQYMBaAFBBSyZi8k/Hz/Q2SAin5bMnE1nOF\nMAwGA1UdEwQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgEpuPZypVImOtDty9p50X\njeD4wdgzHXpd3CDPui4CnZYCIQC4n+r97cCB51dPb+WjDNV5C18S2uI8LlNVj+xL\ndSweAg==\n-----END CERTIFICATE-----\n"
+}
+```
+
+
+### 14.6. 获取SDK证书与私钥压缩包
+
+获取Front使用的sdk证书（包含链证书、sdk证书和sdk私钥）的zip压缩包
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert/sdk/zip/{frontId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1     | frontId       | Int           | 是     | 前置编号                  |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/cert/sdk/zip/1
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 文件名  | ResponseEntity.header       | String   | 是       | 文件名在header中 |
+| 2        | 文件流 | body  | InputStream   | 是       |    文件的流在body中   |
+
+
+**1）数据格式**
+
+a、成功：
+
+```
+headers:  content-disposition: attachment;filename*=UTF-8''conf.zip 
+
+{
+    // 二进制流
+}
+```
+
+
 
 ## 15 订阅事件管理
 
@@ -8329,44 +8617,36 @@ http://localhost:5001/WeBASE-Node-Manager/event/eventLogs/list
 
 成功：
 
-data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": [{
-        "logParams": [{
-            "name": "name3",
-            "type": "bool",
-            "data": true,
-            "indexed": true
-        }, {
-            "name": "name4",
-            "type": "string",
-            "data": " x   zu \u0014n\r'8   z1S   Y S\u0019ܸGg K",
-            "indexed": true
-        }, {
-            "name": "name1",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }, {
-            "name": "name2",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }],
-        "log": {
-            "logIndex": 0,
-            "transactionIndex": 0,
-            "transactionHash": "0x5c7aac536ed70aaad659096b05bd06c1fbbc51604ceb79c3d8cea0f450f3b391",
-            "blockHash": "0x552524b1f6667d1fbb5d0ac72a12d59ecf982b5abc6a5cbe1c8d62ead7138e88",
-            "blockNumber": 137,
-            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
-            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
-            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
-        }
-    }
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"log": {
+			"logIndex": 0,
+			"transactionIndex": 0,
+			"transactionHash": "0x67c8d9a1bc62586b9feb0c8b1127bf0030f649771db3e3d0d99cd99209851ed8",
+			"blockHash": "0x0ca880c70a3f24dc5e6052cca4dbb50d9aa0ec973474e07d82e2f5281c54e582",
+			"blockNumber": 71,
+			"address": "0xd5d4fcf2a46831510f095bfb447bc945f99309f7",
+			"data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033132330000000000000000000000000000000000000000000000000000000000",
+			"topics": ["0x4df9dcd34ae35f40f2c756fd8ac83210ed0b76d065543ee73d868aec7c7fcf02"]
+		}, // `org.fisco.bcos.sdk.model.EventLog`，可参考java sdk
+		"data": ["123"]
+	}, {
+		"log": {
+			"logIndex": 0,
+			"transactionIndex": 0,
+			"transactionHash": "0x7c27078b372cee951dd102edcbbeab6b3b799212e4337d6bfac7f723e487a1fb",
+			"blockHash": "0x47f8456a656f226d5a4a7206790ae864ae4fb645bca625b87cf0378ecca7e742",
+			"blockNumber": 72,
+			"address": "0xd5d4fcf2a46831510f095bfb447bc945f99309f7",
+			"data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
+			"topics": ["0x4df9dcd34ae35f40f2c756fd8ac83210ed0b76d065543ee73d868aec7c7fcf02"]
+		},
+		"data": ["333"]
+	}],
+	"totalCount": 1
 }
 ```
 
