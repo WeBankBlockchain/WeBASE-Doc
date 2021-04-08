@@ -7707,6 +7707,8 @@ headers:  content-disposition: attachment;filename*=UTF-8''conf.zip
 | 201153  | unable to create instance of type, check input params           |  无法创建该合约参数类型的实例，请检查入参 |
 | 201154 | contract path is exists. | 合约路径已存在 |
 | 201155 | contract path cannot be empty | 合约路径不能为空 |
+| 201156 | Write front's sdk cert and key fail | 导出SDK证书私钥文件失败，写入文件失败 |
+| 201157 | Write private key file fail | 导出私钥文件失败，写入文件失败 |
 | 201200  | params not fit             |    参数不符合要求      |
 | 201201  | address is invalid           |    账户地址不正确      |
 | 201202  | permission denied, please check chain administrator permission           |    权限不足，请检查用户 |

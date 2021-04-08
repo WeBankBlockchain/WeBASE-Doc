@@ -11073,7 +11073,7 @@ http://localhost:5001/WeBASE-Node-Manager/external/contract/list/all/1/1/10?type
 | 202462 | Two nodes at least.    |  至少两个节点。          |
 | 202463 | Group need two sealers at least.    |  群组至少需要两个共识节点。          |
 | 202464 | WebaseSignAddess configuration error in Application.yml    |  application.yml中的webaseSignAddess配置错误          |
-| 202465 | Error getting docker image mode    |  获取镜像方式错误          |
+| 202465 | webaseSignAddress cannot be 127.0.0.1 or localhost in application.yml file   |  sign的地址不能为127.0.0.1或localhost          |
 | 202466 | Please pull the Docker image manually in host /ip/    |  主机/ip/请手动拉取 Docker 镜像          |
 | 202467 | Max 4 nodes on a single host    |  单个主机最多部署 4 个节点          |
 | 202468 | Host of WeBASE-Node-Manager's ip is already existed.    |  WeBASE-Node-Manager所在主机的IP已存在          |
@@ -11108,8 +11108,10 @@ http://localhost:5001/WeBASE-Node-Manager/external/contract/list/all/1/1/10?type
 | 202502 | version cannot be empty | 版本不能为空 |
 | 202503 | cns name cannot be empty | cns名不能为空 |
 | 202504 | version already exists | 版本已存在 |
-| 202511 | app key cannot be empty | 应用Key不能为空 |
-| 202514 | app key not exists | 应用Key不存在 |
+| 202511 | Front's sdk cert and key not found | 未找到前置的SDK证书与私钥 |
+| 202512 | Write front's sdk cert and key fail | 导出SDK证书私钥文件失败，无法写入文件 |
+| 202513 | Write private key file fail | 导出私钥文件失败，无法写入文件 |
+| 202514 | group genesis conf not found | 群组的创世块文件不存在，无法添加为共识节点 |
 | 202516 | app name exists | 应用名称已存在 |
 | 202517 | app name not exists | 应用名称不存在 |
 | 202518 | app id not exists | 应用编号不存在 |
