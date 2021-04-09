@@ -1,50 +1,6 @@
 # 一键升级
 
-## 子系统升级
-WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinTech/WeBASE/releases)中WeBASE子系统间的兼容性说明，若只升级某个子系统，则需要查看子系统的Changelog，检查是否与已有的其他子系统兼容
-
-**切记复制备份已有的子服务项目文件，便于恢复**，下面介绍各个服务的升级步骤
-
-#### WeBASE-Front升级
-
-0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 替换`webase-front/apps`中的jar包
-2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
-3. `bash stop.sh && bash start.sh`重启
-
-
-#### WeBASE-Node-Manager升级
-
-0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 替换`webase-node-mgr/apps`中的jar包
-2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
-3. 查看[节点管理服务升级文档](../WeBASE-Node-Manager/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
-    3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
-    3.2 按照升级文档指引，操作数据表
-4. `bash stop.sh && bash start.sh`重启
-
-#### WeBASE-Web升级
-
-0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 直接替换`webase-web`整个目录，无需重启Nginx
-
-#### WeBASE-Sign升级
-
-0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 替换`webase-sign/apps`中的jar包
-2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
-3. 查看[签名服务升级文档](../WeBASE-Sign/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
-    3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
-    3.2 按照升级文档指引，操作数据表
-4. `bash stop.sh && bash start.sh`重启
-
-#### 节点升级
-
-FISCO-BCOS节点的升级的详情需要参考[FISCO-BCOS 版本信息](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/change_log/index.html#id24)文档
-- 兼容升级 ：直接替换 旧版本 的节点二进制文件为 新版本 的节点二进制文件，并重启。此方法无法启用节点新特性
-- 全面升级 ：参考 [安装FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html) 搭建新链，重新向新节点提交所有历史交易
-
-## 使用WeBASE升级脚本
+## 使用WeBASE一键升级脚本
 <span id="auto">
 
 在WeBASE v1.5.0后，WeBASE将提供`webase-upgrade.sh`脚本（位于webase-deploy目录中，与`common.properties`文件同级目录）
@@ -54,13 +10,7 @@ FISCO-BCOS节点的升级的详情需要参考[FISCO-BCOS 版本信息](https://
 - 需要确保WeBASE一键部署的文件目录未重命名（如webase-front）
 - 需要连接外网下载新的WeBASE安装包
 - 暂不支持WeBASE可视化部署的自动升级
-- 若升级脚本报错中断后，备份的各子服务文件存放在以旧版本号命名的目录，如`./v1.4.3`目录中，只需要将该目录的文件恢复并重启WeBASE即可
-    ```bash
-    # 恢复文件到当前目录(common.properties所在目录)
-    cp -rf ./v1.4.3/* .
-    # 重启
-    python3 deploy.py startAll
-    ```
+- 若升级脚本报错中断后，备份的各子服务文件存放在以旧版本号命名的目录，如`./v1.4.3`目录中
 
 检测依赖
 ```bash
@@ -120,4 +70,56 @@ $ bash webase-upgrade.sh -o v1.4.3 -n v1.5.0
 ################################################
 ```
 
+若升级失败，，只需要将当前目录升级中的webase子系统目录移除，并将旧版本目录的文件夹复制到当前目录，如`v1.4.3`，并重启WeBASE即可
+
+以v1.4.3升级到v1.5.0为例，具体步骤如下：
+- 查看当前目录的升级中的webase安装包：`ls .`
+- 查看已备份的webase安装包：`ls ./v1.4.3`
+- 首先将当前目录中已存在的`webase-{subsystem}`安装包移除：如移除当前目录的所有webase安装包，`rm -rf webase-*`
+- 复制旧版本目录中的到当前目录：`cp -rf ./v1.4.3/* .`
+- 重启 `python3 deploy.py startAll`
+
+## 子系统升级
+WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinTech/WeBASE/releases)中WeBASE子系统间的兼容性说明，若只升级某个子系统，则需要查看子系统的Changelog，检查是否与已有的其他子系统兼容
+
+**切记复制备份已有的子服务项目文件，便于恢复**，下面介绍各个服务的升级步骤
+
+#### WeBASE-Front升级
+
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 替换`webase-front/apps`中的jar包
+2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
+3. `bash stop.sh && bash start.sh`重启
+
+
+#### WeBASE-Node-Manager升级
+
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 替换`webase-node-mgr/apps`中的jar包
+2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
+3. 查看[节点管理服务升级文档](../WeBASE-Node-Manager/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
+    3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
+    3.2 按照升级文档指引，操作数据表
+4. `bash stop.sh && bash start.sh`重启
+
+#### WeBASE-Web升级
+
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 直接替换`webase-web`整个目录，无需重启Nginx
+
+#### WeBASE-Sign升级
+
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 替换`webase-sign/apps`中的jar包
+2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
+3. 查看[签名服务升级文档](../WeBASE-Sign/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
+    3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
+    3.2 按照升级文档指引，操作数据表
+4. `bash stop.sh && bash start.sh`重启
+
+#### 节点升级
+
+FISCO-BCOS节点的升级的详情需要参考[FISCO-BCOS 版本信息](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/change_log/index.html#id24)文档
+- 兼容升级 ：直接替换 旧版本 的节点二进制文件为 新版本 的节点二进制文件，并重启。此方法无法启用节点新特性
+- 全面升级 ：参考 [安装FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html) 搭建新链，重新向新节点提交所有历史交易
 
