@@ -4,7 +4,7 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-![[]](../../images/WeBASE/one_click_struct.png)
+![架构图](../../images/WeBASE/one_click_struct.png)
 
 
 ## 前提条件
@@ -399,7 +399,7 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 |--|--|--|-- node0 # 具体节点目录
 |--|--|--|--|-- log # 节点日志目录
 ```
-*备注：当前节点日志路径为一件部署搭链的路径，使用已有链请在相关路径查看日志*
+*备注：当前节点日志路径为一键部署搭链的路径，使用已有链请在相关路径查看日志*
 
 日志目录中包含`{XXX}.log`全量日志文件和`{XXX}-error.log`错误日志文件
  - *通过日志定位错误问题时，可以结合`.log`全量日志和`-error.log`错误日志两种日志信息进行排查。*，如查询WeBASE-Front日志，则打开`WeBASE-Front-error.log`可以快速找到错误信息，根据错误查看`WeBASE-Front.log`的相关内容，可以看到错误日志前后的普通日志信息
@@ -410,7 +410,7 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 
 - 如果上述检查步骤出现异常，如检查不到进程或端口监听，则需要按[日志路径](#logpath)进入**异常子服务**的日志目录，检查该服务的日志
 
-- 如果检查步骤均无异常，但服务仍无法访问，可以到按部署日志`deployLog`，节点前置日志`frontLog`, 节点管理服务日志`nodeMgrLog`的顺序逐步检查日志：
+- 如果检查步骤均无异常，但服务仍无法访问，可以分别检查部署日志`deployLog`，节点前置日志`frontLog`, 节点管理服务日志`nodeMgrLog`进行排查：
   - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误
   - 检查webase-deploy/webase-front/log中的**节点前置日志**，如果最后出现`application run success`字样则代表运行成功
   - 检查webase-deploy/webase-node-mgr/log或webase-deploy/webase-sign/log中的日志

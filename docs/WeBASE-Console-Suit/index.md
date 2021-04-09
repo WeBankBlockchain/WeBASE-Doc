@@ -239,7 +239,7 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 
 导出私钥：可以选中导出.txt/.pem/.p12/WeID等格式的私钥，其中WeID格式私钥为十进制明文私钥，txt则是十六进制明文私钥；在代码中加载私钥可以参考[节点前置-私钥加载](../WeBASE-Front/appendix.html#loadKey)
 
-![](../../images/WeBASE-Console-Suit/import_private.png)
+![](../../images/WeBASE-Console-Suit/export_private.png)
 
 
 ### 系统管理
