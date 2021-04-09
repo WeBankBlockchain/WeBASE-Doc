@@ -191,7 +191,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ![](../../images/WeBASE-Console-Suit/contract_list.png)
 
-链上全量合约：
+链上全量合约：包含通过其他平台部署到链上的合约与WeBASE已登记的合约（链上合约只有合约地址），可通过导入按钮，填入合约ABI导入到本地
 
 ![](../../images/WeBASE-Console-Suit/contract_list_all.png)
 
@@ -221,11 +221,11 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 
 私钥管理：包含WeBASE本地已登记的私钥用户与链上全量私钥用户。
 
-已登记私钥：
+已登记私钥：包含本地创建的私钥与导入的私钥
 
 ![](../../images/WeBASE-Console-Suit/private_key.png)
 
-链上全量私钥：
+链上全量私钥：包含链上私钥和本地已登记的私钥，可通过导入按钮，作为公钥用户导入到本地
 
 ![](../../images/WeBASE-Console-Suit/private_key_all.png)
 
@@ -239,7 +239,7 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 
 导出私钥：可以选中导出.txt/.pem/.p12/WeID等格式的私钥，其中WeID格式私钥为十进制明文私钥，txt则是十六进制明文私钥；在代码中加载私钥可以参考[节点前置-私钥加载](../WeBASE-Front/appendix.html#loadKey)
 
-![](../../images/WeBASE-Console-Suit/import_private.png)
+![](../../images/WeBASE-Console-Suit/export_private.png)
 
 
 ### 系统管理
@@ -306,7 +306,7 @@ FISCO-BCOS基于表的权限管理机制详情可以参考文档[FISCO-BCOS基�
 
 **证书管理**：支持导入和查看证书信息，包括查看Front对应节点的链证书、机构证书、节点证书，可查看证书内容、证书有效期、证书链关系等信息；
 - 证书链关系可通过比对父证书指纹与证书指纹查找；
-- 平台将默认加载所有Front的证书，需要在WeBASE-Front配置文件中配置nodePath节点路径；
+- 平台将默认加载所有Front的证书，需要在Webase-Front配置文件中配置nodePath节点路径；
 
 FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/certificates.html)
 
@@ -373,6 +373,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 注册后WeBASE将和应用间保持心跳。如果应用状态变成不能访问，则应用链接会置灰，变成不可跳转。
 
 ![](../../images/WeBASE-Console-Suit/app_link_enable.png)
+
 
 ### 系统监控
 
