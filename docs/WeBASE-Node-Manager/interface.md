@@ -1910,8 +1910,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 3.16 | createTime      | LocalDateTime | 否   | 创建时间                                    |
 | 3.17 | modifyTime      | LocalDateTime | 是   | 修改时间                                    |
 
-### 5.7 获取Abi信息  
 
+### 5.7 获取Abi信息  
 
 #### 传输协议规范
 
@@ -2222,6 +2222,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList/all/light?groupI
 | 3.8        | 修改时间 | modifyTime | String            | 是       |           |
 | 3.9        | 创建时间 | createTime | String             | 是       |           |
 | 3.10        | 备注 | description | String           | 否       |           |
+| 3.11        | 部署用户地址 | deployAddress | String           | 否       |           |
+| 3.12       | 部署用户姓名 | deployUserName | String           | 否       |           |
 
 
 **2）数据格式**
@@ -2644,22 +2646,130 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCnsList
 }
 ```
 
+
+
+### 5.18 获取合约与导入ABI列表（分页）  
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/abi/list/all/{groupId}/{pageNumber}/{pageSize}?account={account}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数   | 类型   | 可为空 | 备注          |
+| ---- | ---------- | ------ | ------ | ------------- |
+| 1    | groupId    | int    | 否     | 群组编号      |
+| 2    | pageNumber | int    | 否     | 页码，从1开始 |
+| 3    | pageSize   | int    | 否     | 页大小        |
+| 4    | account    | String | 是     | 所属账号      |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数        | 类型          |      | 备注                              |
+| ---- | --------------- | ------------- | ---- | --------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败        |
+| 2    | message         | String        | 否   | 描述                              |
+| 3  |        | Object        |      | 返回数据                      |
+| 3.0  | contractId      | int        |      | 合约编号（contractId为空时，说明合约为外部导入的）                      |
+| 3.1  | abiId           | int           | 否   | 合约编号                          |
+| 3.2  | contractName    | String        | 否   | 合约名称                          |
+| 3.3  | groupId         | Int           | 否   | 所属群组编号                      |
+| 3.4  | contractAddress | String        | 否   | 合约地址                          |
+| 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
+| 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
+| 3.10  | contractPath    | String | 是   | 合约路径                          |
+| 3.11  | contractStatus   | int | 是   | 合约状态                         |
+| 3.12   | deployAddress | String           | 否       |  部署用户地址       |
+| 3.13  | deployUserName | String           | 否       |    部署用户名      |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"contractId": null,
+		"contractPath": null,
+		"contractVersion": null,
+		"contractName": "c",
+		"account": null,
+		"contractStatus": null,
+		"groupId": 1,
+		"contractType": null,
+		"contractSource": null,
+		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"register\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+		"contractBin": null,
+		"bytecodeBin": null,
+		"contractAddress": "0x4ac92d4d1680f426ac2da943b3ff67e82976d075",
+		"deployTime": null,
+		"description": null,
+		"createTime": "2021-04-07 09:29:54",
+		"modifyTime": "2021-04-07 09:29:54",
+		"deployAddress": null,
+		"deployUserName": null,
+		"abiId": 8
+	}, {
+		"contractId": 200013,
+		"contractPath": "weid_0xcde7c667528b6df1b61fd6483a0925ccc67931a02394acab1835254546e67d80",
+		"contractVersion": null,
+		"contractName": "SpecificIssuerController",
+		"account": "admin",
+		"contractStatus": 2,
+		"groupId": 1,
+		"contractType": 2,
+		"contractSource": null,
+		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isSpecificTypeIssuer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"extraValue\",\"type\":\"bytes32\"}],\"name\":\"addExtraValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"registerIssuerType\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"getExtraValue\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"isIssuerTypeExist\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"startPos\",\"type\":\"uint256\"},{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getSpecificTypeIssuerList\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"specificIssuerDataAddress\",\"type\":\"address\"},{\"name\":\"roleControllerAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"operation\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"retCode\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"typeName\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"SpecificIssuerRetLog\",\"type\":\"event\"}]",
+		"contractBin": "",
+		"bytecodeBin": "",
+		"contractAddress": "0xce1d576181e1d68899a3f2b86c8e274657c07fea",
+		"deployTime": null,
+		"description": null,
+		"createTime": "2021-04-06 21:34:38",
+		"modifyTime": "2021-04-06 21:34:38",
+		"deployAddress": null,
+		"deployUserName": null,
+		"abiId": 6
+	}],
+	"totalCount": 2
+}
+```
+
+
+
 ## 6 服务器监控相关
 
 ### 6.1 获取节点监控信息  
 
 
-#### 6.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：
-```
-/chain/mointorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}
-```
-
+* 请求地址：**/chain/monitorInfo/{nodeId}?beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 6.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -2680,7 +2790,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginD
 ```
 
 
-#### 6.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2767,7 +2877,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/chain/mointorInfo/500001?gap=60&beginD
 ### 6.2 获取服务器监控信息 
 
 
-#### 6.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：
 ```
@@ -2777,7 +2887,7 @@ performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&con
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 6.2.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -2798,7 +2908,7 @@ performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&con
 http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55
 ```
 
-#### 6.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2889,14 +2999,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
 
 注：邮件告警的邮箱协议类型默认使用SMTP协议，使用25默认端口，默认使用username/password进行用户验证，目前仅支持通过TLS/SSL连接邮件服务器；
 
-#### 6.3.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/mailServer/config/{serverId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -2912,7 +3022,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 ```
 
 
-#### 6.3.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -2980,14 +3090,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 
 返回所有的邮件告警的邮件服务配置
 
-#### 6.4.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/mailServer/config/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3004,7 +3114,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 ```
 
 
-#### 6.4.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3075,14 +3185,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 
 更新邮件告警的配置内容；目前仅支持单个邮件服务器配置，不支持新增配置；
 
-#### 6.5.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/mailServer/config**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.5.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3117,7 +3227,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 ```
 
 
-#### 6.5.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3178,14 +3288,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 注：需要确保配置正确才能使用后续的邮件告警功能；返回成功信息后，需要用户到自己的邮箱查看是否收到邮测试邮件；
 
-#### 6.6.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/mail/test/{toMailAddress}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.6.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3234,7 +3344,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 }
 ```
 
-#### 6.6.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3271,14 +3381,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 获取单个告警配置的内容；告警类型配置是对不同告警类型下的不同内容，包含告警邮件标题`ruleName`，告警邮件内容`alertContent`，告警邮件发送时间间隔`alertIntervalSeconds`，上次告警时间`lastAlertTime`，目标告警邮箱地址列表`userList`，是否启用该类型的邮件告警`enable`，告警等级`alertLevel`等；
 
 
-#### 6.7.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/{ruleId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.7.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3294,7 +3404,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 ```
 
 
-#### 6.7.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3353,14 +3463,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 
 返回所有的告警类型配置
 
-#### 6.8.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.8.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3377,7 +3487,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 ```
 
 
-#### 6.8.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3469,14 +3579,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 
 更新告警类型配置的内容；目前仅支持更新原有的三个邮件告警的配置，不支持新增配置；
 
-#### 6.9.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.9.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3512,7 +3622,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 ```
 
 
-#### 6.9.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3564,14 +3674,14 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 修改告警类型配置中的`enable`，0-关闭，1-开启；
 
-#### 6.9.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/alert/toggle**
 * 请求方式：PUT
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 6.9.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -3596,7 +3706,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
 ```
 
 
-#### 6.9.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -3640,6 +3750,105 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+
+### 6.10 获取出块监控信息  
+
+获取出块周期、块大小、平均TPS的监控数据
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/stat?groupId={groupId}&beginDate={beginDate}&endDate={endDate}&contrastBeginDate={contrastBeginDate}&contrastEndDate={contrastEndDate}&gap={gap}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1         | nodeId            | int             | 否     | 群组id  |
+| 2         | beginDate         | long   | 是     | 显示时间（开始） 时间戳  |
+| 3         | endDate           | long   | 是     | 显示时间（结束）时间戳 |
+| 4         | contrastBeginDate | long   | 是     | 对比时间（开始）时间戳 |
+| 5         | contrastEndDate   | long   | 是     | 对比时间（结束）时间戳  |
+| 6         | gap               | Int             | 是     | 数据粒度  |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/stat?groupId=1&gap=60eginDate=1617811200000&endDate=1617871955000&contrastBeginDate=&contrastEndDate=
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1         | code              | int             | 否     | 返回码                                                         |
+| 2         | message           | String          | 否     | 描述信息                                                       |
+| 3         | data              | Array           | 否     | 返回信息列表                                                   |
+| 3.1       |                   | Object           |        | 返回信息实体                                                   |
+| 3.1.1     | metricType        | String          | 否     | 测量类型：blockSize, blockCycle, tps                               |
+| 3.1.2     | data              | Object           | 否     |                                                                |
+| 3.1.2.1   | lineDataList      | Object           | 否     |                                                                |
+| 3.1.2.1.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
+| 3.1.2.1.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
+| 3.1.2.2   | contrastDataList  | Object           | 否     |                                                                |
+| 3.1.2.2.1 | timestampList     | List\<String\>  | 否     | 时间戳列表                                                     |
+| 3.1.2.2.2 | valueList         | List\<Integer\> | 否     | 值列表                                                         |
+
+
+***2）出参示例***
+* 成功：
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"metricType": "blockSize",
+		"data": {
+			"lineDataList": {
+				"timestampList": [1617866162706, 1617866462706, 1617866762706, 1617867062706, 1617867362706, 1617867662706, 1617867962706, 1617868262706, 1617868562706, 1617868862706, 1617869162706, 1617869462706, 1617869762706, 1617870062706, 1617870362706, 1617870664184, 1617870964184],
+				"valueList": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+			},
+			"contrastDataList": {
+				"timestampList": [],
+				"valueList": []
+			}
+		}
+	}, {
+		"metricType": "blockCycle",
+		"data": {
+			"lineDataList": {
+				"timestampList": null,
+				"valueList": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+			},
+			"contrastDataList": {
+				"timestampList": null,
+				"valueList": []
+			}
+		}
+	}, {
+		"metricType": "tps",
+		"data": {
+			"lineDataList": {
+				"timestampList": null,
+				"valueList": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+			},
+			"contrastDataList": {
+				"timestampList": null,
+				"valueList": []
+			}
+		}
+	}],
+	"attachment": null
 }
 ```
 
@@ -5467,14 +5676,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 ### 11.4 查询私钥（1.3.0已移除）
 
 
-#### 11.4.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/privateKey/{userId}**
 * 请求方式：GET
 * 返回格式：json
 
-#### 11.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5490,7 +5699,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 ```
 
 
-#### 11.4.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5531,14 +5740,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 ### 11.5 查询用户列表
 
 
-#### 11.5.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/userList/{groupId}/{pageNumber}/{pageSize}?userParam={userName}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 11.5.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5558,7 +5767,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 ```
 
 
-#### 11.5.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5627,7 +5836,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 
 其中私钥字段用Base64加密
 
-#### 11.6.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/import**
@@ -5635,7 +5844,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 11.6.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5664,7 +5873,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 ```
 
 
-#### 11.6.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5700,7 +5909,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 
 可导入控制台所生成的私钥.pem文件
 
-#### 11.7.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/importPem**
@@ -5708,7 +5917,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 11.7.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5737,7 +5946,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 ```
 
 
-#### 11.7.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5773,7 +5982,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 
 可导入控制台生成的私钥.p12文件
 
-#### 11.8.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/user/importP12**
@@ -5781,7 +5990,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 * 请求头：Content-type: **form-data**
 * 返回格式：JSON
 
-#### 11.8.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5802,7 +6011,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importP12
 
 > 使用form-data传参
 
-#### 11.8.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5832,6 +6041,196 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importP12
     "data": null
 }
 ```
+
+
+### 11.9 导出明文私钥
+
+可在页面导入WeBASE-Front所导出的私钥txt文件
+
+其中私钥字段用Base64加密
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/export/{userId}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型   | 可为空 | 备注                   |
+| ---- | ----------- | ------ | ------ | ---------------------- |
+| 1    | privateKey  | string | 否     | Base64加密后的私钥内容 |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/export/300001
+```
+
+```
+{
+    "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
+    "groupId": "1",
+    "description": "密钥拥有者",
+    "userName": "user1",
+    "account": "admin"
+}
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
+| 3.1  | userId      | int           | 否   | 用户编号                           |
+| 3.2  | userName    | string        | 否   | 用户名称                           |
+| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.4  | description | String        | 是   | 备注                               |
+| 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 3.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 3.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 3.9  | account     | string        | 否   | 关联账户                           |
+| 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 3.12  | privateKey   | String        | 否   | 私钥，用base64编码                           |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": {
+		"userId": 700003,
+		"userName": "vivi_d",
+		"account": "xyzshen",
+		"groupId": 1,
+		"publicKey": "04d01115d548e7561b15c38f004d734633687cf4419620095bc5b0f47070afe85aa9f34ffdc815e0d7a8b64537e17bd81579238c5dd9a86d526b051b13f4062327",
+		"privateKey": "MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwYw==",
+		"userStatus": 1,
+		"chainIndex": null,
+		"userType": 1,
+		"address": "0xdbc23ae43a150ff8884b02cea117b22d1c3b9796",
+		"signUserId": "b751efc5d0cc4e12b90908b1f2670258",
+		"appId": "1",
+		"hasPk": 1,
+		"description": "",
+		"createTime": "2021-04-06 21:24:12",
+		"modifyTime": "2021-04-06 21:24:12"
+	},
+	"attachment": null
+}
+```
+
+
+### 11.10 导出.pem私钥
+
+导出pem格式的私钥文件
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/exportPem**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
+| 1    | groupId     | int | 否     | 群组id                                                     |
+| 2    | signUserId | string        | 否     | 用户的signUserId |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/exportPem
+```
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| -    | -     | InputStream    | 否   | 返回文件的二进制流 |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+-----BEGIN PRIVATE KEY-----
+MIGNAgEAMBAGByqGSM49AgEGBSuBBAAKBHYwdAIBAQQgnAXS1DYA90nML3Kge4Qd
+IgMXiQ9cojmRgyjo1BLYXOqgBwYFK4EEAAqhRANCAATLPOzgUzNbo6UeCAjYv2++
+FwlBmT1Sa7goXELaazyJEJLbAlAFGB6qvjdA9m2nx5+rTmfGoSuQK9T2hC/vWJfq
+-----END PRIVATE KEY-----
+
+
+```
+
+
+### 11.11 导出.p12私钥
+
+导出pem格式的私钥文件
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/user/exportP12**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
+| 1    | groupId     | int | 否     | 群组id                                                     |
+| 2    | signUserId | string        | 否     | 用户的signUserId |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/user/exportP12
+```
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| -    | -     | InputStream    | 否   | 返回文件的二进制流 |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+// 二进制流
+
+```
+
 
 ## 12 合约方法管理模块 
 
@@ -7520,14 +7919,14 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 
 由**合约部署者**（一般由运维所部属）与链治理委员共同管理合约的状态，包含冻结/解冻合约、查询合约状态功能
 
-#### 13.23.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/precompiled/contract/status**
 * 请求方式： POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 13.23.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7555,7 +7954,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
 ```
 
 
-#### 13.23.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7837,14 +8236,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?group
 
 注：首次启动项目会自动拉取每一个Front的证书
 
-#### 14.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert/list**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 14.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7861,7 +8260,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 ```
 
 
-#### 14.1.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7915,14 +8314,14 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 根据指纹获取单个证书
 
 
-#### 14.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 14.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -7939,7 +8338,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 ```
 
 
-#### 14.2.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -7988,7 +8387,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 
 导入保存证书文件
 
-#### 14.3.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：POST
@@ -8017,7 +8416,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 ```
 
 
-#### 14.3.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -8055,14 +8454,14 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 根据证书指纹删除一个证书
 
-#### 14.4.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/cert**
 * 请求方式：DELETE
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 14.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -8084,7 +8483,7 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 ```
 
 
-#### 14.4.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -8105,6 +8504,104 @@ http://localhost:5001/WeBASE-Node-Manager/cert
     "data": 1
 }
 ```
+
+
+
+### 14.5. 获取明文SDK证书与私钥
+
+获取Front使用的sdk证书（包含链证书、sdk证书和sdk私钥）的内容
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert/sdk//{frontId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1     | frontId       | Int           | 是     | 前置编号                  |
+
+**2）数据格式**
+
+```
+http://localhost:5001/WeBASE-Node-Manager/cert/sdk/1
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        |   | Map<String,String>       | Map   | 是       | key为文件名，value为文件内容 |
+
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "sdk.key": "-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgxqr/d/VgQ0fAr/KvyAeW\nJ6bD1tqxZ5gYOdfIJiK7WOmhRANCAAT3g/OsuSAD2I/dKLWnZTbMGQ8l9WnkD/wr\npyoiQkMy1qI5/3Sj4WFKGcVu9vhsd0nLoP+y1QttYKM0m5QGcuhP\n-----END PRIVATE KEY-----\n",
+  "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIBsDCCAVagAwIBAgIJAPwQ7ISyofOIMAoGCCqGSM49BAMCMDUxDjAMBgNVBAMM\nBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAgFw0y\nMTA0MDYxMjMwNDBaGA8yMTIxMDMxMzEyMzA0MFowNTEOMAwGA1UEAwwFY2hhaW4x\nEzARBgNVBAoMCmZpc2NvLWJjb3MxDjAMBgNVBAsMBWNoYWluMFYwEAYHKoZIzj0C\nAQYFK4EEAAoDQgAE6UcrK7ukGBVvBmWYwgIloM38ibqtxF2zBnM9zgU4bujjJU1Y\nCZsHGKVGuNstSOZYfYulnTtFUoHhUEyhddvql6NQME4wHQYDVR0OBBYEFBBSyZi8\nk/Hz/Q2SAin5bMnE1nOFMB8GA1UdIwQYMBaAFBBSyZi8k/Hz/Q2SAin5bMnE1nOF\nMAwGA1UdEwQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgEpuPZypVImOtDty9p50X\njeD4wdgzHXpd3CDPui4CnZYCIQC4n+r97cCB51dPb+WjDNV5C18S2uI8LlNVj+xL\ndSweAg==\n-----END CERTIFICATE-----\n",
+  "sdk.crt": "-----BEGIN CERTIFICATE-----\nMIIBeDCCAR+gAwIBAgIJAJoEtSMUsa8HMAoGCCqGSM49BAMCMDgxEDAOBgNVBAMM\nB2FnZW5jeUExEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTAg\nFw0yMTA0MDYxMjMwNDBaGA8yMTIxMDMxMzEyMzA0MFowMTEMMAoGA1UEAwwDc2Rr\nMRMwEQYDVQQKDApmaXNjby1iY29zMQwwCgYDVQQLDANzZGswVjAQBgcqhkjOPQIB\nBgUrgQQACgNCAAT3g/OsuSAD2I/dKLWnZTbMGQ8l9WnkD/wrpyoiQkMy1qI5/3Sj\n4WFKGcVu9vhsd0nLoP+y1QttYKM0m5QGcuhPoxowGDAJBgNVHRMEAjAAMAsGA1Ud\nDwQEAwIF4DAKBggqhkjOPQQDAgNHADBEAiANbeRFiiS6mH+vcAOwV3wXd9YW/B2a\n+vrHMm6NwtliRAIgRH4gSF0XLmpVOEO21bJFDGWm9siIX0cnj0R3kNGZcB4=\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIBcTCCARegAwIBAgIJANrOZ+FrVNpIMAoGCCqGSM49BAMCMDUxDjAMBgNVBAMM\nBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAeFw0y\nMTA0MDYxMjMwNDBaFw0zMTA0MDQxMjMwNDBaMDgxEDAOBgNVBAMMB2FnZW5jeUEx\nEzARBgNVBAoMCmZpc2NvLWJjb3MxDzANBgNVBAsMBmFnZW5jeTBWMBAGByqGSM49\nAgEGBSuBBAAKA0IABIqMDvvzvTq8WW1UtJrnnsifw9/OrPsMc9CrrYBsWdwOGhdx\nfNTJA1ss+vngjrhAmWHczvbh+E1WOlDGzpCumeqjEDAOMAwGA1UdEwQFMAMBAf8w\nCgYIKoZIzj0EAwIDSAAwRQIhALsAbAQ9BDeofk4VYzYx2ZAHB1HviDp9ndvXAkLN\nsfHZAiAjViK97dDr3gxP/qHg0e8BG9ptEv7Do8caOPj33F+yOQ==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIBsDCCAVagAwIBAgIJAPwQ7ISyofOIMAoGCCqGSM49BAMCMDUxDjAMBgNVBAMM\nBWNoYWluMRMwEQYDVQQKDApmaXNjby1iY29zMQ4wDAYDVQQLDAVjaGFpbjAgFw0y\nMTA0MDYxMjMwNDBaGA8yMTIxMDMxMzEyMzA0MFowNTEOMAwGA1UEAwwFY2hhaW4x\nEzARBgNVBAoMCmZpc2NvLWJjb3MxDjAMBgNVBAsMBWNoYWluMFYwEAYHKoZIzj0C\nAQYFK4EEAAoDQgAE6UcrK7ukGBVvBmWYwgIloM38ibqtxF2zBnM9zgU4bujjJU1Y\nCZsHGKVGuNstSOZYfYulnTtFUoHhUEyhddvql6NQME4wHQYDVR0OBBYEFBBSyZi8\nk/Hz/Q2SAin5bMnE1nOFMB8GA1UdIwQYMBaAFBBSyZi8k/Hz/Q2SAin5bMnE1nOF\nMAwGA1UdEwQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgEpuPZypVImOtDty9p50X\njeD4wdgzHXpd3CDPui4CnZYCIQC4n+r97cCB51dPb+WjDNV5C18S2uI8LlNVj+xL\ndSweAg==\n-----END CERTIFICATE-----\n"
+}
+```
+
+
+### 14.6. 获取SDK证书与私钥压缩包
+
+获取Front使用的sdk证书（包含链证书、sdk证书和sdk私钥）的zip压缩包
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/cert/sdk/zip/{frontId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1     | frontId       | Int           | 是     | 前置编号                  |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/cert/sdk/zip/1
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 文件名  | ResponseEntity.header       | String   | 是       | 文件名在header中 |
+| 2        | 文件流 | body  | InputStream   | 是       |    文件的流在body中   |
+
+
+**1）数据格式**
+
+a、成功：
+
+```
+headers:  content-disposition: attachment;filename*=UTF-8''conf.zip 
+
+{
+    // 二进制流
+}
+```
+
+
 
 ## 15 订阅事件管理
 
@@ -8329,44 +8826,36 @@ http://localhost:5001/WeBASE-Node-Manager/event/eventLogs/list
 
 成功：
 
-data中为`List<org.fisco.bcos.web3j.tx.txdecode.LogResult>`，可参考sdk
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": [{
-        "logParams": [{
-            "name": "name3",
-            "type": "bool",
-            "data": true,
-            "indexed": true
-        }, {
-            "name": "name4",
-            "type": "string",
-            "data": " x   zu \u0014n\r'8   z1S   Y S\u0019ܸGg K",
-            "indexed": true
-        }, {
-            "name": "name1",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }, {
-            "name": "name2",
-            "type": "uint256",
-            "data": 1,
-            "indexed": false
-        }],
-        "log": {
-            "logIndex": 0,
-            "transactionIndex": 0,
-            "transactionHash": "0x5c7aac536ed70aaad659096b05bd06c1fbbc51604ceb79c3d8cea0f450f3b391",
-            "blockHash": "0x552524b1f6667d1fbb5d0ac72a12d59ecf982b5abc6a5cbe1c8d62ead7138e88",
-            "blockNumber": 137,
-            "address": "0x19fb54101fef551187d3a79ea1c87de8d0ce754e",
-            "data": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
-            "topics": ["0x060ceb821dc6345162b54f7d678480c561376a770c8c98db63f450e0f8a4a499", "0x0000000000000000000000000000000000000000000000000000000000000001", "0xe478c0fabc7a75e7146e0d2738af81af7a31538df5df59e05319dcb84767f84b"]
-        }
-    }
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"log": {
+			"logIndex": 0,
+			"transactionIndex": 0,
+			"transactionHash": "0x67c8d9a1bc62586b9feb0c8b1127bf0030f649771db3e3d0d99cd99209851ed8",
+			"blockHash": "0x0ca880c70a3f24dc5e6052cca4dbb50d9aa0ec973474e07d82e2f5281c54e582",
+			"blockNumber": 71,
+			"address": "0xd5d4fcf2a46831510f095bfb447bc945f99309f7",
+			"data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033132330000000000000000000000000000000000000000000000000000000000",
+			"topics": ["0x4df9dcd34ae35f40f2c756fd8ac83210ed0b76d065543ee73d868aec7c7fcf02"]
+		}, // `org.fisco.bcos.sdk.model.EventLog`，可参考java sdk
+		"data": ["123"]
+	}, {
+		"log": {
+			"logIndex": 0,
+			"transactionIndex": 0,
+			"transactionHash": "0x7c27078b372cee951dd102edcbbeab6b3b799212e4337d6bfac7f723e487a1fb",
+			"blockHash": "0x47f8456a656f226d5a4a7206790ae864ae4fb645bca625b87cf0378ecca7e742",
+			"blockNumber": 72,
+			"address": "0xd5d4fcf2a46831510f095bfb447bc945f99309f7",
+			"data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
+			"topics": ["0x4df9dcd34ae35f40f2c756fd8ac83210ed0b76d065543ee73d868aec7c7fcf02"]
+		},
+		"data": ["333"]
+	}],
+	"totalCount": 1
 }
 ```
 
@@ -9220,7 +9709,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/chain/info
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Integer       | 否     | 返回码，0：成功 其它：失败                 |
 | 2    | message     | String        | 否     | 描述    
-| 3    | data        | String        | 否       | 链信息查询结果                      |
+| 3    | data        | String        | 否       | 链信息查询结果    |
 | 3.1  | id   | Integer        | 否       | 链编号|                
 | 3.1  |chainName          | String        | 否       | 链名称|    
 | 3.1  | chainDesc   | String        | 否       | 链描述    |
@@ -9769,46 +10258,298 @@ http://localhost:5001/WeBASE-Node-Manager/host/check
 }
 ```
 
+## 17 应用管理模块
 
-## 17 其他接口
+### 17.1 保存应用信息
 
-### 17.1 查询是否使用国密
 
-获取WeBASE-Node-Manager是否使用国密版
+#### 传输协议规范
 
-#### 17.1.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/encrypt**
-* 请求方式：GET
+* 请求地址： **/app/save**
+* 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 17.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | --     | -        | 否     | -   
-
-​         
+| 序号 | 输入参数   | 类型   | 可为空 | 备注                               |
+| ---- | ---------- | ------ | ------ | ---------------------------------- |
+| 1    | appName    | string | 否     | 应用名称                           |
+| 2    | appDocLink | string | 否     | 应用文档链接                       |
+| 3    | appDesc    | string | 否     | 应用描述                           |
+| 4    | appIcon    | string | 是     | 应用图标                           |
+| 5    | appDetail  | string | 是     | 应用详细介绍                       |
+| 6    | id         | int    | 是     | 应用编号，传入时表示更新，否则新增 |
 
 ***2）入参示例***
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/encrypt
+http://127.0.0.1:5001/WeBASE-Node-Manager/app/save
+```
+
+```
+{
+  "appName":"WeID",
+  "appDocLink":"https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html",
+  "appIcon":"test",
+  "appDesc":"WeIdentity是一套分布式多中心的技术解决方案，可承载实体对象（人或者物）的现实身份与链上身份的可信映射、以及实现实体对象之间安全的访问授权与数据交换。WeIdentity由微众银行自主研发并完全开源，秉承公众联盟链整合资源、交换价值、服务公众的理念，致力于成为链接多个垂直行业领域的分布式商业基础设施，促进泛行业、跨机构、跨地域间的身份认证和数据合作。",
+  "appDetail":""
+}
 ```
 
 
-#### 17.1.3 返回参数
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数   | 类型          |      | 备注                       |
+| ---- | ---------- | ------------- | ---- | -------------------------- |
+| 1    | code       | Int           | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message    | String        | 否   | 描述                       |
+| 3    | data       | Object        |      | 信息对象                   |
+| 3.1  | id         | int           | 否   | 自增编号                   |
+| 3.2  | appName    | string        | 否   | 应用名称                   |
+| 3.3  | appKey     | string        | 否   | 应用Key                    |
+| 3.4  | appSecret  | string        | 否   | 应用密码                   |
+| 3.5  | appDocLink | string        | 否   | 应用文档链接               |
+| 3.6  | appIcon    | string        | 否   | 应用图标                   |
+| 3.7  | appDesc    | string        | 否   | 应用描述                   |
+| 3.8  | appDetail  | string        | 是   | 应用详细介绍               |
+| 3.9  | appIp      | string        | 是   | 应用ip                     |
+| 3.10 | frontPort  | int           | 是   | 应用端口                   |
+| 3.11 | appLink    | string        | 是   | 应用服务链接               |
+| 3.12 | appStatus  | int           | 否   | 应用状态(1存活，2不存活)   |
+| 3.13 | createTime | LocalDateTime | 否   | 落库时间                   |
+| 3.14 | modifyTime | LocalDateTime | 否   | 修改时间                   |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "id": 1,
+        "appName": "WeID",
+        "appKey": "z2dJaYXe",
+        "appSecret": "5bTi2zMgdxAbFwgmkZhxNrUXFFvdjmM8",
+        "appStatus": 2,
+        "appDocLink": "https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html",
+        "appLink": null,
+        "appIp": null,
+        "appPort": null,
+        "appIcon": "test",
+        "appDesc": "WeIdentity是一套分布式多中心的技术解决方案，可承载实体对象（人或者物）的现实身份与链上身份的可信映射、以及实现实体对象之间安全的访问授权与数据交换。WeIdentity由微众银行自主研发并完全开源，秉承公众联盟链整合资源、交换价值、服务公众的理念，致力于成为链接多个垂直行业领域的分布式商业基础设施，促进泛行业、跨机构、跨地域间的身份认证和数据合作。",
+        "appDetail": "",
+        "createTime": "2021-03-07 18:15:47",
+        "modifyTime": "2021-03-07 18:15:47"
+    },
+    "attachment": null
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+
+### 17.2 查询应用列表 
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/app/list?appName={appName}&appKey={appKey}&appType={appType}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数 | 类型   | 可为空 | 备注                                                         |
+| ---- | -------- | ------ | ------ | ------------------------------------------------------------ |
+| 1    | appName  | string | 是     | 应用名称                                                     |
+| 2    | appKey   | string | 是     | 应用Key                                                      |
+| 3    | appType  | Int    | 是     | 应用类型(1模板，2新建)，传入时查询对应列表，不传入则返回新建的应用列表 |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/app/list?appType=1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号   | 输出参数   | 类型          |      | 备注                       |
+| ------ | ---------- | ------------- | ---- | -------------------------- |
+| 1      | code       | Int           | 否   | 返回码，0：成功 其它：失败 |
+| 2      | message    | String        | 否   | 描述                       |
+| 3      | totalCount | int           | 否   | 总记录数                   |
+| 4      | data       | List          | 是   | 列表                       |
+| 4.1    |            | Object        |      | 信息对象                   |
+| 4.1.1  | id         | int           | 否   | 自增编号                   |
+| 4.1.2  | appName    | string        | 否   | 应用名称                   |
+| 4.1.3  | appKey     | string        | 否   | 应用Key                    |
+| 4.1.4  | appSecret  | string        | 否   | 应用密码                   |
+| 4.1.5  | appDocLink | string        | 否   | 应用文档链接               |
+| 4.1.6  | appIcon    | string        | 否   | 应用图标                   |
+| 4.1.7  | appDesc    | string        | 否   | 应用描述                   |
+| 4.1.8  | appDetail  | string        | 是   | 应用详细介绍               |
+| 4.1.9  | appIp      | string        | 是   | 应用ip                     |
+| 4.1.10 | frontPort  | int           | 是   | 应用端口                   |
+| 4.1.11 | appLink    | string        | 是   | 应用服务链接               |
+| 4.1.12 | appStatus  | int           | 否   | 应用状态(1存活，2不存活)   |
+| 4.1.13 | createTime | LocalDateTime | 否   | 落库时间                   |
+| 4.1.14 | modifyTime | LocalDateTime | 否   | 修改时间                   |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "id": 1,
+            "appName": "WeID",
+            "appKey": "RXiHxhWn",
+            "appSecret": "FA4evmGGAAQTGnpiu6FF4uWzb2RvuiWU",
+            "appStatus": 2,
+            "appDocLink": "https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html",
+            "appLink": null,
+            "appIp": null,
+            "appPort": null,
+            "appIcon": "test",
+            "appDesc": "WeIdentity是一套分布式多中心的技术解决方案，可承载实体对象（人或者物）的现实身份与链上身份的可信映射、以及实现实体对象之间安全的访问授权与数据交换。WeIdentity由微众银行自主研发并完全开源，秉承公众联盟链整合资源、交换价值、服务公众的理念，致力于成为链接多个垂直行业领域的分布式商业基础设施，促进泛行业、跨机构、跨地域间的身份认证和数据合作。",
+            "appDetail": "",
+            "createTime": "2021-03-07 18:15:47",
+            "modifyTime": "2021-03-07 18:15:47"
+        }
+    ],
+    "totalCount": 1
+}
+```
+
+* 失败：
+
+```
+{
+   "code": 102000,
+   "message": "system exception",
+   "data": {}
+}
+```
+
+### 17.3 删除应用信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/app/{id}**
+* 请求方式：DELETE
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数 | 类型 | 可为空 | 备注     |
+| ---- | -------- | ---- | ------ | -------- |
+| 1    | id       | int  | 否     | 应用编号 |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/app/1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "data": {},
+    "message": "Success"
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+## 18 配置接口
+
+### 18.1 查询是否使用国密
+
+获取WeBASE-Node-Manager是否使用国密版
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/encrypt**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***         
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/config/encrypt
+```
+
+
+#### 返回参数
 
 ***1）出参表***
 
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述    
-| 3    |  data    | Int        | 否     | 1: 国密，0：非国密                           
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | Int        | 否     | 1: 国密，0：非国密                           |
 
 
 ***2）出参示例***
@@ -9819,39 +10560,32 @@ http://localhost:5001/WeBASE-Node-Manager/encrypt
     "message": "success",
     "data": 1 
 }
-
 ```
 
 
-### 17.2 查询WeBASE-Node-Manager的版本
+### 18.2 查询WeBASE-Node-Manager的版本
 
 获取WeBASE-Node-Manager服务的版本号
 
-#### 17.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/version**
+* 请求地址： **/config/version**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 17.2.2 请求参数
+#### 请求参数
 
-***1）入参表***
-
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | --     | -        | 否     | -   
-
-​         
+***1）入参表***         
 
 ***2）入参示例***
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/version
+http://localhost:5001/WeBASE-Node-Manager/config/version
 ```
 
 
-#### 17.2.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -9866,8 +10600,326 @@ http://localhost:5001/WeBASE-Node-Manager/version
 v1.4.0
 ```
 
+### 18.3 获取服务ip和端口
 
-## 附录
+返回本服务ip和端口。
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/ipPort**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/config/ipPort
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | Object |      | 信息对象                   |
+| 3.1  | ip       | string | 否   | 服务IP                     |
+| 3.2  | port     | int    | 否   | 服务端口                   |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "ip": "127.0.0.1",
+        "port": 5001
+    },
+    "attachment": null
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+### 18.4 查询已部署合约是否支持修改
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/isDeployedModifyEnable**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***   
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/config/isDeployedModifyEnable
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型 |      | 备注                       |
+| ---- | -------- | ---- | ---- | -------------------------- |
+| 1    | code     | Int  | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message     | String        | 否     | 描述    |
+| 3    |  data    | boolean | 否     | true: 支持，false：不支持                    |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": true 
+}
+```
+
+## 19. 链上全量数据接口
+
+
+### 19.1 查询链上全量私钥用户列表
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/external/account/list/all/{groupId}/{pageNumber}/{pageSize}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***   
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | string        | 否     | 群组id                                     |
+| 2    | pageNumber   | int           | 否     | 页码                               |
+| 3    | pageSize      | int           | 否     | 页大小                         |
+| 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
+| 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/external/account/list/all/1/1/10
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型 |      | 备注                       |
+| ---- | -------- | ---- | ---- | -------------------------- |
+| 1    | code     | Int  | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message     | String        | 否     | 描述    |
+| 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
+| 3.1  | userId      | int           | 是   | 用户编号（若仅存于链上则为null)    |
+| 3.2  | userName    | string        | 是   | 用户名称                           |
+| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.4  | description | String        | 是   | 备注                               |
+| 3.5  | userStatus  | int           | 是   | 状态（1-正常 2-停用） 默认1        |
+| 3.6  | publicKey   | String        | 是   | 公钥信息                           |
+| 3.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 3.9  | account     | string        | 是   | 关联账户                           |
+| 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 3.12 | extAccountId  | int | 否   | 链上用户编号                         |
+| 3.13 | transCount  | int   | 否   | 用户交易量                           |
+| 3.14 | hashs  | String | 否   | 用户交易hash（5个）                           |
+| 3.14 | signUserId  | String | 是   | 用户的sign用户编号          |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"userId": null,
+		"userName": null,
+		"account": null,
+		"groupId": 1,
+		"publicKey": null,
+		"privateKey": null,
+		"userStatus": null,
+		"chainIndex": null,
+		"userType": null,
+		"address": "0x11523906f9c6d4bbf2bf7ab2ff1049e7bdf2fbf6",
+		"signUserId": null,
+		"appId": null,
+		"hasPk": null,
+		"description": null,
+		"createTime": "2021-04-07 16:34:42",
+		"modifyTime": "2021-04-07 16:34:42",
+		"extAccountId": 4,
+		"transCount": 1,
+		"hashs": "0x6889e8ea793d6326026b2a32bab023183ccc7846d3bcb9bd1001e1f08fb892c5"
+	},{
+		"userId": 700001,
+		"userName": "2222",
+		"account": "mars",
+		"groupId": 1,
+		"publicKey": "04299feb42f324521464c9503220efaeaae99093d92ef08e6f9c1f76e761c2a57422c5fe4dc721e049dfdc05ff8e9b64f59471235ad5e5f4fc07e653f2cd22314e",
+		"privateKey": null,
+		"userStatus": 1,
+		"chainIndex": null,
+		"userType": 1,
+		"address": "0x6bc1eeb7d1bb3f1d8195336843bd938d51e594ee",
+		"signUserId": "0c01b17d67734e95b1e8d5c55e78b4d8",
+		"appId": "1",
+		"hasPk": 1,
+		"description": "",
+		"createTime": "2021-04-06 21:14:04",
+		"modifyTime": "2021-04-06 21:14:04",
+		"extAccountId": 1,
+		"transCount": null,
+		"hashs": null
+	}],
+	"totalCount": 2
+}
+```
+
+
+### 19.2 查询链上全量合约列表
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/external/contract/list/all/{groupId}/{pageNumber}/{pageSize}&type={type}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***   
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | groupId     | string        | 否     | 群组id                                     |
+| 2    | pageNumber   | int           | 否     | 页码                               |
+| 3    | pageSize      | int           | 否     | 页大小                         |
+| 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
+| 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/external/contract/list/all/1/1/10?type=1
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+
+| 序号 | 输出参数        | 类型          |      | 备注                              |
+| ---- | --------------- | ------------- | ---- | --------------------------------- |
+| 1    | code            | Int           | 否   | 返回码，0：成功 其它：失败        |
+| 2    | message         | String        | 否   | 描述                              |
+| 3    |                 | Object        |      | 返回信息实体                      |
+| 3.1  | abiId           | int           | 是   | 合约编号（若未登记，则为空）                          |
+| 3.2  | contractName    | String        | 否   | 合约名称                          |
+| 3.3  | groupId         | Int           | 否   | 所属群组编号                      |
+| 3.4  | contractAddress | String        | 否   | 合约地址                          |
+| 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
+| 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
+| 3.7  | account         | String        | 否   | 所属账号                          |
+| 3.8  | createTime      | LocalDateTime | 否   | 创建时间                          |
+| 3.9  | modifyTime      | LocalDateTime | 是   | 修改时间                          |
+| 3.10 | extContractId  | int | 否   | 链上合约编号                         |
+| 3.11 | transCount  | int   | 否   | 合约交易量                           |
+| 3.12 | hashs  | String | 否   | 合约交易hash（5个）                           |
+| 3.13 | deployTxHash  | String | 是   | 部署合约的交易hash          |
+| 3.14 | deployAddress  | String | 是   | 部署合约的用户地址          |
+| 3.15 | deployTime  | Date | 是   | 合约的部署时间          |
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"abiId": 6,
+		"groupId": 1,
+		"account": "admin",
+		"contractName": "SpecificIssuerController",
+		"contractAddress": "0xce1d576181e1d68899a3f2b86c8e274657c07fea",
+		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isSpecificTypeIssuer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"extraValue\",\"type\":\"bytes32\"}],\"name\":\"addExtraValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"registerIssuerType\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"getExtraValue\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"isIssuerTypeExist\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"startPos\",\"type\":\"uint256\"},{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getSpecificTypeIssuerList\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"specificIssuerDataAddress\",\"type\":\"address\"},{\"name\":\"roleControllerAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"operation\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"retCode\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"typeName\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"SpecificIssuerRetLog\",\"type\":\"event\"}]",
+		"contractBin": "",
+		"createTime": "2021-04-06 21:34:38",
+		"modifyTime": "2021-04-06 21:34:38",
+		"extContractId": 800014,
+		"deployAddress": "0x222d68876bed5a33c8efe04c6fc9783031c22cd1",
+		"deployTxHash": "0xd04b35d7741f0568546de4fc29a880fa0f3727beef544497ca5816fa8793fa13",
+		"deployTime": 1617716070000,
+		"transCount": 0,
+		"hashs": null
+	},{
+		"abiId": null,
+		"groupId": 1,
+		"account": null,
+		"contractName": null,
+		"contractAddress": "0x5e103407b2a06b32bad0fc578e1888036a3e26a8",
+		"contractAbi": null,
+		"contractBin": "",
+		"createTime": null,
+		"modifyTime": null,
+		"extContractId": 800007,
+		"deployAddress": "0x222d68876bed5a33c8efe04c6fc9783031c22cd1",
+		"deployTxHash": "0x4c6f026e72b69e9ed1f3685f24bc055f5ef1bdde4778ee684a96d25deba6b34b",
+		"deployTime": 1617716065000,
+		"transCount": 1,
+		"hashs": "0x4c6f026e72b69e9ed1f3685f24bc055f5ef1bdde4778ee684a96d25deba6b34b"
+	}],
+	"totalCount": 2
+}
+```
+
+
+
+### 附录
 
 ### 1. 返回码信息列表 
 <span id="code"></span>
@@ -9900,6 +10952,7 @@ v1.4.0
 | 202017 | invalid contract id      | 无效的合约编号           |
 | 202018 | invalid param info      | 无效的入参信息           |
 | 202019 | contract name cannot be repeated     | 合约名称不能重复           |
+| 202020 | deployed contract cannot be modified | 已部署合约不支持修改 |
 | 202023 | contract has not deploy      | 合约尚未部署           |
 | 202026 | account info already exists      | 该帐号已经存在           |
 | 202027 | account info not exists      | 该帐号不存在           |
@@ -10020,7 +11073,7 @@ v1.4.0
 | 202462 | Two nodes at least.    |  至少两个节点。          |
 | 202463 | Group need two sealers at least.    |  群组至少需要两个共识节点。          |
 | 202464 | WebaseSignAddess configuration error in Application.yml    |  application.yml中的webaseSignAddess配置错误          |
-| 202465 | Error getting docker image mode    |  获取镜像方式错误          |
+| 202465 | webaseSignAddress cannot be 127.0.0.1 or localhost in application.yml file   |  sign的地址不能为127.0.0.1或localhost          |
 | 202466 | Please pull the Docker image manually in host /ip/    |  主机/ip/请手动拉取 Docker 镜像          |
 | 202467 | Max 4 nodes on a single host    |  单个主机最多部署 4 个节点          |
 | 202468 | Host of WeBASE-Node-Manager's ip is already existed.    |  WeBASE-Node-Manager所在主机的IP已存在          |
@@ -10052,9 +11105,17 @@ v1.4.0
 | 202496 | Host root dir access denied    |  主机的安装目录无权限访问          |
 | 202497 | Host not exist or already been deleted    |  主机不存在或已被删除          |
 | 202501 | contract path is exists. | 合约路径已存在 |
-| 202502 | version cannot be empty. | 版本不能为空 |
-| 202503 | cns name cannot be empty. | cns名不能为空 |
+| 202502 | version cannot be empty | 版本不能为空 |
+| 202503 | cns name cannot be empty | cns名不能为空 |
 | 202504 | version already exists | 版本已存在 |
+| 202511 | Front's sdk cert and key not found | 未找到前置的SDK证书与私钥 |
+| 202512 | Write front's sdk cert and key fail | 导出SDK证书私钥文件失败，无法写入文件 |
+| 202513 | Write private key file fail | 导出私钥文件失败，无法写入文件 |
+| 202514 | group genesis conf not found | 群组的创世块文件不存在，无法添加为共识节点 |
+| 202516 | app name exists | 应用名称已存在 |
+| 202517 | app name not exists | 应用名称不存在 |
+| 202518 | app id not exists | 应用编号不存在 |
+| 202519 | link format invalid | 链接格式错误 |
 | 302000 | user not logged in    |  未登录的用户          |
 | 302001 | Access denied    |  没有权限          |
 | 402000 | param exception    |  参数错误          |
