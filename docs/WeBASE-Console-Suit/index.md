@@ -326,9 +326,9 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 应用管理是WeBASE管理台提供的一种第三方应用接入功能。WeBASE作为底层运维平台，已经有了底层运维基础能力。各个应用可以利用这些基础能力来开发自己的运维管理台。这些可以利用的基础能力主要包括四个方面：1、链信息和链运维（权限，配置等）；2、合约；3、链的私钥账号；4、管理账号（登录态）。![](../../images/WeBASE-Console-Suit/app_intergrate.png)
 这样的主要好处是：
 
-1. 各应用的进程管理还是自我管理，避免WeBase过于笨重
-2. WeBase提供的是规范，方便其他应用参考打通应用与WeBase的联系
-3. 如果有扩展，WeBase也方便提供API来实现
+1. 各应用的进程管理还是自我管理，避免WeBASE过于笨重
+2. WeBASE提供的是规范，方便其他应用参考打通应用与WeBASE的联系
+3. 如果有扩展，WeBASE也方便提供API来实现
 4. 不破坏各应用自身的完整性
 
 
@@ -354,13 +354,13 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/app_weid_node.png)
 
-可以选择自动创建公私钥，或选择从WeBase同步公私钥用户：
+可以选择自动创建公私钥，或选择从WeBASE同步公私钥用户：
 
 ![](../../images/WeBASE-Console-Suit/app_weid_user.png)
 
 ![](../../images/WeBASE-Console-Suit/app_weid_userlist.png)
 
-部署WeID之后，WeID会将合约相关信息通过API导入WeBase：
+部署WeID之后，WeID会将合约相关信息通过API导入WeBASE：
 
 ![](../../images/WeBASE-Console-Suit/app_weid_deploy.png)
 
