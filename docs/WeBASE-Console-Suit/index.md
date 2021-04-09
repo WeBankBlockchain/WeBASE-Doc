@@ -191,7 +191,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ![](../../images/WeBASE-Console-Suit/contract_list.png)
 
-链上全量合约：
+链上全量合约：包含通过其他平台部署到链上的合约与WeBASE已登记的合约（链上合约只有合约地址），可通过导入按钮，填入合约ABI导入到本地
 
 ![](../../images/WeBASE-Console-Suit/contract_list_all.png)
 
@@ -221,11 +221,11 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 
 私钥管理：包含WeBASE本地已登记的私钥用户与链上全量私钥用户。
 
-已登记私钥：
+已登记私钥：包含本地创建的私钥与导入的私钥
 
 ![](../../images/WeBASE-Console-Suit/private_key.png)
 
-链上全量私钥：
+链上全量私钥：包含链上私钥和本地已登记的私钥，可通过导入按钮，作为公钥用户导入到本地
 
 ![](../../images/WeBASE-Console-Suit/private_key_all.png)
 
