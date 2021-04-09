@@ -68,6 +68,7 @@ gradle -version
 ```
 
 ## 2. 常见问题
+<span id="q&a"></span>
 
 * 1：执行shell脚本报错误"permission denied"或格式错误
 
@@ -399,7 +400,7 @@ IDE配置
 
 
 ## 5. 配置文件解析
-
+<span id="config"></span>
 
 - 2. 配置文件解析
 
