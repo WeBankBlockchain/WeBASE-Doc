@@ -71,6 +71,8 @@ $ bash webase-upgrade.sh -o v1.4.3 -n v1.5.0
 ```
 
 若升级失败，，只需要将当前目录升级中的webase子系统目录移除，并将`v1.4.3`旧版本目录的文件夹复制到当前目录，并重启WeBASE即可
+
+具体步骤如下：
 - 查看当前目录的升级中的webase安装包：`ls .`
 - 查看已备份的webase安装包：`ls ./v1.4.3`
 - 首先将当前目录中已存在的`webase-{subsystem}`安装包移除：如移除当前目录的所有webase安装包，`rm -rf webase-*`
