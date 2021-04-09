@@ -375,8 +375,6 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 ![](../../images/WeBASE-Console-Suit/app_link_enable.png)
 
 
-### 应用管理
-
 ### 系统监控
 
 系统监控包含了**监控**与**异常告警**两部分；
