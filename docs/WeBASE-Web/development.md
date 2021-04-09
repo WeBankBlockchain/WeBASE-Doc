@@ -151,6 +151,7 @@ solidity版本默认0.4.25,如果需要修改请按以下步骤修改：
 ## 2、项目打包部署
 
 ### 2.1 项目打包
+`注意：npm run build之前必须要npm instal下载依赖，还要执行npm run update修改依赖并下载solc-bin文件`
 
 > 切换到项目根目录，执行命令：
 
