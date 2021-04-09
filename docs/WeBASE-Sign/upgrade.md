@@ -2,33 +2,34 @@
 
 WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
 
-#### v1.4.3
-- 增加数据签名接口
+WeBASE-Sign升级的必须步骤：
+0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
+1. 替换`webase-sign/apps`中的jar包
+2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
+3. 查看[签名服务升级文档](../WeBASE-Sign/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
+    3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
+    3.2 按照升级文档指引，操作数据表
+4. `bash stop.sh && bash start.sh`重启
 
-#### v1.4.2
-- 使用新版java-sdk替换web3sdk
+各个版本的具体修改可参考下文
+
+#### v1.5.0
+
+- 支持导出私钥，增加配置项`supportPrivateKeyTransfer: true`，接口支持私钥传输（aes加密后的私钥），配置项为`false`时不支持导出
+- jar包升级：mysql-connector-java:8.0.22、bcprov-jdk15on:1.67
+- 修复ECDSA签名结果序列化bug
+
 
 #### v1.4.0
-
-##### 增加版本号接口
 - 增加返回 WeBASE-Sign 版本号接口
-
-##### 修改AES加密默认Pattern
 - 默认Aes加密模式由`ECB`改为更安全的`CBC`，同时支持在yml配置中选择CBC与ECB
 
-
 #### v1.3.2
-
-##### 移除fastjson
 - 移除Fastjson，替换为Jackson 2.11.0。
 - 升级web3sdk为2.4.1，并升级springboot等依赖项
 
 #### v1.3.1
-
-##### 支持导入私钥
 - 新增`/user/import`接口，支持导入私钥，详情参考[接口文档](./interfaces.html)
-
-##### 性能优化
 - 新增`Credential`实例的缓存机制，优化签名性能
 
 #### v1.3.0

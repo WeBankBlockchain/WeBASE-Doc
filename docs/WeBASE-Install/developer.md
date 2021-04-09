@@ -14,11 +14,11 @@
 | :-: | :-: |
 | Java | [JDK 8 至JDK 14](../WeBASE-Front/appendix.html#java) |
 
-备注：部署出现问题请查看[问题记录](../WeBASE-Front/appendix.html#id6)。
+备注：部署出现问题请查看[问题记录](../WeBASE-Front/appendix.html#q&a)。
 
 1. 下载安装包
     ```shell
-    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.3/webase-front.zip
+    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-front.zip
     ```
 
 
@@ -36,7 +36,7 @@
     - 注，国密版**默认使用非国密SSL**，只有在建链时手动指定了`-G`(大写)时才会使用国密SSL
 
 
-4. 服务起停
+4. 服务启停
 
     **国密版**则通过vi修改`application.yml`中将`sdk-encryptType`设置为`1`（默认为0），也可以直接通过以下命令进行快速修改，修改后即可执行启停命令进行服务启停。
     ```shell
@@ -65,7 +65,7 @@
 通过`ps`命令，检查节点与节点前置的进程是否存在
 - 包含：节点进程`nodeXX`，节点前置进程`webase.front`
 
-检查方法如下，若无输出，则代表进程未启动，需要到`webase-front/log`中查看日志的错误信息，并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查
+检查方法如下，若无输出，则代表进程未启动，需要到`webase-front/log`中查看日志的错误信息，并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html#q&a)进行错误排查
 
 检查节点进程
 ```shell
@@ -152,3 +152,17 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 - **开放节点前置端口**：如果希望通过浏览器(Chrome Safari或Firefox)直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
 
 ![Front页面](../../images/WeBASE/front-overview.png)
+
+
+### Docker镜像快速搭建
+<span id="run_docker"></span>
+
+WeBASE提供结合FISCO BCOS节点与WeBASE-Front的Docker镜像，通过镜像快速部署需要的步骤如下：
+- 通过build_chain建链脚本（指定 `-d` docker模式）生成节点所需证书、配置文件等
+    - 如生成4节点`bash build_chain.sh -l 127.0.0.1:4 -p 30300,20200,8545 -o nodes -d`
+- 拉取镜像： `docker pull fiscoorg/fisco-webase:v2.7.2`
+- 启动容器：需要将生成的`nodes`目录的node0的配置、SDK证书挂载到容器中，并将容器内的日志挂载到`/nodes/127.0.0.1/node0/front-log`中
+    - 启动命令：`docker run -d -v /nodes/127.0.0.1/node0:/data -v /nodes/127.0.0.1/sdk:/data/sdk -v /nodes/127.0.0.1/node0/front-log:/front/log --network=host -w=/data fiscoorg/fisco-webase:v2.7.2`
+
+WeBASE的Docker镜像的使用详情可以参考[front镜像模式使用说明](https://github.com/WeBankFinTech/WeBASE-Docker/blob/dev-deploy/docker/front-install.md)
+

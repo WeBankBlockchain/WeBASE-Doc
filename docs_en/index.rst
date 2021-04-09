@@ -1,5 +1,5 @@
 ##############################################################
-Webase Technical Documents
+WeBASE Technical Documents
 ##############################################################
 
 .. image:: ../images/logo/logo.jpg

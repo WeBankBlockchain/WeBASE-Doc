@@ -12,12 +12,13 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 2. 节点管理
 3. 合约管理
 4. 私钥管理
-5. 系统管理
-6. 系统监控
-7. 交易审计
-8. 订阅事件
-9. 账号管理
-10. 群组管理
+5. 应用管理
+6. 系统管理
+7. 系统监控
+8. 交易审计
+9. 订阅事件
+10. 账号管理
+11. 群组管理
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -94,7 +95,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 未初始化节点前置的管理平台，会引导去节点管理页面添加节点前置。
 - 节点前置服务需要填写前置的IP与端口（默认为`127.0.0.1`和`5002`），机构名则根据实际自定义填写
 
-![](../../images/WeBASE-Console-Suit/node_manager_add_front_2.png)
+![](../../images/WeBASE-Console-Suit/node_manager_add_front.png)
 
 前置添加完成后，管理平台就会开始拉取群组信息和群组的区块信息。此时数据概览页面应该就有数据了。为了解析和审计区块数据，需要把相关的合约和用户导入到管理平台。具体看下面两个小节。
 
@@ -163,11 +164,11 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 用户可以通过新增节点前置，把新的节点前置添加到前置列表。系统会默认拉取这些前置所在的群组和各个群组的节点信息。在节点列表中，用户可以修改节点的共识状态：共识节点、观察节点、游离节点。其中修改为游离节点相当于将节点移出群组，停止节点前务必先将节点设置为游离节点，否则将触发节点异常。
 
-节点管理：
+前置列表与节点管理：
+- 前置列表：可以查看节点前置状态，导出前置的SDK证书zip包
+- 节点管理：显示所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
 
-显示所有的共识/观察节点（无论运行或停止），以及正在运行的游离节点
-
-![](../../images/WeBASE-Console-Suit/node_manager_2.png)
+![](../../images/WeBASE-Console-Suit/front_node_manage.png)
 
 
 修改节点共识状态：
@@ -182,15 +183,18 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 合约IDE：
 
-![](../../images/WeBASE-Console-Suit/contract_2.png)
+![](../../images/WeBASE-Console-Suit/contract_ide.png)
 
-合约列表：
+合约列表：包含WeBASE已登记合约与链上已部署的合约
 
-![](../../images/WeBASE-Console-Suit/contract_list_2.png)
+已登记合约：包含通过IDE部署的合约、导入ABI的合约
 
-ABI列表：支持导入已部署的合约ABI进行合约调用
+![](../../images/WeBASE-Console-Suit/contract_list.png)
 
-![](../../images/WeBASE-Console-Suit/import_abi.png)
+链上全量合约：包含通过其他平台部署到链上的合约与WeBASE已登记的合约（链上合约只有合约地址），可通过导入按钮，填入合约ABI导入到本地
+
+![](../../images/WeBASE-Console-Suit/contract_list_all.png)
+
 
 ABI编码：支持对ABI的方法与入参进行编码
 
@@ -215,9 +219,15 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 
 私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，私钥将托管在签名服务中，然后通过签名服务对合约部署和合约调用进行签名。注：外部账户可通过新建公钥账户导入，主要用于把交易和用户关联起来。
 
-私钥管理：
+私钥管理：包含WeBASE本地已登记的私钥用户与链上全量私钥用户。
 
-![](../../images/WeBASE-Console-Suit/private_key_manage.png)
+已登记私钥：包含本地创建的私钥与导入的私钥
+
+![](../../images/WeBASE-Console-Suit/private_key.png)
+
+链上全量私钥：包含链上私钥和本地已登记的私钥，可通过导入按钮，作为公钥用户导入到本地
+
+![](../../images/WeBASE-Console-Suit/private_key_all.png)
 
 添加私钥用户：
 
@@ -226,6 +236,11 @@ EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即�
 导入私钥：支持导入.txt/.pem/.p12格式及明文的私钥，其中.txt私钥可由WeBASE-Front导出，.pem/.p12私钥可由console控制台导出。如果需要导入自定义私钥，可根据节点前置导出的.txt私钥，编辑其中的privateKey字段内容。
 
 ![](../../images/WeBASE-Console-Suit/import_private.png)
+
+导出私钥：可以选中导出.txt/.pem/.p12/WeID等格式的私钥，其中WeID格式私钥为十进制明文私钥，txt则是十六进制明文私钥；在代码中加载私钥可以参考[节点前置-私钥加载](../WeBASE-Front/appendix.html#loadKey)
+
+![](../../images/WeBASE-Console-Suit/export_private.png)
+
 
 ### 系统管理
 
@@ -296,12 +311,68 @@ FISCO-BCOS基于表的权限管理机制详情可以参考文档[FISCO-BCOS基�
 FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/certificates.html)
 
 证书列表：
+- 支持导出SDK证书：v1.5.0后支持导出节点前置的SDK证书zip包，可用于连接节点
 
 ![](../../images/WeBASE-Console-Suit/cert_manage.png)
 
 导入证书：
 
 ![](../../images/WeBASE-Console-Suit/cert_manage_add.png)
+
+### 应用管理
+
+<span id="app_manage"></span>
+
+应用管理是WeBASE管理台提供的一种第三方应用接入功能。WeBASE作为底层运维平台，已经有了底层运维基础能力。各个应用可以利用这些基础能力来开发自己的运维管理台。这些可以利用的基础能力主要包括四个方面：1、链信息和链运维（权限，配置等）；2、合约；3、链的私钥账号；4、管理账号（登录态）。![](../../images/WeBASE-Console-Suit/app_intergrate.png)
+这样的主要好处是：
+
+1. 各应用的进程管理还是自我管理，避免WeBASE过于笨重
+2. WeBASE提供的是规范，方便其他应用参考打通应用与WeBASE的联系
+3. 如果有扩展，WeBASE也方便提供API来实现
+4. 不破坏各应用自身的完整性
+
+
+管理台新增了应用管理菜单。新增应用有两种方式，一种是选择已有应用模板——目前仅支持WeID；另外一种是自定应用：
+
+![](../../images/WeBASE-Console-Suit/app_new.png)
+
+新增应用后，会生成应用相关的注册信息，为应用分配的`appKey`（应用Key）和`appSecret`（应用密码，应用自己保存，不要暴露），WeBASE的`IP`为内网IP，访问不了的话需对应修改：
+
+![](../../images/WeBASE-Console-Suit/app_register_info.png)
+
+第三方应用未向WeBASE进行注册时，WeBASE管理台不可以通过应用链接跳转到应用服务：
+
+![](../../images/WeBASE-Console-Suit/app_link_unable.png)
+
+第三方应用接入时，使用注册信息向WeBASE进行注册，调用相关OPEN API。第三方应用接入请参考【[应用接入说明](../WeBASE-Node-Manager/appintegration.html)】。以下以 [WeIdentity](https://weidentity.readthedocs.io/zh_CN/latest/docs/weidentity-installation-by-web.html) 可视化页面接入为例：
+
+选择 WeID + WeBASE集成模式，从WeBASE复制注册信息：
+
+![](../../images/WeBASE-Console-Suit/app_weid_home.png)
+
+点击下一步时，WeID会向WeBASE进行注册并调用相关API，从WeBASE获取群组、节点、证书等相关信息：
+
+![](../../images/WeBASE-Console-Suit/app_weid_node.png)
+
+可以选择自动创建公私钥，或选择从WeBASE同步公私钥用户：
+
+![](../../images/WeBASE-Console-Suit/app_weid_user.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_userlist.png)
+
+部署WeID之后，WeID会将合约相关信息通过API导入WeBASE：
+
+![](../../images/WeBASE-Console-Suit/app_weid_deploy.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_deployed.png)
+
+![](../../images/WeBASE-Console-Suit/app_weid_contract.png)
+
+第三方应用向WeBASE进行注册后，在WeBASE管理台可以通过应用链接跳转到应用服务：
+
+注册后WeBASE将和应用间保持心跳。如果应用状态变成不能访问，则应用链接会置灰，变成不可跳转。
+
+![](../../images/WeBASE-Console-Suit/app_link_enable.png)
 
 
 ### 系统监控
@@ -314,7 +385,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 节点监控：
 
-![](../../images/WeBASE-Console-Suit/node_monitor_2.png)
+![](../../images/WeBASE-Console-Suit/node_monitor.png)
 
 主机监控：
 
@@ -385,15 +456,15 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 用户交易审计：可以指定用户、时间范围、交易接口进行筛选查看交易
 
-![](../../images/WeBASE-Console-Suit/tx_audit_user_tx_2.png)
+![](../../images/WeBASE-Console-Suit/tx_audit_user_tx.png)
 
 异常用户审计：
 
-![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_user_2.png)
+![](../../images/WeBASE-Console-Suit/abnormal_user.png)
 
 异常合约审计：
 
-![](../../images/WeBASE-Console-Suit/tx_audit_abnormal_contract_2.png)
+![](../../images/WeBASE-Console-Suit/abnormal_contract.png)
 
 ### 订阅事件
 
@@ -497,6 +568,8 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 详情使用说明可以参考本文档[附录-动态群组管理使用指南](#dynamic_group_use)
 
 ## 升级兼容说明
+
+v.1.5.0后，通过一键部署的WeBASE可以使用[一键升级](../WeBASE-Install/upgrade.md)中提供的一键脚本对已有的WeBASE进行升级
 
 WeBASE-Front升级至最新版，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
 

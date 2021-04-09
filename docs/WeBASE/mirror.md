@@ -7,14 +7,14 @@
 
 WeBASE当前仓库源码位于[https://github.com/WebankFinTech/WeBASE](https://github.com/WebankFinTech/WeBASE)，每个新的版本发布会将代码合入master分支。
 
-为了方便国内用户，我们同样在gitee上提供了镜像仓库[https://gitee.com/Webank/WeBASE](https://gitee.com/Webank/WeBASE)，每次新版本发布后，镜像仓库会同步GitHub上官方仓库的更新，如果从GitHub下载失败，请尝试使用Gitee镜像仓库。
+为了方便国内用户，我们同样在gitee上提供了镜像仓库[https://giteee.com/Webank/WeBASE](https://giteee.com/Webank/WeBASE)，每次新版本发布后，镜像仓库会同步GitHub上官方仓库的更新，如果从GitHub下载失败，请尝试使用Gitee镜像仓库。
 
 WeBASE各子系统的Github代码仓库则是`https://github.com/WebankFinTech/` + `WeBASE-XXX`，对应的gitee仓库则是`https://gitee.com/WeBank/` + `WeBASE-XXX`
 
 如WeBASE-Front的Github代码仓库为`https://github.com/WebankFinTech/WeBASE-Front`，Gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
 
 ### 一键部署与安装包
-
+<span id="install_package"></span>
 WeBASE每个新版本发布后，会在[WeBASELargefiles](https://github.com/WeBankFinTech/WeBASELargefiles/releases)GitHub的Releases中提供对应的WeBASE一键部署工具和对应安装包。
 
 其中WeBASELargefiles提供webase-deploy一键部署工具（即WeBASE源码中`/deploy`文件夹），以及webase-front.zip, webase-node-mgr.zip, webase-sign.zip, webase-web.zip子系统的安装包。
