@@ -14,7 +14,7 @@
 | :-: | :-: |
 | Java | [JDK 8 至JDK 14](../WeBASE-Front/appendix.html#java) |
 
-备注：部署出现问题请查看[问题记录](../WeBASE-Front/appendix.html#id6)。
+备注：部署出现问题请查看[问题记录](../WeBASE-Front/appendix.html#q&a)。
 
 1. 下载安装包
     ```shell
@@ -36,7 +36,7 @@
     - 注，国密版**默认使用非国密SSL**，只有在建链时手动指定了`-G`(大写)时才会使用国密SSL
 
 
-4. 服务起停
+4. 服务启停
 
     **国密版**则通过vi修改`application.yml`中将`sdk-encryptType`设置为`1`（默认为0），也可以直接通过以下命令进行快速修改，修改后即可执行启停命令进行服务启停。
     ```shell
@@ -65,7 +65,7 @@
 通过`ps`命令，检查节点与节点前置的进程是否存在
 - 包含：节点进程`nodeXX`，节点前置进程`webase.front`
 
-检查方法如下，若无输出，则代表进程未启动，需要到`webase-front/log`中查看日志的错误信息，并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html)进行错误排查
+检查方法如下，若无输出，则代表进程未启动，需要到`webase-front/log`中查看日志的错误信息，并根据错误提示或根据[WeBASE-Front常见问题](../WeBASE-Front/appendix.html#q&a)进行错误排查
 
 检查节点进程
 ```shell
