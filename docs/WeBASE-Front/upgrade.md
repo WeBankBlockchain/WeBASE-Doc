@@ -15,6 +15,12 @@ WeBASE-Front升级的必须步骤：
 ##### 支持导出证书与私钥
 - 支持导出前置的SDK证书与私钥、支持导出Pem/P12/WeID私钥
 
+#### v1.4.3
+- 新增了合约仓库、在线工具、支持CNS
+
+#### v1.4.2
+- 新增了合约EventLog查询功能
+
 #### v1.4.1
 - 新增链权限ChainGovernance接口
 - 新增getBlockHeaderByHash与getBlockHeaderByNumber接口
