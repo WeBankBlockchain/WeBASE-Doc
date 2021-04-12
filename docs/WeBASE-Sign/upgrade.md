@@ -19,6 +19,11 @@ WeBASE-Sign升级的必须步骤：
 - jar包升级：mysql-connector-java:8.0.22、bcprov-jdk15on:1.67
 - 修复ECDSA签名结果序列化bug
 
+#### v1.4.3
+- 增加数据签名接口
+
+#### v1.4.2
+- 使用新版java-sdk替换web3sdk
 
 #### v1.4.0
 - 增加返回 WeBASE-Sign 版本号接口

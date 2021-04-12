@@ -40,6 +40,67 @@ WeBASE-Node-Manager升级的必须步骤：
 - 新增了外部合约信息表`tb_external_contract`
 - 新增了外部账户信息表`tb_external_account`
 
+
+#### v1.4.3
+- 拆分可视化部署步骤为：添加主机、初始化主机、部署节点
+- 可视化部署支持同机部署节点、支持自动拉取镜像
+- 可视化部署使用ansible，并完善各个步骤的检测脚本
+- 支持注册CNS合约
+
+##### 数据表更新
+
+字段更新：
+- `tb_contract`表中`bytecodeBin`的列名修改为`bytecode_bin`，并对应更新了`conf/mapper/ContractMapper.xml`文件
+- `tb_host`表中`remark`字段从varchar修改为text类型，移除了`agency_id`，`agency_name`，`docker_port`字段，唯一约束改为`UNIQUE KEY unique_ip (ip) USING BTREE`
+- `tb_user`表增加地址的唯一约束`UNIQUE KEY unique_address (group_id,address)`
+- `tb_front_group_map`中增加默认值为1的节点类型字段`type tinyint(4) DEFAULT 1 COMMENT '节点的共识类型：1-共识节点（默认），2-观察节点'`
+
+*数据表具体更新方法可根据实际情况自行制定*
+
+数据表新增：
+- 新增合约CNS信息表`tb_cns`
+
+```SQL
+CREATE TABLE IF NOT EXISTS tb_cns (
+  id int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  group_id int(11) NOT NULL COMMENT '群组ID',
+  contract_path varchar(24) binary NOT NULL COMMENT '合约所在目录',
+  contract_name varchar(120) binary NOT NULL COMMENT '合约名称',
+  cns_name varchar(120) binary NOT NULL COMMENT 'cns名称',
+  version varchar(120) DEFAULT NULL COMMENT 'cns版本',
+  contract_address varchar(64) DEFAULT NULL COMMENT '合约地址',
+  create_time datetime DEFAULT NULL COMMENT '创建时间',
+  modify_time datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_path_name (group_id,contract_path,contract_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='cns信息表';
+```
+
+
+#### v1.4.2
+- 新增了合约EventLog查询功能
+
+##### 数据表更新
+
+字段更新：
+- `tb_contract`表中`bytecodeBin`的列名修改为`bytecode_bin`，并对应更新了`conf/mapper/ContractMapper.xml`文件
+
+
+数据表新增：
+- 新增合约路径信息表`tb_contract_path`
+
+```SQL
+CREATE TABLE IF NOT EXISTS tb_contract_path (
+  id int(11) NOT NULL AUTO_INCREMENT COMMENT '合约路径编号',
+  contract_path varchar(24) binary NOT NULL COMMENT '合约所在目录',
+  group_id int(11) NOT NULL COMMENT '所属群组编号',
+  create_time datetime DEFAULT NULL COMMENT '创建时间',
+  modify_time datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_group_path_name (group_id,contract_path)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合约路径表';
+```
+
 #### v1.4.1
 新增FISCO BCOS v2.5.0及以上版本的基于角色的权限管理功能，新增了开发者模式
 - 新的权限管理基于角色，可参考FISCO BCOS[权限控制文档](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/permission_control.html)
