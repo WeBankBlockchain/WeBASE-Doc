@@ -13,16 +13,12 @@
 
 WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
 
-```eval_rst
-.. important::
-    使用国密版WeBASE-Front需要开启web3sdk的国密开关
-```
-
-开启国密：
-- 在v1.5.0后，sdk将自动根据链的加密类型切换国密或非国密，无需在application.yml中修改加密类型
+开启国密国密SSL：
+- 在v1.5.0后，sdk将自动根据链的加密类型切换国密或非国密，自动根据链的SSL类型切换国密SSL
 
 国密编译：
-- 编译国密版智能合约在v1.3.1版本后，通过引入solcJ:0.4.25-rc1.jar，自动切换支持国密版智能合约的编译/部署/调用；（可自行切换jar包版本为solcJ-0.5.2）
+- 编译国密版智能合约在v1.3.1版本后，通过引入solcJ:0.4.25-rc1.jar，自动切换支持国密版智能合约的编译/部署/调用；（可自行替换jar包版本为solcJ-0.5.2来使用0.5进行后台接口的合约编译）
+- 该部分仅影响后台的`/contract`合约编译接口，不影响前端合约IDE的合约编译
 
 
 <span id="solc6"></span>
@@ -84,9 +80,10 @@ dist目录提供了一份配置模板conf_template：
 cd conf
 ```
 
-**注意：** 需要将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前`conf`目录，供SDK与节点建立连接时使用
+**注意：** 将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前`conf`目录，供SDK与节点建立连接时使用（SDK会自动判断是否为国密，且是否使用国密SSL）
 - 链的`sdk`目录包含了`ca.crt, sdk.crt, sdk.key`和`gm`文件夹，`gm`文件夹包含了国密SSL所需的证书
 - 拷贝命令可使用`cp -r nodes/${ip}/sdk/* ./conf/`
+- 注，只有在建链时手动指定了`-G`(大写)时节点才会使用国密SSL
 
 （3）修改配置（根据实际情况修改）：
 
