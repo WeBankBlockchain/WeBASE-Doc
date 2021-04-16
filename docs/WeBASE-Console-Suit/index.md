@@ -19,6 +19,7 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 9. 订阅事件
 10. 账号管理
 11. 群组管理
+12. 移动端管理台
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -566,6 +567,14 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 ![](../../images/WeBASE-Console-Suit/dynamic_group/join_group_add_sealer.png)
 
 详情使用说明可以参考本文档[附录-动态群组管理使用指南](#dynamic_group_use)
+
+### 移动端管理台
+
+移动端管理台：支持区块链数据概览、链上合约、链上用户、节点列表、区块列表和交易列表的展示
+- 在移动端设备访问WeBASE时将自动切换到移动端管理台页面
+
+![mobile](../../images/WeBASE-Console-Suit/web_mobile.png)
+
 
 ## 升级兼容说明
 
