@@ -573,7 +573,7 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 移动端管理台：支持区块链数据概览、链上合约、链上用户、节点列表、区块列表和交易列表的展示
 - 在移动端设备访问WeBASE时将自动切换到移动端管理台页面
 
-![mobile](../../images/WeBASE-Console-Suit/web_mobile.png)
+![](../../images/WeBASE-Console-Suit/web_mobile.png)
 
 
 ## 升级兼容说明
