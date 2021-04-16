@@ -30,18 +30,13 @@
 
 3. 拷贝sdk证书文件（build_chain的时候生成的） 
 
-    将节点所在目录`nodes/${ip}/sdk`下的ca.crt、node.crt和node.key文件拷贝到conf下
-
-    *如果使用了国密版SSL* `nodes/${ip}/sdk/gm/`下的**所有证书**拷贝到conf目录下。
-    - 注，国密版**默认使用非国密SSL**，只有在建链时手动指定了`-G`(大写)时才会使用国密SSL
+    将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前`conf`目录，供SDK与节点建立连接时使用（SDK会自动判断是否为国密，且是否使用国密SSL）
+    - 链的`sdk`目录包含了`ca.crt, sdk.crt, sdk.key`和`gm`文件夹，`gm`文件夹包含了国密SSL所需的证书
+    - 拷贝命令可使用`cp -r nodes/${ip}/sdk/* ./conf/`
+    - 注，只有在建链时手动指定了`-G`(大写)时节点才会使用国密SSL
 
 
 4. 服务启停
-
-    **国密版**则通过vi修改`application.yml`中将`sdk-encryptType`设置为`1`（默认为0），也可以直接通过以下命令进行快速修改，修改后即可执行启停命令进行服务启停。
-    ```shell
-    sed -i "s%encryptType: 0%encryptType: 1%g" ./conf/application.yml
-    ```
 
     服务启停命令：
     ```shell
