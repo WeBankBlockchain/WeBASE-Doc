@@ -99,7 +99,7 @@ wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.0/
 
 ```eval_rst
 .. important::
-    如果因为网络问题导致长时间无法下载webase-deploy安装包，请尝试 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
+    如果因为网络问题导致长时间无法下载webase-deploy安装包，请尝试`wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip`
 ```
 
 解压安装包：
