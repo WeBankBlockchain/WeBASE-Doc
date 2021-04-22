@@ -43,12 +43,11 @@ WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthed
 
 ```bash
 wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
+
+# 若网络问题导致长时间无法下载，可尝试
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
 ```
 
-```eval_rst
-.. important::
-    如果因为网络问题导致长时间无法下载webase-deploy安装包，请尝试 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
-```
 
 ### 单独下载WeBASE子系统的安装包
 
