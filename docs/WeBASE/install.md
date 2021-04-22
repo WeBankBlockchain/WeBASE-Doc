@@ -94,14 +94,8 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
 ```
-
-```eval_rst
-.. important::
-    如果因为网络问题导致长时间无法下载webase-deploy安装包，请尝试`wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip`
-```
-
 解压安装包：
 ```shell
 unzip webase-deploy.zip
