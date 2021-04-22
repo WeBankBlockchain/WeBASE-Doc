@@ -535,6 +535,7 @@ http://{deployIP}:{webPort}
 - 如果提示内存不足(Free memory too low)，则可以释放主机内存，一节点至少 **1G** 可用内存(Free memory)
 - 如果提示端口被占用，可根据提示的端口号，在主机**释放端口**或删除填入的节点信息，修改后重新填入
 - 如果提示Docker相关错误，需要到主机确认已[安装Docker](#install_docker)并已启用，是否已[配置Docker组](#docker_sudo)，确保能拉取并运行hello-world镜像
+- 部分虚拟机缺少bc依赖(bc command not found)，需要手动安装bc
 
 ![visual-deploy-host-check-fail](../../images/WeBASE-Console-Suit/visual-deploy/node_check_fail.png)
 
@@ -896,3 +897,4 @@ grep "batchAddNode" log/WeBASE-Node-Manager.log
 
 
 
+>>>>>>> upstream/master
