@@ -10,9 +10,12 @@
 
 代码可以放在/data下面，执行命令：
 
-    git clone https://github.com/WeBankFinTech/WeBASE-Web.git
-    或
-    git clone https://gitee.com/WeBank/WeBASE-Web.git
+```shell
+git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+
+# 若网络问题导致长时间无法下载，可尝试以下命令
+git clone https://gitee.com/WeBank/WeBASE-Web.git
+```
 
 进入目录：
 
@@ -48,8 +51,11 @@ cd WeBASE-Web
 WeBASE新增了h5的移动端页面，支持手机浏览器访问
 代码和WeBASE-Web放在同一个目录
 拉取代码
-```
+```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Web-Mobile.git
+
+# 若网络问题导致长时间无法下载，可尝试以下命令
+git clone https://gitee.com/WeBank/WeBASE-Web-Mobile.git
 ```
 
 ### 4. 修改配置
