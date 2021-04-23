@@ -19,13 +19,18 @@ nodejs下载地址：https://nodejs.org/en/download/
 
 > 执行命令：
 
-    git clone https://github.com/WeBankFinTech/webase-web.git
+```shell
+git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+
+# 若网络问题导致长时间无法下载，可尝试以下命令
+git clone https://gitee.com/WeBank/WeBASE-Web.git
+```
 
 将代码放在你的工作目录，例如：D：\project
 
 > 切换到项目目录：
 
-    cd D:\project\webase-web
+    cd D:\project\WeBASE-Web
 
 > 使用命令：
 
@@ -117,11 +122,11 @@ solidity版本默认0.4.25,如果需要修改请按以下步骤修改：
 
 > axios请求地址：
 
-    overview请求url： /webase-web/network/general/1
+    overview请求url： /WeBASE-Web/network/general/1
 
 > mock.js地址：
 
-    Mock.mock('/webase-web/network/general/1',function (req,res) {     //url和上面axios相同
+    Mock.mock('/WeBASE-Web/network/general/1',function (req,res) {     //url和上面axios相同
         return {
             "code":0,
             "message":"success",
