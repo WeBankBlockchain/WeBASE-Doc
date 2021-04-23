@@ -108,7 +108,7 @@ vi /etc/ansible/ansible.cfg
 # 找到host_key_checking选项
 ···
 host_key_checking = False
-``` 
+```
 
 <span id="ssh"></span>
 
@@ -139,7 +139,7 @@ host_key_checking = False
 	```
 
 * 检查 `~/.ssh/` 目录是否已经存在 `id_rsa` 私钥文件和对应的 `id_rsa.pub` 公钥文件。如果存在，备份现有私钥对
-    
+  
     ```Bash
     mv ~/.ssh/id_rsa ~/.ssh/id_rsa.bak
     mv ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub.bak 
@@ -300,6 +300,9 @@ exit
 获取部署安装包：
 ```shell
 wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
+
+# 若网络问题导致长时间无法下载，可尝试以下命令
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -432,7 +435,7 @@ $ python3 deploy.py installWeBASE
 具体步骤如下：
 
 * 签名服务（WeBASE-Sign）
-    
+  
     * 参考 [签名服务 WeBASE-Sign 部署文档](../WeBASE-Sign/install.html#id1) 部署 WeBASE-Sign 服务。
 	* 安装后需要将Sign的外网IP Port配置到下文的WeBASE-Node-Manager中
 
@@ -698,7 +701,7 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 ##### 拉取方式
 
 * 检查本地是否已有镜像
-    
+  
 ```Bash
 # 检查本地是否有镜像
 docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i v2.7.2
@@ -706,10 +709,10 @@ docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i v2.7.2
 # 如果有如下输出，表示本地已有镜像；否则表示本地没有镜像
 fiscoorg/fisco-webase   v2.7.2     bf4a26d5d389  5 days ago   631MB
 ```
-    
+
 * 如果本地没有镜像（如果本地有镜像，跳过）
 * 如果需要替换镜像，执行`docker rmi [ImageId]`删除镜像即可
-    
+  
     * 从 CDN 拉取镜像压缩包
     
     ```Bash
@@ -729,28 +732,28 @@ fiscoorg/fisco-webase   v2.7.2     bf4a26d5d389  5 days ago   631MB
    ```
    
 * 压缩镜像到 `tar` 文件
-    
+  
 ```Bash
 # 压缩镜像为 tar 文件
 docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:v2.7.2
 ```
-    
+
 * 发送镜像 `tar` 文件到部署节点的主机
 
 ```Bash
 # 发送镜像 tar 文件到需要部署节点的主机
 scp docker-fisco-webase.tar root@[IP]:/root/
 ```
-    
+
 * 解压镜像 `tar` 文件
-    
+  
 ```Bash
 # 登录需要部署的主机，解压 tar 文件
 docker load -i docker-fisco-webase.tar
 ```
-    
+
 * 节点主机检查是否已经成功拉取镜像
-    
+  
 ```Bash
 # 检查是否成功拉取镜像
 docker images -a |grep -i "fiscoorg/fisco-webase"
@@ -765,7 +768,7 @@ fiscoorg/fisco-webase   v2.7.2  bf4a26d5d389  5 days ago   631MB
 
 FISCO BCOS 国密版本需要使用 TASSL 生成国密版本的证书，部署工具会自动从GitHub或CDN下载，解压后放置于 `~/.fisco/tassl`(文件名为tassl)，如果碰到下载失败，请尝试从[https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz](https://gitee.com/FISCO-BCOS/LargeFiles/blob/master/tools/tassl.tar.gz) 下载并解压后，放置于 `~/.fisco/tassl`
 
-    
+
 #### 没有进入可视化部署界面
 在登录区块链管理平台后，没有进入可视化部署页面。此时，修改 WeBASE-Node-Manager 服务中的 `dist/conf/application.yml` 文件中的 `deployType` 的值是否为 `1` 后，重启 WeBASE-Node-Manager 服务即可。
 
@@ -897,3 +900,4 @@ grep "batchAddNode" log/WeBASE-Node-Manager.log
 
 
 
+>>>>>>> upstream/master
