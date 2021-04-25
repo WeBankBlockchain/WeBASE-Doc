@@ -115,7 +115,7 @@ cd webase-deploy
 
 ③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
 
-- 当配置"yes"时，需配置已有链的路径`fisco.dir`。路径下要存在sdk目录
+- 当配置"yes"时，需配置已有链的路径`fisco.dir`。路径下要存在sdk目录，sdk目录中包含ca.crt, sdk.crt, sdk.key及gm目录，gm目录中包含国密SSL所需证书，包含gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key
 - 当配置"no"时，需配置节点fisco版本和节点安装个数，搭建的新链默认两个群组
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
@@ -184,10 +184,10 @@ if.exist.fisco=no
 
 # 使用已有链时需配置
 # 已有链的路径，start_all.sh脚本所在路径
-# 路径下要存在sdk目录（sdk目录中包含了SSL所需的证书，即ca.crt、sdk.crt、sdk.key和gm目录（包含gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
+# 路径下要存在sdk目录（sdk目录中包含了SSL所需的证书，即ca.crt、sdk.crt、sdk.key和gm目录（包含国密SSL证书，gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 fisco.dir=/data/app/nodes/127.0.0.1
 # 前置所连接节点的绝对路径
-# 路径下要存在conf文件夹，conf里存放节点证书（ca.crt、sdk.crt和sdk.key）
+# 节点路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
 node.dir=/data/app/nodes/127.0.0.1/node0
 
 # 搭建新链时需配置
