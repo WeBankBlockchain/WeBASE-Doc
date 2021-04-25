@@ -186,7 +186,7 @@ startWaitTime=600
 - 9：启动报错SSLContext: null
 
 答：确保`conf/`目录下包含sdk证书；
-若使用的是v1.5.0以前的版本，则需要保证`ca.crt, node.crt, node.key`；其中node.crt, node.key为sdk.crt, sdk.key复制重命名得到
+若使用的是v1.5.0以前的版本，则需要保证`ca.crt, node.crt, node.key`；其中node.crt, node.key为sdk.crt, sdk.key复制并重命名得到；若使用v1.5.0及以上版本，则需要复制链的sdk目录下的所有文件(ca.crt, sdk.crt, sdk.key及gm文件夹)到前置服务的`conf`目录
 
 
 ## 3. 使用说明
@@ -284,7 +284,7 @@ WeBASE-Front采用 JPA + H2数据库 的方式保存数据
 ![](../../images/WeBASE/front/h2_console.png)
  
 - 同机H2访问：可以通过浏览器打开`localhost:5002/WeBASE-Front/console`，以默认配置为例填入连接参数
-  - `JDBC URL`应填入`file:../h2/webasefron;`，与前置服务的application.yml中配置的`spring.datasource.url`对应
+  - `JDBC URL`应填入`file:../h2/webasefront;`，与前置服务的application.yml中配置的`spring.datasource.url`对应
   - 若未设置用户名与密码，则默认用户名为`sa`，密码为空
 - 服务端H2访问：
   - 修改前置服务的application.yml中的`spring.h2.console.settings.web-allow-others`设为`true`，允许远端访问H2控制台
