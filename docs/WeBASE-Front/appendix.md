@@ -186,7 +186,8 @@ startWaitTime=600
 - 9：启动报错SSLContext: null
 
 答：确保`conf/`目录下包含sdk证书；
-若使用的是v1.5.0以前的版本，则需要保证`ca.crt, node.crt, node.key`；其中node.crt, node.key为sdk.crt, sdk.key复制重命名得到
+若使用的是v1.5.0以前的版本，则需要保证`ca.crt, node.crt, node.key`；其中node.crt, node.key为sdk.crt, sdk.key复制并重命名得到；若使用v1.5.0及以上版本，则需要复制链的sdk目录下的所有文件(ca.crt, sdk.crt, sdk.key及gm文件夹)到前置服务的`conf`目录
+
 
 ## 3. 使用说明
 
@@ -261,6 +262,36 @@ public void loadPrivateKeyTest() {
 }
 
 ```
+
+### 在IDE中开发WeBASE-Front
+<span id="ide"></span>
+
+IDE配置
+- 由于项目依赖了lombok，需要在settings-build-compiler的`Enable Annotation Processing`设置中打钩
+- 本项目使用gradle进行构建，可以在settings-build-build tools-gradle中设置本地的gradle环境
+
+证书与项目配置
+- 需要在资源目录中创建`conf`目录
+- 将sdk中的所有证书文件拷贝到`resources/conf`目录
+- 修改application.yml中的`sdk.ip`和`sdk.channelPort`
+
+### 访问h2数据库
+
+WeBASE-Front采用 JPA + H2数据库 的方式保存数据
+- 源码查看各个**数据表**的内容：需要通过查看WeBASE-Front源码的各个包中带有`@Entity`注解的entity实体类；如，查看私钥数据表`KeyStoreInfo`则查看该文件`com.webank.webase.front.keystore.entity.KeyStoreInfo.java`
+- 通过H2控制台**连接H2数据库**：
+
+![](../../images/WeBASE/front/h2_console.png)
+ 
+- 同机H2访问：可以通过浏览器打开`localhost:5002/WeBASE-Front/console`，以默认配置为例填入连接参数
+  - `JDBC URL`应填入`file:../h2/webasefront;`，与前置服务的application.yml中配置的`spring.datasource.url`对应
+  - 若未设置用户名与密码，则默认用户名为`sa`，密码为空
+- 服务端H2访问：
+  - 修改前置服务的application.yml中的`spring.h2.console.settings.web-allow-others`设为`true`，允许远端访问H2控制台
+  - 重启前置服务
+  - 访问`{ip}:{port}/WeBASE-Front/console`，参数填入方法同上
+
+
 
 <span id="event_subscribe"></span>
 ## 4. 支持链上事件订阅和通知
@@ -386,23 +417,10 @@ public void receive(Channel channel, Message message) throws IOException {
 }
 ```
 
-### 在IDE中开发WeBASE-Front
-
-
-IDE配置
-- 由于项目依赖了lombok，需要在settings-build-compiler的`Enable Annotation Processing`设置中打钩
-- 本项目使用gradle进行构建，可以在settings-build-build tools-gradle中设置本地的gradle环境
-
-证书与项目配置
-- 需要在资源目录中创建`conf`目录
-- 将sdk中的所有证书文件拷贝到`resources/conf`目录
-- 修改application.yml中的`sdk.ip`和`sdk.channelPort`
-
-
 ## 5. 配置文件解析
 <span id="config"></span>
 
-- 2. 配置文件解析
+- 1. 配置文件解析
 
 | 参数 | 默认值    | 描述          |
 |------|-------------|-----------|
