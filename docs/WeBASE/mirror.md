@@ -101,6 +101,6 @@ chmod +x ./gradlew && ./gradlew build -x test
 cd dist
 mv conf_template conf
 // 此处需要复制ca.crt, node.crt, node.key
-cp /fisco/nodes/127.0.0.1/sdk/* ./conf
+cp -rf /fisco/nodes/127.0.0.1/sdk/* ./conf
 bash start.sh
 ```
