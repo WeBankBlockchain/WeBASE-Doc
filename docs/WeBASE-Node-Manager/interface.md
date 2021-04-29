@@ -11046,6 +11046,71 @@ http://localhost:5001/WeBASE-Node-Manager/config/isDeployedModifyEnable
 }
 ```
 
+
+### 18.5 获取配置列表
+
+查询后台保存的配置列表
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | type     | Integer      | 否     | 获取配置类型。1：Docker 镜像列表  |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=1
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功；其它：失败|
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | List        | 否       | 镜像列表 ｜                       
+| 3.1  | id   | Integer        | 否       | 镜像编号|                
+| 3.1  | configName          | String        | 否       | 配置名称|    
+| 3.1  | configType   | Integer        | 否       | 配置类型，1: Docker 镜像列表     |
+| 3.1  | configValue       | String        | 否       |  镜像版本 |
+| 3.1  | createTime   | Long        | 否       |    创建时间 |         
+| 3.1  | modifyTime  | Long        | 否       |  修改时间 | 
+
+
+***2）出参示例***
+* 成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "configName": "docker 镜像版本",
+      "configType": 1,
+      "configValue": "v2.5.0",
+      "createTime": 1590577419000,
+      "modifyTime": 1590577419000
+    }
+  ]
+}
+```
+
 ## 19. 链上全量数据接口
 
 
