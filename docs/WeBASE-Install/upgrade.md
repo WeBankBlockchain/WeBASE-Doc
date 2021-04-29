@@ -87,7 +87,7 @@ WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinT
 #### WeBASE-Front升级
 
 0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 替换`webase-front/apps`中的jar包
+1. 替换旧的`webase-front/apps`中的jar包，替换旧的`webase-front/lib`目录
 2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
 3. `bash stop.sh && bash start.sh`重启
 
@@ -95,7 +95,7 @@ WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinT
 #### WeBASE-Node-Manager升级
 
 0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 替换`webase-node-mgr/apps`中的jar包
+1. 替换旧的`webase-node-mgr/apps`中的jar包，替换旧的`webase-node-mgr/lib`目录
 2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
 3. 查看[节点管理服务升级文档](../WeBASE-Node-Manager/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
     3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
@@ -110,7 +110,7 @@ WeBASE子系统升级需要参考[WeBASE releases](https://github.com/WeBankFinT
 #### WeBASE-Sign升级
 
 0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 替换`webase-sign/apps`中的jar包
+1. 替换旧的`webase-sign/apps`中的jar包，替换旧的`webase-sign/lib`目录
 2. 采用新yml文件，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
 3. 查看[签名服务升级文档](../WeBASE-Sign/upgrade.html)中对应版本是否需要修改数据表，若不需要升级则跳过
     3.1 若需要升级数据表，首先使用`mysqldump`命令备份数据库
