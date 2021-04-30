@@ -2756,11 +2756,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
 }
 ```
 
-### 5.17. 获取本地cns信息列表
+### 5.17. 导入合约仓库到IDE
 
 #### 接口描述
 
-> 获取本地cns信息列表
+> 保存多个合约
 
 #### 传输协议规范
 
@@ -2913,7 +2913,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/list
 
 #### 接口URL
 
-**http://localhost:5001/WeBASE-Node-Manager/warehouse/{warehouseId}**
+**http://localhost:5001/WeBASE-Node-Manager/warehouse?warehouseId={warehouseId}**
 
 #### 调用方法
 
@@ -2930,7 +2930,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/warehouse/1
+http://localhost:5001/WeBASE-Node-Manager/warehouse?warehouseId=1
 ```
 
 #### 响应参数
@@ -2965,7 +2965,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/1
 
 #### 接口URL
 
-**http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list/{warehouseId}**
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list?warehouseId={warehouseId}**
 
 #### 调用方法
 
@@ -2982,7 +2982,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list/1
+http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list?warehouseId=1
 ```
 
 #### 响应参数
@@ -3016,7 +3016,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list/1
 
 #### 接口URL
 
-**http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/{contractFolderId}**
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/folder?folderId={folderId}**
 
 #### 调用方法
 
@@ -3028,12 +3028,12 @@ HTTP GET
 
 | **序号** | **中文**       | **参数名**       | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------------- | ---------------- | -------- | ------------ | -------- | -------- |
-| 1        | 合约文件夹编号 | contractFolderId | int      |              | 是       |          |
+| 1        | 合约文件夹编号 | folderId | int      |              | 是       |          |
 
 **2）数据格式** 
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/2
+http://localhost:5001/WeBASE-Node-Manager/warehouse/folder?folderId=2
 ```
 
 #### 响应参数
@@ -3065,7 +3065,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/2
 
 #### 接口URL
 
-**http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list/{folderId}**
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list?folderId={folderId}**
 
 #### 调用方法
 
@@ -3082,7 +3082,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list/2
+http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list?folderId=2
 ```
 
 #### 响应参数
@@ -3126,7 +3126,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list/2
 
 #### 接口URL
 
-**http://localhost:5001/WeBASE-Node-Manager/warehouse/item/{contractId}**
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId={contractId}**
 
 #### 调用方法
 
@@ -3143,7 +3143,7 @@ HTTP GET
 **2）数据格式** 
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/warehouse/item/2
+http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId=2
 ```
 
 #### 响应参数
