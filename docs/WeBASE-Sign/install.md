@@ -40,7 +40,16 @@ chmod +x ./gradlew && ./gradlew build -x test
 ```
 构建完成后，会在根目录WeBASE-Sign下生成已编译的代码目录dist。
 
-## 4. 修改配置
+
+## 4. 数据库初始化
+```
+#登录MySQL:
+mysql -u ${your_db_account} -p${your_db_password}  例如：mysql -u root -p123456
+#新建数据库：
+CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+```
+
+## 5. 修改配置
 
 （1）进入dist目录
 
@@ -82,6 +91,17 @@ constant:
   aesKey: EfdsW23D23d3df43
 
 ```
+
+<!-- 
+使用sed命令直接修改
+```shell
+修改服务端口：sed -i "s/5004/${your_server_port}/g" conf/application.yml
+修改数据库IP：sed -i "s/127.0.0.1/${your_db_ip}/g" conf/application.yml
+修改数据库端口：sed -i "s/3306/${your_db_port}/g" conf/application.yml
+修改数据库名称：sed -i "s/webasesign/${your_db_name}/g" conf/application.yml
+修改数据库用户：sed -i "s/dbUsername/${your_db_account}/g" conf/application.yml
+修改数据库密码：sed -i "s/dbPassword/${your_db_password}/g" conf/application.yml
+``` -->
 
 ## 5. 服务启停
 
