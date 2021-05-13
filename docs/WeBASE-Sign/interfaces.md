@@ -494,7 +494,7 @@ HTTP POST
 | **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
 | -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
 | 1        | 用户编号  | signUserId | String |         64      | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
-| 2        | 请求数据 | encodedDataStr | String   |              | 是       | 十六进制String类型，使用web3sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString|
+| 2        | 请求数据 | encodedDataStr | String   |              | 是       | 十六进制String类型，使用java-sdk的Numeric.toHexString(byte[] input)方法将编码数据转换成HexString|
 
 **2）数据格式**
 
