@@ -3236,7 +3236,6 @@ http://localhost:5002/WeBASE-Front/1/web3/nodeConfig
 
 ```
 {
-	"orgName": "null",
 	"p2pip": "172.17.0.1",
 	"listenip": "0.0.0.0",
 	"rpcport": "8535",
@@ -3247,6 +3246,26 @@ http://localhost:5002/WeBASE-Front/1/web3/nodeConfig
 }
 ```
 
+* 失败：
+<span id="nodeConfig"></span>
+
+**节点前置的application.yml中未配置nodePath，导致无法读取节点的配置信息**
+
+```
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "p2pip": "null",
+        "listenip": "null",
+        "rpcport": "null",
+        "p2pport": "null",
+        "channelPort": "null",
+        "groupDataPath": "null",
+        "enableStatistic": false
+    }
+}
+```
 
 ### 3.29. 获取前置所连节点信息
 
