@@ -11382,7 +11382,7 @@ http://localhost:5001/WeBASE-Node-Manager/external/account/list/all/1/1/10
 #### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/external/contract/list/all/{groupId}/{pageNumber}/{pageSize}&type={type}**
+* 请求地址： **/external/contract/list/all/{groupId}/{pageNumber}/{pageSize}?type={type}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
