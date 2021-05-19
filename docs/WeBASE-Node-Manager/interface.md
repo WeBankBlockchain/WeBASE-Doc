@@ -191,7 +191,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 
 ### 1.3 删除前置信息
 
-#### 1.3.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/{frontId}**
@@ -199,7 +199,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -215,7 +215,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 ```
 
 
-#### 1.3.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -250,7 +250,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 
 ### 1.4 刷新前置信息
 
-#### 1.3.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/refresh**
@@ -258,7 +258,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -272,7 +272,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
 ```
 
 
-#### 1.3.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -302,6 +302,90 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+
+### 1.5 获取前置所连节点的配置信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/front/nodeConfig?frontId={frontId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+无
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/front/nodeConfig?frontId=1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
+| 3.1  | p2pip   | String | 是   | 节点的P2P IP         |
+| 3.2  | listenip    | String | 是   | 节点监听IP         |
+| 3.3  | rpcport     | String | 是   | 节点的RPC端口         |
+| 3.4  | p2pport     | String | 是   | 节点P2P端口         |
+| 3.5  | channelPort     | String | 是   | 节点channel连接所有端口         |
+| 3.6  | groupDataPath     | String | 是   | 节点群组数据存储路径         |
+| 3.6  | enableStatistic     | boolean | 是   | 是否启用统计         |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "p2pip": "172.17.0.1",
+        "listenip": "0.0.0.0",
+        "rpcport": "8535",
+        "p2pport": "30300",
+        "channelPort": "20200",
+        "groupDataPath": "data/",
+        "enableStatistic": false
+    }
+}
+```
+
+* 失败：
+<span id="nodeConfig"></span>
+
+**节点前置的application.yml中未配置nodePath，导致无法读取节点的配置信息**
+
+```
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "p2pip": "null",
+        "listenip": "null",
+        "rpcport": "null",
+        "p2pport": "null",
+        "channelPort": "null",
+        "groupDataPath": "null",
+        "enableStatistic": false
+    }
 }
 ```
 
