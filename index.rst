@@ -130,7 +130,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
 
 .. toctree::
    :hidden:
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: 更多参考资料
 
    docs/WeBASE/CONTRIBUTING.md
