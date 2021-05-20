@@ -54,7 +54,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          
          - `WeBASE贡献指南 <./docs/WeBASE/CONTRIBUTING.html>`_
          - `WeBASE国内镜像仓库、文档、安装包资源 <./docs/WeBASE/mirror.html>`_
-         - `开源社区 <./docs/Community/community.html>`_
+         - `开源社区 <./docs/More/community.html>`_
          
 
    .. container:: card-holder-bigger
@@ -70,12 +70,12 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          .. container:: tools 
          
             .. raw:: html
-         
+
                <div class="tools-holder">
                   <br>
-                  <h style="font-size: 18px;"><b><a href="./docs/Community/family-bucket.html">更多开源项目</a></b></h>
+                  <h style="font-size: 18px;"><b><a href="./docs/More/family-bucket.html">更多开源项目</a></b></h>
                   <br><br>
-                  <p>微众区块链开源社区中的<a href="./docs/Community/family-bucket.html">更多开源项目</a></p>
+                  <p>微众区块链开源社区中的<a href="./docs/More/family-bucket.html">更多开源项目</a></p>
                </div>
                <img src="./images/Community/overview_blockchain.png" class="card-holder" >               
                <div style="clear:both"></div>
@@ -134,6 +134,6 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
    :caption: 更多参考资料
 
    docs/WeBASE/CONTRIBUTING.md
-   docs/Community/family-bucket.md
-   docs/Community/community.md
+   docs/More/family-bucket.md
+   docs/More/community.md
 
