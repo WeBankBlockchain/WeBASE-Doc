@@ -40,9 +40,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          - `WeBASE管理平台 <./docs/WeBASE-Web/index.html>`_
          - `私钥托管与签名服务 <./docs/WeBASE-Sign/index.html>`_
          - `交易服务 <./docs/WeBASE-Transaction/index.html>`_
-         - `链管理服务 <./docs/WeBASE-Chain-Manager/index.html>`_
-         - `数据统计服务 <./docs/WeBASE-Stat/index.html>`_
-         - `数据监管服务 <./docs/WeBASE-Data/index.html>`_
+
 
    .. container:: card-holder
       
@@ -56,29 +54,35 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          
          - `WeBASE贡献指南 <./docs/WeBASE/CONTRIBUTING.html>`_
          - `WeBASE国内镜像仓库、文档、安装包资源 <./docs/WeBASE/mirror.html>`_
+         - `开源社区 <./docs/Community/community.html>`_
+         
 
-    .. container:: card-holder-bigger
+   .. container:: card-holder-bigger
       
       .. container:: card-bigger rocket
 
          .. raw:: html
 
             <br>
-            <h style="font-size: 22px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;社区</h>
+            <h style="font-size: 22px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;更多开源项目</h>
             <br><br>
 
          .. container:: tools 
          
             .. raw:: html
          
-               <img src="./images/Community/overview_blockchain.png" class="card-holder" >
                <div class="tools-holder">
                   <br>
                   <h style="font-size: 18px;"><b><a href="./docs/Community/family-bucket.html">更多开源项目</a></b></h>
                   <br><br>
                   <p>微众区块链开源社区中的<a href="./docs/Community/family-bucket.html">更多开源项目</a></p>
                </div>
+               <img src="./images/Community/overview_blockchain.png" class="card-holder" >               
                <div style="clear:both"></div>
+
+            .. raw:: html
+            
+               <hr>
 
 
 .. toctree::
