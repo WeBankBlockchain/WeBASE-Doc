@@ -2,7 +2,7 @@
 WeBASE 技术文档
 ##############################################################
 
-.. image:: ./images/logo/logo.jpg
+.. image:: ./images/logo/logo_smaller.jpg
 
 WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应用和FISCO BCOS节点之间搭建的一套通用组件。
 
@@ -74,9 +74,8 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
                <img src="_images/overview_blockchain.png" class="card-holder-full" >               
                <div class="tools-holder">
                   <br>
-                  <h style="font-size: 18px;"><b><a href="./docs/More/family-bucket.html">更多开源项目</a></b></h>
-                  <br><br>
                   <p>微众银行区块链开源社区中的<a href="./docs/More/family-bucket.html">更多开源项目</a></p>
+                  <br><br>
                </div>
                <div style="clear:both"></div>
 
