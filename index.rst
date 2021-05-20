@@ -2,9 +2,7 @@
 WeBASE 技术文档
 ##############################################################
 
-.. image:: ./images/logo/logo.jpg
-   width:: 1000
-   height:: 370
+.. image:: ./images/logo/logo_smaller.png
 
 WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应用和FISCO BCOS节点之间搭建的一套通用组件。
 
