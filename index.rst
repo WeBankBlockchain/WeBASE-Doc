@@ -74,7 +74,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
                <img src="images/community/overview_blockchain.png" class="card-holder" >
                <div class="tools-holder">
                   <br>
-                  <h style="font-size: 18px;"><b><a href="./docs/Community/family-bucket.html">更多开源项目</a></b></h>
+                  <h style="font-size: 18px;"><b><a href="./docs/community/family-bucket.html">更多开源项目</a></b></h>
                   <br><br>
                   <p>包含社区中更多的区块链开源项目</p>
                </div>
@@ -134,6 +134,6 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
    :caption: 更多参考资料
 
    docs/WeBASE/CONTRIBUTING.md
-   docs/Community/family-bucket.md
-   docs/Community/community.md
+   docs/community/family-bucket.md
+   docs/community/community.md
 
