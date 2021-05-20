@@ -155,10 +155,3 @@ gitee地址：[https://gitee.com/WeBankBlockchain/SmartDev-Scaffold](https://git
 
 文档地址：https://smartdev-doc.readthedocs.io/zh_CN/latest/docs/WeBankBlockchain-SmartDev-Scaffold/index.html
 
-### 社区
-
-更多关于微众区块链开源的动态，社区活动，欢迎关注“**微众区块链**”公众号，不定期还有开源周边相送！(*^▽^*)
-
-社区助手微信 ID : WeBank_Blockchain
-
-![](../../images/More/community_assistant.png)
