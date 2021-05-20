@@ -7,14 +7,14 @@
 ### 1.1 新增节点前置信息
 
 
-#### 1.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/front/new**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -39,7 +39,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 ```
 
 
-#### 1.1.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -84,13 +84,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 ### 1.2 获取所有前置列表 
 
-#### 1.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 1.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -107,7 +107,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 ```
 
 
-#### 1.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -394,7 +394,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/nodeConfig?frontId=1
 
 ### 2.1 查询交易信息列表
 
-#### 2.1.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：
@@ -404,7 +404,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/nodeConfig?frontId=1
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 2.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -424,7 +424,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 ```
 
 
-#### 2.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
