@@ -4,7 +4,7 @@
 .. toctree::
    :maxdepth: 1
 
-   ../Community/family_bucket.md
-   ../Community/community.md
+   ../community/family_bucket.md
+   ../community/community.md
 
 ```
