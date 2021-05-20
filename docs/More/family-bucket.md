@@ -3,7 +3,7 @@ All the project addresses participated and established by WeBank Blockchain are 
 
 汇集了微众银行参与和建立的所有区块链项目地址。
 
-![](../../images/Community/overview_blockchain.png)
+![](../../images/More/overview_blockchain.png)
 
 
 ### FISCO-BCOS 适用于金融行业的区块链底层平台
@@ -161,4 +161,4 @@ gitee地址：[https://gitee.com/WeBankBlockchain/SmartDev-Scaffold](https://git
 
 社区助手微信 ID : WeBank_Blockchain
 
-![](../../images/Community/community_assistant.png)
+![](../../images/More/community_assistant.png)
