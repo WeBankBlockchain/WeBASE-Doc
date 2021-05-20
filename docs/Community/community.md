@@ -7,4 +7,4 @@
 
 社区助手微信 ID : WeBank_Blockchain
 
-![](../../images/community/community_assistant.png)
+![](../../images/Community/community_assistant.png)
