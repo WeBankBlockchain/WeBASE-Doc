@@ -1,5 +1,7 @@
 # 更多开源工具 
-All the project addresses participated and established by WeBank Blockchain are collected.汇集了微众银行参与和建立的所有区块链项目地址。
+All the project addresses participated and established by WeBank Blockchain are collected.
+
+汇集了微众银行参与和建立的所有区块链项目地址。
 
 ![](../../images/community/overview_blockchain.png)
 
