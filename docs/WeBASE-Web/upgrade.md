@@ -4,7 +4,7 @@ WeBASE-Web升级说明，请结合[WeBASE-Web Changelog](https://github.com/WeBa
 
 WeBASE-Web升级的必须步骤：
 0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
-1. 直接替换`webase-web`整个目录，无需重启nginx
+1. 采用新的安装包，替换旧的`webase-web`目录，无需重启nginx
 
 各个版本的具体修改可参考下文
 
