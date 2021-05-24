@@ -32,7 +32,8 @@ $ unzip -v
 UnZip 6.00 of 20 April 2009, by Info-ZIP. 
 ```
 
-运行脚本，脚本将自动完成升级步骤
+运行脚本，通过`-o {oldVersion}`指定当前版本，通过`-n {newVersion}`指定新版本，脚本将自动完成升级步骤
+- **当前只支持升级相邻的版本**，可以参考[ChangeLOG](../WeBASE/ChaingeLOG.html)查看版本信息
 
 ```bash
 ## 指定-o旧版本，-n新版本后，即可运行
