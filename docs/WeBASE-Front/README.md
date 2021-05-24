@@ -21,7 +21,7 @@ WeBASE-Front使用方式有以下三种：
 WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用WeBASE v1.2.2及以上版本
 
 WeBASE-Front具体需要适配国密版FISCO-BCOS的地方有：
-- 开启web3sdk的国密开关：修改`application.yml/application.properties`中的`encryptType`改为`1`；
+- 开启java-sdk的国密开关：修改`application.yml/application.properties`中的`encryptType`改为`1`；
 - 合约编译支持国密版：
     - WeBASE-Front Web编译智能合约已引入sol-0.4.25-gm.js，已自动切换支持国密版智能合约的编译/部署/调用；
     - WeBASE-Front后台编译国密版智能合约，已引入solcJ:0.4.25-rc1.jar，**自动切换**支持国密版智能合约的编译/部署/调用；

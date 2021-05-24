@@ -7,14 +7,14 @@
 ### 1.1 新增节点前置信息
 
 
-#### 1.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/front/new**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -39,7 +39,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 ```
 
 
-#### 1.1.3 返回参数
+#### 返回参数
 
 ***1）出参表***
 
@@ -84,13 +84,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 ### 1.2 获取所有前置列表 
 
-#### 1.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 1.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -107,7 +107,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 ```
 
 
-#### 1.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -191,7 +191,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 
 ### 1.3 删除前置信息
 
-#### 1.3.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/{frontId}**
@@ -199,7 +199,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -215,7 +215,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 ```
 
 
-#### 1.3.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -250,7 +250,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 
 ### 1.4 刷新前置信息
 
-#### 1.3.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/front/refresh**
@@ -258,7 +258,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/500001
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 1.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -272,7 +272,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
 ```
 
 
-#### 1.3.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -305,12 +305,96 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
 }
 ```
 
+
+### 1.5 获取前置所连节点的配置信息
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/front/nodeConfig?frontId={frontId}**
+* 请求方式：GET
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+无
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/front/nodeConfig?frontId=1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+| 3    | data     | object | 是   | 返回信息实体（空）         |
+| 3.1  | p2pip   | String | 是   | 节点的P2P IP         |
+| 3.2  | listenip    | String | 是   | 节点监听IP         |
+| 3.3  | rpcport     | String | 是   | 节点的RPC端口         |
+| 3.4  | p2pport     | String | 是   | 节点P2P端口         |
+| 3.5  | channelPort     | String | 是   | 节点channel连接所有端口         |
+| 3.6  | groupDataPath     | String | 是   | 节点群组数据存储路径         |
+| 3.6  | enableStatistic     | boolean | 是   | 是否启用统计         |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "p2pip": "172.17.0.1",
+        "listenip": "0.0.0.0",
+        "rpcport": "8535",
+        "p2pport": "30300",
+        "channelPort": "20200",
+        "groupDataPath": "data/",
+        "enableStatistic": false
+    }
+}
+```
+
+* 失败：
+<span id="nodeConfig"></span>
+
+**节点前置的application.yml中未配置nodePath，导致无法读取节点的配置信息**
+
+```
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "p2pip": "null",
+        "listenip": "null",
+        "rpcport": "null",
+        "p2pport": "null",
+        "channelPort": "null",
+        "groupDataPath": "null",
+        "enableStatistic": false
+    }
+}
+```
+
 ## 2 交易信息模块
 
 
 ### 2.1 查询交易信息列表
 
-#### 2.1.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：
@@ -320,7 +404,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 2.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -340,7 +424,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 ```
 
 
-#### 2.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2753,6 +2837,417 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
 		"abiId": 6
 	}],
 	"totalCount": 2
+}
+```
+
+### 5.17. 导入合约仓库到IDE
+
+#### 接口描述
+
+> 保存多个合约
+
+#### 传输协议规范
+
+* 网络传输协议：HTTP协议
+* 请求地址：**/contract/copy**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ---------- | --------------- | -------- | ------------ | -------- | -------- |
+| 1        | 所属群组   | groupId         | Integer  |              | 是       |          |
+| 2        | 合约IDE路径 | contractPath     | String  |              | 是       | 默认为"/"         |
+| 3        | 合约所属用户   | account      | String  |              | 是       |          |
+| 4        | 合约内容    | contractItems         | List   |              | 是       |  RepCopyContractItem的List        |
+| 4.1        | 合约名称   | contractName         | String   |              | 是       |          |
+| 4.2        | 合约源码   | contractSource | String   |              | 是       |   Base64编码       |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/copy
+```
+
+```
+{
+	"contractItems": [{
+		"contractName": "Evidence",
+		"contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuNDsKY29udHJhY3QgRXZpZGVuY2VTaWduZXJzRGF0YUFCSXsgZnVuY3Rpb24gdmVyaWZ5KGFkZHJlc3MgYWRkcilwdWJsaWMgY29uc3RhbnQgcmV0dXJucyhib29sKXt9CmZ1bmN0aW9uIGdldFNpZ25lcih1aW50IGluZGV4KXB1YmxpYyBjb25zdGFudCByZXR1cm5zKGFkZHJlc3Mpe30gCmZ1bmN0aW9uIGdldFNpZ25lcnNTaXplKCkgcHVibGljIGNvbnN0YW50IHJldHVybnModWludCl7fQp9Cgpjb250cmFjdCBFdmlkZW5jZXsKICAgIAogICAgc3RyaW5nIGV2aWRlbmNlOwogICAgc3RyaW5nIGV2aWRlbmNlSW5mbzsKICAgIHN0cmluZyBldmlkZW5jZUlkOwogICAgdWludDhbXSBfdjsKICAgIGJ5dGVzMzJbXSBfcjsKICAgIGJ5dGVzMzJbXSBfczsKICAgIGFkZHJlc3NbXSBzaWduZXJzOwogICAgYWRkcmVzcyBwdWJsaWMgc2lnbmVyc0FkZHI7CiAgICAKICAgICAgICBldmVudCBhZGRTaWduYXR1cmVzRXZlbnQoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMpOwogICAgICAgIGV2ZW50IG5ld1NpZ25hdHVyZXNFdmVudChzdHJpbmcgZXZpLCBzdHJpbmcgaW5mbywgc3RyaW5nIGlkLCB1aW50OCB2LCBieXRlczMyIHIsIGJ5dGVzMzIgcyxhZGRyZXNzIGFkZHIpOwogICAgICAgIGV2ZW50IGVycm9yTmV3U2lnbmF0dXJlc0V2ZW50KHN0cmluZyBldmksIHN0cmluZyBpbmZvLCBzdHJpbmcgaWQsIHVpbnQ4IHYsIGJ5dGVzMzIgciwgYnl0ZXMzMiBzLGFkZHJlc3MgYWRkcik7CiAgICAgICAgZXZlbnQgZXJyb3JBZGRTaWduYXR1cmVzRXZlbnQoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMsYWRkcmVzcyBhZGRyKTsKICAgICAgICBldmVudCBhZGRSZXBlYXRTaWduYXR1cmVzRXZlbnQoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMpOwogICAgICAgIGV2ZW50IGVycm9yUmVwZWF0U2lnbmF0dXJlc0V2ZW50KHN0cmluZyBldmksIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMsIGFkZHJlc3MgYWRkcik7CgogICAgZnVuY3Rpb24gQ2FsbFZlcmlmeShhZGRyZXNzIGFkZHIpIHB1YmxpYyBjb25zdGFudCByZXR1cm5zKGJvb2wpIHsKICAgICAgICByZXR1cm4gRXZpZGVuY2VTaWduZXJzRGF0YUFCSShzaWduZXJzQWRkcikudmVyaWZ5KGFkZHIpOwogICAgfQoKICAgICAgIGZ1bmN0aW9uIEV2aWRlbmNlKHN0cmluZyBldmksIHN0cmluZyBpbmZvLCBzdHJpbmcgaWQsIHVpbnQ4IHYsIGJ5dGVzMzIgciwgYnl0ZXMzMiBzLCBhZGRyZXNzIGFkZHIsIGFkZHJlc3Mgc2VuZGVyKSBwdWJsaWMgewogICAgICAgc2lnbmVyc0FkZHIgPSBhZGRyOwogICAgICAgaWYoQ2FsbFZlcmlmeShzZW5kZXIpKQogICAgICAgewogICAgICAgICAgIGV2aWRlbmNlID0gZXZpOwogICAgICAgICAgIGV2aWRlbmNlSW5mbyA9IGluZm87CiAgICAgICAgICAgZXZpZGVuY2VJZCA9IGlkOwogICAgICAgICAgIF92LnB1c2godik7CiAgICAgICAgICAgX3IucHVzaChyKTsKICAgICAgICAgICBfcy5wdXNoKHMpOwogICAgICAgICAgIHNpZ25lcnMucHVzaChzZW5kZXIpOwogICAgICAgICAgIG5ld1NpZ25hdHVyZXNFdmVudChldmksaW5mbyxpZCx2LHIscyxhZGRyKTsKICAgICAgIH0KICAgICAgIGVsc2UKICAgICAgIHsKICAgICAgICAgICBlcnJvck5ld1NpZ25hdHVyZXNFdmVudChldmksaW5mbyxpZCx2LHIscyxhZGRyKTsKICAgICAgIH0KICAgIH0KCiAgICAgICAgZnVuY3Rpb24gZ2V0RXZpZGVuY2VJbmZvKCkgcHVibGljIGNvbnN0YW50IHJldHVybnMoc3RyaW5nKXsKICAgICAgICAgICAgcmV0dXJuIGV2aWRlbmNlSW5mbzsKICAgIH0KCiAgICBmdW5jdGlvbiBnZXRFdmlkZW5jZSgpIHB1YmxpYyBjb25zdGFudCByZXR1cm5zKHN0cmluZyxzdHJpbmcsc3RyaW5nLHVpbnQ4W10sYnl0ZXMzMltdLGJ5dGVzMzJbXSxhZGRyZXNzW10pewogICAgICAgIHVpbnQgbGVuZ3RoID0gRXZpZGVuY2VTaWduZXJzRGF0YUFCSShzaWduZXJzQWRkcikuZ2V0U2lnbmVyc1NpemUoKTsKICAgICAgICAgYWRkcmVzc1tdIG1lbW9yeSBzaWduZXJMaXN0ID0gbmV3IGFkZHJlc3NbXShsZW5ndGgpOwogICAgICAgICBmb3IodWludCBpPSAwIDtpPGxlbmd0aCA7aSsrKQogICAgICAgICB7CiAgICAgICAgICAgICBzaWduZXJMaXN0W2ldID0gKEV2aWRlbmNlU2lnbmVyc0RhdGFBQkkoc2lnbmVyc0FkZHIpLmdldFNpZ25lcihpKSk7CiAgICAgICAgIH0KICAgICAgICByZXR1cm4oZXZpZGVuY2UsZXZpZGVuY2VJbmZvLGV2aWRlbmNlSWQsX3YsX3IsX3Msc2lnbmVyTGlzdCk7CiAgICB9CgogICAgZnVuY3Rpb24gYWRkU2lnbmF0dXJlcyh1aW50OCB2LCBieXRlczMyIHIsIGJ5dGVzMzIgcykgcHVibGljIHJldHVybnMoYm9vbCkgewogICAgICAgIGZvcih1aW50IGk9IDAgO2k8c2lnbmVycy5sZW5ndGggO2krKykKICAgICAgICB7CiAgICAgICAgICAgIGlmKG1zZy5zZW5kZXIgPT0gc2lnbmVyc1tpXSkKICAgICAgICAgICAgewogICAgICAgICAgICAgICAgaWYoIF92W2ldID09IHYgJiYgX3JbaV0gPT0gciAmJiBfc1tpXSA9PSBzKQogICAgICAgICAgICAgICAgewogICAgICAgICAgICAgICAgICAgIGFkZFJlcGVhdFNpZ25hdHVyZXNFdmVudChldmlkZW5jZSxldmlkZW5jZUluZm8sZXZpZGVuY2VJZCx2LHIscyk7CiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHRydWU7CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBlbHNlCiAgICAgICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAgICAgIGVycm9yUmVwZWF0U2lnbmF0dXJlc0V2ZW50KGV2aWRlbmNlLGV2aWRlbmNlSWQsdixyLHMsbXNnLnNlbmRlcik7CiAgICAgICAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgIH0KICAgICAgIGlmKENhbGxWZXJpZnkobXNnLnNlbmRlcikpCiAgICAgICB7CiAgICAgICAgICAgIF92LnB1c2godik7CiAgICAgICAgICAgIF9yLnB1c2gocik7CiAgICAgICAgICAgIF9zLnB1c2gocyk7CiAgICAgICAgICAgIHNpZ25lcnMucHVzaChtc2cuc2VuZGVyKTsKICAgICAgICAgICAgYWRkU2lnbmF0dXJlc0V2ZW50KGV2aWRlbmNlLGV2aWRlbmNlSW5mbyxldmlkZW5jZUlkLHYscixzKTsKICAgICAgICAgICAgcmV0dXJuIHRydWU7CiAgICAgICB9CiAgICAgICBlbHNlCiAgICAgICB7CiAgICAgICAgICAgZXJyb3JBZGRTaWduYXR1cmVzRXZlbnQoZXZpZGVuY2UsZXZpZGVuY2VJbmZvLGV2aWRlbmNlSWQsdixyLHMsbXNnLnNlbmRlcik7CiAgICAgICAgICAgcmV0dXJuIGZhbHNlOwogICAgICAgfQogICAgfQogICAgCiAgICBmdW5jdGlvbiBnZXRTaWduZXJzKClwdWJsaWMgY29uc3RhbnQgcmV0dXJucyhhZGRyZXNzW10pCiAgICB7CiAgICAgICAgIHVpbnQgbGVuZ3RoID0gRXZpZGVuY2VTaWduZXJzRGF0YUFCSShzaWduZXJzQWRkcikuZ2V0U2lnbmVyc1NpemUoKTsKICAgICAgICAgYWRkcmVzc1tdIG1lbW9yeSBzaWduZXJMaXN0ID0gbmV3IGFkZHJlc3NbXShsZW5ndGgpOwogICAgICAgICBmb3IodWludCBpPSAwIDtpPGxlbmd0aCA7aSsrKQogICAgICAgICB7CiAgICAgICAgICAgICBzaWduZXJMaXN0W2ldID0gKEV2aWRlbmNlU2lnbmVyc0RhdGFBQkkoc2lnbmVyc0FkZHIpLmdldFNpZ25lcihpKSk7CiAgICAgICAgIH0KICAgICAgICAgcmV0dXJuIHNpZ25lckxpc3Q7CiAgICB9Cn0="
+	}, {
+		"contractName": "EvidenceSignersData",
+		"contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuNDsKaW1wb3J0ICJFdmlkZW5jZS5zb2wiOwoKY29udHJhY3QgRXZpZGVuY2VTaWduZXJzRGF0YXsKICAgICAgICBhZGRyZXNzW10gc2lnbmVyczsKCQlldmVudCBuZXdFdmlkZW5jZUV2ZW50KGFkZHJlc3MgYWRkcik7CiAgICAgICAgZnVuY3Rpb24gbmV3RXZpZGVuY2Uoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sc3RyaW5nIGlkLHVpbnQ4IHYsIGJ5dGVzMzIgcixieXRlczMyIHMpcHVibGljIHJldHVybnMoYWRkcmVzcykKICAgICAgICB7CiAgICAgICAgICAgIEV2aWRlbmNlIGV2aWRlbmNlID0gbmV3IEV2aWRlbmNlKGV2aSwgaW5mbywgaWQsIHYsIHIsIHMsIHRoaXMsIG1zZy5zZW5kZXIpOwogICAgICAgICAgICBuZXdFdmlkZW5jZUV2ZW50KGV2aWRlbmNlKTsKICAgICAgICAgICAgcmV0dXJuIGV2aWRlbmNlOwogICAgICAgIH0KCiAgICAgICAgZnVuY3Rpb24gRXZpZGVuY2VTaWduZXJzRGF0YShhZGRyZXNzW10gZXZpZGVuY2VTaWduZXJzKXB1YmxpY3sKICAgICAgICAgICAgZm9yKHVpbnQgaT0wOyBpPGV2aWRlbmNlU2lnbmVycy5sZW5ndGg7ICsraSkgewogICAgICAgICAgICBzaWduZXJzLnB1c2goZXZpZGVuY2VTaWduZXJzW2ldKTsKCQkJfQoJCX0KCiAgICBmdW5jdGlvbiB2ZXJpZnkoYWRkcmVzcyBhZGRyKXB1YmxpYyBjb25zdGFudCByZXR1cm5zKGJvb2wpewogICAgZm9yKHVpbnQgaT0wOyBpPHNpZ25lcnMubGVuZ3RoOyArK2kpIHsKICAgICAgICBpZiAoYWRkciA9PSBzaWduZXJzW2ldKQogICAgICAgIHsKICAgICAgICAgICAgcmV0dXJuIHRydWU7CiAgICAgICAgfQogICAgfQogICAgcmV0dXJuIGZhbHNlOwp9CgogICAgZnVuY3Rpb24gZ2V0U2lnbmVyKHVpbnQgaW5kZXgpcHVibGljIGNvbnN0YW50IHJldHVybnMoYWRkcmVzcyl7CiAgICAgICAgdWludCBsaXN0U2l6ZSA9IHNpZ25lcnMubGVuZ3RoOwogICAgICAgIGlmKGluZGV4IDwgbGlzdFNpemUpCiAgICAgICAgewogICAgICAgICAgICByZXR1cm4gc2lnbmVyc1tpbmRleF07CiAgICAgICAgfQogICAgICAgIGVsc2UKICAgICAgICB7CiAgICAgICAgICAgIHJldHVybiAwOwogICAgICAgIH0KCiAgICB9CgogICAgZnVuY3Rpb24gZ2V0U2lnbmVyc1NpemUoKSBwdWJsaWMgY29uc3RhbnQgcmV0dXJucyh1aW50KXsKICAgICAgICByZXR1cm4gc2lnbmVycy5sZW5ndGg7CiAgICB9CgogICAgZnVuY3Rpb24gZ2V0U2lnbmVycygpIHB1YmxpYyBjb25zdGFudCByZXR1cm5zKGFkZHJlc3NbXSl7CiAgICAgICAgcmV0dXJuIHNpZ25lcnM7CiAgICB9Cgp9"
+	}],
+	"contractPath": "Evidence1",
+	"groupId": "1",
+	"account": "mars"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | ------------ | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码       | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息     | message         | String   | 是       |                       |
+| 3        | 数据       | data      | Int      | 否       | copy合约数              |
+
+
+**2）数据格式**
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": 2
+}
+```
+
+
+
+### 5.19. 获取合约仓库列表
+
+#### 接口描述
+
+> 返回合约仓库信息列表
+
+#### 接口URL
+
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/list**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+无
+
+**2）数据格式** 
+
+```
+http://localhost:5001/WeBASE-Node-Manager/warehouse/list
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "warehouseName": "工具箱",
+      "warehouseNameEn": "Toolbox",
+      "type": "1",
+      "warehouseIcon": "toolboxId",
+      "description": "工具箱中有常用的工具合约",
+      "warehouseDetail": "工具箱中有常用的工具合约",
+      "descriptionEn": "Toolbox Contract suite",
+      "warehouseDetailEn": "Toolbox Contract suite",
+      "createTime": "2021-01-20 18:02:10",
+      "modifyTime": "2021-01-20 18:02:10"
+    },
+    {
+      "id": 2,
+      "warehouseName": "存证应用",
+      "warehouseNameEn": "Evidence",
+      "type": "2",
+      "warehouseIcon": "evidenceId",
+      "description": "一套区块链存证合约",
+      "warehouseDetail": "一套区块链存证合约",
+      "descriptionEn": "Evidence Contract suite",
+      "warehouseDetailEn": "Evidence Contract suite",
+      "createTime": "2021-01-20 18:02:10",
+      "modifyTime": "2021-01-20 18:02:10"
+    },
+    {
+      "id": 3,
+      "warehouseName": "积分应用",
+      "warehouseNameEn": "Points",
+      "type": "3",
+      "warehouseIcon": "pointsId",
+      "description": "一套积分合约",
+      "warehouseDetail": "一套积分合约",
+      "descriptionEn": "Points Contract suite",
+      "warehouseDetailEn": "Points Contract suite",
+      "createTime": "2021-01-20 18:02:10",
+      "modifyTime": "2021-01-20 18:02:10"
+    }
+  ]
+}
+```
+
+### 12.2. 根据仓库编号获取仓库信息
+
+#### 接口描述
+
+> 返回合约仓库信息
+
+#### 接口URL
+
+**http://localhost:5001/WeBASE-Node-Manager/warehouse?warehouseId={warehouseId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 仓库编号 | warehouseId    | int      |              | 是       |          |
+
+**2）数据格式** 
+
+```
+http://localhost:5001/WeBASE-Node-Manager/warehouse?warehouseId=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": 1,
+    "warehouseName": "工具箱",
+    "warehouseNameEn": "Toolbox",
+    "type": "1",
+    "warehouseIcon": "toolboxId",
+    "description": "工具箱中有常用的工具合约",
+    "warehouseDetail": "工具箱中有常用的工具合约",
+    "descriptionEn": "Toolbox Contract suite",
+    "warehouseDetailEn": "Toolbox Contract suite",
+    "createTime": "2021-01-20 18:02:10",
+    "modifyTime": "2021-01-20 18:02:10"
+  }
+}
+```
+
+### 12.3. 根据仓库编号获取合约文件夹信息
+
+#### 接口描述
+
+> 返回合约文件夹信息
+
+#### 接口URL
+
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list?warehouseId={warehouseId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 仓库编号 | warehouseId    | int      |              | 是       |          |
+
+**2）数据格式** 
+
+```
+http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list?warehouseId=1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 2,
+      "folderName": "Evidence",
+      "folderDesc": "Evidence",
+      "folderDetail": "Evidence",
+      "folderDescEn": "Evidence",
+      "folderDetailEn": "Evidence",
+      "createTime": "2021-01-20 18:02:10",
+      "modifyTime": "2021-01-20 18:02:10"
+    }
+  ]
+}
+```
+
+### 12.4. 根据合约文件夹编号获取合约文件夹信息
+
+#### 接口描述
+
+> 返回合约文件夹信息
+
+#### 接口URL
+
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/folder?folderId={folderId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**       | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------------- | ---------------- | -------- | ------------ | -------- | -------- |
+| 1        | 合约文件夹编号 | folderId | int      |              | 是       |          |
+
+**2）数据格式** 
+
+```
+http://localhost:5001/WeBASE-Node-Manager/warehouse/folder?folderId=2
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": 2,
+    "folderName": "Evidence",
+    "folderDesc": "Evidence",
+    "folderDetail": "Evidence",
+    "folderDescEn": "Evidence",
+    "folderDetailEn": "Evidence",
+    "createTime": "2021-01-20 18:02:10",
+    "modifyTime": "2021-01-20 18:02:10"
+  }
+}
+```
+
+### 12.5. 根据文件夹编号获取合约列表
+
+#### 接口描述
+
+> 返回合约信息列表
+
+#### 接口URL
+
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list?folderId={folderId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ---------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 文件夹编号 | folderId   | int      |              | 是       |          |
+
+**2）数据格式** 
+
+```
+http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list?folderId=2
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "contractId": 4,
+      "contractFolderId": 2,
+      "contractName": "Evidence",
+      "contractDesc": "Evidence",
+      "contractSrc": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuNDsKY29udHJhY3QgRXZpZGVuY2VTaWduZXJzRGF0YUFCSXsgZnVuY3Rpb24gdmVyaWZ5KGFkZHJlc3MgYWRkcilwdWJsaWMgY29uc3RhbnQgcmV0dXJucyhib29sKXt9CmZ1bmN0aW9uIGdldFNpZ25lcih1aW50IGluZGV4KXB1YmxpYyBjb25zdGFudCByZXR1cm5zKGFkZHJlc3Mpe30gCmZ1bmN0aW9uIGdldFNpZ25lcnNTaXplKCkgcHVibGljIGNvbnN0YW50IHJldHVybnModWludCl7fQp9Cgpjb250cmFjdCBFdmlkZW5jZXsKICAgIAogICAgc3RyaW5nIGV2aWRlbmNlOwogICAgc3RyaW5nIGV2aWRlbmNlSW5mbzsKICAgIHN0cmluZyBldmlkZW5jZUlkOwogICAgdWludDhbXSBfdjsKICAgIGJ5dGVzMzJbXSBfcjsKICAgIGJ5dGVzMzJbXSBfczsKICAgIGFkZHJlc3NbXSBzaWduZXJzOwogICAgYWRkcmVzcyBwdWJsaWMgc2lnbmVyc0FkZHI7CiAgICAKICAgICAgICBldmVudCBhZGRTaWduYXR1cmVzRXZlbnQoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMpOwogICAgICAgIGV2ZW50IG5ld1NpZ25hdHVyZXNFdmVudChzdHJpbmcgZXZpLCBzdHJpbmcgaW5mbywgc3RyaW5nIGlkLCB1aW50OCB2LCBieXRlczMyIHIsIGJ5dGVzMzIgcyxhZGRyZXNzIGFkZHIpOwogICAgICAgIGV2ZW50IGVycm9yTmV3U2lnbmF0dXJlc0V2ZW50KHN0cmluZyBldmksIHN0cmluZyBpbmZvLCBzdHJpbmcgaWQsIHVpbnQ4IHYsIGJ5dGVzMzIgciwgYnl0ZXMzMiBzLGFkZHJlc3MgYWRkcik7CiAgICAgICAgZXZlbnQgZXJyb3JBZGRTaWduYXR1cmVzRXZlbnQoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMsYWRkcmVzcyBhZGRyKTsKICAgICAgICBldmVudCBhZGRSZXBlYXRTaWduYXR1cmVzRXZlbnQoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMpOwogICAgICAgIGV2ZW50IGVycm9yUmVwZWF0U2lnbmF0dXJlc0V2ZW50KHN0cmluZyBldmksIHN0cmluZyBpZCwgdWludDggdiwgYnl0ZXMzMiByLCBieXRlczMyIHMsIGFkZHJlc3MgYWRkcik7CgogICAgZnVuY3Rpb24gQ2FsbFZlcmlmeShhZGRyZXNzIGFkZHIpIHB1YmxpYyBjb25zdGFudCByZXR1cm5zKGJvb2wpIHsKICAgICAgICByZXR1cm4gRXZpZGVuY2VTaWduZXJzRGF0YUFCSShzaWduZXJzQWRkcikudmVyaWZ5KGFkZHIpOwogICAgfQoKICAgICAgIGZ1bmN0aW9uIEV2aWRlbmNlKHN0cmluZyBldmksIHN0cmluZyBpbmZvLCBzdHJpbmcgaWQsIHVpbnQ4IHYsIGJ5dGVzMzIgciwgYnl0ZXMzMiBzLCBhZGRyZXNzIGFkZHIsIGFkZHJlc3Mgc2VuZGVyKSBwdWJsaWMgewogICAgICAgc2lnbmVyc0FkZHIgPSBhZGRyOwogICAgICAgaWYoQ2FsbFZlcmlmeShzZW5kZXIpKQogICAgICAgewogICAgICAgICAgIGV2aWRlbmNlID0gZXZpOwogICAgICAgICAgIGV2aWRlbmNlSW5mbyA9IGluZm87CiAgICAgICAgICAgZXZpZGVuY2VJZCA9IGlkOwogICAgICAgICAgIF92LnB1c2godik7CiAgICAgICAgICAgX3IucHVzaChyKTsKICAgICAgICAgICBfcy5wdXNoKHMpOwogICAgICAgICAgIHNpZ25lcnMucHVzaChzZW5kZXIpOwogICAgICAgICAgIG5ld1NpZ25hdHVyZXNFdmVudChldmksaW5mbyxpZCx2LHIscyxhZGRyKTsKICAgICAgIH0KICAgICAgIGVsc2UKICAgICAgIHsKICAgICAgICAgICBlcnJvck5ld1NpZ25hdHVyZXNFdmVudChldmksaW5mbyxpZCx2LHIscyxhZGRyKTsKICAgICAgIH0KICAgIH0KCiAgICAgICAgZnVuY3Rpb24gZ2V0RXZpZGVuY2VJbmZvKCkgcHVibGljIGNvbnN0YW50IHJldHVybnMoc3RyaW5nKXsKICAgICAgICAgICAgcmV0dXJuIGV2aWRlbmNlSW5mbzsKICAgIH0KCiAgICBmdW5jdGlvbiBnZXRFdmlkZW5jZSgpIHB1YmxpYyBjb25zdGFudCByZXR1cm5zKHN0cmluZyxzdHJpbmcsc3RyaW5nLHVpbnQ4W10sYnl0ZXMzMltdLGJ5dGVzMzJbXSxhZGRyZXNzW10pewogICAgICAgIHVpbnQgbGVuZ3RoID0gRXZpZGVuY2VTaWduZXJzRGF0YUFCSShzaWduZXJzQWRkcikuZ2V0U2lnbmVyc1NpemUoKTsKICAgICAgICAgYWRkcmVzc1tdIG1lbW9yeSBzaWduZXJMaXN0ID0gbmV3IGFkZHJlc3NbXShsZW5ndGgpOwogICAgICAgICBmb3IodWludCBpPSAwIDtpPGxlbmd0aCA7aSsrKQogICAgICAgICB7CiAgICAgICAgICAgICBzaWduZXJMaXN0W2ldID0gKEV2aWRlbmNlU2lnbmVyc0RhdGFBQkkoc2lnbmVyc0FkZHIpLmdldFNpZ25lcihpKSk7CiAgICAgICAgIH0KICAgICAgICByZXR1cm4oZXZpZGVuY2UsZXZpZGVuY2VJbmZvLGV2aWRlbmNlSWQsX3YsX3IsX3Msc2lnbmVyTGlzdCk7CiAgICB9CgogICAgZnVuY3Rpb24gYWRkU2lnbmF0dXJlcyh1aW50OCB2LCBieXRlczMyIHIsIGJ5dGVzMzIgcykgcHVibGljIHJldHVybnMoYm9vbCkgewogICAgICAgIGZvcih1aW50IGk9IDAgO2k8c2lnbmVycy5sZW5ndGggO2krKykKICAgICAgICB7CiAgICAgICAgICAgIGlmKG1zZy5zZW5kZXIgPT0gc2lnbmVyc1tpXSkKICAgICAgICAgICAgewogICAgICAgICAgICAgICAgaWYoIF92W2ldID09IHYgJiYgX3JbaV0gPT0gciAmJiBfc1tpXSA9PSBzKQogICAgICAgICAgICAgICAgewogICAgICAgICAgICAgICAgICAgIGFkZFJlcGVhdFNpZ25hdHVyZXNFdmVudChldmlkZW5jZSxldmlkZW5jZUluZm8sZXZpZGVuY2VJZCx2LHIscyk7CiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHRydWU7CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBlbHNlCiAgICAgICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAgICAgIGVycm9yUmVwZWF0U2lnbmF0dXJlc0V2ZW50KGV2aWRlbmNlLGV2aWRlbmNlSWQsdixyLHMsbXNnLnNlbmRlcik7CiAgICAgICAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgIH0KICAgICAgIGlmKENhbGxWZXJpZnkobXNnLnNlbmRlcikpCiAgICAgICB7CiAgICAgICAgICAgIF92LnB1c2godik7CiAgICAgICAgICAgIF9yLnB1c2gocik7CiAgICAgICAgICAgIF9zLnB1c2gocyk7CiAgICAgICAgICAgIHNpZ25lcnMucHVzaChtc2cuc2VuZGVyKTsKICAgICAgICAgICAgYWRkU2lnbmF0dXJlc0V2ZW50KGV2aWRlbmNlLGV2aWRlbmNlSW5mbyxldmlkZW5jZUlkLHYscixzKTsKICAgICAgICAgICAgcmV0dXJuIHRydWU7CiAgICAgICB9CiAgICAgICBlbHNlCiAgICAgICB7CiAgICAgICAgICAgZXJyb3JBZGRTaWduYXR1cmVzRXZlbnQoZXZpZGVuY2UsZXZpZGVuY2VJbmZvLGV2aWRlbmNlSWQsdixyLHMsbXNnLnNlbmRlcik7CiAgICAgICAgICAgcmV0dXJuIGZhbHNlOwogICAgICAgfQogICAgfQogICAgCiAgICBmdW5jdGlvbiBnZXRTaWduZXJzKClwdWJsaWMgY29uc3RhbnQgcmV0dXJucyhhZGRyZXNzW10pCiAgICB7CiAgICAgICAgIHVpbnQgbGVuZ3RoID0gRXZpZGVuY2VTaWduZXJzRGF0YUFCSShzaWduZXJzQWRkcikuZ2V0U2lnbmVyc1NpemUoKTsKICAgICAgICAgYWRkcmVzc1tdIG1lbW9yeSBzaWduZXJMaXN0ID0gbmV3IGFkZHJlc3NbXShsZW5ndGgpOwogICAgICAgICBmb3IodWludCBpPSAwIDtpPGxlbmd0aCA7aSsrKQogICAgICAgICB7CiAgICAgICAgICAgICBzaWduZXJMaXN0W2ldID0gKEV2aWRlbmNlU2lnbmVyc0RhdGFBQkkoc2lnbmVyc0FkZHIpLmdldFNpZ25lcihpKSk7CiAgICAgICAgIH0KICAgICAgICAgcmV0dXJuIHNpZ25lckxpc3Q7CiAgICB9Cn0=",
+      "contractDescEn": "Evidence",
+      "createTime": "2021-01-20 18:02:10",
+      "modifyTime": "2021-01-20 18:02:10"
+    },
+    {
+      "contractId": 5,
+      "contractFolderId": 2,
+      "contractName": "EvidenceSignersData",
+      "contractDesc": "EvidenceSignersData",
+      "contractSrc": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuNDsKaW1wb3J0ICJFdmlkZW5jZS5zb2wiOwoKY29udHJhY3QgRXZpZGVuY2VTaWduZXJzRGF0YXsKICAgICAgICBhZGRyZXNzW10gc2lnbmVyczsKCQlldmVudCBuZXdFdmlkZW5jZUV2ZW50KGFkZHJlc3MgYWRkcik7CiAgICAgICAgZnVuY3Rpb24gbmV3RXZpZGVuY2Uoc3RyaW5nIGV2aSwgc3RyaW5nIGluZm8sc3RyaW5nIGlkLHVpbnQ4IHYsIGJ5dGVzMzIgcixieXRlczMyIHMpcHVibGljIHJldHVybnMoYWRkcmVzcykKICAgICAgICB7CiAgICAgICAgICAgIEV2aWRlbmNlIGV2aWRlbmNlID0gbmV3IEV2aWRlbmNlKGV2aSwgaW5mbywgaWQsIHYsIHIsIHMsIHRoaXMsIG1zZy5zZW5kZXIpOwogICAgICAgICAgICBuZXdFdmlkZW5jZUV2ZW50KGV2aWRlbmNlKTsKICAgICAgICAgICAgcmV0dXJuIGV2aWRlbmNlOwogICAgICAgIH0KCiAgICAgICAgZnVuY3Rpb24gRXZpZGVuY2VTaWduZXJzRGF0YShhZGRyZXNzW10gZXZpZGVuY2VTaWduZXJzKXB1YmxpY3sKICAgICAgICAgICAgZm9yKHVpbnQgaT0wOyBpPGV2aWRlbmNlU2lnbmVycy5sZW5ndGg7ICsraSkgewogICAgICAgICAgICBzaWduZXJzLnB1c2goZXZpZGVuY2VTaWduZXJzW2ldKTsKCQkJfQoJCX0KCiAgICBmdW5jdGlvbiB2ZXJpZnkoYWRkcmVzcyBhZGRyKXB1YmxpYyBjb25zdGFudCByZXR1cm5zKGJvb2wpewogICAgZm9yKHVpbnQgaT0wOyBpPHNpZ25lcnMubGVuZ3RoOyArK2kpIHsKICAgICAgICBpZiAoYWRkciA9PSBzaWduZXJzW2ldKQogICAgICAgIHsKICAgICAgICAgICAgcmV0dXJuIHRydWU7CiAgICAgICAgfQogICAgfQogICAgcmV0dXJuIGZhbHNlOwp9CgogICAgZnVuY3Rpb24gZ2V0U2lnbmVyKHVpbnQgaW5kZXgpcHVibGljIGNvbnN0YW50IHJldHVybnMoYWRkcmVzcyl7CiAgICAgICAgdWludCBsaXN0U2l6ZSA9IHNpZ25lcnMubGVuZ3RoOwogICAgICAgIGlmKGluZGV4IDwgbGlzdFNpemUpCiAgICAgICAgewogICAgICAgICAgICByZXR1cm4gc2lnbmVyc1tpbmRleF07CiAgICAgICAgfQogICAgICAgIGVsc2UKICAgICAgICB7CiAgICAgICAgICAgIHJldHVybiAwOwogICAgICAgIH0KCiAgICB9CgogICAgZnVuY3Rpb24gZ2V0U2lnbmVyc1NpemUoKSBwdWJsaWMgY29uc3RhbnQgcmV0dXJucyh1aW50KXsKICAgICAgICByZXR1cm4gc2lnbmVycy5sZW5ndGg7CiAgICB9CgogICAgZnVuY3Rpb24gZ2V0U2lnbmVycygpIHB1YmxpYyBjb25zdGFudCByZXR1cm5zKGFkZHJlc3NbXSl7CiAgICAgICAgcmV0dXJuIHNpZ25lcnM7CiAgICB9Cgp9",
+      "contractDescEn": "EvidenceSignersData",
+      "createTime": "2021-01-20 18:02:10",
+      "modifyTime": "2021-01-20 18:02:10"
+    }
+  ]
+}
+```
+
+### 12.6. 根据合约编号获取合约信息
+
+#### 接口描述
+
+> 返回合约信息
+
+#### 接口URL
+
+**http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId={contractId}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 合约编号 | contractId | int      |              | 是       |          |
+
+**2）数据格式** 
+
+```
+http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId=2
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "contractId": 2,
+    "contractFolderId": 1,
+    "contractName": "LibSafeMathForUint256Utils",
+    "contractDesc": "LibSafeMathForUint256Utils",
+    "contractSrc": "LyoKICogQ29weXJpZ2h0IDIwMTQtMjAxOSB0aGUgb3JpZ2luYWwgYXV0aG9yIG9yIGF1dGhvcnMuCiAqCiAqIExpY2Vuc2VkIHVuZGVyIHRoZSBBcGFjaGUgTGljZW5zZSwgVmVyc2lvbiAyLjAgKHRoZSAiTGljZW5zZSIpOwogKiB5b3UgbWF5IG5vdCB1c2UgdGhpcyBmaWxlIGV4Y2VwdCBpbiBjb21wbGlhbmNlIHdpdGggdGhlIExpY2Vuc2UuCiAqIFlvdSBtYXkgb2J0YWluIGEgY29weSBvZiB0aGUgTGljZW5zZSBhdAogKgogKiAgICAgIGh0dHA6Ly93d3cuYXBhY2hlLm9yZy9saWNlbnNlcy9MSUNFTlNFLTIuMAogKgogKiBVbmxlc3MgcmVxdWlyZWQgYnkgYXBwbGljYWJsZSBsYXcgb3IgYWdyZWVkIHRvIGluIHdyaXRpbmcsIHNvZnR3YXJlCiAqIGRpc3RyaWJ1dGVkIHVuZGVyIHRoZSBMaWNlbnNlIGlzIGRpc3RyaWJ1dGVkIG9uIGFuICJBUyBJUyIgQkFTSVMsCiAqIFdJVEhPVVQgV0FSUkFOVElFUyBPUiBDT05ESVRJT05TIE9GIEFOWSBLSU5ELCBlaXRoZXIgZXhwcmVzcyBvciBpbXBsaWVkLgogKiBTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBsYW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kCiAqIGxpbWl0YXRpb25zIHVuZGVyIHRoZSBMaWNlbnNlLgogKiAqLwoKcHJhZ21hIHNvbGlkaXR5IF4wLjQuMjU7CgpsaWJyYXJ5IExpYlNhZmVNYXRoRm9yVWludDI1NlV0aWxzIHsKCiAgICBmdW5jdGlvbiBhZGQodWludDI1NiBhLCB1aW50MjU2IGIpIGludGVybmFsIHB1cmUgcmV0dXJucyAodWludDI1NikgewogICAgICAgIHVpbnQyNTYgYyA9IGEgKyBiOwogICAgICAgIHJlcXVpcmUoYyA+PSBhLCAiU2FmZU1hdGhGb3JVaW50MjU2OiBhZGRpdGlvbiBvdmVyZmxvdyIpOwogICAgICAgIHJldHVybiBjOwogICAgfQoKICAgIGZ1bmN0aW9uIHN1Yih1aW50MjU2IGEsIHVpbnQyNTYgYikgaW50ZXJuYWwgcHVyZSByZXR1cm5zICh1aW50MjU2KSB7CiAgICAgICAgcmVxdWlyZShiIDw9IGEsICJTYWZlTWF0aEZvclVpbnQyNTY6IHN1YnRyYWN0aW9uIG92ZXJmbG93Iik7CiAgICAgICAgdWludDI1NiBjID0gYSAtIGI7CiAgICAgICAgcmV0dXJuIGM7CiAgICB9CgogICAgZnVuY3Rpb24gbXVsKHVpbnQyNTYgYSwgdWludDI1NiBiKSBpbnRlcm5hbCBwdXJlIHJldHVybnMgKHVpbnQyNTYpIHsKICAgICAgICBpZiAoYSA9PSAwIHx8IGIgPT0gMCkgewogICAgICAgICAgICByZXR1cm4gMDsKICAgICAgICB9CgogICAgICAgIHVpbnQyNTYgYyA9IGEgKiBiOwogICAgICAgIHJlcXVpcmUoYyAvIGEgPT0gYiwgIlNhZmVNYXRoRm9yVWludDI1NjogbXVsdGlwbGljYXRpb24gb3ZlcmZsb3ciKTsKICAgICAgICByZXR1cm4gYzsKICAgIH0KCiAgICBmdW5jdGlvbiBkaXYodWludDI1NiBhLCB1aW50MjU2IGIpIGludGVybmFsIHB1cmUgcmV0dXJucyAodWludDI1NikgewogICAgICAgIHJlcXVpcmUoYiA+IDAsICJTYWZlTWF0aEZvclVpbnQyNTY6IGRpdmlzaW9uIGJ5IHplcm8iKTsKICAgICAgICB1aW50MjU2IGMgPSBhIC8gYjsKICAgICAgICByZXR1cm4gYzsKICAgIH0KCiAgICBmdW5jdGlvbiBtb2QodWludDI1NiBhLCB1aW50MjU2IGIpIGludGVybmFsIHB1cmUgcmV0dXJucyAodWludDI1NikgewogICAgICAgIHJlcXVpcmUoYiAhPSAwLCAiU2FmZU1hdGhGb3JVaW50MjU2OiBtb2R1bG8gYnkgemVybyIpOwogICAgICAgIHJldHVybiBhICUgYjsKICAgIH0KCiAgICBmdW5jdGlvbiBwb3dlcih1aW50MjU2IGEsIHVpbnQyNTYgYikgaW50ZXJuYWwgcHVyZSByZXR1cm5zICh1aW50MjU2KXsKCiAgICAgICAgaWYoYSA9PSAwKSByZXR1cm4gMDsKICAgICAgICBpZihiID09IDApIHJldHVybiAxOwoKICAgICAgICB1aW50MjU2IGMgPSAxOwogICAgICAgIGZvcih1aW50MjU2IGkgPSAwOyBpIDwgYjsgaSsrKXsKICAgICAgICAgICAgYyA9IG11bChjLCBhKTsKICAgICAgICB9CiAgICB9CgogICAgZnVuY3Rpb24gbWF4KHVpbnQyNTYgYSwgdWludDI1NiBiKSBpbnRlcm5hbCBwdXJlIHJldHVybnMgKHVpbnQyNTYpIHsKICAgICAgICByZXR1cm4gYSA+PSBiID8gYSA6IGI7CiAgICB9CgogICAgZnVuY3Rpb24gbWluKHVpbnQyNTYgYSwgdWludDI1NiBiKSBpbnRlcm5hbCBwdXJlIHJldHVybnMgKHVpbnQyNTYpIHsKICAgICAgICByZXR1cm4gYSA8IGIgPyBhIDogYjsKICAgIH0KCiAgICBmdW5jdGlvbiBhdmVyYWdlKHVpbnQyNTYgYSwgdWludDI1NiBiKSBpbnRlcm5hbCBwdXJlIHJldHVybnMgKHVpbnQyNTYpIHsKICAgICAgICByZXR1cm4gKGEgLyAyKSArIChiIC8gMikgKyAoKGEgJSAyICsgYiAlIDIpIC8gMik7CiAgICB9Cn0K",
+    "contractDescEn": "LibSafeMathForUint256Utils",
+    "createTime": "2021-01-20 18:02:10",
+    "modifyTime": "2021-01-20 18:02:10"
+  }
 }
 ```
 
@@ -8576,7 +9071,7 @@ a、成功：
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/cert/sdk/zip/1
+http://localhost:5001/WeBASE-Node-Manager/cert/sdk/zip/1
 ```
 
 #### 响应参数
@@ -10706,6 +11201,71 @@ http://localhost:5001/WeBASE-Node-Manager/config/isDeployedModifyEnable
 }
 ```
 
+
+### 18.5 获取配置列表
+
+查询后台保存的配置列表
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址： **/config/list**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+|------|-------------|--------------|--------|-------------------------------|
+| 1    | type     | Integer      | 否     | 获取配置类型。1：Docker 镜像列表  |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=1
+```
+
+
+#### 返回参数
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1    | code        | Integer       | 否     | 返回码，0：成功；其它：失败|
+| 2    | message     | String        | 否     | 描述    
+| 3    | data        | List        | 否       | 镜像列表 ｜                       
+| 3.1  | id   | Integer        | 否       | 镜像编号|                
+| 3.1  | configName          | String        | 否       | 配置名称|    
+| 3.1  | configType   | Integer        | 否       | 配置类型，1: Docker 镜像列表     |
+| 3.1  | configValue       | String        | 否       |  镜像版本 |
+| 3.1  | createTime   | Long        | 否       |    创建时间 |         
+| 3.1  | modifyTime  | Long        | 否       |  修改时间 | 
+
+
+***2）出参示例***
+* 成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "configName": "docker 镜像版本",
+      "configType": 1,
+      "configValue": "v2.5.0",
+      "createTime": 1590577419000,
+      "modifyTime": 1590577419000
+    }
+  ]
+}
+```
+
 ## 19. 链上全量数据接口
 
 
@@ -10822,7 +11382,7 @@ http://localhost:5001/WeBASE-Node-Manager/external/account/list/all/1/1/10
 #### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/external/contract/list/all/{groupId}/{pageNumber}/{pageSize}&type={type}**
+* 请求地址： **/external/contract/list/all/{groupId}/{pageNumber}/{pageSize}?type={type}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
