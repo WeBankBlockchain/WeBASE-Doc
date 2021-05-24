@@ -94,7 +94,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.1/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -128,10 +128,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.0
-webase.mgr.version=v1.5.0
-webase.sign.version=v1.5.0
-webase.front.version=v1.5.0
+webase.web.version=v1.5.1
+webase.mgr.version=v1.5.1
+webase.sign.version=v1.5.1
+webase.front.version=v1.5.1
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1

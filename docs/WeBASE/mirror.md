@@ -75,7 +75,7 @@ WeBASE提供FISCO BCOS中使用的v0.4.25, v0.5.2, v0.6.10三个版本的solc JS
 ```
 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.4.25-gm.js
 // 或
-curl -#LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.4.25.js
+curl -#LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.4.25-gm.js
 ```
 
 
