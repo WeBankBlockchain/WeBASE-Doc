@@ -11676,6 +11676,7 @@ http://localhost:5001/WeBASE-Node-Manager/external/contract/list/all/1/1/10?type
 | 202517 | app name not exists | 应用名称不存在 |
 | 202518 | app id not exists | 应用编号不存在 |
 | 202519 | link format invalid | 链接格式错误 |
+| 202534 | contract path not exists | 合约路径不存在 |
 | 302000 | user not logged in    |  未登录的用户          |
 | 302001 | Access denied    |  没有权限          |
 | 402000 | param exception    |  参数错误          |
