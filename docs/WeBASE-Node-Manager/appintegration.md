@@ -1,4 +1,5 @@
 # 应用接入说明
+
 应用管理是WeBASE管理台提供的一种第三方应用接入功能。其他应用可以通过WeBASE通用API来开发自己的运维管理台。接入的步骤如下：
 
 1. 通过WeBASE管理平台获得注册信息，并通过API向WeBASE注册服务。
@@ -58,6 +59,8 @@ EEFD7CD030E6B311AA85B053A90E8A31
 ```
 
 
+
+<span id="api"></span>
 
 ## WeBASE通用API
 
@@ -230,6 +233,246 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/api/accountList?timestamp=161492885783
 }
 ```
 
+### 2.2 查询角色列表
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**api/roleList?appKey={appKey}&signature={signature}&timestamp={timestamp}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+***2）入参示例***
+
+```
+http://localhost:5001/WeBASE-Node-Manager/api/roleList?timestamp=1614928857832&appKey=fdsf78aW&signature=EEFD7CD030E6B311AA85B053A90E8A31
+```
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号  | 输出参数    | 类型          |      | 备注                       |
+| ----- | ----------- | ------------- | ---- | -------------------------- |
+| 1     | code        | Int           | 否   | 返回码，0：成功 其它：失败 |
+| 2     | message     | String        | 否   | 描述                       |
+| 3     | totalCount  | Int           | 否   | 总记录数                   |
+| 4     | data        | List          | 否   | 组织列表                   |
+| 4.1   |             | Object        |      | 组织信息对象               |
+| 4.1.1 | roleId      | Int           | 否   | 角色编号                   |
+| 4.1.2 | roleName    | String        | 否   | 角色名称                   |
+| 4.1.3 | roleNameZh  | String        | 否   | 角色中文名称               |
+| 4.1.4 | roleStatus  | Int           | 否   | 状态（1-正常2-无效） 默认1 |
+| 4.1.5 | description | String        | 否   | 备注                       |
+| 4.1.6 | createTime  | LocalDateTime | 否   | 创建时间                   |
+| 4.1.7 | modifyTime  | LocalDateTime | 否   | 修改时间                   |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "totalCount": 2,
+    "data": [
+        {
+            "roleId": 100000,
+            "roleName": "admin",
+            "roleNameZh": "管理员",
+            "roleStatus": 1,
+            "description": null,
+            "createTime": "2019-02-14 17:33:50",
+            "modifyTime": "2019-02-14 17:33:50"
+        },
+        {
+            "roleId": 100001,
+            "roleName": "visitor",
+            "roleNameZh": "访客",
+            "roleStatus": 1,
+            "description": null,
+            "createTime": "2019-02-14 17:33:50",
+            "modifyTime": "2019-02-14 17:33:50"
+        }
+    ]
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+### 2.3 新增帐号
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/api/accountAdd?appKey={appKey}&signature={signature}&timestamp={timestamp}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数   | 类型   | 可为空 | 备注               |
+| ---- | ---------- | ------ | ------ | ------------------ |
+| 1    | account    | String | 否     | 帐号名称           |
+| 2    | accountPwd | String | 否     | 登录密码（sha256） |
+| 3    | roleId     | int    | 否     | 所属角色编号       |
+| 4    | email      | String | 否     | email地址          |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/api/accountAdd?timestamp=1614928857832&appKey=fdsf78aW&signature=EEFD7CD030E6B311AA85B053A90E8A31
+```
+
+```
+{
+    "account": "testAccount",
+    "accountPwd": "3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e",
+    "roleId": 100001,
+    "email": "test@xxx.com"
+}
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数      | 类型          |      | 备注                       |
+| ---- | ------------- | ------------- | ---- | -------------------------- |
+| 1    | code          | Int           | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message       | String        | 否   | 描述                       |
+| 3    | data          | object        | 否   | 返回信息实体               |
+| 3.1  | account       | String        | 否   | 帐号                       |
+| 3.2  | roleId        | Integer       | 否   | 所属角色                   |
+| 3.3  | roleName      | String        | 否   | 角色名称                   |
+| 3.4  | roleNameZh    | String        | 否   | 角色中文名                 |
+| 3.5  | loginFailTime | Integer       | 是   | 登录失败次数               |
+| 3.6  | accountStatus | Integer       | 否   | 帐号状态                   |
+| 3.7  | description   | String        | 是   | 备注                       |
+| 3.8  | createTime    | LocalDateTime | 否   | 创建时间                   |
+| 3.9  | modifyTime    | LocalDateTime | 否   | 修改时间                   |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "account": "testAccount",
+        "roleId": 100001,
+        "roleName": "visitor",
+        "roleNameZh": "访客",
+        "loginFailTime": 0,
+        "accountStatus": 1,
+        "description": null,
+    	"email": "test@xxx.com",
+        "createTime": "2019-03-04 15:11:44",
+        "modifyTime": "2019-03-04 15:11:44"
+    }
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
+
+### 2.4 更新密码 
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/api/passwordUpdate?appKey={appKey}&signature={signature}&timestamp={timestamp}**
+* 请求方式：POST
+* 请求头：Content-type: application/json
+* 返回格式：JSON
+
+#### 请求参数
+
+***1）入参表***
+
+| 序号 | 输入参数      | 类型   | 可为空 | 备注             |
+| ---- | ------------- | ------ | ------ | ---------------- |
+| 1    | account       | String | 否     | 帐号             |
+| 2    | oldAccountPwd | String | 否     | 旧密码（sha256） |
+| 3    | newAccountPwd | String | 否     | 新密码（sha256） |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/api/passwordUpdate?timestamp=1614928857832&appKey=fdsf78aW&signature=EEFD7CD030E6B311AA85B053A90E8A31
+```
+
+```
+{
+    "account": "admin ",
+    "oldAccountPwd": "dfdfgdg490cef2bfb60a9702erd2ddb7a805c9bd1arrrewefd51a7d0etttfa93e",
+    "newAccountPwd": "3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e"
+}
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数 | 类型   |      | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | code     | Int    | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message  | String | 否   | 描述                       |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+    "code": 0,
+    "message": "success"
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 102000,
+    "message": "system exception",
+    "data": {}
+}
+```
 
 ## 3 链信息模块
 
@@ -1605,3 +1848,6 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/api/dbInfo?timestamp=1614928857832&app
 | 202524 | timestamp timeout | 时间戳超时 |
 | 202525 | app key not exists | 应用Key不存在 |
 | 202526 | signature not match | 签名不匹配 |
+| 202527 | request encrypt fail | 请求加密失败 |
+| 202528 | request decrypt fail | 请求解密失败 |
+| 202529 | isTransferEncrypt config not match | 是否加密传输配置不匹配 |
