@@ -291,6 +291,17 @@ WeBASE-Front采用 JPA + H2数据库 的方式保存数据
   - 重启前置服务
   - 访问`{ip}:{port}/WeBASE-Front/console`，参数填入方法同上
 
+### 使用swagger
+<span id="swagger"></span>
+
+节点前置搭配了swagger，可用于直接调试接口，通过访问 `{ip}:5002/WeBASE-Front/swagger-ui.html` 即可访问前置的swagger页面
+
+![](../../images/WeBASE/front/swagger.png)
+
+在swagger页面中选中一个接口后，点击“Try it out”既可以开始调用了，输入框将提示入参的格式
+
+![](../../images/WeBASE/front/swagger_tool_api.png)
+
 
 
 <span id="event_subscribe"></span>
