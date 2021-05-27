@@ -11290,6 +11290,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=1
 | 3    | pageSize      | int           | 否     | 页大小                         |
 | 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
 | 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+| 6   | address      | string           | 是     |  搜索用户地址|
 
 ***2）入参示例***
 
@@ -11398,6 +11399,7 @@ http://localhost:5001/WeBASE-Node-Manager/external/account/list/all/1/1/10
 | 3    | pageSize      | int           | 否     | 页大小                         |
 | 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
 | 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+| 6   | contractAddress      | string           | 是     |  搜索合约地址|
 
 ***2）入参示例***
 
