@@ -4,7 +4,9 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-![架构图](../../images/WeBASE/one_click_struct.png)
+<img src="../../_images/one_click_struct.png" width="700">
+
+<!-- ![](../../images/WeBASE/one_click_struct.png)-->
 
 
 ## 前提条件
@@ -130,7 +132,7 @@ cd webase-deploy
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.5.1
 webase.mgr.version=v1.5.1
-webase.sign.version=v1.5.1
+webase.sign.version=v1.5.0
 webase.front.version=v1.5.1
 
 # 节点管理子系统mysql数据库配置
