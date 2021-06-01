@@ -1,6 +1,6 @@
 # WeBASE实训插件方案
 
-# 1 景介绍
+# 1 背景介绍
 
 2020年7月6日，人社部联合国家市场监管总局、国家统计局向社会发布了第三批新职业名单，“区块链工程技术人员”赫然在列，越来越多的区块链从业者得到了国家层面的承认，对就业、创业的带动作用明显，彰显了区块链行业的巨大价值和就业前景。随着市场对人才的需求和要求迅速增长，区块链技术培训需求加快释放。如何将 WeBASE与区块链课程相结合，以更好的服务开发者？如何将 WeBASE与区块链课程相结合，以更好的服务开发者？应对这一命题，WeBASE团队和FISCO BCOS 教育合作伙伴柏链教育对 WeBASE 功能进行针对性调整，推出WeBASE实训插件方案。
 
@@ -92,10 +92,10 @@ permitUrlArray:/account/login,/account/pictureCheckCode,/login,/user/privateKey/
 router清单：
 /home    首页
 /contract   合约IDE
-/contractList   合约列表
-/cnsManagement    CNS查询
+/contractList   合约列表
+/cnsManagement    CNS查询
 /CRUDServiceManagement    CURD
-/privateKeyManagement    私钥管理
+/privateKeyManagement    私钥管理
 ```
 
 
