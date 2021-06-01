@@ -50,14 +50,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=2
 
 修改webase-node-manager/conf/application.yml。
 
-- 4.2.2.1 修改constant.permitUrlArray：
+- 修改constant.permitUrlArray：
 
 
 ```plain
 permitUrlArray:/account/login,/account/pictureCheckCode,/login,/user/privateKey/**,/config/encrypt,/config/version,/front/refresh,/api/*,/config/list
 ```
 
-- 4.2.2.2 修改constant.verificationCodeMaxAge，设置为与你的系统的session时间一致。
+- 修改constant.verificationCodeMaxAge，设置为与你的系统的session时间一致。
 - 修改constant.enableVerificationCode=false，设置为false，用以固定验证constant.verificationCodeValue="8888"，为固定的验证码值，不需要修改
 - 修改constant.developerModeEnable，设置为true，开启开发者模式。
 - 重启WeBASE-Node-Manager服务。
