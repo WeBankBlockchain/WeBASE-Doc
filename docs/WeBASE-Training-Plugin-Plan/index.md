@@ -8,9 +8,9 @@
 
 WeBASE实训插件方案主要的目的就是讲WeBASE管理台的部分功能作为插件嵌入到具体的实训系统中，辅助实训系统完成其区块链相关的一些实训功能。
 
-​                 其嵌入的形式可以入下图：![iframe2](../../images/WeBASE-Training-Plugin-Plan/iframe2.png)
+​                 其嵌入的形式可以入下图：![](../../images/WeBASE-Training-Plugin-Plan/iframe2.png)
 
-![iframe1](../../images/WeBASE-Training-Plugin-Plan/iframe1.png)
+![](../../images/WeBASE-Training-Plugin-Plan/iframe1.png)
 
 # 3 具体改造方案
 
