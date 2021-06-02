@@ -4,7 +4,9 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-![架构图](../../images/WeBASE/one_click_struct.png)
+<img src="../../_images/one_click_struct.png" width="700">
+
+<!-- ![](../../images/WeBASE/one_click_struct.png)-->
 
 
 ## 前提条件
@@ -94,7 +96,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.1/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -128,10 +130,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.0
-webase.mgr.version=v1.5.0
+webase.web.version=v1.5.1
+webase.mgr.version=v1.5.1
 webase.sign.version=v1.5.0
-webase.front.version=v1.5.0
+webase.front.version=v1.5.1
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -704,7 +706,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
 ```
 
-答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK/Java-SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
 
 
 ### 8.前置启动报错“Processing bcos message timeout”
