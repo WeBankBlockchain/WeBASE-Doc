@@ -3202,6 +3202,114 @@ a、成功：
 ```
 
 
+### 3.28. 获取前置所连节点的配置信息
+
+
+#### 接口描述
+
+> 返回节点的config.ini配置信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/nodeConfig**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
+| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/1/web3/nodeConfig
+```
+
+#### 响应参数
+**1）数据格式**
+
+```
+{
+	"p2pip": "172.17.0.1",
+	"listenip": "0.0.0.0",
+	"rpcport": "8535",
+	"p2pport": "30300",
+	"channelPort": "20200",
+	"groupDataPath": "data/",
+	"enableStatistic": false
+}
+```
+
+* 失败：
+<span id="nodeConfig"></span>
+
+**节点前置的application.yml中未配置nodePath，导致无法读取节点的配置信息**
+
+```
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "p2pip": "null",
+        "listenip": "null",
+        "rpcport": "null",
+        "p2pport": "null",
+        "channelPort": "null",
+        "groupDataPath": "null",
+        "enableStatistic": false
+    }
+}
+```
+
+### 3.29. 获取前置所连节点信息
+
+
+#### 接口描述
+
+> 返回
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/nodeInfo**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
+| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/1/web3/nodeInfo
+```
+
+#### 响应参数
+**1）数据格式**
+
+```
+{
+    "NodeID": "fe57d7b39ed104b4fb2770ae5aad7946bfd377d0eb91ab92a383447e834c3257dec56686551d08178f2d5f40d9fad615293e46c9f5fc23cf187258e121213b1d",
+    "IPAndPort": "0.0.0.0:35310",
+    "Agency": "agencyA_son",
+    "Node": "node0",
+    "Topic": ["_block_notify_1", "_block_notify_2"]
+}
+```
+
+
 
 
 ## 4. 性能检测接口
@@ -7748,7 +7856,7 @@ headers:  content-disposition: attachment;filename*=UTF-8''conf.zip
 | 201303  | chain governance address cannot be blank      |   链管理委员/运维地址不能为空       |
 | 201311  | get event callback fail for time out     |   获取event回调超时      |
 | 201312  | get event callback error    |   获取event回调失败       |
-| 201501  | web3sdk create key pair fail and return null    |   sdk创建私钥对失败并返回Null       |
+| 201501  | sdk create key pair fail and return null    |   sdk创建私钥对失败并返回Null       |
 | 201502  | pem/p12 manager get key pair error for input params    |   pem/p12证书获取私钥对失败，检查入参       |
 | 201503  | pem/p12 manager get key pair error for bc dependency error    |    pem/p12证书获取私钥对失败，检查bc依赖包版本       |
 | 201504  | sign service return error    |   签名服务并返回异常       |

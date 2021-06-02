@@ -29,7 +29,7 @@ https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/{r
 
 *注：可视化部署中通过国内镜像手动下载docker镜像，文件名则是`docker-fisco-webase.tar`或国密版`docker-fisco-webase-gm.tar`*
 
-## WeBASE文档
+## WeBASE文档镜像
 
 WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthedocs.io/zh_CN/latest/index.html](https://webasedoc.readthedocs.io/zh_CN/latest/index.html)，同样提供国内镜像文档[https://fintech.webank.com/developer/docs/webase/index.html](https://fintech.webank.com/developer/docs/webase/index.html)，*由于网站资源更新周期安排，国内镜像文档更新会比readthedocs有所延迟*。
 
@@ -37,7 +37,7 @@ WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthed
 
 ## 举例：使用国内镜像进行一键部署
 
-本节WeBASE 1.4.1为例进行一键部署，一键部署会默认使用国内镜像下载安装包，下面仅演示关键步骤，具体操作可参考[WeBASE一键部署](./install.html)
+本节WeBASE 1.5.0为例进行一键部署，一键部署会默认使用国内镜像下载安装包，下面仅演示关键步骤，具体操作可参考[WeBASE一键部署](./install.html)
 
 ### 下载WeBASE一键部署工具
 
@@ -61,8 +61,23 @@ WeBASE一键部署(webase-deploy)会自动下载子系统安装包，用户也�
 ```
 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.1/webase-node-mgr.zip
 // 或
-curl -LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.1/webase-node-mgr.zip
+curl -#LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.1/webase-node-mgr.zip
 ```
+
+### 单独下载WeBASE的solc JS文件
+
+WeBASE提供FISCO BCOS中使用的v0.4.25, v0.5.2, v0.6.10三个版本的solc JS编译文件，对应的国密版本则在版本号后加上`-gm`后缀
+
+如需手动下载某一版本的的安装包，可以直接通过`wget`或者`curl -O`命令直接获取安装包。比如：
+
+- 获取v0.4.25的国密版本solc JS编译文件
+
+```
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.4.25-gm.js
+// 或
+curl -#LO https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.4.25-gm.js
+```
+
 
 若通过源码编译获取安装包并用于一键部署工具，需要进行文件夹的重命名，参考下一章节。
 
