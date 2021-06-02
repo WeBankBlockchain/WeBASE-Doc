@@ -27,7 +27,7 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 这套管理工具主要由：节点前置，签名服务，节点管理，WeBASE管理平台四个WeBASE子系统构成。WeBASE四个服务的部署架构如下图：节点前置需要和区块链节点部署在同一台机器；节点管理和WeBASE管理平台可以同机部署，也可以分开部署。
 
-![](../../images/WeBASE-Console-Suit/Framework_2.png)
+<img src="../../_images/Framework_2.png" width="700">
 
 
 ## 使用前提
