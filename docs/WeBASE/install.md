@@ -4,7 +4,7 @@
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
-<img src="../../_images/one_click_struct.png" width="700">
+<img src="../../_images/one_click_structure.png" width="700">
 
 <!-- ![](../../images/WeBASE/one_click_struct.png)-->
 
