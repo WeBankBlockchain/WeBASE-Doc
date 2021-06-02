@@ -152,7 +152,7 @@ FAILURE: Build failed with an exception.
 nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
 ```
 
-答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
+答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK/Java-SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
 
 
 - 7：启动报错“Processing bcos message timeout”
@@ -290,6 +290,17 @@ WeBASE-Front采用 JPA + H2数据库 的方式保存数据
   - 修改前置服务的application.yml中的`spring.h2.console.settings.web-allow-others`设为`true`，允许远端访问H2控制台
   - 重启前置服务
   - 访问`{ip}:{port}/WeBASE-Front/console`，参数填入方法同上
+
+### 使用swagger
+<span id="swagger"></span>
+
+节点前置搭配了swagger，可用于直接调试接口，通过访问 `{ip}:5002/WeBASE-Front/swagger-ui.html` 即可访问前置的swagger页面
+
+![](../../images/WeBASE/front/swagger.png)
+
+在swagger页面中选中一个接口后，点击“Try it out”既可以开始调用了，输入框将提示入参的格式
+
+![](../../images/WeBASE/front/swagger_tool_api.png)
 
 
 

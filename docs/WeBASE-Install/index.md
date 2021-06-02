@@ -27,4 +27,6 @@
    ../WeBASE-Install/enterprise.md
    ../WeBASE-Install/visual_deploy.md
    ../WeBASE-Install/upgrade.md
+   ../WeBASE/mirror.md
+
 ```
