@@ -5,14 +5,16 @@
 
 在WeBASE v1.5.0后，WeBASE将提供`webase-upgrade.sh`脚本（位于webase-deploy目录中，与`common.properties`文件同级目录）
 
+#### 升级步骤说明
+
 升级期间，脚本将暂停节点与WeBASE所有服务，替换WeBASE安装包（不会更新节点）、替换配置文件、更新数据库的数据表（并备份原数据）
 - 确保`common.properties`中配置的数据库配置正确；若已经通过该配置成功完成了一键部署，即不用修改
 - 需要确保WeBASE一键部署的文件目录未重命名（如webase-front）
 - 需要连接外网下载新的WeBASE安装包
 - 暂不支持WeBASE可视化部署的自动升级
-- 若升级脚本报错中断后，备份的各子服务文件存放在以旧版本号命名的目录，如`./v1.4.3`目录中
+- 若升级脚本报错中断后，备份的各子服务文件存放在**以旧版本号命名**的目录，如`./v1.4.3`目录中
 
-检测依赖
+#### 检测依赖
 ```bash
 # 脚本依赖python3命令，dos2unix命令，curl命令，unzip命令，mysqldump命令，mysql命令
 # 检查python3
@@ -32,6 +34,7 @@ $ unzip -v
 UnZip 6.00 of 20 April 2009, by Info-ZIP. 
 ```
 
+#### 执行升级脚本
 运行脚本，通过`-o {oldVersion}`指定当前版本，通过`-n {newVersion}`指定新版本，脚本将自动完成升级步骤
 - **当前只支持升级相邻的版本**，可以参考[ChangeLOG](../WeBASE/ChaingeLOG.html)查看版本信息
 
