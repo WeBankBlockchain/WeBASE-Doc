@@ -1,24 +1,5 @@
 # 一键升级
 
-## 获取WeBASE一键升级脚本
-<span id="get_auto">
-
-下载最新的一键安装包，获取安装包中最新的更新脚本
-
-以`v1.5.1`为例，在**旧版本的webase-deploy目录**执行下载操作
-```bash
-# 创建new目录
-mkdir new && cd new
-# 下载
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.1/webase-deploy.zip
-# 解压
-unzip webase-deploy.zip
-# 复制最新版本的webase-upgrade.sh升级脚本到已有的webase-deploy目录，覆盖旧版本的升级脚本
-cd .. && cp -f webase-deploy/webase-upgrade.sh .
-```
-
-至此，我们已经获取了最新版本的WeBASE一键升级脚本，下面按提示执行脚本进行相邻版本的升级
-
 ## 使用WeBASE一键升级脚本
 <span id="auto">
 
