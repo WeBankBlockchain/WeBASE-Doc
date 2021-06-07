@@ -12,6 +12,29 @@ WeBASE-Node-Manager升级的必须步骤：
 
 各个版本的具体修改可参考下文
 
+#### v1.5.1
+- 新增导出合约Java工程脚手架
+- 新增合约仓库接口
+- 新增全量用户/合约通过地址搜索功能
+- 优化开发者模式下鉴权，修复开发者模式下删除合约目录问题
+- 优化应用管理中合约同步速度过慢问题
+- 修复交易审计中异常数据总数错误问题
+
+##### 数据表更新
+
+执行webase-node-mgr中`script/upgrade`目录中的`v150_v151.sql`即可更新数据表，可通过`mysql -e source v150_v151.sql`命令执行
+- 注：更新前提前备份mysql数据
+
+更新详情如下
+
+**数据表字段修改**
+- `tb_contract_path`合约IDE目录信息表新增`account`字段，类型为`varchar(50) `，默认值为`admin`
+
+**数据表结构更改**
+- 新增了合约仓库合约信息表`tb_contract_item`
+- 新增了合约仓库目录信息表`tb_contract_folder`
+- 新增了合约仓库信息表`tb_warehouse`
+
 #### v1.5.0
 - 新增应用管理，支持WeIdentity模板和自定义应用接入
 - 新增节点监控的链上TPS、出块周期、块大小的统计
@@ -20,8 +43,8 @@ WeBASE-Node-Manager升级的必须步骤：
 
 ##### 数据表更新
 
-执行webase-node-mgr中`script/upgrade`目录中的`v143_v150.sql`即可更新数据表可通过`mysql -e source v143_v150.sql`命令执行
-- 注：提前备份mysql数据
+执行webase-node-mgr中`script/upgrade`目录中的`v143_v150.sql`即可更新数据表，可通过`mysql -e source v143_v150.sql`命令执行
+- 注：更新前提前备份mysql数据
 
 更新详情如下
 
@@ -34,7 +57,7 @@ WeBASE-Node-Manager升级的必须步骤：
 
 **数据表结构更改**
 - 新增了应用信息表`tb_app_info`
-- 新增了合约仓库信息表`tb_contract_store`
+- 新增了应用仓库信息表`tb_contract_store`
 - 新增了区块统计数据表`tb_stat`
 - 新增了外部合约信息表`tb_external_contract`
 - 新增了外部账户信息表`tb_external_account`
