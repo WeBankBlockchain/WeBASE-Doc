@@ -89,7 +89,8 @@ dist目录提供了一份配置模板conf_template：
 cd conf
 ```
 
-将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前conf目录（包括ca.crt, sdk.crt, sdk.key, node.crt, node.key和gm文件夹），供SDK与节点建立连接时使用。
+将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前conf目录（包括ca.crt, sdk.crt, sdk.key, node.crt, node.key），供SDK与节点建立连接时使用。
+- 若使用的是**国密SSL模式**，则将`nodes/${ip}/sdk/gm`下的所有文件（包括gmca.crt, gmensdk.crt, gmensdk.key, gmsdk.crt, gmensdk.key）拷贝到当前conf目录（无需拷贝sdk目录下的sdk.crt等证书）。
 
 ### 4.3 修改配置
 
