@@ -3784,20 +3784,36 @@ HTTP POST
 
 ```
 {
-    "groupId" :1,
-    "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
-    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
-    "contractAddress":"0x14d5af9419bb5f89496678e3e74ce47583f8c166",
-    "funcName":"set",
-    "funcParam":["test"],
-    "useCns":false
+	"groupId": "1",
+	"signUserId": "f4975519b0274e6ca8283650a7e1bc07",
+	"contractName": "HelloWorld",
+	"contractPath": "/",
+	"version": "",
+	"funcName": "set",
+	"funcParam": ["333"],
+	"contractAddress": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+	"contractAbi": [{
+		"inputs": [{
+			"internalType": "string",
+			"name": "n",
+			"type": "string"
+		}],
+		"name": "set",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function",
+		"funcId": 2
+	}],
+	"useAes": false,
+	"useCns": false,
+	"cnsName": ""
 }
 ```
 
 示例：
 
 ```
-curl -X POST "http://localhost:5002/WeBASE-Front/trans/handleWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"contractAbi\": [ { \"outputs\": [], \"constant\": false, \"payable\": false, \"inputs\": [ { \"name\": \"n\", \"type\": \"string\" } ], \"name\": \"set\", \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"outputs\": [ { \"name\": \"\", \"type\": \"string\" } ], \"constant\": true, \"payable\": false, \"inputs\": [], \"name\": \"get\", \"stateMutability\": \"view\", \"type\": \"function\" }, { \"payable\": false, \"inputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"constructor\" }, { \"inputs\": [ { \"indexed\": false, \"name\": \"name\", \"type\": \"string\" } ], \"name\": \"nameEvent\", \"anonymous\": false, \"type\": \"event\" } ], \"contractAddress\": \"0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266\", \"funcName\": \"set\", \"funcParam\": [ \"test\" ], \"groupId\": 1, \"signUserId\": "458ecc77a08c486087a3dcbc7ab5a9c3"}"
+curl -X POST "http://localhost:5002/WeBASE-Front/trans/handleWithSign" -H "accept: */*" -H "Content-Type: application/json" -d "{\"groupId\":\"1\",\"signUserId\":\"f4975519b0274e6ca8283650a7e1bc07\",\"contractName\":\"HelloWorld\",\"contractPath\":\"/\",\"version\":\"\",\"funcName\":\"set\",\"funcParam\":[\"333\"],\"contractAddress\":\"0xe10441d9179cf0424aae808b51bc85dcbbfe1447\",\"contractAbi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"funcId\":2}],\"useAes\":false,\"useCns\":false,\"cnsName\":\"\"}"
 ```
 
 #### 响应参数
@@ -3812,42 +3828,25 @@ b、正确发送数据上链返回值信息（交易收据）
 
 ```
 {
-  "transactionHash": "0x0b426a58af8ba449742b937f1e9b2b225335638707b93d6b296dfd8107edddd7",
-  "transactionIndex": 0,
-  "blockHash": "0xc8eb7a983ecb8c2a0a64450a059d2cf3de8c8d786211dcec48ab9c47219ee8f7",
-  "blockNumber": 36985,
-  "gasUsed": 35400,
-  "contractAddress": "0x0000000000000000000000000000000000000000",
-  "root": null,
-  "status": "0x0",
-  "from": "0xb173ca9a2e07efe6007aee751a013849d53e7c29",
-  "to": "0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266",
-  "input": "0x4ed3885e000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000047465737400000000000000000000000000000000000000000000000000000000",
-  "output": "0x",
-  "logs": [
-    {
-      "removed": false,
-      "logIndex": null,
-      "transactionIndex": null,
-      "transactionHash": null,
-      "blockHash": null,
-      "blockNumber": null,
-      "address": "0x7571ff73f1a37ca07f678aebc4d8213e7ef5c266",
-      "data": "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000047465737400000000000000000000000000000000000000000000000000000000",
-      "type": null,
-      "topics": [
-        "0x9645e7fb5eec05c0f156d4901a10663561199c6dd0401214a0b833fe0022d899"
-      ],
-      "logIndexRaw": null,
-      "blockNumberRaw": null,
-      "transactionIndexRaw": null
-    }
-  ],
-  "logsBloom": "0x00000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000800000000020000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000",
-  "gasUsedRaw": "0x8a48",
-  "statusOK": true,
-  "blockNumberRaw": "0x9079",
-  "transactionIndexRaw": "0x0"
+	"transactionHash": "0xd1234cdb673447b654874d05d4ed98be89f3cb7c5a6c12bc51e1274a03af029c",
+	"transactionIndex": "0x0",
+	"root": "0xeecf2b6bbb028e38e704ca88fe1d9f5e3d43197b32c3336d3273d86fb3a135f0",
+	"blockNumber": "0xa9",
+	"blockHash": "0x906bdf0747ba68c03e6cf73463db62fdbd8ab8debc149f890475775d7c6a8af7",
+	"from": "0x7bfa3539c8761978f0a2a1f7f240bde97819fb03",
+	"to": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+	"gasUsed": "0x710b",
+	"contractAddress": "0x0000000000000000000000000000000000000000",
+	"logs": [],
+	"logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+	"status": "0x0",
+	"statusMsg": "None",
+	"input": "0x3590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
+	"output": "0x",
+	"txProof": null,
+	"receiptProof": null,
+	"message": "Success",
+	"statusOK": true
 }
 ```
 
@@ -3903,22 +3902,36 @@ HTTP POST
 示例：
 
 ```
-curl -l -H "Content-type: application/json" -X POST -d '{"contractName":
-"HelloWorld", "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}], funcName": "set", "funcParam": ["Hi,Welcome!"], "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db", "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde","groupId": 1,"useCns": false}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
+curl -l -H "Content-type: application/json" -X POST -d '{\"groupId\":\"1\",\"user\":\"0x7bfa3539c8761978f0a2a1f7f240bde97819fb03\",\"contractName\":\"HelloWorld\",\"contractPath\":\"/\",\"version\":\"\",\"funcName\":\"set\",\"funcParam\":[\"333\"],\"contractAddress\":\"0xe10441d9179cf0424aae808b51bc85dcbbfe1447\",\"contractAbi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"funcId\":2}],\"useAes\":false,\"useCns\":false,\"cnsName\":\"\"}' http://10.0.0.1:5002/WeBASE-Front/trans/handle
 ```
 
 传入合约abi:
 
 ```
 {
-    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
-    "contractName":"HelloWorld",
-    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
-    "funcName":"set",
-    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
-    "funcParam":["Hi,Welcome!"],
-    "groupId" :"1",
-    "useCns": false
+	"groupId": "1",
+	"user": "0x7bfa3539c8761978f0a2a1f7f240bde97819fb03",
+	"contractName": "HelloWorld",
+	"contractPath": "/",
+	"version": "",
+	"funcName": "set",
+	"funcParam": ["333"],
+	"contractAddress": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+	"contractAbi": [{
+		"inputs": [{
+			"internalType": "string",
+			"name": "n",
+			"type": "string"
+		}],
+		"name": "set",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function",
+		"funcId": 2
+	}],
+	"useAes": false,
+	"useCns": false,
+	"cnsName": ""
 }
 ```
 
@@ -3934,23 +3947,25 @@ b、正确发送数据上链返回值信息（交易收据）
 
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": {
-        "blockHash":
-        "0x1d8d8275aa116d65893291c140849be272dac1d4ca0a0a722f44404b2f2356c3",
-        "gasUsed": 32798,
-        "transactionIndexRaw": "0",
-        "blockNumberRaw": "33",
-        "blockNumber": 33,
-        "contractAddress": "0x0000000000000000000000000000000000000000",
-        "cumulativeGasUsed": 32798,
-        "transactionIndex": 0,
-        "gasUsedRaw": "0x801e",
-        "logs": [],
-        "cumulativeGasUsedRaw": "0x801e",
-        "transactionHash":"0x0653a8e959771955330461456dd094a96d9071bfa31e6f43b68b30f10a85689c"
-    }
+	"transactionHash": "0xd1234cdb673447b654874d05d4ed98be89f3cb7c5a6c12bc51e1274a03af029c",
+	"transactionIndex": "0x0",
+	"root": "0xeecf2b6bbb028e38e704ca88fe1d9f5e3d43197b32c3336d3273d86fb3a135f0",
+	"blockNumber": "0xa9",
+	"blockHash": "0x906bdf0747ba68c03e6cf73463db62fdbd8ab8debc149f890475775d7c6a8af7",
+	"from": "0x7bfa3539c8761978f0a2a1f7f240bde97819fb03",
+	"to": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+	"gasUsed": "0x710b",
+	"contractAddress": "0x0000000000000000000000000000000000000000",
+	"logs": [],
+	"logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+	"status": "0x0",
+	"statusMsg": "None",
+	"input": "0x3590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
+	"output": "0x",
+	"txProof": null,
+	"receiptProof": null,
+	"message": "Success",
+	"statusOK": true
 }
 ```
 
@@ -3982,8 +3997,8 @@ HTTP POST
 
 ```
 {
-    "signedStr": "0xddd",
-    "sync": 1,
+    "signedStr": "0xf9012da001071041dddc1b3c553b48c0fbefecc07f3812f5ce4004d47708f1c3342844db018405f5e10082029d94e10441d9179cf0424aae808b51bc85dcbbfe144780b8643590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000010180b84083bb5313e3dd7825b8b3e32d73aa8aedf9f9a8fcf435e5c37edfe4645c1af4211c12e1368024336a576f26ed624407da0b94e0bc5760514543c0b7a38fa03a7da0972843d0879ffdbdae733e8707896a532e5e1a3c7262cb84db657dd34f09111ba0786106465fe0fd2383588693cafef8934df62b188c6bb5a74eb6b9f23adaba32",
+    "sync": true,
     "groupId":1
 }
 ```
@@ -3994,43 +4009,25 @@ HTTP POST
 
 ```
 {
-    "transactionHash": "0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b",
-    "transactionIndex": 0,
-    "blockHash": "0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade",
-    "blockNumber": 100,
-    "cumulativeGasUsed": 121038,
-    "gasUsed": 121038,
-    "contractAddress": "0x0000000000000000000000000000000000000000",
-    "root": null,
-    "from": null,
-    "to": null,
-    "logs": [
-        {
-            "removed": false,
-            "logIndex": 0,
-            "transactionIndex": 0,
-            "transactionHash": "0xb2c733b742045e61c0fd6e7e2bafece04d56262a4887de9f78dad2c5dd2f944b",
-            "blockHash": "0xf27ff42d4be65329a1e7b11365e190086d92f9836168d0379e92642786db7ade",
-            "blockNumber": 100,
-            "address": "0x986278eb8e8b4ef98bdfc055c02d65865fc87ad2",
-            "data": "0x00000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000001caf3fbec3675eabb85c0b25e2992d6f0a5e1546dad85c20733fdb27cfa4ca782a5fdfb621b416f3494c7d8ca436c12309884550d402ea79f03ef8ddfdd494f7a40000000000000000000000000000000000000000000000000000000000000040666164363863656230616530316530643731616635356331316561643031613532656638363435343866306134643133633836363164393664326461366239380000000000000000000000000000000000000000000000000000000000000002363000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000023630000000000000000000000000000000000000000000000000000000000000",
-            "type": "mined",
-            "topics": [
-                "0xbf474e795141390215f4f179557402a28c562b860f7b74dce4a3c0e0604cd97e"
-            ],
-            "logIndexRaw": "0",
-            "blockNumberRaw": "100",
-            "transactionIndexRaw": "0"
-        }
-    ],
-    "logsBloom": null,
-    "gasUsedRaw": "0x1d8ce",
-    "blockNumberRaw": "100",
-    "transactionIndexRaw": "0",
-    "cumulativeGasUsedRaw": "0x1d8ce",
-    "message": null,
-    "txProof": null,
-    "receiptProof": null
+	"transactionHash": "0xd1234cdb673447b654874d05d4ed98be89f3cb7c5a6c12bc51e1274a03af029c",
+	"transactionIndex": "0x0",
+	"root": "0xeecf2b6bbb028e38e704ca88fe1d9f5e3d43197b32c3336d3273d86fb3a135f0",
+	"blockNumber": "0xa9",
+	"blockHash": "0x906bdf0747ba68c03e6cf73463db62fdbd8ab8debc149f890475775d7c6a8af7",
+	"from": "0x7bfa3539c8761978f0a2a1f7f240bde97819fb03",
+	"to": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+	"gasUsed": "0x710b",
+	"contractAddress": "0x0000000000000000000000000000000000000000",
+	"logs": [],
+	"logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+	"status": "0x0",
+	"statusMsg": "None",
+	"input": "0x3590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
+	"output": "0x",
+	"txProof": null,
+	"receiptProof": null,
+	"message": "Success",
+	"statusOK": true
 }
 ```
 
@@ -4127,6 +4124,193 @@ HTTP POST
   "p": "0x4405f9d5d6ccff709b6543bc8ac24cbb649d3267a66db19ab8f85f3b884a8505f086c581490e7e50558879abde9c4d07fc2daab92f81c0eb4b805af3c8895cfc"
 }
 ```
+
+
+### 5.6. 获取签名后的交易体编码值（结合WeBASE-Sign）
+
+#### 接口描述
+
+构造交易体RawTransaction并将交易体编码，通过传入的`signUserId`签名服务的用户ID，使用对应的私钥对交易提进行签名后，返回已签名的交易体编码值（十六进制字符串）
+
+签名后的交易的编码值可以直接通过`/trans/signed-transaction`接口提交到链上
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/trans/convertRawTxStr/withSign**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
+| -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
+| 1        | 用户编号       | signUserId      | String   |     64         | 是       | WeBASE-Sign用户编号，若为空则返回未签名交易提编码值                          |
+| 2        | 合约名称       | contractName    | String   |              | 是       |                                                |
+| 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
+| 4        | 方法名         | funcName        | String   |              | 是       |                                                |
+| 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
+| 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
+| 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
+| 8 | 是否使用cns调用 | useCns | bool | | 是 |  |
+| 9 | cns名称 | cnsName | String | | 否 | CNS名称，useCns为true时不能为空 |
+| 10 | cns版本 | version | String | | 否 | CNS版本，useCns为true时不能为空 |
+
+
+**2）数据格式**
+
+```
+{
+  "transactionHash": "0x42894f8478bc5cf3417c31a559f22e7d59b049fc3136e223d9ec7003927b16c1",
+  "transactionIndex": "0x0",
+  "root": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "blockNumber": "369",
+  "blockHash": "0x2462d0e8d7f4ed892a0a18c982c3398dd43250863c6fe5e182df4f7eaab205f7",
+  "from": "0xfc2038f30e82a2c7afbb27da4cd7c44ece8a5c91",
+  "to": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+  "gasUsed": "149305",
+  "contractAddress": "0x0000000000000000000000000000000000000000",
+  "logs": [],
+  "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "status": "0x0",
+  "statusMsg": "None",
+  "input": "0x3590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
+  "output": "0x",
+  "txProof": null,
+  "receiptProof": null,
+  "message": null,
+  "statusOK": true
+}
+```
+
+#### 响应参数
+
+```
+0xf9012da002c1442b6ce974291ec317db9859e8310de46f6636d105f19fee67f10ac60b2f018405f5e10082029e94e10441d9179cf0424aae808b51bc85dcbbfe144780b8643590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000010180b8407d3efe268051e49350d877eaba7bbe6369a44263aec6e47fcba2ac1aff849261e833361bc67befbf4566894478c011dcae3e06818a381401751d1bf8bceecedaa01605fb8fcb546b0dc79e1da004a8323b151d1f569e10cae85a3f62bad5d7150fa0d77282eb650e0f52956693177717eb31cfddcada0681973a6aed9c46f3d8eb4d
+```
+
+
+### 5.7. 获取签名后的交易体编码值（本地签名）
+
+#### 接口描述
+
+构造交易体RawTransaction并将交易体编码，并通过传入的`user`地址的私钥对交易提进行签名后，返回已签名的交易体编码值（十六进制字符串）
+
+签名后的交易的编码值可以直接通过`/trans/signed-transaction`接口提交到链上
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/trans/convertRawTxStr/local**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**                    | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                                     |
+| -------- | --------------------------- | --------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
+| 1        | 用户地址                    | user            | String   |              | 是       | 用户地址，可通过`/privateKey`接口创建。*若user为空，则返回未签名交易编码值*                        |
+| 2        | 合约名称                    | contractName    | String   |              | 是       |                                                              |
+| 3        | 合约地址                    | contractAddress | String   |              | 是       |                                                              |
+| 4        | 方法名                      | funcName        | String   |              | 是       |                                                              |
+| 5        | 合约编译后生成的abi文件内容 | contractAbi     | List     |              | 是       | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
+| 6        | 方法参数                    | funcParam       | List     |              | 否       | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
+| 7        | 群组ID                      | groupId         | int      |              | 是       | 默认为1                                                      |
+| 8        | 合约路径                    | contractPath    | int      |              | 否       |                                                              |
+| 9        | 是否使用cns调用             | useCns          | bool     |              | 是       |                                                              |
+| 10       | cns名称                     | cnsName         | String   |              | 否       | CNS名称，useCns为true时不能为空                              |
+| 11       | cns版本                     | version         | String   |              | 否       | CNS版本，useCns为true时不能为空                              |
+
+**2）数据格式**
+
+示例：
+
+```
+{
+    "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
+    "contractName":"HelloWorld",
+    "contractAddress":"dasdfav23rf213vbcdvadf3bcdf2fc23rqde",
+    "funcName":"set",
+    "contractAbi":[{"constant":true,"inputs":[],"name":"getVersion","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getStorageCell","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"setVersion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"storageHash","type":"string"},{"name":"storageInfo","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
+    "funcParam":["Hi,Welcome!"],
+    "groupId" :"1",
+    "useCns": false
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+0xf9012da001071041dddc1b3c553b48c0fbefecc07f3812f5ce4004d47708f1c3342844db018405f5e10082029d94e10441d9179cf0424aae808b51bc85dcbbfe144780b8643590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000010180b84083bb5313e3dd7825b8b3e32d73aa8aedf9f9a8fcf435e5c37edfe4645c1af4211c12e1368024336a576f26ed624407da0b94e0bc5760514543c0b7a38fa03a7da0972843d0879ffdbdae733e8707896a532e5e1a3c7262cb84db657dd34f09111ba0786106465fe0fd2383588693cafef8934df62b188c6bb5a74eb6b9f23adaba32
+```
+
+
+### 5.8. 获取合约函数的编码值
+
+#### 接口描述
+
+构造合约函数的编码值，适用于查询交易，合约函数的编码值可以直接通过`/trans/query-transaction`接口提交到链上
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/trans/encodeFunction**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**                    | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                                     |
+| -------- | --------------------------- | --------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
+| 1        | 方法名                      | funcName        | String   |              | 是       |                                                              |
+| 2        | 合约编译后生成的abi文件内容 | contractAbi     | List     |              | 是       | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
+| 3        | 方法参数                    | funcParam       | List     |              | 否       | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
+
+**2）数据格式**
+
+示例：
+
+```
+{
+  "contractAbi": [{
+		"inputs": [],
+		"name": "get",
+		"outputs": [{
+			"internalType": "string",
+			"name": "",
+			"type": "string"
+		}],
+		"stateMutability": "view",
+		"type": "function",
+		"funcId": 1
+	}],
+  "contractAddress": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+  "encodeStr": "0x299f7f9d",
+  "funcName": "get",
+  "groupId": 1,
+  "userAddress": "0x7bfa3539c8761978f0a2a1f7f240bde97819fb03"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+0x299f7f9d
+```
+
 
 ## 6. 系统管理接口
 
