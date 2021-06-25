@@ -29,7 +29,30 @@ WeBASE实训插件方案主要的目的是：将WeBASE管理台的部分功能�
 
 ###  4.2 WeBASE配置
 
-#### 4.2.1 WeBASE-Node-Manager数据库中插入参数设置数据，脚本如下：
+#### 4.2.1 WeBASE-Node-Manager配置
+
+修改webase-node-manager/conf/application.yml。
+
+- 修改constant.permitUrlArray：
+
+
+```plain
+permitUrlArray: /account/login,/account/pictureCheckCode,/login,/user/privateKey/**,/config/encrypt,/config/version,/front/refresh,/api/*,/config/list
+```
+
+- 修改constant.verificationCodeMaxAge，设置为与你的系统的session时间一致。
+- 修改constant.enableVerificationCode=false，设置为false，用以固定验证constant.verificationCodeValue="8888"，为固定的验证码值，不需要修改
+- 修改constant.developerModeEnable，设置为true，开启开发者模式。
+- 重启WeBASE-Node-Manager服务。
+
+这些配置主要的作用是：
+
+1. 开发者模式主要是为了做学员间的合约和私钥隔离。
+2. 固定校验码为了实现单点登录
+3. permitUrlArray配置是为了放开接口访问权限
+
+
+#### 4.2.2 WeBASE-Node-Manager数据库中插入参数设置数据，脚本如下：
 
 ```plain
 INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('SupportIframe', 2, '1', '2020-09-22 17:14:23', '2020-09-22 17:14:23');
@@ -43,30 +66,6 @@ INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_ti
 ```
 http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=2
 ```
-
-
-
-#### 4.2.2 WeBASE-Node-Manager配置
-
-修改webase-node-manager/conf/application.yml。
-
-- 修改constant.permitUrlArray：
-
-
-```plain
-permitUrlArray:/account/login,/account/pictureCheckCode,/login,/user/privateKey/**,/config/encrypt,/config/version,/front/refresh,/api/*,/config/list
-```
-
-- 修改constant.verificationCodeMaxAge，设置为与你的系统的session时间一致。
-- 修改constant.enableVerificationCode=false，设置为false，用以固定验证constant.verificationCodeValue="8888"，为固定的验证码值，不需要修改
-- 修改constant.developerModeEnable，设置为true，开启开发者模式。
-- 重启WeBASE-Node-Manager服务。
-
-这些配置主要的作用是：
-
-1. 开发者模式主要是为了做学员间的合约和私钥隔离。
-2. 固定校验码为了实现单点登录
-3. permitUrlArray配置是为了放开接口访问权限
 
 ## 5 实验台中使用
 
