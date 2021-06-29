@@ -34,7 +34,7 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
 #     import git_lfs
 #     try:
-#         from urllib.error import HTTPErro
+#         from urllib.error import HTTPError
 #     except ImportError:
 #         from urllib2 import HTTPError
 
