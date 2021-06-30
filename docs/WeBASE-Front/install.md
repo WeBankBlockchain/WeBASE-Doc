@@ -4,25 +4,18 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Java | JDK8或以上版本 |
-| FISCO-BCOS | V2.0.x版本 |
+| Java | Java 1.8或以上版本 |
+| FISCO-BCOS | v2.0.0及以上版本 |
 
 **备注：** Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，可参考[JDK配置指引](./appendix.html#jdk)（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
 
-### 国密支持
+#### 国密支持
 
 WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)
-
-开启国密国密SSL：
 - 在v1.5.0后，sdk将自动根据链的加密类型切换国密或非国密，自动根据链的SSL类型切换国密SSL
 
-国密编译：
-- 编译国密版智能合约在v1.3.1版本后，通过引入solcJ:0.4.25-rc1.jar，自动切换支持国密版智能合约的编译/部署/调用；（可自行替换jar包版本为solcJ-0.5.2来使用0.5进行后台接口的合约编译）
-- 该部分仅影响后台的`/contract`合约编译接口，不影响前端合约IDE的合约编译
-
-
 <span id="solc6"></span>
-### solidity v0.6.10支持
+#### solidity v0.6.10支持
 
 WeBASE-Front v1.4.2已支持solidity `v0.5.1`和`v0.6.10`
 
@@ -71,7 +64,7 @@ dist目录提供了一份配置模板conf_template：
 
 ```
 根据配置模板生成一份实际配置conf。初次部署可直接拷贝。
-例如：cp conf_template conf -r
+例如：cp -r conf_template conf
 ```
 
 （2）进入conf目录：
@@ -87,7 +80,7 @@ cd conf
 
 （3）修改配置（根据实际情况修改）：
 
-*如果在企业部署中使用WeBASE-Front，必须配置下文中的`keyServer`*
+如果在企业部署中使用WeBASE-Front，必须配置下文中的`keyServer`，用于连接WeBASE-Sign服务
 
 ```
 vi application.yml
@@ -108,11 +101,11 @@ sdk:
   certPath: conf                // sdk证书的目录，默认为conf
 constant: 
   keyServer: 127.0.0.1:5004     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
+  aesKey: EfdsW23D23d3df43          // aes加密key(16位) 如启用，各互联的子系统的加密key需保持一致
   transMaxWait: 30              // 交易最大等待时间
   monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
   monitorEnabled: true          // 是否监控数据，默认true
-  aesKey: EfdsW23D23d3df43          // aes加密key(16位) 如启用，各互联的子系统的加密key需保持一致
-  nodePath: /fisco/nodes/127.0.0.1/node0      //配置连接节点的绝对路径
+  nodePath: /fisco/nodes/127.0.0.1/node0      //配置所连节点的绝对路径，用于监控节点配置与日志
 ...
 ```
 
@@ -147,6 +140,7 @@ http://{deployIP}:{frontPort}/WeBASE-Front
 在dist目录查看：
 
 ```
-前置服务日志：tail -f log/WeBASE-Front.log
+前置服务全量日志：tail -f log/WeBASE-Front.log
+前置服务错误日志：tail -f log/WeBASE-Front.log
 web3连接日志：tail -f log/web3sdk.log
 ```
