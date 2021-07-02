@@ -530,8 +530,9 @@ java -version
 
 ```shell
 sudo yum install -y mariadb*
+若直接执行此命令安装的mariadb版本对应mysql5.5，不满足mysql5.6以上的要求，在执行一键部署的时候不会有失败报错，但在网页端登录webase时会无法显示验证码并且报错webasenodemanager错误，检查log错误日志后发现缺失webasenodemanager.tb，一键部署脚本不支持数据库版本所以无法建立数据表，建议进入mariadb官网安装对应系统的高版本。
 ```
-
+详情参考[MariaDB官网安装](https://downloads.mariadb.org/mariadb/repositories/#mirror=digitalocean-nyc)。
 - 启停
 
 ```shell
