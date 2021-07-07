@@ -306,7 +306,7 @@ $ ps -ef  | grep webase.node.mgr
 root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
 ```
 
-- 检查webase-web的nginx进程（运行路径为webase-deploy目录）
+- 检查webase-web对应的nginx进程
 ```
 $ ps -ef | grep nginx       
 ```
