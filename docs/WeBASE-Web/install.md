@@ -5,6 +5,7 @@
 | 环境     | 版本              |
 | ------ | --------------- |
 | nginx   | nginx1.6或以上版本，安装请参考[附录](appendix.html) |
+| WeBASE-Node-Manager    |  WeBASE-Node-Manager[对应版本](../WeBASE/ChangeLOG.md) |
 
 ### 2. 拉取代码
 
@@ -48,8 +49,8 @@ cd WeBASE-Web
 执行完后检查dist/static/js是否下载完这些js文件。
 
 ### 3. 拉取移动端代码
-WeBASE新增了h5的移动端页面，支持手机浏览器访问
-代码和WeBASE-Web放在同一个目录
+WeBASE新增了h5的移动端页面，支持手机浏览器访问。代码和WeBASE-Web放在同级目录
+
 拉取代码
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Web-Mobile.git
