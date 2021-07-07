@@ -4,8 +4,8 @@
 
 | 序号 | 软件                  |
 | ---- | --------------------- |
-| 1    | FISCO-BCOS 2.0        |
-| 2    | WeBASE-Front 对应版本 |
+| 1    | FISCO-BCOS 2.0+        |
+| 2    | WeBASE-Front [对应版本](../WeBASE/ChangeLOG.md) |
 | 3    | MySQL5.6或以上版本    |
 | 4    | Java8或以上版本       |
 
@@ -13,23 +13,18 @@
 ## 2. 注意事项
 *  Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，[JDK配置指引](./appendix.html#jdk)
 * 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.html)
-* 安全温馨提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
+* 安全提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
 
 **通过WeBASE-Sign私钥管理**
-WeBASE-Node-Manager v1.3.0+将通过WeBASE-Sign进行私钥管理，即使用WeBASE-Node-Manager v1.3.0+的版本需要同步安装WeBASE-Sign v1.3.0，详情可参考[升级文档](upgrade.html)进行阅读
+WeBASE-Node-Manager v1.3.0及以上版本将通过WeBASE-Sign进行私钥管理，即使用WeBASE-Node-Manager v1.3.0+的版本需要同步安装WeBASE-Sign v1.3.0，详情可参考[升级文档](upgrade.html)进行阅读
 
 
 **国密支持：**
 
 WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，与[WeBASE-Front v1.2.2+](../WeBASE-Front/index.html)配合使用
 
-```eval_rst
-.. important::
-    使用国密版WeBASE-Node-Manager需要开启java-sdk的国密开关和script/gm中的webase-gm.sh脚本进行数据库初始化
-```
-
-开启java-sdk的国密开关：
-- 将配置文件`application.yml/applicationContext.xml`中sdk配置的`encryptType`从`0`修改为`1`；
+开启WeBASE-Node-Manager的国密开关：
+- 将配置文件`application.yml`中的`sdk.encryptType`从`0`修改为`1`；
 
 
 ## 3. 拉取代码
@@ -79,11 +74,6 @@ CREATE DATABASE IF NOT EXISTS {your_db_name} DEFAULT CHARSET utf8 COLLATE utf8_g
 cd  dist/script
 ```
 
-```eval_rst
-.. important::
-	如果使用国密版，应进入dist/script/gm目录，对/gm目录下的webase-gm.sh进行下文的操作（即`sed`操作`/gm/webase-gm.sh`），并在最后运行webase-gm.sh
-```
-
 修改数据库连接信息：
 ```shell
 修改数据库名称：sed -i "s/webasenodemanager/${your_db_name}/g" webase.sh
@@ -123,7 +113,7 @@ bash webase.sh 127.0.0.1 3306
 ```
 
 **备注**：
-- 如果使用国密版本，则将application.yml中`sdk-encryptType`由`0`改为`1`
+- 如果使用国密版本，则将application.yml中`sdk.encryptType`由`0`改为`1`
 - 如果使用可视化部署，则将application.yml中`constant-deployType`由`0`改为`1`，并设置`constant-webaseSignAddress`为当前的webase-sign路径。具体使用方法可以参考[可视化部署-手动部署](../WeBASE-Install/visual_deploy.html#visual-deploy-manual)
 
 
