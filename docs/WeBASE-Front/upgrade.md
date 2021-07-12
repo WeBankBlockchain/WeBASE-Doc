@@ -10,6 +10,11 @@ WeBASE-Front升级的必须步骤：
 
 各个版本的具体修改可参考下文
 
+#### v1.5.2
+- 优化合约IDE Java项目导出功能，支持多用户与channel端口检查
+- 合约仓库新增Asset资产合约
+- 增加交易组装接口`/tran/convertRawTxStr`和编码交易函数接口`/trans/encodeFunction`
+
 #### v1.5.1
 - 合约IDE支持导出合约的Java工程脚手架
 - 合约仓库新增SmartDev存证合约

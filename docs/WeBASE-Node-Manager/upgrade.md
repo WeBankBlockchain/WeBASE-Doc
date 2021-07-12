@@ -12,6 +12,18 @@ WeBASE-Node-Manager升级的必须步骤：
 
 各个版本的具体修改可参考下文
 
+#### v1.5.2
+- 优化合约IDE Java项目导出功能，支持多用户与channel端口检查
+- 合约仓库新增Asset资产合约
+- 优化免登陆鉴权模式，方便联调
+
+
+##### 数据表更新
+
+执行webase-node-mgr中`script/upgrade`目录中的`v151_v152.sql`即可更新数据表，可通过`mysql -e source v151_v152.sql`命令执行
+- 注：更新前提前备份mysql数据
+
+
 #### v1.5.1
 - 新增导出合约Java工程脚手架
 - 新增合约仓库接口
