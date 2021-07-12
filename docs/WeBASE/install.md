@@ -522,9 +522,11 @@ java -version
 ### 2. 数据库部署
 <span id="mysql"></span>
 
-#### ① 安装MariaDB
+#### ① CentOS安装MariaDB
 
-此处以CentOS 7(x86_64)安装*MariaDB 10.2*为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。MariaDB 10.2版本对应Mysql 5.7。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
+此处以**CentOS 7(x86_64)**安装**MariaDB 10.2**为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。MariaDB 10.2版本对应Mysql 5.7。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
+- CentOS 7 默认MariaDB为5.5版本，安装10.2版本需要按下文进行10.2版本的配置。
+- 若使用CentOS 8则直接使用`sudo yum install -y mariadb*`即可安装MariaDB 10.3，并跳到下文的 *启停* 章节即可。
 
 使用`vi`或`vim`创建新文件`/etc/yum.repos.d/mariadb.repo`，并写入下文的文件内容（参考[MariaDB中科大镜像源修改](http://mirrors.ustc.edu.cn/help/mariadb.html)进行配置）
 
