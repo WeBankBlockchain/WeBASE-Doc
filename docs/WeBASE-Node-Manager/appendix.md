@@ -131,7 +131,7 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
 ```
 
-##### 免鉴权调用
+##### 免鉴权调用（联调）
 
 在`application.yml`中配置`constant.isUseSecurity`为`false`即可禁用WeBASE-Node-Manager的登录鉴权。
 
