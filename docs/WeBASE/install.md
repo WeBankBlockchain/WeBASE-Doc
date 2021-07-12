@@ -522,14 +522,43 @@ java -version
 ### 2. 数据库部署
 <span id="mysql"></span>
 
-此处以Centos安装*MariaDB*为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
-
 #### ① 安装MariaDB
 
-- 安装命令
+此处以CentOS 7(x86_64)安装*MariaDB 10.2*为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。MariaDB 10.2版本对应Mysql 5.7。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
 
-```shell
-sudo yum install -y mariadb*
+使用`vi`或`vim`创建新文件`/etc/yum.repos.d/mariadb.repo`，并写入下文的文件内容（参考[MariaDB中科大镜像源修改](http://mirrors.ustc.edu.cn/help/mariadb.html)进行配置）
+
+- 创建repo文件
+```Bash
+sudo vi /etc/yum.repos.d/mariadb.repo
+```
+
+- 文件内容，此处使用的是中科大镜像源
+```Bash
+# MariaDB 10.2 CentOS repository list - created 2021-07-12 07:37 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = https://mirrors.ustc.edu.cn/mariadb/yum/10.2/centos7-amd64
+gpgkey=https://mirrors.ustc.edu.cn/mariadb/yum/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+```
+
+- 更新yum源缓存数据
+```
+yum clean all
+yum makecache all
+```
+
+- 安装`MariaDB 10.2`
+- 如果已存在使用`sudo yum install -y mariadb*`命令安装的MariaDB，其版本默认为5.5版本，对应Mysql版本为5.5。新版本MariaDB无法兼容升级，需要先**卸载旧版本**的MariaDB，卸载前需要**备份**数据库内容，卸载命令可参考`yum remove mariadb`
+```
+sudo yum install MariaDB-server MariaDB-client -y
+```
+
+若安装时遇到错误`“Failed to connect to 2001:da8:d800:95::110: Network is unreachable”`，将源地址中的 `mirrors.ustc.edu.cn` 替换为 `ipv4.mirrors.ustc.edu.cn` 以强制使用 IPv4：
+```
+sudo sed -i 's#//mirrors.ustc.edu.cn#//ipv4.mirrors.ustc.edu.cn#g' /etc/yum.repos.d/mariadb
 ```
 
 - 启停
