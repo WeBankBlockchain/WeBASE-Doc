@@ -1,4 +1,4 @@
-# 应用管理
+# WeBASE应用管理
 
 ```eval_rst
 .. toctree::
