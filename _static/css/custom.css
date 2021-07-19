@@ -220,7 +220,6 @@ p {
     box-shadow: 0 3px 6px rgba(11,33,74,0.09), 0 -2px 2px rgba(11,33,74,0.03);
     padding: 24px 36px;
     min-height: 284px;
-    max-width: 300px;
 }
 
 .row {
