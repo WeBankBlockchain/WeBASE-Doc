@@ -44,7 +44,7 @@ MySQL-5.6或以上版本：
 mysql --version
 ```
 
-- Mysql安装部署可参考[数据库部署](#mysql)
+- Mysql安装部署可参考[数据库部署](#mysql-install)
 
 #### 检查Python
 <span id="checkpy"></span>
@@ -520,7 +520,7 @@ java -version
 ```
 
 ### 2. 数据库部署
-<span id="mysql"></span>
+<span id="mysql-install"></span>
 
 #### ① CentOS安装MariaDB
 
@@ -633,8 +633,8 @@ mysql -utest -p123456 -h localhost -P 3306
 mysql > create database webasenodemanager;
 ```
 
-### 3. Python部署
 <span id="python3"></span>
+### 3. Python部署
 
 python版本要求使用python3.x, 推荐使用python3.6及以上版本
 
