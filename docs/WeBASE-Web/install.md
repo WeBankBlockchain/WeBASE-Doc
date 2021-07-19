@@ -63,6 +63,7 @@ git clone https://gitee.com/WeBank/WeBASE-Web-Mobile.git
 
 在docs目录下有配置文件nginx.conf，修改完后替换安装的nginx的配置文件nginx.conf（这里nginx安装配置文件在/usr/local/nginx/conf下面，如果这里没找到，可以到/etc下寻找，如有权限问题，请加上sudo）。
 
+
 - 修改配置：
 
 ```
@@ -79,7 +80,8 @@ sed -i "s%/data/WeBASE-Web/dist%${your_file_dir}%g" docs/nginx.conf
 sed -i "s%10.0.0.1:5001%${your_node_manager}%g" docs/nginx.conf
 ```
 
--  复制配置文件nginx.conf
+- 复制配置文件nginx.conf到默认配置目录中
+- 也可以直接通过`nginx -c docs/nginx.conf`命令加载docs/nginx.conf配置
 
 ```
 cp -rf docs/nginx.conf /usr/local/nginx/conf
@@ -127,6 +129,7 @@ cp -rf docs/nginx.conf /usr/local/nginx/conf
 ```
 ps -ef | grep nginx
 ```
+
 ### 6. 访问页面
 
 ```
