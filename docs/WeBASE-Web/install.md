@@ -5,6 +5,7 @@
 | 环境     | 版本              |
 | ------ | --------------- |
 | nginx   | nginx1.6或以上版本，安装请参考[附录](appendix.html) |
+| WeBASE-Node-Manager    |  WeBASE-Node-Manager[对应版本](../WeBASE/ChangeLOG.md) |
 
 ### 2. 拉取代码
 
@@ -48,8 +49,8 @@ cd WeBASE-Web
 执行完后检查dist/static/js是否下载完这些js文件。
 
 ### 3. 拉取移动端代码
-WeBASE新增了h5的移动端页面，支持手机浏览器访问
-代码和WeBASE-Web放在同一个目录
+WeBASE新增了h5的移动端页面，支持手机浏览器访问。代码和WeBASE-Web放在同级目录
+
 拉取代码
 ```shell
 git clone https://github.com/WeBankFinTech/WeBASE-Web-Mobile.git
@@ -61,6 +62,7 @@ git clone https://gitee.com/WeBank/WeBASE-Web-Mobile.git
 ### 4. 修改配置
 
 在docs目录下有配置文件nginx.conf，修改完后替换安装的nginx的配置文件nginx.conf（这里nginx安装配置文件在/usr/local/nginx/conf下面，如果这里没找到，可以到/etc下寻找，如有权限问题，请加上sudo）。
+
 
 - 修改配置：
 
@@ -78,7 +80,8 @@ sed -i "s%/data/WeBASE-Web/dist%${your_file_dir}%g" docs/nginx.conf
 sed -i "s%10.0.0.1:5001%${your_node_manager}%g" docs/nginx.conf
 ```
 
--  复制配置文件nginx.conf
+- 复制配置文件nginx.conf到默认配置目录中
+- 也可以直接通过`nginx -c docs/nginx.conf`命令加载docs/nginx.conf配置
 
 ```
 cp -rf docs/nginx.conf /usr/local/nginx/conf
@@ -126,6 +129,7 @@ cp -rf docs/nginx.conf /usr/local/nginx/conf
 ```
 ps -ef | grep nginx
 ```
+
 ### 6. 访问页面
 
 ```
