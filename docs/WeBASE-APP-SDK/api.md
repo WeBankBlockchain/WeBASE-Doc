@@ -1,74 +1,8 @@
-# 应用接入说明
-
-应用管理是WeBASE管理台提供的一种第三方应用接入功能。其他应用可以通过WeBASE通用API来开发自己的运维管理台。接入的步骤如下：
-
-1. 通过WeBASE管理平台获得注册信息，并通过API向WeBASE注册服务。
-2. 通过WeBASE提供的基础能力API和WeBASE连通。
-
-## 签名
-
-### 签名说明
-
-第三方应用从WeBASE管理平台获取注册信息**WeBASE的IP和端口、为应用分配的`appKey`（应用Key）和`appSecret`（应用密码，应用自己保存，不要暴露）**，向WeBASE发送请求时，需要使用应用分配的`appSecret`对请求进行签名。WeBASE收到请求后，根据`appKey`查询应用对应的`appSecret`，使用相同规则对请求进行签名验证。只有在验证通过后，WeBASE才会对请求进行相应的处理。
-
-* 每个URL请求需带以下三个参数：
-
-| 参数名    | 类型   | 描述                 | 参数值        | 备注                                          |
-| --------- | ------ | -------------------- | ------------- | --------------------------------------------- |
-| timestamp | long   | 请求的时间戳（毫秒） | 1614928857832 | 当前时间戳，有效期默认5分钟                   |
-| appKey    | String | 应用Key              | fdsf78aW      | 从WeBASE管理平台获取                          |
-| signature | String | 签名串               | 15B8F38...    | 从WeBASE管理平台获取appSecret对appKey做的签名 |
-
-### 签名规则
-
-使用MD5对`timestamp`、`appKey`加密并转大写得到签名值`signature`
-
-```
-public static String md5Encrypt(long timestamp, String appKey, String appSecret) {
-        try {
-            String dataStr = timestamp + appKey + appSecret;
-            MessageDigest m = MessageDigest.getInstance("MD5");
-            m.update(dataStr.getBytes("UTF8"));
-            byte s[] = m.digest();
-            String result = "";
-            for (int i = 0; i < s.length; i++) {
-                result += Integer.toHexString((0x000000FF & s[i]) | 0xFFFFFF00).substring(6);
-            }
-            return result.toUpperCase();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-```
-
-### 示例
-
-* 参数值：
-
-| 参数      | 参数值                             |
-| --------- | ---------------------------------- |
-| timestamp | `1614928857832`                    |
-| appKey    | `fdsf78aW`                         |
-| appSecret | `oMdarsqFOsSKThhvXagTpNdoOcIJxUwQ` |
-
-* 签名后的 `signature` 为
-
-```Bash
-EEFD7CD030E6B311AA85B053A90E8A31
-```
-
-
-
-<span id="api"></span>
-
-## WeBASE通用API
-
+# API
 
 ## 1 应用管理模块
 
 ###  1.1 应用注册
-
 
 #### 传输协议规范
 
