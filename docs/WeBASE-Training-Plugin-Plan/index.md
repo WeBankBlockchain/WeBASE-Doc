@@ -29,7 +29,24 @@ WeBASE实训插件方案主要的目的是：将WeBASE管理台的部分功能�
 
 ###  4.2 WeBASE配置
 
-#### 4.2.1 WeBASE-Node-Manager配置
+#### 4.2.1 WeBASE-Node-Manager数据库中插入参数设置数据，脚本如下：
+
+```plain
+INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('SupportIframe', 2, '1', '2020-09-22 17:14:23', '2020-09-22 17:14:23');
+INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('IframeSupportHostList', 3, 'baidu.com|163.com', '2020-09-22 17:14:23', '2020-09-22 17:14:23'); 
+```
+
+其中，SupportIframe设置为1，表示开启iframe嵌入支持；IframeSupportHostList为iframe嵌入支持的host白名单列表。
+
+配置访问接口如下：
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=2
+```
+
+
+
+#### 4.2.2 WeBASE-Node-Manager配置
 
 修改webase-node-manager/conf/application.yml。
 
@@ -50,22 +67,6 @@ permitUrlArray: /account/login,/account/pictureCheckCode,/login,/user/privateKey
 1. 开发者模式主要是为了做学员间的合约和私钥隔离。
 2. 固定校验码为了实现单点登录
 3. permitUrlArray配置是为了放开接口访问权限
-
-
-#### 4.2.2 WeBASE-Node-Manager数据库中插入参数设置数据，脚本如下：
-
-```plain
-INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('SupportIframe', 2, '1', '2020-09-22 17:14:23', '2020-09-22 17:14:23');
-INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('IframeSupportHostList', 3, 'baidu.com|163.com', '2020-09-22 17:14:23', '2020-09-22 17:14:23'); 
-```
-
-其中，SupportIframe设置为1，表示开启iframe嵌入支持；IframeSupportHostList为iframe嵌入支持的host白名单列表。
-
-配置访问接口如下：
-
-```
-http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=2
-```
 
 ## 5 实验台中使用
 
