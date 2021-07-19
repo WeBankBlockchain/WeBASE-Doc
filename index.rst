@@ -23,19 +23,6 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          - `安装部署 <./docs/WeBASE-Install/index.html>`_
          - `WeBASE管理平台使用手册 <./docs/WeBASE-Console-Suit/index.html>`_
 
-  .. container:: card-holder
-      
-      .. container:: card ref
-
-         .. raw:: html
-
-            <br>
-            <h style="font-size: 22px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决方案</h>
-            <br><br>
-
-         - `WeBASE应用管理 <./docs/WeBASE-APP-SDK/index.html>`_
-         - `WeBASE合约仓库 <./docs/WeBASE-Contract-Warehouse/index.html>`_
-         - `WeBASE实训插件方案 <./docs/WeBASE-Training-Plugin-Plan/index.html>`_
 
    .. container:: card-holder
       
@@ -54,6 +41,23 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          - `交易服务 <./docs/WeBASE-Transaction/index.html>`_
 
 
+.. container:: row 
+
+   .. container:: card-holder
+      
+      .. container:: card ref
+
+         .. raw:: html
+
+            <br>
+            <h style="font-size: 22px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决方案</h>
+            <br><br>
+
+         - `WeBASE应用管理 <./docs/WeBASE-APP-SDK/index.html>`_
+         - `WeBASE合约仓库 <./docs/WeBASE-Contract-Warehouse/index.html>`_
+         - `WeBASE实训插件方案 <./docs/WeBASE-Training-Plugin-Plan/index.html>`_
+
+
    .. container:: card-holder
       
       .. container:: card manuals
@@ -68,6 +72,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          - `WeBASE国内镜像仓库、文档、安装包资源 <./docs/WeBASE/mirror.html>`_
          - `开源社区 <./docs/More/community.html>`_
          
+.. container:: row 
 
    .. container:: card-holder-bigger
       
