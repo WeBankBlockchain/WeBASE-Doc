@@ -22,6 +22,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          - `WeBASE版本信息 <./docs/WeBASE/ChangeLOG.html#fisco-bcos-2-x-x>`_
          - `安装部署 <./docs/WeBASE-Install/index.html>`_
          - `WeBASE管理平台使用手册 <./docs/WeBASE-Console-Suit/index.html>`_
+         - `WeBASE应用管理 <./docs/WeBASE-APP-SDK/index.html>`_
          - `WeBASE合约仓库 <./docs/WeBASE-Contract-Warehouse/index.html>`_
          - `WeBASE实训插件方案 <./docs/WeBASE-Training-Plugin-Plan/index.html>`_
 
@@ -124,6 +125,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
    :caption: WeBASE使用指南
    
    docs/WeBASE-Console-Suit/index.md
+   docs/WeBASE-APP-SDK/index.md
    docs/WeBASE-Contract-Warehouse/index.md
    docs/WeBASE-Training-Plugin-Plan/index.md
    docs/WeBASE/quick-start.md
