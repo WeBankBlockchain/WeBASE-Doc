@@ -1,4 +1,4 @@
-# 应用管理
+# 功能介绍
 
 <span id="app_manage"></span>
 
