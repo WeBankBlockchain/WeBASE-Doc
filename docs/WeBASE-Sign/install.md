@@ -4,7 +4,7 @@
 
 | 环境   | 版本                |
 | ------ | ------------------- |
-| Java   | jdk1.8或以上版本    |
+| Java   | Java1.8或以上版本    |
 | 数据库 | MySQL-5.6或以上版本 |
 
 备注：安装说明请参看 [附录-1](./appendix.html#id2)。
@@ -121,8 +121,8 @@ constant:
 
 ## 6. 查看日志
 
-在dist目录下查看：
-
+在dist目录查看：
 ```shell
-tail -f log/WeBASE-Sign.log
+全量日志：tail -f log/WeBASE-Sign.log
+错误日志：tail -f log/WeBASE-Sign-error.log
 ```
