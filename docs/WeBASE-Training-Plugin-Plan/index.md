@@ -54,7 +54,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=2
 
 
 ```plain
-permitUrlArray:/account/login,/account/pictureCheckCode,/login,/user/privateKey/**,/config/encrypt,/config/version,/front/refresh,/api/*,/config/list
+permitUrlArray: /account/login,/account/pictureCheckCode,/login,/user/privateKey/**,/config/encrypt,/config/version,/front/refresh,/api/*,/config/list
 ```
 
 - 修改constant.verificationCodeMaxAge，设置为与你的系统的session时间一致。
