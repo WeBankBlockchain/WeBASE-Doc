@@ -25,7 +25,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
 
   .. container:: card-holder
       
-      .. container:: card manuals
+      .. container:: card ref
 
          .. raw:: html
 
