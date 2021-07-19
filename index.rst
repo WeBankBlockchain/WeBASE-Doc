@@ -26,6 +26,20 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
          - `WeBASE合约仓库 <./docs/WeBASE-Contract-Warehouse/index.html>`_
          - `WeBASE实训插件方案 <./docs/WeBASE-Training-Plugin-Plan/index.html>`_
 
+  .. container:: card-holder
+      
+      .. container:: card ref
+
+         .. raw:: html
+
+            <br>
+            <h style="font-size: 22px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决方案</h>
+            <br><br>
+
+         - `WeBASE应用管理 <./docs/WeBASE-APP-SDK/index.html>`_
+         - `WeBASE合约仓库 <./docs/WeBASE-Contract-Warehouse/index.html>`_
+         - `WeBASE实训插件方案 <./docs/WeBASE-Training-Plugin-Plan/index.html>`_
+
    .. container:: card-holder
       
       .. container:: card ref
