@@ -4097,6 +4097,7 @@ b、正确发送数据上链返回值信息（交易收据）
 ```
 
 ### 5.3. 已签名交易发送
+<span id="signed-transaction"></span>
 
 #### 接口描述
 
@@ -4254,6 +4255,7 @@ HTTP POST
 
 
 ### 5.6. 获取签名后的交易体编码值（结合WeBASE-Sign）
+<span id="convertRawTxStr_withSign"></span>
 
 #### 接口描述
 
@@ -4321,7 +4323,7 @@ HTTP POST
 
 
 ### 5.7. 获取签名后的交易体编码值（本地签名）
-
+<span id="convertRawTxStr_local"></span>
 #### 接口描述
 
 构造交易体RawTransaction并将交易体编码，并通过传入的`user`地址的私钥对交易提进行签名后，返回已签名的交易体编码值（十六进制字符串）
@@ -4381,6 +4383,7 @@ HTTP POST
 
 
 ### 5.8. 获取合约函数的编码值
+<span id="encodeFunction"></span>
 
 #### 接口描述
 
