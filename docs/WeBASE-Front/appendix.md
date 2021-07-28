@@ -305,7 +305,7 @@ WeBASE-Front采用 JPA + H2数据库 的方式保存数据
 ### 两阶段交易
 <span id="two_stage_tx"></span>
 
-在v1.5.2后，WeBASE-Front中丰富了组装交易的接口，包括了[本地签名组装交易接口](../interface.html#convertRawTxStr_local)`/trans/convertRawTxStr/local`和通过[WeBASE-Sign组装交易接口](../interface.html#convertRawTxStr_withSign)`/trans/convertRawTxStr/withSign`，下面以本地签名举例（接口的具体入参可参考对应接口文档）。
+在v1.5.2后，WeBASE-Front中丰富了组装交易的接口，包括了[本地签名组装交易接口](./interface.html#convertRawTxStr_local)`/trans/convertRawTxStr/local`和通过[WeBASE-Sign组装交易接口](./interface.html#convertRawTxStr_withSign)`/trans/convertRawTxStr/withSign`，下面以本地签名举例（接口的具体入参可参考对应接口文档）。
 
 本地签名组装交易需要填入的参数包含合约地址、函数名及函数入参、群组ID和WeBASE-Front的私钥用户地址等，如下所示
 ```
@@ -326,10 +326,10 @@ WeBASE-Front采用 JPA + H2数据库 的方式保存数据
 0xf9012da001071041dddc1b3c553b48c0fbefecc07f3812f5ce4004d47708f1c3342844db018405f5e10082029d94e10441d9179cf0424aae808b51bc85dcbbfe144780b8643590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000010180b84083bb5313e3dd7825b8b3e32d73aa8aedf9f9a8fcf435e5c37edfe4645c1af4211c12e1368024336a576f26ed624407da0b94e0bc5760514543c0b7a38fa03a7da0972843d0879ffdbdae733e8707896a532e5e1a3c7262cb84db657dd34f09111ba0786106465fe0fd2383588693cafef8934df62b188c6bb5a74eb6b9f23adaba32
 ```
 
-通过[已签名交易发送接口](../interface.html#signed-transaction)`/trans/signed-transaction`将交易编码值发到链上，接口将返回交易回执，可根据交易回执的`status`判断交易是否成功
+通过[已签名交易发送接口](./interface.html#signed-transaction)`/trans/signed-transaction`将交易编码值发到链上，接口将返回交易回执，可根据交易回执的`status`判断交易是否成功
 
-**注：**若发起的是查询交易，除了上述接口的两阶段调用方法之外，还可以使用[合约函数的编码值接口](../interface.html#encodeFunction)`/trans/encodeFunction`获取`encodedFunction`值。
-根据入参要求调用[已编码查询交易发送接口](../interface.html#query-transaction)`/trans/query-transaction`，即可发送查询交易，接口将返回查询的返回值。
+**注：**若发起的是查询交易，除了上述接口的两阶段调用方法之外，还可以使用[合约函数的编码值接口](./interface.html#encodeFunction)`/trans/encodeFunction`获取`encodedFunction`值。
+根据入参要求调用[已编码查询交易发送接口](./interface.html#query-transaction)`/trans/query-transaction`，即可发送查询交易，接口将返回查询的返回值。
 
 <span id="event_subscribe"></span>
 ## 4. 支持链上事件订阅和通知
