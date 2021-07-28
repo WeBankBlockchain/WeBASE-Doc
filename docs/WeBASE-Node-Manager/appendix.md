@@ -131,17 +131,22 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
 ```
 
-##### 免鉴权调用（联调）
-
+##### 关闭鉴权调用（联调）
+<span id="disable_auth"></span>
 在`application.yml`中配置`constant.isUseSecurity`为`false`即可禁用WeBASE-Node-Manager的登录鉴权。
 
 ![](../../images/WeBASE/mgr/disable_auth.png)
 
-- 免鉴权后，默认使用的是管理员用户admin（管理员用户可以看到所有用户的数据），可以调过登陆直接访问WeBASE-Web节点管理台的主页，如`http://localhost:5000/#/home`。
+- 免鉴权后，默认使用的是管理员用户admin（管理员用户可以看到所有用户的数据），可以跳过登陆页面，直接访问WeBASE-Web节点管理台的主页，如`http://localhost:5000/#/home`。
 - 若需要指定用户进行接口调用，可以在请求的`headers`中增加`Account`字段，其值设置为节点管理服务的用户名，如获取开发者用户`developer1`对应数据（开发者用户只能看到自己所创建的数据）。
 
 ![](../../images/WeBASE/mgr/api_with_header_account.png)
 
+
+##### 使用swagger
+<span id="swagger"></span>
+
+v1.5.2后，节点管理服务搭配了swagger，可用于直接调试接口，需要[关闭鉴权](#disable_auth)后，访问 `{ip}:5001/WeBASE-Node-Manager/swagger-ui.html` 即可访问swagger页面
 
 ### 3. 配置文件解析
 
