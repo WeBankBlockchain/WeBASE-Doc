@@ -1122,13 +1122,20 @@ HTTP GET
 
 | **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
-| 1 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户 |
-| 2        | 用户名 | userName | String        |             | 否   | 类型为本地用户时必填 |
+| 1 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户；默认为2 |
+| 2        | 用户名 | userName | String        |             | 是  | 用户名 |
+| 3        | 签名服务用户编号 | signUserId | String        |    否         | 否   | 类型为2-外部用户时，必填 |
+| 4        | 应用编号 | appId | String        |             | 否   | 类型为2-外部用户时，必填 |
+| 5        | 是否返回私钥 | returnPrivateKey | Boolean        |             | 否   | 类型为2-外部用户时，选填；默认为false |
 
 **2）数据格式** 
 
 ```
+// 本地用户
 http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test
+// 外部用户
+http://localhost:5002/WeBASE-Front/privateKey?type=2&signUserId=0x123&appId=2
+
 ```
 
 #### 响应参数
@@ -1150,12 +1157,13 @@ http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test
 外部用户时（来自WeBASE-Sign）：
 ```
 {
-  "address": "0x2007e1430f41f75c850464307c0994472bd92ee0",
-  "publicKey": "0x9bd35211855f9f8de22d8a8da7f30d35d62ab2c3d36ea5162008fcbb9faff4d83809f7033deb20049bf51e081105076ec7a09a847f852530f81e978b1eda0392",
-  "userName": "test",
-  "type": 0,
-  "signUserId": "458ecc77a08c486087a3dcbc7ab5a9c3",
-  "appId": "458ecc77a08c486087a3dcbc7ab5a9c3"
+  "address": "0xef5afe7d9a7516cd36b5b2471a3fbb05d3e8a846",
+  "publicKey": "0461e78631ab8428c1be815a4543da8684db13cd2d9a0593e053184dbd29d08f38131e060bc8d1a1ef5f4290b26acca8cefbc16150155e57f4ea81dbed57cea0e8",
+  "privateKey": null, // 默认不返回
+  "userName": null, //外部用户则为空
+  "type": 2,
+  "signUserId": "0x123",
+  "appId": "1"
 }
 ```
 ### 2.2. 导入私钥接口
@@ -4097,6 +4105,7 @@ b、正确发送数据上链返回值信息（交易收据）
 ```
 
 ### 5.3. 已签名交易发送
+<span id="signed-transaction"></span>
 
 #### 接口描述
 
@@ -4254,6 +4263,7 @@ HTTP POST
 
 
 ### 5.6. 获取签名后的交易体编码值（结合WeBASE-Sign）
+<span id="convertRawTxStr_withSign"></span>
 
 #### 接口描述
 
@@ -4321,7 +4331,7 @@ HTTP POST
 
 
 ### 5.7. 获取签名后的交易体编码值（本地签名）
-
+<span id="convertRawTxStr_local"></span>
 #### 接口描述
 
 构造交易体RawTransaction并将交易体编码，并通过传入的`user`地址的私钥对交易提进行签名后，返回已签名的交易体编码值（十六进制字符串）
@@ -4381,6 +4391,7 @@ HTTP POST
 
 
 ### 5.8. 获取合约函数的编码值
+<span id="encodeFunction"></span>
 
 #### 接口描述
 
