@@ -186,7 +186,7 @@ HTTP POST
 {
     "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName":"HelloWorld",
-    "abiInfo": [],
+    "abiInfo": [{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "bytecodeBin":"",
     "funcParam":[]
 }
@@ -224,7 +224,7 @@ HTTP POST
 | **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
 | 1        | 合约名称     | contractName | String         |              | 是       |          |
-| 2        | 合约abi      | abiInfo      | List |              | 是       |          |
+| 2        | 合约abi      | abiInfo      | List |              | 是       |  一个ABI的JsonArray        |
 | 3        | 合约bin      | contractBin  | String         |              | 是       |  合约编译的runtime-bytecode(runtime-bin)       |
 | 4        | 所在目录      | packageName  | String         |              | 是       | 生成java所在的包名 |
 
@@ -233,7 +233,7 @@ HTTP POST
 ```
 {
     "contractName": "HeHe",
-    "abiInfo": [],
+    "abiInfo": [{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "contractBin": "60806040526004361061004c576000357c0100000000000000000000029",
     "packageName": "com.webank"
 }
@@ -242,7 +242,94 @@ HTTP POST
 #### 响应参数
 
 **1）数据格式**
-java文件
+返回Java合约类源码
+
+```Java
+package com.webank;
+
+import java.util.Arrays;
+...
+
+@SuppressWarnings("unchecked")
+public class HelloWorld extends Contract {
+    public static final String[] BINARY_ARRAY = {""};
+
+    public static final String BINARY = org.fisco.bcos.sdk.utils.StringUtils.joinAll("", BINARY_ARRAY);
+
+    public static final String[] SM_BINARY_ARRAY = {""};
+
+    public static final String SM_BINARY = org.fisco.bcos.sdk.utils.StringUtils.joinAll("", SM_BINARY_ARRAY);
+
+    public static final String[] ABI_ARRAY = {"[{\"name\":\"get\",\"type\":\"function\",\"constant\":true,\"payable\":false,\"anonymous\":false,\"stateMutability\":\"view\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"indexed\":false,\"components\":null,\"typeAsString\":\"string\"}],\"methodSignatureAsString\":\"get()\"},{\"name\":\"set\",\"type\":\"function\",\"constant\":false,\"payable\":false,\"anonymous\":false,\"stateMutability\":\"nonpayable\",\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"indexed\":false,\"components\":null,\"typeAsString\":\"string\"}],\"outputs\":[],\"methodSignatureAsString\":\"set(string)\"},{\"name\":null,\"type\":\"constructor\",\"constant\":false,\"payable\":false,\"anonymous\":false,\"stateMutability\":\"nonpayable\",\"inputs\":[],\"outputs\":null,\"methodSignatureAsString\":\"null()\"}]"};
+
+    public static final String ABI = org.fisco.bcos.sdk.utils.StringUtils.joinAll("", ABI_ARRAY);
+
+    public static final String FUNC_GET = "get";
+
+    public static final String FUNC_SET = "set";
+
+    protected HelloWorld(String contractAddress, Client client, CryptoKeyPair credential) {
+        super(getBinary(client.getCryptoSuite()), contractAddress, client, credential);
+    }
+
+    public static String getBinary(CryptoSuite cryptoSuite) {
+        return (cryptoSuite.getCryptoTypeConfig() == CryptoType.ECDSA_TYPE ? BINARY : SM_BINARY);
+    }
+
+    public String get() throws ContractException {
+        final Function function = new Function(FUNC_GET, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        return executeCallWithSingleValueReturn(function, String.class);
+    }
+
+    public TransactionReceipt set(String n) {
+        final Function function = new Function(
+                FUNC_SET, 
+                Arrays.<Type>asList(new org.fisco.bcos.sdk.abi.datatypes.Utf8String(n)), 
+                Collections.<TypeReference<?>>emptyList());
+        return executeTransaction(function);
+    }
+
+    public void set(String n, TransactionCallback callback) {
+        final Function function = new Function(
+                FUNC_SET, 
+                Arrays.<Type>asList(new org.fisco.bcos.sdk.abi.datatypes.Utf8String(n)), 
+                Collections.<TypeReference<?>>emptyList());
+        asyncExecuteTransaction(function, callback);
+    }
+
+    public String getSignedTransactionForSet(String n) {
+        final Function function = new Function(
+                FUNC_SET, 
+                Arrays.<Type>asList(new org.fisco.bcos.sdk.abi.datatypes.Utf8String(n)), 
+                Collections.<TypeReference<?>>emptyList());
+        return createSignedTransaction(function);
+    }
+
+    public Tuple1<String> getSetInput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getInput().substring(10);
+        final Function function = new Function(FUNC_SET, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+                );
+    }
+
+    public static HelloWorld load(String contractAddress, Client client, CryptoKeyPair credential) {
+        return new HelloWorld(contractAddress, client, credential);
+    }
+
+    public static HelloWorld deploy(Client client, CryptoKeyPair credential) throws ContractException {
+        return deploy(HelloWorld.class, client, credential, getBinary(client.getCryptoSuite()), "");
+    }
+}
+```
+
+
 
 ### 1.5. 保存合约接口
 
@@ -277,12 +364,12 @@ HTTP POST
 ```
 {
     "groupId": "1",
-    "contractName": "HeHe",
+    "contractName": "HelloWorld",
     "contractPath": "/",
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsn0=",
-    "contractAbi": “[]”
-    "contractBin": "60806040526004361061004c576000357c0100000000000000000000000029",
-    "bytecodeBin": "6080604052348015610010572269b80029",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5ID49MC40LjI0IDwwLjYuMTE7Cgpjb250cmFjdCBIZWxsb1dvcmxkIHsKICAgIHN0cmluZyBuYW1lOwoKICAgIGNvbnN0cnVjdG9yKCkgcHVibGljIHsKICAgICAgICBuYW1lID0gIkhlbGxvLCBXb3JsZCEiOwogICAgfQoKICAgIGZ1bmN0aW9uIGdldCgpIHB1YmxpYyB2aWV3IHJldHVybnMgKHN0cmluZyBtZW1vcnkpIHsKICAgICAgICByZXR1cm4gbmFtZTsKICAgIH0KCiAgICBmdW5jdGlvbiBzZXQoc3RyaW5nIG1lbW9yeSBuKSBwdWJsaWMgewogICAgICAgIG5hbWUgPSBuOwogICAgfQp9",
+    "contractAbi": "[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+    "contractBin": "",
+    "bytecodeBin": "",
     "contractId": 1
 }
 ```
@@ -312,11 +399,11 @@ HTTP POST
 {
     "id": 1,
     "contractPath": "/",
-    "contractName": "HeHe",
+    "contractName": "HelloWorld",
     "contractStatus": 1,
     "groupId": 1,
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsKCmICB9Cn0=",
-    "contractAbi": "[{\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5ID49MC40LjI0IDwwLjYuMTE7Cgpjb250cmFjdCBIZWxsb1dvcmxkIHsKICAgIHN0cmluZyBuYW1lOwoKICAgIGNvbnN0cnVjdG9yKCkgcHVibGljIHsKICAgICAgICBuYW1lID0gIkhlbGxvLCBXb3JsZCEiOwogICAgfQoKICAgIGZ1bmN0aW9uIGdldCgpIHB1YmxpYyB2aWV3IHJldHVybnMgKHN0cmluZyBtZW1vcnkpIHsKICAgICAgICByZXR1cm4gbmFtZTsKICAgIH0KCiAgICBmdW5jdGlvbiBzZXQoc3RyaW5nIG1lbW9yeSBuKSBwdWJsaWMgewogICAgICAgIG5hbWUgPSBuOwogICAgfQp9",
+    "contractAbi": "[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
     "contractBin": "60806040526004361061004c5760003569b80029",
     "bytecodeBin": "608060405234801561001057600080fd5b506029",
     "contractAddress": null,
@@ -804,12 +891,24 @@ http://localhost:5002/WeBASE-Front/contract/findPathList/1
 **2）数据格式**
 ```
 [
-    {
-        "groupId": 1,
-        "contractPath": "/",
-        "createTime": "2019-06-10 16:42:50",
-        "modifyTime": "2019-06-10 16:42:52"
-    }
+  {
+    "groupId": 1,
+    "contractPath": "/",
+    "createTime": null,
+    "modifyTime": "2021-07-29 14:34:52"
+  },
+  {
+    "groupId": 1,
+    "contractPath": "Asset",
+    "createTime": null,
+    "modifyTime": "2021-07-27 10:43:59"
+  },
+  {
+    "groupId": 1,
+    "contractPath": "template",
+    "createTime": "2021-07-20 11:31:18",
+    "modifyTime": "2021-07-20 11:31:18"
+  }
 ]
 
 ```
@@ -844,6 +943,14 @@ HTTP POST
 http://localhost:5002/WeBASE-Front/contract/addContractPath
 ```
 
+```
+{
+  "contractPath": "test",
+  "groupId": 1
+}
+```
+
+
 #### 响应参数
 **1）参数表**
 
@@ -858,10 +965,10 @@ http://localhost:5002/WeBASE-Front/contract/addContractPath
 **2）数据格式**
 ```
 {
-    "groupId": 1,
-    "contractPath": "/",
-    "createTime": "2019-06-10 16:42:50",
-    "modifyTime": "2019-06-10 16:42:52"
+  "groupId": 1,
+  "contractPath": "test",
+  "createTime": "2021-07-29 14:26:54",
+  "modifyTime": "2021-07-29 14:26:54"
 }
 ```
 
@@ -1124,8 +1231,8 @@ HTTP GET
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
 | 1 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户；默认为2 |
 | 2        | 用户名 | userName | String        |             | 是  | 用户名 |
-| 3        | 签名服务用户编号 | signUserId | String        |    否         | 否   | WeBASE-Sign中的用户编号，一般设为UUID值；类型为2-外部用户时，必填；|
-| 4        | 应用编号 | appId | String        |             | 否   | 记录私钥所属应用，可根据业务设置；类型为2-外部用户时，必填 |
+| 3        | 签名服务用户编号 | signUserId | String        |    64         | 否   | WeBASE-Sign中的用户编号，一般设为UUID值；类型为2-外部用户时，必填；|
+| 4        | 应用编号 | appId | String        |     64        | 否   | 记录私钥所属应用，可根据业务设置；类型为2-外部用户时，必填 |
 | 5        | 是否返回私钥 | returnPrivateKey | Boolean        |             | 否   | 类型为2-外部用户时，选填；默认为false |
 
 **2）数据格式** 
@@ -1438,7 +1545,7 @@ HTTP POST | Content-type: form-data
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
 | 1        | 用户编号 | signUserId    | String   |   64           | 是       |   WeBASE-Sign中的用户编号，一般设为UUID值       |
 | 2        | 应用编号 | appId    | String   |     64         | 是       |  记录私钥所属应用，可根据业务设置         |
-| 2        | 私钥 | privateKey    | String   |              | 是       |  经过Base64加密后的内容        |
+| 3        | 私钥 | privateKey    | String   |              | 是       |  经过Base64加密后的内容        |
 
 **2）数据格式**
 
@@ -1495,7 +1602,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**                              |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | ------------------------------------- |
-| 1        | Sign用户Id | signUserId       | String   |              | 是       | 在webase-sign创建的私钥的id |
+| 1        | Sign用户Id | signUserId       | String   |      64        | 是       | 在webase-sign创建的私钥的id |
 | 2        | Hash值   | messageHash       | String   |              | 是       |                                       |
 
 **2）数据格式**
@@ -1542,7 +1649,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
-| 1        | Sign用户编号 | signUserId    | String   |              | 否      |  非空时，导出sign的私钥        |
+| 1        | Sign用户编号 | signUserId    | String   |     64         | 否      |  非空时，导出sign的私钥        |
 | 2        | 用户地址 | userAddress    | String   |              | 否     |    若signUserId为空，则地址不能为空，导出本地私钥       |
 
 **2）数据格式**
@@ -1601,7 +1708,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
-| 1        | Sign用户编号 | signUserId    | String   |              | 否      |  非空时，导出sign的私钥        |
+| 1        | Sign用户编号 | signUserId    | String   |     64         | 否      |  非空时，导出sign的私钥        |
 | 2        | 用户地址 | userAddress    | String   |              | 否     |    若signUserId为空，则地址不能为空，导出本地私钥       |
 
 **2）数据格式**
@@ -1633,6 +1740,66 @@ headers:  content-disposition: attachment;filename*=UTF-8''111_0x0421975cf4a5b27
 
 {
 // 二进制流
+}
+```
+
+
+### 2.11. 获取WeBASE-Sign私钥用户信息
+
+#### 接口描述
+
+从WeBASE-Sign获取私钥信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/userInfoWithSign**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | Sign用户编号 | signUserId    | String   |     64         | 是      |  WeBASE-Sign中用户编号        |
+| 2        | 是否导出秘钥 | returnPrivateKey    | Boolean   |              | 否     |    默认为false；true时将导出WeBASE-Sign对应私钥       |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/userInfoWithSign?signUserId=d1edf538748b4d899f251b5d746ec62f&returnPrivateKey=false
+```
+
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 用户编号 | signUserId    | String   |         |   WeBASE-Sign中的用户编号，一般为UUID值       |
+| 2        | 应用编号 | appId    | String   |            |  记录私钥所属应用         |
+| 3        | 私钥原文 | privateKey    | String   |                |  若`returnPrivateKey`则不返回（要求WeBASE-Sign设置允许导出私钥配置）      |
+| 3        | 私钥地址 | address    | String   |                |          |
+| 3        | 公钥 | publicKey    | String   |                |          |
+| 3        | 私钥类型 | encryptType    | String   |                |  0-ECDSA, 1-SM2国密        |
+| 3        | 描述 | description    | String   |                |          |
+
+**2）数据格式**
+
+
+```
+{
+  "signUserId": "d1edf538748b4d899f251b5d746ec62f",
+  "appId": "1",
+  "address": "0x2b6e2f9d25bdeeca395bd743099ef50097043aaa",
+  "publicKey": "044ddb8e92cf9dd96c1767b5e9c7e55e749304e88e28a8ec4fb7059c3388590ce83f2786510898464dfeb79771656a506e91cca6bd88c4291d5b9e284542651546",
+  "privateKey": "",
+  "description": null,
+  "encryptType": 1
 }
 ```
 
