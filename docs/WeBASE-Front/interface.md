@@ -186,7 +186,7 @@ HTTP POST
 {
     "user":"0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
     "contractName":"HelloWorld",
-    "abiInfo": [],
+    "abiInfo": [{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "bytecodeBin":"",
     "funcParam":[]
 }
@@ -224,7 +224,7 @@ HTTP POST
 | **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
 | 1        | 合约名称     | contractName | String         |              | 是       |          |
-| 2        | 合约abi      | abiInfo      | List |              | 是       |          |
+| 2        | 合约abi      | abiInfo      | List |              | 是       |  一个ABI的JsonArray        |
 | 3        | 合约bin      | contractBin  | String         |              | 是       |  合约编译的runtime-bytecode(runtime-bin)       |
 | 4        | 所在目录      | packageName  | String         |              | 是       | 生成java所在的包名 |
 
@@ -233,7 +233,7 @@ HTTP POST
 ```
 {
     "contractName": "HeHe",
-    "abiInfo": [],
+    "abiInfo": [{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "contractBin": "60806040526004361061004c576000357c0100000000000000000000029",
     "packageName": "com.webank"
 }
@@ -242,7 +242,94 @@ HTTP POST
 #### 响应参数
 
 **1）数据格式**
-java文件
+返回Java合约类源码
+
+```Java
+package com.webank;
+
+import java.util.Arrays;
+...
+
+@SuppressWarnings("unchecked")
+public class HelloWorld extends Contract {
+    public static final String[] BINARY_ARRAY = {""};
+
+    public static final String BINARY = org.fisco.bcos.sdk.utils.StringUtils.joinAll("", BINARY_ARRAY);
+
+    public static final String[] SM_BINARY_ARRAY = {""};
+
+    public static final String SM_BINARY = org.fisco.bcos.sdk.utils.StringUtils.joinAll("", SM_BINARY_ARRAY);
+
+    public static final String[] ABI_ARRAY = {"[{\"name\":\"get\",\"type\":\"function\",\"constant\":true,\"payable\":false,\"anonymous\":false,\"stateMutability\":\"view\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"indexed\":false,\"components\":null,\"typeAsString\":\"string\"}],\"methodSignatureAsString\":\"get()\"},{\"name\":\"set\",\"type\":\"function\",\"constant\":false,\"payable\":false,\"anonymous\":false,\"stateMutability\":\"nonpayable\",\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"indexed\":false,\"components\":null,\"typeAsString\":\"string\"}],\"outputs\":[],\"methodSignatureAsString\":\"set(string)\"},{\"name\":null,\"type\":\"constructor\",\"constant\":false,\"payable\":false,\"anonymous\":false,\"stateMutability\":\"nonpayable\",\"inputs\":[],\"outputs\":null,\"methodSignatureAsString\":\"null()\"}]"};
+
+    public static final String ABI = org.fisco.bcos.sdk.utils.StringUtils.joinAll("", ABI_ARRAY);
+
+    public static final String FUNC_GET = "get";
+
+    public static final String FUNC_SET = "set";
+
+    protected HelloWorld(String contractAddress, Client client, CryptoKeyPair credential) {
+        super(getBinary(client.getCryptoSuite()), contractAddress, client, credential);
+    }
+
+    public static String getBinary(CryptoSuite cryptoSuite) {
+        return (cryptoSuite.getCryptoTypeConfig() == CryptoType.ECDSA_TYPE ? BINARY : SM_BINARY);
+    }
+
+    public String get() throws ContractException {
+        final Function function = new Function(FUNC_GET, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        return executeCallWithSingleValueReturn(function, String.class);
+    }
+
+    public TransactionReceipt set(String n) {
+        final Function function = new Function(
+                FUNC_SET, 
+                Arrays.<Type>asList(new org.fisco.bcos.sdk.abi.datatypes.Utf8String(n)), 
+                Collections.<TypeReference<?>>emptyList());
+        return executeTransaction(function);
+    }
+
+    public void set(String n, TransactionCallback callback) {
+        final Function function = new Function(
+                FUNC_SET, 
+                Arrays.<Type>asList(new org.fisco.bcos.sdk.abi.datatypes.Utf8String(n)), 
+                Collections.<TypeReference<?>>emptyList());
+        asyncExecuteTransaction(function, callback);
+    }
+
+    public String getSignedTransactionForSet(String n) {
+        final Function function = new Function(
+                FUNC_SET, 
+                Arrays.<Type>asList(new org.fisco.bcos.sdk.abi.datatypes.Utf8String(n)), 
+                Collections.<TypeReference<?>>emptyList());
+        return createSignedTransaction(function);
+    }
+
+    public Tuple1<String> getSetInput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getInput().substring(10);
+        final Function function = new Function(FUNC_SET, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+                );
+    }
+
+    public static HelloWorld load(String contractAddress, Client client, CryptoKeyPair credential) {
+        return new HelloWorld(contractAddress, client, credential);
+    }
+
+    public static HelloWorld deploy(Client client, CryptoKeyPair credential) throws ContractException {
+        return deploy(HelloWorld.class, client, credential, getBinary(client.getCryptoSuite()), "");
+    }
+}
+```
+
+
 
 ### 1.5. 保存合约接口
 
@@ -277,12 +364,12 @@ HTTP POST
 ```
 {
     "groupId": "1",
-    "contractName": "HeHe",
+    "contractName": "HelloWorld",
     "contractPath": "/",
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsn0=",
-    "contractAbi": “[]”
-    "contractBin": "60806040526004361061004c576000357c0100000000000000000000000029",
-    "bytecodeBin": "6080604052348015610010572269b80029",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5ID49MC40LjI0IDwwLjYuMTE7Cgpjb250cmFjdCBIZWxsb1dvcmxkIHsKICAgIHN0cmluZyBuYW1lOwoKICAgIGNvbnN0cnVjdG9yKCkgcHVibGljIHsKICAgICAgICBuYW1lID0gIkhlbGxvLCBXb3JsZCEiOwogICAgfQoKICAgIGZ1bmN0aW9uIGdldCgpIHB1YmxpYyB2aWV3IHJldHVybnMgKHN0cmluZyBtZW1vcnkpIHsKICAgICAgICByZXR1cm4gbmFtZTsKICAgIH0KCiAgICBmdW5jdGlvbiBzZXQoc3RyaW5nIG1lbW9yeSBuKSBwdWJsaWMgewogICAgICAgIG5hbWUgPSBuOwogICAgfQp9",
+    "contractAbi": "[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+    "contractBin": "",
+    "bytecodeBin": "",
     "contractId": 1
 }
 ```
@@ -312,11 +399,11 @@ HTTP POST
 {
     "id": 1,
     "contractPath": "/",
-    "contractName": "HeHe",
+    "contractName": "HelloWorld",
     "contractStatus": 1,
     "groupId": 1,
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuMjsKCmICB9Cn0=",
-    "contractAbi": "[{\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+    "contractSource": "cHJhZ21hIHNvbGlkaXR5ID49MC40LjI0IDwwLjYuMTE7Cgpjb250cmFjdCBIZWxsb1dvcmxkIHsKICAgIHN0cmluZyBuYW1lOwoKICAgIGNvbnN0cnVjdG9yKCkgcHVibGljIHsKICAgICAgICBuYW1lID0gIkhlbGxvLCBXb3JsZCEiOwogICAgfQoKICAgIGZ1bmN0aW9uIGdldCgpIHB1YmxpYyB2aWV3IHJldHVybnMgKHN0cmluZyBtZW1vcnkpIHsKICAgICAgICByZXR1cm4gbmFtZTsKICAgIH0KCiAgICBmdW5jdGlvbiBzZXQoc3RyaW5nIG1lbW9yeSBuKSBwdWJsaWMgewogICAgICAgIG5hbWUgPSBuOwogICAgfQp9",
+    "contractAbi": "[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
     "contractBin": "60806040526004361061004c5760003569b80029",
     "bytecodeBin": "608060405234801561001057600080fd5b506029",
     "contractAddress": null,
@@ -804,12 +891,24 @@ http://localhost:5002/WeBASE-Front/contract/findPathList/1
 **2）数据格式**
 ```
 [
-    {
-        "groupId": 1,
-        "contractPath": "/",
-        "createTime": "2019-06-10 16:42:50",
-        "modifyTime": "2019-06-10 16:42:52"
-    }
+  {
+    "groupId": 1,
+    "contractPath": "/",
+    "createTime": null,
+    "modifyTime": "2021-07-29 14:34:52"
+  },
+  {
+    "groupId": 1,
+    "contractPath": "Asset",
+    "createTime": null,
+    "modifyTime": "2021-07-27 10:43:59"
+  },
+  {
+    "groupId": 1,
+    "contractPath": "template",
+    "createTime": "2021-07-20 11:31:18",
+    "modifyTime": "2021-07-20 11:31:18"
+  }
 ]
 
 ```
@@ -844,6 +943,14 @@ HTTP POST
 http://localhost:5002/WeBASE-Front/contract/addContractPath
 ```
 
+```
+{
+  "contractPath": "test",
+  "groupId": 1
+}
+```
+
+
 #### 响应参数
 **1）参数表**
 
@@ -858,10 +965,10 @@ http://localhost:5002/WeBASE-Front/contract/addContractPath
 **2）数据格式**
 ```
 {
-    "groupId": 1,
-    "contractPath": "/",
-    "createTime": "2019-06-10 16:42:50",
-    "modifyTime": "2019-06-10 16:42:52"
+  "groupId": 1,
+  "contractPath": "test",
+  "createTime": "2021-07-29 14:26:54",
+  "modifyTime": "2021-07-29 14:26:54"
 }
 ```
 
@@ -1102,7 +1209,7 @@ http://localhost:5002/WeBASE-Front/contract/findCns
 
 ## 2. 密钥接口
 
-### 2.1. 获取公私钥接口
+### 2.1. 创建私钥接口
 
 #### 接口描述
 
@@ -1124,8 +1231,8 @@ HTTP GET
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
 | 1 | 私钥类型 | type | int | | 否 | 0-本地用户；1-本地随机；2-外部用户；默认为2 |
 | 2        | 用户名 | userName | String        |             | 是  | 用户名 |
-| 3        | 签名服务用户编号 | signUserId | String        |    否         | 否   | 类型为2-外部用户时，必填 |
-| 4        | 应用编号 | appId | String        |             | 否   | 类型为2-外部用户时，必填 |
+| 3        | 签名服务用户编号 | signUserId | String        |    64         | 否   | WeBASE-Sign中的用户编号，一般设为UUID值；类型为2-外部用户时，必填；|
+| 4        | 应用编号 | appId | String        |     64        | 否   | 记录私钥所属应用，可根据业务设置；类型为2-外部用户时，必填 |
 | 5        | 是否返回私钥 | returnPrivateKey | Boolean        |             | 否   | 类型为2-外部用户时，选填；默认为false |
 
 **2）数据格式** 
@@ -1436,9 +1543,9 @@ HTTP POST | Content-type: form-data
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
-| 1        | 用户编号 | signUserId    | String   |   64           | 是       |          |
-| 2        | 应用编号 | appId    | String   |     64         | 是       |           |
-| 2        | 私钥 | privateKey    | String   |              | 是       |  经过Base64加密后的内容        |
+| 1        | 用户编号 | signUserId    | String   |   64           | 是       |   WeBASE-Sign中的用户编号，一般设为UUID值       |
+| 2        | 应用编号 | appId    | String   |     64         | 是       |  记录私钥所属应用，可根据业务设置         |
+| 3        | 私钥 | privateKey    | String   |              | 是       |  经过Base64加密后的内容        |
 
 **2）数据格式**
 
@@ -1495,7 +1602,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**                              |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | ------------------------------------- |
-| 1        | Sign用户Id | signUserId       | String   |              | 是       | 在webase-sign创建的私钥的id |
+| 1        | Sign用户Id | signUserId       | String   |      64        | 是       | 在webase-sign创建的私钥的id |
 | 2        | Hash值   | messageHash       | String   |              | 是       |                                       |
 
 **2）数据格式**
@@ -1542,7 +1649,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
-| 1        | Sign用户编号 | signUserId    | String   |              | 否      |  非空时，导出sign的私钥        |
+| 1        | Sign用户编号 | signUserId    | String   |     64         | 否      |  非空时，导出sign的私钥        |
 | 2        | 用户地址 | userAddress    | String   |              | 否     |    若signUserId为空，则地址不能为空，导出本地私钥       |
 
 **2）数据格式**
@@ -1601,7 +1708,7 @@ HTTP POST
 
 | **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
-| 1        | Sign用户编号 | signUserId    | String   |              | 否      |  非空时，导出sign的私钥        |
+| 1        | Sign用户编号 | signUserId    | String   |     64         | 否      |  非空时，导出sign的私钥        |
 | 2        | 用户地址 | userAddress    | String   |              | 否     |    若signUserId为空，则地址不能为空，导出本地私钥       |
 
 **2）数据格式**
@@ -1633,6 +1740,66 @@ headers:  content-disposition: attachment;filename*=UTF-8''111_0x0421975cf4a5b27
 
 {
 // 二进制流
+}
+```
+
+
+### 2.11. 获取WeBASE-Sign私钥用户信息
+
+#### 接口描述
+
+从WeBASE-Sign获取私钥信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/privateKey/userInfoWithSign**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | Sign用户编号 | signUserId    | String   |     64         | 是      |  WeBASE-Sign中用户编号        |
+| 2        | 是否导出秘钥 | returnPrivateKey    | Boolean   |              | 否     |    默认为false；true时将导出WeBASE-Sign对应私钥       |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/privateKey/userInfoWithSign?signUserId=d1edf538748b4d899f251b5d746ec62f&returnPrivateKey=false
+```
+
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **必填** | **说明**              |
+| -------- | -------- | ---------- | -------- | -------- | --------------------- |
+| 1        | 用户编号 | signUserId    | String   |         |   WeBASE-Sign中的用户编号，一般为UUID值       |
+| 2        | 应用编号 | appId    | String   |            |  记录私钥所属应用         |
+| 3        | 私钥原文 | privateKey    | String   |                |  若`returnPrivateKey`则不返回（要求WeBASE-Sign设置允许导出私钥配置）      |
+| 3        | 私钥地址 | address    | String   |                |          |
+| 3        | 公钥 | publicKey    | String   |                |          |
+| 3        | 私钥类型 | encryptType    | String   |                |  0-ECDSA, 1-SM2国密        |
+| 3        | 描述 | description    | String   |                |          |
+
+**2）数据格式**
+
+
+```
+{
+  "signUserId": "d1edf538748b4d899f251b5d746ec62f",
+  "appId": "1",
+  "address": "0x2b6e2f9d25bdeeca395bd743099ef50097043aaa",
+  "publicKey": "044ddb8e92cf9dd96c1767b5e9c7e55e749304e88e28a8ec4fb7059c3388590ce83f2786510898464dfeb79771656a506e91cca6bd88c4291d5b9e284542651546",
+  "privateKey": "",
+  "description": null,
+  "encryptType": 1
 }
 ```
 
@@ -3447,6 +3614,71 @@ http://localhost:5002/WeBASE-Front/1/web3/blockHeaderByHash/0xf58f4f43b3761f4863
 ```
 
 
+<!-- ### 3.32. 批量获取区块内交易回执接口 
+
+
+#### 接口描述
+
+> 根据块高批量获取区块交易回执
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/{groupId}/web3/transactionReceipt/{transHash}**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+| 2        | 块高 | blockNumber  | BigInteger   |              | 是       |          |
+| 3       | 交易index起始值 | start  | int   |              | 否       |   区块中交易index的起始值，默认为0       |
+| 4        | 交易index偏移量 | count  | int   |              | 否       |   区块中交易index的偏移量，默认为-1；-1代表返回所有交易回执       |
+
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/1/web3//transReceipt/batchByNumber/{blockNumber}?start={start}&count={count}
+```
+
+#### 响应参数
+
+**2）数据格式**
+
+```
+[
+  {
+    "transactionHash": "0x69ced0162a0c3892e4eaa3091b831ac3aaeb772c062746b20891ceaf8a4fb429",
+    "trans actionIndex": "0x0",
+    "root": "0x8cbc3f2c0e35a71738909e3b388efa6697084b05badd3a3bd3c64f0575c78c15",
+    "blockNumber": "2",
+    "blockHash": "0xf58f4f43b3761f4863ad366c4a7e2a812ed68df9f7bcad6b502fd544665e7625",
+    "from": "0x9d75e0ee66cfef16897b601624b60413d988ae7d",
+    "to": "0x0000000000000000000000000000000000000000",
+    "gasUsed": "316449",
+    "contractAddress": "0xa8af0ee580d8af674a60341030ddbc45431bc235",
+    "logs": [],
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "status": "0x0",
+    "statusMsg": "None",
+    "input": "0x608060405234801561001057600080fd5b506103e3806100206000396000f300608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d1461005c5780633590b49f146100ec57806362e8d6ce14610155575b600080fd5b34801561006857600080fd5b5061007161016c565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100b1578082015181840152602081019050610096565b50505050905090810190601f1680156100de5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100f857600080fd5b50610153600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061020e565b005b34801561016157600080fd5b5061016a6102c4565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102045780601f106101d957610100808354040283529160200191610204565b820191906000526020600020905b8154815290600101906020018083116101e757829003601f168201915b5050505050905090565b7f5715c9562eaf8d524d564edb392acddefc81d8133e2fc3b8125a260b1b413fda816040518080602001828103825283818151815260200191508051906020019080838360005b83811015610270578082015181840152602081019050610255565b50505050905090810190601f16801561029d5780820380516001836020036101000a031916815260200191505b509250505060405180910390a180600090805190602001906102c0929190610312565b5050565b6040805190810160405280600d81526020017f48656c6c6f2c20576f726c6421000000000000000000000000000000000000008152506000908051906020019061030f929190610312565b50565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061035357805160ff1916838001178555610381565b82800160010185558215610381579182015b82811115610380578251825591602001919060010190610365565b5b50905061038e9190610392565b5090565b6103b491905b808211156103b0576000816000905550600101610398565b5090565b905600a165627a7a72305820f3088deb3d14c6893440e4769f2389e9335e04faa10e6de5b4c93af15d1a34e80029",
+    "output": "0x",
+    "txProof": null,
+    "receiptProof": null,
+    "message": null,
+    "statusOK": true
+  } 
+]
+```
+ -->
+
+
 ## 4. 性能检测接口
 
 ### 4.1. 获取机器配置信息  
@@ -4109,7 +4341,7 @@ b、正确发送数据上链返回值信息（交易收据）
 
 #### 接口描述
 
-> 发送已签名的交易上链，返回交易收据；
+发送已签名的交易上链，返回交易收据；可结合`/trans/convertRawTxStr/local`或`/trans/convertRawTxStr/withSign`接口组装已签名的交易
 
 #### 接口URL
 
@@ -4125,7 +4357,7 @@ HTTP POST
 
 | **序号** | **中文**     | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ---------- | -------- | ------------ | -------- | -------- |
-| 1        | 已签名字符串 | signedStr  | String   |              | 是       |          |
+| 1        | 已签名交易编码值 | signedStr  | String   |              | 是       |  `/trans/convertRawTxStr/local`或`/trans/convertRawTxStr/withSign`接口组装已签名的交易        |
 | 2        | 是否同步发送 | sync       | bool     |              | 是       |          |
 | 2        | 群组ID       | groupId    | int      |              | 否       |          |
 
@@ -4172,7 +4404,7 @@ HTTP POST
 
 #### 接口描述
 
-> 发送已编码的查询交易，返回合约的返回值；
+发送已编码的查询交易，返回合约的返回值；其中`encodeStr`字段可通过`/trans/encodeFunction`接口获取合约函数的编码值
 
 #### 接口URL
 
@@ -4188,9 +4420,9 @@ HTTP POST
 
 | **序号** | **中文**     | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | --------------- | -------- | ------------ | -------- | -------- |
-| 1        | 已编码字符串 | encodeStr       | String   |              | 是       |          |
+| 1        | 合约函数编码值 | encodeStr       | String   |              | 是       | 可通过`/trans/encodeFunction`接口获取合约函数的编码值         |
 | 2        | 合约地址     | contractAddress | String   |              | 是       |          |
-| 3        | 群组ID       | groupId         | int      |              | 否       |          |
+| 3        | 群组ID       | groupId         | int      |              | 是       |   默认为1       |
 | 4        | 合约名       | funcName        | String   |              | 是       |          |
 | 5        | 合约abi      | contractAbi     | String   |              | 是       |          |
 | 6        | 用户地址     | userAddress     | String   |              | 否       |          |
@@ -4199,7 +4431,7 @@ HTTP POST
 
 ```
 {
-    "encodeStr": "0xddd",
+    "encodeStr": "0x299f7f9d",
     "contractAddress": "0x2b5ad5c4795c026514f8317c7a215e218dccd6cf",
     "groupId":1,
     "funcName": "get",
@@ -4301,25 +4533,29 @@ HTTP POST
 
 ```
 {
-  "transactionHash": "0x42894f8478bc5cf3417c31a559f22e7d59b049fc3136e223d9ec7003927b16c1",
-  "transactionIndex": "0x0",
-  "root": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "blockNumber": "369",
-  "blockHash": "0x2462d0e8d7f4ed892a0a18c982c3398dd43250863c6fe5e182df4f7eaab205f7",
-  "from": "0xfc2038f30e82a2c7afbb27da4cd7c44ece8a5c91",
-  "to": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
-  "gasUsed": "149305",
-  "contractAddress": "0x0000000000000000000000000000000000000000",
-  "logs": [],
-  "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-  "status": "0x0",
-  "statusMsg": "None",
-  "input": "0x3590b49f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000033333330000000000000000000000000000000000000000000000000000000000",
-  "output": "0x",
-  "txProof": null,
-  "receiptProof": null,
-  "message": null,
-  "statusOK": true
+	"groupId": "1",
+	"signUserId": "f4975519b0274e6ca8283650a7e1bc07",
+	"contractName": "HelloWorld",
+	"contractPath": "/",
+	"version": "",
+	"funcName": "set",
+	"funcParam": ["333"],
+	"contractAddress": "0xe10441d9179cf0424aae808b51bc85dcbbfe1447",
+	"contractAbi": [{
+		"inputs": [{
+			"internalType": "string",
+			"name": "n",
+			"type": "string"
+		}],
+		"name": "set",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function",
+		"funcId": 2
+	}],
+	"useAes": false,
+	"useCns": false,
+	"cnsName": ""
 }
 ```
 
