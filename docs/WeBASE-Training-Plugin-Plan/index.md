@@ -8,7 +8,7 @@
 
 WeBASE实训插件方案主要的目的是：将WeBASE管理台的部分功能作为插件嵌入到具体的实训系统中，辅助实训系统完成其区块链相关的一些实训功能。
 
-​                 其嵌入的形式可以入下图：![](../../images/WeBASE-Training-Plugin-Plan/iframe2.png)
+                 其嵌入的形式可以入下图：![](../../images/WeBASE-Training-Plugin-Plan/iframe2.png)
 
 ![](../../images/WeBASE-Training-Plugin-Plan/iframe1.png)
 
@@ -33,7 +33,7 @@ WeBASE实训插件方案主要的目的是：将WeBASE管理台的部分功能�
 
 ```plain
 INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('SupportIframe', 2, '1', '2020-09-22 17:14:23', '2020-09-22 17:14:23');
-INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('IframeSupportHostList', 3, 'baidu.com|163.com', '2020-09-22 17:14:23', '2020-09-22 17:14:23'); 
+INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('IframeSupportHostList', 3, 'baidu.com|163.com', '2020-09-22 17:14:23', '2020-09-22 17:14:23'); 
 ```
 
 其中，SupportIframe设置为1，表示开启iframe嵌入支持；IframeSupportHostList为iframe嵌入支持的host白名单列表。
@@ -140,3 +140,12 @@ export default {
 };
 </script>
 ```
+
+## 6 本方案贡献者
+
+| 贡献值名称 | github账号 |
+| ---------- | ---------- |
+|            |            |
+|            |            |
+|            |            |
+
