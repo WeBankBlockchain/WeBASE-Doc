@@ -147,5 +147,5 @@ export default {
 | ---------- | ---------- |
 |leeduckgo（李骜华|https://github.com/leeduckgo |
 | ErQi(齐涛) | https://github.com/ErQi |
-|            |            |
+|  孙丽英   |  https://github.com/sunliying2020  |
 
