@@ -10,7 +10,7 @@ git地址：https://github.com/WeBankFinTech/WeIdentity-Build-Tools
 
 | 贡献者名称 | github账号 |
 | ---------- | ---------- |
-|            |            |
+|      杨刚      |     yanggang-JV       |
 |            |            |
 |            |            |
 
