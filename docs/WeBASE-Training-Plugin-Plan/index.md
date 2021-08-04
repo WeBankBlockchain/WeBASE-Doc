@@ -146,6 +146,6 @@ export default {
 | 贡献者名称 | github账号 |
 | ---------- | ---------- |
 |leeduckgo（李骜华|https://github.com/leeduckgo |
-|            |            |
+| ErQi(齐涛) | https://github.com/ErQi |
 |            |            |
 
