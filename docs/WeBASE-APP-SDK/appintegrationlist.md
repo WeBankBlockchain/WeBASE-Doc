@@ -29,9 +29,9 @@ git地址：https://github.com/jiuyu-software/supply-chain-demo
 
 | 贡献者名称 | github账号 |
 | ---------- | ---------- |
-|            |            |
-|            |            |
-|            |            |
+|    刘泉    |            |
+|  何结兵    | freezehe   |
+|  吴媛媛    | shitou13   |
 
 
 
