@@ -8,6 +8,14 @@ git地址：https://github.com/WeBankFinTech/WeIdentity-Build-Tools
 
 文档地址：https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html
 
+| 贡献者名称 | github账号 |
+| ---------- | ---------- |
+|            |            |
+|            |            |
+|            |            |
+
+
+
 
 ## 基于FISCO BCOS 从0-1的供应链支付结算案例
 
@@ -19,6 +27,13 @@ git地址：https://github.com/jiuyu-software/supply-chain-demo
 
 文档地址：https://github.com/jiuyu-software/supply-chain-demo/blob/master/README.md
 
+| 贡献者名称 | github账号 |
+| ---------- | ---------- |
+|            |            |
+|            |            |
+|            |            |
+
+
 
 ## 基于 FISCO BCOS实现的电子存证平台案例
 
@@ -28,3 +43,8 @@ git地址：https://github.com/YibiOpen/evidence-chain-demo
 
 文档地址：https://github.com/YibiOpen/evidence-chain-demo/blob/master/README.md
 
+| 贡献者名称 | github账号 |
+| ---------- | ---------- |
+|            |            |
+|            |            |
+|            |            |
