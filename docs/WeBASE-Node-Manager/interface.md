@@ -84,7 +84,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 #### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
+* 请求地址：**/front/find?frontId={frontId}&groupId={groupId}&frontStatus={frontStatus}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -94,9 +94,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 | 序号 | 输入参数    | 类型          | 必填 | 备注                 |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | frontId       | Int           | 是     | 前置编号                  |
-| 2     | groupId       | Int           | 是     | 所属群组编号                |
-| 2     | frontStatus       | Int           | 是     | 所属群组编号                |
+| 1     | frontId       | Int           | 否     | 前置编号                  |
+| 2     | groupId       | Int           | 否     | 所属群组编号                |
+| 2     | frontStatus       | Int           | 否     | 所属群组编号                |
 
 
 ***2）入参示例***
@@ -319,7 +319,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
 
 ***1）入参表***
 
-无
+| 序号 | 输出参数 | 类型   |  必填    | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | frontId     | Int    | 是   | 获取特定front的nodeConfig |
 
 
 ***2）入参示例***
@@ -578,7 +580,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transactionReceipt/1/0x69c
 | 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1     | groupId         | int           | 是     | 所属群组编号               |
-| 2     | transHash       | String        | 否    | 交易hash                   |
+| 2     | transHash       | String        | 是    | 交易hash                   |
 
 
 ***2）入参示例***
@@ -1446,7 +1448,7 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+| 1        | 块高 | blockNumber | int      |             | 是        |                      |
 
 **2）数据格式**
 
@@ -1520,7 +1522,7 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+| 1        | 区块哈希 | blockHash | String      |             | 是        |                      |
 
 **2）数据格式**
 
@@ -1698,8 +1700,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 
 | 序号 | 输入参数   | 类型 | 必填 | 备注     |
 | ---- | ---------- | ---- | ------ | -------- |
-| 1    | groupId    | int  | 是     | 群组id   |
-| 2    | contractId | int  | 是     | 合约编号 |
+| 1   | contractId | int  | 是     | 合约编号 |
 
 
 ***2）入参示例***
@@ -1809,9 +1810,9 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 | 6    | bytecodeBin       | String | 是     | 合约编译的bytecode(bin)，用于部署合约                 |
 | 7    | contractId        | String | 是     | 合约名称                                              |
 | 8    | contractPath      | String | 是     | 合约所在目录                                          |
-| 9    | user              | String | 是     | 私钥用户的地址                                        |
+| 9    | user              | String | 是     | WeBASE的私钥用户的地址                                |
 | 10   | account           | String | 是     | 关联账户                                              |
-| 11   | constructorParams | List   | 否     | 构造函数入参                                          |
+| 11   | constructorParams | List   | 否     | 构造函数入参，根据合约构造函数决定                        |
 
 
 ***2）入参示例***
@@ -1822,17 +1823,16 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 
 ```
 {
-    "groupId": "1",
-    "contractBin": "60806040526004361061004c576000357c010000002269b80029",
-    "bytecodeBin": "60806040523480156100105761146031c79ef057dd274c87bff322ea2269b80029",
-    "contractAbi": "[]",
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLICAJbmFtZSA9IG47CiAgICB9Cn0=",
-    "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
-    "account": "admin",    
-    "contractName": "HeHe",
-    "contractId": 200008,
-    "contractPath": "Hi",
-    "constructorParams": ["a"]
+	"groupId": "1",
+	"contractBin": "60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d146100515780633590b49f146100e1575b600080fd5b34801561005d57600080fd5b5061006661014a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a657808201518184015260208101905061008b565b50505050905090810190601f1680156100d35780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100ed57600080fd5b50610148600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ec565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101e25780601f106101b7576101008083540402835291602001916101e2565b820191906000526020600020905b8154815290600101906020018083116101c557829003601f168201915b5050505050905090565b8060009080519060200190610202929190610206565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061024757805160ff1916838001178555610275565b82800160010185558215610275579182015b82811115610274578251825591602001919060010190610259565b5b5090506102829190610286565b5090565b6102a891905b808211156102a457600081600090555060010161028c565b5090565b905600a165627a7a72305820456bd30e517ce9633735d32413043bf33a2453c7f56e682b13e6125452d689dc0029",
+	"bytecodeBin": "608060405234801561001057600080fd5b506040805190810160405280600d81526020017f48656c6c6f2c20576f726c6421000000000000000000000000000000000000008152506000908051906020019061005c929190610062565b50610107565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100a357805160ff19168380011785556100d1565b828001600101855582156100d1579182015b828111156100d05782518255916020019190600101906100b5565b5b5090506100de91906100e2565b5090565b61010491905b808211156101005760008160009055506001016100e8565b5090565b90565b6102d7806101166000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d146100515780633590b49f146100e1575b600080fd5b34801561005d57600080fd5b5061006661014a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a657808201518184015260208101905061008b565b50505050905090810190601f1680156100d35780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100ed57600080fd5b50610148600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ec565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101e25780601f106101b7576101008083540402835291602001916101e2565b820191906000526020600020905b8154815290600101906020018083116101c557829003601f168201915b5050505050905090565b8060009080519060200190610202929190610206565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061024757805160ff1916838001178555610275565b82800160010185558215610275579182015b82811115610274578251825591602001919060010190610259565b5b5090506102829190610286565b5090565b6102a891905b808211156102a457600081600090555060010161028c565b5090565b905600a165627a7a72305820456bd30e517ce9633735d32413043bf33a2453c7f56e682b13e6125452d689dc0029",
+	"contractAbi": "[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+	"contractSource": "cHJhZ21hIHNvbGlkaXR5ID49MC40LjI0IDwwLjYuMTE7Cgpjb250cmFjdCBIZWxsb1dvcmxkIHsKICAgIHN0cmluZyBuYW1lOwoKICAgIGNvbnN0cnVjdG9yKCkgcHVibGljIHsKICAgICAgICBuYW1lID0gIkhlbGxvLCBXb3JsZCEiOwogICAgfQoKICAgIGZ1bmN0aW9uIGdldCgpIHB1YmxpYyB2aWV3IHJldHVybnMgKHN0cmluZyBtZW1vcnkpIHsKICAgICAgICByZXR1cm4gbmFtZTsKICAgIH0KCiAgICBmdW5jdGlvbiBzZXQoc3RyaW5nIG1lbW9yeSBuKSBwdWJsaWMgewogICAgICAgIG5hbWUgPSBuOwogICAgfQp9",
+	"user": "0xdccae56cef725605d0fa1e00fd553074a74091c5",
+	"contractName": "HelloWorld",
+	"contractId": 200306,
+	"contractPath": "/",
+	"account": "admin"
 }
 ```
 
@@ -1850,7 +1850,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 3.3  | contractName    | String        | 否   | 合约名称                                              |
 | 3.4  | groupId         | Int           | 否   | 所属群组编号                                          |
 | 3.5  | contractStatus  | int           | 否   | 1未部署，2已部署                                      |
-| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)                      |
+| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约) （已弃用字段）             |
 | 3.7  | contractSource  | String        | 否   | 合约源码                                              |
 | 3.8  | contractAbi     | String        | 是   | 编译合约生成的abi文件内容                             |
 | 3.9  | contractBin     | String        | 是   | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
@@ -1940,7 +1940,7 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 | 6    | contractAddress | String | 否     | 合约地址                            |
 | 7    | funcParam       | List   | 否     | 合约方法入参                        |
 | 8    | contractAbi     | List   | 是     | 合约abi/合约单个函数的abi           |
-| 9    | useCns          | bool   | 是     | 是否使用cns调用                     |
+| 9    | useCns          | bool   | 否     | 是否使用cns调用，默认为false                     |
 | 10   | cnsName         | String | 否     | CNS名称，useCns为true时不能为空     |
 | 11   | version         | String | 否     | CNS合约版本，useCns为true时不能为空 |
 
@@ -1952,15 +1952,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 
 ```
 {
-    "groupId":"1",
-    "user":"0x6accbdb86107b70decceee618ce40e20e15c8ad4",
+    "groupId": 1,
+    "user":"0xdccae56cef725605d0fa1e00fd553074a74091c5",
     "contractName":"HelloWorld",
     "funcName":"set",
     "funcParam":["gwes"],
-    "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],
-    "contractId":200002,
-    "contractAddress":"0x7bd586b045e3684dbcd5506cb175c5d771f38d13",
-    "useCns":false
+    "contractAbi": [{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
+    "contractId":200306,
+    "contractAddress":"0x4d1cbcc47b2558d818b9672df67f22f9a9645c87"
 }
 ```
 
@@ -2351,7 +2350,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 | 1    | groupId         | int    | 是     | 所属群组编号                |
 | 2    | contractAddress | String | 是     | 合约地址                    |
 | 3    | contractName    | String | 是     | 合约名称                    |
-| 4    | contractAbi     | String | 是     | 合约编译后生成的abi文件内容 |
+| 4    | contractAbi     | List<Object> | 是     | 合约编译后生成的abi文件内容 |
 | 5    | account         | String | 是     | 所属账号                    |
 
 
@@ -2413,7 +2412,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 | 2    | groupId         | int    | 是     | 所属群组编号                |
 | 3    | contractAddress | String | 是     | 合约地址                    |
 | 4    | contractName    | String | 是     | 合约名称                    |
-| 5    | contractAbi     | String | 是     | 合约编译后生成的abi文件内容 |
+| 5    | contractAbi     | List<Object> | 是     | 合约编译后生成的abi文件内容 |
 
 
 ***2）入参示例***
@@ -4458,7 +4457,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
 
 | 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1         | nodeId            | int             | 是     | 群组id  |
+| 1         | nodeId            | int   | 是     | 群组id  |
 | 2         | beginDate         | long   | 是     | 显示时间（开始） 时间戳  |
 | 3         | endDate           | long   | 是     | 显示时间（结束）时间戳 |
 | 4         | contrastBeginDate | long   | 否     | 对比时间（开始）时间戳 |
