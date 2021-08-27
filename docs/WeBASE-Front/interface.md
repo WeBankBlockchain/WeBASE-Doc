@@ -8505,3 +8505,29 @@ contract TableFactory {
 | -52010  | account already available                   |          |
 | -52011  | account frozen                    |          |
 | -52012  | current value is expected value              |          |
+
+### 3.调用接口遇到问题&解决方式
+Q1：合约方法入参byte32类型， java 通过HTTP+JSON调用，对应java bean 该如何对应数据类型？ 报错
+```
+{
+    "code":201153,
+    "data":null,
+    "errorMessage":"unable to create instance of 	type:org.fisco.bcos.sdk.abi.datatypes.generated.Bytes32"
+}
+```
+A1：java bean对应还是由String 存储，而非byte[]。 java工程引用如下依赖
+```
+<dependency>
+	<groupId>org.fisco-bcos.java-sdk</groupId>
+	<artifactId>fisco-bcos-java-sdk</artifactId>
+	<version>2.7.2</version>
+</dependency> 
+```
+java 代码处理
+```
+ String username = "hello";
+ Bytes32 bytes32 = CommonUtils.utf8StringToBytes32(username);
+ String bytes32Str = Numeric.toHexString(bytes32.getValue());
+```
+
+**注意**：Numeric 工具类是fisco-bcos-java-sdk 自带的，CommonUtils 是WEBASE Front 里面的
