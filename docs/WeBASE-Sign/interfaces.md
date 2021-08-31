@@ -105,7 +105,7 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 #### 接口URL
 
-http://localhost:5004/WeBASE-Sign/sign
+http://localhost:5004/WeBASE-Sign/user/newUser
 
 #### 调用方法
 
