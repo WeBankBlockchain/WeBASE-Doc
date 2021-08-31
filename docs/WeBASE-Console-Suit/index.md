@@ -180,7 +180,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 合约管理提供了一个图形化的合约IDE环境、已部署的合约列表、合约CNS查询以及预编译合约的CRUD功能。
 
-图形化合约IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口。其中，新建合约可以通过编辑键入合约内容，也可以上传合约文件；编译合约后才可以部署合约；部署合约成功后，可以通过发送交易调用合约接口。具体操作步骤可以参考上一章节中系统初始化配置介绍。
+图形化合约IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口，根据合约导出Java项目脚手架。其中，新建合约可以通过编辑键入合约内容，也可以上传合约文件；编译合约后才可以部署合约；部署合约成功后，可以通过发送交易调用合约接口。具体操作步骤可以参考上一章节中系统初始化配置介绍。
 
 合约IDE：
 
@@ -890,3 +890,37 @@ WeBASE已对这一步骤进行了封装，自动批量调用各个节点前置�
 操作完成后，如下图所示，节点C/D的群组group10也生成并出于running状态了，至此，我们就顺利完成创建群组group10的所有操作了！
 
 ![](../../images/WeBASE-Console-Suit/dynamic_group/steps/group10_all_sealer.png)
+
+### 合约Java项目脚手架
+<span id="scaffold"></span>
+
+
+在合约IDE的右上角支持导出已编译合约的Java项目脚手架，在导出时，填入项目名、选择节点前置（脚手架将使用该前置的SDK证书）、选择一个或多个私钥用户后，选中一个或多个合约（未编译的合约选中后将尝试自动编译），点击确定即可导出。
+
+![](../../images/WeBASE-Console-Suit/java_scaffold_form.png)
+
+比如，我们使用合约仓库中的Asset积分合约模板导出，得到合约对应的Java项目脚手架如下图所示，`service`中包含了各个合约的Service类与Service实例管理类、`config`中包含了初始化FISCO-BCOS JAVA-SDK与初始化合约地址、私钥用户等的配置，`raw`中包含了未封装的合约Java类，`model`中将包含合约Service中所用到的入参实体类。
+
+![](../../images/WeBASE-Console-Suit/java_scaffold_detail.png)
+
+脚手架中提供了gradle-wrapper构建工具，在linux环境下为例，可以直接执行下面的命令构建一个安装包`dist`（已安装gradle 5.6以上版本，也可以直接使用`gradle`命令构建）。
+```Bash
+$ chmod +x ./gradlew
+$ ./gradlew build -x test
+# 得到一个dist包
+$ ls 
+build  build.gradle  dist  gradle  gradlew  gradlew.bat  settings.gradle  src
+```
+
+由于通过WeBASE导出的该脚手架自动在`conf/application.propertiest`中自动配置了节点的IP和channelPort，并自动配置了节点的SDK证书
+
+因此，我们可以进入`dist`安装包中，直接执行jar文件即可启动项目连接到节点中
+```Bash
+$ cd dist
+$ ls
+abi  application.properties  bin  conf  demo-exec.jar
+# 执行jar包
+$ java -jar demo-exec.jar
+```
+*若执行jar时，提示java.io.IOException: Stream closed错误，可忽略该错误*
+
