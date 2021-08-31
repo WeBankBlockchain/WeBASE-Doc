@@ -131,13 +131,29 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time)values('test', '$2a$10$F/aEB1iEx/FvVh0fMn6L/uyy.PkpTy8Kd9EdbqLGo7Bw7eCivpq.m',100000,now(),now());
 ```
 
+##### 关闭鉴权调用（联调）
+<span id="disable_auth"></span>
+在`application.yml`中配置`constant.isUseSecurity`为`false`即可禁用WeBASE-Node-Manager的登录鉴权。
+
+![](../../images/WeBASE/mgr/disable_auth.png)
+
+- 免鉴权后，默认使用的是管理员用户admin（管理员用户可以看到所有用户的数据），可以跳过登陆页面，直接访问WeBASE-Web节点管理台的主页，如`http://localhost:5000/#/home`。
+- 若需要指定用户进行接口调用，可以在请求的`headers`中增加`Account`字段，其值设置为节点管理服务的用户名，如获取开发者用户`developer1`对应数据（开发者用户只能看到自己所创建的数据）。
+
+![](../../images/WeBASE/mgr/api_with_header_account.png)
+
+
+##### 使用swagger
+<span id="swagger"></span>
+
+v1.5.2后，节点管理服务搭配了swagger，可用于直接调试接口，需要[关闭鉴权](#disable_auth)后，访问 `{ip}:5001/WeBASE-Node-Manager/swagger-ui.html` 即可访问swagger页面
 
 ### 3. 配置文件解析
 
 | 参数 | 默认值    | 描述          |
 |------|-------------|-----------|
 | server.port  | 5001 | 当前服务端口   |
-| server.servlet.context-path  | /WeBASE-Node-Manager | 当前服务访问目录   |
+| server.servlet.context-path  | /WeBASE-Node-Manager | 当前服务访问路径   |
 | mybatis.typeAliasesPackage  | com.webank.webase.node.mgr | mapper类扫描路径   |
 | mybatis.mapperLocations  | classpath:mapper/*.xml | mybatis的xml路径   |
 | spring.datasource.driver-class-name | com.mysql.cj.jdbc.Driver | mysql驱动   |
@@ -160,7 +176,7 @@ INSERT INTO tb_account_info (account,account_pwd,role_id,create_time,modify_time
 | constant.blockRetainMax | 10000 |  表中区块保留的条数（开启constant.isDeleteInfo时有效）  |
 | constant.verificationCodeMaxAge | 300 | y验证码有效时长（秒） |
 | constant.authTokenMaxAge | 1800 |  登录token有效时长（秒）  |
-| constant.isUseSecurity | true | 是否启用登录鉴权   |
+| constant.isUseSecurity | true | 是否启用登录鉴权，若false则默认使用admin权限免登陆鉴权   |
 | constant.aesKey | ERTadb83f9ege39k | aes加密key（16位），建议更改 |
 | constant.jwtSecret | S3g4HtJyg7G6Hg0Ln3g4H5Jyg7H6f9dL |  jwt生成时用到的key，建议更改  |
 | constant.frontUrl | http://%1s:%2d/WeBASE-Front/%3s | 前置服务的请求路径  |
