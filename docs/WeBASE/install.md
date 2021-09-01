@@ -562,7 +562,7 @@ sudo yum install MariaDB-server MariaDB-client -y
 ```
 sudo sed -i 's#//mirrors.ustc.edu.cn#//ipv4.mirrors.ustc.edu.cn#g' /etc/yum.repos.d/mariadb
 ```
-
+详情参考[MariaDB官网安装](https://downloads.mariadb.org/mariadb/repositories/#mirror=digitalocean-nyc)。
 - 启停
 
 ```shell
