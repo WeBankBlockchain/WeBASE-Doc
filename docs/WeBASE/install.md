@@ -98,7 +98,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.2/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.3/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -252,10 +252,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.5.0        ========
-==============    webase-node-mgr version  v1.5.0   ========
-==============    webase-sign version  v1.5.0       ========
-==============    webase-front version  v1.5.0      ========
+==============    webase-web version  v1.5.3        ========
+==============    webase-node-mgr version  v1.5.3   ========
+==============    webase-sign version  v1.5.3       ========
+==============    webase-front version  v1.5.3      ========
 ============================================================
 ```
 
