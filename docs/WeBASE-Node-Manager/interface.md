@@ -9941,6 +9941,8 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/checkPort
 
 传入主机的节点信息，检查目标主机中需要用到的端口是否已被占用；端口被占用时，报错信息保存在主机列表的remark字段里
 
+**注意**：使用接口搭链后，需要妥善保存项目目录（如`/dist`）中的`NODES_ROOT`目录，其中保存了链的相关证书与证书私钥。
+
 #### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/deploy/config**

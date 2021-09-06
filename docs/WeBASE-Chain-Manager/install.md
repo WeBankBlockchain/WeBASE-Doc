@@ -5,8 +5,8 @@
 | 序号 | 软件                |
 | ---- | ------------------- |
 | 1    | FISCO-BCOS 2.7+|
-| 2    | WeBASE-Front 1.4.0+|
-| 3 | WeBASE-Sign 1.4.0+|
+| 2    | WeBASE-Front 1.5.0+|
+| 3 | WeBASE-Sign 1.4.3+|
 | 4    | MySQL5.6或以上版本  |
 | 5    | Java8或以上版本     |
 
@@ -118,6 +118,8 @@ bash webase.sh 127.0.0.1 3306
 ...
 	Application() - main run success...
 ```
+
+**注意**：使用接口搭链后，需要妥善保存项目目录（如`/dist`）中的`NODES_ROOT`目录，其中保存了链的相关证书与证书私钥。
 
 ## 7 访问
 
