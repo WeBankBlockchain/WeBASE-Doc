@@ -172,7 +172,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/chain/new
 http://127.0.0.1:5005/WeBASE-Chain-Manager/chain/all
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -246,7 +246,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/chain/all
 http://127.0.0.1:5005/WeBASE-Chain-Manager/chain/100001
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -310,7 +310,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/chain/removeChain
 ```
 
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -505,7 +505,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/front/new
 http://localhost:5005/WeBASE-Chain-Manager/front/find?chainId=12&agencyId=10
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -611,7 +611,7 @@ http://localhost:5005/WeBASE-Chain-Manager/front/find?chainId=12&agencyId=10
 http://127.0.0.1:5005/WeBASE-Chain-Manager/front/200001
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -681,7 +681,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/front/200001
 http://127.0.0.1:5005/WeBASE-Chain-Manager/front/mointorInfo/200001?beginDate=2019-03-13T00:00:00&endDate=2019-03-13T14:34:22&contrastBeginDate=2019-03-13T00:00:00&contrastEndDate=2019-03-13T14:34:22&gap=60&groupId=1
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -800,7 +800,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/front/mointorInfo/200001?beginDate=20
 http://127.0.0.1:5005/WeBASE-Chain-Manager/front/ratio/200001?gap=1&beginDate=2019-03-15T00:00:00&endDate=2019-03-15T15:26:55&contrastBeginDate=2019-03-15T00:00:00&contrastEndDate=2019-03-15T15:26:55
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -910,7 +910,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/front/ratio/200001?gap=1&beginDate=20
 http://127.0.0.1:5005/WeBASE-Chain-Manager/front/config/200001
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -981,7 +981,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/front/config/200001
 http://127.0.0.1:5005/WeBASE-Chain-Manager/front/checkNodeProcess/200001
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1037,7 +1037,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/front/checkNodeProcess/200001
 http://127.0.0.1:5005/WeBASE-Chain-Manager/front/getGroupSizeInfos/200001
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1134,7 +1134,7 @@ http://localhost:5005/WeBASE-Chain-Manager/front/abandonedByAgencyId
 }
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1405,7 +1405,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/generate
 http://127.0.0.1:5005/WeBASE-Chain-Manager/group/operate/100001/2/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2/start
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1530,7 +1530,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/generate
 http://127.0.0.1:5005/WeBASE-Chain-Manager/group/update
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1586,7 +1586,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/update
 http://127.0.0.1:5005/WeBASE-Chain-Manager/group/100001/300001
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -1643,7 +1643,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/100001/300001
 http://127.0.0.1:5005/WeBASE-Chain-Manager/group/all/100001
 ```
 
-#### 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -2185,7 +2185,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/group/charging/getTxGasData/100
 
 ​	删除群组下统计日志数据。
 
-#### 传输协议规范
+#### 3.14.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/group/charging/deleteData/{chainId}/{groupId}/{nodeId}**
@@ -2193,7 +2193,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/group/charging/getTxGasData/100
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 3.14.2 请求参数
 
 ***1）入参表***
 
@@ -2211,7 +2211,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/group/charging/getTxGasData/100
 http://127.0.0.1:5005/WeBASE-Chain-Manager/group/charging/deleteData/1001/1/413c788ec4b55e8170815e1c61977bac8c38f2df8670d09868a6099a044c0bff7884b9c30f3fa9c331358fcbded28f8d0211e2ffc48019c9796fa05274ed89b1?type=2&keepEndDate=2020-01-27T17%3A30%3A04
 ```
 
-#### 
+#### 3.14.3 返回参数 
 
 ***1）出参表***
 
@@ -2247,14 +2247,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/charging/deleteData/1001/1/413c
 
 ### 3.15 分页查询群组列表
 
-#### 传输协议规范
+#### 3.15.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/group/page/{chainId}?pageNumber=1&pageSize=10&agency=10**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 3.15.2 请求参数
 
 ***1）入参表***
 | 序号 | 输入参数   | 类型   | 可为空 | 备注       |
@@ -2274,7 +2274,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/charging/deleteData/1001/1/413c
 http://localhost:5005/WeBASE-Chain-Manager/group/page/1?pageNumber=2&pageSize=3
 ```
 
-#### 
+#### 3.15.3 返回参数 
 
 ***1）出参表***
 
@@ -2372,7 +2372,7 @@ http://localhost:5005/WeBASE-Chain-Manager/group/page/1?pageNumber=2&pageSize=3
 
    先将要变更类型的节点类型更改为观察者节点，并写入到db，然后定期检查块高，等该节点区块同步跟上群组的块高时，才将该节点的类型更改为共识节点
 
-#### 传输协议规范
+#### 3.16.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/group/addSealerAsync**
@@ -2380,7 +2380,7 @@ http://localhost:5005/WeBASE-Chain-Manager/group/page/1?pageNumber=2&pageSize=3
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 3.16.2 请求参数
 
 ***1）入参表***
 
@@ -2407,7 +2407,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/addSealerAsync
 ```
 
 
-#### 返回参数
+#### 3.16.3 返回参数
 
 ***1）出参表***
 
@@ -2471,14 +2471,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/addSealerAsync
 
 ### 3.17 查询群组详情
 
-#### 传输协议规范
+#### 3.17.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/group/{chainId}/{groupId}/detail**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 3.17.2 请求参数
 
 ***1）入参表***
 | 序号  | 输出参数    | 类型   | 可空    | 备注   |
@@ -2492,7 +2492,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/group/addSealerAsync
 curl --location --request GET 'http://localhost:5005/WeBASE-Chain-Manager/group/495/26/detail' 
 ```
 
-#### 
+#### 3.17.3 返回参数 
 
 ***1）出参表***
 
@@ -2591,14 +2591,14 @@ curl --location --request GET 'http://localhost:5005/WeBASE-Chain-Manager/group/
 
 ### 3.18  修改群组描述
 
-#### 传输协议规范
+#### 3.18.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/group/changeDescription**
 - 请求方式：POST
 - 返回格式：JSON
 
-#### 请求参数
+#### 3.18.2 请求参数
 
 ***1）入参表***
 | 序号  | 输出参数    | 类型   | 可空    | 备注   |
@@ -2620,7 +2620,7 @@ http://localhost:5005/WeBASE-Chain-Manager/group/changeDescription'
 }
 ```
 
-#### 
+#### 3.18.3 返回参数 
 
 ***1）出参表***
 
@@ -2661,14 +2661,14 @@ http://localhost:5005/WeBASE-Chain-Manager/group/changeDescription'
 
 > 移除指定机构群组下的所有节点。如果这个机构本来已经是群组内的唯一机构，则会停止该群组。
 
-#### 传输协议规范
+#### 3.19.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/group/removeAgency**
 - 请求方式：POST
 - 返回格式：JSON
 
-#### 请求参数
+#### 3.19.2 请求参数
 
 ***1）入参表***
 | 序号  | 输出参数    | 类型   | 可空    | 备注   |
@@ -2692,7 +2692,7 @@ http://localhost:5005/WeBASE-Chain-Manager/group/removeAgency'
 }
 ```
 
-#### 
+#### 3.19.3 返回参数 
 
 ***1）出参表***
 
@@ -2732,14 +2732,14 @@ http://localhost:5005/WeBASE-Chain-Manager/group/removeAgency'
 
 ### 4.1 查询节点信息列表
 
-#### 传输协议规范
+#### 4.1.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/node/nodeList/{chainId}/{groupId}/{pageNumber}/{pageSize}?nodeId={nodeId}&agencyId={agencyId}&frontPeerName={frontPeerName}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.1.2 请求参数
 
 ***1）入参表***
 
@@ -2760,7 +2760,7 @@ http://localhost:5005/WeBASE-Chain-Manager/group/removeAgency'
 http://127.0.0.1:5005/WeBASE-Chain-Manager/node/nodeList/100001/300001/1/10?agencyId=10&nodeId=
 ```
 
-#### 
+#### 4.1.3 返回参数 
 
 ***1）出参表***
 
@@ -2834,14 +2834,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/nodeList/100001/300001/1/10?agen
 
 ​	节点和前置一一对应，节点编号可以从前置列表获取。
 
-#### 传输协议规范
+#### 4.2.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/node/nodeInfo/{chainId}/{groupId}/{nodeId}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.2.2 请求参数
 
 ***1）入参表***
 
@@ -2857,7 +2857,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/nodeList/100001/300001/1/10?agen
 http://127.0.0.1:5005/WeBASE-Chain-Manager/node/nodeInfo/100001/1/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
 ```
 
-#### 
+#### 4.2.3 返回参数 
 
 ***1）出参表***
 
@@ -2918,14 +2918,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/nodeInfo/100001/1/78e467957af3d0
 
 ​	指定节点获取区块高度。节点和前置一一对应，节点编号可以从前置列表获取。
 
-#### 传输协议规范
+#### 4.3.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/node/getBlockNumber/{chainId}/{groupId}/{nodeId}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.3.2 请求参数
 
 ***1）入参表***
 
@@ -2941,7 +2941,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/nodeInfo/100001/1/78e467957af3d0
 http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getBlockNumber/1001/1/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
 ```
 
-#### 
+#### 4.3.3 返回参数 
 
 ***1）出参表***
 
@@ -2977,14 +2977,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getBlockNumber/1001/1/78e467957a
 
 ​	指定节点根据区块高度获取区块信息。节点和前置一一对应，节点编号可以从前置列表获取。
 
-#### 传输协议规范
+#### 4.4.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/node/getBlockByNumber/{chainId}/{groupId}/{nodeId}/{blockNumber}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.4.2 请求参数
 
 ***1）入参表***
 
@@ -3001,7 +3001,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getBlockNumber/1001/1/78e467957a
 http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getBlockByNumber/1001/1/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2/1
 ```
 
-#### 
+#### 4.4.3 返回参数 
 
 ***1）出参表***
 
@@ -3090,14 +3090,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getBlockByNumber/1001/1/78e46795
 
 ​	指定节点获取群组交易总数信息。节点和前置一一对应，节点编号可以从前置列表获取。
 
-#### 传输协议规范
+#### 4.5.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/getTotalTransactionCount/{chainId}/{nodeId}/{groupId}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.5.2 请求参数
 
 ***1）入参表***
 
@@ -3113,7 +3113,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getBlockByNumber/1001/1/78e46795
 http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTotalTransactionCount/1001/1/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2
 ```
 
-#### 
+#### 4.5.3 返回参数 
 
 ***1）出参表***
 
@@ -3154,14 +3154,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTotalTransactionCount/1001/1/
 
 ​	指定节点根据交易hash获取交易信息。节点和前置一一对应，节点编号可以从前置列表获取。
 
-#### 传输协议规范
+#### 4.6.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/node/getTransactionByHash/{chainId}/{groupId}/{nodeId}/{transHash}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.6.2 请求参数
 
 ***1）入参表***
 
@@ -3178,7 +3178,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTotalTransactionCount/1001/1/
 http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTransactionByHash/1001/1/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2/0x2bf33fff3b81d74548079a669333aef601d4d2acaf8d33a31687fac8d5d9c815
 ```
 
-#### 
+#### 4.6.3 返回参数 
 
 ***1）出参表***
 
@@ -3238,14 +3238,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTransactionByHash/1001/1/78e4
 
 ​	指定节点根据交易hash获取交易回执信息。节点和前置一一对应，节点编号可以从前置列表获取。
 
-#### 传输协议规范
+#### 4.7.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/node/getTransactionReceipt/{chainId}/{groupId}/{nodeId}/{transHash}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.7.2 请求参数
 
 ***1）入参表***
 
@@ -3262,7 +3262,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTransactionByHash/1001/1/78e4
 http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTransactionReceipt/1001/1/78e467957af3d0f77e19b952a740ba8c53ac76913df7dbd48d7a0fe27f4c902b55e8543e1c4f65b4a61695c3b490a5e8584149809f66e9ffc8c05b427e9d3ca2/0x2bf33fff3b81d74548079a669333aef601d4d2acaf8d33a31687fac8d5d9c815
 ```
 
-#### 
+#### 4.7.3 返回参数 
 
 ***1）出参表***
 
@@ -3313,14 +3313,14 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTransactionReceipt/1001/1/78e
 
 ### 4.8 查询节点Id列表
 
-#### 传输协议规范
+#### 4.8.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/node/nodeIdList/{chainId}/{groupId}?agencyId={agencyId}&nodeTypes={nodeType}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 4.8.2 请求参数
 
 ***1）入参表***
 
@@ -3337,7 +3337,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/node/getTransactionReceipt/1001/1/78e
 http://localhost:5005/WeBASE-Chain-Manager/node/nodeIdList/1/1?nodeTypes=sealer&nodeTypes=observer
 ```
 
-#### 
+#### 4.8.3 返回参数 
 
 ***1）出参表***
 
@@ -3390,7 +3390,7 @@ http://localhost:5005/WeBASE-Chain-Manager/node/nodeIdList/1/1?nodeTypes=sealer&
 
 ​	接口参数为合约文件压缩成zip并Base64编码后的字符串。合约文件需要放在同级目录压缩，涉及引用请使用"./XXX.sol"。可参考测试类ContractControllerTest的testCompileContract()方法。国密和非国密编译的bytecodeBin不一样，合约管理模块以国密为例。
 
-#### 传输协议规范
+#### 5.1.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/contract/compile**
@@ -3398,7 +3398,7 @@ http://localhost:5005/WeBASE-Chain-Manager/node/nodeIdList/1/1?nodeTypes=sealer&
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.1.2 请求参数
 
 ***1）入参表***
 
@@ -3422,7 +3422,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/compile
 }
 ```
 
-#### 
+#### 5.1.3 返回参数 
 
 ***1）出参表***
 
@@ -3468,7 +3468,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/compile
 
 ### 5.2 保存合约和更新
 
-#### 传输协议规范
+#### 5.2.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址：**/contract/save**
@@ -3476,7 +3476,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/compile
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.2.2 请求参数
 
 ***1）入参表***
 
@@ -3513,7 +3513,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/save
 }
 ```
 
-#### 
+#### 5.2.3 返回参数 
 
 ***1）出参表***
 
@@ -3583,13 +3583,13 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/save
 ### 5.3 查询合约列表 
 
 
-#### 传输协议规范
+#### 5.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/contractList**
 * 请求方式：POST
 * 返回格式：JSON
 
-#### 请求参数
+#### 5.3.2 请求参数
 
 
 ***1）入参表***
@@ -3617,7 +3617,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/contractList
 }
 ```
 
-#### 
+#### 5.3.3 返回参数 
 
 ***1）出参表***
 
@@ -3689,13 +3689,13 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/contractList
 ### 5.4 查询合约信息
 
 
-#### 传输协议规范
+#### 5.4.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/{contractId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 请求参数
+#### 5.4.2 请求参数
 
 ***1）入参表***
 
@@ -3709,7 +3709,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/contractList
 http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/400003
 ```
 
-#### 
+#### 5.4.3 返回参数 
 
 ***1）出参表***
 
@@ -3785,14 +3785,14 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 ```
 
 
-#### 传输协议规范
+#### 5.5.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/deploy**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 请求参数
+#### 5.4.2 请求参数
 
 ***1）入参表***
 
@@ -3836,7 +3836,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/deploy
 }
 ```
 
-#### 
+#### 5.5.3 返回参数 
 
 ***1）出参表***
 
@@ -3913,14 +3913,14 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 
 关联接口：`/trans/sendByContractId`，通过合约ID发送交易
 
-#### 传输协议规范
+#### 5.6.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/contract/transaction**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 请求参数
+#### 5.6.2 请求参数
 
 
 ***1）入参表***
@@ -3959,7 +3959,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/transaction
 ```
 
 
-#### 
+#### 5.6.3 返回参数 
 
 ***1）出参表***
 
@@ -4039,7 +4039,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/transaction
 
 ​	通过预编译合约管理合约状态，根据入参的操作类型进行调用，可以冻结、解冻合约和授权用户操作权限，还可以查询合约状态和合约用户权限列表。
 
-#### 传输协议规范
+#### 5.7.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/contract/statusManage**
@@ -4047,7 +4047,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/transaction
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.7.2 请求参数
 
 ***1）入参表***
 
@@ -4079,7 +4079,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/statusManage
 }
 ```
 
-#### 返回参数
+#### 5.7.3 返回参数
 
 ***1）出参表***
 
@@ -4116,7 +4116,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/statusManage
 
 ​	合约保存到chain-manager之后，在未部署之前都可以根据合约编号进行编译
 
-#### 传输协议规范
+#### 5.8.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/contract/compile/{contractId}**
@@ -4124,7 +4124,7 @@ http://127.0.0.1:5005/WeBASE-Chain-Manager/contract/statusManage
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.8.2 请求参数
 
 ***1）入参表***
 
@@ -4140,7 +4140,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/compile/400029
 ```
 
 
-#### 返回参数
+#### 5.8.3 返回参数
 
 ***1）出参表***
 
@@ -4217,7 +4217,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/compile/400029
 
 ​	合约保存到chain-manager并且编译之后，可以根据合约编号部署该合约
 
-#### 传输协议规范
+#### 5.9.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/contract/deployByContractId**
@@ -4225,7 +4225,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/compile/400029
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.9.2 请求参数
 
 ***1）入参表***
 
@@ -4252,7 +4252,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/deployByContractId
 ```
 
 
-#### 返回参数
+#### 5.9.3 返回参数
 
 ***1）出参表***
 
@@ -4327,7 +4327,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/deployByContractId
 
 ​	通过chain-manager部署合约之后，可以根据合约编号发送交易来调用该合约函数
 
-#### 传输协议规范
+#### 5.10.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/trans/sendByContractId**
@@ -4335,7 +4335,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/deployByContractId
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.10.2 请求参数
 
 ***1）入参表***
 
@@ -4364,7 +4364,7 @@ http://localhost:5005/WeBASE-Chain-Manager/trans/sendByContractId
 ```
 
 
-#### 返回参数
+#### 5.10.3 返回参数
 
 ***1）出参表***
 
@@ -4418,14 +4418,14 @@ http://localhost:5005/WeBASE-Chain-Manager/trans/sendByContractId
 
 ​	支持删除未部署的合约
 
-#### 传输协议规范
+#### 5.11.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/contract/{chainId}/{groupId}/{contractId}**
 - 请求方式：DELETE
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.11.2 请求参数
 
 ***1）入参表***
 
@@ -4445,7 +4445,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/444/444/444
 
 
 
-#### 返回参数
+#### 5.11.3 返回参数
 
 ***1）出参表***
 
@@ -4485,7 +4485,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/444/444/444
 
 ​	支持删除未部署的合约
 
-#### 传输协议规范
+#### 5.12.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/contract/remove**
@@ -4493,7 +4493,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/444/444/444
 - 请求方式：POSt
 - 返回格式：JSON
 
-#### 请求参数
+#### 5.12.2 请求参数
 
 ***1）入参表***
 
@@ -4515,7 +4515,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/remove
 ```
 
 
-#### 返回参数
+#### 5.12.3 返回参数
 
 ***1）出参表***
 
@@ -4580,7 +4580,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/remove
 http://localhost:5005/WeBASE-Chain-Manager/contract/count?chainId=1&groupId=&agencyId=3
 ```
 
-#### 
+#### 5.13.3 返回参数 
 
 ***1）出参表***
 
@@ -4632,7 +4632,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/count?chainId=1&groupId=&age
 
 ​	场景2：privateKey字段入参不为空，直接保存该私钥。
 
-#### 传输协议规范
+#### 6.1.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/user/newUser**
@@ -4640,7 +4640,7 @@ http://localhost:5005/WeBASE-Chain-Manager/contract/count?chainId=1&groupId=&age
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 6.1.2 请求参数
 
 ***1）入参表***
 
@@ -4697,7 +4697,7 @@ http://localhost:5005/WeBASE-Chain-Manager/user/newUser
 
 
 
-#### 返回参数
+#### 6.1.3 返回参数
 
 ***1）出参表***
 
@@ -4756,7 +4756,7 @@ http://localhost:5005/WeBASE-Chain-Manager/user/newUser
 
 ​ 允许修改私钥用户的备注信息
 
-#### 传输协议规范
+#### 6.2.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/user/update**
@@ -4764,7 +4764,7 @@ http://localhost:5005/WeBASE-Chain-Manager/user/newUser
 - 请求头：Content-type: application/json
 - 返回格式：JSON
 
-#### 请求参数
+#### 6.2.2 请求参数
 
 ***1）入参表***
 
@@ -4788,7 +4788,7 @@ http://localhost:5005/WeBASE-Chain-Manager/user/update
 ```
 
 
-#### 返回参数
+#### 6.2.3 返回参数
 
 ***1）出参表***
 
@@ -4830,14 +4830,14 @@ http://localhost:5005/WeBASE-Chain-Manager/user/update
 
 ​  能够根据appid分页查询当前应用（群组）下的私钥用户列表
 
-#### 传输协议规范
+#### 6.3.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/user/list/{appId}/{pageNumber}/{pageSize}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 6.3.2 请求参数
 
 ***1）入参表***
 
@@ -4856,7 +4856,7 @@ http://localhost:5005/WeBASE-Chain-Manager/user/list/chain_1_group_10/1/10
 
 
 
-#### 返回参数
+#### 6.3.3 返回参数
 
 ***1）出参表***
 
@@ -4933,14 +4933,14 @@ http://localhost:5005/WeBASE-Chain-Manager/user/list/chain_1_group_10/1/10
 
 ​	根据机构编号获取机构下的所有链、前置、群组、合约等信息。
 
-#### 传输协议规范
+#### 7.1.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/agency/{agencyId}/owned**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 7.1.2 请求参数
 
 ***1）入参表***
 
@@ -4957,7 +4957,7 @@ http://localhost:5005/WeBASE-Chain-Manager/agency/10/owned
 ```
 
 
-#### 返回参数
+#### 7.1.3 返回参数
 
 ***1）出参表***
 
@@ -5052,14 +5052,14 @@ http://localhost:5005/WeBASE-Chain-Manager/agency/10/owned
 
 ### 7.2  查询机构列表
 
-#### 传输协议规范
+#### 7.2.1 传输协议规范
 
 - 网络传输协议：使用HTTP协议
 - 请求地址： **/agency/list?chainId={chainId}&groupId={groupId}**
 - 请求方式：GET
 - 返回格式：JSON
 
-#### 请求参数
+#### 7.2.2 请求参数
 
 ***1）入参表***
 
@@ -5083,7 +5083,7 @@ curl --location --request GET 'http://localhost:5005/WeBASE-Chain-Manager/agency
 ```
 
 
-#### 返回参数
+#### 7.2.3 返回参数
 
 ***1）出参表***
 
@@ -5127,13 +5127,13 @@ curl --location --request GET 'http://localhost:5005/WeBASE-Chain-Manager/agency
 ### 7.3 查询机构数
 
 
-#### 传输协议规范
+#### 7.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/agency/count?chainId={chainId}&groupId={groupId}&nodeTypes={nodeTypes}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 请求参数
+#### 7.3.2 请求参数
 
 ***1）入参表***
 
@@ -5149,7 +5149,7 @@ curl --location --request GET 'http://localhost:5005/WeBASE-Chain-Manager/agency
 curl --location --request GET 'http://localhost:5005/WeBASE-Chain-Manager/agency/count?chainId=1&groupId=&nodeTypes=sealer,observer'
 ```
 
-#### 
+#### 7.3.3 返回参数 
 
 ***1）出参表***
 
