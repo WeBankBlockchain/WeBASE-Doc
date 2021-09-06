@@ -26,9 +26,20 @@
 
 #### 检查Docker
 
-Docker 20.10.0及以上版本
+Docker 20.10.0及以上版本，如需安装，参考[Docker安装](#install_docker)
 ```
 $ docker --version
+Docker version 20.10.0, build 7287ab3
+```
+
+**注意**：确保Docker免sudo执行
+
+#### 检查Docker-Compose
+
+Docker-Compose 1.29.2 及以上版本，如需安装，参考[Docker-Compose安装](#docker-compose)
+
+```
+$ docker-compose --version
 Docker version 20.10.0, build 7287ab3
 ```
 
@@ -214,7 +225,7 @@ node.counts=nodeCounts
 
 ```shell
 # 部署并启动所有服务
-python3 deploy.py installDockerAll
+$ python3 deploy.py installDockerAll
 ```
 
 部署完成后可以看到`deploy  has completed`的日志：
@@ -241,10 +252,19 @@ $ python3 deploy.py installDockerAll
 ============================================================
 ```
 
-* 服务启动后，可以根据以下命令检查Docker-Compose运行情况
+* 服务启动后，可以根据以下命令检查Docker-Compose运行情况（不同容器会以不同颜色的日志打印）
 ```Bash
 # 可通过Ctrl + C 取消日志打印
-docker-compose -f docker/docker-compose.yaml logs -f
+$ docker-compose -f docker/docker-compose.yaml logs -f
+
+...
+webase-front-5002  | INFO: Starting ProtocolHandler ["http-nio-5002"]
+webase-front-5002  | Sep 06, 2021 3:18:23 PM org.apache.tomcat.util.net.NioSelectorPool getSharedSelector
+webase-front-5002  | INFO: Using a shared selector for servlet write/read
+mysql-webase-23306 exited with code 0
+webase-web-5000    | wait-for-it.sh: waiting 30 seconds for 127.0.0.1:5001
+webase-web-5000    | wait-for-it.sh: timeout occurred after waiting 30 seconds for 127.0.0.1:5001
+webase-web-5000    | start webase-web now...
 ```
 
 
@@ -274,69 +294,68 @@ docker-compose -f docker/docker-compose.yaml logs -f
 
 成功部署后，可以根据以下步骤**确认各个子服务是否启动成功**
 
-#### 检查各子系统进程
-docker-compose -f xxx logs -f
+#### 检查各子系统容器
 
-通过`docker ps`命令，检查各子系统的进程是否存在
-- 包含：节点进程`nodeXX`，节点前置进程`webase.front`，节点管理服务进程`webase.node.mgr`，节点管理平台`webase-web`的`nginx`进程，以及签名服务进程`webase.sign`
+通过`docker ps`命令，检查各子系统的容器是否存在
+- 包含：节点容器`fiscobcos`，节点前置容器`webase-front`，节点管理服务容器`webase-node-mgr`，节点管理平台容器`webase-web`，以及签名服务容器`webase-sign`
 
-检查方法如下，若无输出，则代表进程未启动，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
+检查方法如下，若无输出，则代表容器未启动，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
 
-- 检查节点进程，此处部署了两个节点node0, node1
+- 检查节点容器，此处部署了两个节点node0, node1
 ```
-$ ps -ef | grep node
-```
-
-输出如下
-```
-root     29977     1  1 17:24 pts/2    00:02:20 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node1/../fisco-bcos -c config.ini
-root     29979     1  1 17:24 pts/2    00:02:23 /root/fisco/webase/webase-deploy/nodes/127.0.0.1/node0/../fisco-bcos -c config.ini
-```
-
-- 检查节点前置webase-front的进程
-```
-$ ps -ef | grep webase.front 
+$ docker ps | grep fiscobcos
 ```
 
 输出如下
 ```
-root     31805     1  0 17:24 pts/2    00:01:30 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.front.Application
+8fc863019565   fiscoorg/fiscobcos:v2.7.2          "/usr/local/bin/fisc…"   About a minute ago   Up About a minute             datahomedeploynodes127.0.0.1node1
+87978ae7050c   fiscoorg/fiscobcos:v2.7.2          "/usr/local/bin/fisc…"   About a minute ago   Up About a minute             datahomedeploynodes127.0.0.1node0
 ```
 
-- 检查节点管理服务webase-node-manager的进程
+- 检查节点前置webase-front的容器
 ```
-$ ps -ef  | grep webase.node.mgr
-```
-
-输出如下
-```
-root      4696     1  0 17:26 pts/2    00:00:40 /usr/local/jdk/bin/java -Djdk.tls.namedGroups=secp256k1 ... conf/:apps/*:lib/* com.webank.webase.node.mgr.Application
-```
-
-- 检查webase-web对应的nginx进程
-```
-$ ps -ef | grep nginx       
+$ docker ps | grep webase-front 
 ```
 
 输出如下
 ```
-root      5141     1  0 Dec08 ?        00:00:00 nginx: master process /usr/sbin/nginx -c /root/fisco/webase/webase-deploy/comm/nginx.conf
+26a131040e58   webasepro/webase-front:v1.5.3      "/wait-for-it.sh 127…"   37 seconds ago   Up 36 seconds             webase-front-5002
 ```
 
-- 检查签名服务webase-sign的进程
+- 检查节点管理服务webase-node-manager的容器
 ```
-$ ps -ef  | grep webase.sign 
+$ docker ps  | grep webase-node.mgr
 ```
 
 输出如下
 ```
-root     30718     1  0 17:24 pts/2    00:00:19 /usr/local/jdk/bin/java ... conf/:apps/*:lib/* com.webank.webase.sign.Application
+cc6bbce73a85   webasepro/webase-node-mgr:v1.5.3   "/wait-for-it.sh 127…"   37 seconds ago   Up 36 seconds             webase-node-mgr-5001
 ```
 
-#### 检查进程端口
-通过`netstat`命令，检查各子系统进程的端口监听情况。
+- 检查webase-web对应的nginx容器
+```
+$ docker ps | grep webase-web       
+```
 
-检查方法如下，若无输出，则代表进程端口监听异常，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
+输出如下
+```
+e056eca7ffa5   webasepro/webase-web:v1.5.3        "/wait-for-it.sh 127…"   2 minutes ago   Up 2 minutes             webase-web-5000
+```
+
+- 检查签名服务webase-sign的容器
+```
+$ docker ps  | grep webase-sign 
+```
+
+输出如下
+```
+49d0650ae904   webasepro/webase-sign:v1.5.3       "/wait-for-it.sh 127…"   37 seconds ago   Up 37 seconds             webase-sign-5004
+```
+
+#### 检查容器端口
+通过`netstat`命令，检查各子系统容器的端口监听情况。
+
+检查方法如下，若无输出，则代表容器端口监听异常，需要到该子系统的日志中[检查日志错误信息](#checklog)，并根据错误提示或本文档的[常见问题](#q&a)进行排查
 
 - 检查节点channel端口(默认为20200)是否已监听
 ```
@@ -413,9 +432,9 @@ tcp6       0      0 :::5004                 :::*                    LISTEN      
 
 ##### 检查服务日志有无错误信息
 
-- 如果各个子服务的进程**已启用**且端口**已监听**，可直接访问下一章节[访问WeBASE](#access)
+- 如果各个子服务的容器**已启用**且端口**已监听**，可直接访问下一章节[访问WeBASE](#access)
 
-- 如果上述检查步骤出现异常，如检查不到进程或端口监听，则需要按[日志路径](#logpath)进入**异常子服务**的日志目录，检查该服务的日志
+- 如果上述检查步骤出现异常，如检查不到容器或端口监听，则需要按[日志路径](#logpath)进入**异常子服务**的日志目录，检查该服务的日志
 
 - 如果检查步骤均无异常，但服务仍无法访问，可以分别检查部署日志`deployLog`，节点前置日志`frontLog`, 节点管理服务日志`nodeMgrLog`进行排查：
   - 检查webase-deploy/log中的**部署日志**，是否在部署时出现错误
@@ -484,6 +503,90 @@ http://{deployIP}:{webPort}
 
 
 ## 附录
+
+
+<span id="install_docker" />
+
+### 安装 Docker
+在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
+
+```Bash
+# 该脚本是 Docker 官方提供的 Linux 自动安装脚本
+bash <(curl -s -L get.docker.com)
+```
+
+在 CentOS/RHEL 8.x 中，使用上面的自动脚本安装时，会出现下面的错误：
+
+```Bash
+Last metadata expiration check: 0:37:43 ago on Sat 22 Feb 2020 07:40:15 PM CST.
+Error: 
+ Problem: package docker-ce-3:19.03.6-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
+  - cannot install the best candidate for the job
+  - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
+  - package containerd.io-1.2.2-3.el7.x86_64 is excluded
+  - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
+  - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages) 
+```
+
+要解决这个问题，需要手动安装 `containerd.io`后，在执行自动安装脚本
+
+```Bash
+# 下载最新的 containerd.io 安装包
+wget https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+
+# 手动安装 containerd.io 
+yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+
+```
+
+<span id="docker-compose"></span>
+
+### Docker-Compose安装
+
+获取Docker-Compose的github仓库提供的二进制文件，其中版本号`1.29.2`可切换到更新版本，`-o`则输出到指定位置
+
+*依赖 curl 进行下载*
+```Bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+
+修改执行权限
+```
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+检测安装是否成功
+```
+$ docker-compose --version
+
+docker-compose version 1.29.2, build 5becea4c
+```
+
+
+<span id="python3"></span>
+### Python部署
+
+python版本要求使用python3.x, 推荐使用python3.6及以上版本
+
+- CentOS
+
+  ```
+  sudo yum install -y python36
+  sudo yum install -y python36-pip
+  ```
+
+- Ubuntu
+
+  ```
+  // 添加仓库，回车继续
+  sudo add-apt-repository ppa:deadsnakes/ppa
+  // 安装python 3.6
+  sudo apt-get install -y python3.6
+  sudo apt-get install -y python3-pip
+  ```
 
 ### 数据库部署
 <span id="mysql-install"></span>
@@ -598,28 +701,6 @@ mysql -utest -p123456 -h localhost -P 3306
 ```sql
 mysql > create database webasenodemanager;
 ```
-
-<span id="python3"></span>
-### 3. Python部署
-
-python版本要求使用python3.x, 推荐使用python3.6及以上版本
-
-- CentOS
-
-  ```
-  sudo yum install -y python36
-  sudo yum install -y python36-pip
-  ```
-
-- Ubuntu
-
-  ```
-  // 添加仓库，回车继续
-  sudo add-apt-repository ppa:deadsnakes/ppa
-  // 安装python 3.6
-  sudo apt-get install -y python3.6
-  sudo apt-get install -y python3-pip
-  ```
 
 <span id="q&a"></span>
 ## 常见问题
@@ -763,4 +844,22 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
 
+
+
+<span id="docker_sudo"></span>
+
+### 12. docker必须使用sudo才能运行，但是sudo下系统环境变量失效
+
+答：可以在root用户下配置环境变量如JAVA_HOME等，或者通过下面操作，尝试创建docker用户组
+
+```
+# 创建docker用户组
+sudo groupadd docker
+# 将当前用户添加到docker用户组
+sudo usermod -aG docker $USER
+# 重启docker服务
+sudo systemctl restart docker
+# 切换或者退出当前账户，重新登入
+exit
+```
 
