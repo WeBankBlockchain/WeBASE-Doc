@@ -15,6 +15,7 @@
 | Docker-Compose | 1.29.2及以上 |
 | Python | Python3.6及以上 |
 | PyMySQL | |
+| MySQL | MySQL-5.6及以上 （可选） |
 
 ### 检查环境
 
@@ -61,7 +62,7 @@ python3 --version
 
 #### PyMySQL部署（Python3.6+）
 
-Python3.6及以上版本，需安装`PyMySQL`依赖包，**若使用Docker启动Mysql，则无需安装PyMySQL**
+Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 - CentOS
 
