@@ -225,7 +225,7 @@ node.counts=nodeCounts
 - 确保**已安装Docker与Docker-Compose，并配置Docker用户组**
 
 ```shell
-# 部署并启动所有服务
+# 部署并启动所有服务（重新安装时需要先停止服务再重新安装，避免端口占用）
 $ python3 deploy.py installDockerAll
 ```
 
