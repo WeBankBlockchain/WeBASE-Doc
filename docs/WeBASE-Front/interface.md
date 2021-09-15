@@ -6554,7 +6554,7 @@ HTTP POST
     "fromBlock": 1,
     "toBlock": 1,
     "topics": {
-        "eventName": "SetName",
+        "eventName": "SetName(uint256,string)",
         "indexed1": {
             "type": "bool",
             "value": true
