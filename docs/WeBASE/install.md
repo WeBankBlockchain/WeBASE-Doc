@@ -797,4 +797,8 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 
 答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
 
+### 12. Ubuntu环境配置数据库
+
+答：执行命令 sudo apt install mysql-server 注意root用户密码的设置。
+
 
