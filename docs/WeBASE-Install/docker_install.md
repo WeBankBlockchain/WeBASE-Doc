@@ -50,7 +50,7 @@ cat /etc/docker/daemon.json
 若提示“目录不存在”、“该文件不存在”或“文件内容为空”属于正常现象，则说明未配置过Docker镜像源
 
 ##### 新建/修改Docker镜像源配置
-以中科大的镜像源为例（若权限不足，则在命令前加上sudo）
+以中科大的镜像源为例（若提示权限不足(Permission Denied)，则在命令前加上sudo）
 ```Bash
 # 若目录不存在
 mkdir -p /etc/docker
@@ -71,11 +71,11 @@ systemctl restart docker.service
 
 #### 检查Docker-Compose
 
-Docker-Compose 1.29.2 及以上版本，如需安装，参考[Docker-Compose安装](#docker-compose)
+Docker-Compose 1.29.2 及以上版本，如需安装，参考[Docker-Compose安装](#docker-compose-install)
 
 ```
 $ docker-compose --version
-Docker version 20.10.0, build 7287ab3
+docker-compose version 1.29.2, build 5becea4c
 ```
 
 **注意**：确保Docker免sudo执行，参考[Docker用户组配置](#docker_sudo)
@@ -270,9 +270,9 @@ $ python3 deploy.py pullDockerAll
 
 **备注：** 
 - 部署脚本会拉取相关Docker镜像进行部署，需保持网络畅通
-- 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
+- 首次部署需要初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
-- **不要用sudo执行脚本**，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
+- **不要用sudo执行脚本**，例如`sudo python3 deploy.py installDockerAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
 - 确保**已安装Docker与Docker-Compose、配置Docker国内镜像源并配置Docker用户组**
 
 ```shell
@@ -304,7 +304,7 @@ $ python3 deploy.py installDockerAll
 ============================================================
 ```
 
-* 服务启动后，可以根据以下命令检查Docker-Compose运行情况（不同容器会以不同颜色的日志打印）
+* 服务启动后，通过`docker-compose -f docker/docker-compose.yaml logs -f`命令查看Docker-Compose运行日志（不同容器会以不同颜色的日志打印）
 ```Bash
 # 可通过Ctrl + C 取消日志打印
 $ docker-compose -f docker/docker-compose.yaml logs -f
@@ -327,18 +327,12 @@ webase-web-5000    | start webase-web now...
 部署并启动所有服务        python3 deploy.py installDockerAll
 停止一键部署的所有服务    python3 deploy.py stopDockerAll
 启动一键部署的所有服务    python3 deploy.py startDockerAll
-# 各子服务启停
-启动FISCO-BCOS节点:      python3 deploy.py startNode
-停止FISCO-BCOS节点:      python3 deploy.py stopNode
-启动WeBASE-Web:          python3 deploy.py startWeb
-停止WeBASE-Web:          python3 deploy.py stopWeb
-启动WeBASE-Node-Manager: python3 deploy.py startManager
-停止WeBASE-Node-Manager: python3 deploy.py stopManager
-启动WeBASE-Sign:        python3 deploy.py startSign
-停止WeBASE-Sign:        python3 deploy.py stopSign
-启动WeBASE-Front:        python3 deploy.py startFront
-停止WeBASE-Front:        python3 deploy.py stopFront
-
+# 节点的启停
+启动所有FISCO-BCOS节点:      python3 deploy.py startNode
+停止所有FISCO-BCOS节点:      python3 deploy.py stopNode
+# WeBASE服务的启停
+启动所有WeBASE服务:      python3 deploy.py dockerStart
+停止所有WeBASE服务:      python3 deploy.py dockerStop
 ```
 
 
@@ -594,7 +588,7 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 
 ```
 
-<span id="docker-compose"></span>
+<span id="docker-compose-install"></span>
 
 ### Docker-Compose安装
 
@@ -789,21 +783,9 @@ ImportError: No module named 'pymysql'
 
 ### 3. 部署时某个组件失败，重新部署提示端口被占用问题
 
-答：因为有个别组件是启动成功的，需先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py installAll”部署全部。
+答：因为有个别组件是启动成功的，需先执行“python deploy.py stopDockerAll”将其停止，再执行“python deploy.py installDockerAll”部署全部。
 
-### 4. 管理平台启动时Nginx报错
-
-```
-...
-==============      WeBASE-Web      start...  ==============
-Traceback (most recent call last):
-...
-Exception: execute cmd  error ,cmd : sudo /usr/local/nginx/sbin/nginx -c /data/app/webase-deploy/comm/nginx.conf, status is 256 ,output is nginx: [emerg] open() "/etc/nginx/mime.types" failed (2: No such file or directory) in /data/app/webase-deploy/comm/nginx.conf:13
-```
-
-答：缺少/etc/nginx/mime.types文件，建议重装nginx。
-
-### 5. 部署时数据库访问报错
+### 4. 部署时数据库访问报错
 
 ```
 ...
@@ -820,7 +802,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认数据库用户名和密码
 
-### 6. 节点sdk目录不存在
+### 5. 节点sdk目录不存在
 
 ```
 ...
@@ -829,78 +811,20 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、sdk.key、sdk.crt、node.crt、node.key）复制到该sdk目录，再重新部署。如果是国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）。
 
-### 7. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
-```
-...
-nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
-```
-
-答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK/Java-SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
-
-
-### 8.前置启动报错“Processing bcos message timeout”
-
-```
-...
-[main] ERROR SpringApplication() - Application startup failed
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractController': Unsatisfied dependency expressed through field 'contractService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractService': Unsatisfied dependency expressed through field 'web3jMap'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'web3j' defined in class path resource [com/webank/webase/front/config/Web3Config.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [java.util.HashMap]: Factory method 'web3j' threw exception; nested exception is java.io.IOException: Processing bcos message timeout
-...
-```
-
-答：一些OpenJDK版本缺少相关包，导致节点连接异常。推荐使用[OracleJDK](#jdk)。
-
-### 9. 服务进程起来了，服务不正常
+### 6. 服务进程起来了，服务不正常
 
 ```
 ...
 ======= WeBASE-Node-Manager  starting . Please check through the log file (default path:./webase-node-mgr/log/). =======
 ```
 
-答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。
-
-### 10. WeBASE-Web登录页面的验证码加载不出来
-
-答：检查WeBASE-Node-Manager后台服务是否已启动成功。若启动成功，检查后台日志：
-
-* 进入 `webase-node-mgr` 目录下，执行 `bash status.sh` 检查服务是否启动，如果服务没有启动，运行 `bash start.sh` 启动服务；
-
-* 如果服务已经启动，按照如下修改日志级别
-    * `webase-node-mgr/conf/application.yml`
-    
-    ```
-    #log config
-    logging:
-      level:
-        com.webank.webase.node.mgr: debug
-    ```
-    
-    * `webase-node-mgr/conf/log/log4j2.xml`
-
-    ```
-    <Loggers>
-    <Root level="debug">
-      <AppenderRef ref="asyncInfo"/>
-      <AppenderRef ref="asyncErrorLog"/>
-    </Root>
-  </Loggers>
-  ```
-
-* 修改日志level后，重启服务 `bash stop.sh && bash start.sh`
-
-* 重启服务后，检查日志文件 `log/WeBASE-Node-Manager.log`。
-  
-    * 检查是否有异常信息。如果有异常信息，根据具体的异常信息检查环境配置，或者通过搜索引擎进行排查。
-
-### 11. WeBASE 国内镜像与CDN加速服务
-
-答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
-
+答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopDockerAll”将其停止，再执行“python deploy.py startDockerAll”重启。
 
 
 <span id="docker_sudo"></span>
 
-### 12. docker必须使用sudo才能运行，但是sudo下系统环境变量失效
+### 7. docker必须使用sudo才能运行，但是sudo下系统环境变量失效
 
 答：可以在root用户下配置环境变量如JAVA_HOME等，或者通过下面操作，尝试创建docker用户组
 
@@ -915,3 +839,4 @@ sudo systemctl restart docker
 exit
 ```
 
+*欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
