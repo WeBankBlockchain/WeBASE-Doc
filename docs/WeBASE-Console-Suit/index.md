@@ -924,8 +924,25 @@ $ java -jar demo-exec.jar
 ```
 *若执行jar时，提示java.io.IOException: Stream closed错误，可忽略该错误*
 
+#### 脚手架使用过程Q&A
 
-#### 如何指定合约调用方
+##### 使用maven时编译报错
+Q1：从webase 导出java工程默认是gradle 打包目录结构，可以替换成maven版本。eclipse运行的时候报如下错误
+
+![image](https://user-images.githubusercontent.com/85043867/134447563-2b368fb0-c871-45a9-89e0-355a2e2a07e5.png)
+
+
+A1：造成该原因是代码编辑器问题，默认导出是IDEA的，需要引入相关的依赖
+
+```
+<dependency>
+	<groupId>org.jetbrains.kotlin</groupId>
+	<artifactId>kotlin-stdlib</artifactId>
+	<version>1.5.21</version>
+</dependency>
+```
+
+##### 如何指定合约调用方
 Q2：WEBASE导出的Java工程，有些合约方法是需要手动指定调用方的（指定私钥），比如合约有个sign方法，在生成的Java工程的raw包下的Service中 sign 方法如下
 
 ```
@@ -963,4 +980,6 @@ private CryptoKeyPair loadAccountFromHexPrivateKey(int cryptoType, String hexPri
    return cryptoSuite.getKeyPairFactory().createKeyPair(hexPrivateKey);
 }
 ```
+
+
 
