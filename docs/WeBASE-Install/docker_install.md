@@ -248,7 +248,23 @@ node.counts=nodeCounts
 ```
 
 
+## 拉取镜像
+
+* 在上文已配置Docker镜像源为国内镜像源后，我们执行`pullDockerAll`命令，部署服务将拉取所需的Docker镜像，包括 `fiscoorg/fiscobcos, webasepro/webase-front, webasepro/webase-node-mgr, webasepro/webase-sign, webasepro/webase-web`，并根据配置确认是否拉取 mysql:5.6 的数据库镜像
+
+**备注：**
+- 请确认已配置Docker镜像源为国内镜像源，以提高拉取镜像的速度。可通过`cat /etc/docker/daemon.json`进行查看
+- 拉取镜像开始前需要输入一个拉取超时时间，如60，即60s拉取未完成则提示超时
+- 超时拉取的镜像，可通过`docker pull`进行手动拉取，如手动拉取webase-front v1.5.3的镜像为`docker pull webasepro/webase-front:v1.5.3`
+
+```Bash
+# 拉取时，可输入拉取超时时间，默认为60s
+$ python3 deploy.py pullDockerAll
+```
+
 ## 部署
+
+### 
 
 * 执行`installDockerAll`命令，部署服务将**使用Docker**自动部署并启动 FISCO BCOS节点 与 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
@@ -257,14 +273,14 @@ node.counts=nodeCounts
 - 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
 - **不要用sudo执行脚本**，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
-- 确保**已安装Docker与Docker-Compose，并配置Docker用户组**
+- 确保**已安装Docker与Docker-Compose、配置Docker国内镜像源并配置Docker用户组**
 
 ```shell
 # 部署并启动所有服务（重新安装时需要先停止服务再重新安装，避免端口占用）
 $ python3 deploy.py installDockerAll
 ```
 
-部署完成后可以看到`deploy  has completed`的日志：
+部署完成后可以看到`deploy has completed`的日志：
 
 ```shell
 $ python3 deploy.py installDockerAll
@@ -531,7 +547,7 @@ http://{deployIP}:{webPort}
 **备注：** 
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
-  - 使用云服务厂商的服务器时，需要开通网络安全组的对应端口。如开放webase使用的5000端口
+  - 使用云服务厂商的服务器时，需要开通网络安全组的对应端口。如开放WeBASE管理台使用的5000端口
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
   - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
