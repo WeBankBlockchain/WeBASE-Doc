@@ -924,3 +924,21 @@ $ java -jar demo-exec.jar
 ```
 *若执行jar时，提示java.io.IOException: Stream closed错误，可忽略该错误*
 
+#### 使用过程中遇到问题&解决方案
+
+Q1：从webase 导出java工程默认是gradle 打包目录结构，可以替换成maven版本。eclipse运行的时候报如下错误
+
+![image](https://user-images.githubusercontent.com/85043867/134447563-2b368fb0-c871-45a9-89e0-355a2e2a07e5.png)
+
+
+A1：造成该原因是代码编辑器问题，默认导出是IDEA的，需要引入相关的依赖
+
+```
+<dependency>
+	<groupId>org.jetbrains.kotlin</groupId>
+	<artifactId>kotlin-stdlib</artifactId>
+	<version>1.5.21</version>
+</dependency>
+```
+
+
