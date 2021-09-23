@@ -924,8 +924,9 @@ $ java -jar demo-exec.jar
 ```
 *若执行jar时，提示java.io.IOException: Stream closed错误，可忽略该错误*
 
-#### 使用过程中遇到问题&解决方案
+#### 脚手架使用过程Q&A
 
+##### 使用maven时编译报错
 Q1：从webase 导出java工程默认是gradle 打包目录结构，可以替换成maven版本。eclipse运行的时候报如下错误
 
 ![image](https://user-images.githubusercontent.com/85043867/134447563-2b368fb0-c871-45a9-89e0-355a2e2a07e5.png)
@@ -940,5 +941,45 @@ A1：造成该原因是代码编辑器问题，默认导出是IDEA的，需要�
 	<version>1.5.21</version>
 </dependency>
 ```
+
+##### 如何指定合约调用方
+Q2：WEBASE导出的Java工程，有些合约方法是需要手动指定调用方的（指定私钥），比如合约有个sign方法，在生成的Java工程的raw包下的Service中 sign 方法如下
+
+```
+  public TransactionReceipt sign(String _certificateNumber) {
+        final Function function = new Function(
+                FUNC_SIGN, 
+                Arrays.<Type>asList(new Utf8String(_certificateNumber)),
+                Collections.<TypeReference<?>>emptyList());
+        return executeTransaction(function);
+  }
+```
+
+但是sign方法的调用方却需要手动指定，如何指定？
+
+A1：可以根据导出的Java工程raw包下的合约service 的构造器，构造一个传入调用方私钥的对象然后调用，部分代码如下
+
+```
+// 1. 获取用户私钥信息,调用WEBASE-SDK 的newUser方法会得到用户私钥信息，存入业务表。得到的privateKey 是base64编码格式
+UserInfoEntity dbUser = userInfoDao.selectById(userId);
+String privateKey = dbUser.getPrivateKey();
+// 2. 将上步的私钥base64转16进制
+String hexPrivateKey = new String(Base64.getDecoder().decode(privateKey));
+// 3. 加载私钥方法获取CryptoKeyPair对象，以非国密为例
+CryptoKeyPair loadAccountFromHexPrivateKey = loadAccountFromHexPrivateKey(CryptoType.ECDSA_TYPE, hexPrivateKey);
+// 4. 传入私钥对象来构造一个MarriageEvidence对象，并调用sign方法
+MarriageEvidence marriageEvidence = new MarriageEvidence(template.getContractAddress(), client, loadAccountFromHexPrivateKey);
+TransactionReceipt sign = marriageEvidence.sign(req.getCertificateNumber());
+
+private CryptoKeyPair loadAccountFromHexPrivateKey(int cryptoType, String hexPrivateKey) {
+   // 根据cryptoType创建cryptoSuite，cryptoType目前支持：
+   // 1. CryptoType.ECDSA_TYPE: 用于创建非国密类型的CryptoSuite
+   // 2. CryptoType.SM_TYPE:    用于创建国密类型的CryptoSuite
+   CryptoSuite cryptoSuite = new CryptoSuite(cryptoType);
+   // 从十六进制私钥字符串hexPrivateKey加载私钥对象
+   return cryptoSuite.getKeyPairFactory().createKeyPair(hexPrivateKey);
+}
+```
+
 
 
