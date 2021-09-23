@@ -896,8 +896,6 @@ grep "scpConfigHostList" log/WeBASE-Node-Manager.log
 grep "batchAddNode" log/WeBASE-Node-Manager.log
 ```
 
+*欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
 
 
-
-
->>>>>>> upstream/master
