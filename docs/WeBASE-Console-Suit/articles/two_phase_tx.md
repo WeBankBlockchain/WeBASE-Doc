@@ -18,9 +18,14 @@
 在发起交易之前，首先要确保在链上部署一个可调用的合约。这里以WeBASE-Front “合约仓库-工具合约”中的 “HelloWorld” 合约为例，部署一份 HelloWorld 合约。
 我们在 WeBASE-Front 的合约IDE中编译一份 HelloWorld 合约并完成部署操作，如下图所示：
 
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/ide.png)
+
 获得合约地址、合约ABI等信息后，我们根据 WeBASE-Front 的接口文档指引，调用获取交易编码接口。
+
 #### 查看接口文档
 两阶段交易中，第一步交易编码并签名可以通过 WeBASE-Front 的 `/trans/convertRawTxStr/withSign` 接口构造一个已签名的交易体，接口文档简介如下：
+
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/with-sign-api.png)
 
 值得一提的是，调用 `/trans/convertRawTxStr/withSign` 接口时：
 - 如果传入了 signUserId 非空，则返回的交易体编码值是通过signUserId对应私钥签名后的交易体编码值。
@@ -28,15 +33,20 @@
 
 获取已签名的交易编码值后，就可以进行第二步的提交交易操作了。
 
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/signed-tx-api.png)
+
 在 WeBASE-Front 中，我们可以通过 `/trans/signed-transaction` 接口，将已签名的交易体编码值，完成交易上链并获得交易回执。
 
 上述各个接口的调用方法都可以在 WeBASE-Front 的接口文档中找到（https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html）。
 
 ### |结合WeBASE-Front接口进行“两阶段交易”
+
 #### 获取交易编码值
 下面以 WeBASE-Sign 签名的获取交易编码接口( `/trans/convertRawTxStr/withSign` )为例，获取未签名的交易编码值。
 
 我们可以访问 WeBASE-Front 的 Swagger 进行接口调用（如，http://localhost:5002/WeBASE-Front/swagger-ui.html），找到Swagger接口列表中的"transaction interface"交易接口一栏，点开  /trans/convertRawTxStr/withSign 即可。
+
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/swagger.png)
 
 在文章开头我们提到，“两阶段交易”的第一阶段是交易编码并通过私钥对编码值签名。
 
@@ -46,7 +56,11 @@
 
 首先，点开Swagger中的 /trans/convertRawTxStr/withSign 接口，再填入参数包括合约ABI、合约地址、函数名及函数入参、群组ID和WeBASE-Sign的私钥用户ID signUserId，点击"Try it out"输入参数，删除不必要的字段。注意，其中signUserId为空字符串。
 
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/swagger-empty-id.png)
+
 点击"Execute"即可发起调用，获得未签名的交易编码值。接口返回值为：
+
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/unsigned-code.png)
 
 拿到未签名的交易编码值之后，我们接下来通过 Java-SDK 对编码值进行签名。
 
@@ -80,7 +94,11 @@
 #### 提交交易
 有了已签名的交易编码值后，我们可以调用 `/trans/signed-transaction` 接口，将该交易发到链上，获得交易回执。这里我们继续使用 Swagger 调用该接口。
 
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/submit-signed.png)
+
 提交请求后，接口返回了交易的回执。可以根据交易回执判断交易是否执行成功。
+
+![](../../images/WeBASE-Console-Suit/articles/two_phase_tx/receipt.png)
 
 当看到返回的交易回执中显示 status 为 0x0，也就意味着交易执行成功了。
 
