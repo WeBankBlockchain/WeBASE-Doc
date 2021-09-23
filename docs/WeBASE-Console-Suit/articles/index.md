@@ -1,8 +1,8 @@
-# 深入浅出WeBASE
+# WeBASE社区文章
 
 ```eval_rst
 .. toctree::
    :maxdepth: 1
 
-   two_phase_tx.md
+   ./two_phase_tx.md
 ```
