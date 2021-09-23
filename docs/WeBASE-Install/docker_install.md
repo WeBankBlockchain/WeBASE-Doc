@@ -1,8 +1,8 @@
 # 一键Docker部署
 
-​	一键部署可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
+​	一键部署（Docker模式）可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
-​	一键部署会搭建：节点（FISCO-BCOS）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
+​	一键部署（Docker模式）会搭建：节点（FISCO-BCOS）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
 <img src="../../_images/one_click_structure.png" width="700">
 
@@ -21,9 +21,11 @@
 
 #### 平台要求
 
-推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
+推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署（Docker模式）脚本依赖Docker与Docker-Compose进行容器的编排，将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
 
 其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, dos2unix`依赖项后重试
+
+*由于WeBASE Docker镜像中自带Java环境，无需在宿主机中配置Java环境；同时支持使用Docker启动一个新的mysql服务*
 
 #### 检查Docker
 
@@ -33,7 +35,39 @@ $ docker --version
 Docker version 20.10.0, build 7287ab3
 ```
 
-**注意**：确保Docker免sudo执行
+**注意**：确保Docker免sudo执行，参考[Docker用户组配置](#docker_sudo)
+
+#### 配置Docker国内镜像源
+
+由于部分网络直接访问DockerHub官方镜像源拉取镜像的速度较慢，为提高部署的成功率，需要配置Docker的镜像源为国内的镜像源。
+
+##### 查看镜像源配置
+```Bash
+cat /etc/docker/daemon.json
+
+{}
+```
+若提示“目录不存在”、“该文件不存在”或“文件内容为空”属于正常现象，则说明未配置过Docker镜像源
+
+##### 新建/修改Docker镜像源配置
+以中科大的镜像源为例（若权限不足，则在命令前加上sudo）
+```Bash
+# 若目录不存在
+mkdir -p /etc/docker
+# 创建/修改daemon.json配置文件
+vi /etc/docker/daemon.json
+
+# 配置内容如下：
+{
+"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+}
+```
+
+##### 重新加载配置文件，重启docker服务
+```Bash
+systemctl daemon-reload
+systemctl restart docker.service
+```
 
 #### 检查Docker-Compose
 
@@ -44,7 +78,7 @@ $ docker-compose --version
 Docker version 20.10.0, build 7287ab3
 ```
 
-**注意**：确保Docker免sudo执行
+**注意**：确保Docker免sudo执行，参考[Docker用户组配置](#docker_sudo)
 
 
 #### 检查Python
@@ -110,7 +144,7 @@ cd webase-deploy
 
 ## 修改配置
 
-① 若未安装mysql，可在配置文件中启用`docker.mysql=1`，并配置Docker中Mysql端口与密码，使用Docker启动Mysql。若使用已安装的Mysql则在配置文件中webase-node-mgr和webase-sign填入对应配置；
+① 若未安装mysql，可在配置文件中启用`docker.mysql=1`，并配置Docker中Mysql端口与密码，**使用Docker启动Mysql**。若使用已安装的Mysql则在配置文件中webase-node-mgr和webase-sign填入对应配置；
 
 ② 修改配置文件（`vi common.properties`）；
 
@@ -164,6 +198,7 @@ sign.mysql.user=dbUsername
 sign.mysql.password=dbPassword
 sign.mysql.database=webasesign
 
+
 # 节点前置子系统h2数据库名和所属机构
 front.h2.name=webasefront
 front.org=fisco
@@ -207,7 +242,7 @@ node.dir=node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.7.2
+fisco.version=2.8.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
@@ -215,7 +250,7 @@ node.counts=nodeCounts
 
 ## 部署
 
-* 执行`installDockerAll`命令，部署服务将**使用Docker**自动部并启动署FISCO BCOS节点，并部署 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
+* 执行`installDockerAll`命令，部署服务将**使用Docker**自动部署并启动 FISCO BCOS节点 与 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
 **备注：** 
 - 部署脚本会拉取相关Docker镜像进行部署，需保持网络畅通
@@ -860,7 +895,7 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 # 重启docker服务
 sudo systemctl restart docker
-# 切换或者退出当前账户，重新登入
+# 切换或者退出当前账户，重新ssh登入
 exit
 ```
 
