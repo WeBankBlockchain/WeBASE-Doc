@@ -1,8 +1,8 @@
 # 一键Docker部署
 
-​	一键部署可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
+​	一键部署（Docker模式）可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
-​	一键部署会搭建：节点（FISCO-BCOS）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
+​	一键部署（Docker模式）会搭建：节点（FISCO-BCOS）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
 <img src="../../_images/one_click_structure.png" width="700">
 
@@ -21,9 +21,11 @@
 
 #### 平台要求
 
-推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
+推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署（Docker模式）脚本依赖Docker与Docker-Compose进行容器的编排，将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
 
 其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, dos2unix`依赖项后重试
+
+*由于WeBASE Docker镜像中自带Java环境，无需在宿主机中配置Java环境；同时支持使用Docker启动一个新的mysql服务*
 
 #### 检查Docker
 
@@ -33,18 +35,50 @@ $ docker --version
 Docker version 20.10.0, build 7287ab3
 ```
 
-**注意**：确保Docker免sudo执行
+**注意**：确保Docker免sudo执行，参考[Docker用户组配置](#docker_sudo)
+
+#### 配置Docker国内镜像源
+
+由于部分网络直接访问DockerHub官方镜像源拉取镜像的速度较慢，为提高部署的成功率，需要配置Docker的镜像源为国内的镜像源。
+
+##### 查看镜像源配置
+```Bash
+cat /etc/docker/daemon.json
+
+{}
+```
+若提示“目录不存在”、“该文件不存在”或“文件内容为空”属于正常现象，则说明未配置过Docker镜像源
+
+##### 新建/修改Docker镜像源配置
+以中科大的镜像源为例（若提示权限不足(Permission Denied)，则在命令前加上sudo）
+```Bash
+# 若目录不存在
+mkdir -p /etc/docker
+# 创建/修改daemon.json配置文件
+vi /etc/docker/daemon.json
+
+# 配置内容如下：
+{
+"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+}
+```
+
+##### 重新加载配置文件，重启docker服务
+```Bash
+systemctl daemon-reload
+systemctl restart docker.service
+```
 
 #### 检查Docker-Compose
 
-Docker-Compose 1.29.2 及以上版本，如需安装，参考[Docker-Compose安装](#docker-compose)
+Docker-Compose 1.29.2 及以上版本，如需安装，参考[Docker-Compose安装](#docker-compose-install)
 
 ```
 $ docker-compose --version
-Docker version 20.10.0, build 7287ab3
+docker-compose version 1.29.2, build 5becea4c
 ```
 
-**注意**：确保Docker免sudo执行
+**注意**：确保Docker免sudo执行，参考[Docker用户组配置](#docker_sudo)
 
 
 #### 检查Python
@@ -110,7 +144,7 @@ cd webase-deploy
 
 ## 修改配置
 
-① 若未安装mysql，可在配置文件中启用`docker.mysql=1`，并配置Docker中Mysql端口与密码，使用Docker启动Mysql。若使用已安装的Mysql则在配置文件中webase-node-mgr和webase-sign填入对应配置；
+① 若未安装mysql，可在配置文件中启用`docker.mysql=1`，并配置Docker中Mysql端口与密码，**使用Docker启动Mysql**。若使用已安装的Mysql则在配置文件中webase-node-mgr和webase-sign填入对应配置；
 
 ② 修改配置文件（`vi common.properties`）；
 
@@ -164,6 +198,7 @@ sign.mysql.user=dbUsername
 sign.mysql.password=dbPassword
 sign.mysql.database=webasesign
 
+
 # 节点前置子系统h2数据库名和所属机构
 front.h2.name=webasefront
 front.org=fisco
@@ -207,29 +242,45 @@ node.dir=node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.7.2
+fisco.version=2.8.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
 
 
+## 拉取镜像
+
+* 在上文已配置Docker镜像源为国内镜像源后，我们执行`pullDockerAll`命令，部署服务将拉取所需的Docker镜像，包括 `fiscoorg/fiscobcos, webasepro/webase-front, webasepro/webase-node-mgr, webasepro/webase-sign, webasepro/webase-web`，并根据配置确认是否拉取 mysql:5.6 的数据库镜像
+
+**备注：**
+- 请确认已配置Docker镜像源为国内镜像源，以提高拉取镜像的速度。可通过`cat /etc/docker/daemon.json`进行查看
+- 拉取镜像开始前需要输入一个拉取超时时间，如60，即60s拉取未完成则提示超时
+- 超时拉取的镜像，可通过`docker pull`进行手动拉取，如手动拉取webase-front v1.5.3的镜像为`docker pull webasepro/webase-front:v1.5.3`
+
+```Bash
+# 拉取时，可输入拉取超时时间，默认为60s
+$ python3 deploy.py pullDockerAll
+```
+
 ## 部署
 
-* 执行`installDockerAll`命令，部署服务将**使用Docker**自动部并启动署FISCO BCOS节点，并部署 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
+### 
+
+* 执行`installDockerAll`命令，部署服务将**使用Docker**自动部署并启动 FISCO BCOS节点 与 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
 **备注：** 
 - 部署脚本会拉取相关Docker镜像进行部署，需保持网络畅通
-- 首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作
+- 首次部署需要初始化数据库，重复部署时可以根据提示不重复操作
 - 部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的[常见问题](#q&a)进行排查
-- **不要用sudo执行脚本**，例如`sudo python3 deploy.py installAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
-- 确保**已安装Docker与Docker-Compose，并配置Docker用户组**
+- **不要用sudo执行脚本**，例如`sudo python3 deploy.py installDockerAll`（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）
+- 确保**已安装Docker与Docker-Compose、配置Docker国内镜像源并配置Docker用户组**
 
 ```shell
 # 部署并启动所有服务（重新安装时需要先停止服务再重新安装，避免端口占用）
 $ python3 deploy.py installDockerAll
 ```
 
-部署完成后可以看到`deploy  has completed`的日志：
+部署完成后可以看到`deploy has completed`的日志：
 
 ```shell
 $ python3 deploy.py installDockerAll
@@ -253,7 +304,7 @@ $ python3 deploy.py installDockerAll
 ============================================================
 ```
 
-* 服务启动后，可以根据以下命令检查Docker-Compose运行情况（不同容器会以不同颜色的日志打印）
+* 服务启动后，通过`docker-compose -f docker/docker-compose.yaml logs -f`命令查看Docker-Compose运行日志（不同容器会以不同颜色的日志打印）
 ```Bash
 # 可通过Ctrl + C 取消日志打印
 $ docker-compose -f docker/docker-compose.yaml logs -f
@@ -276,18 +327,12 @@ webase-web-5000    | start webase-web now...
 部署并启动所有服务        python3 deploy.py installDockerAll
 停止一键部署的所有服务    python3 deploy.py stopDockerAll
 启动一键部署的所有服务    python3 deploy.py startDockerAll
-# 各子服务启停
-启动FISCO-BCOS节点:      python3 deploy.py startNode
-停止FISCO-BCOS节点:      python3 deploy.py stopNode
-启动WeBASE-Web:          python3 deploy.py startWeb
-停止WeBASE-Web:          python3 deploy.py stopWeb
-启动WeBASE-Node-Manager: python3 deploy.py startManager
-停止WeBASE-Node-Manager: python3 deploy.py stopManager
-启动WeBASE-Sign:        python3 deploy.py startSign
-停止WeBASE-Sign:        python3 deploy.py stopSign
-启动WeBASE-Front:        python3 deploy.py startFront
-停止WeBASE-Front:        python3 deploy.py stopFront
-
+# 节点的启停
+启动所有FISCO-BCOS节点:      python3 deploy.py startNode
+停止所有FISCO-BCOS节点:      python3 deploy.py stopNode
+# WeBASE服务的启停
+启动所有WeBASE服务:      python3 deploy.py dockerStart
+停止所有WeBASE服务:      python3 deploy.py dockerStop
 ```
 
 
@@ -496,7 +541,7 @@ http://{deployIP}:{webPort}
 **备注：** 
 
 - 部署服务器IP和管理平台服务端口需对应修改，网络策略需开通
-  - 使用云服务厂商的服务器时，需要开通网络安全组的对应端口。如开放webase使用的5000端口
+  - 使用云服务厂商的服务器时，需要开通网络安全组的对应端口。如开放WeBASE管理台使用的5000端口
 - WeBASE管理平台使用说明请查看[使用手册](../WeBASE-Console-Suit/index.html#id13)（获取WeBASE管理平台默认账号和密码，并初始化系统配置）
   - 默认账号为`admin`，默认密码为`Abcd1234`。首次登陆要求重置密码
   - 添加节点前置WeBASE-Front到WeBASE管理平台；一键部署时，节点前置与节点管理服务默认是同机部署，添加前置则填写IP为`127.0.0.1`，默认端口为`5002`。参考上文中`common.properties`的配置项`front.port={frontPort}`
@@ -543,7 +588,7 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 
 ```
 
-<span id="docker-compose"></span>
+<span id="docker-compose-install"></span>
 
 ### Docker-Compose安装
 
@@ -738,21 +783,9 @@ ImportError: No module named 'pymysql'
 
 ### 3. 部署时某个组件失败，重新部署提示端口被占用问题
 
-答：因为有个别组件是启动成功的，需先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py installAll”部署全部。
+答：因为有个别组件是启动成功的，需先执行“python deploy.py stopDockerAll”将其停止，再执行“python deploy.py installDockerAll”部署全部。
 
-### 4. 管理平台启动时Nginx报错
-
-```
-...
-==============      WeBASE-Web      start...  ==============
-Traceback (most recent call last):
-...
-Exception: execute cmd  error ,cmd : sudo /usr/local/nginx/sbin/nginx -c /data/app/webase-deploy/comm/nginx.conf, status is 256 ,output is nginx: [emerg] open() "/etc/nginx/mime.types" failed (2: No such file or directory) in /data/app/webase-deploy/comm/nginx.conf:13
-```
-
-答：缺少/etc/nginx/mime.types文件，建议重装nginx。
-
-### 5. 部署时数据库访问报错
+### 4. 部署时数据库访问报错
 
 ```
 ...
@@ -769,7 +802,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认数据库用户名和密码
 
-### 6. 节点sdk目录不存在
+### 5. 节点sdk目录不存在
 
 ```
 ...
@@ -778,78 +811,20 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 
 答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、sdk.key、sdk.crt、node.crt、node.key）复制到该sdk目录，再重新部署。如果是国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）。
 
-### 7. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
-```
-...
-nested exception is javax.net.ssl.SSLException: Failed to initialize the client-side SSLContext: Input stream not contain valid certificates.
-```
-
-答：CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK/Java-SDK无法正常连接区块链节点，因此在使用CentOS操作系统时，推荐使用[OracleJDK](#jdk)。
-
-
-### 8.前置启动报错“Processing bcos message timeout”
-
-```
-...
-[main] ERROR SpringApplication() - Application startup failed
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractController': Unsatisfied dependency expressed through field 'contractService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'contractService': Unsatisfied dependency expressed through field 'web3jMap'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'web3j' defined in class path resource [com/webank/webase/front/config/Web3Config.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [java.util.HashMap]: Factory method 'web3j' threw exception; nested exception is java.io.IOException: Processing bcos message timeout
-...
-```
-
-答：一些OpenJDK版本缺少相关包，导致节点连接异常。推荐使用[OracleJDK](#jdk)。
-
-### 9. 服务进程起来了，服务不正常
+### 6. 服务进程起来了，服务不正常
 
 ```
 ...
 ======= WeBASE-Node-Manager  starting . Please check through the log file (default path:./webase-node-mgr/log/). =======
 ```
 
-答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopAll”将其停止，再执行“python deploy.py startAll”重启。
-
-### 10. WeBASE-Web登录页面的验证码加载不出来
-
-答：检查WeBASE-Node-Manager后台服务是否已启动成功。若启动成功，检查后台日志：
-
-* 进入 `webase-node-mgr` 目录下，执行 `bash status.sh` 检查服务是否启动，如果服务没有启动，运行 `bash start.sh` 启动服务；
-
-* 如果服务已经启动，按照如下修改日志级别
-    * `webase-node-mgr/conf/application.yml`
-    
-    ```
-    #log config
-    logging:
-      level:
-        com.webank.webase.node.mgr: debug
-    ```
-    
-    * `webase-node-mgr/conf/log/log4j2.xml`
-
-    ```
-    <Loggers>
-    <Root level="debug">
-      <AppenderRef ref="asyncInfo"/>
-      <AppenderRef ref="asyncErrorLog"/>
-    </Root>
-  </Loggers>
-  ```
-
-* 修改日志level后，重启服务 `bash stop.sh && bash start.sh`
-
-* 重启服务后，检查日志文件 `log/WeBASE-Node-Manager.log`。
-  
-    * 检查是否有异常信息。如果有异常信息，根据具体的异常信息检查环境配置，或者通过搜索引擎进行排查。
-
-### 11. WeBASE 国内镜像与CDN加速服务
-
-答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
-
+答：查看日志，确认问题原因。确认后修改重启，如果重启提示服务进程在运行，先执行“python deploy.py stopDockerAll”将其停止，再执行“python deploy.py startDockerAll”重启。
 
 
 <span id="docker_sudo"></span>
 
-### 12. docker必须使用sudo才能运行，但是sudo下系统环境变量失效
+### 7. docker必须使用sudo才能运行，但是sudo下系统环境变量失效
 
 答：可以在root用户下配置环境变量如JAVA_HOME等，或者通过下面操作，尝试创建docker用户组
 
@@ -860,7 +835,8 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 # 重启docker服务
 sudo systemctl restart docker
-# 切换或者退出当前账户，重新登入
+# 切换或者退出当前账户，重新ssh登入
 exit
 ```
 
+*欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
