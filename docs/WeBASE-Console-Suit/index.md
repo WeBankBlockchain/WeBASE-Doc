@@ -924,3 +924,41 @@ $ java -jar demo-exec.jar
 ```
 *若执行jar时，提示java.io.IOException: Stream closed错误，可忽略该错误*
 
+Q2：WEBASE导出的Java工程 合约方法有些是需要手动指定调用方的，比如合约有个sign方法，生成的raw包下的Service sign 方法如下
+
+```
+  public TransactionReceipt sign(String _certificateNumber) {
+        final Function function = new Function(
+                FUNC_SIGN, 
+                Arrays.<Type>asList(new Utf8String(_certificateNumber)),
+                Collections.<TypeReference<?>>emptyList());
+        return executeTransaction(function);
+  }
+```
+
+但是调用方却需要手动指定，如何指定？
+
+A1：可以根据导出的raw包下的service 的构造器，构造一个传入调用方key的对象然后调用，部分代码如下
+
+```
+// 1. 获取用户私钥信息
+UserInfoEntity dbUser = userInfoDao.selectById(userId);
+String privateKey = dbUser.getPrivateKey();
+// 2.私钥base64转16进制
+String hexPrivateKey = new String(Base64.getDecoder().decode(privateKey));
+// 3.加载私钥方法获取CryptoKeyPair对象
+CryptoKeyPair loadAccountFromHexPrivateKey = loadAccountFromHexPrivateKey(CryptoType.ECDSA_TYPE, hexPrivateKey);
+// 4.调用sign方法
+MarriageEvidence marriageEvidence = new MarriageEvidence(template.getContractAddress(), client, loadAccountFromHexPrivateKey);
+TransactionReceipt sign = marriageEvidence.sign(req.getCertificateNumber());
+
+private CryptoKeyPair loadAccountFromHexPrivateKey(int cryptoType, String hexPrivateKey) {
+   // 根据cryptoType创建cryptoSuite，cryptoType目前支持：
+   // 1. CryptoType.ECDSA_TYPE: 用于创建非国密类型的CryptoSuite
+   // 2. CryptoType.SM_TYPE:    用于创建国密类型的CryptoSuite
+   CryptoSuite cryptoSuite = new CryptoSuite(cryptoType);
+   // 从十六进制私钥字符串hexPrivateKey加载私钥对象
+   return cryptoSuite.getKeyPairFactory().createKeyPair(hexPrivateKey);
+}
+```
+
