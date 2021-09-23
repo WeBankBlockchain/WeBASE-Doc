@@ -924,6 +924,8 @@ $ java -jar demo-exec.jar
 ```
 *若执行jar时，提示java.io.IOException: Stream closed错误，可忽略该错误*
 
+
+#### 如何指定合约调用方
 Q2：WEBASE导出的Java工程 合约方法有些是需要手动指定调用方的，比如合约有个sign方法，生成的raw包下的Service sign 方法如下
 
 ```
