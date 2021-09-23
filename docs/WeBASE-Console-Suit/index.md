@@ -926,7 +926,7 @@ $ java -jar demo-exec.jar
 
 
 #### 如何指定合约调用方
-Q2：WEBASE导出的Java工程 合约方法有些是需要手动指定调用方的，比如合约有个sign方法，生成的raw包下的Service sign 方法如下
+Q2：WEBASE导出的Java工程，有些合约方法是需要手动指定调用方的（指定私钥），比如合约有个sign方法，在生成的Java工程的raw包下的Service中 sign 方法如下
 
 ```
   public TransactionReceipt sign(String _certificateNumber) {
@@ -938,9 +938,9 @@ Q2：WEBASE导出的Java工程 合约方法有些是需要手动指定调用方�
   }
 ```
 
-但是调用方却需要手动指定，如何指定？
+但是sign方法的调用方却需要手动指定，如何指定？
 
-A1：可以根据导出的raw包下的service 的构造器，构造一个传入调用方key的对象然后调用，部分代码如下
+A1：可以根据导出的Java工程raw包下的合约service 的构造器，构造一个传入调用方私钥的对象然后调用，部分代码如下
 
 ```
 // 1. 获取用户私钥信息,调用WEBASE-SDK 的newUser方法会得到用户私钥信息，存入业务表。得到的privateKey 是base64编码格式
@@ -948,9 +948,9 @@ UserInfoEntity dbUser = userInfoDao.selectById(userId);
 String privateKey = dbUser.getPrivateKey();
 // 2. 将上步的私钥base64转16进制
 String hexPrivateKey = new String(Base64.getDecoder().decode(privateKey));
-// 3.加载私钥方法获取CryptoKeyPair对象
+// 3. 加载私钥方法获取CryptoKeyPair对象，以非国密为例
 CryptoKeyPair loadAccountFromHexPrivateKey = loadAccountFromHexPrivateKey(CryptoType.ECDSA_TYPE, hexPrivateKey);
-// 4.调用sign方法
+// 4. 传入私钥对象来构造一个MarriageEvidence对象，并调用sign方法
 MarriageEvidence marriageEvidence = new MarriageEvidence(template.getContractAddress(), client, loadAccountFromHexPrivateKey);
 TransactionReceipt sign = marriageEvidence.sign(req.getCertificateNumber());
 
