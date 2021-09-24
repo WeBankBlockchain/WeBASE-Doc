@@ -488,17 +488,20 @@ http://{deployIP}:{webPort}
 
 ```
 # 创建新的文件夹，安装Java 8或以上的版本，推荐JDK8-JDK13版本，将下载的jdk放在software目录
-# 从Oracle官网(https://www.oracle.com/technetwork/java/javase/downloads/index.html)选择Java 8或以上的版本下载，例如下载jdk-8u201-linux-x64.tar.gz
+# 从Oracle官网(https://www.oracle.com/java/technologies/downloads/#java8)选择Java 8或以上的版本下载，例如下载jdk-8u301-linux-x64.tar.gz
 $ mkdir /software
 
 # 解压jdk
-$ tar -zxvf jdk-8u201-linux-x64.tar.gz
+$ tar -zxvf jdk-8u301-linux-x64.tar.gz
+
+#修改解压后文件的文件名
+$mv jdk1.8.0_301 jdk-8u301
 
 # 配置Java环境，编辑/etc/profile文件
 $ vim /etc/profile
 
 # 打开以后将下面三句输入到文件里面并保存退出
-export JAVA_HOME=/software/jdk-8u201  #这是一个文件目录，非文件
+export JAVA_HOME=/software/jdk-8u301  #这是一个文件目录，非文件
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
