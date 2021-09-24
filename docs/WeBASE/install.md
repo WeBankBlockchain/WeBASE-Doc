@@ -636,6 +636,22 @@ mysql -utest -p123456 -h localhost -P 3306
 mysql > create database webasenodemanager;
 ```
 
+#### ④ Ubuntu安装mysql数据库
+
+- 以root用户执行命令
+
+```
+apt-get install software-properties-common
+sudo add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
+sudo apt-get update
+sudo apt install mysql-server-5.6
+sudo apt install mysql-client-5.6
+```
+- 执行mysql --version命令，若显示如下则安装成功
+```
+mysql  Ver 14.14 Distrib 5.6.16, for debian-linux-gnu (x86_64) using  EditLine wrapper
+```
+
 <span id="python3"></span>
 ### 3. Python部署
 
