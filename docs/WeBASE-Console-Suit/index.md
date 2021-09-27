@@ -20,6 +20,7 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 10. 账号管理
 11. 群组管理
 12. 移动端管理台
+13. 数据监控大屏
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -574,6 +575,21 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 - 在移动端设备访问WeBASE时将自动切换到移动端管理台页面
 
 ![](../../images/WeBASE-Console-Suit/web_mobile.png)
+
+### 数据监控大屏
+
+数据监控大屏页面的入口位于WeBASE管理台的左上角，点击“数据大屏”即可进入数据监控大屏，适用于企业级控制中心需要全局监控链状态数据的场景。
+- 数据大屏每次仅展示单个群组的数据，并定时访问后台刷新数据。
+
+![](../../images/WeBASE-Console-Suit/ecc_page.png)
+
+在“节点管理”中，可以点击节点列表中的“备注”按钮，为数据大屏中的节点配置IP地址、机构名与城市。
+
+![](../../images/WeBASE-Console-Suit/ecc_node_desc.png)
+
+在右上角的“群组管理”中，可以点击群组列表的“备注”按钮，为数据大屏中的群组配置群组应用名（标题）
+
+![](../../images/WeBASE-Console-Suit/ecc_group_desc.png)
 
 
 ## 升级兼容说明
