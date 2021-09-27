@@ -839,4 +839,59 @@ sudo systemctl restart docker
 exit
 ```
 
+### 8. 如何使用启动Docker镜像
+
+答：使用`docker run`命令启动的配置方法，可以参考WeBASE一键部署工具`WeBASE/deploy/docker`目录中的docker-compose配置文件`docker-compose-template.yaml`。
+
+以`docker-compose-template.yaml`中的WeBASE-Front为例，启动容器时会用到docker启动时专用的`application-docker.yml`配置文件，可以通过配置docker容器的环境变量以替换`application-docker.yml`中的默认变量：
+
+```yaml
+ webase-front:
+    image: webasepro/webase-front:v1.5.3
+    container_name: webase-front-5002
+    network_mode: "host"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: 5002
+      SDK_IP: 127.0.0.1
+      SDK_CHANNEL_PORT: 20200
+      KEY_SERVER: "127.0.0.1:5004"
+    volumes:
+      - /webase-deploy/nodes/127.0.0.1/sdk:/dist/sdk 
+      - /webase-deploy/webase-front/log:/dist/log
+      - /webase-deploy/webase-front/h2:/h2
+```
+
+如，在`application-docker.yml`中替换`sdk`连接节点的配置`SDK_CHANNEL_IP`:
+- 在容器启动时通过`-e SPRING_PROFILES_ACTIVE=docker`指定spring的配置文件为docker的yml，并通过`-e SDK_CHANNEL_PORT=20201`指定channel连接的端口，
+```yml
+sdk:
+  corePoolSize: 50
+  maxPoolSize: 100
+  queueCapacity: 100
+  ip: ${SDK_IP:127.0.0.1}
+  channelPort: ${SDK_CHANNEL_PORT:20200}
+  certPath: conf
+```
+
+综上所述，以下为启动WeBASE-Front容器的完整`docker run`命令示例
+- 将sdk证书挂载到容器的`/dist/sdk`中
+- 将容器中的h2数据库目录和日志目录挂载到宿主机中
+- 将一个`application-docker.yml`挂载到容器中，覆盖容器中默认的yml配置，并配置SPRING环境变量以启用`-docker`结尾的yml配置文件
+```shell
+docker run -d --rm --name=webase-front  --network=host -v /data/home/webase/webase/compose/WeBASE-Front/sdk:/dist/sdk -v /data/home/webase/webase/compose/WeBASE-Front/h2:/h2  -v /data/home/webase/webase/compose/WeBASE-Front/log:/dist/log -v /data/home/webase/webase/compose/WeBASE-Front/application-docker.yml:/dist/conf/application-docker.yml -e SPRING_PROFILES_ACTIVE=docker webasepro/webase-front:v1.5.3
+```
+
+使用WeBASE-Web镜像时同理，参考`docker-compose.yaml`对WeBASE-Web的配置项，挂载一个nginx.conf到容器中以覆盖容器中默认的nginx配置，并将log目录挂载出来
+```yaml
+  webase-web:
+    image: webasepro/webase-web:v1.5.3
+    container_name: webase-web-5000
+    network_mode: "host"
+    volumes:
+      - /webase-deploy/webase-web/nginx-docker.conf:/data/webase-web/nginx/nginx.conf
+      - /webase-deploy/webase-web/log:/dist/log
+```
+
+
 *欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
