@@ -508,17 +508,20 @@ http://{deployIP}:{webPort}
 
 ```
 # 创建新的文件夹，安装Java 8或以上的版本，推荐JDK8-JDK13版本，将下载的jdk放在software目录
-# 从Oracle官网(https://www.oracle.com/technetwork/java/javase/downloads/index.html)选择Java 8或以上的版本下载，例如下载jdk-8u201-linux-x64.tar.gz
+# 从Oracle官网(https://www.oracle.com/java/technologies/downloads/#java8)选择Java 8或以上的版本下载，例如下载jdk-8u301-linux-x64.tar.gz
 $ mkdir /software
 
 # 解压jdk
-$ tar -zxvf jdk-8u201-linux-x64.tar.gz
+$ tar -zxvf jdk-8u301-linux-x64.tar.gz
+
+#修改解压后文件的文件名
+$mv jdk1.8.0_301 jdk-8u301
 
 # 配置Java环境，编辑/etc/profile文件
 $ vim /etc/profile
 
 # 打开以后将下面三句输入到文件里面并保存退出
-export JAVA_HOME=/software/jdk-8u201  #这是一个文件目录，非文件
+export JAVA_HOME=/software/jdk-8u301  #这是一个文件目录，非文件
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
@@ -582,7 +585,7 @@ sudo yum install MariaDB-server MariaDB-client -y
 ```
 sudo sed -i 's#//mirrors.ustc.edu.cn#//ipv4.mirrors.ustc.edu.cn#g' /etc/yum.repos.d/mariadb
 ```
-
+详情参考[MariaDB官网安装](https://downloads.mariadb.org/mariadb/repositories/#mirror=digitalocean-nyc)。
 - 启停
 
 ```shell
@@ -651,6 +654,22 @@ mysql -utest -p123456 -h localhost -P 3306
 
 ```sql
 mysql > create database webasenodemanager;
+```
+
+#### ④ Ubuntu安装mysql数据库
+
+- 以root用户执行命令
+
+```
+apt-get install software-properties-common
+sudo add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
+sudo apt-get update
+sudo apt install mysql-server-5.6
+sudo apt install mysql-client-5.6
+```
+- 执行mysql --version命令，若显示如下则安装成功
+```
+mysql  Ver 14.14 Distrib 5.6.16, for debian-linux-gnu (x86_64) using  EditLine wrapper
 ```
 
 <span id="python3"></span>
