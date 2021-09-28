@@ -12,6 +12,10 @@ WeBASE-Sign升级的必须步骤：
 
 各个版本的具体修改可参考下文
 
+#### v1.5.3
+- 新增私钥托管与签名服务Docker镜像，`webasepro/webase-sign:v1.5.3`
+
+
 #### v1.5.0
 
 - 支持导出私钥，增加配置项`supportPrivateKeyTransfer: true`，接口支持私钥传输（aes加密后的私钥），配置项为`false`时不支持导出
