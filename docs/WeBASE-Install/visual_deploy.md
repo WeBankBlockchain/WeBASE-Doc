@@ -693,7 +693,7 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
 #### 拉取 Docker 镜像
 
 镜像版本：
-- v2.7.2
+- v2.8.0
 
 **提示：**
 - 最近的镜像版本，请参考：[https://hub.docker.com/r/fiscoorg/fisco-webase/tags](https://hub.docker.com/r/fiscoorg/fisco-webase/tags)
@@ -704,10 +704,10 @@ yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm
   
 ```Bash
 # 检查本地是否有镜像
-docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i v2.7.2
+docker images -a |grep -i "fiscoorg/fisco-webase" | grep -i v2.8.0
     
 # 如果有如下输出，表示本地已有镜像；否则表示本地没有镜像
-fiscoorg/fisco-webase   v2.7.2     bf4a26d5d389  5 days ago   631MB
+fiscoorg/fisco-webase   v2.8.0     bf4a26d5d389  5 days ago   631MB
 ```
 
 * 如果本地没有镜像（如果本地有镜像，跳过）
@@ -728,14 +728,14 @@ fiscoorg/fisco-webase   v2.7.2     bf4a26d5d389  5 days ago   631MB
 
    ```Bash
    # 执行 Docker 拉取命令
-   docker pull fiscoorg/fisco-webase:v2.7.2 
+   docker pull fiscoorg/fisco-webase:v2.8.0 
    ```
    
 * 压缩镜像到 `tar` 文件
   
 ```Bash
 # 压缩镜像为 tar 文件
-docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:v2.7.2
+docker save -o docker-fisco-webase.tar fiscoorg/fisco-webase:v2.8.0
 ```
 
 * 发送镜像 `tar` 文件到部署节点的主机
@@ -759,7 +759,7 @@ docker load -i docker-fisco-webase.tar
 docker images -a |grep -i "fiscoorg/fisco-webase"
     
 # 如果有如下输出，表示拉取成功
-fiscoorg/fisco-webase   v2.7.2  bf4a26d5d389  5 days ago   631MB
+fiscoorg/fisco-webase   v2.8.0  bf4a26d5d389  5 days ago   631MB
 ```
 
 <span id="tassl"></span>

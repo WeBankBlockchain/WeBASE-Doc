@@ -8,7 +8,7 @@
 
 WeBASE实训插件方案主要的目的是：将WeBASE管理台的部分功能作为插件嵌入到具体的实训系统中，辅助实训系统完成其区块链相关的一些实训功能。
 
-​                 其嵌入的形式可以入下图：![](../../images/WeBASE-Training-Plugin-Plan/iframe2.png)
+                 其嵌入的形式可以入下图：![](../../images/WeBASE-Training-Plugin-Plan/iframe2.png)
 
 ![](../../images/WeBASE-Training-Plugin-Plan/iframe1.png)
 
@@ -33,7 +33,7 @@ WeBASE实训插件方案主要的目的是：将WeBASE管理台的部分功能�
 
 ```plain
 INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('SupportIframe', 2, '1', '2020-09-22 17:14:23', '2020-09-22 17:14:23');
-INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('IframeSupportHostList', 3, 'baidu.com|163.com', '2020-09-22 17:14:23', '2020-09-22 17:14:23'); 
+INSERT INTO `tb_config`(`config_name`, `config_type`, `config_value`, `create_time`, `modify_time`) VALUES ('IframeSupportHostList', 3, 'baidu.com|163.com', '2020-09-22 17:14:23', '2020-09-22 17:14:23'); 
 ```
 
 其中，SupportIframe设置为1，表示开启iframe嵌入支持；IframeSupportHostList为iframe嵌入支持的host白名单列表。
@@ -140,7 +140,6 @@ export default {
 };
 </script>
 ```
-
 
 在适当的位置使用iframe嵌入 嵌入示例
 
@@ -374,11 +373,20 @@ node.counts=nodeCounts
 
 ```
 
-6.启动和停止所有服务
+## 6 启动和停止所有服务
 ```xml
 	 python3 deploy.py startAll
 	 python3 deploy.py stopAll
 ```
 
-7. 访问
+## 7 访问
 http://127.0.0.1:5110/sx/#/   用户名密码需要登录节点管理子系统添加
+
+## 8 本方案贡献者
+
+| 贡献者名称 | github账号 |
+| ---------- | ---------- |
+|leeduckgo（李骜华|https://github.com/leeduckgo |
+| ErQi(齐涛) | https://github.com/ErQi |
+|  孙丽英   |  https://github.com/sunliying2020  |
+

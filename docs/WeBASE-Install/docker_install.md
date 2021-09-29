@@ -254,7 +254,7 @@ node.counts=nodeCounts
 
 **备注：**
 - 请确认已配置Docker镜像源为国内镜像源，以提高拉取镜像的速度。可通过`cat /etc/docker/daemon.json`进行查看
-- 拉取镜像开始前需要输入一个拉取超时时间，如60，即60s拉取未完成则提示超时
+- 拉取镜像开始前需要输入一个**拉取超时时间**，如60，即60s拉取未完成则提示超时
 - 超时拉取的镜像，可通过`docker pull`进行手动拉取，如手动拉取webase-front v1.5.3的镜像为`docker pull webasepro/webase-front:v1.5.3`
 
 ```Bash
@@ -263,8 +263,6 @@ $ python3 deploy.py pullDockerAll
 ```
 
 ## 部署
-
-### 
 
 * 执行`installDockerAll`命令，部署服务将**使用Docker**自动部署并启动 FISCO BCOS节点 与 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）
 
