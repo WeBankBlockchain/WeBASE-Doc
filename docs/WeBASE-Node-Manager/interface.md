@@ -3181,7 +3181,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/list
 }
 ```
 
-### 12.2. 根据仓库编号获取仓库信息
+### 5.20. 根据仓库编号获取仓库信息
 
 #### 接口描述
 
@@ -3233,7 +3233,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse?warehouseId=1
 }
 ```
 
-### 12.3. 根据仓库编号获取合约文件夹信息
+### 5.21. 根据仓库编号获取合约文件夹信息
 
 #### 接口描述
 
@@ -3284,7 +3284,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list?warehouseId=1
 }
 ```
 
-### 12.4. 根据合约文件夹编号获取合约文件夹信息
+### 5.22. 根据合约文件夹编号获取合约文件夹信息
 
 #### 接口描述
 
@@ -3333,7 +3333,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/folder?folderId=2
 }
 ```
 
-### 12.5. 根据文件夹编号获取合约列表
+### 5.23. 根据文件夹编号获取合约列表
 
 #### 接口描述
 
@@ -3394,7 +3394,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list?folderId=2
 }
 ```
 
-### 12.6. 根据合约编号获取合约信息
+### 5.24. 根据合约编号获取合约信息
 
 #### 接口描述
 
@@ -3440,6 +3440,101 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId=2
     "createTime": "2021-01-20 18:02:10",
     "modifyTime": "2021-01-20 18:02:10"
   }
+}
+```
+
+
+### 5.25. 查询合约管理者列表
+
+根据群组ID和合约地址，返回在WeBASE拥有私钥的合约部署者或链委员（若链委员非空）私钥用户
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/listManager/{groupId}/{contractAddress}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 必填 | 备注             |
+| ---- | --------------- | ------ | ------ | ---------------- |
+| 1    | groupId         | int    | 是     | 群组id           |
+| 2    | contractAddress | String | 否     | 合约地址         |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/listManager/1/0x622ca15aa841e92eb65da1a0e59c1b6bb61e3ecb
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号   | 输出参数        | 类型          |      | 备注                                        |
+| ------ | --------------- | ------------- | ---- | ------------------------------------------- |
+| 1      | code            | Int           | 否   | 返回码，0：成功 其它：失败                  |
+| 2      | message         | String        | 否   | 描述                                        |
+| 3      | totalCount      | Int           | 否   | 总记录数                                    |
+| 4      | data        | List          | 是   | 用户列表                           |
+| 4.1    |             | Object        |      | 用户信息对象                       |
+| 4.1.1  | userId      | int           | 否   | 用户编号                           |
+| 4.1.2  | userName    | string        | 否   | 用户名称                           |
+| 4.1.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 4.1.4  | description | String        | 是   | 备注                               |
+| 4.1.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 4.1.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 4.1.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 4.1.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 4.1.9  | account     | string        | 否   | 关联账户                           |
+| 4.1.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 4.1.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 4.1.12 | signUserId  | String        | 否   | 用户在WeBASE-Sign中的编号          |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "userId": 700015,
+      "userName": "mars2",
+      "account": "admin",
+      "groupId": 1,
+      "publicKey": "04476580a6044f3bb25a26d40ba0bafe3ed0c8e98ff50271e20ded684cfa38e02b9c3eaf1de114121f910d8bea26b5e4434f522712c9b8347a777b738dd74b706b",
+      "privateKey": null,
+      "userStatus": 1,
+      "chainIndex": null,
+      "userType": 1,
+      "address": "0xdccae56cef725605d0fa1e00fd553074a74091c5",
+      "signUserId": "ed54e13b0abf4c69b788bd83b8e3515e",
+      "appId": "1",
+      "hasPk": 1,
+      "description": "supplychain_mars2",
+      "createTime": "2021-07-02 17:54:24",
+      "modifyTime": "2021-07-02 17:54:24"
+    }
+  ],
+  "attachment": null
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 202542,
+    "message": "No private key of contract manager address in webase"
 }
 ```
 
@@ -4974,13 +5069,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/1
 ### 8.1 获取群组概况
 
 
-#### 8.1.1 传输协议规范
+####  传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/general/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -4996,7 +5091,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 ```
 
 
-#### 8.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5042,13 +5137,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 
 默认只返回groupStatus为1的群组ID，可传入groupStatus筛选群组 (1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data)
 
-#### 8.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/all**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5065,7 +5160,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 ```
 
 
-#### 8.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5125,13 +5220,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 ### 8.3 查询每日交易数据
 
 
-#### 8.3.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/transDaily/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5146,7 +5241,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 ```
 
 
-#### 8.3.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5201,14 +5296,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 
 节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
-#### 8.4.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/generate/{nodeId}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5239,7 +5334,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b95
 ```
 
 
-#### 8.4.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5296,14 +5391,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b95
 节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
 
-#### 8.5.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/generate**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.5.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5333,7 +5428,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate
 ```
 
 
-#### 8.5.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5380,14 +5475,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate
 
 节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
-#### 8.6.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/operate/{nodeId}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.6.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5411,7 +5506,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952
 ```
 
 
-#### 8.6.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5445,14 +5540,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952
 批量启动多个节点的群组，向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
 
 
-#### 8.7.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/batchStart**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.7.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5478,7 +5573,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/batchStart
 ```
 
 
-#### 8.7.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5524,14 +5619,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/batchStart
 
 群组状态包含：群组不存在"INEXISTENT"、群组正在停止"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
 
-#### 8.8.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/queryGroupStatus/list**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.8.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5557,7 +5652,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/queryGroupStatus/list
 ```
 
 
-#### 8.8.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5628,13 +5723,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/queryGroupStatus/list
 
 刷新节点管理服务的群组列表，检查本地群组数据与链上群组数据是否有冲突，检查多个节点之间的创世块是否一致，并从链上拉取最新的群组列表
 
-#### 8.9.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/update**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.9.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5649,7 +5744,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 ```
 
 
-#### 8.9.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5674,13 +5769,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 
 返回所有群组，包含正常运行、维护中、脏数据冲突、创世块冲突4种状态的群组
 
-#### 8.10.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/all/invalidIncluded**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.10.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 | 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
@@ -5695,7 +5790,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 ```
 
 
-#### 8.10.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5714,8 +5809,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 | 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
 | 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
 | 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
-| 4.1.2 | description     | String        | 否     | 群组描述                   |
-| 4.1.2 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+| 4.1.7 | description     | String        | 否     | 群组描述                   |
+| 4.1.8 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
 
 
 ***2）出参示例***
@@ -5768,13 +5863,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 
 删除指定群组编号的群组的所有数据，包含节点数据、交易数据、交易审计数据等等。
 
-#### 8.11.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/{groupId}**
 * 请求方式：DELETE
 * 返回格式：JSON
 
-#### 8.11.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 | 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
@@ -5788,7 +5883,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/{groupId}
 ```
 
 
-#### 8.11.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5816,19 +5911,150 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/{groupId}
 ```
 
 
+### 8.12 配置群组备注信息
+
+配置群组的备注信息，用于数据大屏中大标题的展示。（默认备注为"synchronous"）
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/description**
+* 请求方式：PUT
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     |  群组ID                                    |
+| 1      | description   | String           | 否     | 群组备注                                  |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/description
+```
+
+{
+  "description": "溯源存证应用",
+  "groupId": 1
+}
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": 1,
+  "attachment": null
+}
+```
+
+
+
+### 8.13 获取单个群组详细信息
+
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/detail/{groupId}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     |  群组ID                                    |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/detail/{groupId}
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Object        |        | 组织信息对象               |
+| 3.1.1 | groupId       | Integer           | 否     | 群组编号                   |
+| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 3.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 3-创世块冲突|
+| 3.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
+| 3.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
+| 3.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
+| 3.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 3.1.7 | description     | String        | 否     | 群组描述                   |
+| 3.1.8 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "groupId": 1,
+    "groupName": "group1",
+    "groupStatus": 1,
+    "nodeCount": 4,
+    "latestBlock": 0,
+    "transCount": 0,
+    "createTime": "2021-07-29 14:44:59",
+    "modifyTime": "2021-09-29 16:42:05",
+    "description": "溯源存证应用",
+    "groupType": 1,
+    "groupTimestamp": null,
+    "nodeIdList": null,
+    "chainId": 0,
+    "chainName": "default"
+  },
+  "attachment": null
+}
+```
+
+
 ## 9 节点管理模块
 
 
 ### 9.1 查询节点列表
 
+查询WeBASE本地保存的节点列表
 
-#### 9.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/node/nodeList/{groupId}/{pageNumber}/{pageSize}?nodeName={nodeName}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 9.1.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
@@ -5847,7 +6073,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 ```
 
 
-#### 9.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5869,6 +6095,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 | 4.1.9 | pbftView    | BigInteger    | 否     | Pbft view                                  |
 | 4.1.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 4.1.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
+| 4.1.12 | city        | String | 否     | 节点所在城市                                   |
+| 4.1.13 | agency      | String | 否     | 节点所属机构                                  |
 
 ***2）出参示例***
 
@@ -5880,18 +6108,20 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
     "totalCount": 1,
     "data": [
         {
-            "nodeId": 500001,
-            "nodeName": "127.0.0.1_10303",
-            "groupId": 300001,
+            "nodeId": "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f",
+            "nodeName": "1_06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97",
+            "groupId": 1,
             "nodeIp": "127.0.0.1",
-            "p2pPort": 10303,
+            "p2pPort": null,
             "description": null,
-            "blockNumber": 133,
-            "pbftView": 5852,
+            "blockNumber": 589,
+            "pbftView": 11,
             "nodeActive": 1,
-            "createTime": "2019-02-14 17:47:00",
-            "modifyTime": "2019-03-15 11:14:29"
-        }
+            "createTime": "2021-07-29 14:44:59",
+            "modifyTime": "2021-09-29 16:17:38",
+            "city": "430500",
+            "agency": "GZ"
+        },
     ]
 }
 ```
@@ -5909,13 +6139,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 ### 9.2 查询节点信息
 
 
-#### 9.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：**/node/nodeInfo/{groupId}?nodeType={nodeType}**
+* 请求地址：**/node/nodeInfo/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 9.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -5929,7 +6159,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
 ```
 
-#### 9.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5949,6 +6179,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
 | 3.9 | pbftView    | BigInteger    | 否     | Pbft view                                  |
 | 3.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 3.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
+| 3.12 | city        | String | 否     | 节点所在城市                                   |
+| 3.13 | agency      | String | 否     | 节点所属机构                                  |
 
 ***2）出参示例***
 
@@ -5958,18 +6190,20 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
     "code": 0,
     "message": "success",
     "data": {
-        "nodeId": 500001,
-        "nodeName": "127.0.0.1_10303",
+        "nodeId": "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f",
+        "nodeName": "1_06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97",
         "groupId": 1,
         "nodeIp": "127.0.0.1",
-        "p2pPort": 10303,
+        "p2pPort": null,
         "description": null,
-        "blockNumber": 133,
-        "pbftView": 5852,
+        "blockNumber": 589,
+        "pbftView": 11,
         "nodeActive": 1,
-        "createTime": "2019-02-14 17:47:00",
-        "modifyTime": "2019-03-15 11:14:29"
-    }
+        "createTime": "2021-07-29 14:44:59",
+        "modifyTime": "2021-09-29 16:17:38",
+        "city": "430500",
+        "agency": "GZ"
+    },
 }
 ```
 
@@ -5979,6 +6213,181 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+
+### 9.3 查询群组下的节点ID列表
+
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/node/nodeIdList/{groupId}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     | 群组id                                     |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeIdList/1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+| 3      | totalCount  | Int           | 否     | 总记录数                                   |
+| 4      | data        | List<String>          | 是     | 节点ID列表                                   |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    "fe57d7b39ed104b4fb2770ae5aad7946bfd377d0eb91ab92a383447e834c3257dec56686551d08178f2d5f40d9fad615293e46c9f5fc23cf187258e121213b1d",
+    "65bc44d398d99d95a9d404aa16e4bfbc2f9ebb40f20439ddef8575a139dc3a80310cfc98a035bd59a67cc5f659f519e3e99b855f3d27f21a889c23a14036d0c7",
+    "95efafa5197796e7edf647191de83f4259d7cbb060f4bac5868be474037f49144d581c15d8aef9b07d78f18041a5f43c3c26352ebbf5583cd23070358c8fba39",
+    "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f"
+  ],
+  "attachment": null
+}
+```
+
+
+### 9.4 配置节点备注信息
+
+可配置节点的IP、机构、城市信息，可用于数据监控大屏展示
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/node/description**
+* 请求方式：PUT
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | nodeId   | String           | 是     |  节点ID                                    |
+| 1      | nodeIp   | String           | 否     | 节点备注IP                                     |
+| 1      | agency   | String           | 否     | 节点备注机构名                                  |
+| 1      | city     | String           | 否     | 节点备注城市                              |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/description
+```
+
+{
+  "agency": "org1",
+  "city": "GZ",
+  "nodeId": "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f",
+  "nodeIp": "127.0.0.1"
+}
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+
+### 9.5 查询节点的城市列表
+
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/node/city/list**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     | 群组id                                     |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/city/list
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+| 3      | data        | List          | 是     |                                    |
+| 3.1      | city        | String          | 是     |   城市名                                 |
+| 3.2      | count        | Int          | 是     |   节点数                                 |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "city": "110100", // 此处为城市ID
+      "count": 2
+    },
+    {
+      "city": "430500",
+      "count": 1
+    },
+    {
+      "city": "440300",
+      "count": 1
+    }
+  ],
+  "attachment": null
 }
 ```
 
@@ -6476,6 +6885,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 | 4.1.9  | account     | string        | 否   | 关联账户                           |
 | 4.1.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
 | 4.1.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 4.1.12 | signUserId  | String        | 否   | 用户在WeBASE-Sign中的编号          |
 
 
 ***2）出参示例***
