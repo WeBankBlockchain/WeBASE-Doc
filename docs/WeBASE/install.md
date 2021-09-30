@@ -26,6 +26,8 @@
 
 其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, nginx, dos2unix`依赖项后重试
 
+若使用[Docker模式一键部署](../WeBASE-Install/docker_install.md)，可只安装Docker、Docker-Compose，无需配置Mysql与Java环境
+
 #### 检查Java
 
 推荐JDK8-JDK13版本，使用OracleJDK[安装指引](#jdk)：
@@ -96,7 +98,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.2/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.3/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -111,7 +113,7 @@ cd webase-deploy
 
 ① mysql数据库需提前安装，已安装直接配置即可，还未安装请参看[数据库部署](#mysql)；
 
-② 修改配置文件（`vi common.properties`），没有变化的可以不修改；
+② 修改配置文件（`vi common.properties`）；
 
 - *若使用可视化部署，则忽略下文，将修改`visual-deploy.properties`，并进行可视化部署依赖服务的一键安装，具体请参考[可视化部署-一键安装依赖服务](../WeBASE-Install/visual_deploy.html#visual-deploy-oneclick)*
 
@@ -130,10 +132,26 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.2
-webase.mgr.version=v1.5.2
-webase.sign.version=v1.5.0
-webase.front.version=v1.5.2
+webase.web.version=v1.5.3
+webase.mgr.version=v1.5.3
+webase.sign.version=v1.5.3
+webase.front.version=v1.5.3
+
+#####################################################################
+## 使用Docker启用Mysql服务，则需要配置以下值
+
+# 1: enable mysql in docker
+# 0: mysql run in host, required fill in the configuration of webase-node-mgr and webase-sign
+docker.mysql=1
+
+# if [docker.mysql=1], mysql run in host (only works in [installDockerAll])
+# run mysql 5.6 by docker
+docker.mysql.port=23306
+# default user [root]
+docker.mysql.password=123456
+
+#####################################################################
+## 不使用Docker启动Mysql，则需要配置以下值
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -148,6 +166,8 @@ sign.mysql.port=3306
 sign.mysql.user=dbUsername
 sign.mysql.password=dbPassword
 sign.mysql.database=webasesign
+
+
 
 # 节点前置子系统h2数据库名和所属机构
 front.h2.name=webasefront
@@ -188,9 +208,9 @@ if.exist.fisco=no
 # 已有链的路径，start_all.sh脚本所在路径
 # 路径下要存在sdk目录（sdk目录中包含了SSL所需的证书，即ca.crt、sdk.crt、sdk.key和gm目录（包含国密SSL证书，gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
 fisco.dir=/data/app/nodes/127.0.0.1
-# 前置所连接节点的绝对路径
+# 前置所连接节点，在127.0.0.1目录中的节点中的一个
 # 节点路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
-node.dir=/data/app/nodes/127.0.0.1/node0
+node.dir=node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
@@ -232,10 +252,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.5.0        ========
-==============    webase-node-mgr version  v1.5.0   ========
-==============    webase-sign version  v1.5.0       ========
-==============    webase-front version  v1.5.0      ========
+==============    webase-web version  v1.5.3        ========
+==============    webase-node-mgr version  v1.5.3   ========
+==============    webase-sign version  v1.5.3       ========
+==============    webase-front version  v1.5.3      ========
 ============================================================
 ```
 
@@ -817,3 +837,4 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 答：WeBASE CDN 加速服务提供 WeBASE 各子系统安装包的下载服务，可参考[国内镜像和CDN加速攻略](./mirror.html)
 
 
+*欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
