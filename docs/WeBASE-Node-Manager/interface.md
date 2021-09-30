@@ -18,11 +18,10 @@
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | frontIp     | string        | 否     | 前置ip                                     |
-| 2    | frontPort   | int           | 否     | 前置服务端口                               |
-| 3    | agency      | int           | 否     | 所属机构                               |
+| 1    | frontIp     | string        | 是     | 前置ip                                     |
+| 2    | frontPort   | int           | 是     | 前置服务端口                               |
 
 ***2）入参示例***
 
@@ -33,8 +32,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 ```
 {
     "frontIp": "127.0.0.1",
-    "frontPort": "5002",
-    "agency": "abc"
+    "frontPort": "5002"
 }
 ```
 
@@ -86,7 +84,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 #### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：**/front/find?frontId={frontId}&groupId={groupId}**
+* 请求地址：**/front/find?frontId={frontId}&groupId={groupId}&frontStatus={frontStatus}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -94,10 +92,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                 |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                 |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | frontId       | Int           | 是     | 前置编号                  |
-| 2     | groupId       | Int           | 是     | 所属群组编号                |
+| 1     | frontId       | Int           | 否     | 前置编号                  |
+| 2     | groupId       | Int           | 否     | 所属群组编号                |
+| 2     | frontStatus       | Int           | 否     | 所属群组编号                |
 
 
 ***2）入参示例***
@@ -203,9 +202,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/find
 
 ***1）入参表***
 
-| 序号 | 输入参数 | 类型 | 可为空 | 备注     |
+| 序号 | 输入参数 | 类型 | 必填 | 备注     |
 | ---- | -------- | ---- | ------ | -------- |
-| 1    | frontId  | int  | 否     | 前置编号 |
+| 1    | frontId  | int  | 是     | 前置编号 |
 
 
 ***2）入参示例***
@@ -320,7 +319,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/refresh
 
 ***1）入参表***
 
-无
+| 序号 | 输出参数 | 类型   |  必填    | 备注                       |
+| ---- | -------- | ------ | ---- | -------------------------- |
+| 1    | frontId     | Int    | 是   | 获取特定front的nodeConfig |
 
 
 ***2）入参示例***
@@ -408,13 +409,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/nodeConfig?frontId=1
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | groupId         | int           | 否     | 所属群组编号               |
-| 2     | transactionHash | String        | 是     | 交易hash                   |
-| 3     | blockNumber     | BigInteger    | 是     | 块高                       |
-| 4     | pageSize        | int           | 否     | 每页记录数                 |
-| 5     | pageNumber      | int           | 否     | 当前页码                   |
+| 1     | groupId         | int           | 是     | 所属群组编号               |
+| 2     | transactionHash | String        | 否    | 交易hash                   |
+| 3     | blockNumber     | BigInteger    | 否    | 块高                       |
+| 4     | pageSize        | int           | 是     | 每页记录数                 |
+| 5     | pageNumber      | int           | 是     | 当前页码                   |
 
 
 ***2）入参示例***
@@ -485,10 +486,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transList/300001/1/10?tran
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | groupId         | int           | 否     | 所属群组编号               |
-| 2     | transHash | String        | 否     | 交易hash                   |
+| 1     | groupId         | int           | 是     | 所属群组编号               |
+| 2     | transHash | String        | 是     | 交易hash                   |
 
 
 ***2）入参示例***
@@ -576,10 +577,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transactionReceipt/1/0x69c
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | groupId         | int           | 否     | 所属群组编号               |
-| 2     | transHash       | String        | 是     | 交易hash                   |
+| 1     | groupId         | int           | 是     | 所属群组编号               |
+| 2     | transHash       | String        | 是    | 交易hash                   |
 
 
 ***2）入参示例***
@@ -683,11 +684,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0x69ced0162a0c
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | account       | String        | 否     | 帐号名称                   |
-| 2    | accountPwd    | String        | 否     | 登录密码（sha256）         |
-| 3    | roleId        | int           | 否     | 所属角色                   |
+| 1    | account       | String        | 是     | 帐号名称                   |
+| 2    | accountPwd    | String        | 是     | 登录密码（sha256）         |
+| 3    | roleId        | int           | 是     | 所属角色                   |
 
 
 ***2）入参示例***
@@ -768,11 +769,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/account/accountInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | account       | String        | 否     | 帐号名称                   |
-| 2    | accountPwd    | String        | 否     | 登录密码（sha256）         |
-| 3    | roleId        | int           | 否     | 所属角色                   |
+| 1    | account       | String        | 是     | 帐号名称                   |
+| 2    | accountPwd    | String        | 是     | 登录密码（sha256）         |
+| 3    | roleId        | int           | 是     | 所属角色                   |
 
 
 ***2）入参示例***
@@ -852,9 +853,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/account/accountInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | account  | String | 否     | 帐号名称                   |
+| 1    | account  | String | 是     | 帐号名称                   |
 
 
 ***2）入参示例***
@@ -907,11 +908,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/account/testAccount
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | pageSize      | Int           | 否     | 每页记录数                 |
-| 2     | pageNumber    | Int           | 否     | 当前页码                   |
-| 3     | account       | String        | 是     | 帐号                       |
+| 1     | pageSize      | Int           | 是     | 每页记录数                 |
+| 2     | pageNumber    | Int           | 是     | 当前页码                   |
+| 3     | account       | String        | 否     | 帐号                       |
 
 
 ***2）入参示例***
@@ -1001,10 +1002,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/account/accountList/1/10?account=
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | oldAccountPwd | String | 否     | 旧密码（sha256）           |
-| 2    | newAccountPwd | String | 否     | 新密码（sha256）           |
+| 1    | oldAccountPwd | String | 是     | 旧密码（sha256）           |
+| 2    | newAccountPwd | String | 是     | 新密码（sha256）           |
 
 ***2）入参示例***
 
@@ -1120,12 +1121,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/account/pictureCheckCode
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | checkCode          | String    | 否     | 登录验证码   |
-| 2    | account          | String    | 否     | 帐号   |
-| 3    | accountPwd          | String    | 否     | 密码   |
-| 4    | token          | String    | 否     | 随验证码返回的token   |
+| 1    | checkCode          | String    | 是     | 登录验证码   |
+| 2    | account          | String    | 是     | 帐号   |
+| 3    | accountPwd          | String    | 是     | 密码   |
+| 4    | token          | String    | 是     | 随验证码返回的token   |
 
 ***2）入参示例***
 
@@ -1195,13 +1196,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/account/login?checkCode=aege
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | groupId        | Int           | 否     | 当前所属链                 |
-| 2     | pageSize       | Int           | 否     | 每页记录数                 |
-| 3     | pageNumber     | Int           | 否     | 当前页码                   |
-| 4     | pkHash         | String        | 是     | 区块hash                   |
-| 5     | blockNumber    | BigInteger    | 是     | 块高                       |
+| 1     | groupId        | Int           | 是     | 当前所属链                 |
+| 2     | pageSize       | Int           | 是     | 每页记录数                 |
+| 3     | pageNumber     | Int           | 是     | 当前页码                   |
+| 4     | pkHash         | String        | 否     | 区块hash                   |
+| 5     | blockNumber    | BigInteger    | 否     | 块高                       |
 
 
 ***2）入参示例***
@@ -1276,13 +1277,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/block/blockList/300001/1/10?pkHash=
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | groupId        | Int           | 否     | 当前所属链                 |
-| 2     | pageSize       | Int           | 否     | 每页记录数                 |
-| 3     | pageNumber     | Int           | 否     | 当前页码                   |
-| 4     | pkHash         | String        | 是     | 区块hash                   |
-| 5     | blockNumber    | BigInteger    | 是     | 块高                       |
+| 1     | groupId        | Int           | 是     | 当前所属链                 |
+| 2     | pageSize       | Int           | 是     | 每页记录数                 |
+| 3     | pageNumber     | Int           | 是     | 当前页码                   |
+| 4     | pkHash         | String        | 否     | 区块hash                   |
+| 5     | blockNumber    | BigInteger    | 否     | 块高                       |
 
 ***2）入参示例***
 
@@ -1447,7 +1448,7 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+| 1        | 块高 | blockNumber | int      |             | 是        |                      |
 
 **2）数据格式**
 
@@ -1521,7 +1522,7 @@ HTTP GET
 
 | **序号** | **中文** | **参数名**       | **类型**   | **最大长度** | **必填** | **说明** |
 | -------- | -------- | ---------------- | ---------- | ------------ | -------- | -------- |
-| 1        | 群组编号 | groupId | int      |             | 是        |                      |
+| 1        | 区块哈希 | blockHash | String      |             | 是        |                      |
 
 **2）数据格式**
 
@@ -1591,15 +1592,15 @@ http://localhost:5001/WeBASE-Front/block/blockHeaderByHash/0xf58f4f43b3761f4863a
 
 ***1）入参表***
 
-| 序号 | 输入参数        | 类型   | 可为空 | 备注             |
+| 序号 | 输入参数        | 类型   | 必填 | 备注             |
 | ---- | --------------- | ------ | ------ | ---------------- |
-| 1    | groupId         | int    | 否     | 群组id           |
-| 2    | contractName    | String | 是     | 合约名           |
-| 3    | contractAddress | String | 是     | 合约地址         |
-| 4    | pageSize        | int    | 否     | 每页记录数       |
-| 5    | pageNumber      | int    | 否     | 当前页码         |
-| 6    | contractStatus  | int    | 是     | 1未部署，2已部署 |
-| 7    | account         | String | 是     | 关联账户         |
+| 1    | groupId         | int    | 是     | 群组id           |
+| 2    | contractName    | String | 否     | 合约名           |
+| 3    | contractAddress | String | 否     | 合约地址         |
+| 4    | pageSize        | int    | 是     | 每页记录数       |
+| 5    | pageNumber      | int    | 是     | 当前页码         |
+| 6    | contractStatus  | int    | 否     | 1未部署，2已部署 |
+| 7    | account         | String | 否     | 关联账户         |
 
 ***2）入参示例***
 
@@ -1697,10 +1698,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 
 ***1）入参表***
 
-| 序号 | 输入参数   | 类型 | 可为空 | 备注     |
+| 序号 | 输入参数   | 类型 | 必填 | 备注     |
 | ---- | ---------- | ---- | ------ | -------- |
-| 1    | groupId    | int  | 否     | 群组id   |
-| 2    | contractId | int  | 否     | 合约编号 |
+| 1   | contractId | int  | 是     | 合约编号 |
 
 
 ***2）入参示例***
@@ -1800,19 +1800,19 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 
 ***1）入参表***
 
-| 序号 | 输入参数          | 类型   | 可为空 | 备注                                                  |
+| 序号 | 输入参数          | 类型   | 必填 | 备注                                                  |
 | ---- | ----------------- | ------ | ------ | ----------------------------------------------------- |
-| 1    | groupId           | Int    | 否     | 所属群组编号                                          |
-| 2    | contractName      | String | 否     | 合约名称                                              |
-| 3    | contractSource    | String | 否     | 合约源码                                              |
-| 4    | contractAbi       | String | 否     | 编译合约生成的abi文件内容                             |
-| 5    | contractBin       | String | 否     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
-| 6    | bytecodeBin       | String | 否     | 合约编译的bytecode(bin)，用于部署合约                 |
-| 7    | contractId        | String | 否     | 合约名称                                              |
-| 8    | contractPath      | String | 否     | 合约所在目录                                          |
-| 9    | user              | String | 否     | 私钥用户的地址                                        |
+| 1    | groupId           | Int    | 是     | 所属群组编号                                          |
+| 2    | contractName      | String | 是     | 合约名称                                              |
+| 3    | contractSource    | String | 是     | 合约源码                                              |
+| 4    | contractAbi       | String | 是     | 编译合约生成的abi文件内容                             |
+| 5    | contractBin       | String | 是     | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
+| 6    | bytecodeBin       | String | 是     | 合约编译的bytecode(bin)，用于部署合约                 |
+| 7    | contractId        | String | 是     | 合约名称                                              |
+| 8    | contractPath      | String | 是     | 合约所在目录                                          |
+| 9    | user              | String | 是     | WeBASE的私钥用户的地址                                |
 | 10   | account           | String | 是     | 关联账户                                              |
-| 11   | constructorParams | List   | 是     | 构造函数入参                                          |
+| 11   | constructorParams | List   | 否     | 构造函数入参，根据合约构造函数决定                        |
 
 
 ***2）入参示例***
@@ -1823,17 +1823,16 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 
 ```
 {
-    "groupId": "1",
-    "contractBin": "60806040526004361061004c576000357c010000002269b80029",
-    "bytecodeBin": "60806040523480156100105761146031c79ef057dd274c87bff322ea2269b80029",
-    "contractAbi": "[]",
-    "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLICAJbmFtZSA9IG47CiAgICB9Cn0=",
-    "user": "0x2db346f9d24324a4b0eac7fb7f3379a2422704db",
-    "account": "admin",    
-    "contractName": "HeHe",
-    "contractId": 200008,
-    "contractPath": "Hi",
-    "constructorParams": ["a"]
+	"groupId": "1",
+	"contractBin": "60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d146100515780633590b49f146100e1575b600080fd5b34801561005d57600080fd5b5061006661014a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a657808201518184015260208101905061008b565b50505050905090810190601f1680156100d35780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100ed57600080fd5b50610148600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ec565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101e25780601f106101b7576101008083540402835291602001916101e2565b820191906000526020600020905b8154815290600101906020018083116101c557829003601f168201915b5050505050905090565b8060009080519060200190610202929190610206565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061024757805160ff1916838001178555610275565b82800160010185558215610275579182015b82811115610274578251825591602001919060010190610259565b5b5090506102829190610286565b5090565b6102a891905b808211156102a457600081600090555060010161028c565b5090565b905600a165627a7a72305820456bd30e517ce9633735d32413043bf33a2453c7f56e682b13e6125452d689dc0029",
+	"bytecodeBin": "608060405234801561001057600080fd5b506040805190810160405280600d81526020017f48656c6c6f2c20576f726c6421000000000000000000000000000000000000008152506000908051906020019061005c929190610062565b50610107565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100a357805160ff19168380011785556100d1565b828001600101855582156100d1579182015b828111156100d05782518255916020019190600101906100b5565b5b5090506100de91906100e2565b5090565b61010491905b808211156101005760008160009055506001016100e8565b5090565b90565b6102d7806101166000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d146100515780633590b49f146100e1575b600080fd5b34801561005d57600080fd5b5061006661014a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a657808201518184015260208101905061008b565b50505050905090810190601f1680156100d35780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100ed57600080fd5b50610148600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ec565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101e25780601f106101b7576101008083540402835291602001916101e2565b820191906000526020600020905b8154815290600101906020018083116101c557829003601f168201915b5050505050905090565b8060009080519060200190610202929190610206565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061024757805160ff1916838001178555610275565b82800160010185558215610275579182015b82811115610274578251825591602001919060010190610259565b5b5090506102829190610286565b5090565b6102a891905b808211156102a457600081600090555060010161028c565b5090565b905600a165627a7a72305820456bd30e517ce9633735d32413043bf33a2453c7f56e682b13e6125452d689dc0029",
+	"contractAbi": "[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+	"contractSource": "cHJhZ21hIHNvbGlkaXR5ID49MC40LjI0IDwwLjYuMTE7Cgpjb250cmFjdCBIZWxsb1dvcmxkIHsKICAgIHN0cmluZyBuYW1lOwoKICAgIGNvbnN0cnVjdG9yKCkgcHVibGljIHsKICAgICAgICBuYW1lID0gIkhlbGxvLCBXb3JsZCEiOwogICAgfQoKICAgIGZ1bmN0aW9uIGdldCgpIHB1YmxpYyB2aWV3IHJldHVybnMgKHN0cmluZyBtZW1vcnkpIHsKICAgICAgICByZXR1cm4gbmFtZTsKICAgIH0KCiAgICBmdW5jdGlvbiBzZXQoc3RyaW5nIG1lbW9yeSBuKSBwdWJsaWMgewogICAgICAgIG5hbWUgPSBuOwogICAgfQp9",
+	"user": "0xdccae56cef725605d0fa1e00fd553074a74091c5",
+	"contractName": "HelloWorld",
+	"contractId": 200306,
+	"contractPath": "/",
+	"account": "admin"
 }
 ```
 
@@ -1851,7 +1850,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 3.3  | contractName    | String        | 否   | 合约名称                                              |
 | 3.4  | groupId         | Int           | 否   | 所属群组编号                                          |
 | 3.5  | contractStatus  | int           | 否   | 1未部署，2已部署                                      |
-| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)                      |
+| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约) （已弃用字段）             |
 | 3.7  | contractSource  | String        | 否   | 合约源码                                              |
 | 3.8  | contractAbi     | String        | 是   | 编译合约生成的abi文件内容                             |
 | 3.9  | contractBin     | String        | 是   | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
@@ -1931,19 +1930,19 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 
 ***1）入参表***
 
-| 序号 | 输入参数        | 类型   | 可为空 | 备注                                |
+| 序号 | 输入参数        | 类型   | 必填 | 备注                                |
 | ---- | --------------- | ------ | ------ | ----------------------------------- |
-| 1    | groupId         | Int    | 否     | 所属群组编号                        |
-| 2    | user            | String | 否     | 私钥用户的地址                      |
-| 3    | contractName    | String | 否     | 合约名称                            |
-| 4    | contractId      | Int    | 否     | 合约编号                            |
-| 5    | funcName        | String | 否     | 合约方法名                          |
-| 6    | contractAddress | String | 是     | 合约地址                            |
-| 7    | funcParam       | List   | 是     | 合约方法入参                        |
-| 8    | contractAbi     | List   | 否     | 合约abi/合约单个函数的abi           |
-| 9    | useCns          | bool   | 否     | 是否使用cns调用                     |
-| 10   | cnsName         | String | 是     | CNS名称，useCns为true时不能为空     |
-| 11   | version         | String | 是     | CNS合约版本，useCns为true时不能为空 |
+| 1    | groupId         | Int    | 是     | 所属群组编号                        |
+| 2    | user            | String | 是     | 私钥用户的地址                      |
+| 3    | contractName    | String | 是     | 合约名称                            |
+| 4    | contractId      | Int    | 是     | 合约编号                            |
+| 5    | funcName        | String | 是     | 合约方法名                          |
+| 6    | contractAddress | String | 否     | 合约地址                            |
+| 7    | funcParam       | List   | 否     | 合约方法入参                        |
+| 8    | contractAbi     | List   | 是     | 合约abi/合约单个函数的abi           |
+| 9    | useCns          | bool   | 否     | 是否使用cns调用，默认为false                     |
+| 10   | cnsName         | String | 否     | CNS名称，useCns为true时不能为空     |
+| 11   | version         | String | 否     | CNS合约版本，useCns为true时不能为空 |
 
 ***2）入参示例***
 
@@ -1953,15 +1952,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 
 ```
 {
-    "groupId":"1",
-    "user":"0x6accbdb86107b70decceee618ce40e20e15c8ad4",
+    "groupId": 1,
+    "user":"0xdccae56cef725605d0fa1e00fd553074a74091c5",
     "contractName":"HelloWorld",
     "funcName":"set",
     "funcParam":["gwes"],
-    "contractAbi": [{\"constant\":false,\"inputs\":[{\"indexed\":false,\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],
-    "contractId":200002,
-    "contractAddress":"0x7bd586b045e3684dbcd5506cb175c5d771f38d13",
-    "useCns":false
+    "contractAbi": [{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
+    "contractId":200306,
+    "contractAddress":"0x4d1cbcc47b2558d818b9672df67f22f9a9645c87"
 }
 ```
 
@@ -2033,10 +2031,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 
 ***1）入参表***
 
-| 序号 | 输入参数          | 类型   | 可为空 | 备注                          |
+| 序号 | 输入参数          | 类型   | 必填 | 备注                          |
 | ---- | ----------------- | ------ | ------ | ----------------------------- |
-| 1    | groupId           | int    | 否     | 所属群组编号                  |
-| 2    | partOfBytecodeBin | String | 否     | 包含合约bytecodeBin的的字符串 |
+| 1    | groupId           | int    | 是     | 所属群组编号                  |
+| 2    | partOfBytecodeBin | String | 是     | 包含合约bytecodeBin的的字符串 |
 
 ***2）入参示例***
 
@@ -2132,17 +2130,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 
 ***1）入参表***
 
-| 序号 | 输入参数       | 类型   | 可为空 | 备注                                        |
+| 序号 | 输入参数       | 类型   | 必填 | 备注                                        |
 | ---- | -------------- | ------ | ------ | ------------------------------------------- |
-| 1    | groupId        | int    | 否     | 所属群组编号                                |
-| 2    | contractId     | int    | 是     | 合约编号，传入contractId表示更新，否则新增  |
-| 3    | contractName   | String | 否     | 合约名称                                    |
-| 4    | contractPath   | String | 否     | 合约所在目录                                |
-| 5    | contractSource | String | 是     | 合约源码的base64                            |
-| 6    | contractAbi    | String | 是     | 合约编译后生成的abi文件内容                 |
-| 7    | contractBin    | String | 是     | 合约编译后生成的bin,可用于交易解析          |
-| 8    | bytecodeBin    | String | 是     | 合约编译后生成的bytecodeBin，可用于合约部署 |
-| 9    | account        | String | 是     | 关联账户，新建时不能为空                    |
+| 1    | groupId        | int    | 是     | 所属群组编号                                |
+| 2    | contractId     | int    | 否     | 合约编号，传入contractId表示更新，否则新增  |
+| 3    | contractName   | String | 是     | 合约名称                                    |
+| 4    | contractPath   | String | 是     | 合约所在目录                                |
+| 5    | contractSource | String | 否     | 合约源码的base64                            |
+| 6    | contractAbi    | String | 否     | 合约编译后生成的abi文件内容                 |
+| 7    | contractBin    | String | 否     | 合约编译后生成的bin,可用于交易解析          |
+| 8    | bytecodeBin    | String | 否     | 合约编译后生成的bytecodeBin，可用于合约部署 |
+| 9    | account        | String | 否     | 关联账户，新建时不能为空                    |
 
 
 ***2）入参示例***
@@ -2202,9 +2200,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 
 ***1）入参表***
 
-| 序号 | 输入参数 | 类型 | 可为空 | 备注    |
+| 序号 | 输入参数 | 类型 | 必填 | 备注    |
 | ---- | -------- | ---- | ------ | ------- |
-| 1    | abiId    | Long | 否     | abi编号 |
+| 1    | abiId    | Long | 是     | abi编号 |
 
 ***2）入参示例***
 
@@ -2269,12 +2267,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/1
 
 ***1）入参表***
 
-| 序号 | 输入参数   | 类型   | 可为空 | 备注          |
+| 序号 | 输入参数   | 类型   | 必填 | 备注          |
 | ---- | ---------- | ------ | ------ | ------------- |
-| 1    | groupId    | int    | 否     | 群组编号      |
-| 2    | pageNumber | int    | 否     | 页码，从1开始 |
-| 3    | pageSize   | int    | 否     | 页大小        |
-| 4    | account    | String | 是     | 所属账号      |
+| 1    | groupId    | int    | 是     | 群组编号      |
+| 2    | pageNumber | int    | 是     | 页码，从1开始 |
+| 3    | pageSize   | int    | 是     | 页大小        |
+| 4    | account    | String | 否     | 所属账号      |
 
 
 ***2）入参示例***
@@ -2347,13 +2345,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 
 ***1）入参表***
 
-| 序号 | 输入参数        | 类型   | 可为空 | 备注                        |
+| 序号 | 输入参数        | 类型   | 必填 | 备注                        |
 | ---- | --------------- | ------ | ------ | --------------------------- |
-| 1    | groupId         | int    | 否     | 所属群组编号                |
-| 2    | contractAddress | String | 否     | 合约地址                    |
-| 3    | contractName    | String | 否     | 合约名称                    |
-| 4    | contractAbi     | String | 否     | 合约编译后生成的abi文件内容 |
-| 5    | account         | String | 否     | 所属账号                    |
+| 1    | groupId         | int    | 是     | 所属群组编号                |
+| 2    | contractAddress | String | 是     | 合约地址                    |
+| 3    | contractName    | String | 是     | 合约名称                    |
+| 4    | contractAbi     | List<Object> | 是     | 合约编译后生成的abi文件内容 |
+| 5    | account         | String | 是     | 所属账号                    |
 
 
 ***2）入参示例***
@@ -2408,13 +2406,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/1/1/5?account=
 
 ***1）入参表***
 
-| 序号 | 输入参数        | 类型   | 可为空 | 备注                        |
+| 序号 | 输入参数        | 类型   | 必填 | 备注                        |
 | ---- | --------------- | ------ | ------ | --------------------------- |
-| 1    | abiId           | long   | 否     | abi编号                     |
-| 2    | groupId         | int    | 否     | 所属群组编号                |
-| 3    | contractAddress | String | 否     | 合约地址                    |
-| 4    | contractName    | String | 否     | 合约名称                    |
-| 5    | contractAbi     | String | 否     | 合约编译后生成的abi文件内容 |
+| 1    | abiId           | long   | 是     | abi编号                     |
+| 2    | groupId         | int    | 是     | 所属群组编号                |
+| 3    | contractAddress | String | 是     | 合约地址                    |
+| 4    | contractName    | String | 是     | 合约名称                    |
+| 5    | contractAbi     | List<Object> | 是     | 合约编译后生成的abi文件内容 |
 
 
 ***2）入参示例***
@@ -2940,12 +2938,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findCnsList
 
 ***1）入参表***
 
-| 序号 | 输入参数   | 类型   | 可为空 | 备注          |
+| 序号 | 输入参数   | 类型   | 必填 | 备注          |
 | ---- | ---------- | ------ | ------ | ------------- |
-| 1    | groupId    | int    | 否     | 群组编号      |
-| 2    | pageNumber | int    | 否     | 页码，从1开始 |
-| 3    | pageSize   | int    | 否     | 页大小        |
-| 4    | account    | String | 是     | 所属账号      |
+| 1    | groupId    | int    | 是     | 群组编号      |
+| 2    | pageNumber | int    | 是     | 页码，从1开始 |
+| 3    | pageSize   | int    | 是     | 页大小        |
+| 4    | account    | String | 否     | 所属账号      |
 
 
 ***2）入参示例***
@@ -3183,7 +3181,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/list
 }
 ```
 
-### 12.2. 根据仓库编号获取仓库信息
+### 5.20. 根据仓库编号获取仓库信息
 
 #### 接口描述
 
@@ -3235,7 +3233,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse?warehouseId=1
 }
 ```
 
-### 12.3. 根据仓库编号获取合约文件夹信息
+### 5.21. 根据仓库编号获取合约文件夹信息
 
 #### 接口描述
 
@@ -3286,7 +3284,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/folder/list?warehouseId=1
 }
 ```
 
-### 12.4. 根据合约文件夹编号获取合约文件夹信息
+### 5.22. 根据合约文件夹编号获取合约文件夹信息
 
 #### 接口描述
 
@@ -3335,7 +3333,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/folder?folderId=2
 }
 ```
 
-### 12.5. 根据文件夹编号获取合约列表
+### 5.23. 根据文件夹编号获取合约列表
 
 #### 接口描述
 
@@ -3396,7 +3394,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/item/list?folderId=2
 }
 ```
 
-### 12.6. 根据合约编号获取合约信息
+### 5.24. 根据合约编号获取合约信息
 
 #### 接口描述
 
@@ -3446,6 +3444,101 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId=2
 ```
 
 
+### 5.25. 查询合约管理者列表
+
+根据群组ID和合约地址，返回在WeBASE拥有私钥的合约部署者或链委员（若链委员非空）私钥用户
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/listManager/{groupId}/{contractAddress}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数        | 类型   | 必填 | 备注             |
+| ---- | --------------- | ------ | ------ | ---------------- |
+| 1    | groupId         | int    | 是     | 群组id           |
+| 2    | contractAddress | String | 否     | 合约地址         |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/listManager/1/0x622ca15aa841e92eb65da1a0e59c1b6bb61e3ecb
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号   | 输出参数        | 类型          |      | 备注                                        |
+| ------ | --------------- | ------------- | ---- | ------------------------------------------- |
+| 1      | code            | Int           | 否   | 返回码，0：成功 其它：失败                  |
+| 2      | message         | String        | 否   | 描述                                        |
+| 3      | totalCount      | Int           | 否   | 总记录数                                    |
+| 4      | data        | List          | 是   | 用户列表                           |
+| 4.1    |             | Object        |      | 用户信息对象                       |
+| 4.1.1  | userId      | int           | 否   | 用户编号                           |
+| 4.1.2  | userName    | string        | 否   | 用户名称                           |
+| 4.1.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 4.1.4  | description | String        | 是   | 备注                               |
+| 4.1.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
+| 4.1.6  | publicKey   | String        | 否   | 公钥信息                           |
+| 4.1.7  | address     | String        | 是   | 在链上位置的hash                   |
+| 4.1.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
+| 4.1.9  | account     | string        | 否   | 关联账户                           |
+| 4.1.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
+| 4.1.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 4.1.12 | signUserId  | String        | 否   | 用户在WeBASE-Sign中的编号          |
+
+
+***2）出参示例***
+
+* 成功：
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "userId": 700015,
+      "userName": "mars2",
+      "account": "admin",
+      "groupId": 1,
+      "publicKey": "04476580a6044f3bb25a26d40ba0bafe3ed0c8e98ff50271e20ded684cfa38e02b9c3eaf1de114121f910d8bea26b5e4434f522712c9b8347a777b738dd74b706b",
+      "privateKey": null,
+      "userStatus": 1,
+      "chainIndex": null,
+      "userType": 1,
+      "address": "0xdccae56cef725605d0fa1e00fd553074a74091c5",
+      "signUserId": "ed54e13b0abf4c69b788bd83b8e3515e",
+      "appId": "1",
+      "hasPk": 1,
+      "description": "supplychain_mars2",
+      "createTime": "2021-07-02 17:54:24",
+      "modifyTime": "2021-07-02 17:54:24"
+    }
+  ],
+  "attachment": null
+}
+```
+
+* 失败：
+
+```
+{
+    "code": 202542,
+    "message": "No private key of contract manager address in webase"
+}
+```
+
+
 
 ## 6 服务器监控相关
 
@@ -3462,14 +3555,14 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId=2
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1         | nodeId            | int             | 否     | 群组id                                                         |
+| 1         | nodeId            | int             | 是     | 群组id                                                         |
 | 2         | beginDate         | LocalDateTime   | 是     | 显示时间（开始） yyyy-MM-dd'T'HH:mm:ss.SSS 2019-03-13T00:00:00 |
 | 3         | endDate           | LocalDateTime   | 是     | 显示时间（结束）                                               |
-| 4         | contrastBeginDate | LocalDateTime   | 是     | 对比时间（开始）                                               |
-| 5         | contrastEndDate   | LocalDateTime   | 是     | 对比时间（结束）                                               |
-| 6         | gap               | Int             | 是     | 数据粒度                                                       |
+| 4         | contrastBeginDate | LocalDateTime   | 否     | 对比时间（开始）                                               |
+| 5         | contrastEndDate   | LocalDateTime   | 否     | 对比时间（结束）                                               |
+| 6         | gap               | Int             | 否    | 数据粒度，默认为1                                                       |
 
 
 ***2）入参示例***
@@ -3581,14 +3674,14 @@ performance/ratio/{nodeId}?gap={gap}&beginDate={beginDate}&endDate={endDate}&con
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1         | nodeId            | int             | 否     | 群组id                                                         |
+| 1         | nodeId            | int             | 是     | 群组id                                                         |
 | 2         | beginDate         | LocalDateTime   | 是     | 显示时间（开始） yyyy-MM-dd'T'HH:mm:ss.SSS 2019-03-13T00:00:00 |
 | 3         | endDate           | LocalDateTime   | 是     | 显示时间（结束）                                               |
-| 4         | contrastBeginDate | LocalDateTime   | 是     | 对比时间（开始）                                               |
-| 5         | contrastEndDate   | LocalDateTime   | 是     | 对比时间（结束）                                               |
-| 6         | gap               | Int             | 是     | 数据粒度                                                       |
+| 4         | contrastBeginDate | LocalDateTime   | 否     | 对比时间（开始）                                               |
+| 5         | contrastEndDate   | LocalDateTime   | 否     | 对比时间（结束）                                               |
+| 6         | gap               | Int             | 否     | 数据粒度，默认为1                                                       |
 
 
 ***2）入参示例***
@@ -3699,9 +3792,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/performance/ratio/500001?gap=1&beginDa
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-|  1   | serverId     | Int       |   否   | 邮件服务的编号
+|  1   | serverId     | Int       |   是   | 邮件服务的编号
 
 
 ***2）入参示例***
@@ -3790,7 +3883,7 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/1
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | -    | -     | -        | -     | -  |
 
@@ -3885,16 +3978,16 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config/list
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | serverId     | int        | 否     |  邮件告警配置的编号 |
-| 2    | protocol     | String        | 否     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）|
-| 3    | host         | String        | 否     |  邮件服务的地址|
-| 4    | port         | int        | 否     |  邮件服务使用的端口，默认25|
-| 5    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填|
-| 6    | password     | String        | 是     |  邮件服务的用户邮箱授权码，**使用base64编码**，authentication开启时为必填|
-| 7    | authentication | int        | 否     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启|
-| 8    | enable       | int        | 否     |  是否启用邮件服务：0-关闭，1-开启|
+| 1    | serverId     | int        | 是     |  邮件告警配置的编号 |
+| 2    | protocol     | String        | 是     |  邮件服务的协议类型，小写（发件服务器默认使用smtp）|
+| 3    | host         | String        | 是     |  邮件服务的地址|
+| 4    | port         | int        | 是     |  邮件服务使用的端口，默认25|
+| 5    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填|
+| 6    | password     | String        | 否     |  邮件服务的用户邮箱授权码，**使用base64编码**，authentication开启时为必填|
+| 7    | authentication | int        | 是     |  是否启用验证，默认使用username/password验证：0-关闭，1-开启|
+| 8    | enable       | int        | 是     |  是否启用邮件服务：0-关闭，1-开启|
 
 ***2）入参示例***
 
@@ -3988,24 +4081,24 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                      |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                      |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | {toMailAddress} | String        | 否     |  接收测试邮件的邮箱地址 |
+| 1    | {toMailAddress} | String        | 是     |  接收测试邮件的邮箱地址 |
 | 2    | host         | String        | 否     |  邮件服务的地址 |
-| 3    | port         | int        | 否     |  邮件服务使用的端口，默认25|
-| 4    | protocol     | String        | 是     |  邮件服务的协议类型，默认使用smtp|
-| 5    | defaultEncoding  | String        | 是     | 邮件服务的邮件编码格式，默认为UTF-8编码|
-| 6    | username     | String        | 否     |  邮件服务的用户邮箱地址，authentication开启时为必填|
-| 7    | password     | String        | 否     |  邮件服务的用户邮箱授权码，authentication开启时为必填|
-| 8    | authentication | int        | 否     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启|
-| 9    | starttlsEnable | int        | 是     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启|
-| 10   | starttlsRequired | int        | 是     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启|
-| 11   | socketFactoryPort | String        | 是     |  TLS/SSL的Socket端口，默认465|
-| 12   | socketFactoryClass | String        | 是     |  TLS/SSL的Socket工厂类|
-| 13   | socketFactoryFallback | int        | 是     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启|
-| 14   | timeout | int        | 是     |  读超时时间值，默认5000ms|
-| 15   | connectionTimeout | int        | 是     |  连接超时时间值，默认5000ms|
-| 16   | writeTimeout | int        | 是     |  写超时时间值，默认5000ms|
+| 3    | port         | int        | 是否     |  邮件服务使用的端口，默认25|
+| 4    | protocol     | String        | 否     |  邮件服务的协议类型，默认使用smtp|
+| 5    | defaultEncoding  | String        | 否     | 邮件服务的邮件编码格式，默认为UTF-8编码|
+| 6    | username     | String        | 是     |  邮件服务的用户邮箱地址，authentication开启时为必填|
+| 7    | password     | String        | 是     |  邮件服务的用户邮箱授权码，authentication开启时为必填|
+| 8    | authentication | int        | 是     |  开启鉴权验证，默认开启（使用username/password验证）0-关闭，1-开启|
+| 9    | starttlsEnable | int        | 否     |  开启优先使用STARTTLS，默认开启 0-关闭，1-开启|
+| 10   | starttlsRequired | int        | 否     |  开启必须使用STARTTLS，默认关闭，开启时需要配置socketFactoryPort, socketFactoryClass, socketFactoryFallback 0-关闭，1-开启|
+| 11   | socketFactoryPort | String        | 否     |  TLS/SSL的Socket端口，默认465|
+| 12   | socketFactoryClass | String        | 否     |  TLS/SSL的Socket工厂类|
+| 13   | socketFactoryFallback | int        | 否     |  开启Socket的Fallback函数，默认关闭 0-关闭，1-开启|
+| 14   | timeout | int        | 否     |  读超时时间值，默认5000ms|
+| 15   | connectionTimeout | int        | 否     |  连接超时时间值，默认5000ms|
+| 16   | writeTimeout | int        | 否是     |  写超时时间值，默认5000ms|
 
 ***2）入参示例***
 
@@ -4081,9 +4174,9 @@ http://localhost:5001/WeBASE-Node-Manager/alert/mail/test/yourmail@qq.com
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-|  1   | ruleId     | Int       |   否   | 告警配置的编号 |
+|  1   | ruleId     | Int       |   是   | 告警配置的编号 |
 
 
 ***2）入参示例***
@@ -4163,7 +4256,7 @@ http://localhost:5001/WeBASE-Node-Manager/alert/1
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | -    | -     | -        | -     | -  |
 
@@ -4279,16 +4372,16 @@ http://localhost:5001/WeBASE-Node-Manager/alert/list
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | ruleId     | int        | 否     |  告警类型配置编号 |
-| 2    | ruleName     | String        | 是     |  告警邮件的标题|
-| 3    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启|
-| 4    | alertType         | int        | 是     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警|
-| 6    | alertIntervalSeconds     | int        | 是     |  告警邮件的发送间隔时间（秒），默认3600s|
-| 7    | alertContent | String        | 是     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除|
-| 8    | userList       | String        | 否     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串|
-| 9    | alertLevel      | Int           | 是     |  告警等级：1-高，2-中，3-低      |
+| 1    | ruleId     | int        | 是     |  告警类型配置编号 |
+| 2    | ruleName     | String        | 否     |  告警邮件的标题|
+| 3    | enable         | int        | 是     |  是否启用该类型的告警：0-关闭，1-开启|
+| 4    | alertType         | int        | 否     |  告警类型：1-节点状态告警，2-审计告警，3-证书有效期告警|
+| 6    | alertIntervalSeconds     | int        | 否     |  告警邮件的发送间隔时间（秒），默认3600s|
+| 7    | alertContent | String        | 否     |  告警邮件的内容，其中大括号`{}`及里面的英文变量不可去除|
+| 8    | userList       | String        | 是     |  接收告警邮件的邮箱列表，以`List<String>`序列化得到的字符串|
+| 9    | alertLevel      | Int           | 否     |  告警等级：1-高，2-中，3-低      |
 
 
 ***2）入参示例***
@@ -4374,10 +4467,10 @@ http://localhost:5001/WeBASE-Node-Manager/mailServer/config
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | ruleId     | int        | 否     |  告警类型配置编号 |
-| 2    | enable         | int        | 否     |  是否启用该类型的告警：0-关闭，1-开启|
+| 1    | ruleId     | int        | 是     |  告警类型配置编号 |
+| 2    | enable         | int        | 是     |  是否启用该类型的告警：0-关闭，1-开启|
 
 
 
@@ -4457,14 +4550,14 @@ http://localhost:5001/WeBASE-Node-Manager/alert/toggle
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1         | nodeId            | int             | 否     | 群组id  |
+| 1         | nodeId            | int   | 是     | 群组id  |
 | 2         | beginDate         | long   | 是     | 显示时间（开始） 时间戳  |
 | 3         | endDate           | long   | 是     | 显示时间（结束）时间戳 |
-| 4         | contrastBeginDate | long   | 是     | 对比时间（开始）时间戳 |
-| 5         | contrastEndDate   | long   | 是     | 对比时间（结束）时间戳  |
-| 6         | gap               | Int             | 是     | 数据粒度  |
+| 4         | contrastBeginDate | long   | 否     | 对比时间（开始）时间戳 |
+| 5         | contrastEndDate   | long   | 否     | 对比时间（结束）时间戳  |
+| 6         | gap               | Int             | 否     | 数据粒度，默认是1  |
 
 
 ***2）入参示例***
@@ -4560,9 +4653,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/stat?groupId=1&gap=60eginDate=16178112
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1      | groupId        | int           | 否     | 所属群组编号                                  |
+| 1      | groupId        | int           | 是     | 所属群组编号                                  |
 
 
 ***2）入参示例***
@@ -4659,10 +4752,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/userList/300001
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1      | groupId        | int           | 否     | 所属群组编号      |
-| 2      | userName         | String        | 是     | 用户名             |
+| 1      | groupId        | int           | 是     | 所属群组编号      |
+| 2      | userName         | String        | 否     | 用户名             |
 
 ***2）入参示例***
 
@@ -4752,7 +4845,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/interfaceList/300001
 
 #### 7.3.1 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/monitor/interfaceList/{groupId}**
+* 请求地址： **/monitor/transList/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
@@ -4760,13 +4853,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/interfaceList/300001
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1       | groupId     | int            | 否     | 所属群组编号               |
-| 2       | userName      | String         | 是     | 用户名                     |
-| 3       | startDate     | String         |        | 开始时间                   |
-| 4       | endDate       | String         |        | 结束时间                   |
-| 5       | interfaceName | String         |        | 接口名称                   |
+| 1       | groupId     | int            | 是     | 所属群组编号               |
+| 2       | userName      | String         | 否     | 用户名                     |
+| 3       | startDate     | String         |    是    | 开始时间                   |
+| 4       | endDate       | String         |  是      | 结束时间                   |
+| 5       | interfaceName | String         |   否     | 接口名称                   |
 
 ***2）入参示例***
 
@@ -4840,12 +4933,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/transList/300001?userName=0x5d
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | groupId  | int           | 否     | 所属群组编号               |
-| 2     | userName   | String        | 是     | 用户名                     |
-| 3     | pageNumber | int           | 否     | 当前页码                   |
-| 4     | pageSize   | int           | 否     | 页面大小                   |
+| 1     | groupId  | int           | 是     | 所属群组编号               |
+| 2     | userName   | String        | 否     | 用户名                     |
+| 3     | pageNumber | int           | 是     | 当前页码                   |
+| 4     | pageSize   | int           | 是     | 页面大小                   |
 
 ***2）入参示例***
 
@@ -4911,12 +5004,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualUserList/300001/1/10?us
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | groupId       | int           | 否     | 所属群组编号               |
-| 2     | contractAddress | String        | 是     | 合约地址                   |
-| 3     | pageNumber      | int           | 否     | 当前页码                   |
-| 4     | pageSize        | int           | 否     | 页面大小                   |
+| 1     | groupId       | int           | 是     | 所属群组编号               |
+| 2     | contractAddress | String        | 否     | 合约地址                   |
+| 3     | pageNumber      | int           | 是     | 当前页码                   |
+| 4     | pageSize        | int           | 是     | 页面大小                   |
 
 ***2）入参示例***
 
@@ -4976,19 +5069,19 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/monitor/unusualContractList/300001/1/1
 ### 8.1 获取群组概况
 
 
-#### 8.1.1 传输协议规范
+####  传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/general/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId          | int    | 否     | 群组id                     |
+| 1    | groupId          | int    | 是     | 群组id                     |
 
 
 ***2）入参示例***
@@ -4998,7 +5091,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 ```
 
 
-#### 8.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5044,19 +5137,19 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/300001
 
 默认只返回groupStatus为1的群组ID，可传入groupStatus筛选群组 (1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data)
 
-#### 8.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/all**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupStatus   | int    | 是    | 群组状态，1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data|
+| 1    | groupStatus   | int    | 否    | 群组状态，1-normal, 2-maintaining, 3-conflict-genesisi, 4-conflict-data|
 
 
 ***2）入参示例***
@@ -5067,7 +5160,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 ```
 
 
-#### 8.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5127,19 +5220,19 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 ### 8.3 查询每日交易数据
 
 
-#### 8.3.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/transDaily/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.3.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId    | int    | 否     | 群组id                     |
+| 1    | groupId    | int    | 是     | 群组id                     |
 
 ***2）入参示例***
 
@@ -5148,7 +5241,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 ```
 
 
-#### 8.3.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5203,24 +5296,24 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/300001
 
 节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
-#### 8.4.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/generate/{nodeId}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.4.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | nodeId    | String        | 否     | 路径变量：节点id                           |
-| 2    | generateGroupId    | Integer        | 否     | 新群组编号                           |
-| 3    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
-| 4    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
-| 5    | description     | String           | 是    | 群组描述                           |
+| 1    | nodeId    | String        | 是     | 路径变量：节点id                           |
+| 2    | generateGroupId    | Integer        | 是     | 新群组编号                           |
+| 3    | timestamp      | Integer        | 是     | 群组创世块时间戳                               |
+| 4    | nodeList     | List<String>           | 是     | 新群组中所有共识节点 |
+| 5    | description     | String           | 否    | 群组描述                           |
 
 ***2）入参示例***
 
@@ -5241,7 +5334,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b95
 ```
 
 
-#### 8.4.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5298,23 +5391,23 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate/78e467957af3d0f77e19b95
 节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
 
-#### 8.5.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/generate**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.5.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
-| 2    | timestamp      | Integer        | 否     | 群组创世块时间戳                               |
-| 3    | nodeList     | List<String>           | 否     | 新群组中所有共识节点 |
-| 4    | description     | String           | 是    | 群组描述                           |
+| 1    | generateGroupId    | Integer        | 是     | 新群组编号                           |
+| 2    | timestamp      | Integer        | 是     | 群组创世块时间戳                               |
+| 3    | nodeList     | List<String>           | 是     | 新群组中所有共识节点 |
+| 4    | description     | String           | 否    | 群组描述                           |
 
 ***2）入参示例***
 
@@ -5335,7 +5428,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate
 ```
 
 
-#### 8.5.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5382,22 +5475,22 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/generate
 
 节点加入已存在群组并启动后，可调用`POST /precompiled/consensus`接口将该节点加入到新加入群组的共识节点或观察节点中
 
-#### 8.6.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/operate/{nodeId}**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.6.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | nodeId    | String        | 否     | 路径变量：节点id                           |
-| 2    | generateGroupId    | Integer        | 否     | 新群组编号                           |
-| 3    | type      | String        | 否     | 操作类型： start, stop, remove, recover, getStatus|
+| 1    | nodeId    | String        | 是     | 路径变量：节点id                           |
+| 2    | generateGroupId    | Integer        | 是     | 新群组编号                           |
+| 3    | type      | String        | 是     | 操作类型： start, stop, remove, recover, getStatus|
 
 ***2）入参示例***
 
@@ -5413,7 +5506,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952
 ```
 
 
-#### 8.6.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5447,21 +5540,21 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/operate/78e467957af3d0f77e19b952
 批量启动多个节点的群组，向`nodeList`中所有节点批量发起启动群组的请求；nodeId可以从前置列表获取。
 
 
-#### 8.7.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/batchStart**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.7.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | generateGroupId    | Integer        | 否     | 新群组编号                           |
-| 2    | nodeList      | List<String>        | 否     | 新群组中所有需要启动的节点nodeId |
+| 1    | generateGroupId    | Integer        | 是     | 新群组编号                           |
+| 2    | nodeList      | List<String>        | 是     | 新群组中所有需要启动的节点nodeId |
 
 ***2）入参示例***
 
@@ -5480,7 +5573,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/batchStart
 ```
 
 
-#### 8.7.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5526,21 +5619,21 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/batchStart
 
 群组状态包含：群组不存在"INEXISTENT"、群组正在停止"STOPPING"、群组运行中"RUNNING"、群组已停止"STOPPED"、群组已删除"DELETED"
 
-#### 8.8.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/queryGroupStatus/list**
 * 请求方式：POST
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 8.8.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | nodeIdList    | List<String>        | 否     | 需要获取群组状态的节点编号列表    |
-| 2    | groupIdList      | List<Integer>        | 否     | 需要查询群组状态的群组编号列表 |
+| 1    | nodeIdList    | List<String>        | 是     | 需要获取群组状态的节点编号列表    |
+| 2    | groupIdList      | List<Integer>        | 是     | 需要查询群组状态的群组编号列表 |
 
 ***2）入参示例***
 
@@ -5559,7 +5652,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/queryGroupStatus/list
 ```
 
 
-#### 8.8.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5630,17 +5723,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/queryGroupStatus/list
 
 刷新节点管理服务的群组列表，检查本地群组数据与链上群组数据是否有冲突，检查多个节点之间的创世块是否一致，并从链上拉取最新的群组列表
 
-#### 8.9.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/update**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.9.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | -    | -    | -     | -                     |
 
@@ -5651,7 +5744,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 ```
 
 
-#### 8.9.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5676,19 +5769,19 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/update
 
 返回所有群组，包含正常运行、维护中、脏数据冲突、创世块冲突4种状态的群组
 
-#### 8.10.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/all/invalidIncluded**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 8.10.2 请求参数
+#### 请求参数
 
 ***1）入参表***
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1      | pageSize    | Integer           | 否     | 每页记录数                                 |
-| 2      | pageNumber  | Integer           | 否     | 当前页码                                   |
+| 1      | pageSize    | Integer           | 是     | 每页记录数                                 |
+| 2      | pageNumber  | Integer           | 是     | 当前页码                                   |
 
 ***2）入参示例***
 
@@ -5697,7 +5790,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 ```
 
 
-#### 8.10.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5716,8 +5809,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 | 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
 | 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
 | 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
-| 4.1.2 | description     | String        | 否     | 群组描述                   |
-| 4.1.2 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+| 4.1.7 | description     | String        | 否     | 群组描述                   |
+| 4.1.8 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
 
 
 ***2）出参示例***
@@ -5770,18 +5863,18 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 
 删除指定群组编号的群组的所有数据，包含节点数据、交易数据、交易审计数据等等。
 
-#### 8.11.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/group/{groupId}**
 * 请求方式：DELETE
 * 返回格式：JSON
 
-#### 8.11.2 请求参数
+#### 请求参数
 
 ***1）入参表***
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1      | groupId    | Integer           | 否     | 群组编号                                 |
+| 1      | groupId    | Integer           | 是     | 群组编号                                 |
 
 ***2）入参示例***
 
@@ -5790,7 +5883,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/{groupId}
 ```
 
 
-#### 8.11.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5818,29 +5911,160 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/{groupId}
 ```
 
 
+### 8.12 配置群组备注信息
+
+配置群组的备注信息，用于数据大屏中大标题的展示。（默认备注为"synchronous"）
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/description**
+* 请求方式：PUT
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     |  群组ID                                    |
+| 1      | description   | String           | 否     | 群组备注                                  |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/description
+```
+
+{
+  "description": "溯源存证应用",
+  "groupId": 1
+}
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": 1,
+  "attachment": null
+}
+```
+
+
+
+### 8.13 获取单个群组详细信息
+
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/group/detail/{groupId}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     |  群组ID                                    |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/group/detail/{groupId}
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+| 3     | data          | List          | 否     | 组织列表                   |
+| 3.1   |               | Object        |        | 组织信息对象               |
+| 3.1.1 | groupId       | Integer           | 否     | 群组编号                   |
+| 3.1.2 | groupName     | String        | 否     | 群组名称                   |
+| 3.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 3-创世块冲突|
+| 3.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
+| 3.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
+| 3.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
+| 3.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 3.1.7 | description     | String        | 否     | 群组描述                   |
+| 3.1.8 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "groupId": 1,
+    "groupName": "group1",
+    "groupStatus": 1,
+    "nodeCount": 4,
+    "latestBlock": 0,
+    "transCount": 0,
+    "createTime": "2021-07-29 14:44:59",
+    "modifyTime": "2021-09-29 16:42:05",
+    "description": "溯源存证应用",
+    "groupType": 1,
+    "groupTimestamp": null,
+    "nodeIdList": null,
+    "chainId": 0,
+    "chainName": "default"
+  },
+  "attachment": null
+}
+```
+
+
 ## 9 节点管理模块
 
 
 ### 9.1 查询节点列表
 
+查询WeBASE本地保存的节点列表
 
-#### 9.1.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/node/nodeList/{groupId}/{pageNumber}/{pageSize}?nodeName={nodeName}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 9.1.2 请求参数
+#### 请求参数
 
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1      | groupId   | int           | 否     | 群组id                                     |
-| 2      | pageSize    | Int           | 否     | 每页记录数                                 |
-| 3      | pageNumber  | Int           | 否     | 当前页码                                   |
-| 4      | nodeName    | String        | 是     | 节点名称                                   |
+| 1      | groupId   | int           | 是     | 群组id                                     |
+| 2      | pageSize    | Int           | 是     | 每页记录数                                 |
+| 3      | pageNumber  | Int           | 是     | 当前页码                                   |
+| 4      | nodeName    | String        | 否     | 节点名称                                   |
 
 ***2）入参示例***
 
@@ -5849,7 +6073,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 ```
 
 
-#### 9.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5871,6 +6095,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 | 4.1.9 | pbftView    | BigInteger    | 否     | Pbft view                                  |
 | 4.1.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 4.1.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
+| 4.1.12 | city        | String | 否     | 节点所在城市                                   |
+| 4.1.13 | agency      | String | 否     | 节点所属机构                                  |
 
 ***2）出参示例***
 
@@ -5882,18 +6108,20 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
     "totalCount": 1,
     "data": [
         {
-            "nodeId": 500001,
-            "nodeName": "127.0.0.1_10303",
-            "groupId": 300001,
+            "nodeId": "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f",
+            "nodeName": "1_06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97",
+            "groupId": 1,
             "nodeIp": "127.0.0.1",
-            "p2pPort": 10303,
+            "p2pPort": null,
             "description": null,
-            "blockNumber": 133,
-            "pbftView": 5852,
+            "blockNumber": 589,
+            "pbftView": 11,
             "nodeActive": 1,
-            "createTime": "2019-02-14 17:47:00",
-            "modifyTime": "2019-03-15 11:14:29"
-        }
+            "createTime": "2021-07-29 14:44:59",
+            "modifyTime": "2021-09-29 16:17:38",
+            "city": "430500",
+            "agency": "GZ"
+        },
     ]
 }
 ```
@@ -5911,19 +6139,19 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 ### 9.2 查询节点信息
 
 
-#### 9.2.1 传输协议规范
+#### 传输协议规范
 * 网络传输协议：使用HTTP协议
-* 请求地址：**/node/nodeInfo/{groupId}?nodeType={nodeType}**
+* 请求地址：**/node/nodeInfo/{groupId}**
 * 请求方式：GET
 * 返回格式：JSON
 
-#### 9.2.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int           | 否     | 群组id                                     |
+| 1    | groupId     | int           | 是     | 群组id                                     |
 
 ***2）入参示例***
 
@@ -5931,7 +6159,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeList/300001/1/10?nodeName=
 http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
 ```
 
-#### 9.2.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
@@ -5951,6 +6179,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
 | 3.9 | pbftView    | BigInteger    | 否     | Pbft view                                  |
 | 3.10 | createTime  | LocalDateTime | 否     | 落库时间                                   |
 | 3.11 | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
+| 3.12 | city        | String | 否     | 节点所在城市                                   |
+| 3.13 | agency      | String | 否     | 节点所属机构                                  |
 
 ***2）出参示例***
 
@@ -5960,18 +6190,20 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
     "code": 0,
     "message": "success",
     "data": {
-        "nodeId": 500001,
-        "nodeName": "127.0.0.1_10303",
+        "nodeId": "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f",
+        "nodeName": "1_06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97",
         "groupId": 1,
         "nodeIp": "127.0.0.1",
-        "p2pPort": 10303,
+        "p2pPort": null,
         "description": null,
-        "blockNumber": 133,
-        "pbftView": 5852,
+        "blockNumber": 589,
+        "pbftView": 11,
         "nodeActive": 1,
-        "createTime": "2019-02-14 17:47:00",
-        "modifyTime": "2019-03-15 11:14:29"
-    }
+        "createTime": "2021-07-29 14:44:59",
+        "modifyTime": "2021-09-29 16:17:38",
+        "city": "430500",
+        "agency": "GZ"
+    },
 }
 ```
 
@@ -5981,6 +6213,181 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
     "code": 102000,
     "message": "system exception",
     "data": {}
+}
+```
+
+
+### 9.3 查询群组下的节点ID列表
+
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/node/nodeIdList/{groupId}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     | 群组id                                     |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeIdList/1
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+| 3      | totalCount  | Int           | 否     | 总记录数                                   |
+| 4      | data        | List<String>          | 是     | 节点ID列表                                   |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    "fe57d7b39ed104b4fb2770ae5aad7946bfd377d0eb91ab92a383447e834c3257dec56686551d08178f2d5f40d9fad615293e46c9f5fc23cf187258e121213b1d",
+    "65bc44d398d99d95a9d404aa16e4bfbc2f9ebb40f20439ddef8575a139dc3a80310cfc98a035bd59a67cc5f659f519e3e99b855f3d27f21a889c23a14036d0c7",
+    "95efafa5197796e7edf647191de83f4259d7cbb060f4bac5868be474037f49144d581c15d8aef9b07d78f18041a5f43c3c26352ebbf5583cd23070358c8fba39",
+    "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f"
+  ],
+  "attachment": null
+}
+```
+
+
+### 9.4 配置节点备注信息
+
+可配置节点的IP、机构、城市信息，可用于数据监控大屏展示
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/node/description**
+* 请求方式：PUT
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | nodeId   | String           | 是     |  节点ID                                    |
+| 1      | nodeIp   | String           | 否     | 节点备注IP                                     |
+| 1      | agency   | String           | 否     | 节点备注机构名                                  |
+| 1      | city     | String           | 否     | 节点备注城市                              |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/description
+```
+
+{
+  "agency": "org1",
+  "city": "GZ",
+  "nodeId": "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f",
+  "nodeIp": "127.0.0.1"
+}
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+
+### 9.5 查询节点的城市列表
+
+
+#### 传输协议规范
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/node/city/list**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+
+***1）入参表***
+
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | groupId   | int           | 是     | 群组id                                     |
+
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/city/list
+```
+
+
+#### 返回参数 
+
+***1）出参表***
+
+| 序号 | 输出参数    | 类型          |        | 备注                                       |
+|------|-------------|---------------|--------|-------------------------------|
+| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 2      | message     | String        | 否     | 描述                                       |
+| 3      | data        | List          | 是     |                                    |
+| 3.1      | city        | String          | 是     |   城市名                                 |
+| 3.2      | count        | Int          | 是     |   节点数                                 |
+
+***2）出参示例***
+
+* 成功：
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "city": "110100", // 此处为城市ID
+      "count": 2
+    },
+    {
+      "city": "430500",
+      "count": 1
+    },
+    {
+      "city": "440300",
+      "count": 1
+    }
+  ],
+  "attachment": null
 }
 ```
 
@@ -6001,12 +6408,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | roleId      | int           | 否     | 角色id                     |
-| 2     | roleName    | String        | 是     | 角色名称                   |
-| 3     | pageSize    | int           | 否     | 每页记录数                 |
-| 4     | pageNumber  | int           | 否     | 当前页码                   |
+| 1     | roleId      | int           | 是     | 角色id                     |
+| 2     | roleName    | String        | 否     | 角色名称                   |
+| 3     | pageSize    | int           | 是     | 每页记录数                 |
+| 4     | pageNumber  | int           | 是     | 当前页码                   |
 
 ***2）入参示例***
 
@@ -6091,12 +6498,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumbe
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型   | 可为空 | 备注     |
+| 序号 | 输入参数    | 类型   | 必填 | 备注     |
 | ---- | ----------- | ------ | ------ | -------- |
-| 1    | userName    | string | 否     | 用户名称 |
-| 2    | description | string | 是     | 备注     |
-| 3    | groupId     | Int    | 否     | 所属群组 |
-| 4    | account     | string | 否     | 关联账户 |
+| 1    | userName    | string | 是     | 用户名称 |
+| 2    | description | string | 否     | 备注     |
+| 3    | groupId     | Int    | 是     | 所属群组 |
+| 4    | account     | string | 是     | 关联账户 |
 
 ***2）入参示例***
 
@@ -6187,12 +6594,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型   | 可为空 | 备注     |
+| 序号 | 输入参数    | 类型   | 必填 | 备注     |
 | ---- | ----------- | ------ | ------ | -------- |
-| 1    | userName    | string | 否     | 用户名称 |
-| 2    | description | string | 是     | 备注     |
-| 3    | groupId     | Int    | 否     | 所属群组 |
-| 4    | account     | string | 否     | 关联账户 |
+| 1    | userName    | string | 是     | 用户名称 |
+| 2    | description | string | 否     | 备注     |
+| 3    | groupId     | Int    | 是     | 所属群组 |
+| 4    | account     | string | 是     | 关联账户 |
 
 
 ***2）入参示例***
@@ -6286,10 +6693,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型   | 可为空 | 备注     |
+| 序号 | 输入参数    | 类型   | 必填 | 备注     |
 | ---- | ----------- | ------ | ------ | -------- |
-| 1    | userId      | int    | 否     | 用户编号 |
-| 2    | description | String | 是     | 备注     |
+| 1    | userId      | int    | 是     | 用户编号 |
+| 2    | description | String | 否     | 备注     |
 
 ***2）入参示例***
 
@@ -6376,9 +6783,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ***1）入参表***
 
-| 序号 | 输入参数 | 类型 | 可为空 | 备注     |
+| 序号 | 输入参数 | 类型 | 必填 | 备注     |
 | ---- | -------- | ---- | ------ | -------- |
-| 1    | userId   | int  | 否     | 用户编号 |
+| 1    | userId   | int  | 是     | 用户编号 |
 
 
 ***2）入参示例***
@@ -6440,13 +6847,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/privateKey/4585
 
 ***1）入参表***
 
-| 序号 | 输入参数   | 类型   | 可为空 | 备注                         |
+| 序号 | 输入参数   | 类型   | 必填 | 备注                         |
 | ---- | ---------- | ------ | ------ | ---------------------------- |
-| 1    | groupId    | int    | 否     | 所属群组id                   |
-| 2    | pageSize   | Int    | 否     | 每页记录数                   |
-| 3    | pageNumber | Int    | 否     | 当前页码                     |
-| 4    | userParam  | String | 是     | 查询参数（用户名或公钥地址） |
-| 5    | account    | string | 是     | 关联账户                     |
+| 1    | groupId    | int    | 是     | 所属群组id                   |
+| 2    | pageSize   | Int    | 是     | 每页记录数                   |
+| 3    | pageNumber | Int    | 是     | 当前页码                     |
+| 4    | userParam  | String | 否     | 查询参数（用户名或公钥地址） |
+| 5    | account    | string | 否     | 关联账户                     |
 
 
 ***2）入参示例***
@@ -6478,6 +6885,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 | 4.1.9  | account     | string        | 否   | 关联账户                           |
 | 4.1.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
 | 4.1.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 4.1.12 | signUserId  | String        | 否   | 用户在WeBASE-Sign中的编号          |
 
 
 ***2）出参示例***
@@ -6537,13 +6945,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userList/300001/1/10?userParam=as
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型   | 可为空 | 备注                   |
+| 序号 | 输入参数    | 类型   | 必填 | 备注                   |
 | ---- | ----------- | ------ | ------ | ---------------------- |
-| 1    | privateKey  | string | 否     | Base64加密后的私钥内容 |
-| 2    | userName    | string | 否     | 用户名称               |
-| 3    | description | string | 是     | 备注                   |
-| 4    | groupId     | Int    | 否     | 所属群组               |
-| 5    | account     | string | 否     | 关联账户               |
+| 1    | privateKey  | string | 是     | Base64加密后的私钥内容 |
+| 2    | userName    | string | 是     | 用户名称               |
+| 3    | description | string | 否     | 备注                   |
+| 4    | groupId     | Int    | 是     | 所属群组               |
+| 5    | account     | string | 是     | 关联账户               |
 
 ***2）入参示例***
 
@@ -6610,13 +7018,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型   | 可为空 | 备注                                                         |
+| 序号 | 输入参数    | 类型   | 必填 | 备注                                                         |
 | ---- | ----------- | ------ | ------ | ------------------------------------------------------------ |
-| 1    | pemContent  | string | 否     | pem文件的内容，必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式 |
-| 2    | userName    | string | 否     | 用户名称                                                     |
-| 3    | description | string | 是     | 备注                                                         |
-| 4    | groupId     | Int    | 否     | 所属群组                                                     |
-| 5    | account     | string | 否     | 关联账户                                                     |
+| 1    | pemContent  | string | 是     | pem文件的内容，必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式 |
+| 2    | userName    | string | 是     | 用户名称                                                     |
+| 3    | description | string | 否     | 备注                                                         |
+| 4    | groupId     | Int    | 是     | 所属群组                                                     |
+| 5    | account     | string | 是     | 关联账户                                                     |
 
 ***2）入参示例***
 
@@ -6683,14 +7091,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                                         |
 | ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
-| 1    | p12File     | MultipartFile | 否     | .p12文件                                                     |
-| 2    | p12Password | string        | 是     | 使用base64编码的密码；.p12文件的密码，缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文 |
-| 3    | userName    | string        | 否     | 用户名称                                                     |
-| 4    | description | string        | 是     | 备注                                                         |
-| 5    | groupId     | Int           | 否     | 所属群组                                                     |
-| 6    | account     | string        | 否     | 关联账户                                                     |
+| 1    | p12File     | MultipartFile | 是     | .p12文件                                                     |
+| 2    | p12Password | string        | 否     | 使用base64编码的密码；.p12文件的密码，缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文 |
+| 3    | userName    | string        | 是     | 用户名称                                                     |
+| 4    | description | string        | 否     | 备注                                                         |
+| 5    | groupId     | Int           | 是     | 所属群组                                                     |
+| 6    | account     | string        | 是     | 关联账户                                                     |
 
 ***2）入参示例***
 
@@ -6750,9 +7158,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importP12
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型   | 可为空 | 备注                   |
+| 序号 | 输入参数    | 类型   | 必填 | 备注                   |
 | ---- | ----------- | ------ | ------ | ---------------------- |
-| 1    | privateKey  | string | 否     | Base64加密后的私钥内容 |
+| 1    | privateKey  | string | 是     | Base64加密后的私钥内容 |
 
 ***2）入参示例***
 
@@ -6840,10 +7248,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/export/300001
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                                         |
 | ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
-| 1    | groupId     | int | 否     | 群组id                                                     |
-| 2    | signUserId | string        | 否     | 用户的signUserId |
+| 1    | groupId     | int | 是     | 群组id                                                     |
+| 2    | signUserId | string        | 是     | 用户的signUserId |
 
 ***2）入参示例***
 
@@ -6891,10 +7299,10 @@ FwlBmT1Sa7goXELaazyJEJLbAlAFGB6qvjdA9m2nx5+rTmfGoSuQK9T2hC/vWJfq
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                                         |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                                         |
 | ---- | ----------- | ------------- | ------ | ------------------------------------------------------------ |
-| 1    | groupId     | int | 否     | 群组id                                                     |
-| 2    | signUserId | string        | 否     | 用户的signUserId |
+| 1    | groupId     | int | 是     | 群组id                                                     |
+| 2    | signUserId | string        | 是     | 用户的signUserId |
 
 ***2）入参示例***
 
@@ -6939,14 +7347,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/exportP12
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | Int           | 否     | 所属群组                           |
-| 2    | methodList  | List           | 否     | 方法列表                           |
-| 2.1  |             | Object           | 否     | 方法实体                           |
-| 2.1.1 | abiInfo    | String        | 否     | 合约abi信息                           |
-| 2.1.2 | methodId   | String        | 否     | 方法编号                           |
-| 2.1.3 | methodType | String        | 否     | 方法类型                           |
+| 1    | groupId     | Int           | 是     | 所属群组                           |
+| 2    | methodList  | List           | 是     | 方法列表                           |
+| 2.1  |             | Object           | 是     | 方法实体                           |
+| 2.1.1 | abiInfo    | String        | 是     | 合约abi信息                           |
+| 2.1.2 | methodId   | String        | 是     | 方法编号                           |
+| 2.1.3 | methodType | String        | 是     | 方法类型                           |
 
 
 ***2）入参示例***
@@ -7013,10 +7421,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/add
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | Int           | 否     | 所属群组                           |
-| 2    | methodId    | String        | 否     | 方法编号                           |
+| 1    | groupId     | Int           | 是     | 所属群组                           |
+| 2    | methodId    | String        | 是     | 方法编号                           |
 
 
 ***2）入参示例***
@@ -7090,13 +7498,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/method/findById/2/methodIasdfdttttt
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2    | permissionType      | String           | 否     | 查看拥有某个权限的address list|
-| 3    | tableName   | String           | 是     |  type=UserTable的时候不能为空。查看某个表的管理员list
-| 4   | pageSize   | int           | 否     |
-| 5    | pageNumber   | int           | 否     |
+| 1    | groupId     | int        | 是     | 群组id                                     
+| 2    | permissionType      | String           | 是     | 查看拥有某个权限的address list|
+| 3    | tableName   | String           | 否     |  type=UserTable的时候不能为空。查看某个表的管理员list
+| 4   | pageSize   | int           | 是     |
+| 5    | pageNumber   | int           | 是     |
                          
 
 ***2）入参示例***
@@ -7161,11 +7569,11 @@ http://localhost:5001/WeBASE-Node-Manager/permission?groupId=1&permissionType=cn
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2    | permissionType      | String           | 否     | 查看拥有某个权限的address list|
-| 3    | tableName   | String           | 是     |
+| 1    | groupId     | int        | 是     | 群组id                                     
+| 2    | permissionType      | String           | 是     | 查看拥有某个权限的address list|
+| 3    | tableName   | String           | 否     |
                      
 
 ***2）入参示例***
@@ -7233,14 +7641,14 @@ http://localhost:5001/WeBASE-Node-Manager/permission/full?groupId=1&permissionTy
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | permissionType     | String        | 否     | 分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)  
-| 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
-| 4    | address   | String           | 否     | 分配链管理员的用户地址         
-| 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
-| 6    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | permissionType     | String        | 是     | 分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)  
+| 3    | fromAddress     | String        | 是     | 管理员自己的地址                                     |
+| 4    | address   | String           | 是     | 分配链管理员的用户地址         
+| 5    | tableName   | String           | 否     | 当permissionType为userTable时不可为空      
+| 6    | useAes     | Boolean        | 否     | 发交易的私钥是否为加密私钥，默认为false  
           
 
 ***2）入参示例***
@@ -7304,14 +7712,14 @@ http://localhost:5001/WeBASE-Node-Manager/permission
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | permissionType     | String        | 否     | 分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)  
-| 3    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
-| 4    | address   | String           | 否     | 分配链管理员的用户地址         
-| 5    | tableName   | String           | 是     | 当permissionType为userTable时不可为空      
-| 6    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | permissionType     | String        | 是     | 分配权限的类型（六种：permission, userTable, deployAndCreate, node, cns, sysConfig)  
+| 3    | fromAddress     | String        | 是     | 管理员自己的地址                                     |
+| 4    | address   | String           | 是     | 分配链管理员的用户地址         
+| 5    | tableName   | String           | 否     | 当permissionType为userTable时不可为空      
+| 6    | useAes     | Boolean        | 否     | 发交易的私钥是否为加密私钥，默认为false  
                     
 
 ***2）入参示例***
@@ -7374,11 +7782,11 @@ http://localhost:5001/WeBASE-Node-Manager/permission
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2    | pageSize      | int           | 是     |  分页大小  |
-| 3    | pageNumber   | int           | 是     |    分页页码
+| 1    | groupId     | int        | 是     | 群组id                                     
+| 2    | pageSize      | int           | 否     |  分页大小  |
+| 3    | pageNumber   | int           | 否     |    分页页码
                      
 
 ***2）入参示例***
@@ -7458,13 +7866,12 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted?groupId=1&pageSize=3
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String        | 否     | 管理员自己的地址                                     |
-| 3    | address   | String           | 否     | 分配链管理员的用户地址         
-| 4        | permissionState       | Object |      否   |   使用{"permissionType": 1}的结构格式，1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限     
-| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String        | 是     | 管理员自己的地址                                     |
+| 3    | address   | String           | 是     | 分配链管理员的用户地址         
+| 4        | permissionState       | Object |      是   |   使用{"permissionType": 1}的结构格式，1代表赋予，0代表去除；支持cns、deployAndCreate、sysConfig、node四种权限     
                       
 
 ***2）入参示例***
@@ -7545,12 +7952,12 @@ http://localhost:5001/WeBASE-Node-Manager/permission/sorted
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     |
-| 2    | contractNameAndVersion   | String           | 否     | 只需要合约名,version缺乏时返回所有版本，version与contractName用英文冒号":"连接                             |
-| 4   | pageSize   | int           | 否     |
-| 5    | pageNumber   | int           | 否     |
+| 1    | groupId     | int        | 是     | 群组id                                     |
+| 2    | contractNameAndVersion   | String           | 是     | 只需要合约名,version缺乏时返回所有版本，version与contractName用英文冒号":"连接                             |
+| 4   | pageSize   | int           | 是     |
+| 5    | pageNumber   | int           | 是     |
 
 ***2）入参示例***
 
@@ -7610,11 +8017,11 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/cns/list?groupId=1&contrac
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2   | pageSize   | int           | 否     |
-| 3    | pageNumber   | int           | 否     |
+| 1    | groupId     | int        | 是     | 群组id      
+| 2   | pageSize   | int           | 是     |
+| 3    | pageNumber   | int           | 是     |
 
 ***2）入参示例***
 
@@ -7678,13 +8085,12 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config/list?groupId=1&pageSize=10&
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String        | 否     | 管理员自己的地址
-| 3    | configKey     | String        | 否     | 目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price
- | 4    | configValue     | String        | 否     |  
-| 5    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String        | 是     | 管理员自己的地址
+| 3    | configKey     | String        | 是     | 目前类型两种(tx_count_limit， tx_gas_limit，用户可自定义key如tx_gas_price
+ | 4    | configValue     | String        | 是     |  
 
 ​                          
 
@@ -7752,11 +8158,11 @@ http://localhost:5001/WeBASE-Node-Manager/sys/config
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id    
-| 2   | pageSize   | int           | 否     |
-| 3    | pageNumber   | int           | 否     |
+| 1    | groupId     | int        | 是     | 群组id    
+| 2   | pageSize   | int           | 是     |
+| 3    | pageNumber   | int           | 是     |
 
 ​         
 
@@ -7819,7 +8225,7 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus/list?groupId=1&p
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | groupId     | int        | 否     | 群组id    
 | 2    | fromAddress     | String        | 否     | 管理员的地址    
@@ -7897,12 +8303,11 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/consensus
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String        | 否     | UserTable管理员的地址  
-| 3    | sql     | String        | 否     | 需要调用的sql语句  
-| 4    | useAes     | Boolean        | 是     | 发交易的私钥是否为加密私钥，默认为false  
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String        | 是     | UserTable管理员的地址  
+| 3    | sql     | String        | 是     | 需要调用的sql语句  
 
 
 ***2）入参示例***
@@ -8001,11 +8406,11 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/crud
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2   | pageSize   | int           | 否     |
-| 3    | pageNumber   | int           | 否     |
+| 1    | groupId     | int        | 是     | 群组id                                     
+| 2   | pageSize   | int           | 是     |
+| 3    | pageNumber   | int           | 是     |
                          
 
 ***2）入参示例***
@@ -8061,11 +8466,11 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee/list?groupId=1&pa
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 3    | address   | String           | 否     | 新的链治理委员地址         
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String        | 是     | 链治理委员地址                                     |
+| 3    | address   | String           | 是     | 新的链治理委员地址         
           
 
 ***2）入参示例***
@@ -8128,11 +8533,11 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 3    | address   | String           | 否     | 待取消的链治理委员地址         
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String        | 是     | 链治理委员地址                                     |
+| 3    | address   | String           | 是     | 待取消的链治理委员地址         
           
 
 ***2）入参示例***
@@ -8193,10 +8598,10 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2   | address   | String           | 否     |
+| 1    | groupId     | int        | 是     | 群组id                                     
+| 2   | address   | String           | 是     |
                          
 
 ***2）入参示例***
@@ -8242,12 +8647,12 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight?groupId=1&
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 3    | address   | String           | 否     | 新的链治理委员地址         
-| 4    | weight     | int        | 否     | 投票权重值      
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String        | 是     | 链治理委员地址                                     |
+| 3    | address   | String           | 是     | 新的链治理委员地址         
+| 4    | weight     | int        | 是     | 投票权重值      
 
 
 ***2）入参示例***
@@ -8309,9 +8714,9 @@ http://localhost:5001/WeBASE-Node-Manager/governance/committee/weight
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
+| 1    | groupId     | int        | 是     | 群组id                                     
                          
 
 ***2）入参示例***
@@ -8357,11 +8762,11 @@ http://localhost:5001/WeBASE-Node-Manager/governance/threshold?groupId=1
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 3    | threshold     | int        | 否     | 投票阈值      
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String        | 是     | 链治理委员地址                                     |
+| 3    | threshold     | int        | 是     | 投票阈值      
 
 
 ***2）入参示例***
@@ -8422,11 +8827,11 @@ http://localhost:5001/WeBASE-Node-Manager/governance/threshold
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2   | pageSize   | int           | 否     |
-| 3    | pageNumber   | int           | 否     |
+| 1    | groupId     | int        | 是     | 群组id                                     
+| 2   | pageSize   | int           | 是     |
+| 3    | pageNumber   | int           | 是     |
                          
 
 ***2）入参示例***
@@ -8480,11 +8885,11 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator/list?groupId=1&pag
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 4    | address   | String           | 否     | 运维地址         
+| 1    | groupId     | int        | 是     | 群组id      
+| 3    | fromAddress     | String        | 是     | 链治理委员地址                                     |
+| 4    | address   | String           | 是     | 运维地址         
           
 
 ***2）入参示例***
@@ -8554,11 +8959,11 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 3    | fromAddress     | String        | 否     | 链治理委员地址                                     |
-| 4    | address   | String           | 否     | 运维地址         
+| 1    | groupId     | int        | 是     | 群组id      
+| 3    | fromAddress     | String        | 是     | 链治理委员地址                                     |
+| 4    | address   | String           | 是     | 运维地址         
           
 
 ***2）入参示例***
@@ -8619,12 +9024,12 @@ http://localhost:5001/WeBASE-Node-Manager/governance/operator
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id      
-| 2    | fromAddress     | String   | 否     | 合约管理者地址                                     |
-| 3    | contractAddress | String | 否     | 已部署的合约地址                                             |
-| 4    | handleType      | String | 否     | 操作类型：freeze-冻结；unfreeze-解冻；getStatus-查询合约状态； |
+| 1    | groupId     | int        | 是     | 群组id      
+| 2    | fromAddress     | String   | 是     | 合约管理者地址                                     |
+| 3    | contractAddress | String | 是     | 已部署的合约地址                                             |
+| 4    | handleType      | String | 是     | 操作类型：freeze-冻结；unfreeze-解冻；getStatus-查询合约状态； |
 
 
 ***2）入参示例***
@@ -8686,10 +9091,10 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | int        | 否     | 群组id                                     
-| 2   | addressList   | List<String>           | 否     | 多个合约地址的列表
+| 1    | groupId     | int        | 是     | 群组id                                     
+| 2   | addressList   | List<String>           | 是     | 多个合约地址的列表
                          
 
 ***2）入参示例***
@@ -8747,11 +9152,11 @@ http://localhost:5001/WeBASE-Node-Manager/precompiled/contract/status/list
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId         | int           | 否     | 群组编号                                        |
-| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
-| 3    | pageSize         | int           | 否     | 页大小                                        |
+| 1    | groupId         | int           | 是     | 群组编号                                        |
+| 2    | pageNumber         | int           | 是     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 是     | 页大小                                        |
 
 
 ***2）入参示例***
@@ -8820,9 +9225,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/list?groupId=1&pageNumber=
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | voteId         | int           | 否     | 投票记录编号                                        |
+| 1    | voteId         | int           | 是     | 投票记录编号                                        |
 
 
 ***2）入参示例***
@@ -8867,11 +9272,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/vote/record/{voteId}
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId         | int           | 否     | 群组编号                                        |
-| 2    | pageNumber         | int           | 否     | 页码，从1开始                                        |
-| 3    | pageSize         | int           | 否     | 页大小                                        |
+| 1    | groupId         | int           | 是     | 群组编号                                        |
+| 2    | pageNumber         | int           | 是     | 页码，从1开始                                        |
+| 3    | pageSize         | int           | 是     | 页大小                                        |
 
 
 ***2）入参示例***
@@ -8936,7 +9341,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/governance/committee/list/sorted?group
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 |     | -     | -        |      |
 
@@ -9014,9 +9419,9 @@ http://localhost:5001/WeBASE-Node-Manager/cert/list
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | fingerPrint     | String        | 否     | 证书指纹，证书唯一标识   |
+| 1    | fingerPrint     | String        | 是     | 证书指纹，证书唯一标识   |
 
 ​         
 
@@ -9087,9 +9492,9 @@ http://localhost:5001/WeBASE-Node-Manager/cert?fingerPrint=814D51FB7CBAB33676FE7
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | content     | String        | 否     | 证书文件的内容，需保留开头与结尾以及证书原有的回车\n的格式文本；证书中包含多个证书亦可 
+| 1    | content     | String        | 是     | 证书文件的内容，需保留开头与结尾以及证书原有的回车\n的格式文本；证书中包含多个证书亦可 
 
 
 ***2）入参示例***
@@ -9154,9 +9559,9 @@ http://localhost:5001/WeBASE-Node-Manager/cert
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | fingerPrint     | String        | 否     | 证书指纹，证书的唯一标识
+| 1    | fingerPrint     | String        | 是     | 证书指纹，证书的唯一标识
 
 
 ***2）入参示例***
@@ -9309,11 +9714,11 @@ headers:  content-disposition: attachment;filename*=UTF-8''conf.zip
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | groupId     | Integer      | 否     | 群组编号                       |
-| 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
-| 3    | pageSize    | Integer      | 否     | 页容量                       |
+| 1    | groupId     | Integer      | 是     | 群组编号                       |
+| 2    | pageNumber  | Integer      | 是     | 页码，从1开始                       |
+| 3    | pageSize    | Integer      | 是     | 页容量                       |
 
 ​         
 
@@ -9383,11 +9788,11 @@ http://localhost:5001/WeBASE-Node-Manager/event/newBlockEvent/list/{groupId}/{pa
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | groupId     | Integer      | 否     | 群组编号                       |
-| 2    | pageNumber  | Integer      | 否     | 页码，从1开始                       |
-| 3    | pageSize    | Integer      | 否     | 页容量                       |
+| 1    | groupId     | Integer      | 是     | 群组编号                       |
+| 2    | pageNumber  | Integer      | 是     | 页码，从1开始                       |
+| 3    | pageSize    | Integer      | 是     | 页容量                       |
 
 ​         
 
@@ -9675,9 +10080,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/event/contractInfo/{groupId}/{type}/{c
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | type     | Integer      | 否     | 获取配置类型，1: Docker 镜像列表   |
+| 1    | type     | Integer      | 是     | 获取配置类型，1: Docker 镜像列表   |
 
 
 ***2）入参示例***
@@ -9740,12 +10145,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=1
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | chainName     | String      | 否   | 链名称，默认为default_chain        |
-| 2    | imageTag  | String      | 否     | 镜像编号， 返回参数中的 id 值            |
-| 3    | dockerImageType    | Integer      | 否     |     Docker 镜像拉取方式，0: 手动获取；1: 自动从 Docker Hub 拉取，2-从CDN拉取；默认为2 |
-| 4    | hostIdList  | List<Integer>      | 否     |  需要初始化的主机Id数组         |
+| 1    | chainName     | String      | 是   | 链名称，默认为default_chain        |
+| 2    | imageTag  | String      | 是     | 镜像编号， 返回参数中的 id 值            |
+| 3    | dockerImageType    | Integer      | 是     |     Docker 镜像拉取方式，0: 手动获取；1: 自动从 Docker Hub 拉取，2-从CDN拉取；默认为2 |
+| 4    | hostIdList  | List<Integer>      | 是     |  需要初始化的主机Id数组         |
 
 ***2）入参示例***
 
@@ -9810,12 +10215,12 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/init
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | chainName     | String      | 否   | 链名称，默认为default_chain        |
-| 2    | imageTag  | String      | 否     | 镜像编号， 返回参数中的 id 值            |
-| 3    | dockerImageType    | Integer      | 否     |     Docker 镜像拉取方式，0: 手动获取；1: 自动从 Docker Hub 拉取，2-从CDN拉取；默认为2 |
-| 4    | hostIdList  | List<Integer>      | 否     |  需要初始化的主机Id数组         |
+| 1    | chainName     | String      | 是   | 链名称，默认为default_chain        |
+| 2    | imageTag  | String      | 是     | 镜像编号， 返回参数中的 id 值            |
+| 3    | dockerImageType    | Integer      | 是     |     Docker 镜像拉取方式，0: 手动获取；1: 自动从 Docker Hub 拉取，2-从CDN拉取；默认为2 |
+| 4    | hostIdList  | List<Integer>      | 是     |  需要初始化的主机Id数组         |
 
 ***2）入参示例***
 
@@ -9889,17 +10294,17 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/initCheck
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | deployNodeInfoList     | List<DeployNodeInfo>      | 否   | 节点部署信息数组        |
-|     | DeployNodeInfo     | Object      | 否   | 节点的主机编号与端口信息        |
-|  1.1   | hostId     | int      | 否   | 主机编号       |
-|  1.2   | ip     | String      | 否   | 主机IP       |
-|  1.3   | frontPort     | int      | 否   | 前置端口       |
-|  1.4   | channelPort     | int      | 否   | 节点的channel端口       |
-|  1.5   | p2pPort     | int      | 否   | 节点的P2P端口       |
-|  1.6   | rpcPort     | int      | 否   | 节点的RPC端口       |
-| 2    | ipconf    | String[]      | 否     |   默认传入空的String数组即可 |
+| 1    | deployNodeInfoList     | List<DeployNodeInfo>      | 是   | 节点部署信息数组        |
+|     | DeployNodeInfo     | Object      | 是   | 节点的主机编号与端口信息        |
+|  1.1   | hostId     | int      | 是   | 主机编号       |
+|  1.2   | ip     | String      | 是   | 主机IP       |
+|  1.3   | frontPort     | int      | 是   | 前置端口       |
+|  1.4   | channelPort     | int      | 是   | 节点的channel端口       |
+|  1.5   | p2pPort     | int      | 是   | 节点的P2P端口       |
+|  1.6   | rpcPort     | int      | 是   | 节点的RPC端口       |
+| 2    | ipconf    | String[]      | 是     |   默认传入空的String数组即可 |
 
 ***2）入参示例***
 
@@ -9946,6 +10351,8 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/checkPort
 
 传入主机的节点信息，检查目标主机中需要用到的端口是否已被占用；端口被占用时，报错信息保存在主机列表的remark字段里
 
+**注意**：使用接口搭链后，需要妥善保存项目目录（如`/dist`）中的`NODES_ROOT`目录，其中保存了链的相关证书与证书私钥。
+
 #### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址： **/deploy/config**
@@ -9957,17 +10364,17 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/checkPort
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | deployNodeInfoList     | List<DeployNodeInfo>      | 否   | 节点部署信息数组        |
-|     | DeployNodeInfo     | Object      | 否   | 节点的主机编号与端口信息        |
-|  1.1   | hostId     | int      | 否   | 主机编号       |
-|  1.2   | ip     | String      | 否   | 主机IP       |
-|  1.3   | frontPort     | int      | 否   | 前置端口       |
-|  1.4   | channelPort     | int      | 否   | 节点的channel端口       |
-|  1.5   | p2pPort     | int      | 否   | 节点的P2P端口       |
-|  1.6   | rpcPort     | int      | 否   | 节点的RPC端口       |
-| 2    | ipconf    | String[]      | 否     |  单个String中包含：主机IP，节点数量，机构名称，所属群组，端口等 |
+| 1    | deployNodeInfoList     | List<DeployNodeInfo>      | 是   | 节点部署信息数组        |
+|     | DeployNodeInfo     | Object      | 是   | 节点的主机编号与端口信息        |
+|  1.1   | hostId     | int      | 是   | 主机编号       |
+|  1.2   | ip     | String      | 是   | 主机IP       |
+|  1.3   | frontPort     | int      | 是   | 前置端口       |
+|  1.4   | channelPort     | int      | 是   | 节点的channel端口       |
+|  1.5   | p2pPort     | int      | 是   | 节点的P2P端口       |
+|  1.6   | rpcPort     | int      | 是   | 节点的RPC端口       |
+| 2    | ipconf    | String[]      | 是     |  单个String中包含：主机IP，节点数量，机构名称，所属群组，端口等 |
 
 
 **注：ipconf 格式参考**
@@ -10058,20 +10465,20 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/config
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | deployNodeInfoList     | List<DeployNodeInfo>      | 否   | 节点部署信息数组        |
-|     | DeployNodeInfo     | Object      | 否   | 节点的主机编号与端口信息        |
-|  1.1   | hostId     | int      | 否   | 主机编号       |
-|  1.2   | ip     | String      | 否   | 主机IP       |
-|  1.3   | frontPort     | int      | 否   | 前置端口       |
-|  1.4   | channelPort     | int      | 否   | 节点的channel端口       |
-|  1.5   | p2pPort     | int      | 否   | 节点的P2P端口       |
-|  1.6   | rpcPort     | int      | 否   | 节点的RPC端口       |
-| 2   | chainName     | String     | 否   | 已有的链名称        |
-| 2   | groupId     | int      | 否   | 群组id，默认为1        |
-| 2   | agencyName     | String     | 否   | 1.4.3后默认均为agency1        |
-| 2   | encryptType     | int  | 否   | 加密类型，与已有链一致        |
+| 1    | deployNodeInfoList     | List<DeployNodeInfo>      | 是   | 节点部署信息数组        |
+|     | DeployNodeInfo     | Object      | 是   | 节点的主机编号与端口信息        |
+|  1.1   | hostId     | int      | 是   | 主机编号       |
+|  1.2   | ip     | String      | 是   | 主机IP       |
+|  1.3   | frontPort     | int      | 是   | 前置端口       |
+|  1.4   | channelPort     | int      | 是   | 节点的channel端口       |
+|  1.5   | p2pPort     | int      | 是   | 节点的P2P端口       |
+|  1.6   | rpcPort     | int      | 是   | 节点的RPC端口       |
+| 2   | chainName     | String     | 是   | 已有的链名称        |
+| 2   | groupId     | int      | 是   | 群组id，默认为1        |
+| 2   | agencyName     | String     | 是   | 1.4.3后默认均为agency1        |
+| 2   | encryptType     | int  | 是   | 加密类型，与已有链一致        |
 
 
 
@@ -10146,9 +10553,9 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/node/add
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | nodeId     | String      | 否   | 启动节点的节点编号        |
+| 1    | nodeId     | String      | 是   | 启动节点的节点编号        |
 
 
 ***2）入参示例***
@@ -10200,9 +10607,9 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/node/start
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | nodeId     | String      | 否   | 停止节点的节点编号        |
+| 1    | nodeId     | String      | 是   | 停止节点的节点编号        |
 
 
 ***2）入参示例***
@@ -10255,9 +10662,9 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/node/stop
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | nodeId     | String      | 否   | 停止节点的节点编号        |
+| 1    | nodeId     | String      | 是   | 停止节点的节点编号        |
 
 
 ***2）入参示例***
@@ -10310,11 +10717,11 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/node/stop
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | nodeId     | String      | 否   | 停止节点的节点编号        |
-| 2    | deleteHost     | Boolean      | 是  | 删除节点时，如果被删除节点是主机上最后一个节点，是否删除主机，true: 删除；false: 不删除；默认：false。    |
-| 3    | deleteAgency     | Boolean      | 是   | 如果需要删除主机，在被删除主机机构最后一台主机，是否删除相应机构，true: 删除；false: 不删除； 默认：false。        |
+| 1    | nodeId     | String      | 是   | 停止节点的节点编号        |
+| 2    | deleteHost     | Boolean      | 否  | 删除节点时，如果被删除节点是主机上最后一个节点，是否删除主机，true: 删除；false: 不删除；默认：false。    |
+| 3    | deleteAgency     | Boolean      | 否   | 如果需要删除主机，在被删除主机机构最后一台主机，是否删除相应机构，true: 删除；false: 不删除； 默认：false。        |
 
 
 ***2）入参示例***
@@ -10378,7 +10785,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/node/stop
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
 |     |      |       |   |     |
 
@@ -10469,7 +10876,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/chain/info
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
 |     |      |       |   |     |
 
@@ -10518,7 +10925,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/delete
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
 |     |      |       |   |     |
 
@@ -10567,7 +10974,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/type
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
 |     |      |       |   |     |
 
@@ -10625,7 +11032,7 @@ http://localhost:5001/WeBASE-Node-Manager/deploy/progress
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
 |     |      |       |   |     |
 
@@ -10694,10 +11101,10 @@ http://localhost:5001/WeBASE-Node-Manager/host/list
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-|   1  |  sshIp    |  String     | 否     |  主机的IP，或与节点管理服务同机的127.0.0.1    |
-|   2  |  rootDir    |  String     | 否     |  主机用于部署节点的路径，若不存在，将自动通过ansible创建   |
+|   1  |  sshIp    |  String     | 是     |  主机的IP，或与节点管理服务同机的127.0.0.1    |
+|   2  |  rootDir    |  String     | 是     |  主机用于部署节点的路径，若不存在，将自动通过ansible创建   |
 
 ***2）入参示例***
 
@@ -10749,9 +11156,9 @@ http://localhost:5001/WeBASE-Node-Manager/host/add
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-|   1  |  hostId    |  Integer     | 否     |  主机编号    |
+|   1  |  hostId    |  Integer     | 是     |  主机编号    |
 
 
 
@@ -10797,10 +11204,10 @@ http://localhost:5001/WeBASE-Node-Manager/host/{hostId}
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-|   1  |  sshIp    |  String     | 否     |  主机的IP，或与节点管理服务同机的127.0.0.1    |
-|   2  |  rootDir    |  String     | 否     |  主机用于部署节点的路径，若不存在，将自动通过ansible创建   |
+|   1  |  sshIp    |  String     | 是     |  主机的IP，或与节点管理服务同机的127.0.0.1    |
+|   2  |  rootDir    |  String     | 是     |  主机用于部署节点的路径，若不存在，将自动通过ansible创建   |
 
 ***2）入参示例***
 
@@ -10852,7 +11259,7 @@ http://localhost:5001/WeBASE-Node-Manager/host/ping
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
 
 ***2）入参示例***
@@ -10899,9 +11306,9 @@ http://localhost:5001/WeBASE-Node-Manager/host/ansible
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-|   1  |  hostIdList    |  List<Integer>     | 否     |  主机编号数组，多个节点时主机id重复多次即可  |
+|   1  |  hostIdList    |  List<Integer>     | 是     |  主机编号数组，多个节点时主机id重复多次即可  |
 
 ***2）入参示例***
 
@@ -10964,14 +11371,14 @@ http://localhost:5001/WeBASE-Node-Manager/host/check
 
 ***1）入参表***
 
-| 序号 | 输入参数   | 类型   | 可为空 | 备注                               |
+| 序号 | 输入参数   | 类型   | 必填 | 备注                               |
 | ---- | ---------- | ------ | ------ | ---------------------------------- |
-| 1    | appName    | string | 否     | 应用名称                           |
-| 2    | appDocLink | string | 否     | 应用文档链接                       |
-| 3    | appDesc    | string | 否     | 应用描述                           |
-| 4    | appIcon    | string | 是     | 应用图标                           |
-| 5    | appDetail  | string | 是     | 应用详细介绍                       |
-| 6    | id         | int    | 是     | 应用编号，传入时表示更新，否则新增 |
+| 1    | appName    | string | 是     | 应用名称                           |
+| 2    | appDocLink | string | 是     | 应用文档链接                       |
+| 3    | appDesc    | string | 是     | 应用描述                           |
+| 4    | appIcon    | string | 否     | 应用图标                           |
+| 5    | appDetail  | string | 否     | 应用详细介绍                       |
+| 6    | id         | int    | 否     | 应用编号，传入时表示更新，否则新增 |
 
 ***2）入参示例***
 
@@ -11066,11 +11473,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/app/save
 
 ***1）入参表***
 
-| 序号 | 输入参数 | 类型   | 可为空 | 备注                                                         |
+| 序号 | 输入参数 | 类型   | 必填 | 备注                                                         |
 | ---- | -------- | ------ | ------ | ------------------------------------------------------------ |
-| 1    | appName  | string | 是     | 应用名称                                                     |
-| 2    | appKey   | string | 是     | 应用Key                                                      |
-| 3    | appType  | Int    | 是     | 应用类型(1模板，2新建)，传入时查询对应列表，不传入则返回新建的应用列表 |
+| 1    | appName  | string | 否     | 应用名称                                                     |
+| 2    | appKey   | string | 否     | 应用Key                                                      |
+| 3    | appType  | Int    | 否     | 应用类型(1模板，2新建)，传入时查询对应列表，不传入则返回新建的应用列表 |
 
 
 ***2）入参示例***
@@ -11161,9 +11568,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/app/list?appType=1
 
 ***1）入参表***
 
-| 序号 | 输入参数 | 类型 | 可为空 | 备注     |
+| 序号 | 输入参数 | 类型 | 必填 | 备注     |
 | ---- | -------- | ---- | ------ | -------- |
-| 1    | id       | int  | 否     | 应用编号 |
+| 1    | id       | int  | 是     | 应用编号 |
 
 
 ***2）入参示例***
@@ -11411,9 +11818,9 @@ http://localhost:5001/WeBASE-Node-Manager/config/isDeployedModifyEnable
 
 ***1）入参表***
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                           |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                           |
 |------|-------------|--------------|--------|-------------------------------|
-| 1    | type     | Integer      | 否     | 获取配置类型。1：Docker 镜像列表  |
+| 1    | type     | Integer      | 是     | 获取配置类型。1：Docker 镜像列表  |
 
 
 ***2）入参示例***
@@ -11477,14 +11884,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=1
 
 ***1）入参表***   
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | string        | 否     | 群组id                                     |
-| 2    | pageNumber   | int           | 否     | 页码                               |
-| 3    | pageSize      | int           | 否     | 页大小                         |
-| 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
-| 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
-| 6   | address      | string           | 是     |  搜索用户地址|
+| 1    | groupId     | string        | 是     | 群组id                                     |
+| 2    | pageNumber   | int           | 是     | 页码                               |
+| 3    | pageSize      | int           | 是     | 页大小                         |
+| 4    | account      | int           | 否     | 所属用户（已登记私钥）                               |
+| 5   | type      | int           | 是     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+| 6   | address      | string           | 否     |  搜索用户地址|
 
 ***2）入参示例***
 
@@ -11586,14 +11993,14 @@ http://localhost:5001/WeBASE-Node-Manager/external/account/list/all/1/1/10
 
 ***1）入参表***   
 
-| 序号 | 输入参数    | 类型          | 可为空 | 备注                                       |
+| 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1    | groupId     | string        | 否     | 群组id                                     |
-| 2    | pageNumber   | int           | 否     | 页码                               |
-| 3    | pageSize      | int           | 否     | 页大小                         |
-| 4    | account      | int           | 是     | 所属用户（已登记私钥）                               |
-| 5   | type      | int           | 否     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
-| 6   | contractAddress      | string           | 是     |  搜索合约地址|
+| 1    | groupId     | string        | 是     | 群组id                                     |
+| 2    | pageNumber   | int           | 是     | 页码                               |
+| 3    | pageSize      | int           | 是     | 页大小                         |
+| 4    | account      | int           | 否     | 所属用户（已登记私钥）                               |
+| 5   | type      | int           | 是     | 1-全量，2-本地已登记，3-本地未登记，默认为1 |
+| 6   | contractAddress      | string           | 否     |  搜索合约地址|
 
 ***2）入参示例***
 
@@ -11675,7 +12082,7 @@ http://localhost:5001/WeBASE-Node-Manager/external/contract/list/all/1/1/10?type
 
 
 
-### 附录
+## 附录
 
 ### 1. 返回码信息列表 
 <span id="code"></span>
