@@ -145,7 +145,7 @@ set @@SESSION.sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_F
 ```
 引号中为之前查询规则结果中除了ONLY_FULL_GROUP_BY以外的规则
 
-若设置时报错，只需将报错的规则删去即可，然后重启WeBASE便可解决异常。
+若设置时报错，只需将引号中报错的规则删去并重新执行命令即可，然后重启WeBASE便可解决异常。
 
 ##### 启动问题
 
