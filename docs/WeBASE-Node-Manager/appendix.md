@@ -117,11 +117,11 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`，如果提示gradlew为非可执行文件，执行`chmod +x ./gradlew`再次执行build操作即可。
 
-##### WeBASE-Node-Manager系统异常问题
+##### 全量交易/全量合约/交易审计出现系统异常问题
 
 * 问：在WeBASE页面进入合约管理/合约列表/全量或者交易审计/异常用户界面时，发生`WeBASE-Node-Manager`系统异常：
 
-答：数据库版本过高，需要禁用only_full_group_by。
+答：检查日志发现报错是由于数据库版本过高，需要禁用only_full_group_by。
 
 登陆数据库 `mysql -u root -p password`(password为配置数据库时设置的密码)
 
