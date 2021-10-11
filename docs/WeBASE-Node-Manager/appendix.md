@@ -123,9 +123,11 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 
 答：检查日志发现报错是由于数据库版本过高，需要禁用only_full_group_by。
 
-登陆数据库 `mysql -u root -p password`(password为配置数据库时设置的密码)
+登陆数据库 `mysql -u root -p` 返回:```Enter password: ```
 
-查询数据库开启的规则:
+需要输入配置数据库时设置的密码。
+
+然后查询数据库开启的规则:
 
 ```
 SELECT @@GLOBAL.sql_mode;
