@@ -9,7 +9,7 @@
 | 贡献者名称 | github账号 | 贡献工程 |
 | ---------- | ---------- | ---------- |
 |  刘明臻   |  https://github.com/mingzhenliu  |  存证合约仓库  |
-
+|  肖东    |  https://github.com/xiaomdong  |  代理合约仓库  |
 
 ```eval_rst
 .. toctree::
