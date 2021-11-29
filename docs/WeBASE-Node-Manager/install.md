@@ -4,7 +4,7 @@
 
 | 序号 | 软件                  |
 | ---- | --------------------- |
-| 1    | FISCO-BCOS 2.0+        |
+| 1    | FISCO-BCOS 3.0+        |
 | 2    | WeBASE-Front [对应版本](../WeBASE/ChangeLOG.md) |
 | 3    | MySQL5.6或以上版本    |
 | 4    | Java8或以上版本       |
@@ -39,6 +39,7 @@ git clone https://gitee.com/WeBank/WeBASE-Node-Manager.git
 
 ```shell
 cd WeBASE-Node-Manager
+git checkout lab
 ```
 
 ## 4. 编译代码
@@ -114,7 +115,6 @@ bash webase.sh 127.0.0.1 3306
 
 **备注**：
 - 如果使用国密版本，则将application.yml中`sdk.encryptType`由`0`改为`1`
-- 如果使用可视化部署，则将application.yml中`constant-deployType`由`0`改为`1`，并设置`constant-webaseSignAddress`为当前的webase-sign路径。具体使用方法可以参考[可视化部署-手动部署](../WeBASE-Install/visual_deploy.html#visual-deploy-manual)
 
 
 ### 6.2 服务启停
