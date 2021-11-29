@@ -21,15 +21,5 @@ WeBASE-Node-Manager可以是处理前端页面所有web请求，管理各个节�
 | 13    | 系统管理模块               |  预编译API，包含权限管理，节点管理，CNS管理等信息    |
 | 14    | 证书管理模块               |  查看sdk证书、节点证书等信息    |
 | 15    | 订阅事件模块               |  查看已订阅的链上事件通知信息    |
-| 16    | 可视化部署模块                  |  可视化部署底层区块链服务以及节点的管理    |
-| 17 | 应用管理模块 | 维护应用接入信息 |
-
-## 2. 国密支持
-
-WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，使用WeBASE-Front v1.2.2及以上版本
-
-WeBASE-Node-Manager具体需要适配国密版FISCO-BCOS与WeBASE-Front的地方有：
-- 在配置文件`application.yml/applicationContext.xml`中开启sdk的国密开关；
-- 国密版部署初始化数据库时，执行国密版的初始化脚本`script/gm/webase-gm.sh`；
 
 安装详情可查看下一章节的[WeBASE-Node-Manager部署说明](install.html)
