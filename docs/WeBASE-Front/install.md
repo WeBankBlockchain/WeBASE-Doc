@@ -32,6 +32,7 @@ git clone https://gitee.com/WeBank/WeBASE-Front.git
 
 ```
 cd WeBASE-Front
+git checkout lab
 ```
 
 ## 3. 编译代码
@@ -73,10 +74,9 @@ dist目录提供了一份配置模板conf_template：
 cd conf
 ```
 
-**注意：** 将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前`conf`目录，供SDK与节点建立连接时使用（SDK会自动判断是否为国密，且是否使用国密SSL）
-- 链的`sdk`目录包含了`ca.crt, sdk.crt, sdk.key`和`gm`文件夹，`gm`文件夹包含了国密SSL所需的证书
-- 拷贝命令可使用`cp -r nodes/${ip}/sdk/* ./conf/`
-- 注，只有在建链时手动指定了`-G`(大写)时节点才会使用国密SSL
+**注意：** 将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前`conf`目录，供SDK与节点建立连接时使用（SDK根据application.yml中的`useSmSsl`判断是否使用国密SSL）
+- 链的`sdk`目录在非国密时，包含`ca.crt, sdk.crt, sdk.key`，在国密时，包含`sm_ca.crt`,`sm_sdk.crt`,`sm_sdk.key`,`sm_ensdk.crt`,`sm_ensdk.key`
+- 拷贝命令可使用`cp nodes/${ip}/sdk/* ./conf/`
 
 （3）修改配置（根据实际情况修改）：
 
@@ -103,9 +103,6 @@ constant:
   keyServer: 127.0.0.1:5004     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
   aesKey: EfdsW23D23d3df43          // aes加密key(16位) 如启用，各互联的子系统的加密key需保持一致
   transMaxWait: 30              // 交易最大等待时间
-  monitorDisk: /                // 要监控的磁盘目录，配置节点所在目录（如：/data）
-  monitorEnabled: true          // 是否监控数据，默认true
-  nodePath: /fisco/nodes/127.0.0.1/node0      //配置所连节点的绝对路径，用于监控节点配置与日志
 ...
 ```
 
