@@ -177,12 +177,9 @@ v1.5.2后，节点管理服务搭配了swagger，可用于直接调试接口，�
 | constant.verificationCodeMaxAge | 300 | y验证码有效时长（秒） |
 | constant.authTokenMaxAge | 1800 |  登录token有效时长（秒）  |
 | constant.isUseSecurity | true | 是否启用登录鉴权，若false则默认使用admin权限免登陆鉴权   |
-| constant.aesKey | ERTadb83f9ege39k | aes加密key（16位），建议更改 |
-| constant.jwtSecret | S3g4HtJyg7G6Hg0Ln3g4H5Jyg7H6f9dL |  jwt生成时用到的key，建议更改  |
 | constant.frontUrl | http://%1s:%2d/WeBASE-Front/%3s | 前置服务的请求路径  |
 | constant.httpTimeOut | 5000 | http请求超时时间（毫秒）  |
 | constant.contractDeployTimeOut | 30000 | 合约部署超时时间（毫秒）  |
-| constant.isPrivateKeyEncrypt | true | 前置私钥接口返回的私钥是否需要加密，true-加密，false-不加密  |
 | constant.maxRequestFail | 3 |  请求前置（frot）被允许失败次数，达到配置值后，将会停止往该路径发送请求  |
 | constant.sleepWhenHttpMaxFail | 60000 | 请求失败次数过多，熔断时间长度（毫秒） |
 | constant.transMonitorTaskFixedRate | 60000  | 交易审计开始执行后，下一个任务开始时间（毫秒）  |
@@ -194,19 +191,6 @@ v1.5.2后，节点管理服务搭配了swagger，可用于直接调试接口，�
 | constant.auditMonitorTaskFixedDelay | 300000 | 监控审计数据任务的运行间隔时间，异常时将发送告警邮件（毫秒）（注：此处为检查频率，告警配置中是告警频率）  |
 | constant.nodeStatusMonitorTaskFixedDelay | 60000 | 监控节点状态任务的运行间隔时间，异常时将发送告警邮件（毫秒）（注：此处为检查频率，告警配置中是告警频率）  |
 | constant.certMonitorTaskFixedDelay | 300000 | 监控证书任务的运行间隔时间，有效期结束7天前时将发送告警邮件（毫秒） （注：此处为检查频率，告警配置中是告警频率） |
-| constant.deployType | 0 |  部署方式选择：0-手动添加前置，1-可视化部署 |
-| constant.dockerRepository | fiscoorg/fisco-webase |  镜像名 |
-| constant.webaseSignAddress | 127.0.0.1:5004 |  WeBASE-Sign 访问地址(不能是localhost) |
-| constant.dockerRestartPeriodTime | 30000 |  单位ms，节点Docker容器重启的超时时间，默认30秒  |
-| constant.execScpTimeout | 10000 |  单位ms，主机间SCP的超时时间（网络差时需要适当调大） |
-| constant.execAddNodeTimeout | 40000 | 单位ms，添加节点的超时时间  |
-| constant.execDockerCheckTimeout | 55000 | 单位ms，执行docker检测的超时时间  |
-| constant.execHostCheckTimeout | 55000 | 单位ms，执行主机检测的超时时间  |
-| constant.execHostCheckPortTimeout | 50000 | 单位ms，执行主机端口检测的超时时间  |
-| constant.execHostInitTimeout | 300000 |  单位ms，执行主机初始化的超时时间，默认5min（需要下载镜像包，网速慢需要适当调大） |
-| constant.execHostConfigTimeout | 40000 | 单位ms，配置主机的链节点超时时间  |
-| constant.execBuildChainTimeout | 40000 | 单位ms，执行建链脚本/生成节点证书脚本的超时时间  |
-| constant.execShellTimeout | 600000 | 单位ms，执行脚本的超时实际，默认10min  |
 | constant.developerModeEnable | false |  是否启用开发者模式（管理员、用户并增加开发者角色） |
 | constant.deployedModifyEnable | true |  是否允许重复部署合约 |
 | constant.enableVerificationCode | true |  验证码是否启用随机 |
