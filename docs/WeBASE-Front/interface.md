@@ -1365,7 +1365,7 @@ http://localhost:5002/WeBASE-Front/contract/findCns
     "cnsName": "Hello",
     "version": "v0.4",
     "contractAddress": "0xcaff8fdf1d461b91c7c8f0ff2af2f79a80bc189e",
-    "contractAbi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\"群组编号:\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
+    "contractAbi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
     "createTime": "2020-12-30 16:32:28",
     "modifyTime": "2020-12-30 16:32:28"
   }
@@ -1662,7 +1662,8 @@ HTTP POST | Content-type: form-data
 | -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
 | 1        | p12文件 | p12File    | MultipartFile   |              | 是       |          |
 | 2        | p12文件密码 | p12Password    | String   |              | 否       | 使用base64编码的密码；缺省时默认为""，即空密码；p12无密码时，可传入空值或不传；不包含中文          |
-| 2        | 用户名 | userName    | String   |              | 是       |          |
+| 3       | 用户名 | userName    | String   |              | 是     |          |
+| 4 | 群组编号 | groupId | String | | 是 | |
 
 **2）数据格式**
 
