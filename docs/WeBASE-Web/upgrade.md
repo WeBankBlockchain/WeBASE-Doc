@@ -1,6 +1,6 @@
 # 升级说明
 
-WeBASE-Web升级说明，请结合[WeBASE-Web Changelog](https://github.com/WeBankFinTech/WeBASE-Web)和[WeBASE管理平台使用手册](../WeBASE-Console-Suit/index.html)进行阅读。
+WeBASE-Web升级说明，请结合[WeBASE-Web Changelog](https://github.com/WeBankBlockchain/WeBASE-Web)和[WeBASE管理平台使用手册](../WeBASE-Console-Suit/index.html)进行阅读。
 
 WeBASE-Web升级的必须步骤：
 0. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）

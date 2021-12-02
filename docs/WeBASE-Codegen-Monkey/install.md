@@ -22,7 +22,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/master/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankBlockchain/WeBASE-Codegen-Monkey/raw/master/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
@@ -95,7 +95,7 @@ bash generate_bee.sh
 ## ./generate_bee.sh -v 1.3.0
 ```
 
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankBlockchain/WeBASE-Collect-Bee/tree/master)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
 
 请注意:请务必按照以上命令操作，**切莫使用sudo命令来操作**，否则会导致Gradlew没有权限，导致depot数据失败。
 
@@ -108,7 +108,7 @@ bash generate_bee.sh -e build
 ## ./generate_bee.sh -e build -v 1.3.0
 ```
 
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/WeBASE-Collect-Bee-core/dist文件夹复制到其他服务器上，并执行：
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankBlockchain/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/WeBASE-Collect-Bee-core/dist文件夹复制到其他服务器上，并执行：
 
 ```
 chmod +x *.sh
@@ -261,7 +261,7 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 ### 4. 开启可视化的API文档和功能性测试
 
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
+[WeBASE-Collect-Bee](https://github.com/WeBankBlockchain/WeBASE-Collect-Bee/tree/master)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
 ![[swagger控制台]](../../images/WeBASE-Collect-Bee/swagger.png)
 
@@ -283,7 +283,7 @@ button.swagger=on
 
 > http://your_ip:port/swagger-ui.html
 
-例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)，且未修改默认的5200端口，则可以访问此地址：
+例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankBlockchain/WeBASE-Collect-Bee/tree/master)，且未修改默认的5200端口，则可以访问此地址：
 
 > http://localhost:5200/swagger-ui.html
 
