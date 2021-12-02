@@ -433,7 +433,7 @@ spring:
 
 - 用户在客户端以用户名密码连接到对应的virtual host，监听自己队列的消息，接收到消息后解析处理；
 
-客户端获取事件通知过程需如上进行配置，可参考[WeBASE-Event-Client](https://github.com/WeBankFinTech/WeBASE-Event-Client)的消费者客户端的代码实现（Dev分支）
+客户端获取事件通知过程需如上进行配置，可参考[WeBASE-Event-Client](https://github.com/WeBankBlockchain/WeBASE-Event-Client)的消费者客户端的代码实现（Dev分支）
 
 消费者客户端核心代码逻辑为：
 ```

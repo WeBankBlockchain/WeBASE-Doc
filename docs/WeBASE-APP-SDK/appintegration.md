@@ -72,7 +72,7 @@ public class HttpConfig {
 
 ### 调用示例
 
-完整示例请查看[SDK示例](https://github.com/WeBankFinTech/WeBASE-APP-SDK/blob/main/src/test/java/com/webank/webase/app/sdk/ClientTest.java)。
+完整示例请查看[SDK示例](https://github.com/WeBankBlockchain/WeBASE-APP-SDK/blob/main/src/test/java/com/webank/webase/app/sdk/ClientTest.java)。
 
 ```java
 public class ClientTest {
