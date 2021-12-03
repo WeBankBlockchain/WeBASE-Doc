@@ -2,7 +2,7 @@
 
 ### 1. 配置参数说明
 
-WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)组件实例，在WeBASE-Codegen-Monkey组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
+WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankBlockchain/WeBASE-Collect-Bee/tree/master)组件实例，在WeBASE-Codegen-Monkey组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
 
 #### 1.1 Springboot服务配置
 
@@ -12,7 +12,7 @@ WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankF
 
 #### 1.2 FISCO-BCOS节点配置
 
-FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)服务连接的区块链节点，使得WeBASE-Collect-Bee服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
+FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBankBlockchain/WeBASE-Collect-Bee/tree/master)服务连接的区块链节点，使得WeBASE-Collect-Bee服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
