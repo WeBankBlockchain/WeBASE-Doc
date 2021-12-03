@@ -299,7 +299,7 @@ exit
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.3/webase-deploy.zip
+wget https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v1.5.3/webase-deploy.zip
 
 # 若网络问题导致长时间无法下载，可尝试以下命令
 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.3/webase-deploy.zip

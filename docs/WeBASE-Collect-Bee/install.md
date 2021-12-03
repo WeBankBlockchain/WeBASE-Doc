@@ -18,9 +18,9 @@
 
 #### 2.1 获取工程代码
 
-请按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作。
+请按照[WeBASE-Codegen-Monkey](https://github.com/WeBankBlockchain/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作。
 
-如果你已经按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作，那么恭喜，你将获得一个完整WeBASE-Collect-Bee工程目录。
+如果你已经按照[WeBASE-Codegen-Monkey](https://github.com/WeBankBlockchain/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作，那么恭喜，你将获得一个完整WeBASE-Collect-Bee工程目录。
 
 WeBASE-Collect-Bee的工程使用gradle进行构建，是一个使用gradle进行多工程构建的SpringBoot工程。
 
@@ -80,7 +80,7 @@ WeBASE-Collect-Bee-parser 区块解析相关的功能。
 
 #### 2.2 配置工程(更多高级配置)
 
-当完整地按照[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作获得WeBASE-Collect-Bee工程后，会得到WeBASE-Collect-Bee工程，主要的基础配置都将会在配置中自动生成，无需额外配置。但是，基于已生成的配置文件，你可以继续按照需求进行深入的个性化高级配置，例如配置集群部署、分库分表、读写分离等等。
+当完整地按照[WeBASE-Codegen-Monkey](https://github.com/WeBankBlockchain/WeBASE-Codegen-Monkey/tree/master)的操作手册进行操作获得WeBASE-Collect-Bee工程后，会得到WeBASE-Collect-Bee工程，主要的基础配置都将会在配置中自动生成，无需额外配置。但是，基于已生成的配置文件，你可以继续按照需求进行深入的个性化高级配置，例如配置集群部署、分库分表、读写分离等等。
 
 
 在得到WeBASE-Collect-Bee工程后，进入WeBASE-Collect-Bee-core的目录：
@@ -316,7 +316,7 @@ bash stop.sh
 也实现当子进程挂掉的时候，父进程可以准确获取子进程挂掉的信息的，可以选择是否自己启动和报警。
 supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程。
 
-supervisor的安装与部署可以参考 [WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master) 附录6的说明文档。
+supervisor的安装与部署可以参考 [WeBASE-Codegen-Monkey](https://github.com/WeBankBlockchain/WeBASE-Codegen-Monkey/tree/master) 附录6的说明文档。
 
 
 #### 2.4 检查运行状态及退出
@@ -467,7 +467,7 @@ grafana将自动绑定3000端口并自动安装时钟和Json的插件。
 
 #### 3.5 导入Dashboard模板
 
-[WeBASE-Codegen-Monkey](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/tree/master)会自动生成数据的dashboard模板，数据的路径位于：WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json
+[WeBASE-Codegen-Monkey](https://github.com/WeBankBlockchain/WeBASE-Codegen-Monkey/tree/master)会自动生成数据的dashboard模板，数据的路径位于：WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json
 
 请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的WeBASE-Collect-Bee/src/main/scripts/grafana/default_dashboard.json文件
 
