@@ -20,7 +20,7 @@
 
 - 本地配置私钥签名
 - 本地随机私钥签名
-- 调用[WeBASE-Sign](https://github.com/WeBankFinTech/WeBASE-Sign)进行签名
+- 调用[WeBASE-Sign](https://github.com/WeBankBlockchain/WeBASE-Sign)进行签名
 
 本工程支持单机部署，也支持分布式任务多活部署（使用分布式任务的话需部署Zookeeper）。
 
