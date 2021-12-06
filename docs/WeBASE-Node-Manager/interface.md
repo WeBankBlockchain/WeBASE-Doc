@@ -41,32 +41,71 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 
 ***1）出参表***
 
-| 序号 | 输出参数    | 类型          |        | 备注                                       |
-|------|-------------|---------------|--------|-------------------------------|
-| 1    | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
-| 2    | message     | String        | 否     | 描述                                       |
-| 3    | data        | Object        |        | 节点信息对象                               |
-| 3.1  | frontId     | int           | 否     | 前置编号                        |
-| 3.2  | frontIp     | string        | 否     | 前置ip                                    |
-| 3.3  | frontPort   | int           | 否     | 前置端口                                   |
-| 3.4  | agency      | string        | 否     | 所属机构                                   |
-| 3.5  | createTime  | LocalDateTime | 否     | 落库时间                                   |
-| 3.6  | modifyTime  | LocalDateTime | 否     | 修改时间                                   |
+| 序号 | 输出参数       | 类型          |      | 备注                       |
+| ---- | -------------- | ------------- | ---- | -------------------------- |
+| 1    | code           | Int           | 否   | 返回码，0：成功 其它：失败 |
+| 2    | message        | String        | 否   | 描述                       |
+| 3    | data           | Object        |      | 节点信息对象               |
+| 3.1  | frontId        | int           | 否   | 前置编号                   |
+| 3.2  | frontIp        | string        | 否   | 前置ip                     |
+| 3.3  | frontPort      | int           | 否   | 前置端口                   |
+| 3.4  | agency         | string        | 否   | 所属机构                   |
+| 3.5  | createTime     | LocalDateTime | 否   | 落库时间                   |
+| 3.6  | modifyTime     | LocalDateTime | 否   | 修改时间                   |
+| 3.7  | nodeId         | int           | 否   | 节点Id                     |
+| 3.8  | groupList      | List<String>  | 否   | 群组列表                   |
+| 3.9  | clientVersion  | String        | 否   | 客户端版本                 |
+| 3.10 | supportVersion | String        | 否   | 支持版本                   |
+| 3.11 | signVersion    | String        | 否   | 签发版本                   |
+| 3.12 | status         | int           | 否   | 当前节点状态               |
+| 3.13 | runType        | Byte          | 否   | 运行类型                   |
+| 3.14 | agencyId       | int           | 否   | 所属机构Id                 |
+| 3.15 | agencyName     | int           | 否   | 所属机构名称               |
+| 3.16 | hostId         | int           | 否   | 主机ID                     |
+| 3.17 | hostIndex      | int           | 否   | 主机索引                   |
+| 3.18 | imageTag       | String        | 否   |                            |
+| 3.19 | containerName  | String        | 否   | 容器名称                   |
+| 3.20 | jsonrpcPort    | int           | 否   | json远程调用端口           |
+| 3.21 | p2pPort        | int           | 否   | P2P端口                    |
+| 3.22 | channelPort    | int           | 否   | 通道端口                   |
+| 3.23 | chainId        | int           | 否   | 链Id                       |
+| 3.24 | chainName      | String        | 否   | 链名称                     |
+| 3.25 | frontVersion   | String        | 否   | 前置版本                   |
 
 ***2）出参示例***
 * 成功：
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": {
-        "frontId": 500001,
-        "frontIp": "127.0.0.1",
-        "frontPort": 8181,
-        "agency": "abc",
-        "createTime": "2019-02-14 17:47:00",
-        "modifyTime": "2019-03-15 11:14:29"
-    }
+	"code": 0,
+	"message": "success",
+	"data": {
+		"frontId": 6,
+		"nodeId": "6e24cc5a21a41eab08636f8bbde0c93dd4a9ce4f16fa7fbaed0174872716dd1463d3ce822340d0f51badd2e43c9c106adffd740dbae3adcba7843959609322fd",
+		"frontIp": "127.0.0.1",
+		"frontPort": 5022,
+		"agency": null,
+		"groupList": null,
+		"clientVersion": null,
+		"supportVersion": null,
+		"frontVersion": "v2.0.0-rc1",
+		"signVersion": "v2.0.0-lab",
+		"createTime": null,
+		"modifyTime": null,
+		"status": 1,
+		"runType": 0,
+		"agencyId": null,
+		"agencyName": null,
+		"hostId": null,
+		"hostIndex": null,
+		"imageTag": null,
+		"containerName": null,
+		"jsonrpcPort": null,
+		"p2pPort": null,
+		"channelPort": null,
+		"chainId": 0,
+		"chainName": "default"
+	},
+	"attachment": null
 }
 ```
 
@@ -1384,7 +1423,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
 | 5.1.1  | contractId      | int           | 否   | 合约编号                                    |
 | 5.1.2  | contractPath    | String        | 否   | 合约所在目录                                |
 | 5.1.3  | contractName    | String        | 否   | 合约名称                                    |
-| 5.1.4  | groupId         | Int           | 否   | 所属群组编号                                |
+| 5.1.4  | groupId         | String        | 否   | 所属群组编号                                |
 | 5.1.5  | contractStatus  | int           | 否   | 1未部署，2已部署                            |
 | 5.1.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)            |
 | 5.1.7  | contractSource  | String        | 否   | 合约源码base64                              |
@@ -1414,7 +1453,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractList
             "contractVersion": null,
             "contractName": "hellos",
             "contractStatus": 2,
-            "groupId": 1,
+            "groupId": "group",
             "contractType": 0,
             "contractSource": "cHJhZ21hIHNvbGlkaXgICAJbmFtZSA9IG47CiAgICB9Cn0=",
             "contractAbi": "[\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
@@ -1479,7 +1518,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 | 3.1  | contractId      | int           | 否   | 合约编号                                              |
 | 3.2  | contractPath    | String        | 否   | 合约所在目录                                          |
 | 3.3  | contractName    | String        | 否   | 合约名称                                              |
-| 3.4  | groupId         | Int           | 否   | 所属群组编号                                          |
+| 3.4  | groupId         | String        | 否   | 所属群组编号                                          |
 | 3.5  | contractStatus  | int           | 否   | 1未部署，2已部署                                      |
 | 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)                      |
 | 3.7  | contractSource  | String        | 否   | 合约源码                                              |
@@ -1509,7 +1548,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
         "contractVersion": null,
         "contractName": "hellos",
         "contractStatus": 2,
-        "groupId": 1,
+        "groupId": "group",
         "contractType": 0,
         "contractSource": "cHJhZ21hIHNvbGlkaXgICAJbmFtZSA9IG47CiAgICB9Cn0=",
         "contractAbi": "[\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
@@ -1581,7 +1620,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 
 ```
 {
-	"groupId": "1",
+	"groupId": "group",
 	"contractBin": "60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d146100515780633590b49f146100e1575b600080fd5b34801561005d57600080fd5b5061006661014a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a657808201518184015260208101905061008b565b50505050905090810190601f1680156100d35780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100ed57600080fd5b50610148600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ec565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101e25780601f106101b7576101008083540402835291602001916101e2565b820191906000526020600020905b8154815290600101906020018083116101c557829003601f168201915b5050505050905090565b8060009080519060200190610202929190610206565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061024757805160ff1916838001178555610275565b82800160010185558215610275579182015b82811115610274578251825591602001919060010190610259565b5b5090506102829190610286565b5090565b6102a891905b808211156102a457600081600090555060010161028c565b5090565b905600a165627a7a72305820456bd30e517ce9633735d32413043bf33a2453c7f56e682b13e6125452d689dc0029",
 	"bytecodeBin": "608060405234801561001057600080fd5b506040805190810160405280600d81526020017f48656c6c6f2c20576f726c6421000000000000000000000000000000000000008152506000908051906020019061005c929190610062565b50610107565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100a357805160ff19168380011785556100d1565b828001600101855582156100d1579182015b828111156100d05782518255916020019190600101906100b5565b5b5090506100de91906100e2565b5090565b61010491905b808211156101005760008160009055506001016100e8565b5090565b90565b6102d7806101166000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d146100515780633590b49f146100e1575b600080fd5b34801561005d57600080fd5b5061006661014a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a657808201518184015260208101905061008b565b50505050905090810190601f1680156100d35780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100ed57600080fd5b50610148600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ec565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101e25780601f106101b7576101008083540402835291602001916101e2565b820191906000526020600020905b8154815290600101906020018083116101c557829003601f168201915b5050505050905090565b8060009080519060200190610202929190610206565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061024757805160ff1916838001178555610275565b82800160010185558215610275579182015b82811115610274578251825591602001919060010190610259565b5b5090506102829190610286565b5090565b6102a891905b808211156102a457600081600090555060010161028c565b5090565b905600a165627a7a72305820456bd30e517ce9633735d32413043bf33a2453c7f56e682b13e6125452d689dc0029",
 	"contractAbi": "[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
@@ -1606,9 +1645,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 | 3.1  | contractId      | int           | 否   | 合约编号                                              |
 | 3.2  | contractPath    | String        | 否   | 合约所在目录                                          |
 | 3.3  | contractName    | String        | 否   | 合约名称                                              |
-| 3.4  | groupId         | Int           | 否   | 所属群组编号                                          |
+| 3.4  | groupId         | String        | 否   | 所属群组编号                                          |
 | 3.5  | contractStatus  | int           | 否   | 1未部署，2已部署                                      |
-| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约) （已弃用字段）             |
+| 3.6  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约) （已弃用字段）       |
 | 3.7  | contractSource  | String        | 否   | 合约源码                                              |
 | 3.8  | contractAbi     | String        | 是   | 编译合约生成的abi文件内容                             |
 | 3.9  | contractBin     | String        | 是   | 合约编译的runtime-bytecode(runtime-bin)，用于交易解析 |
@@ -1636,7 +1675,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
         "contractVersion": null,
         "contractName": "HeHe",
         "contractStatus": 2,
-        "groupId": 1,
+        "groupId": "group",
         "contractType": null,
         "contractSource": "cHJhZ21hIHNvbGlkaXR5IF4wLjQuM0=",
         "contractAbi": "[]",
@@ -1647,7 +1686,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
         "description": null,
         "account": "admin",
         "createTime": null,
-        "modifyTime": null
+        "modifyTime": null,
+        "deployAddress": "0xb783d7c2cd45d8c678093d5f6f1d61855e260e67",
+		"deployUserName": "frank"
     }
 }
 ```
@@ -1701,7 +1742,6 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 | 9    | useCns          | bool   | 否     | 是否使用cns调用，默认为false                     |
 | 10   | cnsName         | String | 否     | CNS名称，useCns为true时不能为空     |
 | 11   | version         | String | 否     | CNS合约版本，useCns为true时不能为空 |
-| 12 | signUserId | String | 否 |  |
 
 ***2）入参示例***
 
@@ -1718,8 +1758,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
     "funcParam":["gwes"],
     "contractAbi": [{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}],
     "contractId":200306,
-    "contractAddress":"0x4d1cbcc47b2558d818b9672df67f22f9a9645c87"，
-    "signUserId": "string"
+    "contractAddress":"0x4d1cbcc47b2558d818b9672df67f22f9a9645c87"
 }
 ```
 
@@ -1740,29 +1779,14 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/transaction
 
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": {
-        "transactionHash": "0x69ced0162a0c3892e4eaa3091b831ac3aaeb772c062746b20891ceaf8a4fb429",
-        "transactionIndex": "0x0",
-        "root": "0x8cbc3f2c0e35a71738909e3b388efa6697084b05badd3a3bd3c64f0575c78c15",
-        "blockNumber": "2",
-        "blockHash": "0xf58f4f43b3761f4863ad366c4a7e2a812ed68df9f7bcad6b502fd544665e7625",
-        "from": "0x9d75e0ee66cfef16897b601624b60413d988ae7d",
-        "to": "0x0000000000000000000000000000000000000000",
-        "gasUsed": "316449",
-        "contractAddress": "0xa8af0ee580d8af674a60341030ddbc45431bc235",
-        "logs": [],
-        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "status": "0x0",
-        "statusMsg": "None",
-        "input": "0x608060405234801561001057600080fd5b506103e3806100206000396000f300608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063299f7f9d1461005c5780633590b49f146100ec57806362e8d6ce14610155575b600080fd5b34801561006857600080fd5b5061007161016c565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100b1578082015181840152602081019050610096565b50505050905090810190601f1680156100de5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100f857600080fd5b50610153600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061020e565b005b34801561016157600080fd5b5061016a6102c4565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102045780601f106101d957610100808354040283529160200191610204565b820191906000526020600020905b8154815290600101906020018083116101e757829003601f168201915b5050505050905090565b7f5715c9562eaf8d524d564edb392acddefc81d8133e2fc3b8125a260b1b413fda816040518080602001828103825283818151815260200191508051906020019080838360005b83811015610270578082015181840152602081019050610255565b50505050905090810190601f16801561029d5780820380516001836020036101000a031916815260200191505b509250505060405180910390a180600090805190602001906102c0929190610312565b5050565b6040805190810160405280600d81526020017f48656c6c6f2c20576f726c6421000000000000000000000000000000000000008152506000908051906020019061030f929190610312565b50565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061035357805160ff1916838001178555610381565b82800160010185558215610381579182015b82811115610380578251825591602001919060010190610365565b5b50905061038e9190610392565b5090565b6103b491905b808211156103b0576000816000905550600101610398565b5090565b905600a165627a7a72305820f3088deb3d14c6893440e4769f2389e9335e04faa10e6de5b4c93af15d1a34e80029",
-        "output": "0x",
-        "txProof": null,
-        "receiptProof": null,
-        "message": null,
-        "statusOK": true
-    }
+	"code": 0,
+	"message": "success",
+	"data": [{
+		"value": 0,
+		"bitSize": 16,
+		"typeAsString": "int16"
+	}],
+	"attachment": null
 }
 ```
 
@@ -1821,7 +1845,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 3    |                 | Object        |      | 返回信息实体                                          |
 | 3.1  | contractId      | int           | 否   | 合约编号                                              |
 | 3.2  | contractName    | String        | 否   | 合约名称                                              |
-| 3.3  | groupId         | Int           | 否   | 所属群组编号                                          |
+| 3.3  | groupId         | String        | 否   | 所属群组编号                                          |
 | 3.4  | contractType    | Int           | 否   | 合约类型(0-普通合约，1-系统合约)                      |
 | 3.5  | contractSource  | String        | 否   | 合约源码                                              |
 | 3.6  | contractAbi     | String        | 是   | 编译合约生成的abi文件内容                             |
@@ -2074,7 +2098,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/group/1/5?account=
   "data": [
     {
       "abiId": 1,
-      "groupId": 1,
+      "groupId": "group",
       "account": "admin",
       "contractName": "TTT",
       "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
@@ -2125,7 +2149,38 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/group/1/5?account=
     "account": "admin",
     "contractAddress": "0x3214227e87bccca63893317febadd0b51ade735e",
     "contractName": "HelloWorld",
-    "contractAbi": [{"constant":false,"inputs":[{"name":"n","type":"string"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"}],"name":"SetName","type":"event"}]
+    "contractAbi": [{
+        "constant": false,
+        "inputs": [{
+            "name": "n",
+            "type": "string"
+        }],
+        "name": "set",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "get",
+        "outputs": [{
+            "name": "",
+            "type": "string"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "name": "name",
+            "type": "string"
+        }],
+        "name": "SetName",
+        "type": "event"
+    }]
 }
 ```
 
@@ -2361,7 +2416,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/contractPath
 
 | **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
 | -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
-| 1        | 所属群组 | groupId | Integer         |              | 是        |                      |
+| 1        | 所属群组 | groupId | String    |              | 是        |                      |
 | 2       | 合约路径 | contractPath | String         |              | 是        |                      |
 | 3 | 账户 | account | String | | 是 | |
 
@@ -2373,7 +2428,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/batch/path
 
 ```
 {
-    "groupId": 1,
+    "groupId": "group",
     "contractPath": test
 }
 ```
@@ -2411,7 +2466,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/batch/path
 
 | 序号 | 输入参数   | 类型   | 必填 | 备注          |
 | ---- | ---------- | ------ | ------ | ------------- |
-| 1    | groupId    | int    | 是     | 群组编号      |
+| 1    | groupId    | String | 是     | 群组编号      |
 | 2    | pageNumber | int    | 是     | 页码，从1开始 |
 | 3    | pageSize   | int    | 是     | 页大小        |
 | 4    | account    | String | 否     | 所属账号      |
@@ -2422,7 +2477,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/batch/path
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
+http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/group/1/5
 ```
 
 
@@ -2436,9 +2491,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
 | 2    | message         | String        | 否   | 描述                              |
 | 3  |        | Object        |      | 返回数据                      |
 | 3.0  | contractId      | int        |      | 合约编号（contractId为空时，说明合约为外部导入的）                      |
-| 3.1  | abiId           | int           | 否   | 合约编号                          |
+| 3.1  | abiId           | int           | 否   | 合约abi编号                       |
 | 3.2  | contractName    | String        | 否   | 合约名称                          |
-| 3.3  | groupId         | Int           | 否   | 所属群组编号                      |
+| 3.3  | groupId         | String      | 否   | 所属群组编号                      |
 | 3.4  | contractAddress | String        | 否   | 合约地址                          |
 | 3.5  | contractAbi     | String        | 是   | 导入的abi文件内容                 |
 | 3.6  | contractBin     | String        | 是   | 合约runtime-bytecode(runtime-bin) |
@@ -2449,6 +2504,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
 | 3.11  | contractStatus   | int | 是   | 合约状态                         |
 | 3.12   | deployAddress | String           | 否       |  部署用户地址       |
 | 3.13  | deployUserName | String           | 否       |    部署用户名      |
+| 3.14 | contractVersion | String | 否 | 合约版本 |
+| 3.15 | contractType | int | 否 | 合约类型 |
+| 3.16 | contractSource | String | 否 | 合约来源 |
+| 3.17 | bytecodeBin | String | 否 | 字节码bin |
+| 3.18 | deployTime | String | 否 | 部署时间 |
+| 3.19 | description | String | 否 | 描述 |
 
 ***2）出参示例***
 
@@ -2456,52 +2517,34 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/abi/list/all/1/1/5?account=
 
 ```
 {
-	"code": 0,
-	"message": "success",
-	"data": [{
-		"contractId": null,
-		"contractPath": null,
-		"contractVersion": null,
-		"contractName": "c",
-		"account": null,
-		"contractStatus": null,
-		"groupId": 1,
-		"contractType": null,
-		"contractSource": null,
-		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"register\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-		"contractBin": null,
-		"bytecodeBin": null,
-		"contractAddress": "0x4ac92d4d1680f426ac2da943b3ff67e82976d075",
-		"deployTime": null,
-		"description": null,
-		"createTime": "2021-04-07 09:29:54",
-		"modifyTime": "2021-04-07 09:29:54",
-		"deployAddress": null,
-		"deployUserName": null,
-		"abiId": 8
-	}, {
-		"contractId": 200013,
-		"contractPath": "weid_0xcde7c667528b6df1b61fd6483a0925ccc67931a02394acab1835254546e67d80",
-		"contractVersion": null,
-		"contractName": "SpecificIssuerController",
-		"account": "admin",
-		"contractStatus": 2,
-		"groupId": 1,
-		"contractType": 2,
-		"contractSource": null,
-		"contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isSpecificTypeIssuer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"extraValue\",\"type\":\"bytes32\"}],\"name\":\"addExtraValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"registerIssuerType\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"getExtraValue\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"}],\"name\":\"isIssuerTypeExist\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"typeName\",\"type\":\"bytes32\"},{\"name\":\"startPos\",\"type\":\"uint256\"},{\"name\":\"num\",\"type\":\"uint256\"}],\"name\":\"getSpecificTypeIssuerList\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"specificIssuerDataAddress\",\"type\":\"address\"},{\"name\":\"roleControllerAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"operation\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"retCode\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"typeName\",\"type\":\"bytes32\"},{\"indexed\":false,\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"SpecificIssuerRetLog\",\"type\":\"event\"}]",
-		"contractBin": "",
-		"bytecodeBin": "",
-		"contractAddress": "0xce1d576181e1d68899a3f2b86c8e274657c07fea",
-		"deployTime": null,
-		"description": null,
-		"createTime": "2021-04-06 21:34:38",
-		"modifyTime": "2021-04-06 21:34:38",
-		"deployAddress": null,
-		"deployUserName": null,
-		"abiId": 6
-	}],
-	"totalCount": 2
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "contractId": 200032,
+      "contractPath": "/",
+      "contractVersion": null,
+      "contractName": "AAA",
+      "account": "admin",
+      "contractStatus": 2,
+      "groupId": "group",
+      "contractType": 0,
+      "contractSource": null,
+      "contractAbi": "[{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"\",\"type\":\"int256\"}],\"name\":\"test\",\"type\":\"event\"}]",
+      "contractBin": "60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634ed3885e146100515780636d4ce63c146100ba575b600080fd5b34801561005d57600080fd5b506100b8600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061014a565b005b3480156100c657600080fd5b506100cf61019c565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561010f5780820151818401526020810190506100f4565b50505050905090810190601f16801561013c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b7f9b22c05d8738838d85bfcacfb2975e59c4f830d5977978bc4e3807f38d08b40e607b6040518082815260200191505060405180910390a1806000908051906020019061019892919061023e565b5050565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102345780601f1061020957610100808354040283529160200191610234565b820191906000526020600020905b81548152906001019060200180831161021757829003601f168201915b5050505050905090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061027f57805160ff19168380011785556102ad565b828001600101855582156102ad579182015b828111156102ac578251825591602001919060010190610291565b5b5090506102ba91906102be565b5090565b6102e091905b808211156102dc5760008160009055506001016102c4565b5090565b905600a165627a7a72305820af1790f550db8574896d26e14c0d9b1e24ac7d740ceb8514606e649c7688a3fe0029",
+      "bytecodeBin": "608060405234801561001057600080fd5b5061030f806100206000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634ed3885e146100515780636d4ce63c146100ba575b600080fd5b34801561005d57600080fd5b506100b8600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929050505061014a565b005b3480156100c657600080fd5b506100cf61019c565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561010f5780820151818401526020810190506100f4565b50505050905090810190601f16801561013c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b7f9b22c05d8738838d85bfcacfb2975e59c4f830d5977978bc4e3807f38d08b40e607b6040518082815260200191505060405180910390a1806000908051906020019061019892919061023e565b5050565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102345780601f1061020957610100808354040283529160200191610234565b820191906000526020600020905b81548152906001019060200180831161021757829003601f168201915b5050505050905090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061027f57805160ff19168380011785556102ad565b828001600101855582156102ad579182015b828111156102ac578251825591602001919060010190610291565b5b5090506102ba91906102be565b5090565b6102e091905b808211156102dc5760008160009055506001016102c4565b5090565b905600a165627a7a72305820af1790f550db8574896d26e14c0d9b1e24ac7d740ceb8514606e649c7688a3fe0029",
+      "contractAddress": "0xab9F30F9827e1C16Bf62d557c3626AeAd9E85502",
+      "deployTime": "2021-12-06 11:31:34",
+      "description": null,
+      "createTime": "2021-12-06 11:31:34",
+      "modifyTime": "2021-12-06 11:31:34",
+      "deployAddress": "0x9097678eb34daeebb6e3528ed4f8715cdc5e4c09",
+      "deployUserName": "new_test",
+      "abiId": 26
+    },
+    ...
+  ],
+  "totalCount": 2
 }
 ```
 
@@ -2941,7 +2984,7 @@ http://localhost:5001/WeBASE-Node-Manager/warehouse/item?contractId=2
 ***2）入参示例***
 
 ```
-http://127.0.0.1:5001/WeBASE-Node-Manager/contract/listManager/1/0x622ca15aa841e92eb65da1a0e59c1b6bb61e3ecb
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/listManager/group/0xab9F30F9827e1C16Bf62d557c3626AeAd9E85502
 ```
 
 
@@ -2980,22 +3023,22 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/listManager/1/0x622ca15aa841e
   "message": "success",
   "data": [
     {
-      "userId": 700015,
-      "userName": "mars2",
-      "account": "admin",
-      "groupId": 1,
-      "publicKey": "04476580a6044f3bb25a26d40ba0bafe3ed0c8e98ff50271e20ded684cfa38e02b9c3eaf1de114121f910d8bea26b5e4434f522712c9b8347a777b738dd74b706b",
+      "userId": 700003,
+      "userName": "new_test",
+      "account": "test",
+      "groupId": "group",
+      "publicKey": "04b27022e80712f4def30d008a390cbe3503100ef54236bea3d4ca9a7fe95c8aafc2a401dd344605fa8d6b52533b289e8af9a75b992ac006a6a0ec8c0ef0b300eb",
       "privateKey": null,
       "userStatus": 1,
       "chainIndex": null,
       "userType": 1,
-      "address": "0xdccae56cef725605d0fa1e00fd553074a74091c5",
-      "signUserId": "ed54e13b0abf4c69b788bd83b8e3515e",
-      "appId": "1",
+      "address": "0x9097678eb34daeebb6e3528ed4f8715cdc5e4c09",
+      "signUserId": "05281cdc3c894a2da852af6b2ad3d919",
+      "appId": "group",
       "hasPk": 1,
-      "description": "supplychain_mars2",
-      "createTime": "2021-07-02 17:54:24",
-      "modifyTime": "2021-07-02 17:54:24"
+      "description": "",
+      "createTime": "2021-11-30 16:18:03",
+      "modifyTime": "2021-11-30 16:18:03"
     }
   ],
   "attachment": null
@@ -4056,21 +4099,24 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/general/group
 | 3.3  | contractCount    | int    | 否     | 已部署智能合约数量         |
 | 3.4  | transactionCount | int    | 否     | 交易数量                   |
 | 3.5  | latestBlock      | int    | 否     | 当前块高                   |
+| 3.6 | orgCount | int | 否 | 组织数量 |
 
 
 ***2）出参示例***
 * 成功：
 ```
 {
-    "code": 0,
-    "data": {
-        "latestBlock": 7156,
-        "contractCount": 0,
-        "groupId": "300001",
-        "nodeCount": 2,
-        "transactionCount": 7131
-    },
-    "message": "Success"
+  "code": 0,
+  "message": "success",
+  "data": {
+    "groupId": "group",
+    "orgCount": 0,
+    "nodeCount": 2,
+    "contractCount": 51,
+    "transactionCount": 249,
+    "latestBlock": 249
+  },
+  "attachment": null
 }
 ```
 
@@ -4115,12 +4161,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1     | code          | Int           | 否     | 返回码，0：成功 其它：失败 |
+| 1     | code          | Integer    | 否     | 返回码，0：成功 其它：失败 |
 | 2     | message       | String        | 否     | 描述                       |
-| 3     | totalCount    | Int           | 否     | 总记录数                   |
+| 3     | totalCount    | Integer    | 否     | 总记录数                   |
 | 4     | data          | List          | 否     | 组织列表                   |
 | 4.1   |               | Object        |        | 组织信息对象               |
-| 4.1.1 | groupId       | string           | 否     | 群组编号                   |
+| 4.1.1 | groupId       | String          | 否     | 群组编号                   |
 | 4.1.2 | groupName     | String        | 否     | 群组名称                   |
 | 4.1.3 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突                  |
 | 4.1.4 | nodeCount     | Integer        | 否     | 群组节点数                  |
@@ -4134,30 +4180,35 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/{groupStatus}
 | 4.1.12 | groupTimestamp | String | 否 | 群组时间戳 |
 | 4.1.13 | nodeIdList | String | 否 | 节点ID列表 |
 | 4.1.14 | chainId | Integer | 否 | 链ID |
-| 4.1.15 | chainName | string | 否 | 链名称 |
+| 4.1.15 | chainName | String | 否 | 链名称 |
 
 
 ***2）出参示例***
 * 成功：
 ```
 {
-    "code": 0,
-    "message": "success",
-    "totalCount": 1,
-    "data": [
-        {
-            "groupId":1,
-            "groupName":"group1",
-            "groupStatus":1,
-            "nodeCount":4,
-            "latestBlock":0,
-            "transCount":0,
-            "createTime":"2020-05-07 16:32:02",
-            "modifyTime":"2020-05-08 10:50:13",
-            "description":"synchronous",
-            "groupType":1
-        }
-    ]
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "groupId": "group",
+      "groupName": "group",
+      "groupStatus": 1,
+      "nodeCount": 2,
+      "latestBlock": 0,
+      "transCount": 0,
+      "createTime": "2021-12-06 11:21:55",
+      "modifyTime": "2021-12-06 17:12:06",
+      "description": "synchronous",
+      "groupType": 1,
+      "encryptType": 0,
+      "groupTimestamp": null,
+      "nodeIdList": null,
+      "chainId": 0,
+      "chainName": ""
+    }
+  ],
+  "totalCount": 1
 }
 ```
 
@@ -4214,20 +4265,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/transDaily/group
 * 成功：
 ```
 {
-    "code": 0,
-    "data": [
-        {
-            "day": "2018-11-21",
-            "groupId": "300001",
-            "transCount": 12561
-        },
-        {
-            "day": "2018-11-22",
-            "groupId": "300001",
-            "transCount": 1251
-        }
-    ],
-    "message": "Success"
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "day": "2021-11-29",
+      "groupId": "group",
+      "transCount": 75
+    },
+    ...
+  ],
+  "attachment": null
 }
 ```
 
@@ -4324,49 +4372,47 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/all/invalidIncluded/{pageNumber}
 | 4.1   |               | Object        |        | 组织信息对象               |
 | 4.1.1 | groupId       | Integer           | 否     | 群组编号                   |
 | 4.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 4.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突|
-| 4.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
-| 4.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
-| 4.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
-| 4.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
-| 4.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
-| 4.1.7 | description     | String        | 否     | 群组描述                   |
-| 4.1.8 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
-
+| 4.1.3 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 4-创世块冲突|
+| 4.1.4 | nodeCount     | Integer        | 否     | 群组节点数                  |
+| 4.1.5 | latestBlock   | BigInteger    | 否     | 最新块高                   |
+| 4.1.6 | transCount    | BigInteger    | 否     | 交易量                     |
+| 4.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 4.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 4.1.9 | description     | String        | 否     | 群组描述                   |
+| 4.1.10 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+| 4.1.11 | encryptType | Integer | 否 | 加密类型 |
+| 4.1.12 | groupTimestamp | String | 否 | 群组时间戳 |
+| 4.1.13 | nodeIdList | String | 否 | 节点Id列表 |
+| 4.1.14 | chainId | Integer | 否 | 链Id |
+| 4.1.15 | chainName | String | 否 | 链名称 |
 
 ***2）出参示例***
+
 * 成功：
 ```
 {
-    "code": 0,
-    "message": "success",
-    "totalCount": 1,
-    "data": [
-        {
-            "groupId":1,
-            "groupName":"group1",
-            "groupStatus":1,
-            "nodeCount":4,
-            "latestBlock":0,
-            "transCount":0,
-            "createTime":"2020-05-07 16:32:02",
-            "modifyTime":"2020-05-08 10:50:13",
-            "description":"synchronous",
-            "groupType":1
-        },
-         {
-            "groupId":2020,
-            "groupName":"group2020",
-            "groupStatus":2,
-            "nodeCount":2,
-            "latestBlock":0,
-            "transCount":0,
-            "createTime":"2020-05-07 16:32:02",
-            "modifyTime":"2020-05-08 10:50:13",
-            "description":"",
-            "groupType":2
-        }
-    ]
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "groupId": "group",
+      "groupName": "group",
+      "groupStatus": 1,
+      "nodeCount": 2,
+      "latestBlock": 0,
+      "transCount": 0,
+      "createTime": "2021-12-06 11:21:55",
+      "modifyTime": "2021-12-06 17:12:06",
+      "description": "synchronous",
+      "groupType": 1,
+      "encryptType": 0,
+      "groupTimestamp": null,
+      "nodeIdList": null,
+      "chainId": 0,
+      "chainName": ""
+    }
+  ],
+  "totalCount": 1
 }
 ```
 
@@ -4522,20 +4568,25 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/detail/{groupId}
 
 | 序号 | 输出参数    | 类型          |        | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
-| 1      | code        | Int           | 否     | 返回码，0：成功 其它：失败                 |
+| 1      | code        | Integer    | 否     | 返回码，0：成功 其它：失败                 |
 | 2      | message     | String        | 否     | 描述                                       |
 | 3     | data          | List          | 否     | 组织列表                   |
 | 3.1   |               | Object        |        | 组织信息对象               |
 | 3.1.1 | groupId       | String      | 否     | 群组编号                   |
 | 3.1.2 | groupName     | String        | 否     | 群组名称                   |
-| 3.1.2 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 3-创世块冲突|
-| 3.1.2 | nodeCount     | Integer        | 否     | 群组节点数                  |
-| 3.1.3 | latestBlock   | BigInteger    | 否     | 最新块高                   |
-| 3.1.4 | transCount    | BigInteger    | 否     | 交易量                     |
-| 3.1.5 | createTime    | LocalDateTime | 否     | 落库时间                   |
-| 3.1.6 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
-| 3.1.7 | description     | String        | 否     | 群组描述                   |
-| 3.1.8 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+| 3.1.3 | groupStatus   | Integer        | 否     | 群组状态：1-正常, 2-维护中, 3-脏数据, 3-创世块冲突|
+| 3.1.4 | nodeCount     | Integer        | 否     | 群组节点数                  |
+| 3.1.5 | latestBlock   | BigInteger    | 否     | 最新块高                   |
+| 3.1.6 | transCount    | BigInteger    | 否     | 交易量                     |
+| 3.1.7 | createTime    | LocalDateTime | 否     | 落库时间                   |
+| 3.1.8 | modifyTime    | LocalDateTime | 否     | 修改时间                   |
+| 3.1.9 | description     | String        | 否     | 群组描述                   |
+| 3.1.10 | groupType     | Integer        | 否     | 群组类别：1-同步，2-动态创建  |
+| 3.1.11 | groupTimestamp | String | 否 | 群组时间戳 |
+| 3.1.12 | nodeIdList | String | 否 | 节点Id列表 |
+| 3.1.13 | chainId | Integer | 否 | 链Id |
+| 3.1.14 | chainName | String | 否 | 链名称 |
+| 3.1.15 | encryptType | Integer | 否 | 加密类型 |
 
 ***2）出参示例***
 
@@ -4558,7 +4609,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/group/detail/{groupId}
     "groupTimestamp": null,
     "nodeIdList": null,
     "chainId": 0,
-    "chainName": "default"
+    "chainName": "default"，
+    "encryptType": 0
   },
   "attachment": null
 }
@@ -4766,7 +4818,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeInfo/1
 **
 
 ```
-http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeIdList/1
+http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeIdList/group
 ```
 
 
@@ -4789,10 +4841,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeIdList/1
   "code": 0,
   "message": "success",
   "data": [
-    "fe57d7b39ed104b4fb2770ae5aad7946bfd377d0eb91ab92a383447e834c3257dec56686551d08178f2d5f40d9fad615293e46c9f5fc23cf187258e121213b1d",
-    "65bc44d398d99d95a9d404aa16e4bfbc2f9ebb40f20439ddef8575a139dc3a80310cfc98a035bd59a67cc5f659f519e3e99b855f3d27f21a889c23a14036d0c7",
-    "95efafa5197796e7edf647191de83f4259d7cbb060f4bac5868be474037f49144d581c15d8aef9b07d78f18041a5f43c3c26352ebbf5583cd23070358c8fba39",
-    "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f"
+            "fe57d7b39ed104b4fb2770ae5aad7946bfd377d0eb91ab92a383447e834c3257dec56686551d08178f2d5f40d9fad615293e46c9f5fc23cf187258e121213b1d",
+            "65bc44d398d99d95a9d404aa16e4bfbc2f9ebb40f20439ddef8575a139dc3a80310cfc98a035bd59a67cc5f659f519e3e99b855f3d27f21a889c23a14036d0c7",
+            "95efafa5197796e7edf647191de83f4259d7cbb060f4bac5868be474037f49144d581c15d8aef9b07d78f18041a5f43c3c26352ebbf5583cd23070358c8fba39",
+            "06269e130f8220ebaa78e67832df0de6b4c5ee3f1b14e64ab2bae26510a4bcf997454b35067c1685d4343e6ad84b45c3b8690a858f2831a9247a97a27166ce1f"
   ],
   "attachment": null
 }
@@ -4817,9 +4869,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/nodeIdList/1
 | 序号 | 输入参数    | 类型          | 必填 | 备注                                       |
 |------|-------------|---------------|--------|-------------------------------|
 | 1      | nodeId   | String           | 是     |  节点ID                                    |
-| 1      | nodeIp   | String           | 否     | 节点备注IP                                     |
-| 1      | agency   | String           | 否     | 节点备注机构名                                  |
-| 1      | city     | String           | 否     | 节点备注城市                              |
+| 2     | nodeIp   | String           | 否     | 节点备注IP                                    |
+| 3     | agency   | String           | 否     | 节点备注机构名                                  |
+| 4     | city     | String           | 否     | 节点备注城市                              |
 
 
 ***2）入参示例***
@@ -5038,10 +5090,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ```
 {
-    "groupId": "300001",
-    "description": "密钥拥有者",
-    "userName": "user1",
-    "account": "admin"
+  "account": "admin",
+  "description": "string",
+  "groupId": "group",
+  "userName": "frank",
+  "userType": 0
 }
 ```
 
@@ -5057,7 +5110,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 | 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
 | 3.1  | userId      | int           | 否   | 用户编号                           |
 | 3.2  | userName    | string        | 否   | 用户名称                           |
-| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.3  | groupId     | String        | 否   | 所属群组编号                       |
 | 3.4  | description | String        | 是   | 备注                               |
 | 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
 | 3.6  | publicKey   | String        | 否   | 公钥信息                           |
@@ -5066,6 +5119,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 | 3.9  | account     | string        | 否   | 关联账户                           |
 | 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
 | 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 3.12 | chainIndex  | int           | 否   | 链索引                             |
+| 3.13 | userType    | int           | 否   | 用户类型                           |
+| 3.14 | signUserId  | String        | 否   | 签名用户Id                         |
+| 3.15 | appId       | String        | 否   | 应用Id                             |
+| 3.16 | privateKey  | String        | 否   | 私钥信息                           |
 
 
 ***2）出参示例***
@@ -5074,22 +5132,27 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": {
-        "userId": 700007,
-        "userName": "asdfvw",
-        "groupId": 300001,
-        "publicKey": "0x4189fdacff55fb99172e015e1adc360777bee6682fcc975238aabf144fbf610a3057fd4b5",
-        "userStatus": 1,
-        "userType": 1,
-        "address": "0x40ec3c20b5178401ae14ad8ce9c9f94fa5ebb86a",
-        "hasPk": 1,
-        "description": "sda",
-        "account": "admin",
-        "createTime": "2019-03-15 18:00:27",
-        "modifyTime": "2019-03-15 18:00:27"
-    }
+  "code": 0,
+  "message": "success",
+  "data": {
+    "userId": 700006,
+    "userName": "frank",
+    "account": "admin",
+    "groupId": "group",
+    "publicKey": "04aa23e6fcc6099c622d7cc9da0ab30019c6a349bfd71d69c83f7cf65a00a5ff9ed5e6fa0ab12c21cc46f0af0aed361a2854777b3b5cd2d13f6ade78bd41fe5b16",
+    "privateKey": null,
+    "userStatus": 1,
+    "chainIndex": null,
+    "userType": 0,
+    "address": "0xd24488a4d51661694f0c31f2cc688d1670f51d29",
+    "signUserId": "c5a76d781e124c7db7279af39819ed2f",
+    "appId": "group",
+    "hasPk": 1,
+    "description": "string",
+    "createTime": "2021-12-06 17:53:53",
+    "modifyTime": "2021-12-06 17:53:53"
+  },
+  "attachment": null
 }
 ```
 
@@ -5137,11 +5200,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ```
 {
-    "userName": "sdfasd",
-    "publicKey": "0x4189fdacff55fb99172e015e1adb96dc77b0cae1619b1a41cc360777bee6682fcc9752d8aabf144fbf610a3057fd4b5",
-    "groupId": "300001",
-    "description": "sdfa",
-    "account": "admin"
+  "account": "admin",
+  "description": "string",
+  "groupId": "group",
+  "publicKey": "04aa23e6fcc6099c622d7cc9da0ab30019c6a349bfd71d69c83f7cf65a00a5ff9ed5e6fa0ab12c21cc46f0af0aed361a2854777b3b5cd2d13f6ade78bd41fe5b16",
+  "userName": "alex",
+  "userType": 0
 }
 ```
 
@@ -5233,7 +5297,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ```
 {
-    "userId": "400001",
+    "userId": "700006",
     "description": "newDescription"
 }
 ```
@@ -5249,16 +5313,21 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 | 2    | message     | String        | 否   | 描述                               |
 | 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
 | 3.1  | userId      | int           | 否   | 用户编号                           |
-| 3.2  | userName    | string        | 否   | 用户名称                           |
-| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.2  | userName    | String        | 否   | 用户名称                           |
+| 3.3  | groupId     | String        | 否   | 所属群组编号                       |
 | 3.4  | description | String        | 是   | 备注                               |
 | 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
 | 3.6  | publicKey   | String        | 否   | 公钥信息                           |
 | 3.7  | address     | String        | 是   | 在链上位置的hash                   |
 | 3.8  | hasPk       | Int           | 否   | 是否拥有私钥信息(1-拥有，2-不拥有) |
-| 3.9  | account     | string        | 否   | 关联账户                           |
+| 3.9  | account     | String        | 否   | 关联账户                           |
 | 3.10 | createTime  | LocalDateTime | 否   | 创建时间                           |
 | 3.11 | modifyTime  | LocalDateTime | 否   | 修改时间                           |
+| 3.12 | chainIndex  | int           | 否   |                                    |
+| 3.13 | userType    | int           | 否   | 用户类型                           |
+| 3.14 | signUserId  | String        | 否   | 签名用户Id                         |
+| 3.15 | appId       | String        | 否   |                                    |
+| 3.16 | privateKey  | String        | 否   |                                    |
 
 
 ***2）出参示例***
@@ -5267,22 +5336,27 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 
 ```
 {
-    "code": 0,
-    "message": "success",
-    "data": {
-        "userId": 400001,
-        "userName": "asdfvw",
-        "groupId": 300001,
-        "publicKey": "0x4189fdacff55fb99172e015e1682fcc9752d8aabf144fbf610a3057fd4b5",
-        "userStatus": 1,
-        "userType": 1,
-        "address": "0x40ec3c20b5178401ae14ad8ce9c9f94fa5ebb86a",
-        "hasPk": 1,
-        "description": "newDescription",
-        "account": "admin",
-        "createTime": "2019-03-15 18:00:27",
-        "modifyTime": "2019-03-15 18:00:27"
-    }
+  "code": 0,
+  "message": "success",
+  "data": {
+    "userId": 700006,
+    "userName": "frank",
+    "account": "admin",
+    "groupId": "group",
+    "publicKey": "04aa23e6fcc6099c622d7cc9da0ab30019c6a349bfd71d69c83f7cf65a00a5ff9ed5e6fa0ab12c21cc46f0af0aed361a2854777b3b5cd2d13f6ade78bd41fe5b16",
+    "privateKey": null,
+    "userStatus": 1,
+    "chainIndex": null,
+    "userType": 0,
+    "address": "0xd24488a4d51661694f0c31f2cc688d1670f51d29",
+    "signUserId": "c5a76d781e124c7db7279af39819ed2f",
+    "appId": "group",
+    "hasPk": 1,
+    "description": "string",
+    "createTime": "2021-12-06 17:53:53",
+    "modifyTime": "2021-12-06 19:13:17"
+  },
+  "attachment": null
 }
 ```
 
@@ -5322,8 +5396,8 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/userInfo
 | 3    | description | string | 否     | 备注                   |
 | 4    | groupId     | String | 是     | 所属群组               |
 | 5    | account     | string | 是     | 关联账户               |
-| 6 | userId | int | 是 |  |
-| 7 | userType | int | 是 |  |
+| 6 | userId | int | 是 | 用户Id |
+| 7 | userType | int | 是 | 用户类型 |
 
 ***2）入参示例***
 
@@ -5334,10 +5408,12 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 ```
 {
     "privateKey": "OGFmNWIzMzNmYTc3MGFhY2UwNjdjYTY3ZDRmMzE4MzU4OWRmOThkMjVjYzEzZGFlMGJmODhkYjhlYzVhMDcxYw==",
-    "groupId": "300001",
+    "groupId": "group",
     "description": "密钥拥有者",
     "userName": "user1",
-    "account": "admin"
+    "account": "admin",
+    "userId": 0,
+    "userType": 0
 }
 ```
 
@@ -5395,7 +5471,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/import
 | 1    | pemContent  | string | 是     | pem文件的内容，必须以`-----BEGIN PRIVATE KEY-----\n`开头，以`\n-----END PRIVATE KEY-----\n`结尾的格式 |
 | 2    | userName    | string | 是     | 用户名称                                                     |
 | 3    | description | string | 否     | 备注                                                         |
-| 4    | groupId     | Int    | 是     | 所属群组                                                     |
+| 4    | groupId     | String | 是     | 所属群组                                                     |
 | 5    | account     | string | 是     | 关联账户                                                     |
 | 6 | userType | int | 是 |  |
 
@@ -5408,10 +5484,11 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/importPem
 ```
 {
     "pemContent":"-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBSuBBAAKBG0wawIBAQQgC8TbvFSMA9y3CghFt51/\nXmExewlioX99veYHOV7dTvOhRANCAASZtMhCTcaedNP+H7iljbTIqXOFM6qm5aVs\nfM/yuDBK2MRfFbfnOYVTNKyOSnmkY+xBfCR8Q86wcsQm9NZpkmFK\n-----END PRIVATE KEY-----\n",
-    "groupId": "1",
+    "groupId": "group",
     "description": "密钥拥有者",
     "userName": "user2",
-    "account": "admin"
+    "account": "admin",
+    "userType": 0
 }
 ```
 
@@ -5554,7 +5631,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/export/300001
 | 3    | data        | object        | 是   | 返回信息实体（成功时不为空）       |
 | 3.1  | userId      | int           | 否   | 用户编号                           |
 | 3.2  | userName    | string        | 否   | 用户名称                           |
-| 3.3  | groupId     | int           | 否   | 所属群组编号                       |
+| 3.3  | groupId     | String      | 否   | 所属群组编号                       |
 | 3.4  | description | String        | 是   | 备注                               |
 | 3.5  | userStatus  | int           | 否   | 状态（1-正常 2-停用） 默认1        |
 | 3.6  | publicKey   | String        | 否   | 公钥信息                           |
@@ -5575,9 +5652,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/export/300001
 	"message": "success",
 	"data": {
 		"userId": 700003,
-		"userName": "vivi_d",
-		"account": "xyzshen",
-		"groupId": 1,
+		"userName": "frank",
+		"account": "admin",
+		"groupId": "group",
 		"publicKey": "04d01115d548e7561b15c38f004d734633687cf4419620095bc5b0f47070afe85aa9f34ffdc815e0d7a8b64537e17bd81579238c5dd9a86d526b051b13f4062327",
 		"privateKey": "MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwYw==",
 		"userStatus": 1,
@@ -5585,7 +5662,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/user/export/300001
 		"userType": 1,
 		"address": "0xdbc23ae43a150ff8884b02cea117b22d1c3b9796",
 		"signUserId": "b751efc5d0cc4e12b90908b1f2670258",
-		"appId": "1",
+		"appId": "group",
 		"hasPk": 1,
 		"description": "",
 		"createTime": "2021-04-06 21:24:12",
@@ -6876,9 +6953,9 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/event/contractInfo/{groupId}/{type}/{c
 }
 ```
 
-## 18 配置接口
+## 16 配置接口
 
-### 18.1 查询是否使用国密
+### 16.1 查询是否使用国密
 
 获取WeBASE-Node-Manager是否使用国密版
 
@@ -6922,7 +6999,7 @@ http://localhost:5001/WeBASE-Node-Manager/config/encrypt
 ```
 
 
-### 18.2 查询WeBASE-Node-Manager的版本
+### 16.2 查询WeBASE-Node-Manager的版本
 
 获取WeBASE-Node-Manager服务的版本号
 
@@ -6959,7 +7036,7 @@ http://localhost:5001/WeBASE-Node-Manager/config/version
 v1.4.0
 ```
 
-### 18.3 获取服务ip和端口
+### 16.3 获取服务ip和端口
 
 返回本服务ip和端口。
 
@@ -7021,7 +7098,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/config/ipPort
 }
 ```
 
-### 18.4 查询已部署合约是否支持修改
+### 16.4 查询已部署合约是否支持修改
 
 #### 传输协议规范
 
@@ -7066,7 +7143,7 @@ http://localhost:5001/WeBASE-Node-Manager/config/isDeployedModifyEnable
 ```
 
 
-### 18.5 获取配置列表
+### 16.5 获取配置列表
 
 查询后台保存的配置列表
 
@@ -7130,10 +7207,10 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/config/list?type=1
 }
 ```
 
-## 19. 链上全量数据接口
+## 17. 链上全量数据接口
 
 
-### 19.1 查询链上全量私钥用户列表
+### 17.1 查询链上全量私钥用户列表
 
 #### 传输协议规范
 
@@ -7242,7 +7319,7 @@ http://localhost:5001/WeBASE-Node-Manager/external/account/list/all/1/1/10
 ```
 
 
-### 19.2 查询链上全量合约列表
+### 17.2 查询链上全量合约列表
 
 #### 传输协议规范
 
