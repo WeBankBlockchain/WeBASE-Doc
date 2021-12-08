@@ -1,6 +1,6 @@
 # 升级说明
 
-WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
+WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankBlockchain/WeBASE-Node-Manager)进行阅读
 
 WeBASE-Node-Manager升级的必须步骤：
 1. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
