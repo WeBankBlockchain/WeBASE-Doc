@@ -1,6 +1,6 @@
 # 升级说明
 
-WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
+WeBASE-Sign升级的兼容性说明，请结合[WeBASE-Sign Changelog](https://github.com/WeBankBlockchain/WeBASE-Sign)进行阅读
 
 WeBASE-Sign升级的必须步骤：
 1. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
