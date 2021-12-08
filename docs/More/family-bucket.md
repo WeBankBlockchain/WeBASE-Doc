@@ -13,31 +13,31 @@ git地址：[https://github.com/FISCO-BCOS](https://github.com/FISCO-BCOS)
 gitee地址：[https://gitee.com/FISCO-BCOS](https://gitee.com/FISCO-BCOS)
 
 文档地址： https://fisco-bcos-documentation.readthedocs.io/ 
-
+<!-- 
 ### WeIdentity 基于区块链的实体身份标识及可信数据交换解决方案
 
-git地址：[https://github.com/WeBankFinTech/WeIdentity](https://github.com/WeBankFinTech/WeIdentity)
+git地址：[https://github.com/WeBankBlockchain/WeIdentity](https://github.com/WeBankBlockchain/WeIdentity)
 
 gitee地址：[https://gitee.com/WeBank/WeIdentity](https://gitee.com/WeBank/WeIdentity)
 
 文档地址：https://weidentity.readthedocs.io/
 
 ### WeEvent 基于区块链的分布式事件驱动架构
-
-git地址：[https://github.com/WeBankFinTech/WeEvent](https://github.com/WeBankFinTech/WeEvent)
+gi
+git地址：[https://github.com/WeBankBlockchain/WeEvent](https://github.com/WeBankBlockchain/WeEvent)
 
 gitee地址：[https://gitee.com/WeBank/WeEvent](https://gitee.com/WeBank/WeEvent)
 
-文档地址：https://weevent.readthedocs.io/
+文档地址：https://weevent.readthedocs.io/ -->
 
 ### WeBASE 区块链中间件平台
 
-git地址：[https://github.com/WeBankFinTech/WeBASE](https://github.com/WeBankFinTech/WeBASE)
+git地址：[https://github.com/WeBankBlockchain/WeBASE](https://github.com/WeBankBlockchain/WeBASE)
 
 gitee地址：[https://gitee.com/WeBank/WeBASE](https://gitee.com/WeBank/WeBASE)
 
 文档地址：https://webasedoc.readthedocs.io/ 
-
+<!-- 
 ### WeCross 区块链跨链协作平台
 
 git地址：[https://github.com/WeBankBlockchain/WeCross](https://github.com/WeBankBlockchain/WeCross)
@@ -75,7 +75,7 @@ git地址：[https://github.com/WeBankBlockchain/Data-Reconcile](https://github.
 gitee地址：[https://gitee.com/WeBankBlockchain/Data-Reconcile](https://gitee.com/WeBankBlockchain/Data-Reconcile)
 
 文档地址：https://data-doc.readthedocs.io/zh_CN/stable/docs/WeBankBlockchain-Data-Reconcile/index.html
-
+ -->
 
 ### Liquid 智能合约编程语言软件
 
@@ -91,7 +91,7 @@ gitee地址：[https://gitee.com/WeBankBlockchain/liquid](https://gitee.com/WeBa
 
 [https://gitee.com/WeBankBlockchain/cargo-liquid](https://gitee.com/WeBankBlockchain/cargo-liquid)
 
-
+<!-- 
 ### Governance-Account 账户治理组件
 
 git地址：https://github.com/WeBankBlockchain/Governance-Account
@@ -153,5 +153,5 @@ git地址：[https://github.com/WeBankBlockchain/SmartDev-Scaffold](https://gith
 
 gitee地址：[https://gitee.com/WeBankBlockchain/SmartDev-Scaffold](https://gitee.com/WeBankBlockchain/SmartDev-Scaffold)
 
-文档地址：https://smartdev-doc.readthedocs.io/zh_CN/latest/docs/WeBankBlockchain-SmartDev-Scaffold/index.html
+文档地址：https://smartdev-doc.readthedocs.io/zh_CN/latest/docs/WeBankBlockchain-SmartDev-Scaffold/index.html -->
 
