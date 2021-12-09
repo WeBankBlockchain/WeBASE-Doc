@@ -1,6 +1,6 @@
 # 快速入门搭建
 
-在区块链应用开发阶段建议用户使用快速入门搭建。在快速入门搭建模式，开发者只需要搭建节点和节点前置服务(WeBASE-Front)，就可通过WeBASE-Front的合约编辑器进行合约的编辑，编译，部署，调试。
+在区块链应用开发阶段建议用户使用快速入门搭建。在快速入门搭建模式，开发者只需要搭建节点和节点前置服务(WeBASE-Front)，就可以通过WeBASE-Front的合约编辑器进行合约的编辑，编译，部署，调试。
 
 ### 节点搭建
 
@@ -24,21 +24,36 @@
 
 2. 解压
     ```shell
-    unzip webase-front.zip
-    cd webase-front
+    unzip webase-front.zip && cd webase-front
     ```
 
 3. 拷贝sdk证书文件（build_chain的时候生成的） 
 
-    将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前`conf`目录，供SDK与节点建立连接时使用（SDK会自动判断是否为国密，且是否使用国密SSL）
-    - 链的`sdk`目录包含了`ca.crt, sdk.crt, sdk.key`和`gm`文件夹，`gm`文件夹包含了国密SSL所需的证书
+    将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前`conf`目录，供SDK与节点建立连接时使用
     - 拷贝命令可使用`cp -r nodes/${ip}/sdk/* ./conf/`
-    - 注，只有在建链时手动指定了`-G`(大写)时节点才会使用国密SSL
+
+    - 证书为以下两种之一：
+
+      非国密：`ca.crt`、`sdk.crt`、`sdk.key`
+
+      国密：`sm_ca.crt`、`sm_sdk.crt`、`sm_sdk.key`、`sm_ensdk.crt`、`sm_ensdk.key`
 
 
-4. 服务启停
+4. 修改配置
 
-    服务启停命令：
+    ```
+    vi conf/application.yml
+    ```
+
+    ```
+    sdk:
+      useSmSsl: false  # sdk连接节点是否使用国密ssl
+      peers: ['127.0.0.1:20200','127.0.0.1:20201'] # 节点ip和rpc端口
+    ```
+
+5. 服务启停
+
+    返回根目录，服务启停命令：
     ```shell
     启动： bash start.sh
     停止： bash stop.sh
@@ -147,17 +162,4 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 - **开放节点前置端口**：如果希望通过浏览器(Chrome Safari或Firefox)直接访问webase-front节点前置的页面，则需要开放节点前置端口`frontPort`（默认5002）
 
 ![](../../images/WeBASE/front-overview.png)
-
-
-### Docker镜像快速搭建
-<span id="run_docker"></span>
-
-WeBASE提供结合FISCO BCOS节点与WeBASE-Front的Docker镜像，通过镜像快速部署需要的步骤如下：
-- 通过build_chain建链脚本（指定 `-d` docker模式）生成节点所需证书、配置文件等
-    - 如生成4节点`bash build_chain.sh -l 127.0.0.1:4 -p 30300,20200,8545 -o nodes -d`
-- 拉取镜像： `docker pull fiscoorg/fisco-webase:v2.7.2`
-- 启动容器：需要将生成的`nodes`目录的node0的配置、SDK证书挂载到容器中，并将容器内的日志挂载到`/nodes/127.0.0.1/node0/front-log`中
-    - 启动命令：`docker run -d -v /nodes/127.0.0.1/node0:/data -v /nodes/127.0.0.1/sdk:/data/sdk -v /nodes/127.0.0.1/node0/front-log:/front/log --network=host -w=/data fiscoorg/fisco-webase:v2.7.2`
-
-WeBASE的Docker镜像的使用详情可以参考[front镜像模式使用说明](https://github.com/WeBankFinTech/WeBASE-Docker/blob/dev-deploy/docker/front-install.md)
 
