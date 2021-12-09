@@ -2,7 +2,7 @@
 
 ​	一键部署可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
-​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
+​	一键部署会搭建：节点（FISCO-BCOS 3.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
 
 <img src="../../_images/one_click_structure.png" width="700">
 
@@ -25,8 +25,6 @@
 推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署脚本将自动安装`openssl, curl, wget, git, nginx, dos2unix`相关依赖项。
 
 其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, nginx, dos2unix`依赖项后重试
-
-若使用[Docker模式一键部署](../WeBASE-Install/docker_install.md)，可只安装Docker、Docker-Compose，无需配置Mysql与Java环境
 
 #### 检查Java
 
@@ -115,46 +113,30 @@ cd webase-deploy
 
 ② 修改配置文件（`vi common.properties`）；
 
-- *若使用可视化部署，则忽略下文，将修改`visual-deploy.properties`，并进行可视化部署依赖服务的一键安装，具体请参考[可视化部署-一键安装依赖服务](../WeBASE-Install/visual_deploy.html#visual-deploy-oneclick)*
+③ 一键部署支持使用已有链或者搭建新链。通过参数`if.exist.fisco`配置是否使用已有链，以下配置二选一即可：
 
-③ 一键部署支持使用已有链或者搭建新链。通过参数"if.exist.fisco"配置是否使用已有链，以下配置二选一即可：
+- 当配置`yes`时，需配置已有链的sdk证书路径`sdk.dir`。路径下存放sdk证书，包含以下两种之一：
 
-- 当配置"yes"时，需配置已有链的路径`fisco.dir`。路径下要存在sdk目录，sdk目录中包含ca.crt, sdk.crt, sdk.key及gm目录，gm目录中包含国密SSL所需证书，包含gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key
-- 当配置"no"时，需配置节点fisco版本和节点安装个数，搭建的新链默认两个群组
+  非国密：`ca.crt`、`sdk.crt`、`sdk.key`
+
+  国密：`sm_ca.crt`、`sm_sdk.crt`、`sm_sdk.key`、`sm_ensdk.crt`、`sm_ensdk.key`
+
+- 当配置`no`时，需配置节点fisco版本和节点安装个数，未修改时搭建的新链默认两个群组
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
 
-​    **注：使用国密版需要修改设置配置项`encrypt.type=1`。前置SDK与节点默认使用非国密SSL，如果需要使用国密SSL，需要修改设置配置项`encrypt.sslType=1`。**
-
 ④ 服务端口不能小于1024
 
-⑤ 部署时，修改 `common.properties` 配置文件
-
 ```shell
-# WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.3
-webase.mgr.version=v1.5.3
-webase.sign.version=v1.5.3
-webase.front.version=v1.5.3
-
-#####################################################################
-## 使用Docker启用Mysql服务，则需要配置以下值
-
-# 1: enable mysql in docker
-# 0: mysql run in host, required fill in the configuration of webase-node-mgr and webase-sign
-docker.mysql=1
-
-# if [docker.mysql=1], mysql run in host (only works in [installDockerAll])
-# run mysql 5.6 by docker
-docker.mysql.port=23306
-# default user [root]
-docker.mysql.password=123456
-
-#####################################################################
-## 不使用Docker启动Mysql，则需要配置以下值
+[common]
+# WeBASE子系统的最新版本（v2.0.0或以上版本）
+webase.web.version=v2.0.0-rc1
+webase.mgr.version=v2.0.0-rc1
+webase.sign.version=v2.0.0-rc1
+webase.front.version=v2.0.0-rc1
 
 # 节点管理子系统mysql数据库配置
-mysql.ip=127.0.0.1
+mysql.ip=localhost
 mysql.port=3306
 mysql.user=dbUsername
 mysql.password=dbPassword
@@ -167,17 +149,11 @@ sign.mysql.user=dbUsername
 sign.mysql.password=dbPassword
 sign.mysql.database=webasesign
 
-
-
-# 节点前置子系统h2数据库名和所属机构
+# 节点前置子系统h2数据库名
 front.h2.name=webasefront
-front.org=fisco
 
 # WeBASE管理平台服务端口
 web.port=5000
-# 启用移动端管理平台 (0: disable, 1: enable)
-web.h5.enable=1
-
 # 节点管理子系统服务端口
 mgr.port=5001
 # 节点前置子系统端口
@@ -185,38 +161,29 @@ front.port=5002
 # 签名服务子系统端口
 sign.port=5004
 
-
-# 节点监听Ip
-node.listenIp=127.0.0.1
-# 节点p2p端口
-node.p2pPort=30300
-# 节点链上链下端口
-node.channelPort=20200
-# 节点rpc端口
-node.rpcPort=8545
-
-# 加密类型 (0: ECDSA算法, 1: 国密算法)
+# SDK连接加密类型 （0: ECDSA SSL, 1: 国密SSL）
 encrypt.type=0
-# SSL连接加密类型 (0: ECDSA SSL, 1: 国密SSL)
-# 只有国密链才能使用国密SSL
-encrypt.sslType=0
 
 # 是否使用已有的链（yes/no）
 if.exist.fisco=no
 
-# 使用已有链时需配置
-# 已有链的路径，start_all.sh脚本所在路径
-# 路径下要存在sdk目录（sdk目录中包含了SSL所需的证书，即ca.crt、sdk.crt、sdk.key和gm目录（包含国密SSL证书，gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）
-fisco.dir=/data/app/nodes/127.0.0.1
-# 前置所连接节点，在127.0.0.1目录中的节点中的一个
-# 节点路径下要存在conf文件夹，conf里存放节点证书（ca.crt、node.crt和node.key）
-node.dir=node0
-
-# 搭建新链时需配置
-# FISCO-BCOS版本
-fisco.version=2.7.2
+# 搭建新链时需配置[if.exist.fisco=no]
+# 节点监听Ip
+node.listenIp=127.0.0.1
+# 节点p2p端口
+node.p2pPort=30300
+# 节点rpc端口
+node.rpcPort=20200
+# FISCO-BCOS版本（v3.0.0或以上版本）
+fisco.version=3.0.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
+
+# 使用已有链时需配置[if.exist.fisco=yes]
+# 已有链节点rpc端口列表
+node.rpcPeers=['127.0.0.1:20200','127.0.0.1:20201']
+# sdk目录，需包含已有链SSL所需的证书（如: ca.crt,sdk.crt,sdk.key）
+sdk.dir=/data/app/nodes/127.0.0.1/sdk
 ```
 
 
@@ -252,10 +219,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.5.3        ========
-==============    webase-node-mgr version  v1.5.3   ========
-==============    webase-sign version  v1.5.3       ========
-==============    webase-front version  v1.5.3      ========
+==============    webase-web version  v...        ========
+==============    webase-node-mgr version  v...   ========
+==============    webase-sign version  v...       ========
+==============    webase-front version  v...      ========
 ============================================================
 ```
 
@@ -277,10 +244,6 @@ $ python3 deploy.py installAll
 停止WeBASE-Sign:        python3 deploy.py stopSign
 启动WeBASE-Front:        python3 deploy.py startFront
 停止WeBASE-Front:        python3 deploy.py stopFront
-# 可视化部署
-部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE
-停止可视化部署的所有服务  python3 deploy.py stopWeBASE
-启动可视化部署的所有服务  python3 deploy.py startWeBASE
 ```
 
 
@@ -767,7 +730,7 @@ OperationalError: (1045, "Access denied for user 'root'@'localhost' (using passw
 ======= FISCO-BCOS sdk dir:/data/app/nodes/127.0.0.1/sdk is not exist. please check! =======
 ```
 
-答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点证书（ca.crt、sdk.key、sdk.crt、node.crt、node.key）复制到该sdk目录，再重新部署。如果是国密链，并且sdk和节点使用国密ssl连接时，需在sdk目录里创建gm目录，gm目录存放国密sdk证书（gmca.crt、gmsdk.crt、gmsdk.key、gmensdk.crt和gmensdk.key）。
+答：确认节点安装目录下有没有sdk目录（企业部署工具搭建的链可能没有），如果没有，需手动创建"mkdir sdk"，并将节点sdk证书（ca.crt、sdk.key、sdk.crt）复制到该sdk目录，再重新部署。如果使用国密SSL，则在sdk目录里存放国密sdk证书（sm_ca.crt、sm_sdk.crt、sm_sdk.key、sm_ensdk.crt、sm_ensdk.key）。
 
 ### 7. 前置启动报错“nested exception is javax.net.ssl.SSLException”
 
