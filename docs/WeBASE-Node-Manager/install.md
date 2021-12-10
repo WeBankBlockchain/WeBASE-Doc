@@ -19,21 +19,13 @@
 WeBASE-Node-Manager v1.3.0及以上版本将通过WeBASE-Sign进行私钥管理，即使用WeBASE-Node-Manager v1.3.0+的版本需要同步安装WeBASE-Sign v1.3.0，详情可参考[升级文档](upgrade.html)进行阅读
 
 
-**国密支持：**
-
-WeBASE-Node-Manager v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/guomi_crypto.html)，与[WeBASE-Front v1.2.2+](../WeBASE-Front/index.html)配合使用
-
-开启WeBASE-Node-Manager的国密开关：
-- 将配置文件`application.yml`中的`sdk.encryptType`从`0`修改为`1`；
-
-
 ## 3. 拉取代码
 执行命令：
 ```shell
-git clone https://github.com/WeBankBlockchain/WeBASE-Node-Manager.git
+git clone -b lab https://github.com/WeBankBlockchain/WeBASE-Node-Manager.git
 
 # 若因网络问题导致长时间下载失败，可尝试以下命令
-git clone https://gitee.com/WeBank/WeBASE-Node-Manager.git
+git clone -b lab https://gitee.com/WeBank/WeBASE-Node-Manager.git
 ```
 进入目录：
 
