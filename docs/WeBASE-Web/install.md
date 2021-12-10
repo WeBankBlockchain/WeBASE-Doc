@@ -12,10 +12,10 @@
 代码可以放在/data下面，执行命令：
 
 ```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+git clone -b lab https://github.com/WeBankBlockchain/WeBASE-Web.git
 
 # 若网络问题导致长时间无法下载，可尝试以下命令
-git clone https://gitee.com/WeBank/WeBASE-Web.git
+git clone -b lab https://gitee.com/WeBank/WeBASE-Web.git
 ```
 
 进入目录：
@@ -47,17 +47,6 @@ cd WeBASE-Web
 ```
 
 执行完后检查dist/static/js是否下载完这些js文件。
-
-### 3. 拉取移动端代码
-WeBASE新增了h5的移动端页面，支持手机浏览器访问。代码和WeBASE-Web放在同级目录
-
-拉取代码
-```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Web-Mobile.git
-
-# 若网络问题导致长时间无法下载，可尝试以下命令
-git clone https://gitee.com/WeBank/WeBASE-Web-Mobile.git
-```
 
 ### 4. 修改配置
 
@@ -98,11 +87,6 @@ cp -rf docs/nginx.conf /usr/local/nginx/conf
         server_name  127.0.0.1;           # 服务器ip，也可配置为域名
         location / {
             root   /data/WeBASE-Web/dist;   # 前端文件路径(文件需要有权限访问)
-            # 下面是移动端nginx配置
-             if ( $http_user_agent ~ "(MIDP)|(WAP)|(UP.Browser)|(Smartphone)|(Obigo)|(Mobile)|(AU.Browser)|(wxd.Mms)|(WxdB.Browser)|(CLDC)|(UP.Link)|(KM.Browser)|(UCWEB)|(SEMC-Browser)|(Mini)|(Symbian)|(Palm)|(Nokia)|(Panasonic)|(MOT-)|(SonyEricsson)|(NEC-)|(Alcatel)|(Ericsson)|(BENQ)|(BenQ)|(Amoisonic)|(Amoi-)|(Capitel)|(PHILIPS)|(SAMSUNG)|(Lenovo)|(Mitsu)|(Motorola)|(SHARP)|(WAPPER)|(LG-)|(LG/)|(EG900)|(CECT)|(Compal)|(kejian)|(Bird)|(BIRD)|(G900/V1.0)|(Arima)|(CTL)|(TDG)|(Daxian)|(DAXIAN)|(DBTEL)|(Eastcom)|(EASTCOM)|(PANTECH)|(Dopod)|(Haier)|(HAIER)|(KONKA)|(KEJIAN)|(LENOVO)|(Soutec)|(SOUTEC)|(SAGEM)|(SEC-)|(SED-)|(EMOL-)|(INNO55)|(ZTE)|(iPhone)|(Android)|(Windows CE)|(Wget)|(Java)|(curl)|(Opera)" )
-           {
-            root   /data/WeBASE-Web-Mobile/dist;
-           }
             index  index.html index.htm;
             try_files $uri $uri/ /index.html =404;
         }

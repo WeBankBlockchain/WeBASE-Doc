@@ -18,7 +18,7 @@
 
 1. 下载安装包
     ```shell
-    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.3/webase-front.zip
+    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v2.0.0-rc1/webase-front.zip
     ```
 
 
@@ -146,7 +146,7 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 2020-12-09 15:47:25.383 [main] INFO  Application() - main run success...
 ```
 
-启动失败或无法使用时，欢迎到WeBASE-Front提交[Issue](https://github.com/WeBankFinTech/WeBASE-Front/issues)或到技术社区共同探讨
+启动失败或无法使用时，欢迎到WeBASE-Front提交[Issue](https://github.com/WeBankBlockchain/WeBASE-Front/issues)或到技术社区共同探讨
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 

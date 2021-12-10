@@ -15,7 +15,7 @@ WeBASE各子系统的Github代码仓库则是`https://github.com/WebankFinTech/`
 
 ### 一键部署与安装包
 <span id="install_package"></span>
-WeBASE每个新版本发布后，会在[WeBASELargefiles](https://github.com/WeBankFinTech/WeBASELargefiles/releases)GitHub的Releases中提供对应的WeBASE一键部署工具和对应安装包。
+WeBASE每个新版本发布后，会在[WeBASELargefiles](https://github.com/WeBankBlockchain/WeBASELargefiles/releases)GitHub的Releases中提供对应的WeBASE一键部署工具和对应安装包。
 
 其中WeBASELargefiles提供webase-deploy一键部署工具（即WeBASE源码中`/deploy`文件夹），以及webase-front.zip, webase-node-mgr.zip, webase-sign.zip, webase-web.zip子系统的安装包。
 
@@ -31,7 +31,7 @@ https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/{r
 
 ## WeBASE文档镜像
 
-WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthedocs.io/zh_CN/latest/index.html](https://webasedoc.readthedocs.io/zh_CN/latest/index.html)，同样提供国内镜像文档[https://fintech.webank.com/developer/docs/webase/index.html](https://fintech.webank.com/developer/docs/webase/index.html)，*由于网站资源更新周期安排，国内镜像文档更新会比readthedocs有所延迟*。
+WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthedocs.io/zh_CN/lab/index.html](https://webasedoc.readthedocs.io/zh_CN/lab/index.html)，同样提供国内镜像文档[https://fintech.webank.com/developer/docs/webase/index.html](https://fintech.webank.com/developer/docs/webase/index.html)，*由于网站资源更新周期安排，国内镜像文档更新会比readthedocs有所延迟*。
 
 每个版本发布会为上个版本的文档打Tag，新版本的文档会合入主干分支，文档由于会持续改进，所以是下个版本发布才打上个版本的tag。readthedocs文档支持下载PDF格式，方便用户使用。
 
@@ -46,7 +46,7 @@ WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthed
 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
 
 # 使用github下载
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
+wget https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
 ```
 
 
