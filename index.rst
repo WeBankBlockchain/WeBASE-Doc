@@ -6,6 +6,8 @@ WeBASE 技术文档
 
 WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应用和FISCO BCOS节点之间搭建的一套通用组件。
 
+*WeBASE v2.0.0-rc1版本已适配FISCO-BCOS 3.0.0版本，相关文档与代码仓库可跳转至 `[WeBASE-lab分支] <https://webasedoc.readthedocs.io/zh_CN/lab>`_ 查看
+
 .. container:: row 
    
    .. container:: card-holder
