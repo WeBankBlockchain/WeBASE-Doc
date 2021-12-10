@@ -92,15 +92,15 @@ spring:
     url: jdbc:h2:file:./h2/webasefront;DB_CLOSE_ON_EXIT=FALSE // 默认H2库为webasefront，建议修改数据库存放路径
 ...
 server: 
-  port: 5003                    // 服务端口
+  port: 5002                    // 服务端口
   context-path: /WeBASE-Front
-sdk: 
+sdk:
+  useSmSsl: false  // 是否启用了国密SSL
+  peers: ['127.0.0.1:20200','127.0.0.1:20201'] // 连接的节点（rpc节点）ip与端口，建议连接所有rpc节点
+  certPath: conf    // sdk证书的目录，默认为conf
   ...
-  ip: 127.0.0.1                 // 连接节点的监听ip
-  channelPort: 20200            // 连接节点的链上链下端口
-  certPath: conf                // sdk证书的目录，默认为conf
 constant: 
-  keyServer: 127.0.0.1:5004     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台使用可以不配置
+  keyServer: 127.0.0.1:5004     // 密钥服务的IP和端口(WeBASE-Node-Manager服务或者WeBASE-Sign服务，不同服务支持的接口不同)，如果作为独立控制台以下配置可选
   aesKey: EfdsW23D23d3df43          // aes加密key(16位) 如启用，各互联的子系统的加密key需保持一致
   transMaxWait: 30              // 交易最大等待时间
 ...
