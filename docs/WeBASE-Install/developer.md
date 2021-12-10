@@ -2,7 +2,7 @@
 
 在区块链应用开发阶段建议用户使用快速入门搭建。在快速入门搭建模式，开发者只需要搭建节点和节点前置服务(WeBASE-Front)，就可通过WeBASE-Front的合约编辑器进行合约的编辑，编译，部署，调试。
 
-- WeBASE v2.0.0版本已适配FISCO-BCOS 3.0.0版本，相关文档与代码仓库可跳转至 `[WeBASE-lab分支] <https://webasedoc.readthedocs.io/zh_CN/lab>`_ 查看
+- WeBASE v2.0.0版本已适配FISCO-BCOS 3.0.0版本，相关文档与代码仓库可跳转至 [WeBASE-lab分支](https://webasedoc.readthedocs.io/zh_CN/lab)查看
 
 ### 节点搭建
 
