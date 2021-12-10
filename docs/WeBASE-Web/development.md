@@ -20,7 +20,7 @@ nodejs下载地址：https://nodejs.org/en/download/
 > 执行命令：
 
 ```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+git clone https://github.com/WeBankBlockchain/WeBASE-Web.git
 
 # 若网络问题导致长时间无法下载，可尝试以下命令
 git clone https://gitee.com/WeBank/WeBASE-Web.git
