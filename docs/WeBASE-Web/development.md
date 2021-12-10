@@ -1,6 +1,6 @@
 # WeBASE管理平台开发文档
 
-本代码仅支持FISCO-BCOS 2.0以上版本，支持群组和群组切换。
+本代码仅支持FISCO-BCOS 3.0以上版本，支持群组和群组切换。
 
 
 ## 1、开发环境搭建
@@ -20,10 +20,10 @@ nodejs下载地址：https://nodejs.org/en/download/
 > 执行命令：
 
 ```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+git clone -b lab https://github.com/WeBankBlockchain/WeBASE-Web.git
 
 # 若网络问题导致长时间无法下载，可尝试以下命令
-git clone https://gitee.com/WeBank/WeBASE-Web.git
+git clone -b lab https://gitee.com/WeBank/WeBASE-Web.git
 ```
 
 将代码放在你的工作目录，例如：D：\project

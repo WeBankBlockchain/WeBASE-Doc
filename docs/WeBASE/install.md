@@ -6,8 +6,6 @@
 
 <img src="../../_images/one_click_structure.png" width="700">
 
-<!-- ![](../../images/WeBASE/one_click_struct.png)-->
-
 
 ## 前提条件
 
@@ -96,7 +94,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.3/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v2.0.0-rc1/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -434,7 +432,7 @@ $ grep "ERROR" log/WeBASE-Front.log
 
 如果出现错误日志，根据错误提示或本文档的[常见问题](#q&a)进行排查
 
-启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankBlockchain/WeBASE/issues)或到技术社区共同探讨。
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 
