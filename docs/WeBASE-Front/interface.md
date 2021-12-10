@@ -5307,6 +5307,11 @@ headers:  content-disposition: attachment;filename*=UTF-8''conf.zip
 | 201522  | table key length error    |   用户表的键值长度大于最大值255       |
 | 201523  | crud's param parse json error    |   CRUD方法的入参转Entry/Condition失败，请检查入参       |
 | 201524  | precompiled common transfer to json fail    |   预编译错误码转JSON失败       |
+| 201605  | Build client instance of new group failed   |   创建新群组的Client实例失败       |
+| 201606  | This group only support Liquid contract of wasm   |   当前群组仅支持Liquid合约       |
+| 201607  | This group not connected with front's rpc peers   |   节点前置无法通过已连接的rpc节点访问该群组       |
+| 201665  | Build eventSubscribe instance of new group failed   |   创建新群组的EventSub实例失败       |
+| 201621  | Sealer's weight cannot be null   |   共识节点的权重值不可为空       |
 
 
 
