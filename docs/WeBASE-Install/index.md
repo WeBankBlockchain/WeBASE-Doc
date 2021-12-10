@@ -25,9 +25,6 @@
    ../WeBASE-Install/developer.md
    ../WeBASE/install.md
    ../WeBASE-Install/enterprise.md
-   ../WeBASE-Install/visual_deploy.md
-   ../WeBASE-Install/docker_install.md   
-   ../WeBASE-Install/upgrade.md
    ../WeBASE/mirror.md
 
 ```
