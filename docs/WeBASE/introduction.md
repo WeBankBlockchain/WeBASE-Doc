@@ -56,16 +56,6 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Web/index.html#)
 
-- **交易服务** 
-
-  接收交易请求，缓存交易到数据库中，异步上链，可大幅提升吞吐量，解决区块链的tps瓶颈。
-
-  [Github地址](https://github.com/WeBankBlockchain/WeBASE-Transcation)
-
-  [Gitee地址](https://gitee.com/WeBank/WeBASE-Transcation)
-
-  [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Transcation/index.html#)
-
 - **私钥托管和签名服务** 
   托管用户私钥，提供云端签名。
 
@@ -74,32 +64,3 @@ WeBASE所有子系统独立存在，均可独立部署，独立提供服务。
   [Gitee地址](https://gitee.com/WeBank/WeBASE-Sign)
 
   [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/index.html#)
-
-- **链管理服务子系统** 
-  支持管理多条链和动态群组管理功能，支持国密链、非国密链。
-
-  [Github地址](https://github.com/WeBankBlockchain/WeBASE-Chain-Manager)
-
-  [Gitee地址](https://gitee.com/WeBank/WeBASE-Chain-Manager)
-
-  [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Chain-Manager/index.html#)
-
-- **数据统计服务子系统** 
-  以前置为基础，拉取CPU、内存、IO、群组大小、群组gas、群组网络流量的数据，记录数据库。
-
-  [Github地址](https://github.com/WeBankBlockchain/WeBASE-Stat)
-
-  [Gitee地址](https://gitee.com/WeBank/WeBASE-Stat)
-
-  [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Stat/index.html#)
-
-- **数据监管服务** 
-  以前置为基础，导出区块链数据并解析，提供一个可视化的监管视图。可以查询交易属于哪条链，哪个用户，哪个合约，保证链上数据可查可管。
-
-  [Github地址](https://github.com/WeBankBlockchain/WeBASE-Data)
-
-  [Gitee地址](https://gitee.com/WeBank/WeBASE-Data)
-
-  [说明文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Data/index.html#)
-
-各子系统的技术文档可到[WeBASE子系统文档](https://fintech.webank.com/developer/docs/webase/docs/WeBASE/subsystem.html)中查看
