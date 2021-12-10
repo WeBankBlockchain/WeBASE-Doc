@@ -31,7 +31,7 @@ https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/{r
 
 ## WeBASE文档镜像
 
-WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthedocs.io/zh_CN/latest/index.html](https://webasedoc.readthedocs.io/zh_CN/latest/index.html)，同样提供国内镜像文档[https://fintech.webank.com/developer/docs/webase/index.html](https://fintech.webank.com/developer/docs/webase/index.html)，*由于网站资源更新周期安排，国内镜像文档更新会比readthedocs有所延迟*。
+WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthedocs.io/zh_CN/lab/index.html](https://webasedoc.readthedocs.io/zh_CN/lab/index.html)，同样提供国内镜像文档[https://fintech.webank.com/developer/docs/webase/index.html](https://fintech.webank.com/developer/docs/webase/index.html)，*由于网站资源更新周期安排，国内镜像文档更新会比readthedocs有所延迟*。
 
 每个版本发布会为上个版本的文档打Tag，新版本的文档会合入主干分支，文档由于会持续改进，所以是下个版本发布才打上个版本的tag。readthedocs文档支持下载PDF格式，方便用户使用。
 
