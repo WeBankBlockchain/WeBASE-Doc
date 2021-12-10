@@ -596,11 +596,11 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 v.1.5.0后，通过一键部署的WeBASE可以使用[一键升级](../WeBASE-Install/upgrade.md)中提供的一键脚本对已有的WeBASE进行升级
 
-WeBASE-Front升级至最新版，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankFinTech/WeBASE-Front)进行阅读
+WeBASE-Front升级至最新版，可查看[节点前置升级说明](../WeBASE-Front/upgrade.md)，请结合[WeBASE-Front Changelog](https://github.com/WeBankBlockchain/WeBASE-Front)进行阅读
 
-WeBASE-Node-Manager升级至最新版，可查看[节点管理服务升级说明](../WeBASE-Node-Manager/upgrade.md)，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
+WeBASE-Node-Manager升级至最新版，可查看[节点管理服务升级说明](../WeBASE-Node-Manager/upgrade.md)，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankBlockchain/WeBASE-Node-Manager)进行阅读
 
-WeBASE-Sign升级至最新版，可查看[签名服务升级说明](../WeBASE-Sign/upgrade.md)，请结合[WeBASE-Sign Changelog](https://github.com/WeBankFinTech/WeBASE-Sign)进行阅读
+WeBASE-Sign升级至最新版，可查看[签名服务升级说明](../WeBASE-Sign/upgrade.md)，请结合[WeBASE-Sign Changelog](https://github.com/WeBankBlockchain/WeBASE-Sign)进行阅读
 
 ## 附录
 

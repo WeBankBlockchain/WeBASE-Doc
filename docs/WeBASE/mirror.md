@@ -15,7 +15,7 @@ WeBASE各子系统的Github代码仓库则是`https://github.com/WebankFinTech/`
 
 ### 一键部署与安装包
 <span id="install_package"></span>
-WeBASE每个新版本发布后，会在[WeBASELargefiles](https://github.com/WeBankFinTech/WeBASELargefiles/releases)GitHub的Releases中提供对应的WeBASE一键部署工具和对应安装包。
+WeBASE每个新版本发布后，会在[WeBASELargefiles](https://github.com/WeBankBlockchain/WeBASELargefiles/releases)GitHub的Releases中提供对应的WeBASE一键部署工具和对应安装包。
 
 其中WeBASELargefiles提供webase-deploy一键部署工具（即WeBASE源码中`/deploy`文件夹），以及webase-front.zip, webase-node-mgr.zip, webase-sign.zip, webase-web.zip子系统的安装包。
 
@@ -46,7 +46,7 @@ WeBASE文档使用readthedocs管理，全部开源于[https://webasedoc.readthed
 wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.0/webase-deploy.zip
 
 # 使用github下载
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
+wget https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v1.5.0/webase-deploy.zip
 ```
 
 
