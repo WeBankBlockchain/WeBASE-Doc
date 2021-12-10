@@ -6,8 +6,6 @@
 
 <img src="../../_images/one_click_structure.png" width="700">
 
-<!-- ![](../../images/WeBASE/one_click_struct.png)-->
-
 
 ## 前提条件
 
