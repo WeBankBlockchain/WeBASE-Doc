@@ -2,16 +2,16 @@
 
 ## 支持FISCO-BCOS 3.X.X系列版本
 
-### WeBASE v2.0.0-rc1
+### WeBASE lab-rc1
 
-WeBASE v2.0.0-rc1 版本支持 FISCO-BCOS 3.0.0及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 3.0.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0)版本。
+WeBASE lab-rc1 版本支持 FISCO-BCOS 3.0.0-rc1及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 3.0.0-rc1](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0-rc1)版本。
 
 | WeBASE子系统名称                                             | 配套版本地址                                                 | FISCO-BCOS 2.X.X                                             |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [节点前置服务](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Front/index.html) | [WeBASE-Front Release v2.0.0-rc1](https://github.com/WeBankBlockchain/WeBASE-Front/releases/tag/v2.0.0-rc1) | [FISCO BCOS 3.0.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0) |
-| [节点管理服务](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Node-Manager/index.html) | [WeBASE-Node-Manager Release v2.0.0-rc1](https://github.com/WeBankBlockchain/WeBASE-Node-Manager/releases/tag/v2.0.0-rc1) | [FISCO BCOS 3.0.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0) |
-| [WeBASE管理平台](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Web/index.html) | [WeBASE-Web Release v2.0.0-rc1](https://github.com/WeBankBlockchain/WeBASE-Web/releases/tag/v2.0.0-rc1) | [FISCO BCOS 3.0.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0) |
-| [签名服务](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Sign/index.html) | [WeBASE-Sign Release v2.0.0-rc1](https://github.com/WeBankBlockchain/WeBASE-Sign/releases/tag/v2.0.0-rc1) | [FISCO BCOS 3.0.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0) |
+| [节点前置服务](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Front/index.html) | [WeBASE-Front Release lab-rc1](https://github.com/WeBankBlockchain/WeBASE-Front/releases/tag/lab-rc1) | [FISCO BCOS 3.0.0-rc1](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0-rc1) |
+| [节点管理服务](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Node-Manager/index.html) | [WeBASE-Node-Manager Release lab-rc1](https://github.com/WeBankBlockchain/WeBASE-Node-Manager/releases/tag/lab-rc1) | [FISCO BCOS 3.0.0-rc1](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0-rc1) |
+| [WeBASE管理平台](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Web/index.html) | [WeBASE-Web Release lab-rc1](https://github.com/WeBankBlockchain/WeBASE-Web/releases/tag/lab-rc1) | [FISCO BCOS 3.0.0-rc1](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0-rc1) |
+| [签名服务](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE-Sign/index.html) | [WeBASE-Sign Release lab-rc1](https://github.com/WeBankBlockchain/WeBASE-Sign/releases/tag/lab-rc1) | [FISCO BCOS 3.0.0-rc1](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0-rc1) |
 
 
 
