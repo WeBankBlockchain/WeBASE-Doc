@@ -87,7 +87,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/front/new
 		"groupList": null,
 		"clientVersion": null,
 		"supportVersion": null,
-		"frontVersion": "v2.0.0-rc1",
+		"frontVersion": "lab-rc1",
 		"signVersion": "v2.0.0-lab",
 		"createTime": null,
 		"modifyTime": null,

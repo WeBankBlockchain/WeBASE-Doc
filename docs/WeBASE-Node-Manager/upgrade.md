@@ -12,5 +12,5 @@ WeBASE-Node-Manager升级的必须步骤：
 
 各个版本的具体修改可参考下文
 
-#### v2.0.0-rc1
+#### lab-rc1
 
