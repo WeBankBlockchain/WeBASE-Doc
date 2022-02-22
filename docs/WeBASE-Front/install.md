@@ -4,7 +4,7 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Java | Java 1.8或以上版本 |
+| Java | Oracle JDK 8至14 |
 | FISCO-BCOS | v2.0.0及以上版本 |
 
 **备注：** Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，可参考[JDK配置指引](./appendix.html#jdk)（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
@@ -22,7 +22,7 @@ WeBASE-Front v1.4.2已支持solidity `v0.5.1`和`v0.6.10`
 ## 2. 拉取代码
 执行命令：
 ```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Front.git
+git clone https://github.com/WeBankBlockchain/WeBASE-Front.git
 
 # 若因网络问题导致长时间下载失败，可尝试以下命令
 git clone https://gitee.com/WeBank/WeBASE-Front.git

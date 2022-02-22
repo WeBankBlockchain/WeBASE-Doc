@@ -12,7 +12,7 @@
 代码可以放在/data下面，执行命令：
 
 ```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Web.git
+git clone https://github.com/WeBankBlockchain/WeBASE-Web.git
 
 # 若网络问题导致长时间无法下载，可尝试以下命令
 git clone https://gitee.com/WeBank/WeBASE-Web.git
@@ -53,7 +53,7 @@ WeBASE新增了h5的移动端页面，支持手机浏览器访问。代码和WeB
 
 拉取代码
 ```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Web-Mobile.git
+git clone https://github.com/WeBankBlockchain/WeBASE-Web-Mobile.git
 
 # 若网络问题导致长时间无法下载，可尝试以下命令
 git clone https://gitee.com/WeBank/WeBASE-Web-Mobile.git

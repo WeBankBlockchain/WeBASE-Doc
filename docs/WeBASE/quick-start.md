@@ -46,7 +46,7 @@ contract HelloWorld{
 请参考[交易接口](../WeBASE-Front/interface.html#id235)
 
 从IDE中的输出信息，拷贝合约地址，合约名，方法名等信息，同时获取用户的公钥地址信息，调用交易接口。
-具体代码请参考 [HelloWorld范例](https://github.com/WeBankFinTech/WeBASE/tree/master/quick-start)
+具体代码请参考 [HelloWorld范例](https://github.com/WeBankBlockchain/WeBASE/tree/master/quick-start)
 
 * 主要代码
 

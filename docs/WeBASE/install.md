@@ -3,6 +3,7 @@
 ​	一键部署可以在 **同机** 快速搭建WeBASE管理台环境，方便用户快速体验WeBASE管理平台。
 
 ​	一键部署会搭建：节点（FISCO-BCOS 2.0+）、管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、节点前置子系统（WeBASE-Front）、签名服务（WeBASE-Sign）。其中，节点的搭建是可选的，可以通过配置来选择使用已有链或者搭建新链。一键部署架构如下：
+- WeBASE lab版本已适配FISCO-BCOS 3.0.0版本，相关文档与代码仓库可跳转至 [WeBASE-lab分支](https://webasedoc.readthedocs.io/zh_CN/lab)查看
 
 <img src="../../_images/one_click_structure.png" width="700">
 
@@ -13,7 +14,7 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | JDK 8 至JDK 14 |
+| Java   | Oracle JDK 8 至 14 |
 | MySQL | MySQL-5.6及以上 |
 | Python | Python3.6及以上 |
 | PyMySQL | |
@@ -98,7 +99,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.3/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.4/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -132,10 +133,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.3
-webase.mgr.version=v1.5.3
-webase.sign.version=v1.5.3
-webase.front.version=v1.5.3
+webase.web.version=v1.5.4
+webase.mgr.version=v1.5.4
+webase.sign.version=v1.5.4
+webase.front.version=v1.5.4
 
 #####################################################################
 ## 使用Docker启用Mysql服务，则需要配置以下值
@@ -252,10 +253,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.5.3        ========
-==============    webase-node-mgr version  v1.5.3   ========
-==============    webase-sign version  v1.5.3       ========
-==============    webase-front version  v1.5.3      ========
+==============    webase-web version  v1.5.4        ========
+==============    webase-node-mgr version  v1.5.4   ========
+==============    webase-sign version  v1.5.4       ========
+==============    webase-front version  v1.5.4      ========
 ============================================================
 ```
 
@@ -471,7 +472,7 @@ $ grep "ERROR" log/WeBASE-Front.log
 
 如果出现错误日志，根据错误提示或本文档的[常见问题](#q&a)进行排查
 
-启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankBlockchain/WeBASE/issues)或到技术社区共同探讨。
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 

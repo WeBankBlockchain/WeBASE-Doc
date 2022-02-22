@@ -16,7 +16,7 @@ gitee地址：[https://gitee.com/FISCO-BCOS](https://gitee.com/FISCO-BCOS)
 
 ### WeIdentity 基于区块链的实体身份标识及可信数据交换解决方案
 
-git地址：[https://github.com/WeBankFinTech/WeIdentity](https://github.com/WeBankFinTech/WeIdentity)
+git地址：[https://github.com/WeBankBlockchain/WeIdentity](https://github.com/WeBankBlockchain/WeIdentity)
 
 gitee地址：[https://gitee.com/WeBank/WeIdentity](https://gitee.com/WeBank/WeIdentity)
 
@@ -24,7 +24,7 @@ gitee地址：[https://gitee.com/WeBank/WeIdentity](https://gitee.com/WeBank/WeI
 
 ### WeEvent 基于区块链的分布式事件驱动架构
 
-git地址：[https://github.com/WeBankFinTech/WeEvent](https://github.com/WeBankFinTech/WeEvent)
+git地址：[https://github.com/WeBankBlockchain/WeEvent](https://github.com/WeBankBlockchain/WeEvent)
 
 gitee地址：[https://gitee.com/WeBank/WeEvent](https://gitee.com/WeBank/WeEvent)
 
@@ -32,7 +32,7 @@ gitee地址：[https://gitee.com/WeBank/WeEvent](https://gitee.com/WeBank/WeEven
 
 ### WeBASE 区块链中间件平台
 
-git地址：[https://github.com/WeBankFinTech/WeBASE](https://github.com/WeBankFinTech/WeBASE)
+git地址：[https://github.com/WeBankBlockchain/WeBASE](https://github.com/WeBankBlockchain/WeBASE)
 
 gitee地址：[https://gitee.com/WeBank/WeBASE](https://gitee.com/WeBank/WeBASE)
 
