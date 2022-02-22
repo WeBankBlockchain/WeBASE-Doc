@@ -4,7 +4,7 @@
 
 WeIdentity + WeBASE集成模式
 
-git地址：https://github.com/WeBankFinTech/WeIdentity-Build-Tools
+git地址：https://github.com/WeBankBlockchain/WeIdentity-Build-Tools
 
 文档地址：https://weidentity.readthedocs.io/zh_CN/latest/docs/deploy-via-web.html
 
