@@ -135,7 +135,7 @@ cd webase-deploy
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.5.4
 webase.mgr.version=v1.5.4
-webase.sign.version=v1.5.4
+webase.sign.version=v1.5.3
 webase.front.version=v1.5.4
 
 #####################################################################
@@ -255,7 +255,7 @@ $ python3 deploy.py installAll
 ============================================================
 ==============    webase-web version  v1.5.4        ========
 ==============    webase-node-mgr version  v1.5.4   ========
-==============    webase-sign version  v1.5.4       ========
+==============    webase-sign version  v1.5.3       ========
 ==============    webase-front version  v1.5.4      ========
 ============================================================
 ```
