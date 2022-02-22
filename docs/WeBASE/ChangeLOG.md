@@ -3,6 +3,19 @@
 ## 支持FISCO-BCOS 2.X.X系列版本
 
 
+### WeBASE v1.5.4
+
+WeBASE v1.5.4 版本支持 FISCO-BCOS 2.5.x及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0)版本。
+
+| WeBASE子系统名称                                             | 配套版本地址                                                 | FISCO-BCOS 2.X.X                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [节点前置服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/index.html) | [WeBASE-Front Release v1.5.4](https://github.com/WeBankBlockchain/WeBASE-Front/releases/tag/v1.5.4) | [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0) |
+| [节点管理服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Node-Manager/index.html) | [WeBASE-Node-Manager Release v1.5.4](https://github.com/WeBankBlockchain/WeBASE-Node-Manager/releases/tag/v1.5.4) | [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0) |
+| [WeBASE管理平台](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Web/index.html) | [WeBASE-Web Release v1.5.4](https://github.com/WeBankBlockchain/WeBASE-Web/releases/tag/v1.5.4) | [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0) |
+| [签名服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Sign/index.html) | [WeBASE-Sign Release v1.5.3](https://github.com/WeBankBlockchain/WeBASE-Sign/releases/tag/v1.5.3) | [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0) |
+| [交易服务](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Transaction/index.html) | [WeBASE-Transaction Release v1.4.0](https://github.com/WeBankBlockchain/WeBASE-Transaction/releases/tag/v1.4.0) | [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0) |
+
+
 ### WeBASE v1.5.3
 
 WeBASE v1.5.3 版本支持 FISCO-BCOS 2.5.x及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0)版本。
