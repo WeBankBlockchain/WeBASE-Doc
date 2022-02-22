@@ -173,7 +173,7 @@ node.p2pPort=30300
 # 节点rpc端口
 node.rpcPort=20200
 # FISCO-BCOS版本（v3.0.0或以上版本）
-fisco.version=3.0.0
+fisco.version=v3.0.0-rc1
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 
