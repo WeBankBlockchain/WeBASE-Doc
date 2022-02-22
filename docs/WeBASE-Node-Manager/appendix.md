@@ -117,6 +117,38 @@ Could not find method compileOnly() for arguments [[org.projectlombok:lombok:1.1
 方法1、已安装的Gradle版本过低，升级Gradle版本到4.10以上即可。
 方法2、直接使用命令：`./gradlew build -x test`，如果提示gradlew为非可执行文件，执行`chmod +x ./gradlew`再次执行build操作即可。
 
+##### 全量交易/全量合约/交易审计出现系统异常问题
+
+* 问：在WeBASE页面进入合约管理/合约列表/全量或者交易审计/异常用户界面时，发生`WeBASE-Node-Manager`系统异常：
+
+答：检查日志发现报错是由于数据库版本过高，需要禁用only_full_group_by。
+
+登陆数据库 `mysql -u root -p` 返回:```Enter password: ```
+
+需要输入配置数据库时设置的密码。
+
+然后查询数据库开启的规则:
+
+```
+SELECT @@GLOBAL.sql_mode;
+SELECT @@SESSION.sql_mode;
+```
+返回如下：
+
+```
+STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY
+```
+需要关闭其中的ONLY_FULL_GROUP_BY规则:
+
+```
+set @@GLOBAL.sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+set @@SESSION.sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+
+```
+引号中为之前查询规则结果中除了ONLY_FULL_GROUP_BY以外的规则
+
+若设置时报错，只需将引号中报错的规则删去并重新执行命令即可，然后重启WeBASE便可解决异常。
+
 ##### 启动问题
 
 * 问：启动Node-Manager进程后，后台日志显示`not found any front`：
