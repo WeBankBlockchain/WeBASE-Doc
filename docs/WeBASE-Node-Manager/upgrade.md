@@ -1,6 +1,6 @@
 # 升级说明
 
-WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankFinTech/WeBASE-Node-Manager)进行阅读
+WeBASE-Node-Manager升级的兼容性说明，请结合[WeBASE-Node-Manager Changelog](https://github.com/WeBankBlockchain/WeBASE-Node-Manager)进行阅读
 
 WeBASE-Node-Manager升级的必须步骤：
 1. 备份已有文件或数据，下载新的安装包（可参考[安装包下载](../WeBASE/mirror.html#install_package)）
@@ -527,7 +527,7 @@ mysql -uroot -p123456
 mysql> use webasenodemanager;
 ```
 
-可以参考[WeBASE-Node-Manager v1.2.2](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.2)源码中的webase-dml.sql
+可以参考[WeBASE-Node-Manager v1.2.2](https://github.com/WeBankBlockchain/WeBASE-Node-Manager/releases/tag/v1.2.2)源码中的webase-dml.sql
 
 - 修改`tb_alert_rule`的默认数据：
 
@@ -620,7 +620,7 @@ mysql -uroot -p123456
 mysql> use webasenodemanager;
 ```
 
-可以参考[WeBASE-Node-Manager v1.2.1](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.1)源码中的webase-ddl.sql与webase-dml.sql
+可以参考[WeBASE-Node-Manager v1.2.1](https://github.com/WeBankBlockchain/WeBASE-Node-Manager/releases/tag/v1.2.1)源码中的webase-ddl.sql与webase-dml.sql
 
 - 执行`tb_alert_rule`, `tb_mail_server_config`, `tb_alert_log`，建表操作
 ```
@@ -745,7 +745,7 @@ mysql> alter table tb_method add column contract_type tinyint(4) DEFAULT '0' COM
 
 - 在表`tb_method`插入系统合约的默认数据
 
-可以参考[WeBASE-Node-Manager v1.2.0](https://github.com/WeBankFinTech/WeBASE-Node-Manager/releases/tag/v1.2.0)源码中的webase-dml.sql
+可以参考[WeBASE-Node-Manager v1.2.0](https://github.com/WeBankBlockchain/WeBASE-Node-Manager/releases/tag/v1.2.0)源码中的webase-dml.sql
 
 ```
 -- (system config info 0x1000) setValueByKey
