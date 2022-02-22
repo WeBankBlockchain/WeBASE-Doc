@@ -672,7 +672,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0x69ced0162a0c
 ### 3.1 新增帐号
 
 
-#### 3.1.1 传输协议规范
+#### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/account/accountInfo**
@@ -680,7 +680,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0x69ced0162a0c
 * 请求头：Content-type: application/json
 * 返回格式：JSON
 
-#### 3.1.2 请求参数
+#### 请求参数
 
 ***1）入参表***
 
@@ -688,7 +688,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/transaction/transInfo/1/0x69ced0162a0c
 |------|-------------|---------------|--------|-------------------------------|
 | 1    | account       | String        | 是     | 帐号名称                   |
 | 2    | accountPwd    | String        | 是     | 登录密码（sha256）         |
-| 3    | roleId        | int           | 是     | 所属角色                   |
+| 3    | roleId        | int           | 是     | 所属角色：100001-管理员，100002-普通用户，100003-开发者                   |
 
 
 ***2）入参示例***
