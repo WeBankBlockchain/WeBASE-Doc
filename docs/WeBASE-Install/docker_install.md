@@ -521,7 +521,7 @@ $ grep "ERROR" log/WeBASE-Front.log
 
 如果出现错误日志，根据错误提示或本文档的[常见问题](#q&a)进行排查
 
-启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankFinTech/WeBASE/issues)或到技术社区共同探讨。
+启动失败或无法使用时，欢迎到WeBASE[提交Issue](https://github.com/WeBankBlockchain/WeBASE/issues)或到技术社区共同探讨。
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 

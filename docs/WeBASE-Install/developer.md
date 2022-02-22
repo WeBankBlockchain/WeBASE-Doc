@@ -2,6 +2,8 @@
 
 在区块链应用开发阶段建议用户使用快速入门搭建。在快速入门搭建模式，开发者只需要搭建节点和节点前置服务(WeBASE-Front)，就可通过WeBASE-Front的合约编辑器进行合约的编辑，编译，部署，调试。
 
+- WeBASE lab版本已适配FISCO-BCOS 3.0.0版本，相关文档与代码仓库可跳转至 [WeBASE-lab分支](https://webasedoc.readthedocs.io/zh_CN/lab)查看
+
 ### 节点搭建
 
 节点搭建的方法建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
@@ -131,7 +133,7 @@ $ grep -B 3 "main run success" log/WeBASE-Front.log
 2020-12-09 15:47:25.383 [main] INFO  Application() - main run success...
 ```
 
-启动失败或无法使用时，欢迎到WeBASE-Front提交[Issue](https://github.com/WeBankFinTech/WeBASE-Front/issues)或到技术社区共同探讨
+启动失败或无法使用时，欢迎到WeBASE-Front提交[Issue](https://github.com/WeBankBlockchain/WeBASE-Front/issues)或到技术社区共同探讨
 - 提交Issue或讨论问题时，可以在issue中配上自己的**环境配置，操作步骤，错误现象，错误日志**等信息，方便社区用户快速定位问题
 
 
@@ -159,5 +161,5 @@ WeBASE提供结合FISCO BCOS节点与WeBASE-Front的Docker镜像，通过镜像�
 - 启动容器：需要将生成的`nodes`目录的node0的配置、SDK证书挂载到容器中，并将容器内的日志挂载到`/nodes/127.0.0.1/node0/front-log`中
     - 启动命令：`docker run -d -v /nodes/127.0.0.1/node0:/data -v /nodes/127.0.0.1/sdk:/data/sdk -v /nodes/127.0.0.1/node0/front-log:/front/log --network=host -w=/data fiscoorg/fisco-webase:v2.7.2`
 
-WeBASE的Docker镜像的使用详情可以参考[front镜像模式使用说明](https://github.com/WeBankFinTech/WeBASE-Docker/blob/dev-deploy/docker/front-install.md)
+WeBASE的Docker镜像的使用详情可以参考[front镜像模式使用说明](https://github.com/WeBankBlockchain/WeBASE-Docker/blob/dev-deploy/docker/front-install.md)
 
