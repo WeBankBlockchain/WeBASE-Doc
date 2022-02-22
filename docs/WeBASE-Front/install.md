@@ -4,7 +4,7 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Java | Java 1.8或以上版本 |
+| Java | Oracle JDK 8至14 |
 | FISCO-BCOS | v2.0.0及以上版本 |
 
 **备注：** Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，可参考[JDK配置指引](./appendix.html#jdk)（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
