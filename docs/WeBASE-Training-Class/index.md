@@ -1,6 +1,6 @@
 # WeBASE实训课程案例
 
-结合智能合约的实训课程案例集，可以通过[WeBASE-Front](../WeBASE-Install/developer.html)与[WeBASE管理平台](../WeBASE-Console-Suit/index.html)中进行合约编译部署、发起交易等。
+WeBASE智能合约的实训课程案例集，可结合WeBASE完成实训课程与题目设计。
 
 
 ```eval_rst
