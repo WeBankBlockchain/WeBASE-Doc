@@ -4,7 +4,7 @@
 
 | 环境      | 版本                      |
 | --------- | ------------------------- |
-| Java      | JDK8或以上版本            |
+| Java      | Oracle JDK 8至14            |
 | 数据库    | MySQL-5.6或以上版本       |
 | ZooKeeper | ZooKeeper-3.6.0或以上版本 |
 
@@ -35,7 +35,7 @@ WeBASE-Transaction v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-doc
 执行命令：
 
 ```shell
-git clone https://github.com/WeBankFinTech/WeBASE-Transaction.git
+git clone https://github.com/WeBankBlockchain/WeBASE-Transaction.git
 
 # 若因网络问题导致长时间下载失败，可尝试以下命令
 git clone https://gitee.com/WeBank/WeBASE-Transaction.git
