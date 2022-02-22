@@ -56,7 +56,7 @@ function set() public ...
 
 ## 参考答案：
 
-#### 1） 智能合约：
+#### 1）智能合约：
 - 要求constructor构造函数初始化string变量
 - 要求get方法是查询交易view/constant/pure中的一种，返回string变量的值
 - 要求set方法设置string变量
