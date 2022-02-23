@@ -14,7 +14,7 @@
 
 | 环境   | 版本                   |
 | ------ | ---------------------- |
-| Java   | JDK 8 至JDK 14 |
+| Java   | Oracle JDK 8 至 14 |
 | MySQL | MySQL-5.6及以上 |
 | Python | Python3.6及以上 |
 | PyMySQL | |
@@ -99,7 +99,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.3/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.4/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -133,10 +133,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.3
-webase.mgr.version=v1.5.3
+webase.web.version=v1.5.4
+webase.mgr.version=v1.5.4
 webase.sign.version=v1.5.3
-webase.front.version=v1.5.3
+webase.front.version=v1.5.4
 
 #####################################################################
 ## 使用Docker启用Mysql服务，则需要配置以下值
@@ -253,10 +253,10 @@ $ python3 deploy.py installAll
 ============================================================
 ==============      deploy  has completed     ==============
 ============================================================
-==============    webase-web version  v1.5.3        ========
-==============    webase-node-mgr version  v1.5.3   ========
+==============    webase-web version  v1.5.4        ========
+==============    webase-node-mgr version  v1.5.4   ========
 ==============    webase-sign version  v1.5.3       ========
-==============    webase-front version  v1.5.3      ========
+==============    webase-front version  v1.5.4      ========
 ============================================================
 ```
 
