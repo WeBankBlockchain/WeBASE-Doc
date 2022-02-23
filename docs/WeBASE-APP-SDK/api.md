@@ -268,7 +268,7 @@ http://localhost:5001/WeBASE-Node-Manager/api/roleList?timestamp=1614928857832&a
 | ---- | ---------- | ------ | ------ | ------------------ |
 | 1    | account    | String | 否     | 帐号名称           |
 | 2    | accountPwd | String | 否     | 登录密码（sha256） |
-| 3    | roleId     | int    | 否     | 所属角色编号       |
+| 3    | roleId     | int    | 否     | 所属角色：100001-管理员，100002-普通用户，100003-开发者       |
 | 4    | email      | String | 否     | email地址          |
 
 

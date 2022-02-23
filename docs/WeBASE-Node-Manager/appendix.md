@@ -251,6 +251,7 @@ v1.5.2后，节点管理服务搭配了swagger，可用于直接调试接口，�
 | constant.statBlockFixedDelay | 5000 | 区块监控数据的频率（ms）  |
 | constant.statBlockPageSize | 10 | 区块监控数据拉取的单次请求量  |
 | constant.enableExternalFromBlock | true  | 是否启用全量用户与全量合约采集  |
+| constant.permitUrlArray | /account/login,/account/pictureCheckCode  | 允许绕过鉴权的API URL  |
 | sdk.encryptType | 0 |  sdk的加密类型，0：标准，1：国密；需要与链和Front的类型一致  |
 | executor |   |  异步拉取区块、刷新群组状态、监控群组数据的线程池配置  |
 | executor.corePoolSize | 3 |  异步任务的核心线程数  |

@@ -6,7 +6,7 @@ WeBASE 技术文档
 
 WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应用和FISCO BCOS节点之间搭建的一套通用组件。
 
-- WeBASE lab版本已适配FISCO-BCOS 3.0.0版本，相关文档与代码仓库可跳转至 `[WeBASE-lab分支] <https://webasedoc.readthedocs.io/zh_CN/lab>`_ 查看
+- WeBASE lab版本已适配FISCO-BCOS 3.0.0版本，WeBASE 1.x版本与lab版本会持续更新维护。本技术文档适用于WeBASE 1.x版本，lab版技术文档可跳转至 `[WeBASE-lab分支] <https://webasedoc.readthedocs.io/zh_CN/lab>`_ 查看
 
 .. container:: row 
    
@@ -147,6 +147,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
    docs/WeBASE-APP-SDK/index.md
    docs/WeBASE-Contract-Warehouse/index.md
    docs/WeBASE-Training-Plugin-Plan/index.md
+   docs/WeBASE-Training-Class/index.md
    docs/WeBASE/quick-start.md
 
 .. toctree::
