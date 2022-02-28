@@ -10,6 +10,12 @@ WeBASE-Front升级的必须步骤：
 
 各个版本的具体修改可参考下文
 
+#### v1.5.4
+- 优化合约仓库加载方式，通过conf/warehouse目录中的.json文件加载合约模板
+- 优化创建随机私钥所调用的JAVASDK的keyFactory问题
+- 修复查询event获取合约时重复的问题
+
+
 #### v1.5.3
 - 新增节点前置Docker镜像，`webasepro/webase-front:v1.5.3`
 - 合约仓库新增代理合约模板、溯源合约模板
