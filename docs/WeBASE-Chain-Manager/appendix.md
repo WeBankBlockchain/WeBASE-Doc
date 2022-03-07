@@ -62,7 +62,7 @@ unzip -d /software/ gradleXXX.zip
 （2）配置环境变量
 
 ```shell
-export GRADLE_HOME=/software/gradle-4.9
+export GRADLE_HOME=/software/gradle-4.10
 export PATH=$GRADLE_HOME/bin:$PATH
 ```
 
