@@ -29,12 +29,12 @@ cd WeBASE-Sign
 
 ## 3. 编译代码
 
-方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+方式一：如果服务器已安装Gradle，且版本为radle-4.10至Gradle-6.x版本
 
 ```shell
 gradle build -x test
 ```
-方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是radle-4.10至Gradle-6.x版本，使用gradlew编译
 ```shell
 chmod +x ./gradlew && ./gradlew build -x test
 ```
