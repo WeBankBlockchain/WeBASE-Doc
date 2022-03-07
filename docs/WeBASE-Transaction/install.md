@@ -50,7 +50,8 @@ cd WeBASE-Transaction
 ## 3. 编译代码
 
 使用以下方式编译构建，如果出现问题可以查看 [常见问题解答](./appendix.html#id9)</br>
-方式一：如果服务器已安装Gradle，或者版本不是gradle-4.10至gradle-6.x版本
+
+方式一：如果服务器已安装Gradle，且版本为gradle-4.10至gradle-6.x版本
 
 ```shell
 gradle build -x test
