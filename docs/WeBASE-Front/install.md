@@ -44,7 +44,7 @@ cd WeBASE-Front
 gradle build -x test
 ```
 
-方式二：如果服务器未安装Gradle，或者版本不是radle-4.10至Gradle-6.x版本，可使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10至Gradle-6.x版本，可使用gradlew编译
 
 ```shell
 chmod +x ./gradlew && ./gradlew build -x test
