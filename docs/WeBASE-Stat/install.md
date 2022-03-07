@@ -32,14 +32,14 @@ cd WeBASE-Stat
 
 ## 4. 编译代码
 
-方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上。
+方式一：如果服务器已安装Gradle，且版本为gradle-4.10或以上。
 *  安装gradle可以参考 [gradle安装示例](./appendix.html#gradle)
 
 ```shell
 gradle build -x test
 ```
 
-方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10或以上，使用gradlew编译
 
 ```shell
 chmod +x ./gradlew && ./gradlew build -x test
