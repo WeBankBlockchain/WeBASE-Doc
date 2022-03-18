@@ -4,7 +4,7 @@
 
 | 环境   | 版本                |
 | ------ | ------------------- |
-| Java   | Java1.8或以上版本    |
+| Java   | JDK8至14版本    |
 | 数据库 | MySQL-5.6或以上版本 |
 
 备注：安装说明请参看 [附录-1](./appendix.html#id2)。
@@ -29,12 +29,12 @@ cd WeBASE-Sign
 
 ## 3. 编译代码
 
-方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+方式一：如果服务器已安装Gradle，且版本为gradle-4.10至gradle-6.x版本
 
 ```shell
 gradle build -x test
 ```
-方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10至gradle-6.x版本，使用gradlew编译
 ```shell
 chmod +x ./gradlew && ./gradlew build -x test
 ```

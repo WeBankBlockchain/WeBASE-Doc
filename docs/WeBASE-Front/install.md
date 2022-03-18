@@ -4,7 +4,7 @@
 
 | 依赖软件 | 支持版本 |
 | :-: | :-: |
-| Java | Java 1.8或以上版本 |
+| Java | JDK 8 至 14 |
 | FISCO-BCOS | v2.0.0及以上版本 |
 
 **备注：** Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，可参考[JDK配置指引](./appendix.html#jdk)（CentOS的yum仓库的OpenJDK缺少JCE(Java Cryptography Extension)，导致Web3SDK无法正常连接区块链节点）
@@ -39,13 +39,13 @@ git checkout lab
 
 使用以下方式编译构建，如果出现问题可以查看 [常见问题解答](./appendix.html#id6) ：
 
-方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+方式一：如果服务器已安装Gradle，且版本为gradle-4.10至gradle-6.x版本
 
 ```shell
 gradle build -x test
 ```
 
-方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10至gradle-6.x版本，使用gradlew编译
 
 ```shell
 chmod +x ./gradlew && ./gradlew build -x test
