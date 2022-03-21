@@ -18,7 +18,7 @@
 
 1. 下载安装包
     ```shell
-    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/lab-rc1/webase-front.zip
+    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/lab-rc2/webase-front.zip
     ```
 
 
