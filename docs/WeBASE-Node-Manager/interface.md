@@ -4974,13 +4974,13 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/city/list
 ### 10.1 查询角色列表
 
 
-### 10.1.1 传输协议规范
+### 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**role/roleList**
 * 请求方式：GET
 * 返回格式：JSON
 
-### 10.1.2 请求参数
+### 请求参数
 
 ***1）入参表***
 
@@ -4997,7 +4997,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/node/city/list
 http://127.0.0.1:5001/WeBASE-Node-Manager/role/roleList?groupId=300001&pageNumber=&pageSize=&roleId=&roleName=
 ```
 
-#### 10.1.3 返回参数 
+#### 返回参数 
 
 ***1）出参表***
 
