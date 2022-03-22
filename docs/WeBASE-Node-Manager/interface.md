@@ -1610,6 +1610,8 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 | 9    | user              | String | 是     | WeBASE的私钥用户的地址                                |
 | 10   | account           | String | 是     | 关联账户                                              |
 | 11   | constructorParams | List   | 否     | 构造函数入参，根据合约构造函数决定                        |
+| 12 | isWasm | Boolean | 是 | 是否为liquid合约，默认为false |
+| 13   | contractAddress | String   | 否     | 合约地址，如果isWasm为true，则合约地址不能为空                        |
 
 
 ***2）入参示例***
@@ -1742,6 +1744,7 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 | 9    | useCns          | bool   | 否     | 是否使用cns调用，默认为false                     |
 | 10   | cnsName         | String | 否     | CNS名称，useCns为true时不能为空     |
 | 11   | version         | String | 否     | CNS合约版本，useCns为true时不能为空 |
+| 12 | isWasm | Boolean | 是 | 是否为liquid合约，默认为false |
 
 ***2）入参示例***
 
@@ -1926,6 +1929,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/findByPartOfBytecodeBin
 | 8    | bytecodeBin    | String | 否     | 合约编译后生成的bytecodeBin，可用于合约部署 |
 | 9    | account        | String | 否     | 关联账户，新建时不能为空                    |
 | 10 | contractAddress | String | 否 | 合约地址 |
+| 11 | isWasm | Boolean | 是 | 是否为liquid合约，默认为false |
 
 ***2）入参示例***
 
@@ -3051,6 +3055,258 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/listManager/group/0xab9F30F98
 {
     "code": 202542,
     "message": "No private key of contract manager address in webase"
+}
+```
+
+
+### 5.23. 检测是否已配置Liquid环境
+
+通过cargo命令和liquid命令，检测WeBASE-Front所在主机是否已配置Liquid环境
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/liquid/check/{frontId}**
+* 请求方式：GET
+* 返回格式：JSON
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | --------------- | -------- | ------------ | -------- | -------- |
+| 1        | 前置编号   | frontId        | Integer  |            | 是       | 检测该前置所在主机是否配置了liquid环境 |
+
+**2）数据格式** 
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/liquid/check/10001
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+
+**2）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success"
+}
+```
+
+
+### 5.24. 编译liquid合约
+
+传入合约源码、编译liquid合约，并返回编译得到的abi和bin。
+
+由于liquid合约类似于rust编译，耗时比solidity更长（3分钟左右），因此接口返回状态为“编译中”时，后台将异步执行编译任务，通过轮询`/contract/liquid/compile/check`接口可以获取最新的编译结果
+
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/liquid/compile**
+* 请求方式：POST
+* 返回格式：JSON
+
+#### 请求参数
+
+| 序号 | 输入参数       | 类型   | 必填 | 备注                                        |
+| ---- | -------------- | ------ | ------ | ------------------------------------------- |
+| 1    | groupId        | String | 是     | 所属群组编号                                |
+| 2    | contractId     | int    | 是     | 合约编号，非空，用于编译完成后后台更新合约ABI和BIN  |
+| 3    | contractName   | String | 是     | 合约名称                                    |
+| 4    | contractPath   | String | 是     | 合约所在目录                                |
+| 5    | contractSource | String | 是     | 合约源码的base64                            |
+| 6    | account        | String | 否     | 关联账户，新建时不能为空                    |
+| 7 | isWasm | Boolean | 是 | 是否为liquid合约，默认为false |
+| 8 | frontId | int | 是 | 前置编号，用于指定通过哪个前置进行liquid编译 |
+
+***2）入参示例***
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/liquid/compile
+```
+
+```
+{
+    "groupId": "group0",
+	"contractName": "LiquidHelloWorld",
+	"contractPath": "/",
+	"contractSource": "IyFbY2ZnX2F0dHIobm90KGZlYXR1cmUgPSAic3RkIiksIG5vX3N0ZCldCgp1c2UgbGlxdWlkOjpzdG9yYWdlOwp1c2UgbGlxdWlkX2xhbmcgYXMgbGlxdWlkOwoKI1tsaXF1aWQ6OmNvbnRyYWN0XQptb2QgaGVsbG9fd29ybGQgewogICAgdXNlIHN1cGVyOjoqOwoKICAgICNbbGlxdWlkKHN0b3JhZ2UpXQogICAgc3RydWN0IEhlbGxvV29ybGQgewogICAgICAgIG5hbWU6IHN0b3JhZ2U6OlZhbHVlPFN0cmluZz4sCiAgICB9CgogICAgI1tsaXF1aWQobWV0aG9kcyldCiAgICBpbXBsIEhlbGxvV29ybGQgewogICAgICAgIHB1YiBmbiBuZXcoJm11dCBzZWxmKSB7CiAgICAgICAgICAgIHNlbGYubmFtZS5pbml0aWFsaXplKFN0cmluZzo6ZnJvbSgiQWxpY2UiKSk7CiAgICAgICAgfQoKICAgICAgICBwdWIgZm4gZ2V0KCZzZWxmKSAtPiBTdHJpbmcgewogICAgICAgICAgICBzZWxmLm5hbWUuY2xvbmUoKQogICAgICAgIH0KCiAgICAgICAgcHViIGZuIHNldCgmbXV0IHNlbGYsIG5hbWU6IFN0cmluZykgewogICAgICAgICAgICBzZWxmLm5hbWUuc2V0KG5hbWUpCiAgICAgICAgfQogICAgfQoKICAgICNbY2ZnKHRlc3QpXQogICAgbW9kIHRlc3RzIHsKICAgICAgICB1c2Ugc3VwZXI6Oio7CgogICAgICAgICNbdGVzdF0KICAgICAgICBmbiBnZXRfd29ya3MoKSB7CiAgICAgICAgICAgIGxldCBjb250cmFjdCA9IEhlbGxvV29ybGQ6Om5ldygpOwogICAgICAgICAgICBhc3NlcnRfZXEhKGNvbnRyYWN0LmdldCgpLCAiQWxpY2UiKTsKICAgICAgICB9CgogICAgICAgICNbdGVzdF0KICAgICAgICBmbiBzZXRfd29ya3MoKSB7CiAgICAgICAgICAgIGxldCBtdXQgY29udHJhY3QgPSBIZWxsb1dvcmxkOjpuZXcoKTsKCiAgICAgICAgICAgIGxldCBuZXdfbmFtZSA9IFN0cmluZzo6ZnJvbSgiQm9iIik7CiAgICAgICAgICAgIGNvbnRyYWN0LnNldChuZXdfbmFtZS5jbG9uZSgpKTsKICAgICAgICAgICAgYXNzZXJ0X2VxIShjb250cmFjdC5nZXQoKSwgIkJvYiIpOwogICAgICAgIH0KICAgIH0KfQ==",
+	"contractAbi": "[{\"inputs\":[],\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"type\":\"string\"}],\"type\":\"function\"},{\"conflictFields\":[{\"kind\":0,\"path\":[],\"read_only\":false,\"slot\":0}],\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\"}]",
+    "isWasm": true,
+    "contractId": 1,
+    "account": "admin",
+    "frontId": 10001
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+| 3        | 返回数据 | data            | List     | 否       |                       |
+| 3.1      | 群组编号 | groupId         | Integer  | 是       |                       |
+| 3.2      | 合约路径 | contractPath    | String   | 是       |  默认空，代表了"/"路径                     |
+| 3.3      | 合约名   | contractName    | String   | 是       |                       |
+| 3.4      | 编译状态    | status         | Integer   | 是       |  1-编译中，2-编译成功，3-编译失败，4-编译已重置                     |
+| 3.5      | 合约Abi  | abi         | String   | 是       |   编译成功时为非空                    |
+| 3.6      | 合约bytecode-bin | bin | String   | 是       |   编译成功时为非空，用于部署合约                    |
+| 3.7      | 编译描述  | description     | String   | 是       |   编译失败时，错误原因将记录在此字段                    |
+| 3.8      | 修改时间 | modifyTime      | LocalDatetime   | 是       |                       |
+| 3.9      | 创建时间 | createTime      | LocalDatetime   | 是       |                       |
+
+**2）数据格式**
+
+状态为编译中时： （编译中时，后台将异步执行编译任务，通过轮询`/contract/liquid/compile/check`接口可以获取最新的编译结果）
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "", 
+    "contractName": "Hello",
+    "status": "1",
+    "bin": null,
+    "abi": null,
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
+状态为编译成功时（后台将自动更新合约IDE中的合约内容，包括ABI，BIN等）：
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "", 
+    "contractName": "Hello",
+    "status": "2",
+    "bin": "",  //bin过长，此处略
+    "abi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
+
+### 5.25. 查询liquid合约编译进度
+
+根据群组ID，合约路径，合约名获取liquid合约的编译状态
+
+#### 传输协议规范
+
+* 网络传输协议：使用HTTP协议
+* 请求地址：**/contract/liquid/compile/check**
+* 请求方式：POST
+* 返回格式：JSON
+
+
+#### 请求参数
+
+| 序号 | 输入参数       | 类型   | 必填 | 备注                                        |
+| ---- | -------------- | ------ | ------ | ------------------------------------------- |
+| 1    | groupId        | String | 是     | 所属群组编号                                |
+| 2    | contractId     | int    | 是     | 合约编号，非空，用于编译完成后后台更新合约ABI和BIN  |
+| 3    | contractName   | String | 是     | 合约名称                                    |
+| 4    | contractPath   | String | 是     | 合约所在目录                                |
+| 5    | contractSource | String | 是     | 合约源码的base64                            |
+| 6    | account        | String | 是     | 关联账户，新建时不能为空                    |
+| 7 | isWasm | Boolean | 是 | 是否为liquid合约，默认为false |
+| 8 | frontId | int | 是 | 前置编号，用于指定通过哪个前置进行liquid编译 |
+
+***2）入参示例***
+
+```
+http://127.0.0.1:5001/WeBASE-Node-Manager/contract/liquid/compile/check
+```
+
+```
+{
+    "groupId": "group0",
+	"contractName": "LiquidHelloWorld",
+	"contractPath": "/",
+	"contractSource": "IyFbY2ZnX2F0dHIobm90KGZlYXR1cmUgPSAic3RkIiksIG5vX3N0ZCldCgp1c2UgbGlxdWlkOjpzdG9yYWdlOwp1c2UgbGlxdWlkX2xhbmcgYXMgbGlxdWlkOwoKI1tsaXF1aWQ6OmNvbnRyYWN0XQptb2QgaGVsbG9fd29ybGQgewogICAgdXNlIHN1cGVyOjoqOwoKICAgICNbbGlxdWlkKHN0b3JhZ2UpXQogICAgc3RydWN0IEhlbGxvV29ybGQgewogICAgICAgIG5hbWU6IHN0b3JhZ2U6OlZhbHVlPFN0cmluZz4sCiAgICB9CgogICAgI1tsaXF1aWQobWV0aG9kcyldCiAgICBpbXBsIEhlbGxvV29ybGQgewogICAgICAgIHB1YiBmbiBuZXcoJm11dCBzZWxmKSB7CiAgICAgICAgICAgIHNlbGYubmFtZS5pbml0aWFsaXplKFN0cmluZzo6ZnJvbSgiQWxpY2UiKSk7CiAgICAgICAgfQoKICAgICAgICBwdWIgZm4gZ2V0KCZzZWxmKSAtPiBTdHJpbmcgewogICAgICAgICAgICBzZWxmLm5hbWUuY2xvbmUoKQogICAgICAgIH0KCiAgICAgICAgcHViIGZuIHNldCgmbXV0IHNlbGYsIG5hbWU6IFN0cmluZykgewogICAgICAgICAgICBzZWxmLm5hbWUuc2V0KG5hbWUpCiAgICAgICAgfQogICAgfQoKICAgICNbY2ZnKHRlc3QpXQogICAgbW9kIHRlc3RzIHsKICAgICAgICB1c2Ugc3VwZXI6Oio7CgogICAgICAgICNbdGVzdF0KICAgICAgICBmbiBnZXRfd29ya3MoKSB7CiAgICAgICAgICAgIGxldCBjb250cmFjdCA9IEhlbGxvV29ybGQ6Om5ldygpOwogICAgICAgICAgICBhc3NlcnRfZXEhKGNvbnRyYWN0LmdldCgpLCAiQWxpY2UiKTsKICAgICAgICB9CgogICAgICAgICNbdGVzdF0KICAgICAgICBmbiBzZXRfd29ya3MoKSB7CiAgICAgICAgICAgIGxldCBtdXQgY29udHJhY3QgPSBIZWxsb1dvcmxkOjpuZXcoKTsKCiAgICAgICAgICAgIGxldCBuZXdfbmFtZSA9IFN0cmluZzo6ZnJvbSgiQm9iIik7CiAgICAgICAgICAgIGNvbnRyYWN0LnNldChuZXdfbmFtZS5jbG9uZSgpKTsKICAgICAgICAgICAgYXNzZXJ0X2VxIShjb250cmFjdC5nZXQoKSwgIkJvYiIpOwogICAgICAgIH0KICAgIH0KfQ==",
+	"contractAbi": "[{\"inputs\":[],\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"type\":\"string\"}],\"type\":\"function\"},{\"conflictFields\":[{\"kind\":0,\"path\":[],\"read_only\":false,\"slot\":0}],\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\"}]",
+    "isWasm": true,
+    "contractId": 1,
+    "account": "admin",
+    "contractAddress": "string",
+    "frontId": 10001
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+| 3        | 返回数据 | data            | List     | 否       |                       |
+| 3.1      | 群组编号 | groupId         | Integer  | 是       |                       |
+| 3.2      | 合约路径 | contractPath    | String   | 是       |  默认空，代表了"/"路径                     |
+| 3.3      | 合约名   | contractName    | String   | 是       |                       |
+| 3.4      | 编译状态    | status         | Integer   | 是       |  1-编译中，2-编译成功，3-编译失败，4-编译已重置                     |
+| 3.5      | 合约Abi  | abi         | String   | 是       |   编译成功时为非空                    |
+| 3.6      | 合约bytecode-bin | bin | String   | 是       |   编译成功时为非空，用于部署合约                    |
+| 3.7      | 编译描述  | description     | String   | 是       |   编译失败时，错误原因将记录在此字段                    |
+| 3.8      | 修改时间 | modifyTime      | LocalDatetime   | 是       |                       |
+| 3.9      | 创建时间 | createTime      | LocalDatetime   | 是       |                       |
+
+**2）数据格式**
+
+状态为编译中时，轮询当前接口直到状态为编译成功、编译失败，status=1：
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "/", 
+    "contractName": "Hello",
+    "status": "1",
+    "bin": null,
+    "abi": null,
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
+状态为编译成功时，status=2（后台将自动更新合约IDE中的合约内容，包括ABI，BIN等）：
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "/", 
+    "contractName": "Hello",
+    "status": "2",
+    "bin": "",  //bin过长，此处略
+    "abi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
 }
 ```
 
