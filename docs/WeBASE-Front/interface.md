@@ -7367,9 +7367,9 @@ HTTP POST
 | **序号** | **中文**       | **参数名**      | **类型** | **最大长度** | **必填** | **说明**                                       |
 | -------- | -------------- | --------------- | -------- | ------------ | -------- | ---------------------------------------------- |
 |  1        | 解析类型    | decodeType        | int      |              | 是       |   1-解析input，2-解析output                        |
-|  2        | 返回类型    | returnType        | int      |              | 否       |   默认是1，1-实体类类型(`InputAndOutputResult.java`)，2-Json格式                        |
-|  3        | 交易输入    | input        | String      |              | 否       |   交易输入值                        |
-|  4        | 交易输出    | output        | String      |              | 否       |   交易输出值                        |
+|  2        | 方法名    | methodName        | String      |              | 是       |   input或output对应的合约方法名，如set, newEvidence                        |
+|  3        | 交易输入    | input        | String      |              | 是       |   交易输入值                        |
+|  4        | 交易输出    | output        | String      |              | 是       |   交易输出值                        |
 |  5        | 合约ABI    | abiList        | List<Object>|              | 是      |   合约ABI列表                        |
 
 **2）数据格式**
@@ -7381,11 +7381,11 @@ http://localhost:5002/WeBASE-Front/tool/decode
 解析output
 ```
 {
-    "abiList": [],
-    "decodeType": 2,
-    "input": "0x5d0d1f0a00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000c0010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000001770000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000",
-    "output": "0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001",
-    "returnType": 2
+  "abiList": [{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getSigner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getSigners","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getSignersSize","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"verify","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"evi","type":"string"}],"name":"newEvidence","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"addSignatures","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getEvidence","outputs":[{"name":"","type":"string"},{"name":"","type":"address[]"},{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"evidenceSigners","type":"address[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"addr","type":"address"}],"name":"newEvidenceEvent","type":"event"}],
+  "decodeType": 1,
+  "input": "0xa12bb1d8000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000097465737431323131320000000000000000000000000000000000000000000000",
+  "methodName": "newEvidence",
+  "output": "0x000000000000000000000000e9d0a146298b2454a26f43adb81f800ccf98b947"
 }
 ```
 
@@ -7396,43 +7396,38 @@ http://localhost:5002/WeBASE-Front/tool/decode
 
 a、成功：
 
-解析output，返回json
+解析output，返回newEvidence方法的返回值
 ```
 {
-    "function": "set(uint256,uint256,bool,string,bytes1,bytes)",
-    "methodID": "0x5d0d1f0a",
-    "result": [{
-        "name": "",
-        "type": "uint256",
-        "data": 1
-    }, {
-        "name": "",
-        "type": "uint256",
-        "data": 1
-    }]
-}
-```
-
-解析input，返回实体
-```
-
-{
-  "function": "set(uint256,uint256,bool,string,bytes1,bytes)",
-  "methodID": "0x5d0d1f0a",
-  "result": [
+  "[0xe9d0a146298b2454a26f43adb81f800ccf98b947]": [
     {
-      "name": "n1",
-      "type": "uint256",
-      "data": 1
-    },
-    {
-      "name": "n6",
-      "type": "bytes",
-      "data": ""
+      "name": "",
+      "type": "VALUE",
+      "valueType": "ADDRESS",
+      "numericValue": null,
+      "bytesValue": null,
+      "bytesLength": 0,
+      "addressValue": {
+        "value": "0xe9d0a146298b2454a26f43adb81f800ccf98b947",
+        "typeAsString": "address"
+      },
+      "boolValue": null,
+      "dynamicBytesValue": null,
+      "stringValue": null,
+      "listType": null,
+      "listValues": null,
+      "listLength": 0,
+      "listValueType": null,
+      "structFields": null,
+      "dynamic": false
     }
   ]
 }
+```
 
+解析input，返回input的输入值
+```
+test12112
 ```
 
 
