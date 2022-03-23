@@ -22,10 +22,9 @@ WeBASE-APP-SDK是应用集成SDK，提供调用WeBASE-Node-Manager的接口，�
 ```java
 repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 dependencies {
-    implementation 'com.webank:webase-app-sdk:1.5.1-SNAPSHOT'
+    implementation 'com.webank:webase-app-sdk:1.5.1'
     implementation 'org.bouncycastle:bcprov-jdk15on:1.67'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
