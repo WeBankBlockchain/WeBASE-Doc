@@ -94,7 +94,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/lab-rc1/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/lab-rc2/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -128,10 +128,10 @@ cd webase-deploy
 ```shell
 [common]
 # WeBASE子系统的最新版本（lab或以上版本）
-webase.web.version=lab-rc1
-webase.mgr.version=lab-rc1
+webase.web.version=lab-rc2
+webase.mgr.version=lab-rc2
 webase.sign.version=lab-rc1
-webase.front.version=lab-rc1
+webase.front.version=lab-rc2
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=localhost
@@ -173,7 +173,7 @@ node.p2pPort=30300
 # 节点rpc端口
 node.rpcPort=20200
 # FISCO-BCOS版本（v3.0.0或以上版本）
-fisco.version=v3.0.0-rc1
+fisco.version=v3.0.0-rc2
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 
