@@ -123,6 +123,9 @@ cd webase-deploy
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
 
+- 如果使用的`liquid`合约的链，并在WeBASE管理台或WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机[配置Liquid环境](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
+
+
 ④ 服务端口不能小于1024
 
 ```shell
@@ -176,6 +179,10 @@ node.rpcPort=20200
 fisco.version=v3.0.0-rc2
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
+# whether air version fisco bcos use liquid(wasm) 
+# if use liquid, require configure liquid in the host of webase-front
+# [0: solidity, 1: liquid]
+fisco.wasm=0
 
 # 使用已有链时需配置[if.exist.fisco=yes]
 # 已有链节点rpc端口列表
