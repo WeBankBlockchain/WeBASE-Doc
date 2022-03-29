@@ -38,6 +38,12 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 两者的主要区别在于build_chain为了使体验更好，搭建速度更快，辅助生成了群组内各个节点的私钥；但企业部署工具出于安全的考虑不辅助生成私钥，需要用户自己生成并设置。
 
+##### Liquid支持
+
+如果使用的`liquid`合约的链，并在WeBASE管理台或WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机[配置Liquid环境](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
+
+配置好Liquid环境后，需要重启WeBASE-Front
+
 ### WeBASE管理平台搭建
 
 WeBASE管理平台分为四个部分：节点前置，签名服务，节点管理，WeBASE管理台。
