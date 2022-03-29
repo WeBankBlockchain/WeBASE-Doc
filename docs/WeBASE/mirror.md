@@ -5,13 +5,13 @@
 
 ### 源码同步
 
-WeBASE当前仓库源码位于[https://github.com/WebankFinTech/WeBASE](https://github.com/WebankFinTech/WeBASE)，每个新的版本发布会将代码合入master分支。
+WeBASE当前仓库源码位于[https://github.com/WeBankBlockchain/WeBASE](https://github.com/WeBankBlockchain/WeBASE)，每个新的版本发布会将代码合入master分支。
 
 为了方便国内用户，我们同样在gitee上提供了镜像仓库[https://giteee.com/Webank/WeBASE](https://giteee.com/Webank/WeBASE)，每次新版本发布后，镜像仓库会同步GitHub上官方仓库的更新，如果从GitHub下载失败，请尝试使用Gitee镜像仓库。
 
-WeBASE各子系统的Github代码仓库则是`https://github.com/WebankFinTech/` + `WeBASE-XXX`，对应的gitee仓库则是`https://gitee.com/WeBank/` + `WeBASE-XXX`
+WeBASE各子系统的Github代码仓库则是`https://github.com/WeBankBlockchain/` + `WeBASE-XXX`，对应的gitee仓库则是`https://gitee.com/WeBank/` + `WeBASE-XXX`
 
-如WeBASE-Front的Github代码仓库为`https://github.com/WebankFinTech/WeBASE-Front`，Gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
+如WeBASE-Front的Github代码仓库为`https://github.com/WeBankBlockchain/WeBASE-Front`，Gitee代码仓库为`https://gitee.com/WeBank/WeBASE-Front`
 
 ### 一键部署与安装包
 <span id="install_package"></span>
