@@ -63,7 +63,7 @@ WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
 
 ```java
 public class Demo {
-    // 接口用于构造交易体RawTransaction并将交易体编码，并通过传入的user地址的私钥对交易进行签名后，返回已签名的交易体编码值（十六进制字符串）
+    // 接口用于构造交易体RawTransaction并将交易体编码，并通过传入的私钥对交易进行签名后，返回已签名的交易体编码值（十六进制字符串）
     private static final String CREATERAWTX = "http://127.0.0.1:5002/WeBASE-Front/trans/convertRawTxStr/local";
     // 接口用于发送已签名的交易上链，返回交易数据；可结合/trans/convertRawTxStr/local或/trans/convertRawTxStr/withSign接口组装已签名的交易
     private static final String SENDTXURL = "http://127.0.0.1:5002/WeBASE-Front/trans/signed-transaction";
