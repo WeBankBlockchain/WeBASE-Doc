@@ -120,9 +120,12 @@ git clone https://gitee.com/WeBank/WeBASE-Front.git
 2. WeBASE-Sign 源码：git clone https://github.com/WeBankBlockchain/WeBASE-Sign.git
 
 重点关注：
+
 ![image14](https://user-images.githubusercontent.com/39053440/163218332-20c4340b-b904-4fc2-b4e4-c20c9a36b98e.png)
 
+
 ![image15](https://user-images.githubusercontent.com/39053440/163218342-543867ba-a422-4c26-87be-3afd29af7090.png)
+
 
 **sign 方法**
 - check signUserId
@@ -131,6 +134,7 @@ git clone https://gitee.com/WeBank/WeBASE-Front.git
 - 往下最后把执行结果交给 WeBASE-Front
 
 ![image16](https://user-images.githubusercontent.com/39053440/163218367-07cd6856-4dbf-4aa6-9c06-e20cf19a5450.png)
+
 
 ### 3）总结
   WeBASE-Front API: /trans/handleWithSign 接受数据求就交给 WeBASE-Sign API: sign 对数据进行签名 ， 然后返回
