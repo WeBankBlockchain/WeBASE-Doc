@@ -10,8 +10,9 @@ FiscoBcos官方文档：https://fisco-bcos-documentation.readthedocs.io
 
 WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
 
-注：以下示例中是以调用/trans/convertRawTxStr/local时有传入用户参数进行签名然后发送已签名交易为例的，如果未指定用户则生成的交易是未签名的，不可通过/trans/signed-transaction发送交易。
+建议配合WeBASE-Front接口文档https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html 进行学习
 
+注：以下示例中是以调用/trans/convertRawTxStr/local时有传入用户参数进行签名然后发送已签名交易为例的，如果未指定用户则生成的交易是未签名的，不可通过/trans/signed-transaction发送交易。
 ## 环境准备
 
 - 搭建FiscoBcos区块链并且搭建WeBASE-Front平台
