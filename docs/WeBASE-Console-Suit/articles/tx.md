@@ -4,7 +4,7 @@
 
 ## 简介
 
-本示例通过调用WeBASE-Front接口**/trans/convertRawTxStr/local**来生成已签名交易，/trans/signed-transaction接口来发送已签名交易。
+本示例通过调用WeBASE-Front接口/trans/convertRawTxStr/local来生成已签名交易，/trans/signed-transaction接口来发送已签名交易。
 
 FiscoBcos官方文档：https://fisco-bcos-documentation.readthedocs.io
 
