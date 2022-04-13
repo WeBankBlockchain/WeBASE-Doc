@@ -75,7 +75,7 @@ public class Handler {
     private static final String CONTRACT_ADDRESS = "0x71688af04b9eb59bfbf61a451798f22501d1d4ef";
     // 合约ABI接口信息，为json格式
     private static final String CONTRACT_ABI = "[{\"constant\":false,\"inputs\":[],\"name\":\"getName\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\"}],\"name\":\"setName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]";
-    // 用户私钥
+    // 用户私钥地址，需要在WeBASE-Front中创建用户后获取对应地址
     private static final String USER_ADDRESS = "0x3cc88bc73a739f5e9c23ce096b0ff311613cee96";
 
 
