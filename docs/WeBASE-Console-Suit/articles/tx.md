@@ -4,13 +4,13 @@
 
 ## 简介
 
-本示例通过调用WeBASE-Front接口**/trans/convertRawTxStr/local**来生成已签名交易，**/trans/signed-transaction**接口来发送已签名交易。
+本示例通过调用WeBASE-Front接口**/trans/convertRawTxStr/local**来生成已签名交易，/trans/signed-transaction接口来发送已签名交易。
 
 FiscoBcos官方文档：https://fisco-bcos-documentation.readthedocs.io
 
 WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
 
-注：以下示例中是以调用**/trans/convertRawTxStr/local**时有传入用户参数进行签名然后发送已签名交易为例的，如果未指定用户则生成的交易是未签名的，不可通过/trans/signed-transaction发送交易。
+注：以下示例中是以调用/trans/convertRawTxStr/local时有传入用户参数进行签名然后发送已签名交易为例的，如果未指定用户则生成的交易是未签名的，不可通过/trans/signed-transaction发送交易。
 
 ## 环境准备
 
