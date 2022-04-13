@@ -16,13 +16,13 @@ WeBASE-Front是和FISCO BCOS节点配合使用的一个子系统，需要和节�
 
 #### 最终效果
 浏览器访问：http://127.0.0.1:5000/#/login
+![image](https://user-images.githubusercontent.com/39053440/163217202-072b29fd-8d51-4480-bfca-bddecffb732d.png)
 
-![image.png](https://note.youdao.com/yws/res/0/WEBRESOURCEfb48fc6ab7f0905c7638aece691cb4a0)
 
 ## 使用 WeBASE-Web 搭建所需要的环境：
 **1. 使用 WeBASE-Web 创建一个用户**
 
-![image.png](https://note.youdao.com/yws/res/5/WEBRESOURCE5d82f83535f1628a14c0e311689ec2a5)
+![image2](https://user-images.githubusercontent.com/39053440/163217295-8d6f0325-c287-4e93-998e-c9936a23f192.png)
 
 **2. 编写 HelloWorld.sol**
 ```
@@ -35,21 +35,21 @@ contract HelloWorld {
 ```
  WeBASE-Web 管理平台 上部署的效果
  
-![image.png](https://note.youdao.com/yws/res/8/WEBRESOURCE13eec6bf2d3553335adab8ee9ee274c8)
+![image3](https://user-images.githubusercontent.com/39053440/163217306-07d97aa0-f2f4-49f7-a7a8-9d12ddf7924c.png)
 
 ==然后 保存 -> 编译 -> 部署==
 
 ## 访问 WeBASE-Front Swagger-ui 
 - 浏览器访问: http://127.0.0.1:5002/WeBASE-Front/swagger-ui.html
 - 找到 /trans/handleWithSign 的 API 接口
-![image.png](https://note.youdao.com/yws/res/1/WEBRESOURCEf25a215989691aae3f8f654a5cf7fbb1)
+![image4](https://user-images.githubusercontent.com/39053440/163217422-795d75b1-9d25-462e-af7d-890f422a34fb.png)
 
 里面有相关的测试用例对其进行测试操作
 
 **可以查看 WeBASE-Front 接口文档**
 - 文档地址：https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html?highlight=handleWithSign#id2
 
-![image.png](https://note.youdao.com/yws/res/f/WEBRESOURCE9aa46968a4382f7f2d31a4899da9f07f)
+![image5](https://user-images.githubusercontent.com/39053440/163217501-f6655afe-6aaf-436e-983b-0462fa82e25e.png)
 
 ## 使用 Swagger-ui 或者 Postman 发送请求
 这里是使用 postman 来对 /trans/handleWithSign 发送请求，postman 看起来比较清晰
@@ -69,17 +69,17 @@ contract HelloWorld {
 ```
 - signUserId : 根据部署合约的用户 signUserId 
 
-![image.png](https://note.youdao.com/yws/res/9/WEBRESOURCEe84211af3f8150ed93ecec4974c89c79)
+![image6](https://user-images.githubusercontent.com/39053440/163217603-5e0bf4d7-277b-4db2-8237-125c740d1ed6.png)
 
 - contractAddress: 合约地址
 - contractAbi: 合约相应的 abi
 
-![image.png](https://note.youdao.com/yws/res/0/WEBRESOURCE834a7920d970232178848e566acf7130)
+![image7](https://user-images.githubusercontent.com/39053440/163217693-7671da17-c3ed-44e2-a1a9-066071f7331f.png)
 
 
 **2) 使用 postman 请求**
 
-![image.png](https://note.youdao.com/yws/res/0/WEBRESOURCE7a6b241b81d6a0d6b3d623c2c4309e80)
+![image8](https://user-images.githubusercontent.com/39053440/163217760-b711025c-577e-4afb-94fe-23ba53b8b915.png)
 
 - **通过调用WeBASE-Sign服务的签名接口让相关用户对数据进行签名，拿回签名数据再发送上链** "status": "0x0" 则为成功
 
@@ -91,25 +91,25 @@ contract HelloWorld {
 ### 1）WeBASE-Front 源码分析
 WeBASE-Front 源码：
 git clone https://gitee.com/WeBank/WeBASE-Front.git
-![image.png](https://note.youdao.com/yws/res/0/WEBRESOURCE45e5ffbb9ae6ea2ccb85ded55a085b30)
+![image9](https://user-images.githubusercontent.com/39053440/163217828-345e1945-6407-42a2-ac65-204ea4986219.png)
 
 **public Object transHandle**
 - 处理 postman request 数据
-![image.png](https://note.youdao.com/yws/res/3/WEBRESOURCE44f0509f2ca4dce805c65148fc8b5f53)
+![image10](https://user-images.githubusercontent.com/39053440/163217903-7eadea74-b674-4355-937b-b9fbe89a6a8d.png)
 
 **public Object transHandleWithSign**
 - 解析过后的数据，交给该函数进行处理
-![image.png](https://note.youdao.com/yws/res/9/WEBRESOURCE2d68751874d8347fcd785f0e45877b09)
+![image11](https://user-images.githubusercontent.com/39053440/163218144-96e52148-a7a0-4672-949f-233ca1a07209.png)
 
 **public Object transHandleWithSign**
 - 解析后的 groupId 数据，获取 web3ApiService client
 - 解析后的  funcName (执行函数名：insert), funcParam（传过去数据：coms）对其进行编码成字符串数据流
-![image.png](https://note.youdao.com/yws/res/e/WEBRESOURCE29e9b9ae2dab08cb077f462217d09c0e)
+![image12](https://user-images.githubusercontent.com/39053440/163218123-bec1277b-a9e8-4cc5-a972-b2279d3d50a1.png)
 
 **public TransactionReceipt handleTransaction**
 - this.requestSignForSign 是把编码后的交易和签名用户ID 发送给 WeBASE-Front-sign 对其进行交易签名
 - this.sendMessage 则是发送交易
-![image.png](https://note.youdao.com/yws/res/a/WEBRESOURCE44e7b2ff203c8cc374fb471ad9270b2a)
+![image13](https://user-images.githubusercontent.com/39053440/163218205-32572d7b-b3d1-43e4-8b45-853c27082201.png)
 
 
 
@@ -117,9 +117,9 @@ git clone https://gitee.com/WeBank/WeBASE-Front.git
 2. WeBASE-Sign 源码：git clone https://github.com/WeBankBlockchain/WeBASE-Sign.git
 
 重点关注：
-![image.png](https://note.youdao.com/yws/res/8/WEBRESOURCE347999d9e8025ba6fd306b0040f7f438)
+![image14](https://user-images.githubusercontent.com/39053440/163218332-20c4340b-b904-4fc2-b4e4-c20c9a36b98e.png)
 
-![image.png](https://note.youdao.com/yws/res/4/WEBRESOURCEb56cf9f54dea28675c94213795da8c44)
+![image15](https://user-images.githubusercontent.com/39053440/163218342-543867ba-a422-4c26-87be-3afd29af7090.png)
 
 **sign 方法**
 - check signUserId
@@ -127,7 +127,7 @@ git clone https://gitee.com/WeBank/WeBASE-Front.git
 - 对其交易内容进行消息签名
 - 往下最后把执行结果交给 WeBASE-Front
 
-![image.png](https://note.youdao.com/yws/res/0/WEBRESOURCE24ef70abe624bf0d5c602808cb741c70)
+![image16](https://user-images.githubusercontent.com/39053440/163218367-07cd6856-4dbf-4aa6-9c06-e20cf19a5450.png)
 
 ### 3）总结
   WeBASE-Front API: /trans/handleWithSign 接受数据求就交给 WeBASE-Sign API: sign 对数据进行签名 ， 然后返回
