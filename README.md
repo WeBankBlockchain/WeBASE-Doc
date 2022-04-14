@@ -49,7 +49,7 @@ contract HelloWorld {
 里面有相关的测试用例对其进行测试操作
 
 **可以查看 WeBASE-Front 接口文档**
-- 文档地址：https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html?highlight=handleWithSign#id2
+文档地址：![image](https://user-images.githubusercontent.com/39053440/163298191-253fc756-fca4-434e-83e4-bee630fec745.png)
 
 ![image5](https://user-images.githubusercontent.com/39053440/163217501-f6655afe-6aaf-436e-983b-0462fa82e25e.png)
 
