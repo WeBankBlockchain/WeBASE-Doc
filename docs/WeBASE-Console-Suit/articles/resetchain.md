@@ -8,8 +8,7 @@
 
 
 # 环境准备
-- 区块链搭建
-https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html
+- 区块链搭建：https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html
 - WeBASE版本及兼容：https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/ChangeLOG.html
 
 
