@@ -20,7 +20,7 @@ https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.h
 ```eval_rst
 .. important::
     -  本文使用CentOS7环境4节点服务。
-    -  生成环境下注意做好数据备份。
+    -  生产环境下注意做好数据备份。
 ```
 
 
@@ -58,7 +58,7 @@ info|2022-04-15 16:00:46.089136|[P2P][Service] heartBeat,connected count=3
 ```eval_rst
 .. important::
     -  本文使用CentOS7环境WeBASE1.5.4版本。
-    -  生成环境下注意做好数据备份。
+    -  生产环境下注意做好数据备份。
 ```
 
 ## 第一步：登录节点管理服务的mysql数据库
