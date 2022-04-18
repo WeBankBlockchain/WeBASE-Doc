@@ -15,7 +15,7 @@
     sudo gedit /etc/docker/daemon.json
 ### 配置内容如下：
 	{
-    "注册表镜像": ["https://docker.mirrors.ustc.edu.cn"]
+   "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
     }
 ### 重启服务
     systemctl daemon-reload
