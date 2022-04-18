@@ -60,17 +60,13 @@ info|2022-04-15 16:00:46.089136|[P2P][Service] heartBeat,connected count=3
     -  生产环境下注意做好数据备份。
 ```
 
-## 第一步：登录节点管理服务的mysql数据库
+## 通过WeBASE管理平台删除WeBASE的链上数据
 
-```bash
-#登录MySQL:
-mysql -u ${your_db_account} -p${your_db_password}  例如：mysql -u root -p123456
-```
-##  第二步：通过命令删除WeBASE平台上的链数据
+登录WeBASE管理平台，选择群组管理，删除群组数据
+![image](https://user-images.githubusercontent.com/81018072/163778388-f975e55c-c56e-44f1-9500-dc9749b3dcd2.png)
 
-```bash
-MariaDB [(none)]> show databases；                         //查看数据库
-MariaDB [(none)]> use webasenodemanager；                  //切换到节点管理服务数据库
-MariaDB [webasenodemanager]> delete from tb_trans_hash_1;  //删除群组1的交易数据
-MariaDB [webasenodemanager]> delete from tb_block_1;	   //删除群组1的块数据
-```
+
+## 总结
+至此，区块链的数据全部清空，块高回到0。请注意：删除数据前做好数据备份。
+
+
