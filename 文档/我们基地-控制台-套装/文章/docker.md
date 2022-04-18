@@ -48,19 +48,18 @@
     export JAVA_HOME=/etc/java-11-openjdk（因个人版本和位置而异）
     export PATH = $JAVA_HOME/bin:$PATH
     source /etc/profile
-
-# 5.安装
-    sudo apt install mysql-server
-    #检查
-    mysql -V
-    #登入MySQL 默认密码123456
-    sudo mysql -uroot -p123456
-    #创建新账户提供WeBase使用(用户名‘test’和密码‘123’，看个人情况修改)
-    CREATE USER 'test'@'localhost' IDENTIFIED BY '123';
-    GRANT ALL PRIVILEGES ON *.* TO 'test'@'localhost';
-    Flush privileges;
-    exit;
-    ![mysql](https://user-images.githubusercontent.com/102428352/163790719-3ae9cda8-6975-44c3-9934-58ea0a886f95.jpg)
+# ！！！mysql最好下载5.7，不要下载8.0的，apt自动下载的是8.0会导致后期连接不上
+# 5.安装 这里使用的是docker镜像方便管理
+    docker search mysql
+    docker pull mysql:5.7
+    docker run -p 3306:3306 --name mysql57 -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+    sudo docker ps -a
+    #查看mysql容器
+    sudo docker ps -a
+    docker start  [对应mysql的containerID]
+    docker exec -it (mysql的id) bash
+    mysql -uroot -p123456
+    create database webasenodemanager;
 
 # 6 开放5000和5002端口
     sudo apt-get install iptables-persistent
@@ -77,9 +76,8 @@
 
 # !!!最重要的一步！！！
     sudo gedit common.properties
-
-#   
-     Mysql database configuration of         WeBASE-Node-Manager）下的mysql.user=，mysql.password= 修改为配置mysql时的账户密码
+    #Mysql database configuration of WeBASE-Node-Manager）下的mysql.user=，mysql.password= 修改为配置mysql时的账户密码
+    #这里由于先前没有设置，我采用的是root和默认密码
 ## WeBASE-Sign（同上） 的 Mysql 数据库配置
     在第74行按照自身情况选课yes，no选no就可以直接保存退出，选yes则需要配置fisco.dir和node0.dir
     ![mysql配置](https://user-images.githubusercontent.com/102428352/163790733-ba185d17-14c6-4c91-8eb1-2b3a2d5af71a.jpg)
@@ -95,9 +93,10 @@
 
 # 最后运行
     python3 deploy.py 安装全部
-    ![image](https://user-images.githubusercontent.com/102428352/163790779-266eeff1-2d9f-4d5c-be9b-efe96e932ad2.png)
     #成功后便可以直接登录了
     http://localhost:5000
     http://127.0.0.1:5000
     默认账户密码：
     管理员 Abcd1234
+    ![1650291394(1)](https://user-images.githubusercontent.com/102428352/163822057-48fda67c-7585-404d-9ceb-5fbea9071189.jpg)
+
