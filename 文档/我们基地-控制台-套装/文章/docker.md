@@ -55,7 +55,9 @@
     export JAVA_HOME=/opt/jdk-14.0.2
     export PATH=$JAVA_HOME/bin:$PATH
     source /etc/profile
-   ![image](https://user-images.githubusercontent.com/102428352/163829127-b69b4cfc-f74d-46b2-b1e2-0d82770bfc5b.png
+   ![509b7c4f7445e873434f78fb0ad0652](https://user-images.githubusercontent.com/102428352/163831928-2e6e4fac-b8ee-47c0-af20-18f5292dabd2.png)
+
+  
 
 # ！！！mysql最好下载5.7，不要下载8.0的，apt自动下载的是8.0会导致后期连接不上
 # 5.安装 这里使用的是docker镜像方便管理
