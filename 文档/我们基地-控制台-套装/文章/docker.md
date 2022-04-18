@@ -20,7 +20,9 @@
 ### 重启服务
     systemctl daemon-reload
     systemctl restart docker.service
-    ![dokcer安装](https://user-images.githubusercontent.com/102428352/163790676-47592333-050d-4624-805a-cd7c94a1203d.jpg)
+   ![dokcer安装](https://user-images.githubusercontent.com/102428352/163823173-96781d47-188e-41a1-bbb4-ff121bdaf9a9.jpg)
+
+
 
 
 
@@ -80,7 +82,8 @@
     #这里由于先前没有设置，我采用的是root和默认密码
 ## WeBASE-Sign（同上） 的 Mysql 数据库配置
     在第74行按照自身情况选课yes，no选no就可以直接保存退出，选yes则需要配置fisco.dir和node0.dir
-    ![mysql配置](https://user-images.githubusercontent.com/102428352/163790733-ba185d17-14c6-4c91-8eb1-2b3a2d5af71a.jpg)
+   ![5520cf6b4dfeaecdae228ed44d6b946](https://user-images.githubusercontent.com/102428352/163822926-a2661753-2815-4f78-865e-cca6c1f2ec8b.png)
+
 
 ###	拉取镜像
     python3 deploy.py pullDockerAll
@@ -98,5 +101,7 @@
     http://127.0.0.1:5000
     默认账户密码：
     管理员 Abcd1234
-    ![1650291394(1)](https://user-images.githubusercontent.com/102428352/163822057-48fda67c-7585-404d-9ceb-5fbea9071189.jpg)
+   ![11db53d83cdd075fcf2b61e5392cacc](https://user-images.githubusercontent.com/102428352/163823009-7d628f2d-d729-41a0-b60c-aa27394b1178.png)
+
+
 
