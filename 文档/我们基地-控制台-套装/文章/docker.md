@@ -24,8 +24,6 @@
 
 
 
-
-
 ## docker-compose：
     sudo curl -L “https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$（uname -s）-$（uname -m）” -o /usr/local/bin/docker-compose
 ### 由于GitHub可能获取访问不了，可以用下面这条
@@ -34,6 +32,8 @@
     sudo chmod +x /usr/local/bin/docker-compose
 ### 检查
     docker-compose --version
+   ![f5dfe4a6e8ad0aef2056b46e52ec25a](https://user-images.githubusercontent.com/102428352/163830899-56b657b2-5ee8-4ae2-8453-6d7eb0c74bd3.png)
+
 
 # 3.安装python和pymysql（此处采用fisco官网提供命令，Ubuntu20.4上的版本自带的python都是3.8，所以可忽略安装，直接安装pip）
 ### 添加仓库，回车继续
@@ -44,30 +44,40 @@
     sudo pip3 install PyMySQL
 
 # 4.安装Java
-    sudo apt install -y default-jdk
+    #建议直接去官网下载jdk14
+    #https://www.oracle.com/cn/java/technologies/javase/jdk14-archive-downloads.html
+    #将安装包移动到/opt下
+    sudo mv (java位置) /opt
+    sudo tar -zxvf jdk-14
+    #赋予权限
+    sudo chmod -R 0777 jdk-14
     #配置环境变量
-    sudo gedit /etc/profile
-    export JAVA_HOME=/etc/java-11-openjdk（因个人版本和位置而异）
-    export PATH = $JAVA_HOME/bin:$PATH
+    export JAVA_HOME=/opt/jdk-14.0.2
+    export PATH=$JAVA_HOME/bin:$PATH
     source /etc/profile
+   ![image](https://user-images.githubusercontent.com/102428352/163829127-b69b4cfc-f74d-46b2-b1e2-0d82770bfc5b.png
+
 # ！！！mysql最好下载5.7，不要下载8.0的，apt自动下载的是8.0会导致后期连接不上
 # 5.安装 这里使用的是docker镜像方便管理
+## 这里用的是docker的镜像 方便下载卸载，不想用镜像的可以参考官网
     docker search mysql
     docker pull mysql:5.7
     docker run -p 3306:3306 --name mysql57 -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
     sudo docker ps -a
-    #查看mysql容器
-    sudo docker ps -a
+   ![image](https://user-images.githubusercontent.com/102428352/163829375-ba4f0a3c-db96-440b-8ec5-4e4687287f91.png)
     docker start  [对应mysql的containerID]
     docker exec -it (mysql的id) bash
     mysql -uroot -p123456
     create database webasenodemanager;
+   ![image](https://user-images.githubusercontent.com/102428352/163829618-91e7b837-3a10-4c6b-9ee0-326a4235eafc.png)
 
+	
 # 6 开放5000和5002端口
+# 安装iptables-persistent后 开放端口需要root权限
     sudo apt-get install iptables-persistent
     sudo iptables -I INPUT -p tcp --dport 5000 -j ACCEPT
     sudo iptables -I INPUT -p tcp --dport 5002 -j ACCEPT
-# 安装iptables-persistent后 开放端口需要root权限
+
 
 # 7 拉取部署脚本
 	wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.4/webase-deploy.zip
@@ -80,9 +90,12 @@
     sudo gedit common.properties
     #Mysql database configuration of WeBASE-Node-Manager）下的mysql.user=，mysql.password= 修改为配置mysql时的账户密码
     #这里由于先前没有设置，我采用的是root和默认密码
+   ![image](https://user-images.githubusercontent.com/102428352/163829772-80b34f55-10e1-4e58-b314-40bf53102675.png)
+
 ## WeBASE-Sign（同上） 的 Mysql 数据库配置
     在第74行按照自身情况选课yes，no选no就可以直接保存退出，选yes则需要配置fisco.dir和node0.dir
-   ![5520cf6b4dfeaecdae228ed44d6b946](https://user-images.githubusercontent.com/102428352/163822926-a2661753-2815-4f78-865e-cca6c1f2ec8b.png)
+   ![image](https://user-images.githubusercontent.com/102428352/163829838-4cdb40aa-99bf-4b19-ae39-179b7ca951dc.png)
+
 
 
 ###	拉取镜像
@@ -96,6 +109,8 @@
 
 # 最后运行
     python3 deploy.py installAll
+   ![image](https://user-images.githubusercontent.com/102428352/163830396-52fde0e4-3baa-415c-89bd-30aa7f327d6b.png)
+
     #成功后便可以直接登录了
     http://localhost:5000
     http://127.0.0.1:5000
