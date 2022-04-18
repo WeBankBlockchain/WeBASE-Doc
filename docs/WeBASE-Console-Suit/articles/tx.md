@@ -64,7 +64,7 @@ WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
 ```java
     
 	// 调用WeBASE-Front接口/trans/convertRawTxStr/local来生成已签名交易
-	private static final String CREATERAWTX = "http://192.168.0.105:5002/WeBASE-Front/trans/convertRawTxStr/local";
+	private static final String CREATERAWTX = "http://127.0.0.1:5002/WeBASE-Front/trans/convertRawTxStr/local";
     // 合约ABI接口信息
     private static final String CONTRACT_ABI = "[{\"constant\":false,\"inputs\":[],\"name\":\"getName\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\"}],\"name\":\"setName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]";
 
