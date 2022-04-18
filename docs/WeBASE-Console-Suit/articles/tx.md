@@ -4,9 +4,9 @@
 
 ## 简介
 
-本示例通过调用WeBASE-Front接口**/trans/convertRawTxStr/local**来生成已签名交易，通过javasdk的Client来发送已签名交易。
+本示例通过调用WeBASE-Front接口**/trans/convertRawTxStr/local**来生成已签名交易，通过JAVA-SDK的Client来发送已签名交易。
 
-FiscoBcos官方文档：https://fisco-bcos-documentation.readthedocs.io
+FISCO BCOS官方文档：https://fisco-bcos-documentation.readthedocs.io
 
 WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
 
@@ -14,7 +14,7 @@ WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
 
 ## 环境准备
 
-- 搭建FiscoBcos区块链并且搭建WeBASE-Front平台
+- 搭建FISCO BCOS区块链并且搭建WeBASE-Front平台
 
 - 使用solidity编写HelloWorld合约并且部署：
 
@@ -36,11 +36,11 @@ WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
 
 ## 调用WeBASE-Front接口创建已签名交易并发送交易
 
-- 需要java环境
-- 需要maven环境
-- 需要使用FiscoBcos的javasdk
+- 需要JAVA环境
+- 需要MAVEN环境
+- 需要使用FISCO BCOS的JAVA-SDK
 
-### 新建java项目导入maven依赖
+### 新建JAVA项目导入MAVEN依赖
 
 ```xml
 <!--    用于json格式化    -->
@@ -69,7 +69,7 @@ WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
     private static final String CONTRACT_ABI = "[{\"constant\":false,\"inputs\":[],\"name\":\"getName\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\"}],\"name\":\"setName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]";
 
     public static void main(){
-        // 创建javasdk客户端详见官网https://fisco-bcos-documentation.readthedocs.io
+        // 创建JAVA-SDK客户端详见官网https://fisco-bcos-documentation.readthedocs.io
         String path = Demo.class.getClassLoader().getResource("config.toml").getPath();
         System.out.println(path);
         BcosSDK sdk = BcosSDK.build(path);
@@ -77,7 +77,7 @@ WeBASE官方文档：https://webasedoc.readthedocs.io/zh_CN/latest/docs
         Client client = applicationContext.getBean("client", Client.class);
         // 调用WeBASE-Front的trans/convertRawTxStr/local接口创建一个已签名交易（本地签名）
         String rawTx = createRawTx();
-        // 通过sdk客户端，传入已签名交易发起交易并获取交易回执
+        // 通过JAVA-SDK客户端，传入已签名交易发起交易并获取交易回执
         TransactionReceipt transactionReceipt = client.sendRawTransactionAndGetReceipt(rawTx);
         System.out.println(transactionReceipt);
     }
