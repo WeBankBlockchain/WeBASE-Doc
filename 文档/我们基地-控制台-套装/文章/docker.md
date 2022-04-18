@@ -95,7 +95,7 @@
     docker pull fiscoorg/fiscobcos:v2.8.0
 
 # 最后运行
-    python3 deploy.py 安装全部
+    python3 deploy.py installAll
     #成功后便可以直接登录了
     http://localhost:5000
     http://127.0.0.1:5000
