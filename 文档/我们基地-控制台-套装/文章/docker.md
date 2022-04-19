@@ -1,5 +1,7 @@
-深职 麦立健
-
+- 任务 使用docker完成对webase的部署
+- 作者 深职院 麦立健
+- 参考：官方文档 https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Install/docker_install.html
+---
 ### 前置准备：
     1.docker 安装：
     bash <(curl -s -L get.docker.com)
@@ -14,8 +16,8 @@
 ### 创建/修改daemon.json配置文件
     sudo gedit /etc/docker/daemon.json
 ### 配置内容如下：
-	{
-   "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+    {
+   	"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
     }
 ### 重启服务
     systemctl daemon-reload
