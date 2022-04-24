@@ -64,6 +64,8 @@ info|2022-04-15 16:00:46.089136|[P2P][Service] heartBeat,connected count=3
 
 登录WeBASE管理平台，选择群组管理，删除群组数据
 ![image](https://user-images.githubusercontent.com/81018072/163778388-f975e55c-c56e-44f1-9500-dc9749b3dcd2.png)
+![image](https://user-images.githubusercontent.com/81018072/164955578-9cadae7d-fcc6-44d6-b43a-6cab8e323b35.png)
+![image](https://user-images.githubusercontent.com/81018072/164955577-97af4538-ebcf-45e6-a144-fa6494e418df.png)
 
 
 ## 总结
