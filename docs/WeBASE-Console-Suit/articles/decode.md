@@ -2,7 +2,7 @@
 
 作者：深职院高旭亮
 
-本文会通过编写java程序来发送请求到WeBASE-Front的接口**tool/decode**来示范如何进行合约调用。
+本文会通过编写java程序来发送请求到WeBASE-Front的接口**tool/decode**来示范如何进行交易解析。
 
 ## WeBASE-Front简介
 
