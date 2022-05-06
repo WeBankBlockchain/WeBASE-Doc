@@ -133,7 +133,7 @@ cd webase-deploy
 # WeBASE子系统的最新版本（lab或以上版本）
 webase.web.version=lab-rc2
 webase.mgr.version=lab-rc2
-webase.sign.version=lab-rc1
+webase.sign.version=lab-rc2
 webase.front.version=lab-rc2
 
 # 节点管理子系统mysql数据库配置
