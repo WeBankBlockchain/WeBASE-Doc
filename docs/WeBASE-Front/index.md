@@ -9,4 +9,5 @@
    interface.md
    upgrade.md
    appendix.md
+   liquid.md
 ```
