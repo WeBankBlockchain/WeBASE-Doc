@@ -42,7 +42,7 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 
 ##### Liquid支持
 
-如果使用的`liquid`合约的链，并在WeBASE管理台或WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机[配置Liquid环境](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
+如果使用的`liquid`合约的链，并在WeBASE管理台或WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机配置Liquid环境，可参考WeBASE-Front节点前置文档中的[Liquid配置](../WeBASE-Front/liquid.md)或[Liquid官方配置文档](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
 
 配置好Liquid环境后，需要重启WeBASE-Front
 
@@ -174,7 +174,8 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 图形化合约IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口。其中，新建合约可以通过编辑键入合约内容，也可以上传合约文件；编译合约后才可以部署合约；部署合约成功后，可以通过发送交易调用合约接口。具体操作步骤可以参考上一章节中系统初始化配置介绍。
 
 合约IDE：
-- 进行Liquid合约编译需要参考[Liquid环境配置](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)后方可使用
+- 进行Liquid合约编译需要在WeBASE-Front所在主机配置Liquid环境，可参考WeBASE-Front节点前置文档中的[Liquid配置](../WeBASE-Front/liquid.md)或参考[Liquid环境配置](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)进行配置后方可使用。
+- 若当前群组属于Liquid群组（Wasm群组），合约IDE将自动切换至Liquid编译模式，并自动检查是否已在节点前置所在主机配置Liquid环境。
 
 ![](../../images/WeBASE-Console-Suit/contract_ide.png)
 
