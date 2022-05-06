@@ -6,6 +6,12 @@
 
 节点搭建的方法建议使用[build_chain](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html)。
 
+##### Liquid支持
+
+如果使用的`liquid`合约的链并在WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机[配置Liquid环境](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
+
+配置好Liquid环境后，需要重启WeBASE-Front
+
 ### 节点前置服务搭建
 
 **前提条件** 
