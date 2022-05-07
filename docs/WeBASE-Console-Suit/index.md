@@ -195,6 +195,30 @@ ABI编码：支持对ABI的方法与入参进行编码
 
 ![](../../images/WeBASE-Console-Suit/abi_analysis.png)
 
+
+合约仓库：合约仓库是WeBASE整理社区贡献者所贡献的合约案例，其中包含基础的工具合约、存证合约、积分合约等。
+
+![](../../images/WeBASE-Console-Suit/lab/contract_warehouse.png)
+
+
+CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns)
+
+注册CNS后，CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
+- 需要在合约管理页面部署合约时**勾选CNS**，或合约列表页面中点击**CNS注册**，即可完成注册
+
+![](../../images/WeBASE-Console-Suit/new_cns_index.png)
+
+
+EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即可查询并同步返回
+
+![EventLog](../../images/WeBASE-Console-Suit/event_sync_query.png)
+
+BFS：BFS（BBlockchain File System）是FISCO BCOS 3.0中新增的功能，可通过类似文件系统的方式查看链上所部署的合约，详情请参考[BFS文档](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/design/contract_directory.html)
+- 部署的合约会在`/apps`目录下产生一个合约文件
+
+![](../../images/WeBASE-Console-Suit/lab/bfs_manage.png)
+
+
 ### 私钥管理
 
 私钥管理包含新建私钥用户和新建公钥用户两个功能。在合约管理界面，可以看到合约部署和交易调用功能。这里的私钥管理可以新建私钥用户，私钥将托管在签名服务中，然后通过签名服务对合约部署和合约调用进行签名。注：外部账户可通过新建公钥账户导入，主要用于把交易和用户关联起来。
