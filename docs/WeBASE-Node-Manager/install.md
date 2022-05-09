@@ -7,7 +7,7 @@
 | 1    | FISCO-BCOS 3.0+        |
 | 2    | WeBASE-Front [对应版本](../WeBASE/ChangeLOG.md) |
 | 3    | MySQL5.6或以上版本    |
-| 4    | Java8或以上版本       |
+| 4    | Java 8至14版本       |
 
 
 ## 2. 注意事项
@@ -36,13 +36,13 @@ git checkout lab
 
 ## 4. 编译代码
 
-方式一：如果服务器已安装Gradle，且版本为Gradle-4.10或以上
+方式一：如果服务器已安装Gradle，且版本为gradle-4.10至gradle-6.x版本
 
 ```shell
 gradle build -x test
 ```
 
-方式二：如果服务器未安装Gradle，或者版本不是Gradle-4.10或以上，使用gradlew编译
+方式二：如果服务器未安装Gradle，或者版本不是gradle-4.10至gradle-6.x版本，使用gradlew编译
 
 ```shell
 chmod +x ./gradlew && ./gradlew build -x test

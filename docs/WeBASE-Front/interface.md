@@ -137,6 +137,8 @@ HTTP POST
 | 11 | 合约来源 | contractSource | String | | 是 |  |
 | 12 | 是否aes | useAes | Boolean | | 是 |  |
 | 13 | 用户 | user | String | | 是 |  |
+| 14       | 是否为liquid | isWasm          |  boolean        |          |         是 |  默认为false，如果为true，则需要传入contractAddress         |
+| 15       | 合约地址 | contractAddress          |  String        |          |         否 |  如果isWasm为true，则合约地址非空，格式以"/"开头，如/apps         |
 
 **2）数据格式**
 
@@ -158,7 +160,8 @@ HTTP POST
   "signUserId": "string",
   "useAes": true,
   "user": "string",
-  "version": "string"
+  "version": "string",
+  "isWasm": false
 }
 ```
 
@@ -235,6 +238,8 @@ HTTP POST
 | 11       | 用户编号        | signUserId     | String   |              | 是       | WeBASE-Sign中的用户编号，通过webase-sign创建私钥获取         |
 | 12       | 是否aes         | useAes         | Boolean  |              | 是       | true表示使用aes，false表示不使用aes                          |
 | 13       | 用户            | user           | String   |              | 是       |                                                              |
+| 14       | 是否为liquid | isWasm          |  boolean        |          |         是 |  默认为false，如果为true，则需要传入contractAddress         |
+| 15       | 合约地址 | contractAddress          |  String        |          |         否 |  如果isWasm为true，则合约地址非空，格式以"/"开头，如/apps         |
 
 **2）数据格式**
 
@@ -256,7 +261,8 @@ HTTP POST
   "signUserId": "string",
   "useAes": true,
   "user": "string",
-  "version": "string"
+  "version": "string",
+  "isWasm": false
 }
 ```
 
@@ -475,6 +481,7 @@ HTTP POST
 | 8        | 合约源码 | contractSource    | String|              | 否       |          |
 | 9 | 合约地址 | contractAddress | String | | 否 | |
 | 10 | 合约版本 | version | String | | 否 | |
+| 11       | 是否为liquid | isWasm          |  boolean        |          |         是 |  默认为false，此处需要传入为true         |
 
 **2）数据格式**
 
@@ -1371,6 +1378,249 @@ http://localhost:5002/WeBASE-Front/contract/findCns
   }
 }
 ```
+
+
+### 1.19. 检测是否已配置Liquid环境
+
+#### 接口描述
+
+通过cargo命令和liquid命令，检测WeBASE-Front所在主机是否已配置Liquid环境
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/liquid/check**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | --------------- | -------- | ------------ | -------- | -------- |
+
+**2）数据格式** 
+
+```
+http://localhost:5002/WeBASE-Front/contract/liquid/check
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+| 3        | 返回数据 | data            | List     | 否       |                       |
+
+**2）数据格式**
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": null
+}
+```
+
+
+### 1.20. 编译liquid合约
+
+#### 接口描述
+
+传入合约源码、编译liquid合约，并返回编译得到的abi和bin。
+
+由于liquid合约类似于rust编译，耗时比solidity更长（3分钟左右），因此接口返回状态为“编译中”时，后台将异步执行编译任务，通过轮询`/contract/liquid/compile/check`接口可以获取最新的编译结果
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/liquid/compile**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组     | groupId       | String      |            | 是       |          |
+| 2        | 合约编号     | contractId    | Long       |            | 是       | 需要先保存合约得到合约id后，再进行编译    |
+| 3        | 合约名称     | contractName | String         |              | 是       |          |
+| 4        | 合约所在目录  | contractPath | String         |              | 是       |  默认"/"         |
+| 5        | 合约源码 | contractSource    | String        |          | 是       |  lib.rs中的liquid源码，需要**base64**编码后传入        |
+| 6       | 是否为liquid | isWasm          |  boolean        |          |         是 |  默认为false，此处需要传入为true         |
+| 7        | 合约地址 | contractAddress | String         |            |          否 |         |
+
+**2）数据格式**
+
+```
+{
+	"groupId": "group0",
+	"contractName": "LiquidHelloWorld",
+	"contractPath": "/",
+	"contractSource": "IyFbY2ZnX2F0dHIobm90KGZlYXR1cmUgPSAic3RkIiksIG5vX3N0ZCldCgp1c2UgbGlxdWlkOjpzdG9yYWdlOwp1c2UgbGlxdWlkX2xhbmcgYXMgbGlxdWlkOwoKI1tsaXF1aWQ6OmNvbnRyYWN0XQptb2QgaGVsbG9fd29ybGQgewogICAgdXNlIHN1cGVyOjoqOwoKICAgICNbbGlxdWlkKHN0b3JhZ2UpXQogICAgc3RydWN0IEhlbGxvV29ybGQgewogICAgICAgIG5hbWU6IHN0b3JhZ2U6OlZhbHVlPFN0cmluZz4sCiAgICB9CgogICAgI1tsaXF1aWQobWV0aG9kcyldCiAgICBpbXBsIEhlbGxvV29ybGQgewogICAgICAgIHB1YiBmbiBuZXcoJm11dCBzZWxmKSB7CiAgICAgICAgICAgIHNlbGYubmFtZS5pbml0aWFsaXplKFN0cmluZzo6ZnJvbSgiQWxpY2UiKSk7CiAgICAgICAgfQoKICAgICAgICBwdWIgZm4gZ2V0KCZzZWxmKSAtPiBTdHJpbmcgewogICAgICAgICAgICBzZWxmLm5hbWUuY2xvbmUoKQogICAgICAgIH0KCiAgICAgICAgcHViIGZuIHNldCgmbXV0IHNlbGYsIG5hbWU6IFN0cmluZykgewogICAgICAgICAgICBzZWxmLm5hbWUuc2V0KG5hbWUpCiAgICAgICAgfQogICAgfQoKICAgICNbY2ZnKHRlc3QpXQogICAgbW9kIHRlc3RzIHsKICAgICAgICB1c2Ugc3VwZXI6Oio7CgogICAgICAgICNbdGVzdF0KICAgICAgICBmbiBnZXRfd29ya3MoKSB7CiAgICAgICAgICAgIGxldCBjb250cmFjdCA9IEhlbGxvV29ybGQ6Om5ldygpOwogICAgICAgICAgICBhc3NlcnRfZXEhKGNvbnRyYWN0LmdldCgpLCAiQWxpY2UiKTsKICAgICAgICB9CgogICAgICAgICNbdGVzdF0KICAgICAgICBmbiBzZXRfd29ya3MoKSB7CiAgICAgICAgICAgIGxldCBtdXQgY29udHJhY3QgPSBIZWxsb1dvcmxkOjpuZXcoKTsKCiAgICAgICAgICAgIGxldCBuZXdfbmFtZSA9IFN0cmluZzo6ZnJvbSgiQm9iIik7CiAgICAgICAgICAgIGNvbnRyYWN0LnNldChuZXdfbmFtZS5jbG9uZSgpKTsKICAgICAgICAgICAgYXNzZXJ0X2VxIShjb250cmFjdC5nZXQoKSwgIkJvYiIpOwogICAgICAgIH0KICAgIH0KfQ==",
+	"contractAbi": "[{\"inputs\":[],\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"type\":\"string\"}],\"type\":\"function\"},{\"conflictFields\":[{\"kind\":0,\"path\":[],\"read_only\":false,\"slot\":0}],\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\"}]",
+  "isWasm": true
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+| 3        | 返回数据 | data            | List     | 否       |                       |
+| 3.1      | 群组编号 | groupId         | Integer  | 是       |                       |
+| 3.2      | 合约路径 | contractPath    | String   | 是       |  默认空，代表了"/"路径                     |
+| 3.3      | 合约名   | contractName    | String   | 是       |                       |
+| 3.4      | 编译状态    | status         | Integer   | 是       |  1-编译中，2-编译成功，3-编译失败，4-编译已重置                     |
+| 3.5      | 合约Abi  | abi         | String   | 是       |   编译成功时为非空                    |
+| 3.6      | 合约bytecode-bin | bin | String   | 是       |   编译成功时为非空，用于部署合约                    |
+| 3.7      | 编译描述  | description     | String   | 是       |   编译失败时，错误原因将记录在此字段                    |
+| 3.8      | 修改时间 | modifyTime      | LocalDatetime   | 是       |                       |
+| 3.9      | 创建时间 | createTime      | LocalDatetime   | 是       |                       |
+
+**2）数据格式**
+
+状态为编译中时： （编译中时，后台将异步执行编译任务，通过轮询`/contract/liquid/compile/check`接口可以获取最新的编译结果）
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "", 
+    "contractName": "Hello",
+    "status": "1",
+    "bin": null,
+    "abi": null,
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
+状态为编译成功时：
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "", 
+    "contractName": "Hello",
+    "status": "2",
+    "bin": "",  //bin过长，此处略
+    "abi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
+
+### 1.20. 查询liquid合约编译进度
+
+#### 接口描述
+
+根据群组ID，合约路径，合约名获取liquid合约的编译状态
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/contract/liquid/compile/check**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型**       | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------------- | ------------ | -------- | -------- |
+| 1        | 所属群组     | groupId       | String      |            | 是       |          |
+| 2        | 合约编号     | contractId    | Long       |            | 否       | 需要先保存合约得到合约id后，再进行编译    |
+| 3        | 合约名称     | contractName | String         |              | 是       |          |
+| 4        | 合约所在目录  | contractPath | String         |              | 是       |  默认"/"         |
+
+**2）数据格式**
+
+```
+{
+	"groupId": "group0",
+	"contractName": "LiquidHelloWorld",
+	"contractPath": "/"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**      | **类型** | **必填** | **说明**              |
+| -------- | -------- | --------------- | -------- | -------- | --------------------- |
+| 1        | 返回码   | code            | String   | 是       | 返回码信息请参看附录1 |
+| 2        | 提示信息 | message         | String   | 是       |                       |
+| 3        | 返回数据 | data            | List     | 否       |                       |
+| 3.1      | 群组编号 | groupId         | Integer  | 是       |                       |
+| 3.2      | 合约路径 | contractPath    | String   | 是       |  默认"/"                    |
+| 3.3      | 合约名   | contractName    | String   | 是       |                       |
+| 3.4      | 编译状态    | status         | Integer   | 是       |  1-编译中，2-编译成功，3-编译失败，4-编译已重置                     |
+| 3.5      | 合约Abi  | abi         | String   | 是       |   编译成功时为非空                    |
+| 3.6      | 合约bytecode-bin | bin | String   | 是       |   编译成功时为非空，用于部署合约                    |
+| 3.7      | 编译描述  | description     | String   | 是       |   编译失败时，错误原因将记录在此字段                    |
+| 3.8      | 修改时间 | modifyTime      | LocalDatetime   | 是       |                       |
+| 3.9      | 创建时间 | createTime      | LocalDatetime   | 是       |                       |
+
+**2）数据格式**
+
+状态为编译中时，轮询当前接口直到状态为编译成功、编译失败，status=1：
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "/", 
+    "contractName": "Hello",
+    "status": "1",
+    "bin": null,
+    "abi": null,
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
+状态为编译成功时，status=2：
+```
+{
+  "code": 0,
+  "message": "success"
+  "data": {
+    "groupId": "group",
+    "contractPath": "/", 
+    "contractName": "Hello",
+    "status": "2",
+    "bin": "",  //bin过长，此处略
+    "abi":"[{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"view\"},{\"constant\":false,\"inputs\":[{\"name\":\"n\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"set\",\"outputs\":[],\"type\":\"function\",\"payable\":false,\"stateMutability\":\"nonpayable\"},{\"constant\":false,\"inputs\":[{\"name\":\"name\",\"type\":\"string\",\"type0\":null,\"indexed\":false}],\"name\":\"SetName\",\"outputs\":null,\"type\":\"event\",\"payable\":false,\"stateMutability\":null}]",
+    "createTime": "2020-12-30 16:32:28",
+    "modifyTime": "2020-12-30 16:32:28"
+  }
+}
+```
+
 
 ## 2. 密钥接口
 
@@ -5152,8 +5402,1652 @@ headers:  content-disposition: attachment;filename*=UTF-8''conf.zip
 }
 ```
 
+## 11. 预编译权限管理
 
-## 11. 附录
+
+### 11.1. 查询链是否开启权限
+
+#### 接口描述
+
+通过接口查询链是否开启权限治理功能
+
+**注：**
+
+> 权限治理功能需要在启动链时进行配置
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/base/queryChainHasAuth**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/precntauth/authmanager/base/queryChainHasAuth?groupId=g1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功1：
+
+```
+true
+```
+
+b、成功2：
+
+```
+false
+```
+
+### 11.2. 查询链环境
+
+#### 接口描述
+
+通过接口查询链是liquid/还是solidity环境
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/base/queryExecEnvIsWasm**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/precntauth/authmanager/base/queryExecEnvIsWasm?groupId=g1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功1：
+
+```
+true
+```
+
+b、成功2：
+
+```
+false
+```
+
+### 11.3.查询治理委员信息(everyone可访问)
+
+#### 接口描述
+
+通过接口查询链的治理委员信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/cmtInfo**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/cmtInfo?groupId=g1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+[
+  {
+    "governorList": [
+      {
+        "governorAddress": "0x015577ab8c903adcf9b65433f16e574d6daf0559",
+        "weight": 1
+      },
+      {
+        "governorAddress": "0x36c10bfbce3b6550ed92a5ebbb9a44e052bfd285",
+        "weight": 2
+      }
+    ],
+    "participatesRate": 100,
+    "winRate": 90
+  }
+]
+```
+
+b、失败：
+
+```
+{
+  "code": 500,
+  "errorMessage": "get Client failed, e: The group not exist, please check the groupID, groupID: g3"
+}
+```
+
+### 11.4. 查询合约管理员信息(everyone可访问)
+
+#### 接口描述
+
+通过接口查询某合约的管理员信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/contract/admin**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId      | String   |              | 是       |          |
+| 2        | 合约地址 | contractAddr | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "contractAddr": "0xB47fd49b0f1Af2Fce3a1824899b60C2b6A29B851",
+  "groupId": "g1"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+0x489877b18f93353c67d252c1b8f4b745d41c2107
+```
+
+b、失败1，查询群组不存在：
+
+```
+{
+  "code": 500,
+  "errorMessage": "get Client failed, e: The group not exist, please check the groupID, groupID: g3"
+}
+```
+
+​    失败2，查询合约地址错误：
+
+```
+{
+  "code": 19,
+  "errorMessage": "Call address error"
+}
+```
+
+​    失败3，查询合约地址不存在：
+
+```
+0x0000000000000000000000000000000000000000
+```
+
+### 11.5. 查询合约函数访问权限(everyone可访问)
+
+#### 接口描述
+
+通过接口查询某用户对某合约函数的访问权限
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/contract/method/auth**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId      | String   |              | 是       |          |
+| 2        | 合约地址 | contractAddr | String   |              | 是       |          |
+| 3        | 合约函数 | func         | String   |              | 是       |          |
+| 4        | 用户地址 | userAddress  | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "contractAddr": "0xB47fd49b0f1Af2Fce3a1824899b60C2b6A29B851",
+  "func": "set",
+  "groupId": "g1",
+  "userAddress": "0x489877b18f93353c67d252c1b8f4b745d41c2107"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+true
+```
+
+b、失败1，查询群组不存在：
+
+```
+{
+  "code": 500,
+  "errorMessage": "get Client failed, e: The group not exist, please check the groupID, groupID: g3"
+}
+```
+
+   失败2，查询合约地址错误：
+
+```
+{
+  "code": 19,
+  "errorMessage": "Call address error"
+}
+```
+
+### 11.6. 查询合约部署权限(everyone可访问)
+
+#### 接口描述
+
+通过接口查询全局合约部署权限
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/deploy/type**
+
+#### 调用方法
+
+HTTP GET	
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5002/WeBASE-Front/precntauth/authmanager/everyone/deploy/type?groupId=g1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功，可部署：
+
+```
+0
+```
+
+b、失败1，查询群组不存在：
+
+```
+{
+  "code": 500,
+  "errorMessage": "get Client failed, e: The group not exist, please check the groupID, groupID: g0"
+}
+```
+
+### 11.7. 查询单一提案信息(everyone可访问)
+
+#### 接口描述
+
+通过接口查询某个提案信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/proposalInfo**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型**   | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | ---------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String     |              | 是       |          |
+| 2        | 提案Id   | proposalId | BigInteger |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "groupId": "g1",
+  "proposalId": 1
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功，可部署：
+
+```
+[
+  {
+    "resourceId": "0xc0523dbdd94ba27e14b0336d799489340ca24cdf",
+    "proposer": "0x015577ab8c903adcf9b65433f16e574d6daf0559",
+    "proposalType": 31,
+    "blockNumberInterval": 604809,
+    "status": 2,
+    "agreeVoters": [
+      "0x015577ab8c903adcf9b65433f16e574d6daf0559"
+    ],
+    "againstVoters": [],
+    "statusString": "finished",
+    "proposalTypeString": "resetAdmin"
+  }
+]
+```
+
+b、失败1，查询提案不存在：
+
+```
+[
+  {
+    "resourceId": "0x0000000000000000000000000000000000000000",
+    "proposer": "0x0000000000000000000000000000000000000000",
+    "proposalType": 0,
+    "blockNumberInterval": 0,
+    "status": 0,
+    "agreeVoters": [],
+    "againstVoters": [],
+    "statusString": "unknown",
+    "proposalTypeString": "unknown"
+  }
+]
+```
+
+### 11.8. 查询提案总数(everyone可访问)
+
+#### 接口描述
+
+通过接口查询某个提案信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/proposalInfo**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5002/WeBASE-Front/precntauth/authmanager/everyone/proposalInfoCount?groupId=g1
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+5
+```
+
+b、失败1，查询提案不存在：
+
+```
+{
+  "code": 500,
+  "errorMessage": "get Client failed, e: The group not exist, please check the groupID, groupID: g0"
+}
+```
+
+### 11.9. 查询提案列表(everyone可访问)
+
+#### 接口描述
+
+通过接口查询某群组提案列表
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/proposalInfo**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明**   |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | ---------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |            |
+| 2        | 页面数   | pageNum    | Integer  |              | 是       | 所在页面   |
+| 3        | 页面大小 | pageSize   | Integer  |              | 是       | 页面数据量 |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5002/WeBASE-Front/precntauth/authmanager/everyone/proposalInfoList
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+[
+  {
+    "resourceId": "0x02a6340ef1d8a780f0ddf01dde9141cc09f678d6",
+    "proposer": "0x015577ab8c903adcf9b65433f16e574d6daf0559",
+    "proposalType": "setWeight",
+    "blockNumberInterval": 604825,
+    "status": "notEnoughVotes",
+    "agreeVoters": [
+      "0x015577ab8c903adcf9b65433f16e574d6daf0559"
+    ],
+    "againstVoters": [],
+    "proposalId": 5
+  },
+  {
+    "resourceId": "0x36c10bfbce3b6550ed92a5ebbb9a44e052bfd285",
+    "proposer": "0x36c10bfbce3b6550ed92a5ebbb9a44e052bfd285",
+    "proposalType": "setWeight",
+    "blockNumberInterval": 604812,
+    "status": "failed",
+    "agreeVoters": [
+      "0x36c10bfbce3b6550ed92a5ebbb9a44e052bfd285"
+    ],
+    "againstVoters": [
+      "0x015577ab8c903adcf9b65433f16e574d6daf0559"
+    ],
+    "proposalId": 4
+  },
+  {
+    "resourceId": "0x0000000000000000000000000000000000010001",
+    "proposer": "0x015577ab8c903adcf9b65433f16e574d6daf0559",
+    "proposalType": "setRate",
+    "blockNumberInterval": 604811,
+    "status": "finished",
+    "agreeVoters": [
+      "0x015577ab8c903adcf9b65433f16e574d6daf0559"
+    ],
+    "againstVoters": [],
+    "proposalId": 3
+  },
+  {
+    "resourceId": "0x36c10bfbce3b6550ed92a5ebbb9a44e052bfd285",
+    "proposer": "0x015577ab8c903adcf9b65433f16e574d6daf0559",
+    "proposalType": "setWeight",
+    "blockNumberInterval": 604810,
+    "status": "finished",
+    "agreeVoters": [
+      "0x015577ab8c903adcf9b65433f16e574d6daf0559"
+    ],
+    "againstVoters": [],
+    "proposalId": 2
+  },
+  {
+    "resourceId": "0xc0523dbdd94ba27e14b0336d799489340ca24cdf",
+    "proposer": "0x015577ab8c903adcf9b65433f16e574d6daf0559",
+    "proposalType": "resetAdmin",
+    "blockNumberInterval": 604809,
+    "status": "finished",
+    "agreeVoters": [
+      "0x015577ab8c903adcf9b65433f16e574d6daf0559"
+    ],
+    "againstVoters": [],
+    "proposalId": 1
+  }
+]
+```
+
+### 11.10. 查询用户全局部署权限(everyone可访问)
+
+#### 接口描述
+
+通过接口查询用户全局部署权限
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/everyone/usr/deploy**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ----------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId     | String   |              | 是       |          |
+| 2        | 用户地址 | userAddress | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "groupId": "g1",
+  "userAddress": "0x489877b18f93353c67d252c1b8f4b745d41c2107"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+true
+```
+
+### 11.11. 设置合约的访问权限类型(admin可访问)
+
+#### 接口描述
+
+通过接口设置合约的访问权限类型
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/admin/method/auth/type**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**   | **类型** | **最大长度** | **必填** | **说明**           |
+| -------- | ---------- | ------------ | -------- | ------------ | -------- | ------------------ |
+| 1        | 群组Id     | groupId      | String   |              | 是       |                    |
+| 2        | 调用地址   | fromAddress  | String   |              | 否       |                    |
+| 3        | 合约地址   | contractAddr | String   |              | 是       |                    |
+| 4        | 合约函数   | func         | String   |              | 是       |                    |
+| 5        | 用户签名Id | signUserId   | String   |              | 是       |                    |
+| 6        | 权限类型   | authType     | Integer  |              | 是       | 1.白名单；2.黑名单 |
+
+**2）数据格式**
+
+```
+{
+  "authType": 1,
+  "contractAddr": "4721d1a77e0e76851d460073e64ea06d9c104194",
+  "fromAddress": "0xe88ff54644de54fa32ac845c05ed2b7d5677c078",
+  "func": "set",
+  "groupId": "group0",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 11.12. 设置某用户对合约的访问权限(admin可访问)
+
+#### 接口描述
+
+通过接口设置某用户对合约函数的访问权限
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/admin/method/auth/set**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id       | groupId      | String   |              | 是       |          |
+| 2        | 调用地址     | fromAddress  | String   |              | 否       |          |
+| 3        | 合约地址     | contractAddr | String   |              | 是       |          |
+| 4        | 合约函数     | func         | String   |              | 是       |          |
+| 5        | 用户签名Id   | signUserId   | String   |              | 是       |          |
+| 6        | 是否开启权限 | isOpen       | Boolean  |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "contractAddr": "0xB47fd49b0f1Af2Fce3a1824899b60C2b6A29B851",
+  "fromAddress": "0x489877b18f93353c67d252c1b8f4b745d41c2107",
+  "func": "set",
+  "groupId": "g1",
+  "isOpen": true,
+  "signUserId": "string",
+  "userAddress": "0x489877b18f93353c67d252c1b8f4b745d41c2107"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 11.13. 设置某合约的管理员(committee可访问)
+
+#### 接口描述
+
+通过接口设置某合约的管理员
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/committee/contract/admin**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**     | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ------------ | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id       | groupId      | String   |              | 是       |          |
+| 2        | 调用地址     | fromAddress  | String   |              | 否       |          |
+| 3        | 合约地址     | contractAddr | String   |              | 是       |          |
+| 4        | 合约新管理员 | newAdmins    | String   |              | 是       |          |
+| 5        | 用户签名Id   | signUserId   | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "contractAddr": "4721d1a77e0e76851d460073e64ea06d9c104194",
+  "fromAddress": "0x70da1da76e0e423ec582ec866fae749af67ec4c0",
+  "groupId": "group0",
+  "newAdmin": "0x70da1da76e0e423ec582ec866fae749af67ec4c0",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 11.14. 设置全局部署权限(committee可访问)
+
+#### 接口描述
+
+通过接口设置全局部署类型
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/committee/deploy/type**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**     | **类型** | **最大长度** | **必填** | **说明**           |
+| -------- | ---------- | -------------- | -------- | ------------ | -------- | ------------------ |
+| 1        | 群组Id     | groupId        | String   |              | 是       |                    |
+| 2        | 调用地址   | fromAddress    | String   |              | 否       |                    |
+| 3        | 部署类型   | deployAuthType | Integer  |              | 是       | 1.白名单；2.黑名单 |
+| 4        | 用户签名Id | signUserId     | String   |              | 是       |                    |
+
+**2）数据格式**
+
+```
+{
+  "deployAuthType":1,
+  "fromAddress": "",
+  "groupId": "group0",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 11.15. 设置治理委员账户(committee可访问)
+
+#### 接口描述
+
+通过接口设置治理委员(新增/更新/删除)
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/committee/governor**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**     | **类型** | **最大长度** | **必填** | **说明**         |
+| -------- | ---------- | -------------- | -------- | ------------ | -------- | ---------------- |
+| 1        | 群组Id     | groupId        | String   |              | 是       |                  |
+| 2        | 调用地址   | fromAddress    | String   |              | 否       |                  |
+| 3        | 账户地址   | accountAddress | Integer  |              | 是       | 对该账户进行操作 |
+| 4        | 分配权重   | weight         | Integer  |              | 是       |                  |
+| 5        | 用户签名Id | signUserId     | String   |              | 是       |                  |
+
+**2）数据格式**
+
+```
+{
+  "accountAddress": "0xe88ff54644de54fa32ac845c05ed2b7d5677c078",
+  "fromAddress": "",
+  "groupId": "group0",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31",
+  "weight": 5
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+a、成功：
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 11.16. 设置治理阈值(committee可访问)
+
+#### 接口描述
+
+通过接口设置治理阈值
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/committee/rate**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**       | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ---------- | ---------------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id     | groupId          | String   |              | 是       |          |
+| 2        | 调用地址   | fromAddress      | String   |              | 否       |          |
+| 3        | 参与阈值   | participatesRate | Integer  |              | 是       |          |
+| 4        | 获胜阈值   | winRate          | Integer  |              | 是       |          |
+| 5        | 用户签名Id | signUserId       | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "fromAddress": "string",
+  "groupId": "group0",
+  "participatesRate": 51,
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31",
+  "winRate": 51
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 11.17. 对提案投票(committee可访问)
+
+#### 接口描述
+
+通过接口设置对提案进行投票
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/committee/proposal/vote**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**  | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ---------- | ----------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id     | groupId     | String   |              | 是       |          |
+| 2        | 调用地址   | fromAddress | String   |              | 否       |          |
+| 3        | 提案Id     | proposalId  | Integer  |              | 是       |          |
+| 4        | 是否同意   | agree       | Boolean  |              | 是       |          |
+| 5        | 用户签名Id | signUserId  | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "agree": true,
+  "fromAddress": "string",
+  "groupId": "group0",
+  "proposalId": 55,
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 11.18.撤销提案(committee可访问)
+
+#### 接口描述
+
+通过接口设置撤销某提案
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/authmanager/committee/proposal/revoke**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**  | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ---------- | ----------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id     | groupId     | String   |              | 是       |          |
+| 2        | 调用地址   | fromAddress | String   |              | 否       |          |
+| 3        | 提案Id     | proposalId  | Integer  |              | 是       |          |
+| 4        | 用户签名Id | signUserId  | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "fromAddress": "string",
+  "groupId": "group0",
+  "proposalId": 55,
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+**1）数据格式**
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+## 12. 预编译合约管理
+
+
+### 12.1. 创建BFS路径
+
+#### 接口描述
+
+通过接口创建BFS
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/bfs/create**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文**   | **参数名**  | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | ---------- | ----------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id     | groupId     | String   |              | 是       |          |
+| 2        | 调用地址   | fromAddress | String   |              | 否       |          |
+| 3        | 创建路径   | path        | String   |              | 是       |          |
+| 4        | 用户签名Id | signUserId  | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "fromAddress": "",
+  "groupId": "group0",
+  "path": "/apps/test9",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 12.2. 查询BFS路径
+
+#### 接口描述
+
+通过接口查询BFS
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/bfs/query**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+| 2        | 查询路径 | path       | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "groupId": "group0",
+  "path": "/apps"
+}
+```
+
+#### 响应参数
+
+```
+[
+  "test",
+  "test1"
+]
+```
+
+### 12.3. 通过contractName查询合约信息
+
+#### 接口描述
+
+通过groupId和contractName查询合约信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/cns/queryCnsByName**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId      | String   |              | 是       |          |
+| 2        | 合约名称 | contractName | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "contractName": "HelloWorld",
+  "groupId": "group0"
+}
+```
+
+#### 响应参数
+
+```
+[
+  {
+    "name": "HelloWorld",
+    "version": "1.0",
+    "address": "4721d1a77e0e76851d460073e64ea06d9c104194",
+    "abi": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+  },
+  {
+    "name": "HelloWorld",
+    "version": "2.0",
+    "address": "4721d1a77e0e76851d460073e64ea06d9c104194",
+    "abi": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+  }
+]
+```
+
+### 12.4. 通过contractName和version查询合约信息
+
+#### 接口描述
+
+通过groupId、contractName、version查询合约信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/cns/queryCnsByNameVersion**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId      | String   |              | 是       |          |
+| 2        | 合约名称 | contractName | String   |              | 是       |          |
+| 3        | 合约版本 | version      | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "contractName": "HelloWorld",
+  "groupId": "group0",
+  "version": "1.0"
+}
+```
+
+#### 响应参数
+
+```
+{
+  "address": "0x4721d1a77e0e76851d460073e64ea06d9c104194",
+  "abi": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+}
+```
+
+### 12.5. 通过contractName/groupId/version查询合约地址
+
+#### 接口描述
+
+通过contractName/groupId/version参数查询合约地址
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/cns/queryCnsByNameVersion**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId      | String   |              | 是       |          |
+| 2        | 合约名称 | contractName | String   |              | 是       |          |
+| 3        | 合约版本 | version      | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "contractName": "HelloWorld",
+  "groupId": "group0",
+  "version": "1.0"
+}
+```
+
+#### 响应参数
+
+```
+0x4721d1a77e0e76851d460073e64ea06d9c104194
+```
+
+### 12.6. 注册合约
+
+#### 接口描述
+
+通过接口注册合约信息
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/cns/reqAddressInfoByNameVersion**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId      | String   |              | 是       |          |
+| 2        | 合约名称 | contractName | String   |              | 是       |          |
+| 3        | 合约版本 | version      | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "abiData": "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"n\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+  "contractAddress": "4721d1a77e0e76851d460073e64ea06d9c104194",
+  "contractName": "HelloWorld",
+  "contractVersion": "1.0",
+  "fromAddress": "",
+  "groupId": "group0",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 12.7. 查询共识节点列表
+
+#### 接口描述
+
+通过接口查询共识节点列表
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/consensus/list**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+| 2        | 页面数   | pageNumber | Integer  |              | 是       |          |
+| 3        | 页面大小 | pageSize   | Integer  |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "groupId": "group0",
+  "pageNumber": 1,
+  "pageSize": 5
+}
+```
+
+#### 响应参数
+
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": [
+    {
+      "nodeId": "6447e978505cafd05fc99b731d8fdff31fb07a3c6e9679054fb1880ae6f58aeff638eacfe082d54adca93086c2986bc27a5befeabb7ba39728e24c7da9c786e9",
+      "nodeType": "sealer",
+      "weight": 1
+    },
+    {
+      "nodeId": "b14bd4a225db308da3f395c69f12ce06f191ff19941d52eebf30cfb5fc979422ad086fedb0378fdcfbcb4630416e71c34aeb421f4fe51792408283bfd7338099",
+      "nodeType": "sealer",
+      "weight": 1
+    },
+    {
+      "nodeId": "848883c435d5c7e32da7744ffb0659538995994a42c24ec7da81a2fd58cd28e76fbaaf603b81f9134d22f57d112cdbd701cece549121b99f5e436daec11b3267",
+      "nodeType": "sealer",
+      "weight": 1
+    },
+    {
+      "nodeId": "5007b294c7aadd22d62e0c5e33bae14ee6ec0230ebd34df23f29f0330272f6021fd3a8f2b4a4789f1e2fe7fbc8581c1d371883d9eb1e16a9266905f36d57ab8b",
+      "nodeType": "sealer",
+      "weight": 1
+    }
+  ],
+  "totalCount": 4
+}
+```
+
+### 12.8. 修改共识节点类型
+
+#### 接口描述
+
+通过接口查询共识节点列表
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/consensus/manage**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ----------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId     | String   |              | 是       |          |
+| 2        | 调用地址 | fromAddress | String   |              | 否       |          |
+| 3        | 节点Id   | nodeId      | String   |              | 是       |          |
+| 4        | 节点类型 | nodeType    | String   |              | 是       |          |
+| 5        | 签名Id   | signUserId  | String   |              | 是       |          |
+| 6        | 权重     | weight      | Integer  |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "fromAddress": "0x2abd2fc35c4553b1f1aa6cf70a4e6ef30b4d53a2",
+  "groupId": "group0",
+  "nodeId": "5007b294c7aadd22d62e0c5e33bae14ee6ec0230ebd34df23f29f0330272f6021fd3a8f2b4a4789f1e2fe7fbc8581c1d371883d9eb1e16a9266905f36d57ab8b",
+  "nodeType": "observer",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31",
+  "weight": 1
+}
+```
+
+#### 响应参数
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 12.9. 建表
+
+#### 接口描述
+
+通过接口插入新的表结构
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/kvtable/reqCreateTable**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**   | **类型** | **最大长度** | **必填** | **说明**     |
+| -------- | -------- | ------------ | -------- | ------------ | -------- | ------------ |
+| 1        | 群组Id   | groupId      | String   |              | 是       |              |
+| 2        | 调用地址 | fromAddress  | String   |              | 否       |              |
+| 3        | 主键     | keyFieldName | String   |              | 是       |              |
+| 4        | 值描述   | valueFields  | List     |              | 是       | 对表进行描述 |
+| 5        | 签名Id   | signUserId   | String   |              | 是       |              |
+| 6        | 表名     | tableName    | String   |              | 是       |              |
+
+**2）数据格式**
+
+```
+{
+  "fromAddress": "string",
+  "groupId": "group0",
+  "keyFieldName": "myKey",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31",
+  "tableName": "test_table",
+  "valueFields": [
+    "valueIsData"
+  ]
+}
+```
+
+#### 响应参数
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 12.10. 写表
+
+#### 接口描述
+
+通过接口在表插入数据
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/kvtable/reqSetTable**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**       | **类型** | **最大长度** | **必填** | **说明**   |
+| -------- | -------- | ---------------- | -------- | ------------ | -------- | ---------- |
+| 1        | 群组Id   | groupId          | String   |              | 是       |            |
+| 2        | 调用地址 | fromAddress      | String   |              | 否       |            |
+| 3        | 主键     | key              | String   |              | 是       |            |
+| 4        | 对应值   | fieldNameToValue | JSON     |              | 是       | 写入JSON值 |
+| 5        | 签名Id   | signUserId       | String   |              | 是       |            |
+| 6        | 表名     | tableName        | String   |              | 是       |            |
+
+**2）数据格式**
+
+```
+{
+  "fieldNameToValue": {
+    "key1": "hi",
+    "key2": "hello",
+    "key3": "how are u"
+  },
+  "fromAddress": "string",
+  "groupId": "group0",
+  "key": "myKey",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31",
+  "tableName": "test_table"
+}
+```
+
+#### 响应参数
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+### 12.11. 读表
+
+#### 接口描述
+
+通过接口在表读取数据
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/kvtable/reqGetTable**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**       | **类型** | **最大长度** | **必填** | **说明**   |
+| -------- | -------- | ---------------- | -------- | ------------ | -------- | ---------- |
+| 1        | 群组Id   | groupId          | String   |              | 是       |            |
+| 2        | 调用地址 | fromAddress      | String   |              | 否       |            |
+| 3        | 主键     | key              | String   |              | 是       |            |
+| 4        | 对应值   | fieldNameToValue | JSON     |              | 是       | 写入JSON值 |
+| 5        | 签名Id   | signUserId       | String   |              | 是       |            |
+| 6        | 表名     | tableName        | String   |              | 是       |            |
+
+**2）数据格式**
+
+```
+{
+  "groupId": "group0",
+  "key": "myKey",
+  "tableName": "test_table"
+}
+```
+
+#### 响应参数
+
+```
+{
+  "key2": "hello",
+  "key1": "hi",
+  "key3": "how are u"
+}
+```
+
+### 12.12. 获取群组系统配置
+
+#### 接口描述
+
+通过接口读取某个群组的系统配置
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/sys/config/list**
+
+#### 调用方法
+
+HTTP GET
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名** | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ---------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId    | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+http://127.0.0.1:5002/WeBASE-Front/precntauth/precompiled/sys/config/list?groupId=group0
+```
+
+#### 响应参数
+
+```
+[
+  {
+    "groupId": "group0",
+    "configKey": "tx_count_limit",
+    "configValue": "10"
+  },
+  {
+    "groupId": "group0",
+    "configKey": "tx_gas_limit",
+    "configValue": "300000002"
+  }
+]
+```
+
+### 12.13. 设置群组系统配置
+
+#### 接口描述
+
+通过接口设置某个群组的系统配置
+
+#### 接口URL
+
+**http://localhost:5002/WeBASE-Front/precntauth/precompiled/sys/config/list**
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明** |
+| -------- | -------- | ----------- | -------- | ------------ | -------- | -------- |
+| 1        | 群组Id   | groupId     | String   |              | 是       |          |
+| 2        | 调用地址 | fromAddress | String   |              | 否       |          |
+| 3        | 配置主键 | configKey   | String   |              | 是       |          |
+| 4        | 配置值   | configValue | String   |              | 是       |          |
+| 5        | 签名Id   | signUserId  | String   |              | 是       |          |
+
+**2）数据格式**
+
+```
+{
+  "configKey": "tx_count_limit",
+  "configValue": "5",
+  "fromAddress": "string",
+  "groupId": "group0",
+  "signUserId": "5db5a98aef544650aa3864f4cb27af31"
+}
+```
+
+#### 响应参数
+
+```
+{
+  "code" : 0,
+  "message" : "success",
+  "data" : "Success"
+}
+```
+
+##  附录
 
 ### 1. 返回码信息列表 
 <span id="code"></span>
