@@ -15,8 +15,10 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 5. 系统管理
 6. 系统监控
 7. 交易审计
-8. 账号管理
-
+8. 订阅事件
+9. 账号管理
+10. 移动端管理台
+11. 数据监控大屏
 
 ![](../../images/WeBASE-Console-Suit/overview_2.png)
 
@@ -37,6 +39,12 @@ WeBASE管理平台是由四个WeBASE子系统组成的一套管理FISCO-BCOS联�
 2. 如果是开发企业级应用，建议使用企业部署工具[FISCO-BCOS generator](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/enterprise_tools/index.html)。
 
 两者的主要区别在于build_chain为了使体验更好，搭建速度更快，辅助生成了群组内各个节点的私钥；但企业部署工具出于安全的考虑不辅助生成私钥，需要用户自己生成并设置。
+
+##### Liquid支持
+
+如果使用的`liquid`合约的链，并在WeBASE管理台或WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机配置Liquid环境，可参考WeBASE-Front节点前置文档中的[Liquid配置](../WeBASE-Front/liquid.md)或[Liquid官方配置文档](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
+
+配置好Liquid环境后，需要重启WeBASE-Front
 
 ### WeBASE管理平台搭建
 
@@ -77,7 +85,9 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 未初始化节点前置的管理平台，会引导去节点管理页面添加节点前置。
 - 节点前置服务需要填写前置的IP与端口（默认为`127.0.0.1`和`5002`），机构名则根据实际自定义填写
 
-![](../../images/WeBASE-Console-Suit/node_manager_add_front.png)
+<!-- ![](../../images/WeBASE-Console-Suit/node_manager_add_front.png) -->
+![](../../images/WeBASE-Console-Suit/lab/new_front.png)
+
 
 前置添加完成后，管理平台就会开始拉取群组信息和群组的区块信息。此时数据概览页面应该就有数据了。为了解析和审计区块数据，需要把相关的合约和用户导入到管理平台。具体看下面两个小节。
 
@@ -101,7 +111,7 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ![](../../images/WeBASE-Console-Suit/contract_send_transaction.png)
 
-交易发送成功后，将返回交易回执。可以在数据概览-交易列表-更多中根据transactionHash搜索交易，通过交易解析和Event解析查看可视化的交易回执信息。具体操作方法参考下文的区块链数据概览章节中的交易解析与Event解析。
+交易发送成功后，将返回交易回执。可以在数据概览-交易列表-更多中根据transactionHash搜索交易，通过交易解析和Event解析查看可视化的交易回执信息。具体操作方法参考下文的区块链数据概览章节中的交易解析与Event解析。(注：Liquid合约的交易暂未支持交易解析）
 
 ![](../../images/WeBASE-Console-Suit/transaction_output.png)
 
@@ -132,11 +142,11 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 ![](../../images/WeBASE-Console-Suit/transaction_analysis_raw.png)
 
-进行交易解析后如下图所示：
+进行交易解析后如下图所示：(注：Liquid合约的交易暂未支持交易解析）
 
 ![](../../images/WeBASE-Console-Suit/transaction_analysis.png)
 
-同样的，Event数据解析后可以看到：
+同样的，Event数据解析后可以看到：(注：Liquid合约的交易暂未支持交易解析）
 
 ![](../../images/WeBASE-Console-Suit/transaction_event.png)
 
@@ -164,6 +174,8 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 图形化合约IDE提供了一整套的合约管理工具：新建合约，保存合约，编译合约，部署合约，调用合约接口。其中，新建合约可以通过编辑键入合约内容，也可以上传合约文件；编译合约后才可以部署合约；部署合约成功后，可以通过发送交易调用合约接口。具体操作步骤可以参考上一章节中系统初始化配置介绍。
 
 合约IDE：
+- 进行Liquid合约编译需要在WeBASE-Front所在主机配置Liquid环境，可参考WeBASE-Front节点前置文档中的[Liquid配置](../WeBASE-Front/liquid.md)或参考[Liquid环境配置](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)进行配置后方可使用。
+- 若当前群组属于Liquid群组（Wasm群组），合约IDE将自动切换至Liquid编译模式，并自动检查是否已在节点前置所在主机配置Liquid环境。
 
 ![](../../images/WeBASE-Console-Suit/contract_ide.png)
 
@@ -171,7 +183,8 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 
 已登记合约：包含通过IDE部署的合约、导入ABI的合约
 
-![](../../images/WeBASE-Console-Suit/contract_list.png)
+<!-- ![](../../images/WeBASE-Console-Suit/contract_list.png) -->
+![](../../images/WeBASE-Console-Suit/lab/contract_list.png)
 
 链上全量合约：包含通过其他平台部署到链上的合约与WeBASE已登记的合约（链上合约只有合约地址），可通过导入按钮，填入合约ABI导入到本地
 
@@ -181,6 +194,30 @@ WeBASE管理台使用框架`vue-cli`，具体搭建流程参见[《WeBASE管理�
 ABI编码：支持对ABI的方法与入参进行编码
 
 ![](../../images/WeBASE-Console-Suit/abi_analysis.png)
+
+
+合约仓库：合约仓库是WeBASE整理社区贡献者所贡献的合约案例，其中包含基础的工具合约、存证合约、积分合约等。
+
+![](../../images/WeBASE-Console-Suit/lab/contract_warehouse.png)
+
+
+CNS查询：CNS（Contract Name Service）是通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。详情可查看FISCO-BCOS文档的 [CNS方案](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/design/features/cns_contract_name_service.html#cns)
+
+注册CNS后，CNS可以根据合约名和合约版本号查询CNS信息(合约名和合约版本号用英文冒号连接)。若缺失合约版本号，则返回所有符合合约名的合约信息。
+- 需要在合约管理页面部署合约时**勾选CNS**，或合约列表页面中点击**CNS注册**，即可完成注册
+
+![](../../images/WeBASE-Console-Suit/new_cns_index.png)
+
+
+EventLog查看：支持输入合约地址和ABI、区块范围和Event名，即可查询并同步返回
+
+![EventLog](../../images/WeBASE-Console-Suit/event_sync_query.png)
+
+BFS：BFS（BBlockchain File System）是FISCO BCOS 3.0中新增的功能，可通过类似文件系统的方式查看链上所部署的合约，详情请参考[BFS文档](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/design/contract_directory.html)
+- 部署的合约会在`/apps`目录下产生一个合约文件
+
+![](../../images/WeBASE-Console-Suit/lab/bfs_manage.png)
+
 
 ### 私钥管理
 
@@ -211,7 +248,16 @@ ABI编码：支持对ABI的方法与入参进行编码
 
 ### 系统管理
 
-系统管理目前支持系统配置管理、证书管理的功能。
+系统管理目前支持权限管理、系统配置管理、证书管理的功能。
+
+**权限管理**：在FISCO BCOS3.0中，链上角色按照不同的权责可划分为三类：治理角色、合约管理员角色和用户角色，三种角色依次进行管理和被管理。详情可参考[FISCO BCOS权限治理体系设计](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/design/committee_design.html)和[FISCO BCOS权限治理使用指南](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/develop/committee_usage.html)
+
+值得注意的是，在区块链初始化启动之前，在配置中必须**开启并设置好权限治理的配置**，才能正确启动权限治理模式。区块链启动后再配置将不起作用。详细方法参考[FISCO BCOS权限治理使用指南](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/develop/committee_usage.html)
+- 开启权限治理模式的主要要点是：将`is_auth_check`选项置为`true`，`auth_admin_account`初始委员会账户地址需要配置正确的地址。FISCO BCOS不同的节点部署模式，开启权限治理的方式略有不同
+- 开启权限后，需要**在WeBASE权限管理页面中导入对应的链管理员私钥**
+
+![](../../images/WeBASE-Console-Suit/lab/permission_home.png)
+
 
 **系统配置管理**：系统属性包含FISCO-BCOS链的tx_count_limit和tx_gas_limit两种属性值的配置。注：一般不建议随意修改tx_count_limit和tx_gas_limit，如下情况可修改这些参数：
 - 机器网络或CPU等硬件性能有限：调小tx_count_limit，降低业务压力； 
@@ -331,6 +377,17 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 
 ![](../../images/WeBASE-Console-Suit/abnormal_contract.png)
 
+### 订阅事件
+
+订阅事件管理：可查看前置中已订阅的链上事件通知，包括出块事件列表和合约Event事件列表。详情请参考[节点前置-链上事件订阅和通知](../WeBASE-Front/appendix.html#event_subscribe)
+
+出块事件列表：
+
+![](../../images/WeBASE-Console-Suit/event_new_block.png)
+
+合约Event事件列表：
+![](../../images/WeBASE-Console-Suit/event_contract_event.png)
+
 ### 账号管理
 
 账号管理提供管理台登陆账号的管理功能。管理台用户分为三种角色：
@@ -353,6 +410,29 @@ FISCO-BCOS证书说明可以参考FISCO-BCOS使用手册的[证书说明](https:
 添加登陆账号并指定账号类型：
 
 ![](../../images/WeBASE-Console-Suit/login_user_add_2.png)
+
+
+### 移动端管理台
+
+移动端管理台：支持区块链数据概览、链上合约、链上用户、节点列表、区块列表和交易列表的展示
+- 在移动端设备访问WeBASE时将自动切换到移动端管理台页面
+
+![](../../images/WeBASE-Console-Suit/web_mobile.png)
+
+### 数据监控大屏
+
+数据监控大屏页面的入口位于WeBASE管理台的左上角，点击“数据大屏”即可进入数据监控大屏，适用于企业级控制中心需要全局监控链状态数据的场景。
+- 数据大屏每次仅展示单个群组的数据，并定时访问后台刷新数据。
+
+![](../../images/WeBASE-Console-Suit/lab/big_screen_lab.png)
+
+在“节点管理”中，可以点击节点列表中的“备注”按钮，为数据大屏中的节点配置IP地址、机构名与城市。
+
+![](../../images/WeBASE-Console-Suit/ecc_node_desc.png)
+
+在右上角的“群组管理”中，可以点击群组列表的“备注”按钮，为数据大屏中的群组配置群组应用名（标题）
+
+![](../../images/WeBASE-Console-Suit/ecc_group_desc.png)
 
 
 ## 升级兼容说明
