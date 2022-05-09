@@ -123,7 +123,9 @@ cd webase-deploy
 
 ​    如果不使用一键部署搭建新链，可以参考FISCO BCOS官方文档搭建 [FISCO BCOS部署流程](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos)；
 
-- 如果使用的`liquid`合约的链，并在WeBASE管理台或WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机[配置Liquid环境](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
+- 如果使用的`liquid`合约的链（`fisco.wasm=1`），并在WeBASE管理台或WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机[配置Liquid环境](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)后，才能通过WeBASE编译Liquid合约
+
+- 启用链的权限管理功能时（`fisco.auth=1`），建链后会在`webase-deploy/nodes/ca`目录生成一个链管理员私钥（包含国密与非国密），需要在WeBASE管理台的权限管理页面中**导入该私钥**才能进行权限管理。
 
 
 ④ 服务端口不能小于1024

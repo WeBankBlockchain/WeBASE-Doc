@@ -254,7 +254,7 @@ BFS：BFS（BBlockchain File System）是FISCO BCOS 3.0中新增的功能，可�
 
 值得注意的是，在区块链初始化启动之前，在配置中必须**开启并设置好权限治理的配置**，才能正确启动权限治理模式。区块链启动后再配置将不起作用。详细方法参考[FISCO BCOS权限治理使用指南](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/docs/develop/committee_usage.html)
 - 开启权限治理模式的主要要点是：将`is_auth_check`选项置为`true`，`auth_admin_account`初始委员会账户地址需要配置正确的地址。FISCO BCOS不同的节点部署模式，开启权限治理的方式略有不同
-- 开启权限后，需要**在WeBASE权限管理中导入对应的链管理员私钥**
+- 开启权限后，需要**在WeBASE权限管理页面中导入对应的链管理员私钥**
 
 ![](../../images/WeBASE-Console-Suit/lab/permission_home.png)
 
