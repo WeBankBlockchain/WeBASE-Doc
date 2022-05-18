@@ -299,6 +299,7 @@ public class HelloWorld extends Contract {
     <version>1.2.79</version>
 </dependency>
 
+<!-- 本实例没有用到本地发送交易所以可以不用引入该依赖 -->
 <!-- fisco-jdk -->
 <dependency>
     <groupId>org.fisco-bcos.java-sdk</groupId>
@@ -316,7 +317,9 @@ public class HelloWorld extends Contract {
 
 3. 在 springboot 项目的 src/main/resources 下新建 fisco-config.xml
 
-具体可观看[javaSDK配置文件](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk/configuration.html#xml)
+> 注意：利用 WeBASE-Front 发送交易的可以不用这步
+
+具体可观看[javaSDK 配置文件](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk/configuration.html#xml)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -381,24 +384,20 @@ public class HelloWorld extends Contract {
 
 [创建私钥接口](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html#id105)
 
+[交易处理接口（本地签名）](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html#id399)
+
 ```java
 package com.blockchain.controller;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.blockchain.controller.blockchainResource.HelloWorld;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.fisco.bcos.sdk.BcosSDK;
-import org.fisco.bcos.sdk.client.Client;
-import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
-import org.fisco.bcos.sdk.model.TransactionReceipt;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -421,6 +420,9 @@ import java.util.Properties;
 public class Task {
     // 调用WeBASE-Front接口/contract/deploy 来实现合约部署
     private static final String deployUrl = "http://localhost:5002/WeBASE-Front/contract/deploy";
+
+    // 发送交易的WeBASE-Front接口/trans/handle
+    private static final String tradeUrl = "http://localhost:5002/WeBASE-Front/trans/handle";
 
     // 合约ABI接口信息
     private static final String deploy_abi = "[{ \"constant\": false, \"inputs\": " +
@@ -457,11 +459,6 @@ public class Task {
             "090555060010161028c565b5090565b905600a165627a7a72305820aa8d37bec7b8a85e32740629893aa0bd08" +
             "94e6eadefe527bc854f28f9493d1fd0029";
 
-
-    private Client client;
-    private CryptoKeyPair cryptoKeyPair;
-    private HelloWorld helloWorld;
-
     /**
      * 发送 post 请求
      *
@@ -496,6 +493,11 @@ public class Task {
         return result;
     }
 
+    /**
+     * @return 返回合约部署完成的地址
+     * @author 鲤鱼乡
+     * date 2022-05-18 下午 7:46
+     */
     private static String contractDeployment(String userAddress) {
         // 新建一个对象用于承载数据，来自fastjson依赖，底层为Map，
         JSONObject jsonObj = new JSONObject();
@@ -515,34 +517,60 @@ public class Task {
         return responseStr;
     }
 
+    /**
+     * info 要发送交易数据以及发送请求
+     *
+     * @author 鲤鱼乡
+     * date 2022-05-18 下午 8:05
+     */
+    public static byte[] tradeData(String userAddress, String contractAddress, String val) {
+        // 新建一个对象用于承载数据，来自fastjson依赖，底层为Map，
+        JSONObject jsonObj = new JSONObject();
+        // 要调用的用户地址
+        jsonObj.put("user", userAddress);
+        // 调用的所属群组
+        jsonObj.put("groupId", 1);
+        // 要调用的合约名称
+        jsonObj.put("contractName", "HelloWorld");
+        // 调用的合约地址
+        jsonObj.put("contractAddress", contractAddress);
+        //调用的合约方法名
+        jsonObj.put("funcName", "set");
+        // 此处ABI原为json格式，因为JSONObject对象要序列化为json格式，避免重复序列化所以先将ABI转为java对象
+        jsonObj.put("contractAbi", JSONUtil.parseArray(deploy_abi));
+        //调用合约的方法参数
+        // 传入的参数要求以数组形式
+        Object[] params = {val};
+        jsonObj.put("funcParam", params);
+        //是否使用cns调用
+        jsonObj.put("useCns", false);
 
-    public void init() throws Exception {
-        //初始化合约
-        @SuppressWarnings("resource")
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:fisco-config.xml");
-        BcosSDK bcosSDK = context.getBean(BcosSDK.class);
-        client = bcosSDK.getClient(1);
-        cryptoKeyPair = client.getCryptoSuite().createKeyPair();
-        client.getCryptoSuite().setCryptoKeyPair(cryptoKeyPair);
-    }
-
-    @GetMapping("deploy")
-    public void deployAssetAndRecordAddr(String userAddress) {
-        /**
-         * 说明
-         * userAddress 为前端通过 'http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test' 创建私钥的接口
-         * 获取到的该用户的地址
-         */
-        //部署合约获取到合约地址
+        // 创建httpClient
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        // 创建post请求方式实例
+        HttpPost httpPost = new HttpPost(tradeUrl);
+        // 设置请求头 发送的是json数据格式
+        httpPost.setHeader("Content-type", "application/json;charset=utf-8");
+        // 设置参数---设置消息实体 也就是携带的数据
+        StringEntity entity = new StringEntity(jsonObj.toJSONString(), StandardCharsets.UTF_8);
+        // 设置编码格式
+        entity.setContentEncoding("UTF-8");
+        // 发送Json格式的数据请求
+        entity.setContentType("application/json");
+        // 把请求消息实体塞进去
+        httpPost.setEntity(entity);
+        // 执行http的post请求
+        CloseableHttpResponse httpResponse;
+        byte[] result = null;
         try {
-            String contractAddress = contractDeployment(userAddress);
-            //获取到的合约地址传给函数--recordAssetAddr
-            recordAssetAddr(contractAddress);
-        } catch (Exception e) {
-            System.out.println(" deploy Asset contract failed, error message is  " + e.getMessage());
+            httpResponse = httpClient.execute(httpPost);
+            result = EntityUtils.toByteArray(httpResponse.getEntity());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return result;
     }
+
 
     /**
      * info 保存地址
@@ -561,9 +589,8 @@ public class Task {
     }
 
     /**
-     * info 获取地址
+     * info 从文件中获取地址
      *
-     * @return java.lang.String
      * @author 鲤鱼乡
      * date 2022-05-17 下午 8:56
      */
@@ -579,19 +606,51 @@ public class Task {
         return contractAddress;
     }
 
-    // 调用HelloWorld合约的set接口
-    @GetMapping("/set")
-    public String setHelloWorld(@RequestParam(value = "val", required = false, defaultValue = "default val") String val) throws Exception {
+    /**
+     * info 调用 WeBASE-Front 接口实现合约部署
+     * @author 鲤鱼乡
+     * date 2022-05-18 下午 8:26
+     * @param userAddress
+     */
+    @GetMapping("deploy")
+    public void deployAssetAndRecordAddr(String userAddress) {
+        /**
+         * 说明
+         * userAddress 为前端通过 'http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test' 创建私钥的接口
+         * 获取到的该用户的地址
+         */
+        //部署合约获取到合约地址
         try {
-            String contractAddress = loadAssetAddr();
-            helloWorld = HelloWorld.load(contractAddress, client, cryptoKeyPair);
-            // 调用HelloWorld合约的set接口
-            TransactionReceipt receipt = helloWorld.set(val);
-            System.out.println("-----call HelloWorld get success------:" + receipt.getMessage());
-            return "setHelloWorld success";
+            String contractAddress = contractDeployment(userAddress);
+            //获取到的合约地址传给函数--recordAssetAddr
+            recordAssetAddr(contractAddress);
         } catch (Exception e) {
-            return (" query asset account failed, error message is %s\n" + e.getMessage());
+            System.out.println(" deploy Asset contract failed, error message is  " + e.getMessage());
         }
+    }
+
+    /**
+     * info 利用 WeBASE-Front 发送交易
+     *
+     * @author 鲤鱼乡
+     * date 2022-05-18 下午 8:25
+     */
+    @GetMapping("/set")
+    public void setHelloWorld(@RequestParam(value = "val", required = false, defaultValue = "default val") String val,
+                              @RequestParam(value = "userAddress", required = false) String userAddress) throws Exception {
+        /**
+         * 说明
+         * userAddress 为前端通过 'http://localhost:5002/WeBASE-Front/privateKey?type=0&userName=test' 创建私钥的接口
+         * 获取到的该用户的地址
+         */
+        if (!StrUtil.hasEmpty(userAddress)) {
+            String contractAddress = loadAssetAddr();
+            //调用接口发送交易
+            tradeData(userAddress, contractAddress, val);
+        } else {
+            System.out.println("用户地址不能为空");
+        }
+
     }
 }
 
