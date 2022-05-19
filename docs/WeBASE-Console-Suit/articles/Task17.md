@@ -523,7 +523,7 @@ public class Task {
      * @author 鲤鱼乡
      * date 2022-05-18 下午 8:05
      */
-    public static byte[] tradeData(String userAddress, String contractAddress, String val) {
+    public static void tradeData(String userAddress, String contractAddress, String val) {
         // 新建一个对象用于承载数据，来自fastjson依赖，底层为Map，
         JSONObject jsonObj = new JSONObject();
         // 要调用的用户地址
@@ -545,30 +545,8 @@ public class Task {
         //是否使用cns调用
         jsonObj.put("useCns", false);
 
-        // 创建httpClient
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        // 创建post请求方式实例
-        HttpPost httpPost = new HttpPost(tradeUrl);
-        // 设置请求头 发送的是json数据格式
-        httpPost.setHeader("Content-type", "application/json;charset=utf-8");
-        // 设置参数---设置消息实体 也就是携带的数据
-        StringEntity entity = new StringEntity(jsonObj.toJSONString(), StandardCharsets.UTF_8);
-        // 设置编码格式
-        entity.setContentEncoding("UTF-8");
-        // 发送Json格式的数据请求
-        entity.setContentType("application/json");
-        // 把请求消息实体塞进去
-        httpPost.setEntity(entity);
-        // 执行http的post请求
-        CloseableHttpResponse httpResponse;
-        byte[] result = null;
-        try {
-            httpResponse = httpClient.execute(httpPost);
-            result = EntityUtils.toByteArray(httpResponse.getEntity());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+        //发送交易
+        sendPost(tradeUrl,jsonObj.toJSONString());
     }
 
 
@@ -653,5 +631,4 @@ public class Task {
 
     }
 }
-
 ```
