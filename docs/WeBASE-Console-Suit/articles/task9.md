@@ -110,6 +110,12 @@ HelloWorld合约get方法调用配置界面
 
 ![HelloWorld合约get方法调用成功界面](https://user-images.githubusercontent.com/3991904/169191797-61091d61-f62c-487c-a579-9b49b06566f6.png)
 HelloWorld合约get方法调用成功界面
+
+6、重新回到WeBASE-Front的数据预览页面，可以看到区块数量和交易数量都有所增加，至此合约调用成功
+
+![数据预览界面](https://user-images.githubusercontent.com/3991904/169192119-bd10a9e2-ed05-49c6-acdb-815909fef2de.png)
+WeBASE-Front之数据预览界面
+
 ## 总结
 
 WeBASE是在区块链应用和FISCO-BCOS节点之间搭建的一套通用组件。合约IDE提供了合约编写、编译、部署和调用等通用功能，非常适合开发者进行合约的编辑，编译，部署，调试。
