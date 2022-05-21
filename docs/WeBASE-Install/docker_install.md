@@ -21,7 +21,7 @@
 
 #### 平台要求
 
-推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署（Docker模式）脚本依赖Docker与Docker-Compose进行容器的编排，将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
+推荐使用CentOS 7.2+, Ubuntu 16.04, MacOS 10.2.x 及以上版本, 一键部署（Docker模式）脚本依赖Docker与Docker-Compose进行容器的编排，将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
 
 其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, dos2unix`依赖项后重试
 
@@ -112,8 +112,15 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
   sudo apt-get install -y python3-pip
   sudo pip3 install PyMySQL
   ```
+- MacOS
 
- CentOS或Ubuntu不支持pip命令的话，可以使用以下方式：
+  ```
+  sudo brew install python3
+  sudo pip3 install PyMySQL
+  ```
+
+
+ 若CentOS/Ubuntu/MacOS不支持pip命令的话，可以使用以下方式：
 
   ```
   git clone https://github.com/PyMySQL/PyMySQL
@@ -552,39 +559,42 @@ http://{deployIP}:{webPort}
 <span id="install_docker" />
 
 ### 安装 Docker
-在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
+- Debian/Ubuntu/CentOS/RHEL
+  ```Bash
+  # 该脚本是 Docker 官方提供的 Linux 自动安装脚本
+  bash <(curl -s -L get.docker.com)
+  ```
+  
+  在 CentOS/RHEL 8.x 中，使用上面的自动脚本安装时，会出现下面的错误：
+  
+  ```Bash
+  Last metadata expiration check: 0:37:43 ago on Sat 22 Feb 2020 07:40:15 PM CST.
+  Error: 
+   Problem: package docker-ce-3:19.03.6-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
+    - cannot install the best candidate for the job
+    - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
+    - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
+    - package containerd.io-1.2.2-3.el7.x86_64 is excluded
+    - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
+    - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
+    - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
+  (try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages) 
+  ```
+  
+  要解决这个问题，需要手动安装 `containerd.io`后，在执行自动安装脚本
+  
+  ```Bash
+  # 下载最新的 containerd.io 安装包
+  wget https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+  
+  # 手动安装 containerd.io 
+  yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+  
+  ```
 
-```Bash
-# 该脚本是 Docker 官方提供的 Linux 自动安装脚本
-bash <(curl -s -L get.docker.com)
-```
+- MacOS
 
-在 CentOS/RHEL 8.x 中，使用上面的自动脚本安装时，会出现下面的错误：
-
-```Bash
-Last metadata expiration check: 0:37:43 ago on Sat 22 Feb 2020 07:40:15 PM CST.
-Error: 
- Problem: package docker-ce-3:19.03.6-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
-  - cannot install the best candidate for the job
-  - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
-  - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
-  - package containerd.io-1.2.2-3.el7.x86_64 is excluded
-  - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
-  - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
-  - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
-(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages) 
-```
-
-要解决这个问题，需要手动安装 `containerd.io`后，在执行自动安装脚本
-
-```Bash
-# 下载最新的 containerd.io 安装包
-wget https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm 
-
-# 手动安装 containerd.io 
-yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm 
-
-```
+  ```brew install --cask --appdir=/Applications docker```
 
 <span id="docker-compose-install"></span>
 
@@ -630,6 +640,12 @@ python版本要求使用python3.x, 推荐使用python3.6及以上版本
   // 安装python 3.6
   sudo apt-get install -y python3.6
   sudo apt-get install -y python3-pip
+  ```
+- MacOS
+
+  ```
+  // brew 安装python3时，会自动安装pip3
+  sudo brew install python3
   ```
 
 ### 数据库部署
@@ -891,5 +907,24 @@ docker run -d --rm --name=webase-front  --network=host -v /data/home/webase/weba
       - /webase-deploy/webase-web/log:/dist/log
 ```
 
+### 9. MacOS中如何使用`sed`命令, 替换文件中的内容
+答：因为MacOS与`Linux`系统中对于`sed`的处理处理方式不同。如果想在MacOS中拥有Linux中`sed`体验，可以通过以下方式。
+- 安装 gnu-sed
+  ```brew install gnu-sed```
+- 设置环境变量
+  ```vi ~/.zshrc```
+
+  ```export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"```
+
+  ```source ~/.zshrc```
+- 替换文件中的内容
+
+  ```sed -i "" "s/target/value/g"```
+  
+  * Tips
+  ```sed -i ""``` 等同于Linux中的```sed -i```
+  
+    如果没有添加`""`，则会替换文本的时候，生成副本.
+    
 
 *欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
