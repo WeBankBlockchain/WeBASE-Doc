@@ -1,0 +1,21 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+
+namespace: webase
+
+images:
+  - name: mawla/webase-web:v1.5.3
+
+commonLabels:
+  app: webase-web
+
+configMapGenerator:
+  - name: webase-web
+    files:
+      - default.conf
+
+generatorOptions:
+  disableNameSuffixHash: true

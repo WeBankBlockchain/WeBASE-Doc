@@ -1,0 +1,44 @@
+# server version
+version: v1.5.3
+
+server:
+  # 本工程服务端口，端口被占用则修改
+  port: 5004
+  context-path: /WeBASE-Sign
+  tomcat:
+    max-threads: 200       #default 200
+    max-connections: 10000  #default 10000
+
+spring:
+  cache:
+    type: simple
+  datasource:
+    # 数据库连接信息
+    url: jdbc:mysql://127.0.0.1:3306/webasesign?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+    # 数据库用户名
+    username: root
+    # 数据库密码
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1 FROM DUAL
+      connection-timeout: 30000
+      maximum-pool-size: 20
+      max-lifetime: 1800000
+      minimum-idle: 5
+
+constant:
+  # aes加密key（16位）
+  aesKey: EfdsW23D23d3df43
+  # aes加密模式 v1.4.0+ 默认CBC（v1.4.0前默认为ECB）
+  aesPattern: CBC
+  keepAliveRequests: 100
+  syncUsrCacheTaskFixedDelay: 10000
+  # 返回值是否支持私钥传输
+  supportPrivateKeyTransfer: true
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  config: classpath:log4j2.xml
