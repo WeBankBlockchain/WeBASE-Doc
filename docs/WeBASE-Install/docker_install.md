@@ -907,7 +907,7 @@ docker run -d --rm --name=webase-front  --network=host -v /data/home/webase/weba
       - /webase-deploy/webase-web/log:/dist/log
 ```
 
-### 9. MacOS中如何使用`sed`命令, 替换文件中的内容
+### 9. MacOS中如何使用`sed`命令替换文件中的内容
 答：因为MacOS与`Linux`系统中对于`sed`的处理处理方式不同。如果想在MacOS中拥有Linux中`sed`体验，可以通过以下方式。
 - 安装 gnu-sed
   ```brew install gnu-sed```
@@ -925,6 +925,39 @@ docker run -d --rm --name=webase-front  --network=host -v /data/home/webase/weba
   ```sed -i ""``` 等同于Linux中的```sed -i```
   
     如果没有添加`""`，则会替换文本的时候，生成副本.
-    
+
+
+##### demo
+* 现在有文件`webase.txt`, 内容如下
+```text
+Hello,
+123456
+aaabbbaaa
+cccaba
+```
+* 将`webase.txt`中的`12345`替换成`webase`
+```
+sed -i "" "s/12345/webase/" webase.txt
+```
+
+>`-i`表示直接操作文件并不需要备份文件，如果需要备分则使用 `-i "备份名称"`
+> 
+>`s` 代表 substitue 即替换
+> 
+>`12345` 表示被代替的文字
+>
+>`webase` 表示替换的文字
+>
+>`webase.txt` 表示对应修改的文件
+
+* 此时`webase.txt`内容如下：
+```text
+Hello,
+webase
+aaabbbaaa
+cccaba
+```
+
+
 
 *欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
