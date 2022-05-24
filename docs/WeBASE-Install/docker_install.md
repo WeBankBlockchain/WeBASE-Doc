@@ -27,6 +27,8 @@
 
 *由于WeBASE Docker镜像中自带Java环境，无需在宿主机中配置Java环境；同时支持使用Docker启动一个新的mysql服务*
 
+*如果在MacOS中进行配置*，需要按照[Mac配置sed指令](#mac_sed)完成配置后，才能使用一键部署
+
 #### 检查Docker
 
 Docker 20.10.0及以上版本，如需安装，参考[Docker安装](#install_docker)
@@ -908,6 +910,7 @@ docker run -d --rm --name=webase-front  --network=host -v /data/home/webase/weba
 ```
 
 ### 9. MacOS中如何使用`sed`命令替换文件中的内容
+<span id="mac_sed"></span>
 答：因为MacOS与`Linux`系统中对于`sed`的处理处理方式不同。如果想在MacOS中拥有Linux中`sed`体验，可以通过以下方式。
 - 安装 gnu-sed
   ```brew install gnu-sed```
