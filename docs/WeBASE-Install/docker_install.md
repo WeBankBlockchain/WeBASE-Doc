@@ -934,7 +934,7 @@ docker run -d --rm --name=webase-front  --network=host -v /data/home/webase/weba
 * 现在有文件`webase.txt`, 内容如下
 ```text
 Hello,
-123456
+12345
 aaabbbaaa
 cccaba
 ```
