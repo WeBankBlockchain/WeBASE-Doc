@@ -26,7 +26,7 @@ BCOS WeBASE官方文档已经提供了[一建docker部署WeBASE](https://webased
 [root@VM-4-14-centos fisco]# ps -ef | grep -v grep | grep fisco-bcos
 ```
 
-![1.check node process](./pic/1.check node process.png)
+![](pic/1-check-node-process.png)
 
 ```bash
 # 进入到nodes所在路径，当前文档nodes目录位于/root/fisco下
@@ -35,14 +35,14 @@ BCOS WeBASE官方文档已经提供了[一建docker部署WeBASE](https://webased
 [root@VM-4-14-centos fisco]# tail -f nodes/127.0.0.1/node0/log/log*  | grep connected
 ```
 
-![2.check log](./pic/2.check log.gif)
+![](pic/2-check-log.gif)
 
 ```bash
 # 查看共识是否正常
 [root@VM-4-14-centos fisco]# tail -f nodes/127.0.0.1/node0/log/log*  | grep +++
 ```
 
-![](./pic/3. check consensus.gif)
+![](pic/3-check-consensus.gif)
 
 #### 2.3 docker配置
 
@@ -78,11 +78,11 @@ BCOS WeBASE官方文档已经提供了[一建docker部署WeBASE](https://webased
 [root@VM-4-14-centos fisco]# docker pull webasepro/webase-front:latest
 ```
 
-![4.docker pull](./pic/4.docker pull.gif)
+![](pic/4-docker-pull.gif)
 
 拉取成功后，使用`docker images`查看。
 
-![5.docker images](./pic/5.docker images.png)
+![](pic/5-docker-images.png)
 
 #### 3.2 运行容器
 
@@ -94,7 +94,7 @@ WeBASE-Front服务通过区块链sdk与节点建立链接，运行容器时，�
 [root@VM-4-14-centos fisco]# docker run -it --name webase-front webasepro/webase-front:latest
 ```
 
-![6.docker run报错](./pic/6.docker run报错.png)
+![](pic/6-docker-run-err.png)
 
 ##### 3.2.2 挂载sdk目录，再次尝试
 
@@ -104,7 +104,7 @@ WeBASE-Front服务通过区块链sdk与节点建立链接，运行容器时，�
 [root@VM-4-14-centos fisco]# docker run -it --name webase-front -v /root/fisco/nodes/127.0.0.1/sdk:/dist/sdk -d webasepro/webase-front:latest
 ```
 
-![7.tomact stop](./pic/7.tomact服务停止.gif)
+![](pic/7-tomact.gif)
 
 在第一次运行时，遇到了如上图所示的问题，容器未报错误日志，但是日志显示服务停止了。
 
@@ -116,7 +116,7 @@ WeBASE-Front服务通过区块链sdk与节点建立链接，运行容器时，�
 [root@VM-4-14-centos fisco]# docker run -it --net=host --name webase-front -v /root/fisco/nodes/127.0.0.1/sdk:/dist/sdk webasepro/webase-front:latest
 ```
 
-![8.容器正常运行](./pic/8. 容器正常运行.png)
+![](pic/8-docker.png)
 
 至此，服务正常运行，我们对上面的docker命令稍作调整，指定容器服务后台运行。
 
@@ -131,7 +131,7 @@ WeBASE-Front服务通过区块链sdk与节点建立链接，运行容器时，�
 [root@VM-4-14-centos fisco]# docker ps
 ```
 
-![9.docker ps](./pic/9. docker ps.png)
+![](pic/9-docker-ps.png)
 
 ### 4. 验证
 
@@ -141,13 +141,13 @@ WeBASE-Front服务通过区块链sdk与节点建立链接，运行容器时，�
 
 *这里需要注意，若要对外提供服务，（默认）5002端口要对外正常暴露*。在浏览器输入`http://Your-IP:5002/WeBASE-Front`，正常情况下，能够看见如下图所示界面：
 
-![10.访问节点控制台](./pic/10. 访问节点控制台.png)
+![](pic/10-node-mgmt.png)
 
 #### 4.2 调用http接口验证
 
 通过调用官方[接口文档](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html)提供的接口方法验证服务能否正常对外提供服务。本次调用的是[获取本地公私钥列表接口](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html#id117)，通过PostMan接口调用工具进行验证，验证结果如下图：
 
-![11.调用接口](./pic/11.调用接口.png)
+![](pic/11-get.png)
 
 ### 5. 参考
 
