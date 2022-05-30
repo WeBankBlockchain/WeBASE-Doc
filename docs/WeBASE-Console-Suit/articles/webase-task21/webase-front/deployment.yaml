@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webase-front
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: webase-front
+          image: mawla/webase-front:v1.5.3
+          imagePullPolicy: "Always"
+          ports:
+            - name: webase-front
+              containerPort: 5001
+              protocol: "TCP"
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:InitialRAMPercentage=40.0 -XX:MinRAMPercentage=20.0 -XX:MaxRAMPercentage=80.0"
+          volumeMounts:
+            - name: "conf-webase-front"
+              mountPath: /app/resources
+            - name: "sdk-webase-front"
+              mountPath: /app/resources/conf
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "384Mi"
+            limits:
+              cpu: "2"
+              memory: "384Mi"
+      volumes:
+        - name: "conf-webase-front"
+          configMap:
+            name: webase-front
+        - name: "sdk-webase-front"
+          configMap:
+            name: webase-front-sdk
