@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webase-node-manager
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: webase-node-manager
+          image: mawla/webase-node-manager:v1.5.3
+          imagePullPolicy: "Always"
+          ports:
+            - name: node-manager
+              containerPort: 5001
+              protocol: "TCP"
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:InitialRAMPercentage=40.0 -XX:MinRAMPercentage=20.0 -XX:MaxRAMPercentage=80.0"
+          volumeMounts:
+            - name: "conf-webase-node-manager"
+              mountPath: /app/resources/config
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "384Mi"
+            limits:
+              cpu: "2"
+              memory: "384Mi"
+      volumes:
+        - name: "conf-webase-node-manager"
+          configMap:
+            name: webase-node-manager
