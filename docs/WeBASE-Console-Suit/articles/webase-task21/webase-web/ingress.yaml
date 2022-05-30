@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: webase-web
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: webase.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: webase-web
+              servicePort: 80
