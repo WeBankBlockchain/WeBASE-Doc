@@ -51,10 +51,8 @@
 我的代码方案：
 ```java
  public void reloadAssembleTransactionProcessor(String hexPrivateKey){
-     //根据私钥生成密钥对，具体参数怎么用参考具体的类
-    CryptoSuite cryptoSuite = new CryptoSuite(1,hexPrivateKey);
     try {
-       this.txProcessor = TransactionProcessorFactory.createAssembleTransactionProcessor(this.client, cryptoSuite.getCryptoKeyPair());
+       this.txProcessor = TransactionProcessorFactory.createAssembleTransactionProcessor(this.client, this.client.getCryptoSuite().createKeyPair(hexPrivateKey));
     } catch (Exception e) {
       e.printStackTrace();
     }
