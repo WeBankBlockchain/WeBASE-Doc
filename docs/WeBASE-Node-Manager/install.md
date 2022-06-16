@@ -11,6 +11,12 @@
 
 
 ## 2. 注意事项
+
+```eval_rst
+.. important::
+    FISCO-BCOS 2.0与3.0对比、JDK版本、WeBASE及其他子系统的版本兼容说明！`请查看 <https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/compatibility.html>`_
+```
+
 *  Java推荐使用[OracleJDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html)，[JDK配置指引](./appendix.html#jdk)
 * 在服务搭建的过程中，如碰到问题，请查看 [常见问题解答](./install_FAQ.html)
 * 安全提示： 强烈建议设置复杂的数据库登录密码，且严格控制数据操作的权限和网络策略
