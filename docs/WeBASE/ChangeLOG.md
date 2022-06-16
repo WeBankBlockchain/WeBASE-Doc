@@ -2,6 +2,10 @@
 
 ## 支持FISCO-BCOS 3.X.X系列版本
 
+```eval_rst
+.. important::
+    FISCO-BCOS 2.0与3.0对比、JDK版本、WeBASE及其他子系统的版本兼容说明！`请查看 <https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/compatibility.html>`_
+```
 
 ### WeBASE lab-rc2
 
