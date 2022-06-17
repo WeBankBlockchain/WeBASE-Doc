@@ -3,6 +3,10 @@
 ## 支持FISCO-BCOS 2.X.X系列版本
 
 
+```eval_rst
+.. important::
+    FISCO-BCOS 2.0与3.0对比、JDK版本、WeBASE及其他子系统的兼容版本说明！`请查看 <https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/compatibility.html>`_
+```
 ### WeBASE v1.5.4
 
 WeBASE v1.5.4 版本支持 FISCO-BCOS 2.5.x及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 2.8.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v2.8.0)版本。
