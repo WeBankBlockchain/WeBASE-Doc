@@ -4,7 +4,7 @@
 
 可视化部署，需要先部署依赖服务，包括管理平台（WeBASE-Web）、节点管理子系统（WeBASE-Node-Manager）、签名服务（WeBASE-Sign）。
 
-然后通过 WeBASE 管理平台（WeBASE-Web）的界面在填入的主机中部署节点（FISCO-BCOS 2.5.0+）和节点前置子系统（WeBASE-Front 1.4.0+）。
+然后通过 WeBASE 管理平台（WeBASE-Web）的界面在填入的主机中部署节点（FISCO-BCOS 2.5.0+，暂未支持FISCO-BCOS 3.0系列）和节点前置子系统（WeBASE-Front 1.4.0+）。
 
 <span id="system_require"></span>
 

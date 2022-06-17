@@ -3,6 +3,11 @@
 ## 部署WeBASE
 搭建WeBASE, 请参考[快速部署](../WeBASE/install.html)
 
+
+```eval_rst
+.. important::
+    FISCO-BCOS 2.0与3.0对比、JDK版本、WeBASE及其他子系统的兼容版本说明！`请查看 <https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/compatibility.html>`_
+```
 ## 登录WeBASE管理平台进行配置
 安装WeBASE完成后，需要将节点信息添加到WeBASE平台中，这样WeBASE才可和节点进行通信。需要添加的信息包含节点信息，生成用户的私钥等。如下图所示：
 
