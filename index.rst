@@ -8,6 +8,11 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
 
 - 本技术文档适用于WeBASE lab版本（适配FISCO BCOS v3.0），WeBASE 1.x版技术文档可跳转至 `[WeBASE master分支] <https://webasedoc.readthedocs.io/zh_CN/latest>`_ 查看
 
+
+.. important::
+    FISCO-BCOS 2.0与3.0对比、JDK版本、WeBASE及其他子系统的版本兼容说明！`请查看 <https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/compatibility.html>`_
+
+
 .. container:: row 
    
    .. container:: card-holder

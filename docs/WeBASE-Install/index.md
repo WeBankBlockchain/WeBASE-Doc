@@ -17,6 +17,11 @@
 企业部署：在生产环境中，建议用户参考详细安装，部署全部功能，保证系统高效和稳定。
 
 ```eval_rst
+.. important::
+    FISCO-BCOS 2.0与3.0对比、JDK版本、WeBASE及其他子系统的版本兼容说明！`请查看 <https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/compatibility.html>`_
+```
+
+```eval_rst
 .. toctree::
    :maxdepth: 1
 
