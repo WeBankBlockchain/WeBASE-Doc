@@ -1,0 +1,22 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+
+commonLabels:
+  app: webase-front
+
+namespace: webase
+
+configMapGenerator:
+  - name: webase-front
+    files:
+      - application.yml
+      - log4j2.xml
+  - name: webase-front-sdk
+    files:
+      - ca.crt
+      - sdk.crt
+      - sdk.key
+
+generatorOptions:
+  disableNameSuffixHash: true

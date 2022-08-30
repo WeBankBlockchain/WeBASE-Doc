@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webase-sign
+spec:
+  type: ClusterIP
+  ports:
+    - name: webase-sign
+      port: 5004
+      protocol: "TCP"
