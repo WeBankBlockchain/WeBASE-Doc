@@ -1,4 +1,5 @@
-# WEBASE中Event功能的使用教程
+# WEBASE中“Event查看”功能的使用教程
+
 WEBASE中的“Event查看”功能，只能用于查询历史Event，即末区块的值不能超过最新区块高度。
 ## 一、WEBASE中Event功能的业务逻辑介绍
 当用户在WEBASE中进行Event事件查询时，由WEBASE调用WEBASE-Front子系统中的“获取历史区块EventLog”接口，WEBASE-Front子系统收到请求后向节点查询历史Event事件并将查询结果返回给WEBASE，即完成Event事件的查询。其中，WEBASE-Front子系统查询历史Event事件的主要逻辑如下：
