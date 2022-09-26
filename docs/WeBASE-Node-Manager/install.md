@@ -28,10 +28,10 @@ WeBASE-Node-Manager v1.3.0及以上版本将通过WeBASE-Sign进行私钥管理�
 ## 3. 拉取代码
 执行命令：
 ```shell
-git clone -b lab https://github.com/WeBankBlockchain/WeBASE-Node-Manager.git
+git clone -b master-3.0 https://github.com/WeBankBlockchain/WeBASE-Node-Manager.git
 
 # 若因网络问题导致长时间下载失败，可尝试以下命令
-git clone -b lab https://gitee.com/WeBank/WeBASE-Node-Manager.git
+git clone -b master-3.0 https://gitee.com/WeBank/WeBASE-Node-Manager.git
 ```
 进入目录：
 
