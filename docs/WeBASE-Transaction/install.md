@@ -83,7 +83,7 @@ dist目录提供了一份配置模板conf_template：
 cd conf
 ```
 
-将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前conf目录（包括ca.crt, sdk.crt, sdk.key，国密下则包括gmca.crt, gmensdk.crt, gmensdk.key, gmsdk.crt, gmensdk.key），供SDK与节点建立连接时使用。
+将节点所在目录`nodes/${ip}/sdk`下的所有文件拷贝到当前conf目录（包括ca.crt, sdk.crt, sdk.key，国密下则包括smca.crt, smensdk.crt, smensdk.key, smsdk.crt, smensdk.key），供SDK与节点建立连接时使用。
 
 ### 4.3 修改配置
 
