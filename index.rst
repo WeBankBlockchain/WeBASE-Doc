@@ -61,6 +61,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
             <br><br>
 
          - `WeBASE合约仓库 <./docs/WeBASE-Contract-Warehouse/index.html>`_
+         - `WeBASE实训插件方案 <./docs/WeBASE-Training-Class/index.html>`_
 
 
    .. container:: card-holder
@@ -126,6 +127,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
    
    docs/WeBASE-Console-Suit/index.md
    docs/WeBASE-Contract-Warehouse/index.md
+   docs/WeBASE-Training-Class/index.md
    docs/WeBASE/quick-start.md
 
 .. toctree::
