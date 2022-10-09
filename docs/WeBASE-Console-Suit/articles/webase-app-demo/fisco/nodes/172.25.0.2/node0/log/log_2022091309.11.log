@@ -1,0 +1,267 @@
+info|2022-09-13 09:11:01.862926|[P2P][Service] heartBeat,connected count=2
+error|2022-09-13 09:11:01.862993|[NETWORK][Session]Idle connection, disconnect ,endpoint=172.25.0.3:30300
+info|2022-09-13 09:11:01.863001|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.3:30300
+warning|2022-09-13 09:11:01.863039|[NETWORK][Session][drop] closing remote 172.25.0.3:30300,reason=(Idle connection for no network io happens during 5s time intervals.),endpoint=172.25.0.3:30300
+info|2022-09-13 09:11:01.863098|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-13 09:11:01.863135|[NETWORK][Session]Session inactived
+error|2022-09-13 09:11:01.863142|[NETWORK][Session]Idle connection, disconnect ,endpoint=172.25.0.4:30300
+info|2022-09-13 09:11:01.863147|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.4:30300
+warning|2022-09-13 09:11:01.863158|[NETWORK][Session][drop] closing remote 172.25.0.4:30300,reason=(Idle connection for no network io happens during 5s time intervals.),endpoint=172.25.0.4:30300
+error|2022-09-13 09:11:01.863206|[NETWORK][Session]Session inactived
+warning|2022-09-13 09:11:01.863220|[P2P][Service] disconnect error P2PSession,nodeID=59b384e6...,endpoint=172.25.0.3:30300,errorCode=3,what=Disconnect
+warning|2022-09-13 09:11:01.863238|[NETWORK][Session]doRead error,endpoint=172.25.0.3:30300,message=Operation canceled
+warning|2022-09-13 09:11:01.863249|[NETWORK][Session]doRead error,endpoint=172.25.0.4:30300,message=Operation canceled
+warning|2022-09-13 09:11:01.863259|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-13 09:11:01.863265|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-13 09:11:01.863379|[g:1][P2P][Service] Node inactived,nodeID=59b384e6...
+warning|2022-09-13 09:11:01.863392|[g:1][NETWORK][Session]Session inactived
+warning|2022-09-13 09:11:01.863564|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-13 09:11:01.863587|[P2P][Service] disconnect error P2PSession,nodeID=e32feb67...,endpoint=172.25.0.4:30300,errorCode=3,what=Disconnect
+warning|2022-09-13 09:11:01.863599|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-13 09:11:01.883083|[g:1][CONSENSUS][PBFT]ViewChangeWarning: not caused by omit empty block ,v=16138,toV=16144,curNum=0,hash=78a38d4f...,nodeIdx=0,myNode=15b8b0ac...
+warning|2022-09-13 09:11:01.883111|[g:1][CONSENSUS][PBFT]Find disconnectedNode,disconnectedNodeSize=2,sessionSize=0,minValidNodes=3,connectedNodeList=,disconnectedNode=59b384e6..., e32feb67..., ,idx=0
+info|2022-09-13 09:11:01.883139|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=16138,toView=16144,nodeIdx=0,changeCycle=7,myNode=15b8b0ac...,timecost=1
+info|2022-09-13 09:11:01.888693|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:01.888748|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:57.278991|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:57.484014|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:57.684269|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:57.884910|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:58.085257|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:58.285534|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:58.485889|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:58.686362|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:58.887103|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:59.087370|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:59.288087|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:59.488378|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:59.689075|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:10:59.889235|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:00.089826|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:00.289950|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:00.490229|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:00.691086|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:00.893336|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:01.093692|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:01.294101|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:01.494269|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:01.694581|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:01.894810|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:02.095320|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:02.297951|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:02.502068|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:02.702524|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:02.903415|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:03.104309|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:03.304826|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:03.506094|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:03.706674|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:03.907111|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:04.107680|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:04.309265|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:04.509640|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:04.711205|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:04.912420|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:05.113568|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:05.315821|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:05.517737|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:05.719577|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:05.920408|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:06.122540|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:06.322903|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:06.523902|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:06.726122|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:06.926255|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:07.128921|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:07.329470|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:07.530269|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:07.730741|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:07.938904|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:08.149595|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:08.353938|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:08.568749|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:08.814902|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:09.021018|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:09.224192|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:09.426066|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:09.631962|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:09.841929|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:10.048954|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:10.271058|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:10.453858|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:10.656810|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:10.857792|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:11.061450|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:11.271242|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:11.471938|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:11.671315|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:11.877054|[NETWORK][Host]Connecting to node,endpoint=172.25.0.3:30300
+info|2022-09-13 09:11:11.877310|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:11.880313|[NETWORK][Host]Connecting to node,endpoint=172.25.0.4:30300
+info|2022-09-13 09:11:11.880683|[P2P][Service] heartBeat,connected count=0
+info|2022-09-13 09:11:11.903232|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.3:30300
+info|2022-09-13 09:11:11.904942|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.4:30300
+info|2022-09-13 09:11:11.906386|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:38432
+info|2022-09-13 09:11:11.927797|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-13 09:11:11.939530|[NETWORK][Host]P2P Recv Connect, From=172.25.0.4:58274
+info|2022-09-13 09:11:11.939814|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-13 09:11:12.080788|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-13 09:11:12.095846|[NETWORK][Host]Get ca basic failed
+error|2022-09-13 09:11:12.260635|[NETWORK][Host]Get ca basic failed
+info|2022-09-13 09:11:12.283205|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-13 09:11:12.472221|[NETWORK][Host]Get ca basic failed
+info|2022-09-13 09:11:12.488624|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-13 09:11:12.653855|[NETWORK][Host]Get ca basic failed
+info|2022-09-13 09:11:12.694423|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:12.759646|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.4:58274
+info|2022-09-13 09:11:12.760193|[P2P][Service] Connection established,nodeID=e32feb67...,endpoint=172.25.0.4:58274
+info|2022-09-13 09:11:12.760285|[NETWORK][Host]startPeerSession, Remote=172.25.0.4:58274,local endpoint=172.25.0.2:30300,nodeID=e32feb67...
+info|2022-09-13 09:11:12.760443|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:38432
+info|2022-09-13 09:11:12.760692|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:38432,local endpoint=172.25.0.2:30300,nodeID=59b384e6...
+info|2022-09-13 09:11:12.764562|[P2P][Service] Connection established,nodeID=59b384e6...,endpoint=172.25.0.3:38432
+info|2022-09-13 09:11:12.764923|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:53226
+info|2022-09-13 09:11:12.765232|[NETWORK][Host]startPeerSession, Remote=172.25.0.4:30300,local endpoint=172.25.0.2:53226,nodeID=e32feb67...
+info|2022-09-13 09:11:12.765691|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:56294
+info|2022-09-13 09:11:12.765975|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:30300,local endpoint=172.25.0.2:56294,nodeID=59b384e6...
+warning|2022-09-13 09:11:12.787548|[NETWORK][Session]doRead error,endpoint=172.25.0.4:58274,message=short read
+info|2022-09-13 09:11:12.787627|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.4:58274
+warning|2022-09-13 09:11:12.787730|[P2P][Service] disconnect error P2PSession,nodeID=e32feb67...,endpoint=172.25.0.4:58274,errorCode=3,what=Disconnect
+warning|2022-09-13 09:11:12.788000|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-13 09:11:12.788133|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=Low-level TCP communication error.,endpoint=172.25.0.4:58274
+warning|2022-09-13 09:11:12.788420|[NETWORK][Session]doRead error,endpoint=172.25.0.3:38432,message=short read
+info|2022-09-13 09:11:12.788460|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.3:38432
+warning|2022-09-13 09:11:12.788727|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=Low-level TCP communication error.,endpoint=172.25.0.3:38432
+warning|2022-09-13 09:11:12.789939|[P2P][Service] disconnect error P2PSession,nodeID=59b384e6...,endpoint=172.25.0.3:38432,errorCode=3,what=Disconnect
+warning|2022-09-13 09:11:12.790085|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+error|2022-09-13 09:11:12.790786|[NETWORK][Session]Session inactived
+warning|2022-09-13 09:11:12.790887|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-13 09:11:12.790952|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+info|2022-09-13 09:11:12.895726|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:13.097193|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:13.306430|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:13.513149|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:13.715415|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:13.920027|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:14.127904|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:14.329928|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:14.536064|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:14.738633|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:14.940006|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:15.141579|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:15.348839|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:15.547581|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:15.754948|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:15.954134|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:16.157307|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:16.358792|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:16.559525|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:16.763730|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:16.965668|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:17.171984|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:17.388064|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:17.580017|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:17.784067|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:17.988665|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:18.193699|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:18.408145|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:18.609831|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:18.813031|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:19.022048|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:19.224571|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:19.425643|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:19.627456|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:19.828417|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:20.031301|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:20.234049|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:20.438101|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:20.640813|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:20.843254|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:21.044785|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:21.246050|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:21.448628|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:21.649290|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:21.850134|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:21.874227|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:38442
+info|2022-09-13 09:11:21.874312|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-13 09:11:21.880904|[NETWORK][Host]Connecting to node,endpoint=172.25.0.3:30300
+info|2022-09-13 09:11:21.881111|[NETWORK][Host]Connecting to node,endpoint=172.25.0.4:30300
+info|2022-09-13 09:11:21.881136|[P2P][Service] heartBeat,connected count=0
+info|2022-09-13 09:11:21.881381|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.3:30300
+info|2022-09-13 09:11:21.881472|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.4:30300
+error|2022-09-13 09:11:21.890347|[NETWORK][Host]Get ca basic failed
+error|2022-09-13 09:11:21.894005|[NETWORK][Host]Get ca basic failed
+info|2022-09-13 09:11:21.898003|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:38442
+info|2022-09-13 09:11:21.898081|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:38442,local endpoint=172.25.0.2:30300,nodeID=59b384e6...
+info|2022-09-13 09:11:21.898237|[P2P][Service] Connection established,nodeID=59b384e6...,endpoint=172.25.0.3:38442
+error|2022-09-13 09:11:21.898462|[NETWORK][Host]Get ca basic failed
+info|2022-09-13 09:11:21.908778|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:53238
+info|2022-09-13 09:11:21.909018|[P2P][Service] Connection established,nodeID=e32feb67...,endpoint=172.25.0.4:30300
+info|2022-09-13 09:11:21.909125|[NETWORK][Host]startPeerSession, Remote=172.25.0.4:30300,local endpoint=172.25.0.2:53238,nodeID=e32feb67...
+info|2022-09-13 09:11:21.909688|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:56310
+info|2022-09-13 09:11:21.909716|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:30300,local endpoint=172.25.0.2:56310,nodeID=59b384e6...
+info|2022-09-13 09:11:21.910368|[NETWORK][Host]P2P Recv Connect, From=172.25.0.4:58290
+info|2022-09-13 09:11:21.910522|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+error|2022-09-13 09:11:21.923288|[NETWORK][Host]Get ca basic failed
+info|2022-09-13 09:11:21.930610|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.4:58290
+info|2022-09-13 09:11:21.931718|[NETWORK][Host]startPeerSession, Remote=172.25.0.4:58290,local endpoint=172.25.0.2:30300,nodeID=e32feb67...
+info|2022-09-13 09:11:22.051288|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:22.252964|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:22.453422|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:22.655921|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:22.857002|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:23.058762|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:23.259970|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:23.461528|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:23.661910|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:23.862220|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:24.062708|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:24.263914|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:24.464737|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:24.665950|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:24.867333|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:25.068622|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:25.269917|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:25.471708|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:25.672516|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:25.873451|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:26.074053|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:26.274237|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:26.474957|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:26.675935|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:26.876564|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:27.077161|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:27.253709|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:27.455859|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:27.658148|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:27.859770|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:28.060311|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:28.261415|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:28.462215|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:28.662738|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:28.863945|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:29.064317|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:29.266742|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:29.467727|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:29.668317|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:29.869398|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:30.069938|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:30.270310|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:30.471005|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:30.673767|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:30.873961|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:31.074278|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:31.275407|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:31.476411|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:31.676841|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:31.877444|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:31.881267|[P2P][Service] heartBeat,connected count=2
+info|2022-09-13 09:11:32.078706|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 09:11:32.280583|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory

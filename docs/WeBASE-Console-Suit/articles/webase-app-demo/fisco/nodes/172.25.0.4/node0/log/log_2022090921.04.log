@@ -1,0 +1,602 @@
+info|2022-09-09 21:04:49.920926|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:49.921190|[P2P][Service] heartBeat,connected count=2
+error|2022-09-09 21:04:49.921199|[NETWORK][Session]Idle connection, disconnect ,endpoint=172.25.0.3:30300
+info|2022-09-09 21:04:49.921203|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.3:30300
+warning|2022-09-09 21:04:49.921231|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=(Idle connection for no network io happens during 5s time intervals.),endpoint=172.25.0.3:30300
+error|2022-09-09 21:04:49.921298|[NETWORK][Session]Idle connection, disconnect ,endpoint=172.25.0.2:30300
+info|2022-09-09 21:04:49.921309|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.2:30300
+info|2022-09-09 21:04:49.932368|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+warning|2022-09-09 21:04:49.932454|[NETWORK][Session][drop] closing remote 172.25.0.2:30300,reason=(Idle connection for no network io happens during 5s time intervals.),endpoint=172.25.0.2:30300
+error|2022-09-09 21:04:49.932585|[NETWORK][Session]Session inactived
+error|2022-09-09 21:04:49.932590|[NETWORK][Session]Session inactived
+warning|2022-09-09 21:04:49.932602|[NETWORK][Session]doRead error,endpoint=172.25.0.3:30300,message=short read
+error|2022-09-09 21:04:49.932610|[NETWORK][Session]Session inactived
+warning|2022-09-09 21:04:49.932613|[NETWORK][Session]doRead error,endpoint=172.25.0.2:30300,message=Operation canceled
+warning|2022-09-09 21:04:49.932623|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-09 21:04:49.932628|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-09 21:04:49.932668|[P2P][Service] disconnect error P2PSession,nodeID=15b8b0ac...,endpoint=172.25.0.2:30300,errorCode=3,what=Disconnect
+warning|2022-09-09 21:04:49.932677|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-09 21:04:49.932869|[g:1][CONSENSUS][PBFT]ViewChangeWarning: not caused by omit empty block ,v=3106,toV=3107,curNum=0,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+warning|2022-09-09 21:04:49.932882|[g:1][CONSENSUS][PBFT]Find disconnectedNode,disconnectedNodeSize=1,sessionSize=1,minValidNodes=3,connectedNodeList=172.25.0.3:30300, ,disconnectedNode=15b8b0ac..., ,idx=2
+warning|2022-09-09 21:04:49.932908|[g:1][NETWORK][Session]Session inactived
+info|2022-09-09 21:04:49.932913|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3106,toView=3107,nodeIdx=2,changeCycle=2,myNode=e32feb67...,timecost=11
+warning|2022-09-09 21:04:48.059443|[P2P][Service] disconnect error P2PSession,nodeID=59b384e6...,endpoint=172.25.0.3:30300,errorCode=3,what=Disconnect
+warning|2022-09-09 21:04:48.059471|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+info|2022-09-09 21:04:48.059777|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:48.260072|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:48.460512|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:48.660905|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:48.861493|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:49.061902|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:49.262115|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:49.470642|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:49.671298|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:49.871710|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:50.072095|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:50.272561|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:50.473050|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:50.673504|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:50.874051|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:51.074350|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:51.280701|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:51.481870|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:51.683661|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:51.884879|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:52.086041|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:52.286325|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:52.486605|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:52.686969|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:52.887324|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:53.095764|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:53.305838|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:53.505795|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:53.706329|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:53.908972|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:54.109391|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:54.310636|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:54.510935|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:54.712935|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:54.809681|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+warning|2022-09-09 21:04:54.809962|[g:1][CONSENSUS][PBFT]ViewChangeWarning: not caused by omit empty block ,v=3106,toV=3108,curNum=0,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+warning|2022-09-09 21:04:54.809975|[g:1][CONSENSUS][PBFT]Find disconnectedNode,disconnectedNodeSize=2,sessionSize=0,minValidNodes=3,connectedNodeList=,disconnectedNode=15b8b0ac..., 59b384e6..., ,idx=2
+info|2022-09-09 21:04:54.809995|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3106,toView=3108,nodeIdx=2,changeCycle=3,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:04:54.810090|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:55.010530|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:55.214054|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:55.416676|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:55.617173|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:55.818022|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:56.019917|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:56.220977|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:56.422594|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:56.624633|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:56.824954|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:57.025202|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:57.226017|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:57.426986|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:57.627589|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:57.828912|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:58.029240|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:58.233787|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:58.434447|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:58.642312|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:58.848386|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:59.058886|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:59.260607|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:59.556692|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:59.759714|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:04:59.925135|[NETWORK][Host]Connecting to node,endpoint=172.25.0.2:30300
+info|2022-09-09 21:04:59.937361|[NETWORK][Host]Connecting to node,endpoint=172.25.0.3:30300
+info|2022-09-09 21:04:59.944029|[P2P][Service] heartBeat,connected count=0
+info|2022-09-09 21:04:59.945086|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.2:30300
+info|2022-09-09 21:05:00.006107|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:00.006993|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.3:30300
+info|2022-09-09 21:05:00.008477|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:48158
+info|2022-09-09 21:05:00.008710|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+error|2022-09-09 21:05:00.116482|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 21:05:00.210618|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:00.772805|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:01.063499|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:01.123710|[NETWORK][Host]P2P Recv Connect, From=172.25.0.2:52428
+info|2022-09-09 21:05:01.124016|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+error|2022-09-09 21:05:01.152883|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 21:05:01.241776|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:01.429485|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:01.703090|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-09 21:05:01.805323|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 21:05:01.862645|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:02.059087|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.4:57472
+info|2022-09-09 21:05:02.073629|[P2P][Service] Connection established,nodeID=15b8b0ac...,endpoint=172.25.0.2:30300
+info|2022-09-09 21:05:02.073776|[NETWORK][Host]startPeerSession, Remote=172.25.0.2:30300,local endpoint=172.25.0.4:57472,nodeID=15b8b0ac...
+info|2022-09-09 21:05:02.074041|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:48158
+info|2022-09-09 21:05:02.074393|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:48158,local endpoint=172.25.0.4:30300,nodeID=59b384e6...
+info|2022-09-09 21:05:02.074730|[P2P][Service] Connection established,nodeID=59b384e6...,endpoint=172.25.0.3:48158
+info|2022-09-09 21:05:02.075204|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.4:54060
+info|2022-09-09 21:05:02.089578|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:30300,local endpoint=172.25.0.4:54060,nodeID=59b384e6...
+warning|2022-09-09 21:05:02.105962|[NETWORK][Session]doRead error,endpoint=172.25.0.3:48158,message=short read
+info|2022-09-09 21:05:02.106406|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.3:48158
+warning|2022-09-09 21:05:02.107419|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=Low-level TCP communication error.,endpoint=172.25.0.3:48158
+warning|2022-09-09 21:05:02.109308|[P2P][Service] disconnect error P2PSession,nodeID=59b384e6...,endpoint=172.25.0.3:48158,errorCode=3,what=Disconnect
+warning|2022-09-09 21:05:02.109432|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-09 21:05:02.120029|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+info|2022-09-09 21:05:02.144781|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:02.349760|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-09 21:05:02.423974|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 21:05:02.589021|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:02.604645|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.2:52428
+info|2022-09-09 21:05:02.604973|[NETWORK][Host]startPeerSession, Remote=172.25.0.2:52428,local endpoint=172.25.0.4:30300,nodeID=15b8b0ac...
+info|2022-09-09 21:05:02.848776|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:03.052647|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:03.253907|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:03.462924|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:03.674831|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:03.877594|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:04.081810|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:04.289638|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:04.496510|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:04.759796|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+warning|2022-09-09 21:05:04.940419|[g:1][CONSENSUS][PBFT]ViewChangeWarning: not caused by omit empty block ,v=3106,toV=3109,curNum=0,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+warning|2022-09-09 21:05:04.940609|[g:1][CONSENSUS][PBFT]Find disconnectedNode,disconnectedNodeSize=1,sessionSize=1,minValidNodes=3,connectedNodeList=172.25.0.2:30300, ,disconnectedNode=59b384e6..., ,idx=2
+info|2022-09-09 21:05:04.940943|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3106,toView=3109,nodeIdx=2,changeCycle=4,myNode=e32feb67...,timecost=2
+info|2022-09-09 21:05:04.975578|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:05.157721|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3106,cur_changeCycle=4,curView=3106,view=3109
+info|2022-09-09 21:05:05.161890|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:05.400813|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:05.603890|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:05.810023|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:06.014688|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:06.260396|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:06.355781|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=15bb3ec2...,time=1
+info|2022-09-09 21:05:06.391730|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:06.459525|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3109,toView=3110,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=103
+info|2022-09-09 21:05:06.473030|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:06.576015|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3109,cur_changeCycle=1,curView=3109,view=3110
+info|2022-09-09 21:05:06.592346|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:06.794025|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:07.035621|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:07.577182|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:07.673228|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=7a74e4b9...
+info|2022-09-09 21:05:07.796481|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:07.814683|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=2fc12a84...
+info|2022-09-09 21:05:07.874803|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:07.962463|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:07.964383|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3110,toView=3111,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=6
+info|2022-09-09 21:05:07.982816|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:08.266733|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:08.675857|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:08.682316|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3110,cur_changeCycle=1,curView=3110,view=3111
+info|2022-09-09 21:05:08.713385|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:09.007513|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:09.264528|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:09.518637|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:09.543161|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=3eb22d41...,time=0
+info|2022-09-09 21:05:09.557842|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3111,toView=3112,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=14
+info|2022-09-09 21:05:09.594391|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:09.780175|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3111,cur_changeCycle=1,curView=3111,view=3112
+info|2022-09-09 21:05:09.787490|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:09.936051|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:48168
+info|2022-09-09 21:05:09.936358|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-09 21:05:10.003566|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:10.079778|[NETWORK][Host]Connecting to node,endpoint=172.25.0.3:30300
+info|2022-09-09 21:05:10.080253|[P2P][Service] heartBeat,connected count=1
+info|2022-09-09 21:05:10.081280|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.3:30300
+info|2022-09-09 21:05:10.201756|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-09 21:05:10.342552|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 21:05:10.424235|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:10.603146|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:48168
+info|2022-09-09 21:05:10.603517|[P2P][Service] Connection established,nodeID=59b384e6...,endpoint=172.25.0.3:48168
+info|2022-09-09 21:05:10.603623|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:48168,local endpoint=172.25.0.4:30300,nodeID=59b384e6...
+error|2022-09-09 21:05:10.609297|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 21:05:10.658277|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:10.855123|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:10.912130|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=210736d8...,time=0
+info|2022-09-09 21:05:10.929457|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:10.986046|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3112,toView=3113,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=74
+info|2022-09-09 21:05:11.044787|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.4:54068
+info|2022-09-09 21:05:11.045082|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:30300,local endpoint=172.25.0.4:54068,nodeID=59b384e6...
+info|2022-09-09 21:05:11.083419|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:11.107736|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3112,cur_changeCycle=1,curView=3112,view=3113
+info|2022-09-09 21:05:11.108148|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:11.309049|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:11.509614|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:11.710384|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:11.919363|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.141393|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.145238|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=fcb8e1aa...
+info|2022-09-09 21:05:12.146570|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.152932|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.153894|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3113,toView=3114,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=5
+info|2022-09-09 21:05:12.178833|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.182558|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3113,cur_changeCycle=1,curView=3113,view=3114
+info|2022-09-09 21:05:12.183161|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.384018|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.585336|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.785812|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:12.986962|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:13.177941|[g:1][CONSENSUS][PBFT]Trigger fast-viewchange,view=3114,toView=3114,minView=3115,INFO=,reqNum=0,curNum=0,GenIdx=1,Cview=3115,view=3114,fromIdx=1,fromNode=59b384e6...,fromIp=172.25.0.3:48168,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+info|2022-09-09 21:05:13.178165|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:13.179667|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3114,toView=3115,nodeIdx=2,changeCycle=2,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:13.179857|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:13.180346|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3114,cur_changeCycle=2,curView=3114,view=3115
+info|2022-09-09 21:05:13.180437|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:13.380725|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:13.581288|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:13.781831|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:13.982107|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.182536|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.184979|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=d10b326f...,time=1
+info|2022-09-09 21:05:14.186257|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.187498|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3115,toView=3116,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:14.189864|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.192523|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3115,cur_changeCycle=1,curView=3115,view=3116
+info|2022-09-09 21:05:14.192699|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.393147|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.593908|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.794335|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:14.994861|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:15.194465|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=883819d6...
+info|2022-09-09 21:05:15.194623|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:15.197242|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3116,toView=3117,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:15.198019|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:15.199862|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:15.201208|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3116,cur_changeCycle=1,curView=3116,view=3117
+info|2022-09-09 21:05:15.201704|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:15.402305|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:15.603045|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:15.803410|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:16.003884|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:16.203621|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=88123222...,time=0
+info|2022-09-09 21:05:16.204088|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3117,toView=3118,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:16.204519|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:16.205010|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:16.209166|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3117,cur_changeCycle=1,curView=3117,view=3118
+info|2022-09-09 21:05:16.210676|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:16.411136|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:16.611605|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:16.811986|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.012314|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.222889|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.224850|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=30e3ccf8...,time=0
+info|2022-09-09 21:05:17.224954|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.225243|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3118,toView=3119,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:17.225323|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.229313|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3118,cur_changeCycle=1,curView=3118,view=3119
+info|2022-09-09 21:05:17.229378|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.434960|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.635321|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:17.836333|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:18.036983|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:21.488782|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=93080c58...
+info|2022-09-09 21:05:21.489279|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:21.492224|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3119,toView=3120,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:21.492666|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:21.494253|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3119,cur_changeCycle=1,curView=3119,view=3120
+info|2022-09-09 21:05:21.494329|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:21.494999|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:21.695182|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:21.895676|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:22.096092|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:22.296742|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:22.496660|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=69aea991...,time=0
+info|2022-09-09 21:05:22.497238|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:22.497719|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3120,toView=3121,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:05:22.498630|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:22.499154|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3120,cur_changeCycle=1,curView=3120,view=3121
+info|2022-09-09 21:05:22.499385|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:22.699911|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:22.900402|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:23.101006|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:23.302141|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:23.338511|[P2P][Service] heartBeat,connected count=2
+info|2022-09-09 21:05:23.503697|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:23.504615|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=fa5472f5...,time=0
+info|2022-09-09 21:05:23.505048|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3121,toView=3122,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:23.506652|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:23.514881|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3121,cur_changeCycle=1,curView=3121,view=3122
+info|2022-09-09 21:05:23.515609|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:23.715758|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:23.916181|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.118373|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.318724|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.515141|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=286de153...
+info|2022-09-09 21:05:24.515322|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.518875|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3122,toView=3123,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:05:24.519423|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3122,cur_changeCycle=1,curView=3122,view=3123
+info|2022-09-09 21:05:24.519555|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.519976|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.520186|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.720843|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:24.920928|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.121442|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.322082|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.523775|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.524355|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=324f1563...,time=0
+info|2022-09-09 21:05:25.524667|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.525939|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3123,toView=3124,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=4
+info|2022-09-09 21:05:25.528546|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.529685|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3123,cur_changeCycle=1,curView=3123,view=3124
+info|2022-09-09 21:05:25.529805|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.730009|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:25.930296|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:26.130661|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:26.331074|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:26.528549|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=f64b225c...,time=0
+info|2022-09-09 21:05:26.528719|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:26.529073|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3124,toView=3125,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:26.529205|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:26.531189|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3124,cur_changeCycle=1,curView=3124,view=3125
+info|2022-09-09 21:05:26.531287|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:26.731737|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:26.932109|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.132469|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.332880|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.531726|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=1531ac57...
+info|2022-09-09 21:05:27.531886|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.535047|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.535408|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3125,toView=3126,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:27.535531|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.536216|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3125,cur_changeCycle=1,curView=3125,view=3126
+info|2022-09-09 21:05:27.536279|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.736677|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:27.937075|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.137421|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.337753|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.538320|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.539639|[g:1][CONSENSUS][PBFT]Trigger fast-viewchange,view=3126,toView=3126,minView=3127,INFO=,reqNum=0,curNum=0,GenIdx=0,Cview=3127,view=3126,fromIdx=0,fromNode=15b8b0ac...,fromIp=172.25.0.2:30300,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+info|2022-09-09 21:05:28.539725|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.539996|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3126,toView=3127,nodeIdx=2,changeCycle=2,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:28.540203|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.540454|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3126,cur_changeCycle=2,curView=3126,view=3127
+info|2022-09-09 21:05:28.540720|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.741095|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:28.941399|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:29.141562|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:29.341766|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:29.542024|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:29.544600|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=6e361758...,time=0
+info|2022-09-09 21:05:29.545047|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3127,toView=3128,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:29.545808|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:29.547679|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3127,cur_changeCycle=1,curView=3127,view=3128
+info|2022-09-09 21:05:29.547840|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:29.748136|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:29.948390|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:30.150014|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:30.350377|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:30.549015|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=f76ba538...
+info|2022-09-09 21:05:30.549901|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:30.558160|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:30.558904|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3128,toView=3129,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=2
+info|2022-09-09 21:05:30.562534|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3128,cur_changeCycle=1,curView=3128,view=3129
+info|2022-09-09 21:05:30.567978|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:30.768507|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:30.968902|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:31.169688|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:31.370370|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:31.567904|[g:1][CONSENSUS][PBFT]Trigger fast-viewchange,view=3129,toView=3129,minView=3130,INFO=,reqNum=0,curNum=0,GenIdx=0,Cview=3130,view=3129,fromIdx=0,fromNode=15b8b0ac...,fromIp=172.25.0.2:30300,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+info|2022-09-09 21:05:31.568137|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:31.569666|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3129,toView=3130,nodeIdx=2,changeCycle=2,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:31.569824|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:31.570200|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3129,cur_changeCycle=2,curView=3129,view=3130
+info|2022-09-09 21:05:31.570261|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:31.770908|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:31.971291|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:32.172312|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:32.373177|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:32.574180|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:32.579706|[g:1][CONSENSUS][PBFT]Trigger fast-viewchange,view=3130,toView=3130,minView=3131,INFO=,reqNum=0,curNum=0,GenIdx=1,Cview=3131,view=3130,fromIdx=1,fromNode=59b384e6...,fromIp=172.25.0.3:48168,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+info|2022-09-09 21:05:32.580088|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3130,toView=3131,nodeIdx=2,changeCycle=3,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:32.582065|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:32.584233|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3130,cur_changeCycle=3,curView=3130,view=3131
+info|2022-09-09 21:05:32.584719|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:32.785153|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:32.985488|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.185888|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.339051|[P2P][Service] heartBeat,connected count=2
+info|2022-09-09 21:05:33.386200|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.585430|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=5d6fe2b6...
+info|2022-09-09 21:05:33.585823|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.589937|[g:1][CONSENSUS][PBFT]Trigger fast-viewchange,view=3131,toView=3131,minView=3132,INFO=,reqNum=0,curNum=0,GenIdx=1,Cview=3132,view=3131,fromIdx=1,fromNode=59b384e6...,fromIp=172.25.0.3:48168,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+info|2022-09-09 21:05:33.590050|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.590697|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3131,toView=3132,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:33.591741|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.592296|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3131,cur_changeCycle=1,curView=3131,view=3132
+info|2022-09-09 21:05:33.592378|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.793006|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:33.994052|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:34.194820|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:34.395231|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:34.597830|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:34.598289|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=edf0fcf9...,time=0
+info|2022-09-09 21:05:34.598423|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:34.598979|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3132,toView=3133,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:34.599380|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:34.601434|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3132,cur_changeCycle=1,curView=3132,view=3133
+info|2022-09-09 21:05:34.601733|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:34.802271|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.003089|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.203571|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.403942|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.604342|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.604971|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=23b4ca03...,time=1
+info|2022-09-09 21:05:35.605904|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.606100|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3133,toView=3134,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:35.606459|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.611273|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3133,cur_changeCycle=1,curView=3133,view=3134
+info|2022-09-09 21:05:35.612121|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:35.812929|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.013294|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.214113|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.414782|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.612298|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=550b8a7f...
+info|2022-09-09 21:05:36.613179|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.613685|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3134,toView=3135,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:05:36.617538|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.618182|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.619785|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3134,cur_changeCycle=1,curView=3134,view=3135
+info|2022-09-09 21:05:36.620510|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:36.821045|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:37.021940|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:37.222730|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:37.423099|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:37.624046|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:37.630515|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=d3feb0d7...,time=0
+info|2022-09-09 21:05:37.630919|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3135,toView=3136,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:05:37.631869|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:37.636235|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3135,cur_changeCycle=1,curView=3135,view=3136
+info|2022-09-09 21:05:37.636992|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:37.838007|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.038567|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.239287|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.439488|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.639735|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.641715|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=ba6ae01e...,time=0
+info|2022-09-09 21:05:38.642830|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.645361|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3136,toView=3137,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=3
+info|2022-09-09 21:05:38.645816|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.648878|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3136,cur_changeCycle=1,curView=3136,view=3137
+info|2022-09-09 21:05:38.649811|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:38.850052|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.050517|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.251927|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.452281|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.648785|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=0a486f36...
+info|2022-09-09 21:05:39.649051|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.652679|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.653326|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3137,toView=3138,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:39.653637|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.657286|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3137,cur_changeCycle=1,curView=3137,view=3138
+info|2022-09-09 21:05:39.657760|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:39.857994|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.058145|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.258690|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.459187|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.660049|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.665188|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=5a68565e...,time=0
+info|2022-09-09 21:05:40.666061|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.667761|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3138,toView=3139,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=2
+info|2022-09-09 21:05:40.668453|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.671773|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3138,cur_changeCycle=1,curView=3138,view=3139
+info|2022-09-09 21:05:40.672501|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:40.873538|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.073921|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.274686|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.475291|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.675709|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.676888|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=44b30f43...,time=0
+info|2022-09-09 21:05:41.677303|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.679962|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3139,toView=3140,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=3
+info|2022-09-09 21:05:41.680242|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.680869|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3139,cur_changeCycle=1,curView=3139,view=3140
+info|2022-09-09 21:05:41.681067|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:41.882443|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.082659|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.284591|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.485547|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.681997|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=17f8fdbe...
+info|2022-09-09 21:05:42.682320|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.688555|[g:1][CONSENSUS][PBFT]Trigger fast-viewchange,view=3140,toView=3140,minView=3141,INFO=,reqNum=0,curNum=0,GenIdx=0,Cview=3141,view=3140,fromIdx=0,fromNode=15b8b0ac...,fromIp=172.25.0.2:30300,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+info|2022-09-09 21:05:42.689011|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.689765|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3140,toView=3141,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:42.690777|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.692518|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3140,cur_changeCycle=1,curView=3140,view=3141
+info|2022-09-09 21:05:42.692791|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:42.893356|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.093909|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.294150|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.339804|[P2P][Service] heartBeat,connected count=2
+info|2022-09-09 21:05:43.494392|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.694879|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.695376|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=c3954eea...,time=0
+info|2022-09-09 21:05:43.695607|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.695684|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3141,toView=3142,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:05:43.696407|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.698447|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3141,cur_changeCycle=1,curView=3141,view=3142
+info|2022-09-09 21:05:43.698583|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:43.898982|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:44.100575|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:44.301120|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:44.501843|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:44.701811|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=cba7cd88...,time=0
+info|2022-09-09 21:05:44.702135|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:44.702538|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3142,toView=3143,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:44.703045|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:44.705037|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3142,cur_changeCycle=1,curView=3142,view=3143
+info|2022-09-09 21:05:44.705138|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:44.906028|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.106920|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.307325|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.507817|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.706231|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=8cbf4ecc...
+info|2022-09-09 21:05:45.707137|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.712581|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3143,toView=3144,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=5
+info|2022-09-09 21:05:45.712786|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.718213|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.719717|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3143,cur_changeCycle=1,curView=3143,view=3144
+info|2022-09-09 21:05:45.720009|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:45.920351|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:46.120720|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:46.321156|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:46.521483|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:46.718942|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=b9127126...,time=0
+info|2022-09-09 21:05:46.720265|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3144,toView=3145,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:46.722205|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:46.730826|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3144,cur_changeCycle=1,curView=3144,view=3145
+info|2022-09-09 21:05:46.731220|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:46.931975|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.132755|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.333422|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.534104|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.736827|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.738145|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=da3cd79a...,time=0
+info|2022-09-09 21:05:47.739152|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.739348|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3145,toView=3146,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:47.739654|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.740286|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3145,cur_changeCycle=1,curView=3145,view=3146
+info|2022-09-09 21:05:47.740402|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:47.941007|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.141229|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.341475|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.541763|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.740747|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=a644d4a6...
+info|2022-09-09 21:05:48.741553|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.747652|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.748975|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3146,toView=3147,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=2
+info|2022-09-09 21:05:48.749205|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.751715|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3146,cur_changeCycle=1,curView=3146,view=3147
+info|2022-09-09 21:05:48.752183|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:48.956738|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:49.157155|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:49.357523|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:49.557965|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:49.753263|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=0,hash=1aea586e...,time=0
+info|2022-09-09 21:05:49.753863|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:49.754325|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3147,toView=3148,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=1
+info|2022-09-09 21:05:49.754478|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:49.756316|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3147,cur_changeCycle=1,curView=3147,view=3148
+info|2022-09-09 21:05:49.756443|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:49.956801|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:50.157341|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:50.357804|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:50.558482|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:50.781077|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:50.785625|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=8118822a...,time=0
+info|2022-09-09 21:05:50.785888|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3148,toView=3149,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:05:50.786350|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3148,cur_changeCycle=1,curView=3148,view=3149
+info|2022-09-09 21:05:50.787148|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:50.987897|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:51.188068|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:51.376180|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:51.576525|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:51.775525|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=2,hash=414a948b...
+info|2022-09-09 21:05:51.775904|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:51.780593|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3149,toView=3150,nodeIdx=2,changeCycle=1,myNode=e32feb67...,timecost=0
+info|2022-09-09 21:05:51.782686|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:51.782887|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-09 21:05:51.785696|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3149,cur_changeCycle=1,curView=3149,view=3150
+info|2022-09-09 21:05:51.785826|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory

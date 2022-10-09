@@ -1,0 +1,173 @@
+services:
+  chain-node0:
+    image: fiscoorg/fiscobcos:v2.9.0
+    container_name: chain-node0
+    working_dir: /data
+    command: -c  config.ini
+    volumes:
+      - ./fisco/nodes/172.25.0.2/node0/:/data/
+    ports:
+      - "30300:30300"
+      - "8545:8545"
+      - "20200:20200"
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.2
+
+  chain-node1:
+    image: fiscoorg/fiscobcos:v2.9.0
+    container_name: chain-node1
+    working_dir: /data
+    command: -c  config.ini
+    volumes:
+      - ./fisco/nodes/172.25.0.3/node0/:/data/
+    ports:
+      - "30301:30300"
+      - "8546:8545"
+      - "20201:20200"
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.3
+
+  chain-node2:
+    image: fiscoorg/fiscobcos:v2.9.0
+    container_name: chain-node2
+    working_dir: /data
+    command: -c  config.ini
+    volumes:
+      - ./fisco/nodes/172.25.0.4/node0/:/data/
+    ports:
+      - "30302:30300"
+      - "8547:8545"
+      - "20202:20200"
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.4
+
+  webase-front:
+    image: webasepro/webase-front:v1.5.4
+    container_name: webase-front
+    ports:
+      - "5002:5002"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: 5002
+      SDK_IP: 172.25.0.2
+      SDK_CHANNEL_PORT: 20200
+      KEY_SERVER: webase-sign:5004
+    volumes:
+      - ./fisco/nodes/172.25.0.2/sdk:/dist/sdk
+      - ./webase/webase-front/log:/dist/log
+      - ./webase/webase-front/h2:/h2
+      - ./webase/docker/script/wait-for-it.sh:/wait-for-it.sh
+      - ./webase/docker/script/front-start.sh:/start.sh
+    depends_on:
+      - webase-sign
+    entrypoint: ["/wait-for-it.sh", "172.25.0.2:20200", "--timeout=10", "--strict", "--",  "bash", "/start.sh"]
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.5
+
+  webase-node-mgr:
+    image: webasepro/webase-node-mgr:v1.5.4
+    container_name: webase-node-mgr
+    ports:
+      - "5001:5001"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: 5001
+      WEBASE_DB_IP: webase-mysql
+      WEBASE_DB_PORT: 3306
+      WEBASE_DB_NAME: webasenodemanager
+      WEBASE_DB_UNAME: root
+      WEBASE_DB_PWD: 123456
+      ENCRYPT_TYPE: 0
+    volumes:
+      - ./webase/webase-node-mgr/log:/dist/log
+      - ./webase/docker/script/wait-for-it.sh:/wait-for-it.sh
+      - ./webase/docker/script/mgr-start.sh:/start.sh
+    depends_on:
+      - webase-mysql
+      - webase-sign
+      - webase-front
+    entrypoint: ["/wait-for-it.sh", "webase-mysql:3306", "--timeout=5", "--strict", "--", "bash", "/start.sh"]
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.6
+
+  webase-sign:
+    image: webasepro/webase-sign:v1.5.3
+    container_name: webase-sign
+    ports:
+      - "5004:5004"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: 5004
+      WEBASE_DB_IP: webase-mysql
+      WEBASE_DB_PORT: 3306
+      WEBASE_DB_NAME: webasesign
+      WEBASE_DB_UNAME: root
+      WEBASE_DB_PWD: 123456
+    volumes:
+      - ./webase/webase-sign/log:/dist/log
+      - ./webase/docker/script/wait-for-it.sh:/wait-for-it.sh
+      - ./webase/docker/script/sign-start.sh:/start.sh
+    depends_on:
+      - webase-mysql
+    entrypoint: ["/wait-for-it.sh", "webase-mysql:3306", "--timeout=5", "--strict", "--", "bash", "/start.sh"]
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.7
+
+  webase-web:
+    image: webasepro/webase-web:v1.5.4
+    container_name: webase-web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./webase/nginx.conf:/data/webase-web/nginx/nginx.conf
+      - ./webase/webase-web/log:/usr/share/nginx/log
+      - ./webase/docker/script/wait-for-it.sh:/wait-for-it.sh
+      - ./webase/docker/script/web-start.sh:/start.sh
+    depends_on:
+      - webase-node-mgr
+    entrypoint: ["/wait-for-it.sh", "webase-node-mgr:5001", "--timeout=30", "--", "bash", "/start.sh"]
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.8
+
+  webase-mysql:
+    container_name: webase-mysql
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "23306:3306"
+    volumes:
+    - ./webase/mysql:/var/lib/mysql
+    # entrypoint: ["echo", "Service [mysql] disabled"]
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.9
+
+
+  webase-app-patient:
+    container_name: webase-app-patient
+    image: openjdk:8
+    restart: always
+    privileged: true
+    command: java -jar /app/patient-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev
+    ports:
+      - "8021:8021"
+    volumes:
+      - ./app/patient/target:/app
+    networks:
+      web_network:
+        ipv4_address: 172.25.0.10
+
+networks:
+  web_network:
+    external: true
+
+
+

@@ -1,0 +1,555 @@
+info|2022-09-20 15:02:49.859815|[INITIALIZER][initGlobalConfig],enableCompress=true,compatibilityVersion=2.9.0,versionNumber=34144256,enableStat=false,chainId=1,useSMCrypto=false
+info|2022-09-20 15:02:49.867007|[INITIALIZER][SecureInitializer]loading privateKey
+info|2022-09-20 15:02:49.894933|[INITIALIZER][SecureInitializer]get pub of node,nodeID=15b8b0acce3bb63355d1f97b859edc1bfcd4766a055ee0b3970d172bae020ba421afb919cd82d923d2de034806ed6559ed55a0ebdf063f407956934165ffa870
+info|2022-09-20 15:02:49.908505|[INITIALIZER][SecureInitializer]use user certificate,file=conf//node.crt
+info|2022-09-20 15:02:49.932767|[INITIALIZER][SecureInitializer]use ca certificate,file=conf//ca.crt
+info|2022-09-20 15:02:49.932889|[INITIALIZER][SecureInitializer]use ca,file=conf//
+info|2022-09-20 15:02:49.932918|[INITIALIZER][SecureInitializer][initChannelCertConfig]enable rsa cert for channel ,conf//channel_cert/ certs will be used for channel ssl,dataPath=conf/
+info|2022-09-20 15:02:50.055600|[NETWORK][Host]Connecting to node,endpoint=172.25.0.2:30300
+info|2022-09-20 15:02:50.055722|[NETWORK][Host]Connecting to node,endpoint=172.25.0.3:30300
+info|2022-09-20 15:02:50.055825|[NETWORK][Host]Connecting to node,endpoint=172.25.0.4:30300
+info|2022-09-20 15:02:50.055909|[P2P][Service] heartBeat,connected count=0
+info|2022-09-20 15:02:50.055933|[INITIALIZER][RPCInitializer],network_security.check_cert_issuer=true
+info|2022-09-20 15:02:50.058772|[CHANNEL]ChannelRPCServer started
+info|2022-09-20 15:02:50.058786|[INITIALIZER][RPCInitializer: ChannelRPCHttpServer started.],disableDynamicGroup=false
+info|2022-09-20 15:02:50.058793|[INITIALIZER][LedgerInitializer]initConfig
+info|2022-09-20 15:02:50.058800|[LedgerInitializer],groupConfigPath=conf/
+info|2022-09-20 15:02:50.059291|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-20 15:02:50.059567|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.2:30300
+info|2022-09-20 15:02:50.059730|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.3:30300
+info|2022-09-20 15:02:50.059830|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.4:30300
+info|2022-09-20 15:02:50.059929|[NETWORK][Host]P2P Recv Connect, From=172.25.0.2:42998
+info|2022-09-20 15:02:50.059957|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-20 15:02:50.060922|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:52726
+info|2022-09-20 15:02:50.060958|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+error|2022-09-20 15:02:50.061225|[NETWORK][Host]Get ca basic failed
+error|2022-09-20 15:02:50.081594|[NETWORK][Host]Get ca basic failed
+info|2022-09-20 15:02:50.102547|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.2:42998
+info|2022-09-20 15:02:50.102599|[NETWORK][Host]startPeerSession, Remote=172.25.0.2:42998,local endpoint=172.25.0.2:30300,nodeID=15b8b0ac...
+error|2022-09-20 15:02:50.107323|[NETWORK][Host]Get ca basic failed
+error|2022-09-20 15:02:50.126726|[NETWORK][Host]Get ca basic failed
+info|2022-09-20 15:02:50.139057|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:42998
+info|2022-09-20 15:02:50.139107|[NETWORK][Host]startPeerSession, Remote=172.25.0.2:30300,local endpoint=172.25.0.2:42998,nodeID=15b8b0ac...
+error|2022-09-20 15:02:50.139452|[NETWORK][Host]Get ca basic failed
+info|2022-09-20 15:02:50.142609|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:42714
+info|2022-09-20 15:02:50.142667|[P2P][Service] Connection established,nodeID=e32feb67...,endpoint=172.25.0.4:30300
+info|2022-09-20 15:02:50.142677|[NETWORK][Host]startPeerSession, Remote=172.25.0.4:30300,local endpoint=172.25.0.2:42714,nodeID=e32feb67...
+info|2022-09-20 15:02:50.142697|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:52726
+info|2022-09-20 15:02:50.142731|[P2P][Service] Connection established,nodeID=59b384e6...,endpoint=172.25.0.3:52726
+info|2022-09-20 15:02:50.142739|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:52726,local endpoint=172.25.0.2:30300,nodeID=59b384e6...
+info|2022-09-20 15:02:50.142849|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:58932
+info|2022-09-20 15:02:50.142882|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:30300,local endpoint=172.25.0.2:58932,nodeID=59b384e6...
+warning|2022-09-20 15:02:50.143278|[NETWORK][Session]doRead error,endpoint=172.25.0.3:52726,message=short read
+info|2022-09-20 15:02:50.143287|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.3:52726
+warning|2022-09-20 15:02:50.143297|[P2P][Service] disconnect error P2PSession,nodeID=59b384e6...,endpoint=172.25.0.3:52726,errorCode=3,what=Disconnect
+warning|2022-09-20 15:02:50.143302|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-20 15:02:50.143317|[NETWORK][Session][drop] closing remote 172.25.0.3:52726,reason=Low-level TCP communication error.,endpoint=172.25.0.3:52726
+warning|2022-09-20 15:02:50.143368|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+info|2022-09-20 15:02:50.181726|[INITIALIZER][initSingleLedger] [GroupId], LedgerConstructor:  1,configFileName=conf/group.1.genesis,dataDir=data/
+info|2022-09-20 15:02:50.185133|[g:1][LedgerParam][parseGenesisConfig]initConsensusConfig/initStorageConfig/initTxConfig,configFile=conf/group.1.genesis
+info|2022-09-20 15:02:50.185157|[g:1][LedgerParam][initConsensusConfig],type=pbft,consensusTimeout=3,maxTxNum=1000,txGasLimit=300000000
+info|2022-09-20 15:02:50.185173|[g:1][LedgerParam][parsePublicKeyListOfSection],sectionName=consensus,it.first=15b8b0acce3bb63355d1f97b859edc1bfcd4766a055ee0b3970d172bae020ba421afb919cd82d923d2de034806ed6559ed55a0ebdf063f407956934165ffa870
+info|2022-09-20 15:02:50.185194|[g:1][LedgerParam][parsePublicKeyListOfSection],sectionName=consensus,it.first=59b384e61fdc52f79ab356b042c42d1d3d82091793f21459765e50733aecb0c1ec2dff469957f0b3d11579005b6dbd2bf6c79e902906025509f27e043e017057
+info|2022-09-20 15:02:50.185209|[g:1][LedgerParam][parsePublicKeyListOfSection],sectionName=consensus,it.first=e32feb676113e7dc6748e089395d53138f6d769d9bf1c3bef3ed7fbfa030cccb13d831110815f2d54d6b1214cd0eda959a958e0ff66aed9bd89e6eebc84668dc
+info|2022-09-20 15:02:50.185218|[g:1][LedgerParam][parsePublicKeyListOfSection],totalPubKeySize=3
+info|2022-09-20 15:02:50.185248|[g:1][LedgerParam][max_block_range],maxBlockRange=0,maxBlockPerProcess=3
+info|2022-09-20 15:02:50.185260|[g:1][LedgerParam][parseGenesisConfig],timestamp=1662713572000
+info|2022-09-20 15:02:50.185271|[g:1][LedgerParam]setEVMFlags,enableFreeStorageVMSchedule=false,evmFlags=0
+info|2022-09-20 15:02:50.185283|[g:1][LedgerParam]store evmFlag,evmFlag=0
+info|2022-09-20 15:02:50.185288|[g:1][LedgerParam]store consensus time,consensusTimeout=3
+info|2022-09-20 15:02:50.185294|[g:1][LedgerParam][initMark],genesisMark=1-15b8b0acce3bb63355d1f97b859edc1bfcd4766a055ee0b3970d172bae020ba421afb919cd82d923d2de034806ed6559ed55a0ebdf063f407956934165ffa870,59b384e61fdc52f79ab356b042c42d1d3d82091793f21459765e50733aecb0c1ec2dff469957f0b3d11579005b6dbd2bf6c79e902906025509f27e043e017057,e32feb676113e7dc6748e089395d53138f6d769d9bf1c3bef3ed7fbfa030cccb13d831110815f2d54d6b1214cd0eda959a958e0ff66aed9bd89e6eebc84668dc,-pbft-storage-0-1000-300000000-3
+info|2022-09-20 15:02:50.185300|[g:1][LedgerParam][initIniConfig]initTxPoolConfig/initSyncConfig/initTxExecuteConfig,configFile=conf/group.1.ini
+info|2022-09-20 15:02:50.199501|[g:1][LedgerParam][initStorageConfig],stateType=storage,storageDB=rocksdb,storagePath=data//group1/block/RocksDB,baseDir=data//group1,dbtype=mysql,dbip=127.0.0.1,dbport=3306,dbcharset=utf8mb4,initconnections=15,maxconnections=50,scrollThreshold=2000
+info|2022-09-20 15:02:50.199526|[g:1][LedgerParam][initTxPoolConfig],txPoolLimit=150000,memorySizeLimit(MB)=512,notifyWorkerNum=2,txsExpirationTime(ms)=600000
+info|2022-09-20 15:02:50.199534|[g:1][LedgerParam][initSyncConfig],idleWaitMs=200
+info|2022-09-20 15:02:50.199543|[g:1][LedgerParam][initSyncConfig],enableSendTxsByTree=true,enableSendBlockStatusByTree=true
+info|2022-09-20 15:02:50.199550|[g:1][LedgerParam][initSyncConfig],gossipInterval=1000
+info|2022-09-20 15:02:50.199563|[g:1][LedgerParam][initSyncConfig],enableSendBlockStatusByTree=true,gossipInterval=1000,gossipPeers=3,syncTreeWidth=3,maxQueueSizeForBlockSync=536870912,txsStatusGossipMaxPeers=5
+info|2022-09-20 15:02:50.199573|[g:1][LedgerParam][InitTxExecuteConfig],enableParallel=true
+info|2022-09-20 15:02:50.199587|[g:1][LedgerParam][initConsensusIniConfig],maxTTL=2,minBlockGenerationTime=500,enablDynamicBlockSize=true,blockSizeIncreaseRatio=0.5,enableTTLOptimize=true,enablePrepareWithTxsHash=true
+info|2022-09-20 15:02:50.199656|[g:1][LedgerParam][initRPBFTConsensusIniConfig],broadcastPrepareByTree=true,prepareStatusBroadcastPercent=33,maxRequestMissedTxsWaitTime=100,maxRequestPrepareWaitTime=100
+info|2022-09-20 15:02:50.199664|[g:1][LedgerParam][initFlowControlConfig],maxQPS=9223372036854775807,outGoingBandwidth(Bytes)=9223372036854775807
+info|2022-09-20 15:02:50.199670|[g:1][LedgerParam]parseSDKAllowList,sdkAllowList=[],enableSDKAllowListControl=false
+info|2022-09-20 15:02:50.199692|[g:1][LEDGER][initLedger][DBInitializer]
+info|2022-09-20 15:02:50.199698|[g:1][LEDGER]setSDKAllowList,groupId=1,sdkAllowListSize=0
+info|2022-09-20 15:02:50.199703|[g:1][CHANNEL]registerSDKAllowListByGroupId,groupId=1,size=0
+info|2022-09-20 15:02:50.199707|[g:1][CHANNEL]Disable group-level sdk permission control for sdk allowlist is empty
+info|2022-09-20 15:02:50.199712|[g:1][DBINITIALIZER] [initStorageDB]
+info|2022-09-20 15:02:50.199919|[g:1][DBINITIALIZER] [initRocksDBStorage]
+info|2022-09-20 15:02:50.205204|[g:1][ROCKSDB]open rocksDB handler,path=data//group1/block/RocksDB
+info|2022-09-20 15:02:50.576529|[g:1][g:1][STORAGE][CachedStorage]Init flushStorage thread
+info|2022-09-20 15:02:50.578980|[g:1][DBINITIALIZER] [init CachedStorage],maxCapacity=32,maxForwardBlock=10
+info|2022-09-20 15:02:50.579125|[g:1][LEDGER][initLedger][initBlockChain]
+info|2022-09-20 15:02:50.580688|[g:1][LEDGER]set enableHexBlock to be false,version=34144256
+info|2022-09-20 15:02:50.580710|[g:1][BLOCKCHAIN][#checkAndBuildGenesisBlock],shouldBuild=false
+info|2022-09-20 15:02:50.581146|[g:1][BLOCKCHAIN][#checkAndBuildGenesisBlock]Already have the 0th block, 0th groupMark is equal to file groupMark.
+info|2022-09-20 15:02:50.581153|[g:1][LEDGER][initLedger]initBlockChain SUCC
+info|2022-09-20 15:02:50.581276|[g:1][DBINITIALIZER] [createStateFactory],type=storage
+info|2022-09-20 15:02:50.581284|[g:1][DBINITIALIZER] createStorageState SUCC
+info|2022-09-20 15:02:50.581287|[g:1][DBINITIALIZER] [createStateFactory SUCC]
+info|2022-09-20 15:02:50.581294|[g:1][DBINITIALIZER] createExecutiveContext...
+info|2022-09-20 15:02:50.581313|[g:1][LEDGER]createGasMetric,vmFlagType=0
+info|2022-09-20 15:02:50.581318|[g:1][LEDGER]createGasMetric
+info|2022-09-20 15:02:50.581331|[g:1][DBINITIALIZER] create precompiledGasFactory and precompiledResultFactory
+info|2022-09-20 15:02:50.581334|[g:1][DBINITIALIZER] createExecutiveContext SUCC
+info|2022-09-20 15:02:50.581338|[g:1][DBINITIALIZER] [setSyncNumForCachedStorage],syncNum=0
+info|2022-09-20 15:02:50.581343|[g:1][LEDGER][initNetworkBandWidthLimiter: outGoingBandwidthLimit has been disabled],groupId=1
+info|2022-09-20 15:02:50.581347|[g:1][LEDGER][QPSLimit has been disabled],groupId=1
+info|2022-09-20 15:02:50.581351|[g:1][LEDGER][initLedger][initBlockVerifier]
+info|2022-09-20 15:02:50.581357|[g:1][LEDGER][initLedger][initBlockVerifier SUCC],evmFlags=0
+info|2022-09-20 15:02:50.581360|[g:1][LEDGER][initLedger][initTxPool],txPoolLimit=150000
+info|2022-09-20 15:02:50.581562|[g:1][LEDGER][initLedger]initTxPool SUCC
+info|2022-09-20 15:02:50.581569|[g:1][LEDGER][initLedger][initSync],idleWaitMs=200,gossipInterval=1000,gossipPeers=3
+info|2022-09-20 15:02:50.581574|[g:1][LEDGER]Init sync master,enableSendBlockStatusByTree=true,enableSendTxsByTree=true
+info|2022-09-20 15:02:50.586473|[g:1][LEDGER][initLedger]initSync SUCC
+info|2022-09-20 15:02:50.586489|[g:1][LEDGER][initLedger][consensusInitFactory]
+info|2022-09-20 15:02:50.586496|[g:1][LEDGER][initLedger][createPBFTSealer]
+info|2022-09-20 15:02:50.586500|[g:1][LEDGER][initLedger][createPBFTSealer],baseDir=data//group1,Protocol=65544
+info|2022-09-20 15:02:50.586584|[g:1][LEDGER][initLedger]createPBFTSealer for PBFT or rPBFT,consensusType=pbft
+info|2022-09-20 15:02:50.586624|[g:1][LEDGER]createConsensusEngine: create PBFTEngine
+info|2022-09-20 15:02:50.586639|[g:1][CONSENSUS][PBFT]Register handler for PBFTEngine
+info|2022-09-20 15:02:50.587113|[g:1][CONSENSUS][PBFT]setMinBlockGenerationTime,minBlockGenerationTime=500,consensusTime=1000
+info|2022-09-20 15:02:50.587127|[g:1][LEDGER][initEventLogFilterManager]initEventLogFilterManager SUCC
+info|2022-09-20 15:02:50.587133|[LedgerInitializer init group succ],groupID=1
+info|2022-09-20 15:02:50.588012|[INITIALIZER][RPCInitializer JsonrpcHttpServer started],jsonrpc_IP=127.0.0.1,jsonrpc_listen_port=8545,ipv6=false,disableDynamicGroup=false
+info|2022-09-20 15:02:50.588028|[g:1][LEDGER]startAll...
+info|2022-09-20 15:02:50.591230|[g:1][GossipBlockStatus]start GossipBlockStatus succ
+info|2022-09-20 15:02:50.591254|[g:1][CONSENSUS][ConsensusEngine][Start ConsensusEngineBase]
+info|2022-09-20 15:02:50.591725|[g:1][CONSENSUS][PBFT]^^^^^^^^Report,num=0,sealerIdx=0,hash=78a38d4f...,next=1,tx=0,nodeIdx=0
+info|2022-09-20 15:02:50.592597|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:50.597559|[g:1][ROCKSDB]open rocksDB handler,path=data//group1/pbftMsgBackup/RocksDB
+info|2022-09-20 15:02:50.793878|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:50.993624|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:50.997204|[g:1][CONSENSUS][PBFT][PBFT init env successfully]
+info|2022-09-20 15:02:50.997249|[g:1][CONSENSUS][PBFT][Start PBFTEngine...]
+info|2022-09-20 15:02:50.997256|[g:1][CONSENSUS][SEALER][Start sealer module]
+info|2022-09-20 15:02:50.997568|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:50.997620|[g:1][CONSENSUS][PBFT]^^^^^^^^Report,num=0,sealerIdx=0,hash=78a38d4f...,next=1,tx=0,nodeIdx=0
+info|2022-09-20 15:02:50.997820|[g:1][EVENT][EventLogFilterManager]start,m_maxBlockRange=0,m_maxBlockPerLoopFilter=3
+info|2022-09-20 15:02:51.199260|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:51.399823|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:51.538261|[g:1][NodeTimeMaintenance]updateTimeInfo: update median time offset,updatedMedianTimeOffset=-1,peer=e32feb67...,peerTime=1663657371537,peerOffset=-1,utcTime=1663657371538
+info|2022-09-20 15:02:51.568614|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=0,hash=aa95ce04...
+info|2022-09-20 15:02:51.571419|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:51.587638|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=0,toView=1,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=0
+info|2022-09-20 15:02:51.591797|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:51.792625|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:51.992830|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:52.193206|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+warning|2022-09-20 15:02:52.358956|[CHANNEL]SSL handshake error,message=short read
+info|2022-09-20 15:02:52.393376|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:52.593570|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:52.793851|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:52.994136|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:53.194600|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:53.394908|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:53.595117|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:53.796490|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:53.996812|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:54.197225|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:54.398423|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:54.599263|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:54.799560|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:54.999979|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:55.200569|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:55.400627|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:55.601041|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:55.802357|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:56.002649|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:56.096962|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+warning|2022-09-20 15:02:56.097107|[g:1][CONSENSUS][PBFT]ViewChangeWarning: not caused by omit empty block ,v=0,toV=2,curNum=0,hash=78a38d4f...,nodeIdx=0,myNode=15b8b0ac...
+warning|2022-09-20 15:02:56.097422|[g:1][CONSENSUS][PBFT]Find disconnectedNode,disconnectedNodeSize=1,sessionSize=1,minValidNodes=3,connectedNodeList=172.25.0.4:30300, ,disconnectedNode=59b384e6..., ,idx=0
+info|2022-09-20 15:02:56.107857|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=0,toView=2,nodeIdx=0,changeCycle=2,myNode=15b8b0ac...,timecost=11
+info|2022-09-20 15:02:56.110225|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:56.313156|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:56.513558|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:56.713846|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:56.914143|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:57.114895|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:57.315192|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:57.515431|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:57.719102|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:57.920210|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:58.121511|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:58.323664|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:58.530572|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:58.732029|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:58.935653|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:59.136093|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:59.336397|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:59.511651|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:40138
+info|2022-09-20 15:02:59.511800|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-20 15:02:59.536581|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+error|2022-09-20 15:02:59.545963|[NETWORK][Host]Get ca basic failed
+info|2022-09-20 15:02:59.549315|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:40138
+info|2022-09-20 15:02:59.549729|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:40138,local endpoint=172.25.0.2:30300,nodeID=59b384e6...
+info|2022-09-20 15:02:59.550186|[P2P][Service] Connection established,nodeID=59b384e6...,endpoint=172.25.0.3:40138
+info|2022-09-20 15:02:59.681213|[g:1][NodeTimeMaintenance]updateTimeInfo: update median time offset,updatedMedianTimeOffset=-1,peer=59b384e6...,peerTime=1663657379680,peerOffset=-1,utcTime=1663657379681
+info|2022-09-20 15:02:59.739481|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:02:59.939746|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:00.024579|[NETWORK][Host]P2P Recv Connect, From=172.25.0.4:57200
+info|2022-09-20 15:03:00.026837|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+error|2022-09-20 15:03:00.044176|[NETWORK][Host]Get ca basic failed
+info|2022-09-20 15:03:00.051168|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.4:57200
+info|2022-09-20 15:03:00.053148|[NETWORK][Host]startPeerSession, Remote=172.25.0.4:57200,local endpoint=172.25.0.2:30300,nodeID=e32feb67...
+info|2022-09-20 15:03:00.056848|[NETWORK][Host]Connecting to node,endpoint=172.25.0.3:30300
+info|2022-09-20 15:03:00.057713|[P2P][Service] heartBeat,connected count=2
+info|2022-09-20 15:03:00.058585|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.3:30300
+error|2022-09-20 15:03:00.066484|[NETWORK][Host]Get ca basic failed
+info|2022-09-20 15:03:00.081048|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.2:47156
+info|2022-09-20 15:03:00.081168|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:30300,local endpoint=172.25.0.2:47156,nodeID=59b384e6...
+info|2022-09-20 15:03:00.140056|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:00.340518|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:00.541862|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:00.743203|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:00.943710|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:01.144736|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:01.344935|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:01.545546|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:01.746756|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:01.947119|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:02.147949|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:02.348618|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:02.549137|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:02.749681|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:02.855394|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+warning|2022-09-20 15:03:02.856025|[g:1][CONSENSUS][PBFT]ViewChangeWarning: not caused by omit empty block ,v=0,toV=3,curNum=0,hash=78a38d4f...,nodeIdx=0,myNode=15b8b0ac...
+info|2022-09-20 15:03:02.856171|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=0,toView=3,nodeIdx=0,changeCycle=3,myNode=15b8b0ac...,timecost=2
+info|2022-09-20 15:03:02.856372|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:02.864168|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=0,cur_changeCycle=3,curView=0,view=3
+info|2022-09-20 15:03:02.865051|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:03.065343|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:03.265932|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:03.468782|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:03.669006|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:03.864890|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=0,hash=49932de4...
+info|2022-09-20 15:03:03.865790|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:03.865881|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=3,toView=4,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=0
+info|2022-09-20 15:03:03.866037|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:03.870970|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=3,cur_changeCycle=1,curView=3,view=4
+info|2022-09-20 15:03:03.871077|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:04.072480|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:04.275135|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:04.477953|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:04.678755|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:04.877969|[g:1][CONSENSUS][PBFT]Trigger fast-viewchange,view=4,toView=4,minView=5,INFO=,reqNum=0,curNum=0,GenIdx=1,Cview=5,view=4,fromIdx=1,fromNode=59b384e6...,fromIp=172.25.0.3:40138,hash=78a38d4f...,nodeIdx=0,myNode=15b8b0ac...
+info|2022-09-20 15:03:04.878109|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:04.878431|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=4,toView=5,nodeIdx=0,changeCycle=2,myNode=15b8b0ac...,timecost=0
+info|2022-09-20 15:03:04.878637|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:04.881308|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=4,cur_changeCycle=2,curView=4,view=5
+info|2022-09-20 15:03:04.881374|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.082311|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.282505|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.482964|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.683217|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.884004|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.888933|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=2,hash=67ca9bd4...,time=0
+info|2022-09-20 15:03:05.890064|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.890909|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=5,toView=6,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=1
+info|2022-09-20 15:03:05.891161|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:05.897707|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=5,cur_changeCycle=1,curView=5,view=6
+info|2022-09-20 15:03:05.899347|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.099507|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.299598|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.499912|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.700312|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.898203|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=0,hash=cfe9f986...
+info|2022-09-20 15:03:06.898424|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.898936|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.899911|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=6,toView=7,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=1
+info|2022-09-20 15:03:06.905126|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:06.905199|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=6,cur_changeCycle=1,curView=6,view=7
+info|2022-09-20 15:03:06.907379|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:07.107561|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:07.307773|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:07.508044|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:07.708604|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:07.905433|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=cc740d5e...,time=0
+info|2022-09-20 15:03:07.905609|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:07.905832|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=7,toView=8,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=0
+info|2022-09-20 15:03:07.905914|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:07.911730|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=7,cur_changeCycle=1,curView=7,view=8
+info|2022-09-20 15:03:07.923629|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:08.126015|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:08.326326|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:08.526506|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:08.726921|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:08.922335|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=2,hash=37463fed...,time=0
+info|2022-09-20 15:03:08.922513|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:08.922745|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=8,toView=9,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=0
+info|2022-09-20 15:03:08.922832|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:08.931788|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=8,cur_changeCycle=1,curView=8,view=9
+info|2022-09-20 15:03:08.931859|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:09.134494|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:09.334687|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:09.535072|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:09.735480|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:09.932549|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=0,hash=2f84c3a9...
+info|2022-09-20 15:03:09.932655|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:09.942176|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:09.942823|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=9,toView=10,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=10
+info|2022-09-20 15:03:09.947050|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=9,cur_changeCycle=1,curView=9,view=10
+info|2022-09-20 15:03:09.947187|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:10.057899|[P2P][Service] heartBeat,connected count=2
+info|2022-09-20 15:03:10.147529|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:10.347961|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:10.551054|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:10.751332|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:10.946078|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=3a2e33e6...,time=0
+info|2022-09-20 15:03:10.946787|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:10.947190|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=10,toView=11,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=1
+info|2022-09-20 15:03:10.947741|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:10.949929|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=10,cur_changeCycle=1,curView=10,view=11
+info|2022-09-20 15:03:10.950031|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:11.151152|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:11.351567|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:11.552209|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:11.753696|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:11.953964|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=2,hash=38b6ad95...,time=0
+info|2022-09-20 15:03:11.955084|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=11,toView=12,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=1
+info|2022-09-20 15:03:11.955749|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:11.958751|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:11.961139|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=11,cur_changeCycle=1,curView=11,view=12
+info|2022-09-20 15:03:11.961475|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.161786|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.361965|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.562864|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.763427|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.963277|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=1,tx=0,nodeIdx=0,hash=56a28a86...
+info|2022-09-20 15:03:12.964393|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.973532|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.973705|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=12,toView=13,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=0
+info|2022-09-20 15:03:12.973874|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:12.976093|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=12,cur_changeCycle=1,curView=12,view=13
+info|2022-09-20 15:03:12.976230|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:13.176555|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:13.386600|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:13.587343|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:13.789055|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:13.989409|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:14.012789|[g:1][CONSENSUS]addRawPrepare,height=1,reqIdx=1,hash=a1bcfc3b...,time=0
+info|2022-09-20 15:03:14.013088|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:14.013534|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=13,toView=14,nodeIdx=0,changeCycle=1,myNode=15b8b0ac...,timecost=1
+info|2022-09-20 15:03:14.013869|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:14.022478|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=13,cur_changeCycle=1,curView=13,view=14
+info|2022-09-20 15:03:14.022576|[g:1][SYNC][id:15b8b0ac...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-20 15:03:14.169856|[LEDGER]stop sealer,groupID=1
+info|2022-09-20 15:03:14.170147|[CONSENSUS][SEALER]Stop sealer module...
+info|2022-09-20 15:03:14.173162|[CONSENSUS][ConsensusEngine][Stop ConsensusEngineBase]
+info|2022-09-20 15:03:14.175806|[CONSENSUS][ConsensusEngine]ConsensusEngineBase stopped
+info|2022-09-20 15:03:14.175820|[LEDGER]sealer stopped. stop sync,groupID=1
+info|2022-09-20 15:03:14.181742|[g:1] [SYNC][id:15b8b0ac...]SyncMsgEngine stopped
+info|2022-09-20 15:03:14.259897|[GossipBlockStatus]stop GossipBlockStatus succ
+info|2022-09-20 15:03:14.630548|[SYNC][id:15b8b0ac...][g:1]SyncMaster stopped
+info|2022-09-20 15:03:14.630596|[LEDGER]sync stopped. stop event filter manager,groupID=1
+info|2022-09-20 15:03:14.632570|[EVENT][EventLogFilterManager]stop
+info|2022-09-20 15:03:14.632583|[LEDGER]event filter manager stopped. stop tx pool,groupID=1
+info|2022-09-20 15:03:14.633260|[LEDGER]removeNetworkStatHandlerByGroupID and removeGroupBandwidthLimiter for service,groupID=1
+info|2022-09-20 15:03:14.633276|[CHANNEL]removeSDKAllowListByGroupId,groupId=1
+info|2022-09-20 15:03:14.633282|[INITIALIZER]ledgerInitializer stopped
+warning|2022-09-20 15:03:14.633306|[CHANNEL]Accept failed,message=Operation canceled
+warning|2022-09-20 15:03:14.633388|[CHANNEL]Accept failed,message=Operation canceled
+warning|2022-09-20 15:03:14.633436|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633462|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633487|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633512|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633536|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633561|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633585|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633608|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633629|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633653|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633677|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633698|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633720|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633744|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633769|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633791|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633814|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633837|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633949|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.633990|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634016|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634038|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634061|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634086|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634109|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634131|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634155|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634183|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634208|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634244|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634270|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634293|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634315|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634338|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634361|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634389|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634411|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634483|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634513|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.634544|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635657|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635697|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635721|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635821|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635853|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635870|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635889|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635905|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635921|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635937|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635952|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635967|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.635982|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636002|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636018|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636034|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636049|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636064|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636079|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636095|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636110|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636125|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636144|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636160|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636176|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636191|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636206|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636235|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636250|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636266|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636283|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636304|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636321|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636337|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636352|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636368|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636383|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636399|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636414|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636430|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636458|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636475|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636491|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636507|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636522|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636538|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636554|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636569|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636585|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636604|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636621|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636637|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636652|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636669|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636685|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636700|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636716|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636731|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636751|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636768|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636783|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636799|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636815|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636830|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636845|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636860|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636876|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636896|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636912|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636928|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636944|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636959|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636975|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.636991|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637006|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637022|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637041|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637057|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637073|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637089|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637104|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637120|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637135|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637152|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637168|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637187|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637204|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637219|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637235|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637251|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637266|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637282|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637298|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637314|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637333|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637350|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637365|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637479|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.637497|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638051|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638349|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638373|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638393|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638439|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638595|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638903|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638929|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638946|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.638963|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639079|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639145|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639177|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639465|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639484|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639500|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639627|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639847|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.639875|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.640487|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.640763|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.641145|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.641204|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.641662|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.641813|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.642728|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.642918|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.643681|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.643825|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.644173|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.644192|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:14.644844|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-20 15:03:15.483132|[NETWORK][Session]doRead error,endpoint=172.25.0.3:40138,message=short read
+info|2022-09-20 15:03:15.483578|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.3:40138
+warning|2022-09-20 15:03:15.483626|[NETWORK][Session][drop] closing remote 172.25.0.3:40138,reason=Low-level TCP communication error.,endpoint=172.25.0.3:40138
+error|2022-09-20 15:03:15.483732|[NETWORK][Session]Session inactived
+error|2022-09-20 15:03:15.483739|[NETWORK][Session]Session inactived
+warning|2022-09-20 15:03:15.483744|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-20 15:03:15.483969|[P2P][Service] disconnect error P2PSession,nodeID=59b384e6...,endpoint=172.25.0.3:40138,errorCode=3,what=Disconnect
+warning|2022-09-20 15:03:15.483984|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+info|2022-09-20 15:03:15.646831|[INITIALIZER]ChannelRPCHttpServer deleted.
+info|2022-09-20 15:03:15.647900|[INITIALIZER]JsonrpcHttpServer deleted.
+info|2022-09-20 15:03:15.647965|[INITIALIZER]RPCInitializer stopped
+error|2022-09-20 15:03:15.647996|[NETWORK][Host]Error: system:125
+info|2022-09-20 15:03:15.648189|[NETWORK][Host]Host exit
+info|2022-09-20 15:03:15.649833|[INITIALIZER]P2PInitializer stopped
+info|2022-09-20 15:03:15.649851|[LEDGER]stop sealer,groupID=1
+info|2022-09-20 15:03:15.649860|[LEDGER]sealer stopped. stop sync,groupID=1
+info|2022-09-20 15:03:15.649869|[g:1] [SYNC][id:15b8b0ac...]SyncMsgEngine stopped
+info|2022-09-20 15:03:15.649879|[GossipBlockStatus]GossipBlockStatus already stopped
+info|2022-09-20 15:03:15.649883|[SYNC][id:15b8b0ac...][g:1]SyncMaster stopped
+info|2022-09-20 15:03:15.649886|[LEDGER]sync stopped. stop event filter manager,groupID=1
+info|2022-09-20 15:03:15.649889|[LEDGER]event filter manager stopped. stop tx pool,groupID=1
+info|2022-09-20 15:03:15.649895|[LEDGER]removeNetworkStatHandlerByGroupID and removeGroupBandwidthLimiter for service,groupID=1
+info|2022-09-20 15:03:15.649902|[g:1][STORAGE][CachedStorage]Stopping flushStorage thread
+info|2022-09-20 15:03:16.565911|[g:1][STORAGE][CachedStorage]flushStorage thread stopped.
+info|2022-09-20 15:03:16.568417|[DBINITIALIZER] storage stopped
+info|2022-09-20 15:03:16.619976|[g:1] [SYNC][id:15b8b0ac...]SyncMsgEngine stopped
+info|2022-09-20 15:03:16.620391|[GossipBlockStatus]GossipBlockStatus already stopped
+info|2022-09-20 15:03:16.620399|[SYNC][id:15b8b0ac...][g:1]SyncMaster stopped
+info|2022-09-20 15:03:16.620415|[g:1] [SYNC][id:15b8b0ac...]SyncMsgEngine stopped

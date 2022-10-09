@@ -1,0 +1,57 @@
+warning|2022-09-13 05:22:54.543875|[NETWORK][Session]doRead error,endpoint=172.25.0.3:30300,message=short read
+info|2022-09-13 05:22:54.543890|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.3:30300
+warning|2022-09-13 05:22:54.543897|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=Low-level TCP communication error.,endpoint=172.25.0.3:30300
+info|2022-09-13 05:22:54.543928|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:48942
+info|2022-09-13 05:22:54.543949|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+warning|2022-09-13 05:22:54.543972|[NETWORK][Session]doRead error,endpoint=172.25.0.2:53196,message=short read
+info|2022-09-13 05:22:54.543977|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.2:53196
+warning|2022-09-13 05:22:54.543982|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=Low-level TCP communication error.,endpoint=172.25.0.2:53196
+info|2022-09-13 05:22:54.544025|[P2P][Service] heartBeat,connected count=2
+error|2022-09-13 05:22:54.544031|[NETWORK][Session]Session inactived
+error|2022-09-13 05:22:54.544034|[NETWORK][Session]Session inactived
+error|2022-09-13 05:22:54.544036|[NETWORK][Session]Session inactived
+error|2022-09-13 05:22:54.544039|[NETWORK][Session]Session inactived
+warning|2022-09-13 05:22:54.544483|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-13 05:22:54.544490|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-13 05:22:54.544595|[g:1][NETWORK][Session]Session inactived
+warning|2022-09-13 05:22:54.544603|[g:1][NETWORK][Session]Session inactived
+warning|2022-09-13 05:22:54.644082|[P2P][Service] disconnect error P2PSession,nodeID=59b384e6...,endpoint=172.25.0.3:30300,errorCode=3,what=Disconnect
+warning|2022-09-13 05:22:54.644115|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-13 05:22:54.644133|[P2P][Service] disconnect error P2PSession,nodeID=15b8b0ac...,endpoint=172.25.0.2:53196,errorCode=3,what=Disconnect
+warning|2022-09-13 05:22:54.644141|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+info|2022-09-13 05:22:54.644416|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+warning|2022-09-13 05:22:54.644712|[g:1][CONSENSUS][PBFT]ViewChangeWarning: not caused by omit empty block ,v=16138,toV=16143,curNum=0,hash=78a38d4f...,nodeIdx=2,myNode=e32feb67...
+warning|2022-09-13 05:22:54.644725|[g:1][CONSENSUS][PBFT]Find disconnectedNode,disconnectedNodeSize=2,sessionSize=0,minValidNodes=3,connectedNodeList=,disconnectedNode=15b8b0ac..., 59b384e6..., ,idx=2
+info|2022-09-13 05:22:54.644748|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=16138,toView=16143,nodeIdx=2,changeCycle=6,myNode=e32feb67...,timecost=0
+error|2022-09-13 05:22:54.778530|[NETWORK][Host]Get ca basic failed
+info|2022-09-13 05:22:50.520440|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:50.576308|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:48942
+info|2022-09-13 05:22:50.576385|[P2P][Service] Connection established,nodeID=59b384e6...,endpoint=172.25.0.3:48942
+info|2022-09-13 05:22:50.576464|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:48942,local endpoint=172.25.0.4:30300,nodeID=59b384e6...
+info|2022-09-13 05:22:50.719972|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:50.947795|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:51.148094|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:51.350176|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:51.550753|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:51.751243|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:51.951767|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:52.152742|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:52.381609|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:52.582624|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:52.783652|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:52.985797|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:53.186320|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:53.386431|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:53.586629|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:53.786989|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:53.995488|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:54.209768|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:54.409777|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:54.610047|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:54.810533|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:55.010870|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory
+info|2022-09-13 05:22:55.211967|[g:1][SYNC][id:e32feb67...]DownloadingBlockQueue: clearQueue and ReleaseFreeMemory

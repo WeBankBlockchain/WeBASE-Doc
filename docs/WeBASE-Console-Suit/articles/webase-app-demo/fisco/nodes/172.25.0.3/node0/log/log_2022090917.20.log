@@ -1,0 +1,246 @@
+info|2022-09-09 17:20:18.131952|[INITIALIZER][initGlobalConfig],enableCompress=true,compatibilityVersion=2.9.0,versionNumber=34144256,enableStat=false,chainId=1,useSMCrypto=false
+info|2022-09-09 17:20:18.133691|[INITIALIZER][SecureInitializer]loading privateKey
+info|2022-09-09 17:20:18.149841|[INITIALIZER][SecureInitializer]get pub of node,nodeID=59b384e61fdc52f79ab356b042c42d1d3d82091793f21459765e50733aecb0c1ec2dff469957f0b3d11579005b6dbd2bf6c79e902906025509f27e043e017057
+info|2022-09-09 17:20:18.155378|[INITIALIZER][SecureInitializer]use user certificate,file=conf//node.crt
+info|2022-09-09 17:20:18.162712|[INITIALIZER][SecureInitializer]use ca certificate,file=conf//ca.crt
+info|2022-09-09 17:20:18.162801|[INITIALIZER][SecureInitializer]use ca,file=conf//
+info|2022-09-09 17:20:18.162825|[INITIALIZER][SecureInitializer][initChannelCertConfig]enable rsa cert for channel ,conf//channel_cert/ certs will be used for channel ssl,dataPath=conf/
+info|2022-09-09 17:20:18.173150|[NETWORK][Host]Connecting to node,endpoint=172.25.0.2:30300
+info|2022-09-09 17:20:18.173283|[NETWORK][Host]Connecting to node,endpoint=172.25.0.3:30300
+info|2022-09-09 17:20:18.173331|[NETWORK][Host]Connecting to node,endpoint=172.25.0.4:30300
+info|2022-09-09 17:20:18.173393|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+info|2022-09-09 17:20:18.173529|[P2P][Service] heartBeat,connected count=0
+info|2022-09-09 17:20:18.173659|[INITIALIZER][RPCInitializer],network_security.check_cert_issuer=true
+info|2022-09-09 17:20:18.174988|[CHANNEL]ChannelRPCServer started
+info|2022-09-09 17:20:18.175003|[INITIALIZER][RPCInitializer: ChannelRPCHttpServer started.],disableDynamicGroup=false
+info|2022-09-09 17:20:18.175011|[INITIALIZER][LedgerInitializer]initConfig
+info|2022-09-09 17:20:18.175016|[LedgerInitializer],groupConfigPath=conf/
+info|2022-09-09 17:20:18.175894|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.2:30300
+info|2022-09-09 17:20:18.176069|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.3:30300
+info|2022-09-09 17:20:18.176377|[NETWORK][ASIO]asyncResolveConnect,endpoint=172.25.0.4:30300
+info|2022-09-09 17:20:18.176743|[NETWORK][Host]P2P Recv Connect, From=172.25.0.3:52642
+info|2022-09-09 17:20:18.176776|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+error|2022-09-09 17:20:18.178689|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 17:20:18.183219|[INITIALIZER][initSingleLedger] [GroupId], LedgerConstructor:  1,configFileName=conf/group.1.genesis,dataDir=data/
+info|2022-09-09 17:20:18.184266|[g:1][LedgerParam][parseGenesisConfig]initConsensusConfig/initStorageConfig/initTxConfig,configFile=conf/group.1.genesis
+info|2022-09-09 17:20:18.184287|[g:1][LedgerParam][initConsensusConfig],type=pbft,consensusTimeout=3,maxTxNum=1000,txGasLimit=300000000
+info|2022-09-09 17:20:18.184300|[g:1][LedgerParam][parsePublicKeyListOfSection],sectionName=consensus,it.first=15b8b0acce3bb63355d1f97b859edc1bfcd4766a055ee0b3970d172bae020ba421afb919cd82d923d2de034806ed6559ed55a0ebdf063f407956934165ffa870
+info|2022-09-09 17:20:18.184330|[g:1][LedgerParam][parsePublicKeyListOfSection],sectionName=consensus,it.first=59b384e61fdc52f79ab356b042c42d1d3d82091793f21459765e50733aecb0c1ec2dff469957f0b3d11579005b6dbd2bf6c79e902906025509f27e043e017057
+info|2022-09-09 17:20:18.184352|[g:1][LedgerParam][parsePublicKeyListOfSection],sectionName=consensus,it.first=e32feb676113e7dc6748e089395d53138f6d769d9bf1c3bef3ed7fbfa030cccb13d831110815f2d54d6b1214cd0eda959a958e0ff66aed9bd89e6eebc84668dc
+info|2022-09-09 17:20:18.184358|[g:1][LedgerParam][parsePublicKeyListOfSection],totalPubKeySize=3
+info|2022-09-09 17:20:18.184382|[g:1][LedgerParam][max_block_range],maxBlockRange=0,maxBlockPerProcess=3
+info|2022-09-09 17:20:18.184388|[g:1][LedgerParam][parseGenesisConfig],timestamp=1662713572000
+info|2022-09-09 17:20:18.184399|[g:1][LedgerParam]setEVMFlags,enableFreeStorageVMSchedule=false,evmFlags=0
+info|2022-09-09 17:20:18.184411|[g:1][LedgerParam]store evmFlag,evmFlag=0
+info|2022-09-09 17:20:18.184416|[g:1][LedgerParam]store consensus time,consensusTimeout=3
+info|2022-09-09 17:20:18.184421|[g:1][LedgerParam][initMark],genesisMark=1-15b8b0acce3bb63355d1f97b859edc1bfcd4766a055ee0b3970d172bae020ba421afb919cd82d923d2de034806ed6559ed55a0ebdf063f407956934165ffa870,59b384e61fdc52f79ab356b042c42d1d3d82091793f21459765e50733aecb0c1ec2dff469957f0b3d11579005b6dbd2bf6c79e902906025509f27e043e017057,e32feb676113e7dc6748e089395d53138f6d769d9bf1c3bef3ed7fbfa030cccb13d831110815f2d54d6b1214cd0eda959a958e0ff66aed9bd89e6eebc84668dc,-pbft-storage-0-1000-300000000-3
+info|2022-09-09 17:20:18.184433|[g:1][LedgerParam][initIniConfig]initTxPoolConfig/initSyncConfig/initTxExecuteConfig,configFile=conf/group.1.ini
+info|2022-09-09 17:20:18.186391|[g:1][LedgerParam][initStorageConfig],stateType=storage,storageDB=rocksdb,storagePath=data//group1/block/RocksDB,baseDir=data//group1,dbtype=mysql,dbip=127.0.0.1,dbport=3306,dbcharset=utf8mb4,initconnections=15,maxconnections=50,scrollThreshold=2000
+info|2022-09-09 17:20:18.186407|[g:1][LedgerParam][initTxPoolConfig],txPoolLimit=150000,memorySizeLimit(MB)=512,notifyWorkerNum=2,txsExpirationTime(ms)=600000
+info|2022-09-09 17:20:18.186412|[g:1][LedgerParam][initSyncConfig],idleWaitMs=200
+info|2022-09-09 17:20:18.186418|[g:1][LedgerParam][initSyncConfig],enableSendTxsByTree=true,enableSendBlockStatusByTree=true
+info|2022-09-09 17:20:18.186422|[g:1][LedgerParam][initSyncConfig],gossipInterval=1000
+info|2022-09-09 17:20:18.186443|[g:1][LedgerParam][initSyncConfig],enableSendBlockStatusByTree=true,gossipInterval=1000,gossipPeers=3,syncTreeWidth=3,maxQueueSizeForBlockSync=536870912,txsStatusGossipMaxPeers=5
+info|2022-09-09 17:20:18.186449|[g:1][LedgerParam][InitTxExecuteConfig],enableParallel=true
+info|2022-09-09 17:20:18.186459|[g:1][LedgerParam][initConsensusIniConfig],maxTTL=2,minBlockGenerationTime=500,enablDynamicBlockSize=true,blockSizeIncreaseRatio=0.5,enableTTLOptimize=true,enablePrepareWithTxsHash=true
+info|2022-09-09 17:20:18.186474|[g:1][LedgerParam][initRPBFTConsensusIniConfig],broadcastPrepareByTree=true,prepareStatusBroadcastPercent=33,maxRequestMissedTxsWaitTime=100,maxRequestPrepareWaitTime=100
+info|2022-09-09 17:20:18.186479|[g:1][LedgerParam][initFlowControlConfig],maxQPS=9223372036854775807,outGoingBandwidth(Bytes)=9223372036854775807
+info|2022-09-09 17:20:18.186482|[g:1][LedgerParam]parseSDKAllowList,sdkAllowList=[],enableSDKAllowListControl=false
+info|2022-09-09 17:20:18.186495|[g:1][LEDGER][initLedger][DBInitializer]
+info|2022-09-09 17:20:18.186526|[g:1][LEDGER]setSDKAllowList,groupId=1,sdkAllowListSize=0
+info|2022-09-09 17:20:18.186586|[g:1][CHANNEL]registerSDKAllowListByGroupId,groupId=1,size=0
+info|2022-09-09 17:20:18.186601|[g:1][CHANNEL]Disable group-level sdk permission control for sdk allowlist is empty
+info|2022-09-09 17:20:18.186635|[g:1][DBINITIALIZER] [initStorageDB]
+info|2022-09-09 17:20:18.186640|[g:1][DBINITIALIZER] [initRocksDBStorage]
+info|2022-09-09 17:20:18.186676|[g:1][ROCKSDB]open rocksDB handler,path=data//group1/block/RocksDB
+error|2022-09-09 17:20:18.194012|[NETWORK][Host]Get ca basic failed
+error|2022-09-09 17:20:18.200262|[NETWORK][Host]Get ca basic failed
+error|2022-09-09 17:20:18.211261|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 17:20:18.213455|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.3:37114
+info|2022-09-09 17:20:18.213509|[NETWORK][Host]startPeerSession, Remote=172.25.0.2:30300,local endpoint=172.25.0.3:37114,nodeID=15b8b0ac...
+info|2022-09-09 17:20:18.213570|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.3:52642
+info|2022-09-09 17:20:18.213622|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:52642,local endpoint=172.25.0.3:30300,nodeID=59b384e6...
+info|2022-09-09 17:20:18.213675|[P2P][Service] Connection established,nodeID=15b8b0ac...,endpoint=172.25.0.2:30300
+info|2022-09-09 17:20:18.213683|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.3:52642
+info|2022-09-09 17:20:18.213708|[NETWORK][Host]startPeerSession, Remote=172.25.0.3:30300,local endpoint=172.25.0.3:52642,nodeID=59b384e6...
+info|2022-09-09 17:20:18.213789|[NETWORK][Host]handshakeClient succ,local endpoint=172.25.0.3:47646
+info|2022-09-09 17:20:18.213813|[NETWORK][Host]startPeerSession, Remote=172.25.0.4:30300,local endpoint=172.25.0.3:47646,nodeID=59b384e6...
+warning|2022-09-09 17:20:18.213977|[NETWORK][Session]doRead error,endpoint=172.25.0.2:30300,message=short read
+info|2022-09-09 17:20:18.213986|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.2:30300
+warning|2022-09-09 17:20:18.214005|[P2P][Service] disconnect error P2PSession,nodeID=15b8b0ac...,endpoint=172.25.0.2:30300,errorCode=3,what=Disconnect
+warning|2022-09-09 17:20:18.214012|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2022-09-09 17:20:18.214028|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=Low-level TCP communication error.,endpoint=172.25.0.2:30300
+warning|2022-09-09 17:20:18.214054|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+error|2022-09-09 17:20:18.228720|[g:1][ROCKSDB]access rocksDB failed, status: IO error: While lock file: data//group1/block/RocksDB/LOCK: Resource temporarily unavailable, path:data//group1/block/RocksDB
+error|2022-09-09 17:20:18.254998|[g:1][DBINITIALIZER] initRocksDBStorage failed,EINFO=/FISCO-BCOS/libstorage/BasicRocksDB.cpp(237): Throw in function void dev::storage::BasicRocksDB::checkStatus(const rocksdb::Status &, const std::string &)
+Dynamic exception type: boost::exception_detail::clone_impl<dev::DatabaseError>
+std::exception::what: std::exception
+[dev::tag_comment*] = access rocksDB failed, status: IO error: While lock file: data//group1/block/RocksDB/LOCK: Resource temporarily unavailable, path:data//group1/block/RocksDB
+
+info|2022-09-09 17:20:18.255052|[DBINITIALIZER] storage stopped
+error|2022-09-09 17:20:18.255119|[INITIALIZER][LedgerInitializer]initLedger failed,EINFO=/FISCO-BCOS/libinitializer/LedgerInitializer.cpp(126): Throw in function auto dev::initializer::LedgerInitializer::initLedgers()::(anonymous class)::operator()(const dev::GROUP_ID &, const std::__cxx11::string &) const
+Dynamic exception type: boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector<std::exception> >
+std::exception::what: std::exception
+
+error|2022-09-09 17:20:18.255162|[INITIALIZER][Initializer]Init failed,EINFO=/FISCO-BCOS/libinitializer/LedgerInitializer.cpp(136): Throw in function vector<dev::GROUP_ID> dev::initializer::LedgerInitializer::initLedgers()
+Dynamic exception type: boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector<std::exception> >
+std::exception::what: std::exception
+
+info|2022-09-09 17:20:18.255192|[INITIALIZER]ledgerInitializer stopped
+warning|2022-09-09 17:20:18.255216|[CHANNEL]Accept failed,message=Operation canceled
+warning|2022-09-09 17:20:18.255288|[CHANNEL]Accept failed,message=Operation canceled
+warning|2022-09-09 17:20:18.255330|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255352|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255370|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255385|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255402|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255418|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255434|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255450|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255466|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255502|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255542|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255577|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255660|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255687|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255713|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255738|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255763|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255790|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255820|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.255850|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256070|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256136|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256170|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256200|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256219|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256250|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256285|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256317|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256335|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256351|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256386|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256422|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256444|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256463|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256486|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256526|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256554|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256572|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256587|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256677|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256705|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256725|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256741|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256772|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256834|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256865|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256883|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256900|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256916|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256933|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256953|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256971|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.256987|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257003|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257022|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257040|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257057|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257077|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257096|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257117|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257135|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257153|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257171|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257189|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257205|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257220|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257236|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257251|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257267|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257282|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257297|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257312|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257328|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257343|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257358|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257373|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257389|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257449|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257473|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257489|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257506|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257522|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257586|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257606|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257622|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257639|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257659|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257675|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257690|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257705|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257720|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257735|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257750|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257766|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257784|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257801|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257817|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257832|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257849|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257864|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257879|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257894|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257909|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257925|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257942|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257958|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257973|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.257988|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258003|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258018|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258033|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258049|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258065|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258082|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258098|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258113|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258128|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258144|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258159|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258174|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258189|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258204|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258221|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258237|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258252|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258267|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258286|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258302|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258319|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258356|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258389|[CHANNEL]SSL handshake error,message=Bad file descriptor
+warning|2022-09-09 17:20:18.258641|[CHANNEL]SSL handshake error,message=Bad file descriptor
+info|2022-09-09 17:20:18.804972|[NETWORK][Host]P2P Recv Connect, From=172.25.0.2:54984
+info|2022-09-09 17:20:18.805026|[NETWORK][Host]P2P StartAccept,Host=0.0.0.0:30300
+error|2022-09-09 17:20:18.809999|[NETWORK][Host]Get ca basic failed
+info|2022-09-09 17:20:18.815130|[NETWORK][Host]handshakeServer succ,remote endpoint=172.25.0.2:54984
+info|2022-09-09 17:20:18.815185|[NETWORK][Host]startPeerSession, Remote=172.25.0.2:54984,local endpoint=172.25.0.3:30300,nodeID=15b8b0ac...
+info|2022-09-09 17:20:18.815411|[P2P][Service] Connection established,nodeID=15b8b0ac...,endpoint=172.25.0.2:54984
+warning|2022-09-09 17:20:18.815529|[NETWORK][Session]doRead error,endpoint=172.25.0.2:54984,message=short read
+info|2022-09-09 17:20:18.815620|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.25.0.2:54984
+warning|2022-09-09 17:20:18.815682|[NETWORK][Session][drop] closing remote 0.0.0.0:0,reason=Low-level TCP communication error.,endpoint=172.25.0.2:54984
+error|2022-09-09 17:20:18.815797|[NETWORK][Session]Session inactived
+error|2022-09-09 17:20:18.815803|[NETWORK][Session]Session inactived
+warning|2022-09-09 17:20:18.815809|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2022-09-09 17:20:18.815849|[P2P][Service] disconnect error P2PSession,nodeID=15b8b0ac...,endpoint=172.25.0.2:54984,errorCode=3,what=Disconnect
+warning|2022-09-09 17:20:18.815864|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+info|2022-09-09 17:20:19.261236|[INITIALIZER]ChannelRPCHttpServer deleted.
+info|2022-09-09 17:20:19.261262|[INITIALIZER]RPCInitializer stopped
+error|2022-09-09 17:20:19.261334|[NETWORK][Host]Error: system:125
+info|2022-09-09 17:20:19.261379|[NETWORK][Host]Host exit
+info|2022-09-09 17:20:19.263469|[INITIALIZER]P2PInitializer stopped
