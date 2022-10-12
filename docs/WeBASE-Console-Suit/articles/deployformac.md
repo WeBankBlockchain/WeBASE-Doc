@@ -4,7 +4,7 @@
 
 ## 安装
 
-- 按照[WeBASE lab](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE/install.html)下载一键部署工具，并修改了两个脚本后，提交基于MacOS的一键部署工具到Github，详情见[地址](https://github.com/Skkypy/webase-deploy-macos/edit/main/README.md)。
+- 按照[WeBASE lab](https://webasedoc.readthedocs.io/zh_CN/lab/docs/WeBASE/install.html)下载一键部署工具(WeBASE v3.0)，并修改了两个脚本后，提交基于MacOS的一键部署工具到Github，详情见[地址](https://github.com/Skkypy/webase-deploy-macos/blob/main/README.md)。WeBASE v1.x系列同理
 
 ## 适配MacOS
 
