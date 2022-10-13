@@ -208,7 +208,7 @@ sudo pip3 install PyMySQL
 
 ```bash
 cd ~
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.4.1/webase-front.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.4/webase-front.zi
 unzip webase-front.zip
 cd webase-front
 ```
