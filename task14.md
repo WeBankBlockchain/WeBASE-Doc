@@ -34,6 +34,7 @@ mkdir fisco
 brew install openssl@1.1 curl
 
 openssl version
+
 OpenSSL 1.1.1n  15 Mar 2022
 Copy to clipboard
 ## 下载脚本
