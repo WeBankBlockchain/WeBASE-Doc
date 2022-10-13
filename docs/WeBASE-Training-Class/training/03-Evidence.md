@@ -156,17 +156,17 @@ contract EvidenceFactory{
 #### 3）编译部署智能合约
 
 **填写完合约空缺部分后**，通过合约IDE编译合约。
+- 同时，通过创建Alice私钥、Bob私钥和Caron私钥，以Alice、Bob、Caron私钥的地址为参数，部署合约
 
-同时，通过创建Alice私钥和Bob私钥，以Alice和Bob私钥的地址为合约构造函数的入参，部署合约
 
 **提交方式：**
 - 提交合约部署成功后的交易回执截图
 - 提交部署成功后的智能合约截图，截图应包含合约地址
-- 调用合约，获取合约的signer变量的值，提交截图
+- 调用合约，获取合约的signer变量的值，提交截图（signer应该是Alice、Bob、Caron的地址）
 
 #### 4）向部署的智能合约发送交易
 - 通过Alice私钥调用EvidenceFactory合约的newEvidence方法创建一个存证，提交交易回执截图，并记录Evidence的地址
-- 调用EvidenceFactory合约getEvidence方法，传入newEvidence获得的Evidence，获取刚创建的存证，提交截图
+- 调用EvidenceFactory合约getEvidence方法，传入上一步骤获得的Evidence，获取刚创建的存证，提交截图
 - 通过Bob私钥调用EvidenceFactory合约addSignatures方法，提交交易回执截图
 - 再调用EvidenceFactory合约getEvidence方法，获取存证中新增的Bob的签名，提交截图
 
@@ -174,11 +174,10 @@ contract EvidenceFactory{
 - 编写一个区块链应用程序，可以通过SDK连接区块链节点，并向智能合约发送交易。
 
 **提交方式：**
-- 提交Asset合约Java类截图
-- 调用Asset的合约Java类send方法的源代码
-- 通过Java调用Asset合约Java类的send方法，向issuer转账1个积分，在控制台输出交易哈希，截图并提交
-- 通过Java调用Asset合约Java类，获取issuer的余额，在控制台输出issuer地址和余额值，截图并提交
-- 通过合约IDE获取issuer余额，截图并提交
+- 提交EvidenceFactory合约Java类截图
+- 加载Caron私钥，通过Caron的私钥调用EvidenceFactory合约Java类的addSignatures方法，给步骤4中创建的Evidence存证添加Caron的签名，在console控制台输出交易哈希，截图并提交
+- 通过Java调用EvidenceFactory合约Java类的getEvidence方法，获取上述步骤所创建的存证，在控制台输出存证的地址和存证签名数，此时签名数应该为3（包含Alice、Bob、Caron的地址），截图并提交
+
 
 ## 参考答案：
 
@@ -341,21 +340,23 @@ contract EvidenceFactory{
 
 #### 3）编译部署智能合约
 若步骤2提交的合约未编译成功，可以使用参考合约进行部署，完成后续操作。
+- 要求创建Alice私钥、Bob私钥和Caron私钥共三个用于存证的私钥
+- 以Alice、Bob、Caron的地址为参数，部署合约
 - 要求提交成功部署合约的截图，截图包含合约的ABI，BIN和部署得到的合约地址
+- 调用合约，获取合约的signer变量的值，提交截图（signer应该是Alice、Bob、Caron的地址）
 
 #### 4）向部署的智能合约发送交易
 - 要求通过Alice私钥调用EvidenceFactory合约的newEvidence方法创建一个存证，提交交易回执截图
-- 要求调用EvidenceFactory合约getEvidence方法，传入newEvidence获得的Evidence的地址，获取刚创建的存证，提交截图
+- 要求调用EvidenceFactory合约getEvidence方法，传入上一步骤中newEvidence获得的Evidence的地址，获取刚创建的存证，提交截图
 - 要求通过Bob私钥调用EvidenceFactory合约addSignatures方法，提交交易回执截图
 - 要求再调用EvidenceFactory合约getEvidence方法，获取存证中新增的Bob的签名，提交截图
 
+
 #### 5）编写应用程序调用合约
 实现功能的编程语言不限，需要提交源码与调用结果的截图
-- 提交Evidence合约Java类截图，可参考WeBASE导出Java类或导出Java项目
-- 调用Asset的合约Java类send方法的源代码
-- 通过Java调用Asset合约Java类的send方法，向issuer转账1个积分，在控制台输出交易哈希，截图并提交
-- 通过Java调用Asset合约Java类，获取issuer的余额，在控制台输出issuer地址和余额值，截图并提交
-- 通过合约IDE获取issuer余额，截图并提交
+- 提交EvidenceFactory合约Java类截图
+- 加载Caron私钥，通过Caron的私钥调用EvidenceFactory合约Java类的addSignatures方法，给步骤4中创建的Evidence存证添加Caron的签名，在console控制台输出交易哈希，截图并提交
+- 通过Java调用EvidenceFactory合约Java类的getEvidence方法，获取上述步骤所创建的存证，在控制台输出存证的地址和存证签名数，此时签名数应该为3（包含Alice、Bob、Caron的地址），截图并提交
 
  
 下图以WeBASE-Front为例，查看交易回执
