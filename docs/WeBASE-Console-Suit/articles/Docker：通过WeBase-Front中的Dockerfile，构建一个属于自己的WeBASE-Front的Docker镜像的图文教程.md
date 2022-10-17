@@ -1,16 +1,16 @@
-## Docker£ºÍ¨¹ıWeBase-Front/Docker/BuildÖĞµÄDockerfile£¬¹¹½¨Ò»¸öÊôÓÚ×Ô¼ºµÄWeBASE-FrontµÄDocker¾µÏñµÄÍ¼ÎÄ½Ì³Ì
+## Dockerï¼šé€šè¿‡WeBase-Front/Docker/Buildä¸­çš„Dockerfileï¼Œæ„å»ºä¸€ä¸ªå±äºè‡ªå·±çš„WeBASE-Frontçš„Dockeré•œåƒçš„å›¾æ–‡æ•™ç¨‹
 
 
-### 1¡¢±àÒë´úÂëĞŞ¸ÄÅäÖÃ
-  °´ÕÕ [½»Ò×²¿ÊğËµÃ÷](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)£¨Á´½Ó[https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)£©Íê³Éµ½µÚ4²½£¬Ö÷ÒªĞèÒªĞŞ¸ÄµÄÊÇ¡°//Á¬½Ó½ÚµãµÄ¼àÌıip¡± ºÍ ¡°//ÅäÖÃËùÁ¬½ÚµãµÄ¾ø¶ÔÂ·¾¶£¬ÓÃÓÚ¼à¿Ø½ÚµãÅäÖÃÓëÈÕÖ¾¡± ÕâÁ½¸öÅäÖÃ£¬È·±£µØÖ·ÕıÈ·ºÍ¿ÉÁ¬½Ó¡£
+### 1ã€ç¼–è¯‘ä»£ç ä¿®æ”¹é…ç½®
+  æŒ‰ç…§ [äº¤æ˜“éƒ¨ç½²è¯´æ˜](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)ï¼ˆé“¾æ¥[https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)ï¼‰å®Œæˆåˆ°ç¬¬4æ­¥ï¼Œä¸»è¦éœ€è¦ä¿®æ”¹çš„æ˜¯â€œ//è¿æ¥èŠ‚ç‚¹çš„ç›‘å¬ipâ€ å’Œ â€œ//é…ç½®æ‰€è¿èŠ‚ç‚¹çš„ç»å¯¹è·¯å¾„ï¼Œç”¨äºç›‘æ§èŠ‚ç‚¹é…ç½®ä¸æ—¥å¿—â€ è¿™ä¸¤ä¸ªé…ç½®ï¼Œç¡®ä¿åœ°å€æ­£ç¡®å’Œå¯è¿æ¥ã€‚
 
-### 2¡¢²é¿´DockerfileÎÄ¼ş
+### 2ã€æŸ¥çœ‹Dockerfileæ–‡ä»¶
 
-½øÈëµ½WeBASE-Front\docker\buildÄ¿Â¼£¬²é¿´DockerfileÎÄ¼ş
+è¿›å…¥åˆ°WeBASE-Front\docker\buildç›®å½•ï¼ŒæŸ¥çœ‹Dockerfileæ–‡ä»¶
 ```
 vim Dockerfile
 ```
-ÄÚÈİÈçÏÂ£º
+å†…å®¹å¦‚ä¸‹ï¼š
 
 ```
 FROM ubuntu:18.04 as prod
@@ -41,15 +41,15 @@ ENV APP_MAIN "com.webank.webase.front.Application"
 ENTRYPOINT cp -r /dist/sdk/* /dist/conf/ && java ${JAVA_OPTS} -Djdk.tls.namedGroups="secp256k1", -Duser.timezone="Asia/Shanghai" -Djava.security.egd=file:/dev/./urandom, -Djava.library.path=/dist/conf -cp ${CLASSPATH}  ${APP_MAIN}
 
 ```
-Õâ¸ö¾µÏñÔÚÔËĞĞµ½ÈİÆ÷µÄÊ±ºò£¬»á±¨ÏÂÃæÕâ¸ö´íÎó
+è¿™ä¸ªé•œåƒåœ¨è¿è¡Œåˆ°å®¹å™¨çš„æ—¶å€™ï¼Œä¼šæŠ¥ä¸‹é¢è¿™ä¸ªé”™è¯¯
 ```
 cp: cannot stat '/dist/sdk/*': No such file or directory
 ```
-ËùÒÔ¶ÔÕâ¸öDockerfileÎÄ¼ş½øĞĞÒ»ÏÂĞŞ¸Ä¡£
+æ‰€ä»¥å¯¹è¿™ä¸ªDockerfileæ–‡ä»¶è¿›è¡Œä¸€ä¸‹ä¿®æ”¹ã€‚
 
 
-### 3¡¢ĞŞ¸ÄDockerfileÎÄ¼ş
-ĞŞ¸ÄºóÄÚÈİÈçÏÂ£º
+### 3ã€ä¿®æ”¹Dockerfileæ–‡ä»¶
+ä¿®æ”¹åå†…å®¹å¦‚ä¸‹ï¼š
 ```
 FROM java:8
 
@@ -72,12 +72,12 @@ ENV APP_MAIN "com.webank.webase.front.Application"
 ENTRYPOINT   java ${JAVA_OPTS} -Djdk.tls.namedGroups="secp256k1", -Duser.timezone="Asia/Shanghai" -Djava.security.egd=file:/dev/./urandom, -Djava.library.path=/dist/conf -cp ${CLASSPATH}  ${APP_MAIN}
 ```
 
-### 4¡¢´´½¨¾µÏñ
-¸´ÖÆDockerfileÎÄ¼şµ½±àÒëºóÉú³ÉµÄdistÄ¿Â¼ÖĞ£¬Ö´ĞĞ´´½¨ÃüÁî£º£¨×¢Òâ×îºóÓĞ¸öµã£©
+### 4ã€åˆ›å»ºé•œåƒ
+å¤åˆ¶Dockerfileæ–‡ä»¶åˆ°ç¼–è¯‘åç”Ÿæˆçš„distç›®å½•ä¸­ï¼Œæ‰§è¡Œåˆ›å»ºå‘½ä»¤ï¼šï¼ˆæ³¨æ„æœ€åæœ‰ä¸ªç‚¹ï¼‰
 ```
 docker build -f Dockerfile -t webase-front:myself .
 ```
-Ö´ĞĞ½á¹û£º
+æ‰§è¡Œç»“æœï¼š
 
 ```
 Sending build context to Docker daemon  360.5MB
@@ -123,7 +123,7 @@ Successfully built 1631bbc9f2ac
 Successfully tagged webase-front:myself
 ```
 
-²é¿´¾µÏñ£º
+æŸ¥çœ‹é•œåƒï¼š
 
 ```
 docker images
@@ -134,23 +134,23 @@ REPOSITORY                                                  TAG       IMAGE ID  
 webase-front                                                myself    1631bbc9f2ac   4 weeks ago     817MB
 ```
 
-### 5¡¢ÔËĞĞ¾µÏñµ½ÈİÆ÷
-Ê×ÏÈÒªÆô¶¯ºÃ
-ÔËĞĞÃüÁî£º
+### 5ã€è¿è¡Œé•œåƒåˆ°å®¹å™¨
+é¦–å…ˆè¦å¯åŠ¨å¥½
+è¿è¡Œå‘½ä»¤ï¼š
 ```
 docker run -d --name WeBASE-Front -v /docker_file/front/dist/log/:/dist/log -p 5002:5002 webase-front:myself
 ```
 
-²é¿´ÔËĞĞµÄÈİÆ÷£º
+æŸ¥çœ‹è¿è¡Œçš„å®¹å™¨ï¼š
 
 ```
 docker ps
 ```
 ```
 CONTAINER ID   IMAGE                 COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-04db2b9864e3   webase-front:myself   "/bin/sh -c 'java ${¡­"   3 seconds ago   Up 2 seconds   0.0.0.0:5002->5002/tcp, :::5002->5002/tcp   WeBASE-Front
+04db2b9864e3   webase-front:myself   "/bin/sh -c 'java ${â€¦"   3 seconds ago   Up 2 seconds   0.0.0.0:5002->5002/tcp, :::5002->5002/tcp   WeBASE-Front
 ```
-²é¿´ÈÕÖ¾£º
+æŸ¥çœ‹æ—¥å¿—ï¼š
 
 ```
 tail -f log/WeBASE-Front.log
@@ -161,12 +161,4 @@ tail -f log/WeBASE-Front.log
 [main] INFO  Application() - main run success...
 ```
 
-ä¯ÀÀÆ÷·ÃÎÊÒ³Ãæ£ºhttp://IPµØÖ·:5002/WeBASE-Front
-
-
-
-
-
-
-
-
+æµè§ˆå™¨è®¿é—®é¡µé¢ï¼šhttp://IPåœ°å€:5002/WeBASE-Front
