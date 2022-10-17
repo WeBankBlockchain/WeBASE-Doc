@@ -1,7 +1,7 @@
-## ²¿Êğ£ºÈçºÎÊ¹ÓÃDocker²¿ÊğWeBASE-Front·şÎñ
+## éƒ¨ç½²ï¼šå¦‚ä½•ä½¿ç”¨Dockeréƒ¨ç½²WeBASE-FrontæœåŠ¡ 
 
-### 1¡¢ÅäÖÃ¾µÏñÔ´
-´´½¨»òĞŞ¸Ä /etc/docker/daemon.json ÎÄ¼ş£¬ÄÚÈİÈçÏÂ£º
+### 1ã€é…ç½®é•œåƒæº
+åˆ›å»ºæˆ–ä¿®æ”¹ /etc/docker/daemon.json æ–‡ä»¶ï¼Œå†…å®¹å¦‚ä¸‹ï¼š
 ```
 {
     "registry-mirrors": [
@@ -11,7 +11,7 @@
     ]
 }
 ```
-ÖØÆôdocker·şÎñ£º
+é‡å¯dockeræœåŠ¡ï¼š
 
 ```
 service docker restart
@@ -19,12 +19,12 @@ service docker restart
 
 
 
-### 2¡¢À­È¡webase-front¾µÏñ
-À­È¡ÃüÁî£º
+### 2ã€æ‹‰å–webase-fronté•œåƒ
+æ‹‰å–å‘½ä»¤ï¼š
 ```
 docker pull webasepro/webase-front
 ```
-Ö´ĞĞ½á¹û£º
+æ‰§è¡Œç»“æœï¼š
 
 ```
 Using default tag: latest
@@ -41,7 +41,7 @@ Digest: sha256:126eee0f940d3ea9e08150a9896c57648d8eb8bab9eb4efd90930c4ec8ad5423
 Status: Downloaded newer image for webasepro/webase-front:latest
 docker.io/webasepro/webase-front:latest
 ```
-²é¿´À­È¡µÄ¾µÏñ£º
+æŸ¥çœ‹æ‹‰å–çš„é•œåƒï¼š
 
 ```
 docker images
@@ -52,13 +52,13 @@ REPOSITORY                                                  TAG       IMAGE ID  
 webasepro/webase-front                                      latest    a2d3effc01d9   12 months ago   610MB
 ```
 
-### 3¡¢ÔËĞĞ¾µÏñ
-Ö´ĞĞÃüÁî£º
+### 3ã€è¿è¡Œé•œåƒ
+æ‰§è¡Œå‘½ä»¤ï¼š
 
 ```
 docker run -d --name WeBASE-Front -v /docker_file/front/dist/log/:/dist/log -p 5002:5002 webasepro/webase-front:latest
 ```
-²é¿´ÈİÆ÷×´Ì¬£º
+æŸ¥çœ‹å®¹å™¨çŠ¶æ€ï¼š
 
 ```
 docker ps -a
@@ -66,25 +66,25 @@ docker ps -a
 
 ```
 CONTAINER ID   IMAGE                           COMMAND                  CREATED          STATUS                      PORTS                                       NAMES
-da20cddd5379   webasepro/webase-front:latest   "/bin/sh -c 'cp -r /¡­"   15 seconds ago   Exited (1) 14 seconds ago                                               WeBASE-Front
+da20cddd5379   webasepro/webase-front:latest   "/bin/sh -c 'cp -r /â€¦"   15 seconds ago   Exited (1) 14 seconds ago                                               WeBASE-Front
 ```
-Î´Æô¶¯³É¹¦£¬²é¿´ÈÕÖ¾£º
+æœªå¯åŠ¨æˆåŠŸï¼ŒæŸ¥çœ‹æ—¥å¿—ï¼š
 
 ```
 docker logs da20cddd5379
 ```
-±¨ÒÔÏÂ´íÎó£º
+æŠ¥ä»¥ä¸‹é”™è¯¯ï¼š
 ```
 cp: cannot stat '/dist/sdk/*': No such file or directory
 ```
 
-### 4¡¢×Ô¼º¹¹½¨¾µÏñ
-#### £¨1£©¡¢±àÒë´úÂëĞŞ¸ÄÅäÖÃ
-  °´ÕÕ [½»Ò×²¿ÊğËµÃ÷](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)£¨Á´½Ó[https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)£©Íê³Éµ½µÚ4²½£¬Ö÷ÒªĞèÒªĞŞ¸ÄµÄÊÇ¡°//Á¬½Ó½ÚµãµÄ¼àÌıip¡± ºÍ ¡°//ÅäÖÃËùÁ¬½ÚµãµÄ¾ø¶ÔÂ·¾¶£¬ÓÃÓÚ¼à¿Ø½ÚµãÅäÖÃÓëÈÕÖ¾¡± ÕâÁ½¸öÅäÖÃ£¬È·±£µØÖ·ÕıÈ·ºÍ¿ÉÁ¬½Ó¡£
+### 4ã€è‡ªå·±æ„å»ºé•œåƒ
+#### ï¼ˆ1ï¼‰ã€ç¼–è¯‘ä»£ç ä¿®æ”¹é…ç½®
+  æŒ‰ç…§ [äº¤æ˜“éƒ¨ç½²è¯´æ˜](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)ï¼ˆé“¾æ¥[https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html)ï¼‰å®Œæˆåˆ°ç¬¬4æ­¥ï¼Œä¸»è¦éœ€è¦ä¿®æ”¹çš„æ˜¯â€œ//è¿æ¥èŠ‚ç‚¹çš„ç›‘å¬ipâ€ å’Œ â€œ//é…ç½®æ‰€è¿èŠ‚ç‚¹çš„ç»å¯¹è·¯å¾„ï¼Œç”¨äºç›‘æ§èŠ‚ç‚¹é…ç½®ä¸æ—¥å¿—â€ è¿™ä¸¤ä¸ªé…ç½®ï¼Œç¡®ä¿åœ°å€æ­£ç¡®å’Œå¯è¿æ¥ã€‚
   
   
-#### £¨2£©¡¢ĞŞ¸ÄDockerfileÎÄ¼ş
-½øÈëµ½WeBASE-Front\docker\buildÄ¿Â¼£¬ĞŞ¸ÄDockerfileÎÄ¼ş£¬ĞŞ¸ÄºóÄÚÈİÈçÏÂ£º
+#### ï¼ˆ2ï¼‰ã€ä¿®æ”¹Dockerfileæ–‡ä»¶
+è¿›å…¥åˆ°WeBASE-Front\docker\buildç›®å½•ï¼Œä¿®æ”¹Dockerfileæ–‡ä»¶ï¼Œä¿®æ”¹åå†…å®¹å¦‚ä¸‹ï¼š
 ```
 FROM java:8
 
@@ -107,12 +107,12 @@ ENV APP_MAIN "com.webank.webase.front.Application"
 ENTRYPOINT   java ${JAVA_OPTS} -Djdk.tls.namedGroups="secp256k1", -Duser.timezone="Asia/Shanghai" -Djava.security.egd=file:/dev/./urandom, -Djava.library.path=/dist/conf -cp ${CLASSPATH}  ${APP_MAIN}
 ```
 
-#### £¨3£©¡¢´´½¨¾µÏñ
-¸´ÖÆDockerfileÎÄ¼şµ½±àÒëºóÉú³ÉµÄdistÄ¿Â¼ÖĞ£¬Ö´ĞĞ´´½¨ÃüÁî£º£¨×¢Òâ×îºóÓĞ¸öµã£©
+#### ï¼ˆ3ï¼‰ã€åˆ›å»ºé•œåƒ
+å¤åˆ¶Dockerfileæ–‡ä»¶åˆ°ç¼–è¯‘åç”Ÿæˆçš„distç›®å½•ä¸­ï¼Œæ‰§è¡Œåˆ›å»ºå‘½ä»¤ï¼šï¼ˆæ³¨æ„æœ€åæœ‰ä¸ªç‚¹ï¼‰
 ```
 docker build -f Dockerfile -t webase-front:myself .
 ```
-Ö´ĞĞ½á¹û£º
+æ‰§è¡Œç»“æœï¼š
 
 ```
 Sending build context to Docker daemon  360.5MB
@@ -158,7 +158,7 @@ Successfully built 1631bbc9f2ac
 Successfully tagged webase-front:myself
 ```
 
-²é¿´¾µÏñ£º
+æŸ¥çœ‹é•œåƒï¼š
 
 ```
 docker images
@@ -169,22 +169,22 @@ REPOSITORY                                                  TAG       IMAGE ID  
 webase-front                                                myself    1631bbc9f2ac   4 weeks ago     817MB
 ```
 
-#### £¨4£©¡¢ÔËĞĞ¾µÏñµ½ÈİÆ÷
-ÔËĞĞÃüÁî£º
+#### ï¼ˆ4ï¼‰ã€è¿è¡Œé•œåƒåˆ°å®¹å™¨
+è¿è¡Œå‘½ä»¤ï¼š
 ```
 docker run -d --name WeBASE-Front -v /docker_file/front/dist/log/:/dist/log -p 5002:5002 webase-front:myself
 ```
 
-²é¿´ÔËĞĞµÄÈİÆ÷£º
+æŸ¥çœ‹è¿è¡Œçš„å®¹å™¨ï¼š
 
 ```
 docker ps
 ```
 ```
 CONTAINER ID   IMAGE                 COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-04db2b9864e3   webase-front:myself   "/bin/sh -c 'java ${¡­"   3 seconds ago   Up 2 seconds   0.0.0.0:5002->5002/tcp, :::5002->5002/tcp   WeBASE-Front
+04db2b9864e3   webase-front:myself   "/bin/sh -c 'java ${â€¦"   3 seconds ago   Up 2 seconds   0.0.0.0:5002->5002/tcp, :::5002->5002/tcp   WeBASE-Front
 ```
-²é¿´ÈÕÖ¾£º
+æŸ¥çœ‹æ—¥å¿—ï¼š
 
 ```
 tail -f log/WeBASE-Front.log
@@ -195,7 +195,4 @@ tail -f log/WeBASE-Front.log
 [main] INFO  Application() - main run success...
 ```
 
-ä¯ÀÀÆ÷·ÃÎÊÒ³Ãæ£ºhttp://IPµØÖ·:5002/WeBASE-Front
-
-
-
+æµè§ˆå™¨è®¿é—®é¡µé¢ï¼šhttp://IPåœ°å€:5002/WeBASE-Front
