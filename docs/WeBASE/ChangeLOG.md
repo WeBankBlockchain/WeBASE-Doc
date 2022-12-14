@@ -10,7 +10,7 @@
 
 ### WeBASE v3.0.0
 
-WeBASE lab-rc2 版本支持 FISCO-BCOS 3.0.0及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 3.0.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0)版本。
+WeBASE v3.0.0 版本支持 FISCO-BCOS 3.0.0及以上版本。WeBASE 子系统推荐使用下表的版本搭配，FISCO-BCOS 推荐使用 [FISCO BCOS 3.0.0](https://github.com/FISCO-BCOS/FISCO-BCOS/releases/tag/v3.0.0)版本。
 
 | WeBASE子系统名称                                             | 配套版本地址                                                 | FISCO-BCOS 2.X.X                                             |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
