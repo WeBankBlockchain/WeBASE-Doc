@@ -21,8 +21,12 @@
 
 ```bash
 ### 生成一个RSA私钥, server.key
-### 输入命令后会提示输入密钥的密码，可以设置为123456或自定义密码；该密码后续会在配置中用到
-openssl genrsa -out server.key 2048
+### 输入命令后会提示输入密钥的密码，可以设置为123456或自定义密码
+openssl genrsa -des3 -out server.pass.key 2048
+
+### 利用私钥生成一个[不需要输入密码]的密钥文件（需要输入刚才设置的密码）
+openssl rsa -in server.pass.key -out server.key
+
 
 ### 生成一个证书请求 server.csr
 # 字段解读
@@ -71,6 +75,7 @@ server:
     key-store-type: pkcs12
     key-store: classpath:server.pkcs12
     # by default this is 123456
+    # 由于上文中生成的私钥是不需要密码的，因此此处可为空或123456
     key-store-password: 123456
     # 默认false，不启用SSL。改为true即可启用
     enabled: true
