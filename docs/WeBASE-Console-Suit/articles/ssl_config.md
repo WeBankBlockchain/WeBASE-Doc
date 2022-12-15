@@ -15,18 +15,13 @@
 1. 生成RSA私钥.key
 2. 生成证书请求.csr
 3. 生成自签发证书.crt
-4. 转为pkcs12格式
+4. 转为pkcs12格式，并设置密码为123456
 
 如果linux中没有安装openssl，需要安装。以CentOS为例：`yum install openssl openssl-devel -y`
 
 ```bash
 ### 生成一个RSA私钥, server.key
-### 输入命令后会提示输入密钥的密码，可以设置为123456或自定义密码
-openssl genrsa -des3 -out server.pass.key 2048
-
-### 利用私钥生成一个[不需要输入密码]的密钥文件（需要输入刚才设置的密码）
-openssl rsa -in server.pass.key -out server.key
-
+openssl genrsa -out server.key 2048
 
 ### 生成一个证书请求 server.csr
 # 字段解读
@@ -43,7 +38,9 @@ openssl req -new -key server.key -out server.csr -subj "/C=CN/ST=GuangDong/L=She
 openssl x509 -req -days 365  -signkey server.key -in server.csr -out server.crt
 
 ### 转换为pkcs12格式 server.p12
-# 因为在Java中使用证书，需要转换一下格式）
+### 因为在Java中使用证书，需要转换一下格式）
+### 输入命令后会提示输入证书的密码，可以设置为123456或自定义密码；该密码后续会在配置中用到
+
 # -export：这个选项指定了一个PKCS#12文件将会被创建
 # -clcerts：仅仅输出客户端证书，不输出CA证书
 # -in filename：指定私钥和证书读取的文件，默认为标准输入。必须为PEM格式
@@ -54,7 +51,7 @@ openssl pkcs12 -export -clcerts -in server.crt -inkey server.key -out server.pkc
 openssl pkcs12 -export -clcerts -in server.crt -inkey server.key -out server.p12
 ```
 
-把生成的`server.pkcs12`文件，粘贴到节点管理服务的resources目录下（或者打包后的dist/conf/目录下），并把证书的密钥密码（如123456）输入到配置文件中。
+把生成的`server.pkcs12`文件，粘贴到节点管理服务的resources目录下（或者打包后的dist/conf/目录下），并把pkcs12证书的密码（如123456）输入到配置文件中。
 
 ### 2. 节点管理服务WeBASE-Node-Manager
 
@@ -62,7 +59,7 @@ openssl pkcs12 -export -clcerts -in server.crt -inkey server.key -out server.p12
 - 修改application.yml配置文件的spring中加上`ssl`的配置，并设置`enable`为`true`，将`key-store-password`的密码改为生成密钥时的密码
 - 复制上文密钥文件，粘贴到节点管理服务的resources目录下（或者打包后的dist/conf/目录下），
 
-修改conf/application.yml中server的配置
+修改conf/application.yml中server的配置，以pkcs12证书为例
 ```yaml
 
 #server config
@@ -74,8 +71,7 @@ server:
   ssl:
     key-store-type: pkcs12
     key-store: classpath:server.pkcs12
-    # by default this is 123456
-    # 由于上文中生成的私钥是不需要密码的，因此此处可为空或123456
+    # pkcs12证书的密码
     key-store-password: 123456
     # 默认false，不启用SSL。改为true即可启用
     enabled: true
