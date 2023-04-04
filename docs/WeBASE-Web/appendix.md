@@ -29,7 +29,7 @@ nginx下载地址：https://nginx.org/download/（下载最新稳定版本即可
 ##### 1.3.5 测试是否安装成功
 使用命令：
 
-	/usr/local/nginx/sbin/nginx –t
+	/usr/local/nginx/sbin/nginx -t
 正常情况的信息输出：
 
 	nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
