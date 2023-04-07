@@ -25,6 +25,12 @@ cd WeBASE-Web
 ```
 
 #### 2.1  下载solc-bin
+
+#### solidity v0.8.11支持
+
+WeBASE-Web v3.0.1已支持solidity `v0.8.11`
+
+
 执行脚本get_solc_js.sh会自动下载solc-bin，即下面v0.4.25.js等文件。
 在`WeBASE-Web/`目录中直接执行脚本get_solc_js.sh（（脚本与`dist`文件夹同级））
 
@@ -44,9 +50,12 @@ cd WeBASE-Web
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.5.2-gm.js -o ./dist/static/js/v0.5.2-gm.js
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.6.10.js -o ./dist/static/js/v0.6.10.js
     curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.6.10-gm.js -o ./dist/static/js/v0.6.10-gm.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.8.11.js -o ./dist/static/js/v0.8.11.js
+    curl -#L https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/download/solidity/wasm/v0.8.11-gm.js -o ./dist/static/js/v0.8.11-gm.js
 ```
 
 执行完后检查dist/static/js是否下载完这些js文件。
+
 
 ### 4. 修改配置
 
