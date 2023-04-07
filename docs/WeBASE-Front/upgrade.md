@@ -7,11 +7,3 @@ WeBASE-Front升级的必须步骤：
 2. 采用新的安装包，并将旧版本yml已有配置添加到新版本yml中；可通过`diff aFile bFile`命令对比新旧yml的差异
 3. `bash stop.sh && bash start.sh`重启
 
-
-各个版本的具体修改可参考下文
-
-#### lab-rc1
-支持FISCO BCOS v3.0.0-rc1
-
-#### lab-rc2
-支持FISCO BCOS v3.0.0-rc2
