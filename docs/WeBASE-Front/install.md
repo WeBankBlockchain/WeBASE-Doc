@@ -24,6 +24,10 @@ WeBASE-Front v1.2.2+已支持 [国密版FISCO-BCOS](https://fisco-bcos-documenta
 
 WeBASE-Front v1.4.2已支持solidity `v0.5.1`和`v0.6.10`
 
+#### solidity v0.8.11支持
+
+WeBASE-Front v3.0.1已支持solidity `v0.8.11`
+
 #### Liquid支持
 
 如果使用的`liquid`合约的链并在WeBASE-Front的合约IDE中编译Liquid合约，要求**手动**在WeBASE-Front所在主机[配置Liquid环境](https://liquid-doc.readthedocs.io/zh_CN/latest/docs/quickstart/prerequisite.html)
