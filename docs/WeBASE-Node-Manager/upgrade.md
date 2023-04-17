@@ -10,11 +10,5 @@ WeBASE-Node-Manager升级的必须步骤：
     3.2 按照升级文档指引，操作数据表
 4. `bash stop.sh && bash start.sh`重启
 
-各个版本的具体修改可参考下文
 
-#### lab-rc1
-支持FISCO BCOS v3.0.0-rc1
-
-#### lab-rc2
-支持FISCO BCOS v3.0.0-rc2
 

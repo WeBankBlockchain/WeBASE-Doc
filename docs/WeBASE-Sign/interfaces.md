@@ -545,6 +545,76 @@ b.异常返回结果示例（信息详情请参看附录1）
 ```
 
 
+### 5.1. ECDSA/国密对交易体哈希签名接口
+
+#### 接口描述
+
+指定用户通过ECDSA/国密SM2对交易体的哈希进行签名。
+
+#### 接口URL
+
+http://localhost:5004/WeBASE-Sign/sign/hash
+
+#### 调用方法
+
+HTTP POST
+
+#### 请求参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**     | **类型** | **最大长度** | **必填** | **说明**                                                     |
+| -------- | -------- | -------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
+| 1        | 用户编号  | signUserId | String |         64      | 是       | 私钥用户的唯一业务编号，仅支持数字字母下划线  |
+| 2        | 交易体哈希 | messageHash | String   |              | 是       | 交易体的哈希，通过java-sdk的TransactionBuilderJniObject.calTransactionDataHash()方法获取交易体的哈希|
+
+**2）数据格式**
+
+```
+http://localhost:5004/WeBASE-Sign/sign/hash
+```
+
+```
+{
+  "signUserId": "user_111",
+  "encodedDataStr": "0xa665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+}
+```
+
+#### 响应参数
+
+**1）参数表**
+
+| **序号** | **中文** | **参数名**  | **类型** | **最大长度** | **必填** | **说明**          |
+| -------- | -------- | ----------- | -------- | ------------ | -------- | ----------------- |
+| 1        | 返回码   | code        | String   |              | 是       | 返回码信息请附录1 |
+| 2        | 提示信息 | message     | String   |              | 是       |                   |
+| 3        | 返回数据 | data        | Object   |              | 是       |                   |
+| 3.1      | 签名数据 | signDataStr | String   |              | 是       |                   |
+
+**2）数据格式**
+
+a.请求正常返回结果
+
+```
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "signDataStr": "1c3f59a48593b66de4c57fe99f9c429811aa2dc9b495823cd99faa3e72b4a4d02e04bb7c3da6390a17adc00b0e740293c6306229a26a0c0cf2974581880d19e57b"
+    }
+}
+```
+
+b.异常返回结果示例（信息详情请参看附录1）
+
+```
+{
+    "code": 203009,
+    "message": "encoded data string must be hex string",
+    "data": null
+}
+```
 
 ## 6. 其他接口
 

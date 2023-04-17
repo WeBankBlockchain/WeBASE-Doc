@@ -1576,13 +1576,26 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/200001
 ### 5.3 部署合约
 
 
-构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
 
-```
-constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
-constructor(uint n,bool b) -> [1,true]
-constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-```
+3.0.2及以后版本：
+> 构造方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+> 
+> ```
+> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+> constructor(uint n,bool b) -> ["1","true"]
+> constructor(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+> ```
+
+
+3.0.2以前的版本：
+> 
+> 构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+>
+> ```
+> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+> constructor(uint n,bool b) -> [1,true]
+> constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+> ```
 
 
 #### 传输协议规范
@@ -1609,7 +1622,7 @@ constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b
 | 8    | contractPath      | String | 是     | 合约所在目录                                          |
 | 9    | user              | String | 是     | WeBASE的私钥用户的地址                                |
 | 10   | account           | String | 是     | 关联账户                                              |
-| 11   | constructorParams | List   | 否     | 构造函数入参，根据合约构造函数决定                        |
+| 11   | constructorParams | List<String>   | 否     | 构造函数入参，根据合约构造函数决定。String数组，每个参数都通过String字符串表示，包括数组也需要括在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]     |
 | 12 | isWasm | Boolean | 是 | 是否为liquid合约，默认为false |
 | 13   | contractAddress | String   | 否     | 合约地址，如果isWasm为true，则合约地址不能为空                        |
 
@@ -1709,10 +1722,22 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/contract/deploy
 ### 5.4 发送交易
 
 
+3.0.2及以后版本：
+
+方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+function set(uint n,bool b) -> ["1","true"]
+function set(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+```
+
+3.0.2以前的版本：
+
 方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
 
 ```
-function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
 function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
@@ -1739,7 +1764,7 @@ function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8
 | 4    | contractId      | Int    | 是     | 合约编号                            |
 | 5    | funcName        | String | 是     | 合约方法名                          |
 | 6    | contractAddress | String | 否     | 合约地址                            |
-| 7    | funcParam       | List   | 否     | 合约方法入参                        |
+| 7    | funcParam       | List<String>   | 否     | 合约方法入参，String数组，每个参数都通过String字符串表示，包括数组也需要括在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]                        |
 | 8    | contractAbi     | List   | 是     | 合约abi/合约单个函数的abi           |
 | 9    | useCns          | bool   | 否     | 是否使用cns调用，默认为false                     |
 | 10   | cnsName         | String | 否     | CNS名称，useCns为true时不能为空     |
