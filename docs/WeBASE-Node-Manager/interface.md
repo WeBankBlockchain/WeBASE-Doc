@@ -1058,7 +1058,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/account/pictureCheckCode
 #### 3.7.1 传输协议规范
 * 网络传输协议：使用HTTP协议
 * 请求地址：**/account/login?checkCode={checkCode}**
-* 请求方式：get
+* 请求方式：Post
 * 请求头：Content-type: application/json;token:{token}
 * 返回格式：JSON
 
