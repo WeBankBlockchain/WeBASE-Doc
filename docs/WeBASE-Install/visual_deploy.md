@@ -330,7 +330,7 @@ cd webase-deploy
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.5.5
 webase.mgr.version=v1.5.5
-webase.sign.version=v1.5.3
+webase.sign.version=v1.5.5
 fisco.webase.docker.cdn.version=v1.5.5
 
 # 节点管理子系统mysql数据库配置
