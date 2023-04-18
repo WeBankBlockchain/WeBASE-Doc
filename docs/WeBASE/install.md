@@ -140,7 +140,7 @@ cd webase-deploy
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
 webase.web.version=v1.5.5
 webase.mgr.version=v1.5.5
-webase.sign.version=v1.5.3
+webase.sign.version=v1.5.5
 webase.front.version=v1.5.5
 
 #####################################################################
@@ -220,7 +220,7 @@ node.dir=node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.7.2
+fisco.version=2.9.1
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```
