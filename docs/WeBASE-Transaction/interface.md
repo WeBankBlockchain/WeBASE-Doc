@@ -68,13 +68,26 @@ b.异常返回结果示例（信息详情请参看附录1）
 
 调用此接口发送合约部署相关信息，交易服务子系统会将合约部署请求信息缓存到数据库，通过轮询服务向节点发送交易请求，确保合约成功部署。
 
-构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+1.5.5及以后版本：
+> 构造方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+> 
+> ```
+> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+> constructor(uint n,bool b) -> ["1","true"]
+> constructor(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+> ```
 
-```
-constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
-constructor(uint n,bool b) -> [1,true]
-constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-```
+
+1.5.5以前的版本：
+> 
+> 构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+>
+> ```
+> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+> constructor(uint n,bool b) -> [1,true]
+> constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
+> ```
+
 
 #### 接口URL
 
@@ -95,7 +108,7 @@ HTTP POST
 | 3        | 签名类型     | signType    | int            | 2            | 是       | 0-本地配置私钥签名，1-本地随机私钥签名，2-调用WeBASE-Sign签名 |
 | 4        | 合约Bin      | contractBin | String         |              | 是       |                                                    |
 | 5        | 合约Abi      | contractAbi | List\<Object\> |              | 是       | JSON数组                                           |
-| 6        | 构造方法参数 | funcParam   | List\<Object\> |              | 否       | JSON数组                                           |
+| 6        | 构造方法参数 | funcParam   | List\<String\> |              | 否       | String数组，每个参数都通过String字符串表示，包括数组也需要括在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]                                           |
 | 7        | 签名用户编号 | signUserId | String         |               | 否       | signType为2时必填                                 |
 
 **2）数据格式**
@@ -416,9 +429,23 @@ b.异常返回结果示例（信息详情请参看附录1）
 调用此接口发送无状态交易请求，交易服务子系统会将交易请求信息缓存到数据库，通过轮询服务向节点发送交易请求，确保交易成功上链。当部署业务流水号为空时（即不是调用交易子系统部署合约），合约地址和abi不能为空。
 
 
-方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+1.5.5及以后版本：
+
+方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+
 ```
-function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+function set(uint n,bool b) -> ["1","true"]
+function set(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+```
+
+1.5.5以前的版本：
+
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
 function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
@@ -445,7 +472,7 @@ HTTP POST
 | 5        | 合约地址   | contractAddress | String         |              | 是       |                                                    |
 | 6        | 合约Abi    | contractAbi     | List\<Object\> |              | 是       | JSON数组                                           |
 | 7        | 调用方法名 | funcName        | String         |              | 是       |                                                    |
-| 8        | 方法参数   | funcParam       | List\<Object\> |              | 否       | JSON数组                                           |
+| 8        | 方法参数   | funcParam       | List\<String\> |              | 否       | String数组，每个参数都通过String字符串表示，包括数组也需要括在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]                                           |
 | 9       | 签名用户编号 | signUserId     | String        |               | 否        | signType为2时必填 |
 
 **2）数据格式**
@@ -498,9 +525,22 @@ b.异常返回结果示例（信息详情请参看附录1）
 调用此接口同步从节点查询交易信息。当部署业务流水号为空时（即不是调用交易子系统部署合约），合约地址和abi不能为空。
 
 
-方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+1.5.5及以后版本：
+
+方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+
 ```
-function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+function set(uint n,bool b) -> ["1","true"]
+function set(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+```
+
+1.5.5以前的版本：
+
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
 function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
@@ -524,7 +564,7 @@ HTTP POST
 | 3        | 合约地址   | contractAddress | String         |              | 否       |                                                    |
 | 4        | 合约Abi    | contractAbi     | List\<Object\> |              | 否       | JSON数组 |
 | 5        | 调用方法名 | funcName        | String         |              | 是       |          |
-| 6        | 方法参数   | funcParam       | List\<Object\> |              | 否       | JSON数组 |
+| 6        | 方法参数   | funcParam       | List\<String\> |              | 否       | String数组，每个参数都通过String字符串表示，包括数组也需要括在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"] |
 
 **2）数据格式**
 ```
