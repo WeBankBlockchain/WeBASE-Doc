@@ -59,7 +59,19 @@ HTTP POST
 #### 接口描述
 
 > 将合约部署到当前节点。此接口需结合WeBASE-Sign使用，通过调用WeBASE-Sign服务的签名接口让相关用户对数据进行签名，拿回签名数据再发送上链。需要调用此接口时，工程配置文件application.yml中的配置"keyServer"需配置WeBASE-Sign服务的ip和端口，并保证WeBASE-Sign服务正常和存在相关用户。
->
+
+1.5.5及以后版本：
+> 构造方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+> 
+> ```
+> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+> constructor(uint n,bool b) -> ["1","true"]
+> constructor(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+> ```
+
+
+1.5.5以前的版本：
+> 
 > 构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
 >
 > ```
@@ -68,14 +80,6 @@ HTTP POST
 > constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 > ```
 
-
-构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
-
-```
-constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
-constructor(uint n,bool b) -> [1,true]
-constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-```
 
 *查看WeBASE-Front通过本地私钥（测试用户）部署合约的接口（非WeBASE-Sign签名交易），可查看[其他接口-合约部署接口（本地签名）](#deployNoSign)*
 
@@ -98,7 +102,7 @@ HTTP POST
 | 3        | 合约名称     | contractName | String   |              | 否      |                      |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       |  合约编译后生成的abi内容  |
 | 5        | 合约bin      | bytecodeBin  | String   |              | 是       |  合约编译的bytecode(bin)，用于部署合约|
-| 6        | 构造函数参数 | funcParam    | List     |              | 否       | 合约构造函数所需参数，JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
+| 6        | 构造函数参数 | funcParam    | List<String>     |              | 否       | 合约构造函数所需参数，String数组，每个参数都通过String字符串表示，包括数组也需要括在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"] |
 | 7        | 合约版本     | version     | String    |             |   否       |  用于指定合约在CNS中的版本    |
 
 **2）数据格式**
@@ -174,23 +178,27 @@ curl -X POST "http://localhost:5002/WeBASE-Front/contract/deployWithSign"  -H "a
 
 此接口为WeBASE-Front使用**本地私钥（页面中的测试用户）进行签名**
 
-> 将合约部署到当前节点。
->
+将合约部署到当前节点。
+
+1.5.5及以后版本：
+> 构造方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+> 
+> ```
+> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+> constructor(uint n,bool b) -> ["1","true"]
+> constructor(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+> ```
+
+
+1.5.5以前的版本：
+> 
 > 构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
 >
 > ```
-> constructor(string s) -> ["aa,bb\"cc"]    // 双引号要转义
+> constructor(string s) -> ["aa,bb\"cc"]	// 双引号要转义
 > constructor(uint n,bool b) -> [1,true]
 > constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 > ```
-
-构造方法参数（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
-
-```
-constructor(string s) -> ["aa,bb\"cc"]  // 双引号要转义
-constructor(uint n,bool b) -> [1,true]
-constructor(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
-```
 
 *查看WeBASE-Front通过WeBASE-Sign部署合约的接口（非本地私钥签名交易），可查看[合约接口-合约部署接口（结合WeBASE-Sign）](#deployWithSign)*
 
@@ -214,7 +222,7 @@ HTTP POST
 | 3        | 合约名称     | contractName | String   |              | 否       |                                                              |
 | 4        | 合约abi      | abiInfo      | List     |              | 是       | 合约编译后生成的abi文件内容                                  |
 | 5        | 合约bin      | bytecodeBin  | String   |              | 是       | 合约编译的bytecode(bin)，用于部署合约                        |
-| 6        | 构造函数参数 | funcParam    | List     |              | 否       | 合约构造函数所需参数，JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
+| 6        | 构造函数参数 | funcParam    | List<String>     |              | 否       | 合约构造函数所需参数，String数组，每个参数都通过String字符串表示，包括数组也需要括在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"] |
 
 **2）数据格式**
 
@@ -4180,13 +4188,27 @@ HTTP GET
 
    当合约方法为非“constant”方法，要发送数据上链时，此接口需结合WeBASE-Sign使用。通过调用WeBASE-Sign服务的签名接口让相关用户对数据进行签名，拿回签名数据再发送上链。需要调用此接口时，工程配置文件application.yml中的配置"keyServer"需配置WeBASE-Sign服务的ip和端口，并保证WeBASE-Sign服务正常和存在相关用户。
 
-   方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
+
+1.5.5及以后版本：
+
+方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+function set(uint n,bool b) -> ["1","true"]
+function set(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+```
+
+1.5.5以前的版本：
+
+方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
 
 ```
 function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
 function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
+
 
 *查看WeBASE-Front通过本地私钥（测试用户）交易处理接口（非WeBASE-Sign签名交易），可查看[其他接口-交易处理接口（本地签名）](#transNoSign)*
 
@@ -4209,7 +4231,7 @@ HTTP POST
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
 | 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
-| 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
+| 6        | 方法参数       | funcParam       | List<String>     |              | 否         | String数组，每个参数都使用String字符串表示，数组也需要放在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
 | 8 | 是否使用cns调用 | useCns | bool | | 是 |  |
 | 9 | cns名称 | cnsName | String | | 否 | CNS名称，useCns为true时不能为空 |
@@ -4296,10 +4318,22 @@ b、正确发送数据上链返回值信息（交易收据）
 
 通过合约信息进行调用，前置根据调用的合约方法是否是“constant”方法区分返回信息，“constant”方法为查询，返回要查询的信息。非“constant”方法为发送数据上链，返回块hash、块高、交易hash等信息。
 
+1.5.5及以后版本：
+
+方法参数（funcParam）为String数组，每个参数都使用String字符串表示，多个参数以逗号分隔（参数为数组时同理），示例：
+
+```
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
+function set(uint n,bool b) -> ["1","true"]
+function set(bytes b,address[] a) -> ["0x1a","[\"0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE\",\"0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9\"]"]
+```
+
+1.5.5以前的版本：
+
 方法入参（funcParam）为JSON数组，多个参数以逗号分隔（参数为数组时同理），示例：
 
 ```
-function set(string s) -> ["aa,bb\"cc"] // 双引号要转义
+function set(string s) -> ["aa,bb\"cc"]	// 双引号要转义
 function set(uint n,bool b) -> [1,true]
 function set(bytes b,address[] a) -> ["0x1a",["0x7939E26070BE44E6c4Fc759Ce55C6C8b166d94BE","0xce867fD9afa64175bb50A4Aa0c17fC7C4A3C67D9"]]
 ```
@@ -4326,7 +4360,7 @@ HTTP POST
 | 3        | 合约地址                    | contractAddress | String   |              | 是       |                                                              |
 | 4        | 方法名                      | funcName        | String   |              | 是       |                                                              |
 | 5        | 合约编译后生成的abi文件内容 | contractAbi     | List     |              | 是       | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
-| 6        | 方法参数                    | funcParam       | List     |              | 否       | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
+| 6        | 方法参数       | funcParam       | List<String>     |              | 否         | String数组，每个参数都使用String字符串表示，数组也需要放在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID                      | groupId         | int      |              | 是       | 默认为1                                                      |
 | 8        | 合约路径                    | contractPath    | int      |              | 否       |                                                              |
 | 9        | 是否使用cns调用             | useCns          | bool     |              | 是       |                                                              |
@@ -4591,7 +4625,7 @@ HTTP POST
 | 3        | 合约地址       | contractAddress | String   |              | 是       |                                                |
 | 4        | 方法名         | funcName        | String   |              | 是       |                                                |
 | 5        | 合约编译后生成的abi文件内容 | contractAbi    | List |        | 是        | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
-| 6        | 方法参数       | funcParam       | List     |              | 否         | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]] |
+| 6        | 方法参数       | funcParam       | List<String>     |              | 否         | String数组，每个参数都使用String字符串表示，数组也需要放在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID         | groupId         | int      |              |   是       |  默认为1                                          |
 | 8 | 是否使用cns调用 | useCns | bool | | 是 |  |
 | 9 | cns名称 | cnsName | String | | 否 | CNS名称，useCns为true时不能为空 |
@@ -4662,7 +4696,7 @@ HTTP POST
 | 3        | 合约地址                    | contractAddress | String   |              | 是       |                                                              |
 | 4        | 方法名                      | funcName        | String   |              | 是       |                                                              |
 | 5        | 合约编译后生成的abi文件内容 | contractAbi     | List     |              | 是       | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
-| 6        | 方法参数                    | funcParam       | List     |              | 否       | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填 |
+| 6        | 方法参数       | funcParam       | List<String>     |              | 否         | String数组，每个参数都使用String字符串表示，数组也需要放在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID                      | groupId         | int      |              | 是       | 默认为1                                                      |
 | 8        | 合约路径                    | contractPath    | int      |              | 否       |                                                              |
 | 9        | 是否使用cns调用             | useCns          | bool     |              | 是       |                                                              |
@@ -4718,7 +4752,7 @@ HTTP POST
 | -------- | --------------------------- | --------------- | -------- | ------------ | -------- | ------------------------------------------------------------ |
 | 1        | 方法名                      | funcName        | String   |              | 是       |                                                              |
 | 2        | 合约编译后生成的abi文件内容 | contractAbi     | List     |              | 是       | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
-| 3        | 方法参数                    | funcParam       | List     |              | 是      | JSON数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]，根据所调用的合约方法判断是否必填，为空则使用`[]`空数组代替 |
+| 3       | 方法参数       | funcParam       | List<String>     |              | 否         | String数组，每个参数都使用String字符串表示，数组也需要放在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]，根据所调用的合约方法判断是否必填 |
 
 **2）数据格式**
 
