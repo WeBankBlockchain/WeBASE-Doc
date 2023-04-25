@@ -4698,7 +4698,7 @@ HTTP POST
 | 5        | 合约编译后生成的abi文件内容 | contractAbi     | List     |              | 是       | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List<String>     |              | 否         | String数组，每个参数都使用String字符串表示，数组也需要放在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID                      | groupId         | int      |              | 是       | 默认为1                                                      |
-| 8        | 合约路径                    | contractPath    | int      |              | 否       |                                                              |
+| 8        | 合约路径                    | contractPath    | String      |              | 否       |                                                              |
 | 9        | 是否使用cns调用             | useCns          | bool     |              | 是       |                                                              |
 | 10       | cns名称                     | cnsName         | String   |              | 否       | CNS名称，useCns为true时不能为空                              |
 | 11       | cns版本                     | version         | String   |              | 否       | CNS版本，useCns为true时不能为空                              |
