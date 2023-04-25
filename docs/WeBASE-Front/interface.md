@@ -7510,7 +7510,7 @@ a、成功：
 {
   "privateKey": "a81dfd0d3b1004d6635e099aeddd0e939481081372d791b0c477bb21c663105d",
   "publicKey": "0xaa95cfddb68f6e583a204e479536ac2d6f8fba254ef08cfad82aa48b1d9eadd58314d7cbd3c0a8461b68219577ee511e84c630a0df252afa35bd86aa12f1ebff",
-  "address": "988f01939de8797789ea4889e39a7039af9f4c11",
+  "address": "0x988f01939de8797789ea4889e39a7039af9f4c11",
   "encryptType": 0 // 0-ecdsa, 1-sm2
 }
 ```
