@@ -7603,7 +7603,7 @@ a、成功：
 type=1，入参为Hex String时：
 ```
 {
-  "hashValue": "0x667d3611273365cfb6e64399d5af0bf332ec3e5d6986f76bc7d10839b680eb58",
+  "hashValue": "64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107",
   "encryptType": 0
 }
 ```
@@ -7611,7 +7611,7 @@ type=1，入参为Hex String时：
 type=2，入参为UTF8类型时：
 ```
 {
-  "hashValue": "0x64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107",
+  "hashValue": "64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107",
   "encryptType": 0
 }
 ```
