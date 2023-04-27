@@ -146,7 +146,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.4/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.5/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -178,10 +178,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.4
-webase.mgr.version=v1.5.4
-webase.sign.version=v1.5.3
-webase.front.version=v1.5.4
+webase.web.version=v1.5.5
+webase.mgr.version=v1.5.5
+webase.sign.version=v1.5.5
+webase.front.version=v1.5.5
 
 #####################################################################
 ## 使用Docker启用Mysql服务，则需要配置以下值
@@ -257,7 +257,7 @@ node.dir=node0
 
 # 搭建新链时需配置
 # FISCO-BCOS版本
-fisco.version=2.8.0
+fisco.version=2.9.1
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 ```

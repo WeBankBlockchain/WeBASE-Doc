@@ -305,10 +305,10 @@ exit
 
 获取部署安装包：
 ```shell
-wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.4/webase-deploy.zip
+wget https://github.com/WeBankFinTech/WeBASELargeFiles/releases/download/v1.5.5/webase-deploy.zip
 
 # 若网络问题导致长时间无法下载，可尝试以下命令
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.4/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.5/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -334,10 +334,10 @@ cd webase-deploy
 
 ```shell
 # WeBASE子系统的最新版本(v1.1.0或以上版本)
-webase.web.version=v1.5.4
-webase.mgr.version=v1.5.4
-webase.sign.version=v1.5.3
-fisco.webase.docker.cdn.version=v1.5.4
+webase.web.version=v1.5.5
+webase.mgr.version=v1.5.5
+webase.sign.version=v1.5.5
+fisco.webase.docker.cdn.version=v1.5.5
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=127.0.0.1
@@ -724,7 +724,7 @@ fiscoorg/fisco-webase   v2.8.0     bf4a26d5d389  5 days ago   631MB
     ```Bash
     # 从 CDN 拉取镜像 tar 文件
     # 非国密
-    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.4/docker-fisco-webase.tar
+    wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.5/docker-fisco-webase.tar
     
     # 解压镜像 tar 文件
     docker load -i docker-fisco-webase.tar
