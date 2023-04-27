@@ -24,7 +24,7 @@ repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
 }
 dependencies {
-    implementation 'com.webank:webase-app-sdk:1.5.1'
+    implementation 'com.webank:webase-app-sdk:1.5.5'
     implementation 'org.bouncycastle:bcprov-jdk15on:1.67'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
