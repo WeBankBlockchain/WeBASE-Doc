@@ -1,5 +1,8 @@
 # SDK构造RawTransaction交易传入AppId
 
+> 作者： 张宇豪
+> 学校： 深圳职业技术学院
+
 ## 1、案例准备
 
 - 双节点的FISCO BCOS链
