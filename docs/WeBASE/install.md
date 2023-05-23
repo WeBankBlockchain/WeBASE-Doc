@@ -542,8 +542,8 @@ java -version
 <span id="ubuntujava"></span>
 
 ```
-  # 安装默认Java版本(Java 8或以上)
-  sudo apt install -y default-jdk
+  # 安装oracle Java版本(Java 8或以上，默认的openjdk无法启动一键部署)
+  sudo apt-get install oracle-java8-installer 
   # 查询Java版本
   java -version
 ```
