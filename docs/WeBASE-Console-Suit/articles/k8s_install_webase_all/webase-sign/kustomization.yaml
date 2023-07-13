@@ -1,0 +1,17 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+
+
+commonLabels:
+  app: webase-sign
+
+namespace: webase
+
+configMapGenerator:
+  - name: webase-sign
+    files:
+      - application.yml
+
+generatorOptions:
+  disableNameSuffixHash: true
