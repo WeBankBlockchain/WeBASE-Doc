@@ -1,4 +1,4 @@
-# 深职院 张宇豪|SDK构造RawTransaction交易传入AppId
+# 深职院 张宇豪 | SDK构造RawTransaction交易传入AppId
 
 > 作者： 张宇豪
 > 学校： 深圳职业技术学院

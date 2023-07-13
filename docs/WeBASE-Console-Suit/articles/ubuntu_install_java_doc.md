@@ -1,4 +1,4 @@
-# Ubuntu环境安装Java教程
+# 配置教程 | Ubuntu环境安装Java教程
 
 ```
 # 安装默认Java版本(Java 8或以上)

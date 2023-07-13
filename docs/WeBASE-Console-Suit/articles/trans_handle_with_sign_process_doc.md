@@ -1,4 +1,4 @@
-# COMS|交易处理接口（结合WeBASE-Sign）的流程分析
+# COMS | 交易处理接口（结合WeBASE-Sign）的流程分析
 
 作者：COMS (陈钦宇)
 
