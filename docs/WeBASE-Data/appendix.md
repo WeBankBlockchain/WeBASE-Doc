@@ -291,7 +291,7 @@ make install
 使用命令：
 
 ```
-/usr/local/nginx/sbin/nginx –t
+/usr/local/nginx/sbin/nginx -t
 ```
 
 正常情况的信息输出：

@@ -4698,7 +4698,7 @@ HTTP POST
 | 5        | 合约编译后生成的abi文件内容 | contractAbi     | List     |              | 是       | 合约中单个函数的ABI，若不存在同名函数可以传入整个合约ABI，格式：JSONArray |
 | 6        | 方法参数       | funcParam       | List<String>     |              | 否         | String数组，每个参数都使用String字符串表示，数组也需要放在双引号内，多个参数以逗号分隔（参数为数组时同理），如：set(string s, string[] l) -> ["str1","[\"arr1\",\"arr2\"]"]，根据所调用的合约方法判断是否必填 |
 | 7        | 群组ID                      | groupId         | int      |              | 是       | 默认为1                                                      |
-| 8        | 合约路径                    | contractPath    | int      |              | 否       |                                                              |
+| 8        | 合约路径                    | contractPath    | String      |              | 否       |                                                              |
 | 9        | 是否使用cns调用             | useCns          | bool     |              | 是       |                                                              |
 | 10       | cns名称                     | cnsName         | String   |              | 否       | CNS名称，useCns为true时不能为空                              |
 | 11       | cns版本                     | version         | String   |              | 否       | CNS版本，useCns为true时不能为空                              |
@@ -7509,8 +7509,8 @@ a、成功：
 ```
 {
   "privateKey": "a81dfd0d3b1004d6635e099aeddd0e939481081372d791b0c477bb21c663105d",
-  "publicKey": "0xaa95cfddb68f6e583a204e479536ac2d6f8fba254ef08cfad82aa48b1d9eadd58314d7cbd3c0a8461b68219577ee511e84c630a0df252afa35bd86aa12f1ebff",
-  "address": "988f01939de8797789ea4889e39a7039af9f4c11",
+  "publicKey": "04aa95cfddb68f6e583a204e479536ac2d6f8fba254ef08cfad82aa48b1d9eadd58314d7cbd3c0a8461b68219577ee511e84c630a0df252afa35bd86aa12f1ebff",
+  "address": "0x988f01939de8797789ea4889e39a7039af9f4c11",
   "encryptType": 0 // 0-ecdsa, 1-sm2
 }
 ```
@@ -7589,7 +7589,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/tool/hash??input=123&type=1
+http://localhost:5002/WeBASE-Front/tool/hash?input=123&type=1
 ```
 
 
@@ -7603,7 +7603,7 @@ a、成功：
 type=1，入参为Hex String时：
 ```
 {
-  "hashValue": "0x667d3611273365cfb6e64399d5af0bf332ec3e5d6986f76bc7d10839b680eb58",
+  "hashValue": "64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107",
   "encryptType": 0
 }
 ```
@@ -7611,7 +7611,7 @@ type=1，入参为Hex String时：
 type=2，入参为UTF8类型时：
 ```
 {
-  "hashValue": "0x64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107",
+  "hashValue": "64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107",
   "encryptType": 0
 }
 ```
@@ -7644,7 +7644,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/tool/utf8ToHexString??input=123&type=1
+http://localhost:5002/WeBASE-Front/tool/utf8ToHexString?input=123&type=1
 ```
 
 
@@ -7690,7 +7690,7 @@ HTTP GET
 **2）数据格式**
 
 ```
-http://localhost:5002/WeBASE-Front/tool/utf8ToHexString??input=123
+http://localhost:5002/WeBASE-Front/tool/utf8ToHexString?input=123
 ```
 
 

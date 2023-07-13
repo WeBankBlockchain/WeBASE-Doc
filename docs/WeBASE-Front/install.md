@@ -147,6 +147,6 @@ http://{deployIP}:{frontPort}/WeBASE-Front
 
 ```
 前置服务全量日志：tail -f log/WeBASE-Front.log
-前置服务错误日志：tail -f log/WeBASE-Front.log
+前置服务错误日志：tail -f log/WeBASE-Front-error.log
 web3连接日志：tail -f log/web3sdk.log
 ```
