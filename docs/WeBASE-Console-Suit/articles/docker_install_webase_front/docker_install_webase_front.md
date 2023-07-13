@@ -1,4 +1,4 @@
-# liwh1227|使用Docker部署WeBASE-Front
+# liwh1227 | 使用Docker部署WeBASE-Front
 
 > 作者：liwh1227
 >

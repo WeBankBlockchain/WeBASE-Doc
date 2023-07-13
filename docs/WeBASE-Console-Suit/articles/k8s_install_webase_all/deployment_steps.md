@@ -1,4 +1,4 @@
-# 通过K8S部署WeBASE教程
+# 部署教程 | 通过 K8S 部署 WeBASE 教程
 * 说明： k8s v1.17.3 以上 webase v1.5.3 以上, ${} 取自定义的名称
 ## 1.部署webase-front
 ```shell

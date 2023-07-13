@@ -1,4 +1,4 @@
-# WEBASE中“Event查看”功能的使用教程
+# 使用教程 | WEBASE中“Event查看”功能的使用
 
 WEBASE中的“Event查看”功能，只能用于查询历史Event，即末区块的值不能超过最新区块高度。
 ## 一、WEBASE中Event功能的业务逻辑介绍

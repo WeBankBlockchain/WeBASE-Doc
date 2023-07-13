@@ -1,4 +1,4 @@
-## 走读代码-WeBASE-Node-Manager的NodeService如何判断节点状态是否正常
+# 走读代码 | WeBASE-Node-Manager的NodeService如何判断节点状态是否正常
 
 &nbsp;&nbsp;&nbsp;&nbsp;登录WeBASE管理管理平台，点击“链管理”下的“节点管理”，显示节点的各项信息，其中包括状态，这次走读代码的内容，就是“节点列表”中的“状态”是如何判断的。
 

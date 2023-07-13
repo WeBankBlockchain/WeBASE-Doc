@@ -1,4 +1,4 @@
-# Skkypy|适配MacOS的WeBASE一键部署工具
+# Skkypy | 适配MacOS的WeBASE一键部署工具
 
 &emsp;&emsp;主要通过修改webase一键部署脚本使适配MacOS。
 

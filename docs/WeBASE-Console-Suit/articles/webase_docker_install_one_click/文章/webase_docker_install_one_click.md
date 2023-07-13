@@ -1,4 +1,4 @@
-# 深职院 麦立健|WeBASE一键Docker部署教程
+# 深职院 麦立健 | WeBASE一键Docker部署教程
 
 - 任务 使用docker完成对webase的部署
 - 作者 深职院 麦立健
