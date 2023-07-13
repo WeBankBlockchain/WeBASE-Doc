@@ -596,7 +596,7 @@ if __name__ == '__main__':
 <https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/index.html>
 
 <https://github.com/MIllionBenjamin/Blockchain-FinalProject-SupplyChainFinancialPlatform>
-# 关于作者
+## 关于作者
 
 <div align=center><a href="https://blog.csdn.net/qq_19381989" target="_blank"><img src="https://img-blog.csdnimg.cn/20200427000145250.png" width="40%" /></a></div>
 
