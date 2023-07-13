@@ -32,6 +32,7 @@
 | ---- | -------- |
 | CentOS / RHEL | CentOS 7.3 |
 | Ubuntu | Xenial 16.04 |
+| MaxOS | MaxOS 10.2.x |
 
 <span id="port_open"></span>
 
@@ -82,6 +83,11 @@ apt-get install software-properties-common
 apt-add-repository ppa:ansible/ansible
 apt-get update
 apt-get install ansible 
+```
+MaxOS
+```
+brew install python3
+pip3 install ansible
 ```
 
 安装完成后，可以通过`--version`检查是否安装成功
