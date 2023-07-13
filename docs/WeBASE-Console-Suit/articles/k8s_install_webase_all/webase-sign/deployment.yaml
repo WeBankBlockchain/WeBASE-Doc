@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webase-sign
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: webase-sign
+          image: mawla/webase-sign:v1.5.3
+          imagePullPolicy: "Always"
+          ports:
+            - name: webase-sign
+              containerPort: 5004
+              protocol: "TCP"
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:InitialRAMPercentage=40.0 -XX:MinRAMPercentage=20.0 -XX:MaxRAMPercentage=80.0"
+          volumeMounts:
+            - name: "conf-webase-sign"
+              mountPath: /app/resources/config
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "306Mi"
+            limits:
+              cpu: "2"
+              memory: "500Mi"
+      volumes:
+        - name: "conf-webase-sign"
+          configMap:
+            name: webase-sign
+
+
