@@ -27,11 +27,13 @@
 
 #### 平台要求
 
-推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本, 一键部署（Docker模式）脚本依赖Docker与Docker-Compose进行容器的编排，将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
+推荐使用CentOS 7.2+, Ubuntu 16.04, MacOS 10.2.x 及以上版本, 一键部署（Docker模式）脚本依赖Docker与Docker-Compose进行容器的编排，将自动安装`openssl, curl, wget, git, dos2unix`等相关依赖项。
 
 其余系统可能导致安装依赖失败，可自行安装`openssl, curl, wget, git, dos2unix`依赖项后重试
 
 *由于WeBASE Docker镜像中自带Java环境，无需在宿主机中配置Java环境；同时支持使用Docker启动一个新的mysql服务*
+
+*如果在MacOS中进行配置*，需要按照[Mac配置sed指令](#mac_sed)完成配置后，才能使用一键部署
 
 #### 检查Docker
 
@@ -118,8 +120,15 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
   sudo apt-get install -y python3-pip
   sudo pip3 install PyMySQL
   ```
+- MacOS
 
- CentOS或Ubuntu不支持pip命令的话，可以使用以下方式：
+  ```
+  sudo brew install python3
+  sudo pip3 install PyMySQL
+  ```
+
+
+ 若CentOS/Ubuntu/MacOS不支持pip命令的话，可以使用以下方式：
 
   ```
   git clone https://github.com/PyMySQL/PyMySQL
@@ -558,39 +567,42 @@ http://{deployIP}:{webPort}
 <span id="install_docker" />
 
 ### 安装 Docker
-在 Debian/Ubuntu/CentOS/RHEL，直接执行命令：
+- Debian/Ubuntu/CentOS/RHEL
+  ```Bash
+  # 该脚本是 Docker 官方提供的 Linux 自动安装脚本
+  bash <(curl -s -L get.docker.com)
+  ```
+  
+  在 CentOS/RHEL 8.x 中，使用上面的自动脚本安装时，会出现下面的错误：
+  
+  ```Bash
+  Last metadata expiration check: 0:37:43 ago on Sat 22 Feb 2020 07:40:15 PM CST.
+  Error: 
+   Problem: package docker-ce-3:19.03.6-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
+    - cannot install the best candidate for the job
+    - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
+    - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
+    - package containerd.io-1.2.2-3.el7.x86_64 is excluded
+    - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
+    - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
+    - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
+  (try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages) 
+  ```
+  
+  要解决这个问题，需要手动安装 `containerd.io`后，在执行自动安装脚本
+  
+  ```Bash
+  # 下载最新的 containerd.io 安装包
+  wget https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+  
+  # 手动安装 containerd.io 
+  yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm 
+  
+  ```
 
-```Bash
-# 该脚本是 Docker 官方提供的 Linux 自动安装脚本
-bash <(curl -s -L get.docker.com)
-```
+- MacOS
 
-在 CentOS/RHEL 8.x 中，使用上面的自动脚本安装时，会出现下面的错误：
-
-```Bash
-Last metadata expiration check: 0:37:43 ago on Sat 22 Feb 2020 07:40:15 PM CST.
-Error: 
- Problem: package docker-ce-3:19.03.6-3.el7.x86_64 requires containerd.io >= 1.2.2-3, but none of the providers can be installed
-  - cannot install the best candidate for the job
-  - package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
-  - package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
-  - package containerd.io-1.2.2-3.el7.x86_64 is excluded
-  - package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
-  - package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
-  - package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
-(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages) 
-```
-
-要解决这个问题，需要手动安装 `containerd.io`后，在执行自动安装脚本
-
-```Bash
-# 下载最新的 containerd.io 安装包
-wget https://download.docker.com/linux/centos/8/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm 
-
-# 手动安装 containerd.io 
-yum localinstall containerd.io-1.2.13-3.2.el7.x86_64.rpm 
-
-```
+  ```brew install --cask --appdir=/Applications docker```
 
 <span id="docker-compose-install"></span>
 
@@ -637,14 +649,20 @@ python版本要求使用python3.x, 推荐使用python3.6及以上版本
   sudo apt-get install -y python3.6
   sudo apt-get install -y python3-pip
   ```
+- MacOS
+
+  ```
+  // brew 安装python3时，会自动安装pip3
+  sudo brew install python3
+  ```
 
 ### 数据库部署
 <span id="mysql-install"></span>
 
 #### ① CentOS安装MariaDB
 
-此处以**CentOS 7(x86_64)**安装**MariaDB 10.2**为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。MariaDB 10.2版本对应Mysql 5.7。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
-- CentOS 7 默认MariaDB为5.5版本，安装10.2版本需要按下文进行10.2版本的配置。
+此处以**CentOS 7(x86_64)**安装**MariaDB 10.3**为例。*MariaDB*数据库是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。*MariaDB*完全兼容 MySQL，包括API和命令行。MariaDB 10.3版本对应Mysql 5.7。其他安装方式请参考[MySQL官网](https://dev.mysql.com/downloads/mysql/)。
+- CentOS 7 默认MariaDB为5.5版本，安装10.3版本需要按下文进行10.3版本的配置。
 - 若使用CentOS 8则直接使用`sudo yum install -y mariadb*`即可安装MariaDB 10.3，并跳到下文的 *启停* 章节即可。
 
 使用`vi`或`vim`创建新文件`/etc/yum.repos.d/mariadb.repo`，并写入下文的文件内容（参考[MariaDB中科大镜像源修改](http://mirrors.ustc.edu.cn/help/mariadb.html)进行配置）
@@ -656,11 +674,11 @@ sudo vi /etc/yum.repos.d/mariadb.repo
 
 - 文件内容，此处使用的是中科大镜像源
 ```Bash
-# MariaDB 10.2 CentOS repository list - created 2021-07-12 07:37 UTC
+# MariaDB 10.3 CentOS repository list - created 2021-07-12 07:37 UTC
 # http://downloads.mariadb.org/mariadb/repositories/
 [mariadb]
 name = MariaDB
-baseurl = https://mirrors.ustc.edu.cn/mariadb/yum/10.2/centos7-amd64
+baseurl = https://mirrors.ustc.edu.cn/mariadb/yum/10.3/centos7-amd64
 gpgkey=https://mirrors.ustc.edu.cn/mariadb/yum/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 ```
@@ -671,7 +689,7 @@ yum clean all
 yum makecache all
 ```
 
-- 安装`MariaDB 10.2`
+- 安装`MariaDB 10.3
 - 如果已存在使用`sudo yum install -y mariadb*`命令安装的MariaDB，其版本默认为5.5版本，对应Mysql版本为5.5。新版本MariaDB无法兼容升级，需要先**卸载旧版本**的MariaDB，卸载前需要**备份**数据库内容，卸载命令可参考`yum remove mariadb`
 ```
 sudo yum install MariaDB-server MariaDB-client -y
@@ -896,6 +914,59 @@ docker run -d --rm --name=webase-front  --network=host -v /data/home/webase/weba
       - /webase-deploy/webase-web/nginx-docker.conf:/data/webase-web/nginx/nginx.conf
       - /webase-deploy/webase-web/log:/dist/log
 ```
+
+### 9. MacOS中如何使用`sed`命令替换文件中的内容
+<span id="mac_sed"></span>
+答：因为MacOS与`Linux`系统中对于`sed`的处理处理方式不同。如果想在MacOS中拥有Linux中`sed`体验，可以通过以下方式。
+- 安装 gnu-sed
+  ```brew install gnu-sed```
+- 设置环境变量
+  ```vi ~/.zshrc```
+
+  ```export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"```
+
+  ```source ~/.zshrc```
+- 替换文件中的内容
+
+  ```sed -i "" "s/target/value/g"```
+  
+  * Tips
+  ```sed -i ""``` 等同于Linux中的```sed -i```
+  
+    如果没有添加`""`，则会替换文本的时候，生成副本.
+
+
+##### demo
+* 现在有文件`webase.txt`, 内容如下
+```text
+Hello,
+12345
+aaabbbaaa
+cccaba
+```
+* 将`webase.txt`中的`12345`替换成`webase`
+```
+sed -i "" "s/12345/webase/" webase.txt
+```
+
+>`-i`表示直接操作文件并不需要备份文件，如果需要备分则使用 `-i "备份名称"`
+> 
+>`s` 代表 substitue 即替换
+> 
+>`12345` 表示被代替的文字
+>
+>`webase` 表示替换的文字
+>
+>`webase.txt` 表示对应修改的文件
+
+* 此时`webase.txt`内容如下：
+```text
+Hello,
+webase
+aaabbbaaa
+cccaba
+```
+
 
 
 *欢迎给WeBASE的文档提交 Pull Request 补充更多的 Q&A*
