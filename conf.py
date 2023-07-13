@@ -100,7 +100,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'WeBASE'
-copyright = u'© 2020. All rights reserved.'
+copyright = u'© 2023. All rights reserved.'
 author = u'WeBankBlockchain'
 
 # The version info for the project you're documenting, acts as replacement for
