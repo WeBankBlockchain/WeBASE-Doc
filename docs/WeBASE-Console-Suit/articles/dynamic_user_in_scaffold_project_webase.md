@@ -1,4 +1,4 @@
-# WeBASE导出的Java脚手架项目动态设置发起合约方法的用户
+# WeBASE Java项目 | Java脚手架动态设置发起合约方法的用户
 
 注：脚手架默认走的SdkBeanConfig类中的用户client
 ```java

@@ -1,4 +1,4 @@
-# 深职院 陈洁|如何使用Docker部署WeBASE-Front
+# 深职院 陈洁 | 如何使用Docker部署WeBASE-Front
 
 * * *
 

@@ -1,4 +1,4 @@
-## 叶开|介绍struct和bytesN智能合约中的参数传递方法
+# 叶开 | 介绍struct和bytesN智能合约中的参数传递方法
 作者：叶开
 
 Solidity智能合约中可以使用uint、string、address、bool等数据类型。Solidity语言同样支持Struct，但是如果将Struct作为参数传递可能会让人头疼。本文主要介绍在智能合约中如何使用Struct，尤其是将其作为参数或者是返回值的时候，应该如何操作。另外，bytesN作为Solidity当中的特殊类型，在这篇介绍特殊参数传递的文章中也顺便一起介绍一下。

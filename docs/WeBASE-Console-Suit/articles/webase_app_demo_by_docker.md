@@ -1,4 +1,4 @@
-# idefa|WeBASE应用管理接入Demo
+# idefa | WeBASE应用管理接入Demo
 
 > WeBASE应用管理接入Demo,项目示例使用docker运行
 

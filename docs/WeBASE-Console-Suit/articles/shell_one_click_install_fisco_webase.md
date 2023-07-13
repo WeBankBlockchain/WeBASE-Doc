@@ -1,4 +1,4 @@
-# CN-ZHANG|一键部署FISCO BCOS开发者环境
+# CN-ZHANG | 一键部署FISCO BCOS开发者环境
 
 ## 前言
 

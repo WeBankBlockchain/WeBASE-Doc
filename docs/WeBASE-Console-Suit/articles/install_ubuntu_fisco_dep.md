@@ -1,4 +1,4 @@
-# 深职院-zyh|在Ubuntu中安装FISCO BCOS依赖
+# 深职院-zyh | 在Ubuntu中安装FISCO BCOS依赖
 
 ```bash
 #!/bin/bash
