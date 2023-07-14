@@ -15,6 +15,7 @@
    ./shell_one_click_install_fisco_webase.md
    ./webase_deploy_of_macos_github.md
    ./install_webase_front_by_docker.md
+   ./webase_deploy_listen_check/webase_deploy_listen_check.md
    ./build_docker_image_webase_front/build_docker_image_webase_front.md
    ./build_docker_images_webase_front_2.md
    ./webase_contract_ide_usage.md
@@ -36,5 +37,6 @@
    ./code_review_node_mgr_node_service.md
    ./code_review_node_mgr_node_status_check.md
    ./reset_fisco_webase_data_doc.md
-
+   ./how_to_update_logo.md
+   
 ```
