@@ -5,6 +5,7 @@
    :maxdepth: 1
 
    ./two_phase_tx.md
+   ./dameng_db_fit_in.md
    ./docker_install_webase_front/docker_install_webase_front.md
    ./docker_install_webase_front_2/docker_install_webase_front_2.md
    ./k8s_install_webase_all/deployment_steps.md
@@ -38,5 +39,5 @@
    ./code_review_node_mgr_node_status_check.md
    ./reset_fisco_webase_data_doc.md
    ./how_to_update_logo.md
-   
+
 ```
