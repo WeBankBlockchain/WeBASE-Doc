@@ -62,8 +62,6 @@ function  webase_web(){
 }
 ```
 
-![脚本代码](./webase-listen.sh)
-
 完整的脚本代码：webase-listen.sh
 ```bash
 #!/bin/bash
