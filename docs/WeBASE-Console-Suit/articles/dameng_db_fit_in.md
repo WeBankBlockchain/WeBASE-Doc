@@ -24,7 +24,7 @@
 如果不同DM版本可以从数据库的安装目录下相关说明文档下获取到，
 配置方法也可以在数据库安装目录下的\dmdbms\drivers\jdbc\readme.txt中看到依赖配置信息。
 
-### |MD结合WeBASE-SIGN的适配实现
+### DM结合WeBASE-SIGN的适配实现
 当前WeBase-SIGN是使用的MYSQL作为数据库，达梦数据对MYSQL的兼容性也是比较优化，但存在有些关键语法的问题导致SQL执行不通过；
 设计思路，此次改造通过增加使用开关来决定是否达启用达梦数据库(DM)，同时也不影响原来WeBase-SIGN支持MYSQL的能力，改造结果就是同时能支持MYSQL或者达梦数据库(DM)；
 
