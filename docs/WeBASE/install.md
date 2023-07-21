@@ -100,7 +100,7 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v3.0.2/webase-deploy.zip
+wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v3.1.0/webase-deploy.zip
 ```
 解压安装包：
 ```shell
@@ -139,10 +139,10 @@ cd webase-deploy
 ```shell
 [common]
 # WeBASE子系统的最新版本（v3.0版本）
-webase.web.version=v3.0.2
-webase.mgr.version=v3.0.2
+webase.web.version=v3.1.0
+webase.mgr.version=v3.1.0
 webase.sign.version=v3.0.2
-webase.front.version=v3.0.2
+webase.front.version=v3.1.0
 
 # 节点管理子系统mysql数据库配置
 mysql.ip=localhost
@@ -184,7 +184,7 @@ node.p2pPort=30300
 # 节点rpc端口
 node.rpcPort=20200
 # FISCO-BCOS版本（v3.0.0或以上版本）
-fisco.version=v3.2.0
+fisco.version=v3.4.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 # 是否搭建Liquid合约链（Solidity和Liquid合约需要二选一，默认Solidity
