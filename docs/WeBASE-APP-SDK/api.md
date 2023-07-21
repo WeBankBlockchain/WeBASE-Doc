@@ -417,7 +417,7 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/api/passwordUpdate?timestamp=161492885
 #### 传输协议规范
 
 * 网络传输协议：使用HTTP协议
-* 请求地址： **/api/basicInfo?appKey={appKey}&signature={signature}&timestamp={timestamp}**
+* 请求地址： **/api/basicInfo?appKey={appKey}&signature={signature}&timestamp={timestamp}&groupId={groupId}**
 * 请求方式：GET
 * 请求头：Content-type: application/json
 * 返回格式：JSON
@@ -426,10 +426,17 @@ http://127.0.0.1:5001/WeBASE-Node-Manager/api/passwordUpdate?timestamp=161492885
 
 ***1）入参表***
 
+| 序号 | 输入参数      | 类型   | 可为空 | 备注             |
+| ---- | ------------- | ------ | ------ | ---------------- |
+| 1    | appKey       | String | 否     | app接入的key             |
+| 2    | signature | String | 否     | 签名密文值 |
+| 3    | timestamp | String | 否     | 时间戳 |
+| 4    | groupId | String | 是     | FISCO BCOS为2.x版本则可为空，**3.x版本不可以为空** |
+
 ***2）入参示例***
 
 ```
-http://localhost:5001/WeBASE-Node-Manager/api/basicInfo?timestamp=1614928857832&appKey=fdsf78aW&signature=EEFD7CD030E6B311AA85B053A90E8A31
+http://localhost:5001/WeBASE-Node-Manager/api/basicInfo?timestamp=1614928857832&appKey=fdsf78aW&signature=EEFD7CD030E6B311AA85B053A90E8A31&groupId=1
 ```
 
 
