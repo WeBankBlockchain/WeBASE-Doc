@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webase-node-manager
+spec:
+  type: ClusterIP
+  ports:
+    - name: webase-node-manager
+      port: 5001
+      targetPort: 5001
+      protocol: "TCP"

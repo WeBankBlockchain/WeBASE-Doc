@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webase-web
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: webase-web
+          image: mawla/webase-web:v1.5.3
+          imagePullPolicy: "Always"
+          ports:
+            - name: webase-web
+              containerPort: 80
+              protocol: "TCP"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 150Mi
+            limits:
+              cpu: 100m
+              memory: 150Mi
+          volumeMounts:
+            - name: "conf-webase-web"
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: "conf-webase-web"
+          configMap:
+            name: webase-web
+            items:
+              - key: "default.conf"
+                path: "default.conf"

@@ -1,0 +1,17 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+
+
+commonLabels:
+  app: webase-node-manager
+
+namespace: webase
+
+configMapGenerator:
+  - name: webase-node-manager
+    files:
+      - application.yml
+
+generatorOptions:
+  disableNameSuffixHash: true
