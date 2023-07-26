@@ -48,7 +48,6 @@ git clone -b master-3.0 https://gitee.com/WeBank/WeBASE-Front.git
 
 ```
 cd WeBASE-Front
-git checkout lab
 ```
 
 ## 3. 编译代码

@@ -37,7 +37,6 @@ git clone -b master-3.0 https://gitee.com/WeBank/WeBASE-Node-Manager.git
 
 ```shell
 cd WeBASE-Node-Manager
-git checkout lab
 ```
 
 ## 4. 编译代码
