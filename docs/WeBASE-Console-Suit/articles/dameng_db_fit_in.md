@@ -14,7 +14,7 @@
 可以在maven或者gradle配置中引入
 
 ``` maven依赖配置示例
-<dependency>H
+<dependency>
 <groupId>com.dameng</groupId>
 <artifactId>DmJdbcDriver18</artifactId>
 <version>8.1.1.193</version>
