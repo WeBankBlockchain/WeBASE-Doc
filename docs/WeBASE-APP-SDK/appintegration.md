@@ -14,6 +14,7 @@ WeBASE-APP-SDK是应用集成SDK，提供调用WeBASE-Node-Manager的接口，�
 
 - `v1.5.1`及其以上版本，应用配置AppConfig的属性`isTransferEncrypt`需和WeBASE-Node-Manager的配置文件`/conf/application.yml`下的配置`constant.isTransferEncrypt`相同，默认为`true`。
 - 如果`v1.5.0`需要使用SDK，应用配置AppConfig的属性`isTransferEncrypt`需设置为`false`。`v1.5.1`及其以上版本新增的接口调用不了。
+- `1.5.6`以上版本，既支持WeBASE 1.5.x及以上版本，同时支持WeBASE 3.1.0及以上版本（WeBASE 3.0.2版本暂未支持webase-app-sdk）
 
 ### 添加依赖
 
@@ -24,18 +25,20 @@ repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
 }
 dependencies {
-    implementation 'com.webank:webase-app-sdk:1.5.1'
+    implementation 'com.webank:webase-app-sdk:1.5.6-SNAPSHOT'
     implementation 'org.bouncycastle:bcprov-jdk15on:1.67'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.11.0'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.0'
-    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.11.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.14.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2'
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.2'
     implementation 'org.projectlombok:lombok:1.18.12'
-    implementation 'org.apache.logging.log4j:log4j-api:2.13.3'
-    implementation 'org.apache.logging.log4j:log4j-core:2.13.3'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.13.3'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
 }
 ```
 

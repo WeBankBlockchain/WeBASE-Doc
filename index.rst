@@ -74,7 +74,8 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
             <br>
             <h style="font-size: 22px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;更多资料</h>
             <br><br>
-         
+
+         - `WeBASE社区文章 <./docs/WeBASE-Console-Suit/articles/index.html>`_
          - `WeBASE贡献指南 <./docs/WeBASE/CONTRIBUTING.html>`_
          - `WeBASE国内镜像仓库、文档、安装包资源 <./docs/WeBASE/mirror.html>`_
          - `开源社区 <./docs/More/community.html>`_
