@@ -23,9 +23,10 @@
 ### 3.1 测试使用的一物一码追溯合约
 
 基于官方的一物一码追溯合约，做了一些改动，合约分为三个，分别为Goods.sol,Traceability.sol,TraceabilityFactory.sol，代码如下：
+
 **Goods.sol合约:**
 
-```reasonml
+```typescript
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.10;
 pragma experimental ABIEncoderV2;
@@ -79,7 +80,7 @@ contract Goods {
 
 **Traceability.sol合约：**
 
-```reasonml
+```typescript
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.10;
 pragma experimental ABIEncoderV2;
@@ -130,7 +131,7 @@ contract Traceability {
 
 **TraceabilityFactory.sol合约：**
 
-```reasonml
+```typescript
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.10;
 pragma experimental ABIEncoderV2;
@@ -209,9 +210,11 @@ TraceabilityFactory.sol为业务调用的入口合约，对外公开的接口列
 
 链委员治理角色账户地址：0x6eac7c4ff88516ba72e4237bfc721e33af88a933
 ![img](https://segmentfault.com/img/bVc9eqb)
+
 运维角色账户地址：0x4c88e3e3764767aa398c29de440c3492df8d2747
 ![img](https://segmentfault.com/img/bVc9eqc)
 业务账户地址1：0xba7d313fac4caa48f7c937f8212b1b4cbb73697f
+
 业务账户地址2：0x4acb81ee8f9f777807fc18009f294cd29af4509e
 ![img](https://segmentfault.com/img/bVc9eqd)
 
@@ -223,8 +226,10 @@ TraceabilityFactory.sol为业务调用的入口合约，对外公开的接口列
 ### 3.4 使用运维角色账户调用合约的数据上链方法，调用成功
 
 TraceabilityFactory合约的changeTraceGoods方法为追溯数据上链，利用运维角色账户 0x4c88e3e3764767aa398c29de440c3492df8d2747 ，发起交易，如下图所示：
+
 ![img](https://segmentfault.com/img/bVc9eqf)
 ![img](https://segmentfault.com/img/bVc9eqg)
+
 通过交易回执，可以看到使用运维角色账户调用合约写操作接口是成功的。
 
 ### 3.5 使用业务账户1调用合约的数据上链方法，调用失败
@@ -232,20 +237,26 @@ TraceabilityFactory合约的changeTraceGoods方法为追溯数据上链，利用
 使用业务账户1： 0xba7d313fac4caa48f7c937f8212b1b4cbb73697f 调用合约的追溯数据上链接口
 ![img](https://segmentfault.com/img/bVc9eqh)
 ![img](https://segmentfault.com/img/bVc9eqi)
+
 通过交易回执，可以看到交易失败，返回状态0x16，RevertInstruction错误。
 
 ### 3.6 将业务账户1升级为运维角色并调用合约数据上链方法，调用成功
 
 将业务账户1 ：0xba7d313fac4caa48f7c937f8212b1b4cbb73697f，添加到运维角色，如下图所示：
+
 ![img](https://segmentfault.com/img/bVc9eqk)
+
 然后使用业务账户1 ，再次调用合约的追溯数据上链方法，下图直接展示交易回执结果：
+
 ![img](https://segmentfault.com/img/bVc9eql)
 
 ### 3.7 使用业务账户2调用合约的数据上链方法，调用失败
 
 然后再使用业务账户2：0x4acb81ee8f9f777807fc18009f294cd29af4509e，调用合约的追溯数据上链方法，如下图所示：
+
 ![img](https://segmentfault.com/img/bVc9eqp)
 ![img](https://segmentfault.com/img/bVc9eqq)
+
 从交易回执结果看，业务账户2调用合约写操作方法失败，返回0x16，RevertInstruction错误。
 
 ## 四、权限问题分析及解决方案
@@ -260,7 +271,7 @@ TraceabilityFactory合约的changeTraceGoods方法为追溯数据上链，利用
   另外合约状态管理接口中，已经废弃了为合约分配管理权限的账户的操作类型。所以我们可自行添加为合约分配写权限的账户的接口。以下是改造WeBASE-Front前置服务的分配权限接口的部分关键代码：
    PrecompiledUtils.java中增加权限类型：
 
-```arduino
+```java
 //2023-07-27 sunyunsheng add
 public static final String PERMISSION_TYPE_CONTRACT_WRITE = "contractWrite";
 ```
@@ -403,13 +414,14 @@ public List<PermissionInfo> listContractWritePermission(int groupId, String cons
 ![img](https://segmentfault.com/img/bVc9eqv)
 为合约添加可写权限的业务账户2之后，再次测试业务账户2发起上链交易请求，交易回执结果如下图所示：
 ![img](https://segmentfault.com/img/bVc9eqx)
+
 由此可见，单单为业务账户分配合约的写权限仍旧未解决问题。
 
 ### 4.3 分析原因二
 
 根据交易回执结果的状态为0x16，错误信息 RevertInstruction，官方给出的交易执行失败问题排查方向中列举了可引起此错误的情况，如下所示：
 
-```coq
+```java
 2. revert instruction
 问题描述:
 交易回滚，交易回执状态值为0x16，错误描述revert instruction，这个错误是因为合约的逻辑问题，包括:
@@ -425,7 +437,7 @@ public List<PermissionInfo> listContractWritePermission(int groupId, String cons
 
 既然是合约逻辑问题，那说明还是合约内的某些地方引起的，但运维账户可以调用成功，所以合约方法本身的逻辑应该是不存在漏洞的， 引起该错误的其中一种情况有“访问调用未初始化的合约”，根据这种情况，我们检查合约的changeTraceGoods方法的源码，
 
-```reasonml
+```java
 ///@notice 商品追溯信息上链
     function changeTraceGoods(bytes32 goodsGroup,string memory goodsId,int16 goodsStatus,string memory remark) public {
         Traceability category = getTraceability(goodsGroup);
@@ -458,17 +470,25 @@ public List<PermissionInfo> listContractWritePermission(int groupId, String cons
 再次使用业务账户2，调用合约的追溯数据上链方法，调用成功，交易回执结果如下图所示：
 ![img](https://segmentfault.com/img/bVc9eqz)
 ![img](https://segmentfault.com/img/bVc9eqA)
+
 通过交易回执结果，可以看出，当业务账户2分配部署合约和创建表的权限后，合约追溯数据上链的方法调用执行成功，可断定当前业务账户在没有分配部署合约和创建表权限之前，是不具有创建合约的权限，从而导致合约内使用new关键字创建合约时会造成失败回滚。
 
 ## 五、测试流程总结
 
 > 1、运维账号调用合约的写方法，调用成功；
+> 
 > 2、业务账号1调用合约的写方法，调用失败；
+> 
 > 3、业务账号1添加到运维角色，调用合约写接口，成功；
+>
 > 4、使用业务账号2调用合约写方法，调用失败；
+> 
 > 5、分配业务账号2对合约的写权限，(重写前置服务的权限分配接口，增加contractWrite权限类型的接口，包括分配、撤销、查询权限列表三个接口)；
+> 
 > 6、使用已分配合约写权限的业务账号2调用合约写方法，调用失败；
+> 
 > 7、为业务账号2分配deployAndCreate(部署合约和创建表的权限)
+> 
 > 8、使用业务账号2对合约的写方法调用，调用成功
 
 ## 六、方案总结
