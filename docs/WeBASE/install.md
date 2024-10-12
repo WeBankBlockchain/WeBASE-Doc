@@ -100,7 +100,14 @@ Python3.6及以上版本，需安装`PyMySQL`依赖包
 
 获取部署安装包：
 ```shell
-wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v3.1.1/webase-deploy.zip
+wget https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v3.1.1/webase-deploy.zip
+
+# 网络访问失败，则可以尝试直接git clone WeBASE的仓库
+# 其中仓库根目录下的deploy目录即webase-deploy目录
+git clone -b master-3.0 https://github.com/WeBankBlockchain/WeBASE.git
+# 若因网络问题导致长时间下载失败，可尝试以下命令
+git clone -b master-3.0 https://gitee.com/WeBank/WeBASE.git
+
 ```
 解压安装包：
 ```shell
@@ -184,7 +191,7 @@ node.p2pPort=30300
 # 节点rpc端口
 node.rpcPort=20200
 # FISCO-BCOS版本（v3.0.0或以上版本）
-fisco.version=v3.5.0
+fisco.version=v3.10.3
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 # 是否搭建Liquid合约链（Solidity和Liquid合约需要二选一，默认Solidity
