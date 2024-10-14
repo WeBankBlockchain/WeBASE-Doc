@@ -191,7 +191,7 @@ node.p2pPort=30300
 # 节点rpc端口
 node.rpcPort=20200
 # FISCO-BCOS版本（v3.0.0或以上版本）
-fisco.version=v3.10.3
+fisco.version=v3.11.0
 # 搭建节点个数（默认两个）
 node.counts=nodeCounts
 # 是否搭建Liquid合约链（Solidity和Liquid合约需要二选一，默认Solidity
