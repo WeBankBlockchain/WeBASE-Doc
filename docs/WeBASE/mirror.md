@@ -21,6 +21,36 @@ WeBASE每个新版本发布后，会在[WeBASELargefiles](https://github.com/WeB
 
 若github的访问速度较慢，可以对应地访问[WeBASELargefiles gitee](https://gitee.com/WeBank/WeBASELargefiles/releases)
 
+
+## 举例：使用国内镜像进行一键部署
+
+本节WeBASE 1.5.0为例进行一键部署，一键部署会默认使用国内镜像下载安装包，下面仅演示关键步骤，具体操作可参考[WeBASE一键部署](./install.html)
+
+### 下载WeBASE一键部署工具
+
+```bash
+# 使用CDN下载
+wget https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v3.1.1/webase-deploy.zip
+
+# 使用github下载
+wget https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v3.1.1/webase-deploy.zip
+```
+
+
+### 单独下载WeBASE子系统的安装包
+
+WeBASE一键部署(webase-deploy)会自动下载子系统安装包，用户也可以手动下载安装包或编译源码得到安装包，并复制到webase-deploy目录下。
+
+如需手动下载某一子系统的安装包，可以直接通过`wget`或者`curl -O`命令直接获取安装包。比如：
+
+- 获取WeBASE-Node-Manager v1.4.1的安装包`webase-node-mgr.zip`
+
+```
+wget https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v3.1.1/webase-front.zip
+// 或
+curl -#LO https://github.com/WeBankBlockchain/WeBASELargeFiles/releases/download/v3.1.1/webase-front.zip
+```
+
 ### 单独下载WeBASE的solc JS文件
 
 WeBASE提供FISCO BCOS中使用的v0.4.25, v0.5.2, v0.6.10, v0.8.11 四个版本的solc JS编译文件，对应的国密版本则在版本号后加上`-gm`后缀
