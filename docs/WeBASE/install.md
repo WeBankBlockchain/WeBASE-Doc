@@ -198,10 +198,6 @@ node.counts=nodeCounts
 # 如果使用Liquid，要求在webase-front所在主机配置Liquid环境才能在WeBASE中编译合约
 # [0: solidity, 1: liquid]
 fisco.wasm=0
-# 是否启用链的权限管理，FISCO BCOS >=3.3.0后默认启用
-# 如果启用权限，一键部署自动在'webase-deploy/nodes/ca'目录生成一个随机的管理员私钥（包含国密与非国密）
-# [0: disabled, 1: enable]
-fisco.auth=1
 
 # 使用已有链时需配置[if.exist.fisco=yes]
 # 已有链节点rpc端口列表
