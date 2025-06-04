@@ -17,7 +17,7 @@ nginx下载地址：https://nginx.org/download/（下载最新稳定版本即可
 
 ##### 1.3.2 进入nginx目录
 
-	cd nginx-1.9.9
+	cd nginx
 ##### 1.3.3 配置
 
 	./configure --prefix=/usr/local/nginx
